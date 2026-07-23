@@ -2,272 +2,420 @@
 
 # FRC Java Coding Lab 7.0 — Repository Rules
 
-English documents are authoritative. Vietnamese may be used for explanatory documentation.
+English is normative. Vietnamese is explanatory.
+
+---
 
 ## 1. Required Reading
 
-Before analysis, implementation, documentation, commit, or push, Codex MUST read:
+Before any analysis, coding, documentation, commit, or push, Codex MUST read:
 
-1. `AGENTS.md`
-2. `README.md`
-3. `REPOSITORY_WORKFLOW.md`
-4. `docs/Document_A/FRC_Final_Frozen_Backbone_Guide_EN.pdf`
-5. `docs/Document_A/ES-06_Frozen_Interface_Contract_EN.pdf`
-6. `docs/Document_B/English/00_Engineering_Standard_Overview_EN.pdf`
-7. `docs/Document_B/English/01_Frozen_Development_Workflow_EN.pdf`
-8. `docs/Document_B/English/02_Java_Coding_Standard_EN.pdf`
-9. `docs/Document_B/English/03_Architecture_Review_Checklist_EN.pdf`
-10. `docs/Document_B/English/04_Lesson_Module_Checklist_EN.pdf`
-11. Active lesson `LESSON_STATUS.md`
-12. Active lesson source code
+1. AGENTS.md
+2. README.md
+3. docs/Document_A/FRC_Final_Frozen_Backbone_Guide_EN.pdf
+4. docs/Document_A/ES-06_Frozen_Interface_Contract_EN.pdf
+5. docs/Document_B/English/00_Engineering_Standard_Overview_EN.pdf
+6. docs/Document_B/English/01_Frozen_Development_Workflow_EN.pdf
+7. docs/Document_B/English/02_Java_Coding_Standard_EN.pdf
+8. docs/Document_B/English/03_Architecture_Review_Checklist_EN.pdf
+9. docs/Document_B/English/04_Lesson_Module_Checklist_EN.pdf
+10. Active lesson LESSON_STATUS.md
+11. Active lesson source code
 
-DOCX files are editable sources. Vietnamese files are reference translations.
+Only the English PDF documents are authoritative.
+DOCX files are editable source documents.
+Vietnamese documents are reference translations and are not required reading.
 
-## 2. Authority Order
+### Authority Order
 
-1. `AGENTS.md`
-2. Authoritative English Document A
-3. Authoritative English Document B
-4. `REPOSITORY_WORKFLOW.md`
-5. `README.md`
-6. Active lesson `LESSON_STATUS.md`
-7. Active source code
+1. AGENTS.md
+2. Document A
+3. Document B
+4. README.md
+5. Repository Source Code
 
-When documents conflict, the higher authority wins.
+If documents conflict, the higher priority document wins.
 
-## 3. Active Lesson Rule
+Stop immediately if repository code conflicts with Document A or Document B.
 
-- Only the latest active lesson may be modified.
-- Earlier lessons are read-only snapshots.
-- Never reorganize repository folders without explicit user approval.
-- One lesson introduces one architectural concept.
+---
 
-## 4. Frozen Backbone
+## 2. Repository Structure
 
-```text
+Repository layout is fixed.
+
+```
+FRC_Java_Coding_Lab_7/
+├── AGENTS.md
+├── README.md
+├── docs/
+│   ├── Document_A/
+│   └── Document_B/
+└── real_robot_programming/
+    └── <LESSON_NAME>/
+        ├── docs/
+        ├── src/
+        ├── build.gradle
+        ├── settings.gradle
+        └── LESSON_STATUS.md
+```
+
+Rules
+
+- One lesson = One independent WPILib project.
+- Every lesson has its own docs.
+- Every lesson has LESSON_STATUS.md.
+- Do not create folders outside the approved structure.
+
+---
+
+## 3. Frozen Backbone
+
+Always preserve
+
 Driver
 → Xbox Controller
 → controls
 → commands
 → subsystems
 → io
-→ Hardware
-```
+→ hardware
 
-Telemetry is read-only:
+Telemetry flow
 
-```text
-Subsystem observations
+Subsystem
 → Telemetry Coordinator
 → Telemetry Facade
 → NetworkTables / Glass
-```
 
-## 5. Package Responsibilities
+Telemetry is read-only.
 
-- `controls`: driver-input processing only
-- `commands`: action coordination and subsystem requirements
-- `subsystems`: mechanism behavior and state
-- `io`: vendor-independent hardware boundary
-- `telemetry`: read-only observation and publishing
-- `util`: proven shared helpers only
+---
 
-## 6. RobotContainer
+## 4. Package Responsibilities
 
-`RobotContainer` is the composition root only.
+controls
+- Driver input processing only.
 
-Allowed:
+commands
+- Coordinate subsystem actions.
+
+subsystems
+- Own mechanism behavior and state.
+
+io
+- Hardware abstraction only.
+
+telemetry
+- Observation only.
+
+util
+- Shared reusable helpers.
+
+---
+
+## 5. RobotContainer
+
+RobotContainer is the Composition Root.
+
+Allowed
 
 - object creation
-- implementation selection
 - dependency injection
+- implementation selection
 - default commands
 - button bindings
 
-Forbidden:
+Forbidden
 
-- input-processing logic
-- mechanism behavior
-- hardware configuration logic
+- hardware logic
+- mechanism logic
+- input processing
 - telemetry calculations
 - business logic
 
-## 7. IO Contract
+---
 
-Each mechanism IO design must provide, when required by the lesson:
+## 6. IO Contract
+
+Every mechanism must provide
 
 - IO interface
-- inputs snapshot
-- real implementation
-- simulation or no-op implementation
-- safe stop method
+- Inputs snapshot
+- Real implementation
+- Simulation or Noop implementation when required by the current lesson
+- Safe stop()
 
-Subsystems must not directly import vendor hardware APIs.
+Flow
 
-```text
 Hardware
 → IO
 → Inputs
 → Subsystem
 → Telemetry
-```
 
-## 8. Java Rules
+Subsystems never access vendor hardware directly.
 
-- Provide complete Java files only.
-- Never use diffs, ellipses, or omitted lines as the final code deliverable.
-- Preserve the WPILib copyright header.
-- Add this block immediately before `package`:
+---
 
-```java
+## 7. Java Rules
+
+- Complete Java files only.
+- No partial code.
+- No omitted lines.
+- No deprecated APIs.
+- No magic numbers.
+- English comments only.
+- Preserve WPILib header.
+- Add
+
 /**
  * Author: SSIS
  * Mentor: SSIS
  */
-```
 
-- Comments must be short, technical, and English-only.
-- Do not use deprecated APIs.
-- Do not use magic numbers or hardcoded configuration values.
-- Prefer low coupling, high cohesion, dependency injection, composition, and single responsibility.
-- Do not add unnecessary packages, classes, abstractions, or refactors.
-- Keep `Constants.java` as the default configuration authority unless an approved lesson changes that rule.
+before package.
 
-## 9. Verification Truthfulness
+Keep Constants.java as the default configuration authority.
 
-Allowed verification results:
+---
 
-- `PASS`
-- `FAIL`
-- `NOT TESTED`
-- `NOT APPLICABLE`
+## 8. Lesson Lifecycle
 
-Rules:
+Copy previous completed lesson
+→ Rename
+→ Delete build/ and .gradle/
+→ Baseline Build
+→ Add ONE concept
+→ Build
+→ Simulation
+→ Real Robot
+→ Documentation
+→ Commit
+→ Push
 
-- Never claim `PASS` without evidence.
-- A successful build does not prove simulation or real-robot behavior.
-- Use stable evidence: source inspection, Git diff, command output, simulation output, Driver Station/Glass output, or real-robot test results.
-- Do not use a commit hash as the only evidence.
-- Preserve untested items as `NOT TESTED`.
+Rules
 
-## 10. LESSON_STATUS.md
+- Never recreate from scratch.
+- Never modify the source code of completed lessons.
+- Documentation or metadata may be updated only with explicit user approval.
+- Only the lesson with Status = IN_PROGRESS is editable.
+- COMPLETE lessons are frozen snapshots.
 
-Codex maintains the active lesson `LESSON_STATUS.md`.
+---
 
-Allowed lesson statuses:
+## 9. LESSON_STATUS.md
 
-- `PLANNED`
-- `IN_PROGRESS`
-- `BUILD_PASSED`
-- `SIMULATION_PASSED`
-- `REAL_ROBOT_PASSED`
-- `COMPLETE`
+Required fields
 
-Rules:
+- Lesson
+- Previous Lesson
+- Status
+- Architecture Review
+- Baseline Build
+- Build
+- Simulation
+- Driver Station / Glass
+- Real Robot
+- Transition Guide
+- Git Commit
+- Git Push
+- Known Issues
 
-- Before source edits: `IN_PROGRESS`
-- After verified clean build: `BUILD_PASSED`
-- After verified simulation: `SIMULATION_PASSED`
-- After verified real-robot test: `REAL_ROBOT_PASSED`
-- `COMPLETE` requires all mandatory gates to pass
-- The file must show the current gate and next gate
+Lesson status
+
+- IN_PROGRESS
+- COMPLETE
+
+Verification
+
+- PASS
+- FAIL
+- NOT TESTED
+- NOT APPLICABLE
+
+Never report PASS without evidence.
+
+---
+
+## 10. Development Workflow
+
+Before coding
+
+- Read required documents.
+- Confirm active lesson.
+- Review Backbone.
+- Review architecture.
+- Confirm lesson objective.
+
+During coding
+
+- Each implementation step shall have one objective and one independently verifiable result.
+- Preserve architecture.
+- Build frequently.
+
+After coding
+
+- Build.
+- Verify.
+- Record issues.
+- Update LESSON_STATUS.md.
+
+Stop when
+
+- required documents missing
+- architecture conflict
+- Document A/B conflict
+- build fails
+- verification fails
+
+### Repository Safety
+
+Never
+
+- rename repository folders
+- move repository folders
+- delete repository folders
+- overwrite repository folders
+- reorganize repository structure
+
+unless explicitly approved by the user.
+
+### Self Review
+
+Before reporting success verify
+
+- Documents read
+- Document A reviewed
+- Document B reviewed
+- Backbone preserved
+- Architecture preserved
+- RobotContainer preserved
+- Build reported
+- Verification reported
+- Documentation reported
+- No unsupported claims
+
+---
 
 ## 11. Documentation
 
-Each lesson transition must create:
+Every completed lesson contains
 
-```text
-docs/<PREVIOUS>_to_<CURRENT>_Step_by_Step.md
-```
+real_robot_programming/<LESSON>/docs/
 
-Required sections:
+Required guide
 
-1. Lesson Summary
-2. Why This Lesson Exists
-3. Starting Architecture
-4. Target Architecture
-5. Files Created
-6. Files Modified
-7. Step-by-Step Implementation
-8. Behavior Preservation
-9. Verification Results
-10. Known Issues and Deferred Work
-11. Final Checklist
+<PREVIOUS>_to_<CURRENT>_Step_by_Step.md
 
-Every implementation step must include:
+Documentation is created only after implementation and verification.
 
+Each step contains
+
+- Step
 - Objective
 - Why
-- Before
-- After
 - Action
 - Files Changed
 - Verification
 - Expected Result
 
-The guide must be understandable without opening Git history and must match the actual source and Git diff.
+One step = One change.
 
-## 12. Completion Gate
+---
 
-```text
-Implementation
-→ Build PASS
-→ Required runtime verification PASS
-→ Documentation created
-→ Documentation review PASS
-→ LESSON_STATUS.md updated
-→ User review
-→ Commit
-→ Push
-```
+## 12. Built-in Commands
 
-Never skip a gate. Never mark `COMPLETE` early.
+### Make step by step docs
+
+Codex shall
+
+- Read AGENTS
+- Read Document A
+- Read Document B
+- Read README
+- Read LESSON_STATUS
+- Compare previous and current lesson
+- Generate guide
+- Save guide
+- Update LESSON_STATUS
+- Review git status
+- Commit
+- Push
+- Report results
+
+Stop if
+
+- lesson incomplete
+- build failed
+- verification missing
+- git failure
+
+### Reserved Commands
+
+Start next lesson
+
+Finish lesson
+
+Publish lesson
+
+Reserved for future repository automation.
+
+---
 
 ## 13. Git Rules
 
-Codex must not commit or push unless explicitly requested in the current instruction.
+Workflow
 
-Before commit:
-
-```text
 git status
-→ git diff --check
-→ review staged files
-→ user approval
+→ git add
 → git commit
-```
-
-Before push:
-
-```text
-verified commit
-→ explicit user approval
 → git push
-```
 
 Never claim GitHub was updated unless push succeeds.
 
-## 14. Final Report
+---
 
-Report only verified facts:
+## 14. Change Control
 
-- required documents read
-- active lesson
-- objective
-- architecture before
-- architecture after
-- files inspected
-- files created
-- files modified
-- baseline build
-- final build
-- simulation
-- Driver Station / Glass
-- real robot
-- documentation
-- documentation review
-- Git commit
-- Git push
-- known issues
-- current lesson status
-- next required gate
+Formal review required before changing
+
+- Frozen Backbone
+- Package responsibilities
+- Dependency direction
+- IO contracts
+- RobotContainer role
+- Constants architecture
+- Completed lessons
+
+The review shall document:
+
+- Reason
+- Scope
+- Impact
+- Decision (APPROVED / REJECTED)
+
+---
+
+## 15. Final Report
+
+Always report
+
+- Required Documents
+- Architecture Check
+- Source Lesson
+- Active Lesson
+- Files Inspected
+- Files Changed
+- Baseline Build
+- Build Result
+- Simulation Result
+- Driver Station / Glass Result
+- Real Robot Result
+- Documentation Result
+- Git Commit Result
+- Git Push Result
+- Known Issues
+- Lesson Status
+
+Only report verified facts.
