@@ -1,0 +1,250 @@
+# FRC Java Coding Lab 7.0
+## Real Robot Programming
+
+> Learn professional FRC robot software engineering through incremental inheritance development.
+
+> Học lập trình robot FRC theo phương pháp phát triển kế thừa (Inheritance Development) với các dự án robot thật.
+
+---
+
+# Repository Purpose
+# Mục tiêu Repository
+
+This repository is a complete learning roadmap for developing FRC robots using Java and WPILib.
+
+The goal is not only to build a working robot, but also to learn software architecture, engineering workflow, testing, documentation, and long-term project maintenance.
+
+Repository này là lộ trình học hoàn chỉnh để phát triển robot FRC bằng Java và WPILib.
+
+Mục tiêu không chỉ là làm robot chạy được, mà còn học kiến trúc phần mềm, quy trình phát triển, kiểm thử, tài liệu hóa và bảo trì dự án lâu dài.
+
+---
+
+# Core Principles
+# Nguyên tắc cốt lõi
+
+- Frozen Architecture
+- Inheritance Development
+- One Lesson = One Project
+- One Lesson = One New Concept
+- Step-by-Step Learning
+- Build Before Continue
+- Simulation Before Real Robot
+- Complete Documentation
+
+---
+
+# Repository Structure
+# Cấu trúc Repository
+
+```text
+FRC_Java_Coding_Lab_7/
+│
+├── AGENTS.md
+├── README.md
+├── .gitignore
+│
+├── docs/
+│   ├── Document_A/
+│   └── Document_B/
+│
+└── real_robot_programming/
+    ├── D00_L01_Competition_Robot_Foundation/
+    ├── D00_L02_Drivebase_Safety_Configuration/
+    ├── D00_L03_Tank_Drive_With_Joystick/
+    └── ...
+```
+
+---
+
+# Directory Description
+# Giải thích thư mục
+
+## AGENTS.md
+
+Defines the operating rules for Codex.
+
+Định nghĩa quy tắc vận hành của Codex.
+
+---
+
+## docs/
+
+Contains the repository engineering standards.
+
+Chứa các tiêu chuẩn kỹ thuật của toàn bộ repository.
+
+Typical contents:
+
+- Frozen Backbone
+- Frozen Interface Contract
+- Engineering Standard
+- Architecture Documents
+
+---
+
+## real_robot_programming/
+
+Contains every lesson project.
+
+Mỗi lesson là một project WPILib độc lập.
+
+Each lesson inherits from the previous completed lesson.
+
+Mỗi lesson kế thừa lesson hoàn thành trước đó.
+
+Example:
+
+```text
+D00_L01
+    ↓ Copy
+D00_L02
+    ↓ Copy
+D00_L03
+```
+
+---
+
+# Lesson Structure
+# Cấu trúc một Lesson
+
+```text
+D00_L02_Drivebase_Safety_Configuration/
+│
+├── docs/
+├── src/
+├── vendordeps/
+├── gradle/
+├── build.gradle
+├── settings.gradle
+├── WPILib-License.md
+└── LESSON_STATUS.md
+```
+
+---
+
+## docs/
+
+Contains the learning documentation for this lesson.
+
+Chứa tài liệu học của lesson.
+
+Example:
+
+```
+D00_L01_to_D00_L02_Step_by_Step.md
+```
+
+---
+
+## src/
+
+Robot source code.
+
+Mã nguồn robot.
+
+---
+
+## LESSON_STATUS.md
+
+Records the lesson status.
+
+Ghi lại trạng thái lesson.
+
+Typical information:
+
+- Current lesson
+- Previous lesson
+- Build result
+- Simulation result
+- Real robot result
+- Git status
+
+---
+
+# Learning Workflow
+# Quy trình học
+
+```text
+Previous Lesson Completed
+            │
+            ▼
+Copy Previous Project
+            │
+            ▼
+Rename New Lesson
+            │
+            ▼
+Remove Generated Folders
+            │
+            ▼
+Baseline Build
+            │
+            ▼
+Learn One New Concept
+            │
+            ▼
+Build
+            │
+            ▼
+Simulation
+            │
+            ▼
+Real Robot
+            │
+            ▼
+Create Step-by-Step Guide
+            │
+            ▼
+Git Commit
+            │
+            ▼
+Git Push
+```
+
+---
+
+# Required Documents
+# Tài liệu bắt buộc
+
+Every completed lesson contains:
+
+- source code
+- lesson status
+- transition guide
+
+Mỗi lesson hoàn thành bao gồm:
+
+- mã nguồn
+- trạng thái lesson
+- tài liệu chuyển đổi
+
+---
+
+# Repository Rules
+# Quy tắc Repository
+
+Always read:
+
+1. AGENTS.md
+2. Engineering Documents
+3. Current Lesson
+
+before modifying code.
+
+Luôn đọc:
+
+1. AGENTS.md
+2. Tài liệu kỹ thuật
+3. Lesson hiện tại
+
+trước khi sửa mã nguồn.
+
+---
+
+# Goal
+# Mục tiêu
+
+Learn professional robot software engineering through continuous inheritance development.
+
+Học phát triển phần mềm robot chuyên nghiệp thông qua phát triển kế thừa liên tục.
