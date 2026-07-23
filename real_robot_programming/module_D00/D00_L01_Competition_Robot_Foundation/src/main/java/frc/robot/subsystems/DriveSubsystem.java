@@ -11,20 +11,19 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.io.drive.DriveIO;
+import frc.robot.io.drive.DriveIO.DriveIOInputs;
 
 /**
- * EN: Provides high-level drivetrain behavior.
- * VI: Cung cấp các chức năng điều khiển drivetrain ở mức cao.
+ * Provides high-level drivetrain behavior.
  */
 public class DriveSubsystem extends SubsystemBase {
-  // EN: Hardware implementation used by this subsystem.
-  // VI: Lớp phần cứng được subsystem sử dụng.
   private final DriveIO io;
+  private final DriveIOInputs inputs = new DriveIOInputs();
 
   /**
-   * EN: Creates the drive subsystem.
-   * VI: Khởi tạo DriveSubsystem.
+   * Creates the drive subsystem.
    *
    * @param io real or simulated drivetrain hardware
    */
@@ -33,9 +32,13 @@ public class DriveSubsystem extends SubsystemBase {
     stop();
   }
 
+  @Override
+  public void periodic() {
+    io.updateInputs(inputs);
+  }
+
   /**
-   * EN: Drives the left and right sides independently.
-   * VI: Điều khiển độc lập bên trái và bên phải.
+   * Drives the left and right sides independently.
    *
    * @param leftOutput left-side output
    * @param rightOutput right-side output
@@ -43,13 +46,17 @@ public class DriveSubsystem extends SubsystemBase {
   public void tankDrive(
       double leftOutput,
       double rightOutput) {
-    // EN: Prevent values outside the legal motor range.
-    // VI: Giới hạn công suất trong phạm vi hợp lệ của motor.
     double safeLeftOutput =
-        MathUtil.clamp(leftOutput, -1.0, 1.0);
+        MathUtil.clamp(
+            leftOutput,
+            DriveConstants.kMinimumDriveOutput,
+            DriveConstants.kMaximumDriveOutput);
 
     double safeRightOutput =
-        MathUtil.clamp(rightOutput, -1.0, 1.0);
+        MathUtil.clamp(
+            rightOutput,
+            DriveConstants.kMinimumDriveOutput,
+            DriveConstants.kMaximumDriveOutput);
 
     io.setTankOutputs(
         safeLeftOutput,
@@ -57,8 +64,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   /**
-   * EN: Stops the complete drivetrain.
-   * VI: Dừng toàn bộ drivetrain.
+   * Stops the complete drivetrain.
    */
   public void stop() {
     io.stop();

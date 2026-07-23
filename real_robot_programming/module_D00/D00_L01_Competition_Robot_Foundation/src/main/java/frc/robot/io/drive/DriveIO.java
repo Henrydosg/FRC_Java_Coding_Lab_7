@@ -10,26 +10,36 @@
 package frc.robot.io.drive;
 
 /**
- * EN: Defines the hardware operations required by the drive subsystem.
- * VI: Định nghĩa các thao tác phần cứng mà DriveSubsystem cần sử dụng.
+ * Defines the hardware operations required by the drive subsystem.
  */
 public interface DriveIO {
   /**
-   * EN: Sets the output of the left and right drivetrain sides.
-   * VI: Đặt công suất cho bên trái và bên phải của drivetrain.
+   * Stores drivetrain observations for one periodic cycle.
+   */
+  class DriveIOInputs {
+    public double leftAppliedOutput;
+    public double rightAppliedOutput;
+  }
+
+  /**
+   * Updates the drivetrain observation snapshot.
+   *
+   * @param inputs snapshot to update
+   */
+  void updateInputs(DriveIOInputs inputs);
+
+  /**
+   * Sets the output of the left and right drivetrain sides.
    *
    * @param leftOutput left-side output from -1.0 to 1.0
    * @param rightOutput right-side output from -1.0 to 1.0
    */
-  default void setTankOutputs(
+  void setTankOutputs(
       double leftOutput,
-      double rightOutput) {}
+      double rightOutput);
 
   /**
-   * EN: Stops the complete drivetrain.
-   * VI: Dừng toàn bộ drivetrain.
+   * Stops the complete drivetrain.
    */
-  default void stop() {
-    setTankOutputs(0.0, 0.0);
-  }
+  void stop();
 }

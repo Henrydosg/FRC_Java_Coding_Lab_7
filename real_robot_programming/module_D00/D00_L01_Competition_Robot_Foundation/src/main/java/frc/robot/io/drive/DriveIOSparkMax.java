@@ -16,41 +16,31 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import frc.robot.Constants.DriveConstants;
 
 /**
- * EN: Controls the four drivetrain SPARK MAX motor controllers.
- * VI: Điều khiển bốn bộ điều khiển motor SPARK MAX của drivetrain.
+ * Controls the four drivetrain SPARK MAX motor controllers.
  */
 public class DriveIOSparkMax implements DriveIO {
-  // EN: Main motor controller for the left drivetrain.
-  // VI: Bộ điều khiển chính của drivetrain bên trái.
   private final SparkMax leftLeader =
       new SparkMax(
           DriveConstants.kLeftLeaderCanId,
           DriveConstants.kDriveMotorType);
 
-  // EN: Copies commands from the left leader.
-  // VI: Tự động sao chép lệnh từ Left Leader.
   private final SparkMax leftFollower =
       new SparkMax(
           DriveConstants.kLeftFollowerCanId,
           DriveConstants.kDriveMotorType);
 
-  // EN: Main motor controller for the right drivetrain.
-  // VI: Bộ điều khiển chính của drivetrain bên phải.
   private final SparkMax rightLeader =
       new SparkMax(
           DriveConstants.kRightLeaderCanId,
           DriveConstants.kDriveMotorType);
 
-  // EN: Copies commands from the right leader.
-  // VI: Tự động sao chép lệnh từ Right Leader.
   private final SparkMax rightFollower =
       new SparkMax(
           DriveConstants.kRightFollowerCanId,
           DriveConstants.kDriveMotorType);
 
   /**
-   * EN: Creates and configures the real drivetrain hardware.
-   * VI: Khởi tạo và cấu hình phần cứng drivetrain thật.
+   * Creates and configures the real drivetrain hardware.
    */
   public DriveIOSparkMax() {
     setConfigurationTimeouts();
@@ -64,11 +54,20 @@ public class DriveIOSparkMax implements DriveIO {
   }
 
   /**
-   * EN: Sends commands only to the two leaders.
-   * VI: Chỉ gửi lệnh trực tiếp đến hai Leader.
+   * Updates applied output observations from the leaders.
+   *
+   * @param inputs snapshot to update
+   */
+  @Override
+  public void updateInputs(DriveIOInputs inputs) {
+    inputs.leftAppliedOutput = leftLeader.getAppliedOutput();
+    inputs.rightAppliedOutput = rightLeader.getAppliedOutput();
+  }
+
+  /**
+   * Sends commands only to the two leaders.
    *
    * <p>The followers automatically copy their leaders.
-   * Hai Follower sẽ tự động làm theo Leader tương ứng.
    */
   @Override
   public void setTankOutputs(
@@ -79,11 +78,9 @@ public class DriveIOSparkMax implements DriveIO {
   }
 
   /**
-   * EN: Stops both drivetrain leaders.
-   * VI: Dừng hai Leader của drivetrain.
+   * Stops both drivetrain leaders.
    *
    * <p>The followers stop automatically with their leaders.
-   * Hai Follower cũng tự động dừng theo Leader.
    */
   @Override
   public void stop() {
@@ -92,8 +89,7 @@ public class DriveIOSparkMax implements DriveIO {
   }
 
   /**
-   * EN: Sets CAN timeouts used during startup configuration.
-   * VI: Đặt thời gian chờ CAN khi robot khởi động.
+   * Sets CAN timeouts used during startup configuration.
    */
   private void setConfigurationTimeouts() {
     leftLeader.setCANTimeout(
@@ -110,8 +106,7 @@ public class DriveIOSparkMax implements DriveIO {
   }
 
   /**
-   * EN: Configures the left leader.
-   * VI: Cấu hình Leader bên trái.
+   * Configures the left leader.
    */
   private void configureLeftLeader() {
     SparkMaxConfig config = new SparkMaxConfig();
@@ -131,8 +126,7 @@ public class DriveIOSparkMax implements DriveIO {
   }
 
   /**
-   * EN: Configures the right leader.
-   * VI: Cấu hình Leader bên phải.
+   * Configures the right leader.
    */
   private void configureRightLeader() {
     SparkMaxConfig config = new SparkMaxConfig();
@@ -152,8 +146,7 @@ public class DriveIOSparkMax implements DriveIO {
   }
 
   /**
-   * EN: Configures CAN 8 to follow CAN 11.
-   * VI: Cấu hình CAN 8 tự động làm theo CAN 11.
+   * Configures the left follower.
    */
   private void configureLeftFollower() {
     SparkMaxConfig config = new SparkMaxConfig();
@@ -172,8 +165,7 @@ public class DriveIOSparkMax implements DriveIO {
   }
 
   /**
-   * EN: Configures CAN 7 to follow CAN 10.
-   * VI: Cấu hình CAN 7 tự động làm theo CAN 10.
+   * Configures the right follower.
    */
   private void configureRightFollower() {
     SparkMaxConfig config = new SparkMaxConfig();
