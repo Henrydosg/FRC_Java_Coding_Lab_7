@@ -1,78 +1,26 @@
-\# Lesson Status
+# Lesson Status
 
+- Lesson: D00_L01_Competition_Robot_Foundation
+- Previous Lesson: Imported competition baseline
+- Status: IN_PROGRESS
 
+## Architecture
 
-\## Active Lesson
+- Architecture Review: PASS
+- Frozen Pipeline: Driver -> Xbox Controller -> controls -> commands -> subsystems -> io -> Hardware
+- RobotContainer: Composition root only
 
+## Verification
 
+- Baseline Build: PASS
+- Build: PASS - `.\gradlew.bat clean build`
+- Simulation: NOT TESTED
+- Driver Station / Glass: NOT TESTED
+- Real Robot: NOT TESTED
+- Transition Guide: NOT TESTED
+- Git Commit: PASS - `88257ea`
+- Git Push: NOT TESTED
 
-\- Lesson ID: D00\_L01
+## Known Issues
 
-\- Lesson Name: Competition Robot Foundation
-
-\- Status: IN\_PROGRESS
-
-\- Authoritative Path: real\_robot\_programming/module\_D00/D00\_L01\_Competition\_Robot\_Foundation
-
-
-
-\## Current Baseline
-
-
-
-\- Existing competition project imported
-
-\- Generated build artifacts removed
-
-\- WPILib build verified successfully
-
-\- Hardware configuration preserved
-
-\- Imported source has not yet been architecturally refactored
-
-
-
-\## Current Objective
-
-
-
-Restore the frozen command-based architecture without changing robot behavior:
-
-
-
-Driver
-
-→ Xbox Controller
-
-→ commands
-
-→ subsystems
-
-→ io
-
-→ Hardware
-
-
-
-\## Last Verification
-
-
-
-\- Command: .\\gradlew.bat build
-
-\- Result: BUILD SUCCESSFUL
-
-
-
-\## Deferred Work
-
-
-
-\- Move drive behavior out of RobotContainer
-
-\- Create the drive command layer
-
-\- Add simulation IO in a later lesson
-
-\- Normalize remaining code-standard issues
-
+- Simulation and real-robot behavior remain unverified.
