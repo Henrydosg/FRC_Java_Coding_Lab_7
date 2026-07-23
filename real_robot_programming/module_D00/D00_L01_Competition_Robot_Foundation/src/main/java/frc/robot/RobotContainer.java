@@ -2,62 +2,112 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+/**
+ * Author: SSIS
+ * Mentor: SSIS
+ */
+
 package frc.robot;
 
-import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.OperatorConstants;
+import frc.robot.io.drive.DriveIOSparkMax;
+import frc.robot.subsystems.DriveSubsystem;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and trigger mappings) should be declared here.
+ * EN: Owns robot subsystems, controls, and button bindings.
+ * VI: Quản lý subsystem, tay điều khiển và các nút bấm của robot.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // EN: Xbox controller used by the driver.
+  // VI: Tay cầm Xbox được người lái sử dụng.
+  private final CommandXboxController driverController =
+      new CommandXboxController(
+          OperatorConstants.kDriverControllerPort);
 
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  // EN: Real drivetrain subsystem using SPARK MAX controllers.
+  // VI: Drivetrain thật sử dụng các bộ điều khiển SPARK MAX.
+  private final DriveSubsystem driveSubsystem =
+      new DriveSubsystem(new DriveIOSparkMax());
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  /**
+   * EN: Creates the robot container and button bindings.
+   * VI: Khởi tạo RobotContainer và thiết lập các nút bấm.
+   */
   public RobotContainer() {
-    // Configure the trigger bindings
     configureBindings();
+    printTestInstructions();
   }
 
   /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
+   * EN: Configures the first forward/reverse drivetrain test.
+   * VI: Thiết lập bài kiểm tra tiến/lùi đầu tiên.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    // EN: Hold A to move forward.
+    // VI: Giữ nút A để robot chạy tiến.
+    driverController
+        .a()
+        .whileTrue(
+            Commands.startEnd(
+                this::driveForward,
+                driveSubsystem::stop,
+                driveSubsystem));
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    // EN: Hold B to move backward.
+    // VI: Giữ nút B để robot chạy lùi.
+    driverController
+        .b()
+        .whileTrue(
+            Commands.startEnd(
+                this::driveReverse,
+                driveSubsystem::stop,
+                driveSubsystem));
   }
 
   /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
+   * EN: Runs both drivetrain sides forward at 50%.
+   * VI: Cho cả hai bên drivetrain chạy tiến ở mức 50%.
+   */
+  private void driveForward() {
+    driveSubsystem.tankDrive(
+        DriveConstants.kDriveTestOutput,
+        DriveConstants.kDriveTestOutput);
+  }
+
+  /**
+   * EN: Runs both drivetrain sides backward at 50%.
+   * VI: Cho cả hai bên drivetrain chạy lùi ở mức 50%.
+   */
+  private void driveReverse() {
+    driveSubsystem.tankDrive(
+        -DriveConstants.kDriveTestOutput,
+        -DriveConstants.kDriveTestOutput);
+  }
+
+  /**
+   * EN: Prints the active test controls to RioLog.
+   * VI: In hướng dẫn điều khiển hiện tại ra RioLog.
+   */
+  private void printTestInstructions() {
+    System.out.println("=================================");
+    System.out.println("Leader/Follower Drive Test");
+    System.out.println("A: Forward at 50%");
+    System.out.println("B: Reverse at 50%");
+    System.out.println("Release Button: Stop");
+    System.out.println("Left: CAN 11 Leader -> CAN 8 Follower");
+    System.out.println("Right: CAN 10 Leader -> CAN 7 Follower");
+    System.out.println("=================================");
+  }
+
+  /**
+   * EN: Returns an empty autonomous command.
+   * VI: Trả về autonomous rỗng để giữ robot an toàn.
    */
   public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return Commands.none();
   }
 }
