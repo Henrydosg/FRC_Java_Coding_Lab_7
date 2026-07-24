@@ -2,7 +2,7 @@
 
 - Lesson: D00_L03_Tank_Drive_With_Joystick
 - Previous Lesson: D00_L01_Competition_Robot_Foundation
-- Status: IN_PROGRESS
+- Status: COMPLETE
 
 ## Architecture
 
@@ -23,8 +23,8 @@
 | Documentation | PASS | Transition guide completed |
 | Driver Station / Glass | NOT REQUIRED | Not required for this lesson |
 | Real Robot | DEFERRED | Physical robot verification deferred |
-| Git Commit | NOT COMPLETED | No lesson commit created |
-| Git Push | NOT COMPLETED | No lesson commit pushed |
+| Git Commit | PASS | Lesson commits completed |
+| Git Push | PASS | Lesson commits pushed to `origin/main` |
 
 ## Known Issues
 
