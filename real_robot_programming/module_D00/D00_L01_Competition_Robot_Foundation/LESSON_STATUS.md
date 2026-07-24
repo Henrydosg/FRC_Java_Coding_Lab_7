@@ -2,7 +2,7 @@
 
 - Lesson: D00_L01_Competition_Robot_Foundation
 - Previous Lesson: Imported competition baseline
-- Status: IN_PROGRESS
+- Status: COMPLETE
 
 ## Architecture
 
