@@ -47,12 +47,12 @@ public final class Constants {
 
     public static final int kDriveCurrentLimitAmps = 60;
     public static final double kVoltageCompensationVolts = 12.0;
-    public static final double kOpenLoopRampRateSeconds = 0.25;
+    public static final double kOpenLoopRampRateSeconds = 0.15;
     public static final int kConfigurationCanTimeoutMs = 250;
 
     public static final double kMinimumDriveOutput = -1.0;
     public static final double kMaximumDriveOutput = 1.0;
-    public static final double kDriveTestOutput = 0.15;
+    public static final double kDriveTestOutput = 0.50;
 
     private DriveConstants() {}
   }
