@@ -47,7 +47,7 @@ public final class Constants {
 
     public static final double kMinimumDriveOutput = -1.0;
     public static final double kMaximumDriveOutput = 1.0;
-    public static final double kDriveTestOutput = 0.50;
+    public static final double kDriveTestOutput = 0.30;
 
     private DriveConstants() {}
   }
