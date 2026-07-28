@@ -5,6 +5,7 @@
 - Previous Lesson: D00_L06_Simulation_IO_Layer
 - Source Lesson: D00_L06_Simulation_IO_Layer
 - Status: COMPLETE
+- Real Robot Verification: PASS
 - Objective: Read-only drive observation boundary
 
 ## Architecture
@@ -35,6 +36,7 @@
 | Step 8 - Git Commit and Push | PASS | Completed lesson committed and synchronized with the configured upstream |
 | Implementation | PASS | Read-only drive observation boundary implemented |
 | Simulation | PASS | All required DriveObservation simulation cases passed |
+| Real Robot | PASS | Deployment and physical drivetrain operation confirmed by the user |
 | Documentation | PASS | Complete bilingual engineering guide created in Markdown, Word, and PDF |
 
 ## Verification
@@ -55,8 +57,9 @@
 | Stop Observation | PASS | Expected and actual outputs returned to `0.0`, `0.0` |
 | Snapshot Immutability | PASS | Existing record retained state A while a new record reflected state B |
 | No Side-effect Observation Access | PASS | Repeated accessor calls did not invoke `updateInputs()` |
-| Driver Station / Glass | NOT TESTED | Not run |
-| Real Robot Verification | NOT TESTED | Not run |
+| Driver Station | PASS | Robot communications, deployed robot code, and controller operation verified on the physical robot by the user |
+| Glass | NOT TESTED | Glass-specific telemetry was not available in this lesson |
+| Real Robot Verification | PASS | User confirmed successful deployment and physical drivetrain testing on the competition robot |
 | Architecture Regression | PASS | Frozen control path and IO ownership preserved |
 | Java Regression | PASS | Java changes limited to approved observation implementation scope |
 | Previous Lesson Integrity | PASS | D00_L06 remains unchanged |
@@ -72,9 +75,17 @@
 | Git Push | PASS | Lesson commit pushed to the configured upstream |
 | Repository Sync | PASS | Local `main` synchronized with `origin/main` |
 
-## Deferred Verification
+## Real Robot Verification
 
-- Physical robot verification has not been performed.
+- Physical robot deployment and drivetrain testing were completed successfully.
+- Driver Station communication and robot code execution were verified.
+- Xbox controller operation was verified on USB port 0.
+- Disabled-state safety behavior was verified.
+- Forward and reverse drive test commands were verified on the physical drivetrain.
+- Left and right drivetrain response were verified.
+- Motor stop behavior after releasing controls was verified.
+- Observation values were not displayed externally because D01_L01 does not yet include telemetry publishing.
+- Glass-specific verification remains deferred to a later telemetry lesson.
 
 ## Known Issues
 
