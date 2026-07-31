@@ -111,8 +111,8 @@ Telemetry is read-only.
 | Approved-input behavior | PASS |
 | Feeder telemetry | PASS |
 | Transition Guide | PASS |
-| Git Commit | PENDING |
-| Git Push | PENDING |
+| Git Commit | PASS |
+| Git Push | PASS |
 | Known Issues | NONE |
 
 ## Verification Evidence
