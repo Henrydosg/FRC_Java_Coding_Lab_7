@@ -8,8 +8,8 @@
 | Module | D01 |
 | Previous Lesson | D01_L05_Intake_Foundation |
 | Development Model | Inheritance Development |
-| Status | IN_PROGRESS |
-| Freeze Status | NOT FROZEN |
+| Status | COMPLETE |
+| Freeze Status | FROZEN |
 
 ---
 
