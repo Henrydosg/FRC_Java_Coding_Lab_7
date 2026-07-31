@@ -4,16 +4,17 @@
 
 `D01_L08_Feeder_Complete_Foundation` inherits the completed and frozen
 `D01_L07_Flywheel_Complete_Foundation` project. It adds one complete Feeder foundation while
-preserving the inherited Drivebase, Intake, and Flywheel behavior.
+preserving the inherited Drivebase, Intake, and Flywheel behavior and responsibilities.
 
-Status: `IN_PROGRESS`
+Status: `COMPLETE`
 
-Freeze status: `NOT FROZEN`
+Freeze status: `FROZEN`
 
 ## Objective
 
-Provide safe manual control, real and simulation IO, immutable observation, and read-only
-telemetry for one Feeder driven by a REV NEO Brushless motor and REV Spark MAX.
+Provide safe manual forward and reverse control, real and simulation IO, integrated encoder
+observations, immutable mechanism observations, and read-only telemetry for one Feeder driven by
+a REV NEO Brushless motor and REV Spark MAX.
 
 ## Frozen Architecture
 
@@ -39,8 +40,8 @@ FeederIO
 ```
 
 `RobotContainer` remains the composition root. It creates objects, selects real or simulation
-implementations, injects dependencies, and declares the approved controller binding. It contains
-no Feeder hardware logic, input processing, mechanism logic, or telemetry calculations.
+implementations, injects dependencies, and declares controller bindings. It contains no Feeder
+hardware logic, input processing, mechanism logic, or telemetry calculations.
 
 REVLib types remain inside `FeederIOSparkMax`. `FeederIO`, `FeederSubsystem`, commands, controls,
 observations, and telemetry remain vendor-independent.
@@ -59,49 +60,61 @@ observations, and telemetry remain vendor-independent.
 | Control mode | Open-loop duty cycle |
 | Real IO | FeederIOSparkMax |
 | Simulation IO | FeederIOSim |
+| Safe fallback IO | FeederIONoop |
 
-## Safety Configuration
+## Final Configuration
 
 | Setting | Value |
 | --- | --- |
-| Inversion | PENDING APPROVAL |
-| Neutral mode | PENDING APPROVAL |
-| Supply-current limit | PENDING APPROVAL |
-| Stator-current limit | NOT APPLICABLE |
-| Open-loop ramp | PENDING APPROVAL |
-| Peak reverse output | PENDING APPROVAL |
-| Peak forward output | PENDING APPROVAL |
-| Manual test output | PENDING APPROVAL |
+| Motor inversion | `false` |
+| Idle mode | Brake |
+| Supply-current limit | `30 A` |
+| Stator-current limit | Not applicable |
+| Open-loop ramp | `0.20 s` |
+| Peak reverse output | `-0.40` |
+| Peak forward output | `+0.40` |
+| Manual feed output | `+0.20` |
+| Manual reverse output | `-0.20` |
+| Safe stopped output | `0.0` |
 
-The Spark MAX configuration will be applied and checked inside `FeederIOSparkMax`. The mechanism
-must start stopped and stop when its command ends or is interrupted.
+The Spark MAX configuration is applied and checked inside `FeederIOSparkMax`. Output is clamped
+to the configured peak range in the subsystem and IO implementations. The mechanism starts
+stopped and returns to `0.0` when the command ends or is interrupted.
 
-## Driver Control
+REVLib does not provide a separate Spark MAX stator-current observation. The Feeder contract
+therefore reports `StatorCurrentAmps` deterministically as `0.0`, documented as not applicable.
 
-| Input | Behavior |
-| --- | --- |
-| Hold approved Xbox input | Command the approved Feeder output |
-| Release approved Xbox input | Stop Feeder at `0.0` |
-| Command interruption | Stop Feeder at `0.0` |
-| Robot disabled | Stop Feeder at `0.0` |
+## Driver Controls
 
-The binding will use hold-to-run behavior. It will not use a toggle.
+| Input | Output | Mode |
+| --- | --- | --- |
+| Hold Xbox right bumper only | `+0.20` | `FEEDING` |
+| Hold Xbox left bumper only | `-0.20` | `REVERSING` |
+| Hold both bumpers | `0.0` | `STOPPED` |
+| Release both bumpers | `0.0` through safe stop | `STOPPED` |
+| Command interruption | `0.0` through safe stop | `STOPPED` |
+| Robot disabled | `0.0` | `STOPPED` |
+
+Both bumper controls are hold-to-run. They do not toggle. Simultaneous requests resolve to a
+stopped output using the inherited Intake conflict-handling pattern.
 
 ## IO Implementations
 
-- `FeederIOSparkMax` will own Spark MAX creation, REVLib configuration, open-loop output, status
-  values, connection state, configuration health, and safe stop.
-- `FeederIOSim` will store the commanded output and report deterministic, contract-compatible
+- `FeederIOSparkMax` owns Spark MAX creation, REVLib configuration, open-loop output, integrated
+  encoder reads, status values, connection state, configuration health, output clamping, and safe
+  stop.
+- `FeederIOSim` stores the commanded output and reports deterministic, contract-compatible
   observation values.
-- `FeederIONoop` will report deterministic safe stopped and disconnected values.
+- `FeederIONoop` reports deterministic safe stopped and disconnected values.
 
 ## Read-Only Telemetry
 
-The planned NetworkTables table is `/Feeder`.
+NetworkTables table: `/Feeder`
 
-Planned published fields:
+Published fields:
 
 - `/Feeder/AppliedOutput`
+- `/Feeder/PositionRotations`
 - `/Feeder/VelocityRpm`
 - `/Feeder/SupplyCurrentAmps`
 - `/Feeder/StatorCurrentAmps`
@@ -110,46 +123,43 @@ Planned published fields:
 - `/Feeder/ConfigurationHealthy`
 - `/Feeder/Mode`
 
-Telemetry will observe immutable `FeederObservation` values. It must not command hardware,
-schedule commands, modify subsystem state, or calculate control outputs.
+Telemetry observes immutable `FeederObservation` values. It does not command hardware, schedule
+commands, modify subsystem state, or calculate control outputs.
 
 ## Verification
 
 | Verification | Result |
 | --- | --- |
-| Architecture review | PENDING |
-| Clean build | PENDING |
-| WPILib Simulation | PENDING |
-| Approved-input hold and release | PENDING |
-| Command interruption stop | PENDING |
-| Driver Station / Glass | PENDING |
-| Real robot | PENDING |
-| Drivebase regression | PENDING |
-| Intake and Flywheel regression | PENDING |
-| Telemetry read-only behavior | PENDING |
+| Architecture review | PASS |
+| Build | PASS |
+| WPILib Simulation | PASS |
+| Driver Station / Glass | PASS |
+| Real robot | PASS |
+| Right bumper feed at `+0.20` | PASS |
+| Left bumper reverse at `-0.20` | PASS |
+| Simultaneous bumper stop | PASS |
+| Release safe stop | PASS |
+| Motor direction | PASS |
+| Telemetry read-only behavior | PASS |
 
-Required behavior:
-
-- Holding the approved input runs the Feeder at the approved output.
-- Releasing the approved input returns the Feeder output to zero.
-- Interrupting the command returns the Feeder output to zero.
-- Disabling the robot returns the Feeder output to zero.
-- The `/Feeder` telemetry fields publish through the existing telemetry layer.
-- Existing Drivebase, Intake, and Flywheel control and telemetry behavior remain functional.
+The user supplied the simulation, Glass, real-robot, control-behavior, safe-stop, and motor
+direction verification results. The final repository build was also run during lesson closure.
 
 ## Scope Exclusions
 
 D01_L08 does not add Shooter integration, closed-loop velocity control, PID, feedforward,
 characterization, automatic Feeder logic, mechanism coordination, or autonomous Feeder commands.
 
-The next lesson is `D01_L09_Shooter_Integration`.
+## Next Lesson
+
+The next lesson is Shooter integration. It will coordinate the existing Flywheel and Feeder
+subsystems through commands while preserving their separate subsystem responsibilities, IO
+contracts, state ownership, and telemetry boundaries. D01_L09 is not created by this lesson.
 
 ## Transition Guide
-
-The transition will be documented in:
 
 `docs/D01_L07_Flywheel_Complete_Foundation_to_D01_L08_Feeder_Complete_Foundation_Step_by_Step.md`
 
 ## Final State
 
-`D01_L08_Feeder_Complete_Foundation` is `IN_PROGRESS` and `NOT FROZEN`.
+`D01_L08_Feeder_Complete_Foundation` is `COMPLETE` and `FROZEN`.

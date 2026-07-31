@@ -10,11 +10,13 @@
 package frc.robot.telemetry;
 
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.subsystems.FlywheelSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.telemetry.drive.DriveTelemetryFacade;
-import frc.robot.telemetry.intake.IntakeTelemetryFacade;
+import frc.robot.telemetry.feeder.FeederTelemetryFacade;
 import frc.robot.telemetry.flywheel.FlywheelTelemetryFacade;
+import frc.robot.telemetry.intake.IntakeTelemetryFacade;
 import java.util.Objects;
 
 /**
@@ -27,6 +29,8 @@ public final class RobotTelemetry {
   private final IntakeTelemetryFacade intakeTelemetryFacade;
   private final FlywheelSubsystem flywheelSubsystem;
   private final FlywheelTelemetryFacade flywheelTelemetryFacade;
+  private final FeederSubsystem feederSubsystem;
+  private final FeederTelemetryFacade feederTelemetryFacade;
 
   /**
    * Creates the robot telemetry coordinator.
@@ -37,6 +41,8 @@ public final class RobotTelemetry {
    * @param intakeTelemetryFacade intake telemetry publisher
    * @param flywheelSubsystem flywheel observation source
    * @param flywheelTelemetryFacade flywheel telemetry publisher
+   * @param feederSubsystem feeder observation source
+   * @param feederTelemetryFacade feeder telemetry publisher
    */
   public RobotTelemetry(
       DriveSubsystem driveSubsystem,
@@ -44,7 +50,9 @@ public final class RobotTelemetry {
       IntakeSubsystem intakeSubsystem,
       IntakeTelemetryFacade intakeTelemetryFacade,
       FlywheelSubsystem flywheelSubsystem,
-      FlywheelTelemetryFacade flywheelTelemetryFacade) {
+      FlywheelTelemetryFacade flywheelTelemetryFacade,
+      FeederSubsystem feederSubsystem,
+      FeederTelemetryFacade feederTelemetryFacade) {
     this.driveSubsystem =
         Objects.requireNonNull(
             driveSubsystem,
@@ -69,6 +77,14 @@ public final class RobotTelemetry {
         Objects.requireNonNull(
             flywheelTelemetryFacade,
             "flywheelTelemetryFacade");
+    this.feederSubsystem =
+        Objects.requireNonNull(
+            feederSubsystem,
+            "feederSubsystem");
+    this.feederTelemetryFacade =
+        Objects.requireNonNull(
+            feederTelemetryFacade,
+            "feederTelemetryFacade");
   }
 
   /**
@@ -81,5 +97,7 @@ public final class RobotTelemetry {
         intakeSubsystem.getObservation());
     flywheelTelemetryFacade.publish(
         flywheelSubsystem.getObservation());
+    feederTelemetryFacade.publish(
+        feederSubsystem.getObservation());
   }
 }

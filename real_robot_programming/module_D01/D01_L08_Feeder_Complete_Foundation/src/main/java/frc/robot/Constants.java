@@ -105,6 +105,24 @@ public final class Constants {
   }
 
   /**
+   * Stores confirmed feeder hardware and safety constants.
+   */
+  public static final class FeederConstants {
+    public static final int kFeederMotorCanId = 19;
+    public static final boolean kFeederMotorInverted = false;
+    public static final boolean kFeederBrakeModeEnabled = true;
+    public static final int kFeederSupplyCurrentLimitAmps = 30;
+    public static final double kFeederOpenLoopRampSeconds = 0.20;
+    public static final double kFeederPeakReverseOutput = -0.40;
+    public static final double kFeederPeakForwardOutput = 0.40;
+    public static final double kStoppedFeederOutput = 0.0;
+    public static final double kManualFeedOutput = 0.20;
+    public static final double kManualReverseOutput = -0.20;
+
+    private FeederConstants() {}
+  }
+
+  /**
    * Stores telemetry topic configuration.
    */
   public static final class TelemetryConstants {
@@ -144,6 +162,24 @@ public final class Constants {
     public static final String kFlywheelConfigurationHealthyKey =
         "ConfigurationHealthy";
     public static final String kFlywheelModeKey = "Mode";
+    public static final String kFeederTableName = "Feeder";
+    public static final String kFeederAppliedOutputKey =
+        "AppliedOutput";
+    public static final String kFeederPositionRotationsKey =
+        "PositionRotations";
+    public static final String kFeederVelocityRpmKey =
+        "VelocityRpm";
+    public static final String kFeederSupplyCurrentAmpsKey =
+        "SupplyCurrentAmps";
+    public static final String kFeederStatorCurrentAmpsKey =
+        "StatorCurrentAmps";
+    public static final String kFeederTemperatureCelsiusKey =
+        "TemperatureCelsius";
+    public static final String kFeederConnectedKey =
+        "Connected";
+    public static final String kFeederConfigurationHealthyKey =
+        "ConfigurationHealthy";
+    public static final String kFeederModeKey = "Mode";
 
     private TelemetryConstants() {}
   }

@@ -19,27 +19,34 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.TelemetryConstants;
 import frc.robot.commands.drive.DefaultDriveCommand;
 import frc.robot.commands.drive.DriveTestCommand;
-import frc.robot.commands.intake.ManualIntakeCommand;
+import frc.robot.commands.feeder.ManualFeederCommand;
 import frc.robot.commands.flywheel.ManualFlywheelCommand;
+import frc.robot.commands.intake.ManualIntakeCommand;
 import frc.robot.controls.DriveInputProcessor;
-import frc.robot.controls.IntakeInputProcessor;
+import frc.robot.controls.FeederInputProcessor;
 import frc.robot.controls.FlywheelInputProcessor;
+import frc.robot.controls.IntakeInputProcessor;
 import frc.robot.io.drive.DriveIO;
 import frc.robot.io.drive.DriveIOSim;
 import frc.robot.io.drive.DriveIOSparkMax;
-import frc.robot.io.intake.IntakeIO;
-import frc.robot.io.intake.IntakeIOSim;
-import frc.robot.io.intake.IntakeIOTalonFX;
+import frc.robot.io.feeder.FeederIO;
+import frc.robot.io.feeder.FeederIOSim;
+import frc.robot.io.feeder.FeederIOSparkMax;
 import frc.robot.io.flywheel.FlywheelIO;
 import frc.robot.io.flywheel.FlywheelIOSim;
 import frc.robot.io.flywheel.FlywheelIOTalonFX;
+import frc.robot.io.intake.IntakeIO;
+import frc.robot.io.intake.IntakeIOSim;
+import frc.robot.io.intake.IntakeIOTalonFX;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.subsystems.FlywheelSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.telemetry.RobotTelemetry;
 import frc.robot.telemetry.drive.DriveTelemetryFacade;
-import frc.robot.telemetry.intake.IntakeTelemetryFacade;
+import frc.robot.telemetry.feeder.FeederTelemetryFacade;
 import frc.robot.telemetry.flywheel.FlywheelTelemetryFacade;
+import frc.robot.telemetry.intake.IntakeTelemetryFacade;
 
 /**
  * Creates robot components and configures controller bindings.
@@ -58,6 +65,9 @@ public class RobotContainer {
   private final FlywheelInputProcessor flywheelInputProcessor =
       new FlywheelInputProcessor();
 
+  private final FeederInputProcessor feederInputProcessor =
+      new FeederInputProcessor();
+
   private final DriveIO driveIO;
 
   private final DriveSubsystem driveSubsystem;
@@ -70,11 +80,17 @@ public class RobotContainer {
 
   private final FlywheelSubsystem flywheelSubsystem;
 
+  private final FeederIO feederIO;
+
+  private final FeederSubsystem feederSubsystem;
+
   private final DriveTelemetryFacade driveTelemetryFacade;
 
   private final IntakeTelemetryFacade intakeTelemetryFacade;
 
   private final FlywheelTelemetryFacade flywheelTelemetryFacade;
+
+  private final FeederTelemetryFacade feederTelemetryFacade;
 
   private final RobotTelemetry robotTelemetry;
 
@@ -90,6 +106,8 @@ public class RobotContainer {
     intakeSubsystem = new IntakeSubsystem(intakeIO);
     flywheelIO = createFlywheelIO();
     flywheelSubsystem = new FlywheelSubsystem(flywheelIO);
+    feederIO = createFeederIO();
+    feederSubsystem = new FeederSubsystem(feederIO);
     driveTelemetryFacade =
         new DriveTelemetryFacade(
             NetworkTableInstance
@@ -108,6 +126,12 @@ public class RobotContainer {
                 .getDefault()
                 .getTable(
                     TelemetryConstants.kFlywheelTableName));
+    feederTelemetryFacade =
+        new FeederTelemetryFacade(
+            NetworkTableInstance
+                .getDefault()
+                .getTable(
+                    TelemetryConstants.kFeederTableName));
     robotTelemetry =
         new RobotTelemetry(
             driveSubsystem,
@@ -115,7 +139,9 @@ public class RobotContainer {
             intakeSubsystem,
             intakeTelemetryFacade,
             flywheelSubsystem,
-            flywheelTelemetryFacade);
+            flywheelTelemetryFacade,
+            feederSubsystem,
+            feederTelemetryFacade);
     defaultDriveCommand =
         new DefaultDriveCommand(
             driveSubsystem,
@@ -167,6 +193,19 @@ public class RobotContainer {
   }
 
   /**
+   * Creates the feeder IO implementation for the runtime environment.
+   *
+   * @return real or simulated feeder IO
+   */
+  private FeederIO createFeederIO() {
+    if (RobotBase.isReal()) {
+      return new FeederIOSparkMax();
+    }
+
+    return new FeederIOSim();
+  }
+
+  /**
    * Configures the drivetrain default command.
    */
   private void configureDefaultCommands() {
@@ -211,6 +250,17 @@ public class RobotContainer {
                 flywheelSubsystem,
                 flywheelInputProcessor,
                 driverController.getHID()::getYButton));
+
+    driverController
+        .rightBumper()
+        .or(
+            driverController.leftBumper())
+        .whileTrue(
+            new ManualFeederCommand(
+                feederSubsystem,
+                feederInputProcessor,
+                driverController.getHID()::getRightBumperButton,
+                driverController.getHID()::getLeftBumperButton));
   }
 
   /**
