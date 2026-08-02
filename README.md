@@ -46,7 +46,8 @@ FRC_Java_Coding_Lab_7/
 │
 ├── docs/
 │   ├── Document_A/
-│   └── Document_B/
+│   ├── Document_B/
+│   └── Document_C/
 │
 └── real_robot_programming/
     ├── D00_L01_Competition_Robot_Foundation/
@@ -80,6 +81,13 @@ Typical contents:
 - Frozen Interface Contract
 - Engineering Standard
 - Architecture Documents
+- Observation Architecture and Model Contract
+
+`Document_C` formally defines `frc.robot.observation` as the permanent
+top-level package for immutable, vendor-neutral read models.
+
+`Document_C` chính thức định nghĩa `frc.robot.observation` là package
+top-level cố định cho các read model bất biến và độc lập với vendor.
 
 ---
 

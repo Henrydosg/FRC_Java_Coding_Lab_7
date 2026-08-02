@@ -19,8 +19,12 @@ Before any analysis, coding, documentation, commit, or push, Codex MUST read:
 7. docs/Document_B/English/02_Java_Coding_Standard_EN.pdf
 8. docs/Document_B/English/03_Architecture_Review_Checklist_EN.pdf
 9. docs/Document_B/English/04_Lesson_Module_Checklist_EN.pdf
-10. Active lesson LESSON_STATUS.md
-11. Active lesson source code
+10. docs/Document_C/English/00_Observation_Architecture_Overview_EN.pdf
+11. docs/Document_C/English/01_Observation_Model_Contract_EN.pdf
+12. docs/Document_C/English/02_Observation_Package_Standard_EN.pdf
+13. docs/Document_C/English/03_Observation_Architecture_Checklist_EN.pdf
+14. Active lesson LESSON_STATUS.md
+15. Active lesson source code
 
 Only the English PDF documents are authoritative.
 DOCX files are editable source documents.
@@ -31,8 +35,9 @@ Vietnamese documents are reference translations and are not required reading.
 1. AGENTS.md
 2. Document A
 3. Document B
-4. README.md
-5. Repository Source Code
+4. Document C
+5. README.md
+6. Repository Source Code
 
 If documents conflict, the higher priority document wins.
 
@@ -50,7 +55,8 @@ FRC_Java_Coding_Lab_7/
 ├── README.md
 ├── docs/
 │   ├── Document_A/
-│   └── Document_B/
+│   ├── Document_B/
+│   └── Document_C/
 └── real_robot_programming/
     └── <LESSON_NAME>/
         ├── docs/
@@ -81,12 +87,14 @@ Driver
 → io
 → hardware
 
-Telemetry flow
+Observation flow
 
-Subsystem
-→ Telemetry Coordinator
-→ Telemetry Facade
-→ NetworkTables / Glass
+hardware
+→ IOInputs
+→ subsystem / estimator
+→ immutable Observation
+→ telemetry
+→ NT4 / Glass / log
 
 Telemetry is read-only.
 
@@ -106,11 +114,17 @@ subsystems
 io
 - Hardware abstraction only.
 
+observation
+- Immutable, vendor-neutral read models and pure evaluators only.
+- Subsystems or dedicated estimators produce Observations.
+- No hardware access, vendor APIs, NetworkTables, CommandScheduler, RobotContainer, mutable mechanism state, or control behavior.
+
 telemetry
-- Observation only.
+- Consume and publish immutable Observations only.
+- No behavior control or hardware access.
 
 util
-- Shared reusable helpers.
+- Generic shared reusable helpers only.
 
 ---
 
@@ -150,11 +164,13 @@ Flow
 
 Hardware
 → IO
-→ Inputs
+→ IOInputs
 → Subsystem
+→ immutable Observation
 → Telemetry
 
 Subsystems never access vendor hardware directly.
+Telemetry never publishes directly from mutable IOInputs when an Observation contract exists.
 
 ---
 
@@ -388,6 +404,8 @@ Formal review required before changing
 - Constants architecture
 - Completed lessons
 
+The permanent top-level package `frc.robot.observation` is part of the Frozen Backbone.
+
 The review shall document:
 
 - Reason
@@ -419,3 +437,12 @@ Always report
 - Lesson Status
 
 Only report verified facts.
+
+---
+
+## 16. Governance Revision History
+
+| Version | Date | Status | Decision |
+| --- | --- | --- | --- |
+| 1.0 | 2026-07-18 | FROZEN | Initial repository governance. |
+| 1.1 | 2026-08-01 | FROZEN | APPROVED: recognize `frc.robot.observation` as the permanent immutable read-model boundary; control flow remains unchanged. |
