@@ -1,0 +1,80 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+/**
+ * Author: SSIS
+ * Mentor: SSIS
+ */
+
+package frc.robot.subsystems;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.io.gyro.GyroIO;
+import frc.robot.io.swerve.SwerveModuleIO;
+
+/**
+ * Owns Swerve IO dependencies and refreshes their raw input snapshots.
+ */
+public class SwerveSubsystem extends SubsystemBase {
+  private final SwerveModuleIO frontLeft;
+  private final SwerveModuleIO frontRight;
+  private final SwerveModuleIO backLeft;
+  private final SwerveModuleIO backRight;
+  private final GyroIO gyro;
+
+  private final SwerveModuleIO.SwerveModuleIOInputs frontLeftInputs =
+      new SwerveModuleIO.SwerveModuleIOInputs();
+  private final SwerveModuleIO.SwerveModuleIOInputs frontRightInputs =
+      new SwerveModuleIO.SwerveModuleIOInputs();
+  private final SwerveModuleIO.SwerveModuleIOInputs backLeftInputs =
+      new SwerveModuleIO.SwerveModuleIOInputs();
+  private final SwerveModuleIO.SwerveModuleIOInputs backRightInputs =
+      new SwerveModuleIO.SwerveModuleIOInputs();
+  private final GyroIO.GyroIOInputs gyroInputs =
+      new GyroIO.GyroIOInputs();
+
+  /**
+   * Creates the Swerve subsystem with vendor-neutral hardware dependencies.
+   *
+   * @param frontLeft front-left module IO
+   * @param frontRight front-right module IO
+   * @param backLeft back-left module IO
+   * @param backRight back-right module IO
+   * @param gyro gyro IO
+   */
+  public SwerveSubsystem(
+      SwerveModuleIO frontLeft,
+      SwerveModuleIO frontRight,
+      SwerveModuleIO backLeft,
+      SwerveModuleIO backRight,
+      GyroIO gyro) {
+    this.frontLeft = frontLeft;
+    this.frontRight = frontRight;
+    this.backLeft = backLeft;
+    this.backRight = backRight;
+    this.gyro = gyro;
+  }
+
+  /**
+   * Refreshes each module and gyro input snapshot once per cycle.
+   */
+  @Override
+  public void periodic() {
+    frontLeft.updateInputs(frontLeftInputs);
+    frontRight.updateInputs(frontRightInputs);
+    backLeft.updateInputs(backLeftInputs);
+    backRight.updateInputs(backRightInputs);
+    gyro.updateInputs(gyroInputs);
+  }
+
+  /**
+   * Stops every Swerve module.
+   */
+  public void stop() {
+    frontLeft.stop();
+    frontRight.stop();
+    backLeft.stop();
+    backRight.stop();
+  }
+}
