@@ -6,6 +6,10 @@
 
 S00_L08_Swerve_Module_State_Foundation
 
+# Status
+
+COMPLETE / FROZEN
+
 # Goal
 
 Prepare the module-state boundary for Swerve without deciding module-state architecture before review.

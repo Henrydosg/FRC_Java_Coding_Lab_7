@@ -5,6 +5,8 @@
 - Previous Lesson: S00_L07_Runtime_Telemetry_Integration
 - Source: S00_L07_Runtime_Telemetry_Integration
 - Source Status: IN_PROGRESS; inherited runtime telemetry, architecture, implementation, build, simulation, and Driver Station / Glass evidence are recorded in S00_L07.
+- Status: COMPLETE
+- Freeze: FROZEN
 - Owner: UNASSIGNED
 - Date: UNSET
 - Reviewer: UNASSIGNED
