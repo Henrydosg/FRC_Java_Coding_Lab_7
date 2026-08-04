@@ -39,8 +39,8 @@
 ## Step 5
 
 - Objective: Record the lesson handoff state.
-- Why: S00_L13 remains active until user-owned verification and Git lifecycle steps are complete.
+- Why: S00_L13 can be closed only after verification and the user-owned Git lifecycle steps are complete.
 - Action: Update only S00_L13 README, plan, checklist, status, and this transition guide.
 - Files Changed: S00_L13 documentation files only.
-- Verification: Documentation records Architecture Review PASS, Implementation PASS, Focused Tests PASS - 8/8, Full Build PASS, runtime checks NOT APPLICABLE, Documentation PASS, and Commit/Push/Freeze NOT TESTED.
-- Expected Result: The lesson remains `IN_PROGRESS` with no unsupported completion claims.
+- Verification: Documentation records Architecture Review PASS, Implementation PASS, Focused Tests PASS - 8/8, Full Build PASS, runtime checks NOT APPLICABLE, Documentation PASS, Commit PASS - `3665929`, Push PASS - `origin/main`, and Freeze PASS.
+- Expected Result: The lesson is `COMPLETE / FROZEN / READ-ONLY`.
