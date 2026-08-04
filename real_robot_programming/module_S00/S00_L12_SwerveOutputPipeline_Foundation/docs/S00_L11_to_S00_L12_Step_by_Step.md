@@ -40,7 +40,7 @@
 
 - Objective: Document the S00_L12 architecture, constant decision, test contract, and current verification evidence.
 - Why: Lesson status must report only verified facts and keep user-owned runtime and Git work visible as pending.
-- Action: Update the lesson README, plan, status, checklist, and this transition guide. Record the verified 13/13 focused tests and full build, keep runtime checks NOT APPLICABLE, and keep Status IN_PROGRESS with Commit, Push, and Freeze as NOT TESTED.
+- Action: Update the lesson README, plan, status, checklist, and this transition guide. Record the verified 13/13 focused tests and full build, keep runtime checks NOT APPLICABLE, record commit `0295ac0` and push to `origin/main`, and freeze the lesson as COMPLETE / FROZEN / READ-ONLY.
 - Files Changed: `README.md`, `LESSON_PLAN.md`, `LESSON_STATUS.md`, `LESSON_CHECKLIST.md`, `docs/S00_L11_to_S00_L12_Step_by_Step.md`.
 - Verification: PASS; documentation matches the implemented source and verified results.
-- Expected Result: S00_L12 is documented as an in-progress lesson awaiting user Git commit, push, freeze, and later hardware validation of the provisional 4.0 m/s baseline.
+- Expected Result: S00_L12 is documented as COMPLETE / FROZEN / READ-ONLY. The provisional 4.0 m/s baseline remains a later hardware-validation follow-up.

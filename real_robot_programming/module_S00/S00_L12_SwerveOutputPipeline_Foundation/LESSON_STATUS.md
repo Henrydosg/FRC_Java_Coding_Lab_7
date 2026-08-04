@@ -6,8 +6,8 @@
 - Lesson: S00_L12_SwerveOutputPipeline_Foundation
 - Previous Lesson: S00_L11_SwerveModuleStateOptimization_Foundation
 - Source: S00_L11_SwerveModuleStateOptimization_Foundation
-- Status: IN_PROGRESS
-- Freeze: NOT TESTED
+- Status: COMPLETE
+- Freeze: FROZEN / READ-ONLY
 - Architecture Review: PASS
 
 ## Current-Lesson Evidence
@@ -24,9 +24,9 @@
 | Real Robot | NOT APPLICABLE | No IO, motor output, or hardware behavior was added. |
 | Documentation | PASS | README, lesson plan, lesson status, checklist, and transition guide were updated for S00_L12. |
 | Transition Guide | PASS | `docs/S00_L11_to_S00_L12_Step_by_Step.md` was created. |
-| Commit | NOT TESTED | No Git operations performed. |
-| Push | NOT TESTED | No Git operations performed. |
-| Freeze | NOT TESTED | Lesson remains IN_PROGRESS. |
+| Commit | PASS | Implementation commit `0295ac0`. |
+| Push | PASS | Pushed to `origin/main`. |
+| Freeze | PASS | S00_L12 is complete, frozen, and read-only. |
 
 ## Architecture Boundary
 
@@ -42,12 +42,10 @@ No existing maximum wheel-speed constant was available in the inherited S00_L11 
 
 ## Git State
 
-- Commit: NOT TESTED
-- Push: NOT TESTED
-- Freeze: NOT TESTED
+- Commit: PASS - `0295ac0`
+- Push: PASS - `origin/main`
+- Freeze: PASS - FROZEN / READ-ONLY
 
-## Remaining Completion Steps
+## Post-Freeze Note
 
-- User-owned Git commit.
-- User-owned Git push.
-- User-owned lesson freeze after the provisional speed baseline is reviewed for later hardware validation.
+The provisional 4.0 m/s software baseline remains documented for later hardware validation. It does not prevent lesson closure.
