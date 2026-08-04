@@ -20,7 +20,7 @@ FROZEN / READ-ONLY
 
 # Freeze Verification
 
-NOT TESTED - Git operations and formal freeze remain user-owned.
+PASS - lesson commit and push completed; lesson is now FROZEN / READ-ONLY.
 
 # Goal
 
@@ -74,7 +74,9 @@ verified on hardware; FR, BL, and BR hardware checks passed; and Pigeon2 communi
 - Real Robot: PASS - Disabled commissioning only.
 - Phoenix Tuner X: PASS - hardware verification evidence supplied by the user.
 - Documentation: PASS for the S00_L14 audit records and matrix.
-- Commit, Push, and Freeze: NOT TESTED by instruction.
+- Commit: PASS - `97af186`.
+- Push: PASS - `origin/main`.
+- Freeze: PASS - working tree clean and local `main` matches `origin/main`.
 
 # Safety Boundary
 

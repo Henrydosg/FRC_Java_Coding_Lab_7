@@ -2,7 +2,7 @@
 
 Status: COMPLETE
 
-Freeze: NOT TESTED
+Freeze: PASS
 
 | Step | State |
 | --- | --- |
@@ -22,9 +22,9 @@ Freeze: NOT TESTED
 | Glass | NOT APPLICABLE |
 | Real Robot Disabled Verification | PASS - no unintended actuation; sensor and Pigeon2 checks passed |
 | Documentation Finalization | PASS |
-| Commit | NOT TESTED - user-owned |
-| Push | NOT TESTED - user-owned |
-| Freeze | NOT TESTED - user-owned |
+| Commit | PASS - `97af186` |
+| Push | PASS - `origin/main` |
+| Freeze | PASS - clean working tree; local `main` matches `origin/main` |
 
 ## Verification Note
 
@@ -35,4 +35,5 @@ The robot remained Disabled, no unintended motor actuation occurred, and the har
 passed. The matrix classifies every requested value as VERIFIED, PROVISIONAL, or UNRESOLVED. No
 output method, configuration write, command, or new abstraction was added.
 
-Final lesson state: COMPLETE / FROZEN / READ-ONLY. Commit, Push, and Freeze remain NOT TESTED.
+Final lesson state: COMPLETE / FROZEN / READ-ONLY. Commit `97af186`, Push to `origin/main`, and
+Freeze are PASS.
