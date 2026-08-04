@@ -67,13 +67,13 @@
 - Why: The lesson requires explicit evidence for software, Glass, Driver Station, and real-robot
   commissioning behavior before it becomes read-only.
 - Action: Record Architecture Review, Implementation, focused tests, full tests, full build, Glass,
-  Driver Station, real-robot, and Documentation as PASS. Record Commit, Push, and Freeze as NOT
-  TESTED.
+  Driver Station, real-robot, and Documentation as PASS. Record Commit `193fd4a`, Push to
+  `origin/main`, and Freeze as PASS.
 - Files Changed: S00_L15 README, plan, status, checklist, and this guide.
 - Verification: Documentation records the full Glass/SmartDashboard → CommandScheduler → command →
   subsystem → Front Left IO path and the safety checklist.
-- Expected Result: Status is `COMPLETE`; Lesson is `FROZEN / READ-ONLY`; Commit, Push, and Freeze
-  remain `NOT TESTED`.
+- Expected Result: Status is `COMPLETE`; Lesson is `FROZEN / READ-ONLY`; Commit `193fd4a`, Push to
+  `origin/main`, and Freeze are PASS.
 
 ## Step 7
 

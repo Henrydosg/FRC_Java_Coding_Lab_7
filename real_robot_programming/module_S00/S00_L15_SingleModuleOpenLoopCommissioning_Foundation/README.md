@@ -83,7 +83,9 @@ Exactly four command identities are published:
 - Driver Station: PASS.
 - Real Robot: PASS.
 - Documentation: PASS.
-- Commit, Push, and Freeze: NOT TESTED by instruction.
+- Commit: PASS — `193fd4a`.
+- Push: PASS — `origin/main`.
+- Freeze: PASS — local `main` matches `origin/main`; lesson is FROZEN / READ-ONLY.
 
 # Safety Boundary
 

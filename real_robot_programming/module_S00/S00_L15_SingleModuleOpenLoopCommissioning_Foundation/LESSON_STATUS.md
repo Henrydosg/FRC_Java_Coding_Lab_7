@@ -15,9 +15,9 @@
 - Driver Station / Glass: PASS
 - Real Robot: PASS
 - Transition Guide: PASS
-- Git Commit: NOT TESTED
-- Git Push: NOT TESTED
-- Known Issues: Simulation evidence was not supplied; Commit, Push, and Freeze remain NOT TESTED.
+- Git Commit: PASS — `193fd4a`
+- Git Push: PASS — `origin/main`
+- Known Issues: Simulation evidence was not supplied.
 
 ## Current-Lesson Evidence
 
@@ -34,9 +34,9 @@
 | Driver Station / Glass | PASS | Glass commissioning and Driver Station verification passed. |
 | Real Robot | PASS | Real-robot commissioning verification passed. |
 | Documentation | PASS | S00_L15 activation, hardening, and safety documentation updated. |
-| Git Commit | NOT TESTED | Git operations are explicitly excluded. |
-| Git Push | NOT TESTED | Git operations are explicitly excluded. |
-| Freeze | NOT TESTED | Git freeze evidence is user-owned; lesson documentation records FROZEN / READ-ONLY. |
+| Git Commit | PASS | Implementation/documentation commit `193fd4a`. |
+| Git Push | PASS | Pushed to `origin/main`; local `main` matches `origin/main`. |
+| Freeze | PASS | Lesson is FROZEN / READ-ONLY. |
 
 ## Architecture Decision Record
 
@@ -68,4 +68,4 @@
 ## Known Issues
 
 - Simulation evidence was not supplied for this commissioning lesson.
-- Commit, Push, and Freeze are NOT TESTED by instruction.
+- Commit, Push, and Freeze are PASS: `193fd4a`, `origin/main`, and FROZEN / READ-ONLY.
