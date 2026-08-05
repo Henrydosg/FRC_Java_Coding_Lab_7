@@ -16,7 +16,20 @@ S00_L15_SingleModuleOpenLoopCommissioning_Foundation - COMPLETE / FROZEN / READ-
 
 # Status
 
-IN_PROGRESS
+COMPLETE
+
+# Lesson State
+
+COMPLETE / FROZEN / READ-ONLY
+
+# Completion Commit
+
+`eb65523 Complete S00_L16 module hardware configuration contract` — recorded and pushed to
+`origin/main`.
+
+# Transition Guide
+
+`docs/S00_L15_to_S00_L16_Step_by_Step.md`
 
 # Concept
 
@@ -95,8 +108,9 @@ existing IO boundary.
   or four-module actuation.
 - Do not modify previous lessons.
 - Do not add commissioning commands for other modules.
-- Implementation and verification are complete. Git, push, and freeze remain user-owned pending
-  steps.
+- Implementation and verification are complete. The completion commit and push are recorded.
+- The user still owns the final build confirmation, freeze commit, push of that freeze commit, and
+  clean-working-tree validation.
 
 # Current State
 
@@ -107,6 +121,13 @@ existing IO boundary.
 - Documentation finalization: COMPLETE.
 - Hardware configuration values: synchronized to the approved calibration record.
 - User owns build, tests, simulation, Driver Station / Glass, real-robot verification, and Git.
+
+## Next Locked Lesson
+
+`S00_L17_SingleModuleClosedLoopControl`
+
+S00_L17 is the next locked lesson. Its control scope must not be back-ported into this frozen S00_L16
+lesson.
 
 ## Deferred Scope
 

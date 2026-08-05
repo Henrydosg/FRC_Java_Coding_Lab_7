@@ -1,6 +1,6 @@
 # S00_L16 Lesson Checklist
 
-Status: IN_PROGRESS
+Status: COMPLETE / FROZEN / READ-ONLY
 
 Source lesson: S00_L15_SingleModuleOpenLoopCommissioning_Foundation - COMPLETE / FROZEN / READ-ONLY
 
@@ -23,9 +23,10 @@ Source lesson: S00_L15_SingleModuleOpenLoopCommissioning_Foundation - COMPLETE /
 | Driver Station / Glass | PASS |
 | Real Robot | PASS |
 | Documentation finalization | PASS - COMPLETE |
-| Git Commit | NOT TESTED - user-owned Git workflow |
-| Git Push | NOT TESTED - user-owned Git workflow |
-| Freeze | NOT TESTED - user-owned final freeze step |
+| Transition guide | PASS - `docs/S00_L15_to_S00_L16_Step_by_Step.md` |
+| Git Commit | PASS - `eb65523 Complete S00_L16 module hardware configuration contract` recorded |
+| Git Push | PASS - pushed to `origin/main` |
+| Freeze | NOT TESTED - user-owned freeze commit and final working-tree validation |
 
 ## Safety and Architecture Constraints
 
@@ -67,3 +68,17 @@ sensor-direction equality remain mandatory.
 - Four-module state actuation.
 - Kinematics.
 - Odometry.
+
+## Next Locked Lesson
+
+`S00_L17_SingleModuleClosedLoopControl`
+
+S00_L17 is the next locked lesson. Its closed-loop scope remains outside this frozen S00_L16
+lesson.
+
+## Remaining User Lifecycle Steps
+
+- Confirm the final build state.
+- Create or verify the freeze commit.
+- Push the freeze commit.
+- Verify the final working tree with Git status.

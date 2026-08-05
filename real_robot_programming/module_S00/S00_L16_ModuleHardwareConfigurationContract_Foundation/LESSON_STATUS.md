@@ -7,19 +7,19 @@
 - Previous Lesson: S00_L15_SingleModuleOpenLoopCommissioning_Foundation
 - Source: S00_L15_SingleModuleOpenLoopCommissioning_Foundation
 - Source Status: COMPLETE / FROZEN / READ-ONLY
-- Status: IN_PROGRESS
-- Lesson State: IN_PROGRESS / READY_FOR_USER_GIT_AND_FREEZE
+- Status: COMPLETE
+- Lesson State: COMPLETE / FROZEN / READ-ONLY
 - Architecture Review: PASS - implementation and verification complete
 - Baseline Build: PASS - user-reported inherited baseline
 - Build: PASS - clean full build successful
 - Simulation: PASS
 - Driver Station / Glass: PASS
 - Real Robot: PASS
-- Transition Guide: NOT TESTED
-- Git Commit: NOT TESTED
-- Git Push: NOT TESTED
-- Known Issues: None reported after real-robot configuration verification. Git, push, freeze, and
-  working-tree-clean status remain user-owned pending steps.
+- Transition Guide: PASS - `docs/S00_L15_to_S00_L16_Step_by_Step.md`
+- Git Commit: PASS - `eb65523 Complete S00_L16 module hardware configuration contract`
+- Git Push: PASS - pushed to `origin/main`
+- Known Issues: None reported after real-robot configuration verification. The user still owns the
+  final build confirmation, freeze commit, freeze push, and clean-working-tree validation.
 
 ## Current-Lesson Evidence
 
@@ -36,9 +36,10 @@
 | Driver Station / Glass | PASS | User-verified. |
 | Real Robot | PASS | Apply/readback, connectivity, health, direction, and safe-stop verification completed. |
 | Documentation Finalization | PASS - COMPLETE | Final active-lesson records updated. |
-| Git Commit | NOT TESTED | Git not run by Codex; user-owned workflow. |
-| Git Push | NOT TESTED | Git not run by Codex; user-owned workflow. |
-| Freeze | NOT TESTED | Deferred until lesson completion. |
+| Transition Guide | PASS | `docs/S00_L15_to_S00_L16_Step_by_Step.md` recorded. |
+| Git Commit | PASS | Completion commit recorded: `eb65523 Complete S00_L16 module hardware configuration contract`. |
+| Git Push | PASS | Completion commit pushed to `origin/main`. |
+| Freeze | NOT TESTED | User-owned freeze commit, push, and final clean-working-tree validation remain. |
 
 ## Lesson Concept
 
@@ -56,7 +57,8 @@ control behavior.
   semantics, quantized offset comparison, and fail-closed output behavior.
 - Impact: Constants remains the configuration authority; CTRE APIs remain inside IO; the existing
   vendor-neutral interface and Frozen Backbone remain unchanged.
-- Decision: APPROVED for implementation and verification; Git and freeze remain pending.
+- Decision: APPROVED. Implementation, verification, completion commit, and push are recorded;
+  final freeze commit and clean-working-tree validation remain user-owned.
 
 ## Locked Constraints
 
@@ -67,5 +69,13 @@ control behavior.
 - Do not add closed-loop control, PID, feedforward, Motion Magic, kinematics, odometry, driver input,
   or four-module actuation.
 - Do not modify previous frozen lessons.
-- Implementation, tests, simulation, robot verification, and documentation finalization are complete.
-- Do not mark Git commit, Git push, freeze, or working-tree-clean as complete yet.
+- Implementation, tests, simulation, robot verification, documentation finalization, completion
+  commit, and completion push are complete and recorded.
+- The final freeze commit, freeze push, and working-tree-clean verification remain user-owned.
+
+## Next Locked Lesson
+
+`S00_L17_SingleModuleClosedLoopControl`
+
+S00_L17 is the next locked lesson. Its closed-loop control scope must not be back-ported into this
+frozen S00_L16 lesson.

@@ -7,7 +7,7 @@
 - Previous Lesson: S00_L15_SingleModuleOpenLoopCommissioning_Foundation
 - Source Lesson: S00_L15_SingleModuleOpenLoopCommissioning_Foundation
 - Previous Lesson Status: COMPLETE / FROZEN / READ-ONLY
-- Status: IN_PROGRESS
+- Status: COMPLETE
 - Architecture Audit: PASS
 - Baseline Build: PASS - user-reported inherited baseline
 - Implementation: COMPLETE
@@ -16,9 +16,9 @@
 - Driver Station / Glass: PASS
 - Real Robot: PASS
 - Documentation Finalization: COMPLETE
-- Git Commit: NOT TESTED
-- Git Push: NOT TESTED
-- Freeze: NOT TESTED
+- Git Commit: PASS - `eb65523 Complete S00_L16 module hardware configuration contract`
+- Git Push: PASS - pushed to `origin/main`
+- Freeze: NOT TESTED - user final freeze commit and clean-working-tree validation remain
 
 ## Lesson Concept
 
@@ -49,8 +49,8 @@ implementation.
 Previous completed lesson -> copied baseline -> baseline build -> one new concept -> build ->
 simulation -> Driver Station / Glass -> real robot -> documentation -> Git commit -> Git push.
 
-The active lesson is IN_PROGRESS. Only the deterministic CTRE module hardware configuration
-contract is in scope.
+The lesson is COMPLETE / FROZEN / READ-ONLY. Only the deterministic CTRE module hardware
+configuration contract was in scope.
 
 ## Explicit Exclusions
 
@@ -76,9 +76,10 @@ contract is in scope.
 | Driver Station / Glass | PASS | User-verified. |
 | Real Robot | PASS | Apply/readback, connectivity, health, direction, and safe-stop verification completed. |
 | Documentation Finalization | PASS - COMPLETE | Final S00_L16 record written. |
-| Git Commit | NOT TESTED | User-owned Git workflow; Git not run by Codex. |
-| Git Push | NOT TESTED | User-owned Git workflow; Git not run by Codex. |
-| Freeze | NOT TESTED | Deferred until lesson completion. |
+| Transition Guide | PASS | `docs/S00_L15_to_S00_L16_Step_by_Step.md`. |
+| Git Commit | PASS | Completion commit recorded: `eb65523 Complete S00_L16 module hardware configuration contract`. |
+| Git Push | PASS | Completion commit pushed to `origin/main`. |
+| Freeze | NOT TESTED | User-owned freeze commit, push, and final clean-working-tree validation remain. |
 
 ## Final Configuration Contract
 
@@ -119,3 +120,15 @@ checks all passed.
 - Four-module state actuation.
 - Kinematics.
 - Odometry.
+
+## Next Locked Lesson
+
+`S00_L17_SingleModuleClosedLoopControl`
+
+S00_L17 is locked as the next lesson. Closed-loop control scope remains excluded from S00_L16.
+
+## Final Lifecycle Boundary
+
+S00_L16 documentation records the lesson as `COMPLETE / FROZEN / READ-ONLY`. The user remains
+responsible for the final build confirmation, freeze commit, push of that freeze commit, and
+working-tree status validation.
