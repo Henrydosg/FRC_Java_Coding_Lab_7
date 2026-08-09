@@ -8,7 +8,8 @@ English is normative. Vietnamese is explanatory.
 
 ## 1. Required Reading
 
-Before any analysis, coding, documentation, commit, or push, Codex MUST read:
+Before any analysis, architecture review, implementation, testing analysis, documentation, or
+repository audit, Codex MUST read:
 
 1. AGENTS.md
 2. README.md
@@ -56,14 +57,18 @@ FRC_Java_Coding_Lab_7/
 ├── docs/
 │   ├── Document_A/
 │   ├── Document_B/
-│   └── Document_C/
+│   ├── Document_C/
+│   └── architecture_decisions/
 └── real_robot_programming/
-    └── <LESSON_NAME>/
-        ├── docs/
-        ├── src/
-        ├── build.gradle
-        ├── settings.gradle
-        └── LESSON_STATUS.md
+    ├── module_D00/
+    ├── module_D01/
+    └── module_S00/
+        └── <LESSON_NAME>/
+            ├── docs/
+            ├── src/
+            ├── build.gradle
+            ├── settings.gradle
+            └── LESSON_STATUS.md
 ```
 
 Rules
@@ -98,12 +103,18 @@ hardware
 
 Telemetry is read-only.
 
+This mechanism observation flow remains unchanged. The narrowly approved external human/operator
+input exception is defined in Section 14 and does not apply to mechanism Observations.
+
 ---
 
 ## 4. Package Responsibilities
 
 controls
 - Driver input processing only.
+- For external human/operator input only, controls may acquire one coherent controller sample and
+  produce an immutable, vendor-neutral DriverInputObservation.
+- This exception does not permit controls to produce mechanism Observations.
 
 commands
 - Coordinate subsystem actions.
@@ -116,12 +127,16 @@ io
 
 observation
 - Immutable, vendor-neutral read models and pure evaluators only.
-- Subsystems or dedicated estimators produce Observations.
+- Subsystems or dedicated estimators produce mechanism Observations.
+- The Section 14 external human/operator input exception is the only approved controls-produced
+  Observation exception.
 - No hardware access, vendor APIs, NetworkTables, CommandScheduler, RobotContainer, mutable mechanism state, or control behavior.
 
 telemetry
 - Consume and publish immutable Observations only.
 - No behavior control or hardware access.
+- Lesson-specific approved exceptions are recorded in the architecture decision records referenced
+  by Section 14 and do not establish general package dependencies.
 
 util
 - Generic shared reusable helpers only.
@@ -202,13 +217,14 @@ Copy previous completed lesson
 → Rename
 → Delete build/ and .gradle/
 → Baseline Build
+→ Create and maintain Transition Guide
 → Add ONE concept
 → Build
 → Simulation
 → Real Robot
-→ Documentation
-→ Commit
-→ Push
+→ Finalize Documentation
+→ User Commit
+→ User Push
 
 Rules
 
@@ -217,6 +233,15 @@ Rules
 - Documentation or metadata may be updated only with explicit user approval.
 - Only the lesson with Status = IN_PROGRESS is editable.
 - COMPLETE lessons are frozen snapshots.
+
+### Fixed Role Ownership
+
+- ChatGPT is the Architect, Mentor, and Reviewer.
+- Codex is the repository implementation and audit engineer.
+- The User runs and verifies builds, Simulation, Glass / AdvantageScope, Driver Station, and
+  real-robot testing.
+- The User is the only Git commit and push operator.
+- Codex shall not run Git, commit, push, or claim user-owned verification without supplied evidence.
 
 ---
 
@@ -268,12 +293,12 @@ During coding
 
 - Each implementation step shall have one objective and one independently verifiable result.
 - Preserve architecture.
-- Build frequently.
+- The User runs builds frequently and supplies the result as verification evidence.
 
 After coding
 
-- Build.
-- Verify.
+- The User runs the required build and verification workflow.
+- Codex records only supplied or directly authorized evidence.
 - Record issues.
 - Update LESSON_STATUS.md.
 
@@ -318,13 +343,16 @@ Before reporting success verify
 
 Every completed lesson contains
 
-real_robot_programming/<LESSON>/docs/
+real_robot_programming/<MODULE>/<LESSON>/docs/
 
 Required guide
 
 <PREVIOUS>_to_<CURRENT>_Step_by_Step.md
 
-Documentation is created only after implementation and verification.
+The transition guide is created and maintained during the lesson.
+It is finalized only after implementation and all required verification are complete.
+Transition Guide may be marked PASS only when the guide is final.
+The final guide must exist before the lesson becomes COMPLETE / FROZEN.
 
 Each step contains
 
@@ -355,17 +383,15 @@ Codex shall
 - Generate guide
 - Save guide
 - Update LESSON_STATUS
-- Review git status
-- Commit
-- Push
 - Report results
 
-Stop if
+Guide creation and maintenance are allowed while the lesson is IN_PROGRESS.
 
-- lesson incomplete
+Stop guide finalization and do not mark Transition Guide PASS if
+
+- implementation incomplete
 - build failed
 - verification missing
-- git failure
 
 ### Reserved Commands
 
@@ -380,6 +406,8 @@ Reserved for future repository automation.
 ---
 
 ## 13. Git Rules
+
+Git is User-owned. Codex shall not run Git commands.
 
 Workflow
 
@@ -412,6 +440,28 @@ The review shall document:
 - Scope
 - Impact
 - Decision (APPROVED / REJECTED)
+
+### Approved External Operator-Input Observation Exception
+
+For external human/operator input only, controls may produce an immutable, vendor-neutral
+DriverInputObservation from one coherent controller sample.
+
+This exception:
+
+- does not change the mechanism observation flow;
+- does not permit controls to produce mechanism Observations;
+- does not permit Observation to contain hardware access, vendor APIs, NetworkTables,
+  CommandScheduler, RobotContainer, mutable state, or control behavior; and
+- does not permit telemetry to control robot behavior.
+
+### Approved Architecture Decision Records
+
+Lesson-specific decisions shall be recorded outside global governance and referenced here.
+
+- S00_L19 / S00_L20 driver-input ownership and migration:
+  `docs/architecture_decisions/ADR_S00_L19_L20_Driver_Input_Ownership.md`
+
+This reference does not change the Frozen Backbone, the authority order, or the lesson roadmap.
 
 ---
 
@@ -446,3 +496,4 @@ Only report verified facts.
 | --- | --- | --- | --- |
 | 1.0 | 2026-07-18 | FROZEN | Initial repository governance. |
 | 1.1 | 2026-08-01 | FROZEN | APPROVED: recognize `frc.robot.observation` as the permanent immutable read-model boundary; control flow remains unchanged. |
+| 1.2 | 2026-08-08 | FROZEN | APPROVED: fixed role ownership, transition-guide lifecycle, module structure, durable external operator-input Observation exception, and referenced lesson-specific architecture decision records. |
