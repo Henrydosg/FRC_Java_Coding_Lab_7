@@ -1,11 +1,10 @@
 # S00_L18 to S00_L19: Driver Input Processing
 
-Status: `FINAL / PASS`
+Status: `IN_PROGRESS / NOT FINAL`
 
-This guide is the finalized transition record for the `COMPLETE / FROZEN / READ-ONLY` L19 lesson.
-The Architect confirmed the established closure-workflow and Git evidence as authoritative during
-governance reconciliation. This record does not invent test counts, commit hashes, or remote
-revision identifiers that are not present in the lesson history.
+This guide is maintained during the lesson. It records completed implementation and verified evidence,
+but it must not be finalized or marked PASS until the current regression, current clean build, and
+required Disabled real-roboRIO verification are complete.
 
 ## Step 1 - Copy the frozen S00_L18 lesson
 
@@ -61,9 +60,8 @@ revision identifiers that are not present in the lesson history.
   deadband rescaling with deadband `0.10`, signed-square shaping, and clamp to `[-1.0, +1.0]`.
 - Files Changed: `src/main/java/frc/robot/Constants.java` and
   `src/main/java/frc/robot/controls/DriverInputProcessor.java`.
-- Verification: Implementation confirmed by source inspection; `compileJava` PASS. At this
-  implementation step, the expanded 14-test processor run remained NOT TESTED; final closure
-  verification is recorded in Step 12 and `LESSON_STATUS.md`.
+- Verification: Implementation confirmed by source inspection; `compileJava` PASS. The current
+  14-test processor run remains NOT TESTED.
 - Expected Result: Each semantic axis produces a finite normalized value without creating robot motion.
 
 ## Step 6 - Acquire one coherent Xbox sample and map semantics
@@ -125,9 +123,8 @@ revision identifiers that are not present in the lesson history.
 - Action: Add `DriverInputProcessorTest`, `XboxDriverInputSourceTest`, and
   `DriverInputTelemetryFacadeTest`.
 - Files Changed: The three focused test files under `src/test/java/frc/robot`.
-- Verification: At this test-authoring step, processor evidence covered 11/11 before expansion to
-  14 tests; Xbox source 2/2 PASS and telemetry facade PASS were recorded. Final closure verification
-  is recorded in Step 12 and `LESSON_STATUS.md`.
+- Verification: Processor previously 11/11 PASS, but the file now contains 14 tests and the current
+  14-test run is NOT TESTED. Xbox source 2/2 PASS. Telemetry facade PASS.
 - Expected Result: No 14/14 or current regression claim is made until the latest suite is run.
 
 ## Step 11 - Verify Simulation and telemetry tools
@@ -142,16 +139,16 @@ revision identifiers that are not present in the lesson history.
   PASS, all from current user-supplied evidence.
 - Expected Result: Raw, SemanticRaw, and Processed data are observable without drivetrain actuation.
 
-## Step 12 - Complete automated closure verification
+## Step 12 - Rerun current automated closure verification
 
 - Step: 12
 - Objective: Validate the exact current test tree and a clean build.
 - Why: Earlier full regression evidence predates the latest three processor-test additions.
-- Action: Complete the required automated verification and clean-build workflow.
+- Action: Run the current 14-test processor suite, full regression, and current clean build.
 - Files Changed: None expected; generated build output only.
-- Verification: PASS; established L19 closure-workflow evidence was confirmed as authoritative by
-  the Architect. Detailed command output and counts are not restated without a repository record.
-- Expected Result: The completed lesson has accepted automated and clean-build closure evidence.
+- Verification: PENDING. `compileJava` is PASS, but 14/14 processor tests, current full regression,
+  and current clean build are not yet verified.
+- Expected Result: New PASS evidence corresponds to the exact current files.
 
 ## Step 13 - Complete Disabled real-roboRIO verification
 
@@ -162,23 +159,23 @@ revision identifiers that are not present in the lesson history.
   Xbox controller on USB port `0`; inspect Raw, SemanticRaw, and Processed values; verify axis signs,
   processing, and zero near center/deadband; confirm absolutely no drivetrain actuation.
 - Files Changed: None.
-- Verification: PASS; the Architect confirmed completed closure evidence for the required Disabled,
-  non-actuating verification.
-- Expected Result: The real target published driver-input observations while the drivetrain remained
-  completely inactive.
+- Verification: REQUIRED / PENDING / NOT TESTED.
+- Expected Result: The real target publishes correct driver-input observations while the drivetrain
+  remains completely inactive.
 
-## Step 14 - Finalize documentation and close L19
+## Step 14 - Finalize documentation and close only after evidence
 
 - Step: 14
 - Objective: Reconcile final evidence and prepare the lesson for closure.
 - Why: The transition guide may be marked PASS only when final, and it must be complete before the
   lesson becomes `COMPLETE / FROZEN`.
-- Action: Reconcile the established closure evidence, finalize L19 documentation, record the
-  Architect-confirmed Git completion, and freeze the lesson.
+- Action: Record the current automated and real-roboRIO results, resolve any failures, finalize all L19
+  documentation, perform closure review, then leave commit and push to the user.
 - Files Changed: L19 documentation only unless a failed verification separately authorizes a source
   correction.
-- Verification: PASS; governance documentation now records L19 as `COMPLETE / FROZEN / READ-ONLY`.
-- Expected Result: L19 remains a frozen snapshot and L20 becomes the sole active lesson.
+- Verification: PENDING; this guide is not final and not PASS.
+- Expected Result: L19 may be considered for `COMPLETE / FROZEN` only when every required gate is
+  supported by current evidence.
 
 ## L19 Boundary
 
