@@ -210,9 +210,9 @@ only the drive motor; explicit and fail-closed full module stops still stop both
   reseated/tightened the encoder assembly before the final retest.
 - Files Changed: None for the audits or mechanical user action.
 - Verification: No absolute hardware root cause was established.
-- Expected Result: Retain only the bounded diagnostic statement: probable mechanical
+- Expected Result: Retain only the bounded diagnostic statement: "Probable mechanical
   encoder/mounting issue; symptom not reproduced after mechanical correction and post-fix
-  verification.
+  verification."
 
 ## Step 16 - Execute post-fix real-robot verification
 
@@ -267,6 +267,19 @@ only the drive motor; explicit and fail-closed full module stops still stop both
   confirmed that all tests executed by the clean build passed.
 - Expected Result: The final L20 production source and tests build successfully from a clean state.
 
+## Step 20 - Record the clear Git commit and freeze L20
+
+- Step: 20
+- Objective: Reconcile the user-owned Git evidence and close the lesson lifecycle.
+- Why: Document B requires a clear Git commit before lesson/module closure.
+- Action: Record user-created commit `216ee4d` with message
+  `Complete S00_L20 robot-relative teleop integration`; record that the user reported a CLEAN
+  working tree before this documentation reconciliation; mark L20 `COMPLETE / FROZEN / READ-ONLY`.
+- Files Changed: L20 `LESSON_STATUS.md`, `LESSON_PLAN.md`, `LESSON_CHECKLIST.md`, `README.md`, and
+  this transition guide.
+- Verification: PASS from user-supplied commit and working-tree evidence. Codex did not run Git.
+- Expected Result: L20 is closed and frozen with truthful Git evidence; no Git push is claimed.
+
 ## Verification Summary
 
 | Gate | State |
@@ -281,16 +294,15 @@ only the drive motor; explicit and fail-closed full module stops still stop both
 | Glass / DriverInput | PASS - user supplied |
 | Robot on stands | PASS - user supplied |
 | Floor verification | PASS - user supplied |
-| Git | NOT RUN - user-owned |
+| Git commit | PASS - `216ee4d`, user supplied |
+| Git push | NOT TESTED - no evidence supplied |
 
 ## Closure and Scope Boundary
 
 Architecture, implementation, current post-fix tests, final post-fix clean build,
 Simulation/HALSIM/Glass, real-robot safety and motion verification, diagnostic reconciliation, and
-documentation are complete. This guide is `FINAL / PASS`.
-
-Git remains user-owned and has not run. Under Document B, the clear Git commit is still required
-before the lesson itself may be marked `COMPLETE / FROZEN / READ-ONLY`.
+documentation and the clear Git commit are complete. This guide is `FINAL / PASS`, and L20 is
+`COMPLETE / FROZEN / READ-ONLY`. Git push evidence was not supplied and no push is claimed.
 
 - L21 First Floor Drive Validation: not included.
 - L22 Field-Relative Drive: not included.

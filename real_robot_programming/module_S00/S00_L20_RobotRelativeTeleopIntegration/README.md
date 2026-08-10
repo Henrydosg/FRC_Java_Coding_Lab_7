@@ -2,7 +2,7 @@
 
 ## Lesson State
 
-`IN_PROGRESS`
+`COMPLETE / FROZEN / READ-ONLY`
 
 Previous lesson: `S00_L19_DriverInputProcessing` (`COMPLETE / FROZEN / READ-ONLY`)
 
@@ -70,14 +70,17 @@ does not introduce a production fake or simulation IO implementation.
 
 An intermittent BL steer drift/jitter was investigated. The user mechanically reseated/tightened
 the encoder assembly, then did not reproduce BL drift/jitter or FL jitter during the supplied
-post-fix stands, transition-stress, and floor verification. The bounded conclusion is: probable
+post-fix stands, transition-stress, and floor verification. The bounded conclusion is: "Probable
 mechanical encoder/mounting issue; symptom not reproduced after mechanical correction and post-fix
-verification. No absolute hardware root cause is claimed, and no speculative tuning change was made.
+verification." No absolute hardware root cause is claimed, and no speculative tuning change was
+made.
 
 All L20 technical verification is complete, including the final clean build performed after both
-production corrections. The transition guide is `FINAL / PASS`. L20 remains `IN_PROGRESS` solely
-because Document B requires a clear Git commit before lesson/module closure. Git is user-owned and
-has not run. The lesson is ready for user Git closure. Do not start L21.
+production corrections. The transition guide is `FINAL / PASS`. User-created commit `216ee4d`
+(`Complete S00_L20 robot-relative teleop integration`) satisfies the clear-commit closure gate; the
+user reported a CLEAN working tree before final governance reconciliation. L20 is
+`COMPLETE / FROZEN / READ-ONLY`. Git push evidence was not supplied and no push is claimed. Do not
+modify L20 or start L21.
 
 See `LESSON_STATUS.md`, `LESSON_PLAN.md`, `LESSON_CHECKLIST.md`, and
 `docs/S00_L19_to_S00_L20_Step_by_Step.md` for the reconciled lesson record.

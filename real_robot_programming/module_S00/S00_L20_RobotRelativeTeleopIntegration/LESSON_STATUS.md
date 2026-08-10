@@ -4,7 +4,8 @@
 
 - Lesson: `S00_L20_RobotRelativeTeleopIntegration`
 - Previous Lesson: `S00_L19_DriverInputProcessing`
-- Status: `IN_PROGRESS`
+- Status: `COMPLETE`
+- Freeze State: `FROZEN / READ-ONLY`
 - Lesson Goal: Robot-Relative Teleop Integration
 - Architecture Decision: `ADR_S00_L19_L20_Driver_Input_Ownership.md` (`APPROVED`)
 - Next Roadmap Lesson: `S00_L21_FirstFloorDriveValidation` (`OUT OF SCOPE`)
@@ -24,8 +25,8 @@
 | Driver Station / Glass | PASS | User supplied HALSIM joystick PASS and Glass / DriverInput PASS evidence. |
 | Real Robot | PASS | User supplied post-fix robot-on-stands and floor verification evidence: Enable/Disable 10/10, all requested robot-relative motion directions, transition stress 3/3, correct floor driving, and no unintended module actuation. |
 | Transition Guide | PASS | `docs/S00_L19_to_S00_L20_Step_by_Step.md` is reconciled and finalized as `FINAL / PASS`. |
-| Git Commit | USER-OWNED / NOT RUN | No L20 Git action was run by Codex. |
-| Git Push | USER-OWNED / NOT RUN | No L20 Git action was run by Codex. |
+| Git Commit | PASS | User supplied commit `216ee4d` - `Complete S00_L20 robot-relative teleop integration`; working tree was CLEAN before this documentation reconciliation. |
+| Git Push | USER-OWNED / NOT TESTED | No Git push evidence was supplied; Codex did not run Git. |
 
 ## Final Implemented Production Path
 
@@ -85,23 +86,26 @@ four-module output path using recording test IO.
 15. Completed the final post-fix clean build with user-supplied PASS evidence: `BUILD SUCCESSFUL in
     35s`, 7 actionable tasks executed, and all clean-build tests passed.
 16. Finalized the L19-to-L20 transition guide as `FINAL / PASS`.
+17. Recorded user-owned Git commit `216ee4d` (`Complete S00_L20 robot-relative teleop integration`)
+    and the user-supplied CLEAN working-tree state before final governance reconciliation.
+18. Marked L20 `COMPLETE / FROZEN / READ-ONLY`.
 
 ## Known Issues / Verification Debt
 
 - Final post-fix clean build: `PASS` using the user-supplied evidence recorded above.
 - Real Robot Verification: `PASS` using only the user-supplied post-fix evidence recorded above.
-- Intermittent BL steer drift/jitter diagnostic history: probable mechanical encoder/mounting issue;
-  symptom not reproduced after mechanical correction and post-fix verification. This is not an
-  absolute hardware root-cause claim.
+- Diagnostic closure: "Probable mechanical encoder/mounting issue; symptom not reproduced after
+  mechanical correction and post-fix verification." This is not an absolute hardware root-cause
+  claim.
 - FL jitter was not reproduced during the supplied post-fix verification.
 - The copied Java comment describing the Xbox port as L19-specific remains stale. It does not define
   governance and was not changed because production Java is locked.
-- User-owned Git commit and push have not run.
+- Git push evidence was not supplied. No push is claimed.
 
 ## Closure Gate
 
 Architecture, implementation, current regression, final post-fix clean build, Simulation, HALSIM,
-Glass, required real-robot verification, safety review, diagnostic reconciliation, and the final
-transition guide are complete based on recorded evidence. Document B still requires a clear Git
-commit before lesson/module closure. Because Git is user-owned and has not run, the lesson remains
-`IN_PROGRESS` and is ready for user Git closure. Do not start L21.
+Glass, required real-robot verification, safety review, diagnostic reconciliation, final transition
+guide, and the required clear Git commit are complete based on recorded evidence. No unresolved L20
+production correctness blocker remains. L20 is `COMPLETE / FROZEN / READ-ONLY`. Do not modify L20
+Java/tests and do not start L21.

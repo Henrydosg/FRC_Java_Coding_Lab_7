@@ -1,4 +1,4 @@
-# S00_L20 Robot-Relative Teleop Integration - Lesson Plan
+# S00_L20 Robot-Relative Teleop Integration - Final Lesson Plan
 
 ## Metadata
 
@@ -6,7 +6,8 @@
 - Lesson: `S00_L20_RobotRelativeTeleopIntegration`
 - Previous Lesson: `S00_L19_DriverInputProcessing`
 - Source Lesson Status: `COMPLETE / FROZEN / READ-ONLY`
-- Status: `IN_PROGRESS`
+- Status: `COMPLETE`
+- Freeze State: `FROZEN / READ-ONLY`
 - Architecture Decision: `ADR_S00_L19_L20_Driver_Input_Ownership.md`
 - Next Roadmap Lesson: `S00_L21_FirstFloorDriveValidation` (`OUT OF SCOPE`)
 
@@ -79,13 +80,17 @@ telemetry use that same immutable sample. The approved baseline limits are `1.0 
 21. User ran the final post-fix clean build after both production corrections: `BUILD SUCCESSFUL in
     35s`, 7 actionable tasks executed, and all tests executed by the clean build passed.
 22. Finalized `docs/S00_L19_to_S00_L20_Step_by_Step.md` as `FINAL / PASS`.
+23. Recorded user-created commit `216ee4d` - `Complete S00_L20 robot-relative teleop integration`;
+    the user reported a CLEAN working tree before final governance reconciliation.
+24. Marked L20 `COMPLETE / FROZEN / READ-ONLY`.
 
-## Remaining Work
+## Closure Record
 
-1. User performs the required clear Git commit and supplies the evidence.
-2. Reconcile the Git fields and mark the lesson `COMPLETE / FROZEN / READ-ONLY` after that closure
-   gate is satisfied.
-3. Leave Git push to the user and do not begin L21 in this task.
+- All required L20 architecture, implementation, verification, documentation, and clear-commit
+  gates are complete.
+- No unresolved L20 production correctness blocker remains.
+- Git push evidence was not supplied and no push is claimed.
+- L20 is frozen/read-only. L21 remains out of scope and was not started.
 
 ## Explicitly Out of Scope
 
@@ -98,7 +103,6 @@ telemetry use that same immutable sample. The approved baseline limits are `1.0 
 ## Closure Position
 
 The current post-fix tests, final post-fix clean build, Simulation/HALSIM/Glass, robot-on-stands,
-transition-stress, floor verification, architecture review, and transition guide are complete. L20
-remains `IN_PROGRESS` solely because Document B requires a clear Git commit before lesson/module
-closure and Git is user-owned and has not run. The lesson is ready for user Git closure. Do not
-begin L21.
+transition-stress, floor verification, architecture review, transition guide, and clear Git commit
+are complete. L20 is `COMPLETE / FROZEN / READ-ONLY`. Do not modify it and do not begin L21 in this
+task.

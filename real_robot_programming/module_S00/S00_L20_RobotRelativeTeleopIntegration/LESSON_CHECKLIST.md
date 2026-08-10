@@ -1,6 +1,6 @@
 # S00_L20 Robot-Relative Teleop Integration Checklist
 
-Status: `IN_PROGRESS`
+Status: `COMPLETE / FROZEN / READ-ONLY`
 
 Source lesson: `S00_L19_DriverInputProcessing` - `COMPLETE / FROZEN / READ-ONLY`
 
@@ -76,9 +76,11 @@ Source lesson: `S00_L19_DriverInputProcessing` - `COMPLETE / FROZEN / READ-ONLY`
 - [x] Real-robot actuation and safety verification complete.
 - [x] Transition Guide marked final/PASS.
 - [x] Architecture Review PASS recorded.
-- [ ] User Git commit and push complete.
+- [x] User Git commit complete: `216ee4d` - `Complete S00_L20 robot-relative teleop integration`.
+- [ ] Git push evidence supplied; no push is claimed.
+- [x] Lesson freeze complete.
 
-All implementation and verification gates are complete, and the transition guide is final/PASS.
-The lesson remains `IN_PROGRESS` solely because Document B requires a clear Git commit before
-lesson/module closure. Git is user-owned and has not run. L20 is ready for user Git closure; do not
-begin L21.
+All required implementation, verification, documentation, architecture, and clear-commit gates are
+complete. The transition guide is final/PASS, no unresolved production correctness blocker remains,
+and L20 is `COMPLETE / FROZEN / READ-ONLY`. Git push evidence was not supplied and no push is
+claimed. Do not modify L20 or begin L21.
