@@ -7,7 +7,7 @@
 ## Lesson Identity
 
 - Source: `S00_L20_RobotRelativeTeleopIntegration` — `COMPLETE / FROZEN / READ-ONLY`
-- Current: `S00_L21_FirstFloorDriveValidation` — `IN_PROGRESS — READY FOR USER GIT CLOSURE`
+- Current: `S00_L21_FirstFloorDriveValidation` — `COMPLETE / FROZEN / READ-ONLY`
 - Next: `S00_L22_FieldRelativeDrive` — `OUT OF SCOPE`
 - Objective: controlled real-floor validation of the existing robot-relative drivetrain under load.
 - Architecture delta: `NONE`
@@ -109,7 +109,7 @@ Observed: stable low-speed operation; correct directions; no unsafe steer-alignm
 - Why: preserve truthful governance before user Git closure.
 - Action: reconciled status, plan, checklist, README, and this guide.
 - Files Changed: five L21 Markdown documents only.
-- Verification: PASS — guide finalized as `FINAL / PASS`; lesson remains `IN_PROGRESS — READY FOR USER GIT CLOSURE`.
+- Verification: PASS — guide finalized as `FINAL / PASS`; lesson is now `COMPLETE / FROZEN / READ-ONLY`.
 - Expected Result: documentation is ready for the user-owned Git workflow.
 
 ## Production Result
@@ -122,5 +122,4 @@ Cosine compensation; steer-alignment gating; slew-rate limiting; acceleration li
 
 ## Git Closure Boundary
 
-The transition guide is `FINAL / PASS`, but L21 remains `IN_PROGRESS — READY FOR USER GIT CLOSURE`. The user must complete Git commit/push before the lesson may be reviewed for `COMPLETE / FROZEN / READ-ONLY`. Do not start L22.
-
+The transition guide is `FINAL / PASS`. User-created commit `5d1cc1f` (`Complete S00_L21 first floor drive validation`) is recorded; the working tree was CLEAN before reconciliation. L21 is `COMPLETE / FROZEN / READ-ONLY`. Git push evidence was not supplied. Do not start L22.

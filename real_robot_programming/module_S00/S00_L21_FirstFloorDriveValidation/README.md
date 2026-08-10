@@ -2,7 +2,7 @@
 
 ## Lesson State
 
-- Status: `IN_PROGRESS — READY FOR USER GIT CLOSURE`
+- Status: `COMPLETE / FROZEN / READ-ONLY`
 - Previous lesson: `S00_L20_RobotRelativeTeleopIntegration` — `COMPLETE / FROZEN / READ-ONLY`
 - Next lesson: `S00_L22_FieldRelativeDrive` — `OUT OF SCOPE`
 
@@ -49,5 +49,4 @@ See [`docs/S00_L20_to_S00_L21_Step_by_Step.md`](docs/S00_L20_to_S00_L21_Step_by_
 
 ## Closure Boundary
 
-L21 is `IN_PROGRESS — READY FOR USER GIT CLOSURE`. Do not mark `COMPLETE / FROZEN / READ-ONLY` until the user completes the Git commit/push workflow.
-
+L21 is `COMPLETE / FROZEN / READ-ONLY`. User-created commit `5d1cc1f` (`Complete S00_L21 first floor drive validation`) is recorded; the working tree was CLEAN before reconciliation. Git push evidence was not supplied; no unresolved L21 correctness blocker remains.

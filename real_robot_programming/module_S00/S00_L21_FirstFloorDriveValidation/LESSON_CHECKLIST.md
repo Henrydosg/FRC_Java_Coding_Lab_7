@@ -1,6 +1,6 @@
 # S00_L21 First Floor Drive Validation — Checklist
 
-Status: `IN_PROGRESS — READY FOR USER GIT CLOSURE`  
+Status: `COMPLETE / FROZEN / READ-ONLY`  
 Source: `S00_L20_RobotRelativeTeleopIntegration` — `COMPLETE / FROZEN / READ-ONLY`  
 Next: `S00_L22_FieldRelativeDrive` — `OUT OF SCOPE`
 
@@ -45,8 +45,7 @@ Production defects found: `NONE`. BL/FL jitter or drift was not reproduced. No t
 ## Transition and Git Closure
 
 - [x] Transition guide finalized as `FINAL / PASS`.
-- [ ] User Git commit.
-- [ ] User Git push.
+- [x] User Git commit recorded: `5d1cc1f` — `Complete S00_L21 first floor drive validation`.
+- [ ] User Git push evidence supplied.
 
-L21 must remain `IN_PROGRESS` until the user completes Git closure. Then the Architect may review `COMPLETE / FROZEN / READ-ONLY` status.
-
+L21 is `COMPLETE / FROZEN / READ-ONLY`. The user-created commit is recorded; push evidence was not supplied, and no unresolved L21 correctness blocker remains.

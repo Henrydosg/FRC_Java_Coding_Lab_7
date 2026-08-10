@@ -4,7 +4,7 @@
 
 - Lesson: `S00_L21_FirstFloorDriveValidation`
 - Previous: `S00_L20_RobotRelativeTeleopIntegration` — `COMPLETE / FROZEN / READ-ONLY`
-- Status: `IN_PROGRESS — READY FOR USER GIT CLOSURE`
+- Status: `COMPLETE / FROZEN / READ-ONLY`
 - Next: `S00_L22_FieldRelativeDrive` — `OUT OF SCOPE`
 - Architecture delta: `NONE`
 
@@ -48,5 +48,4 @@ Cosine compensation; steer-alignment gating; slew/acceleration limiting; PID, Ne
 
 ## Closure State
 
-The final documentation and transition guide are ready. L21 remains `IN_PROGRESS — READY FOR USER GIT CLOSURE`; only the user-owned Git commit/push gate remains before governance status can be changed.
-
+The final documentation and transition guide are complete. User-created commit `5d1cc1f` (`Complete S00_L21 first floor drive validation`) is recorded, and the working tree was CLEAN before reconciliation. L21 is `COMPLETE / FROZEN / READ-ONLY`; no unresolved L21 correctness blocker remains. Git push evidence was not supplied.

@@ -5,7 +5,8 @@
 - Lesson: `S00_L21_FirstFloorDriveValidation`
 - Previous Lesson: `S00_L20_RobotRelativeTeleopIntegration`
 - Previous Lesson State: `COMPLETE / FROZEN / READ-ONLY`
-- Status: `IN_PROGRESS`
+- Status: `COMPLETE`
+- Freeze State: `FROZEN / READ-ONLY`
 - Lesson Goal: Controlled real-floor validation of the existing robot-relative production drivetrain under load.
 - Architecture Decision: Validation-only; architecture delta is `NONE`.
 - Next Roadmap Lesson: `S00_L22_FieldRelativeDrive` — `OUT OF SCOPE`
@@ -22,8 +23,8 @@
 | Driver Station / Glass | NOT TESTED | No separate L21 closure evidence supplied. |
 | Real Robot | PASS | Gates 1–9 and final floor confidence passed. |
 | Transition Guide | PASS | Final guide is marked `FINAL / PASS`. |
-| Git Commit | NOT RUN | Git is user-owned. |
-| Git Push | NOT RUN | Git is user-owned. |
+| Git Commit | PASS | User-created commit `5d1cc1f` — `Complete S00_L21 first floor drive validation`; working tree was CLEAN before reconciliation. |
+| Git Push | NOT TESTED | No push evidence supplied; Git remains user-owned. |
 
 ## Final Real-Robot Matrix
 
@@ -55,5 +56,4 @@ Cosine compensation; steer-alignment gating; slew/acceleration limiting; PID, Ne
 
 ## Closure State
 
-L21 is `IN_PROGRESS — READY FOR USER GIT CLOSURE`. Do not mark `COMPLETE / FROZEN / READ-ONLY` until the user completes the Git commit/push workflow.
-
+L21 is `COMPLETE / FROZEN / READ-ONLY`. The user-created commit is recorded above; no unresolved L21 correctness blocker remains.
