@@ -10,6 +10,7 @@
 package frc.robot.subsystems;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,15 +24,54 @@ class SwerveOutputPipelineTest {
   private static final double TOLERANCE = 1.0e-9;
 
   @Test
-  void zeroChassisSpeedsProduceFourZeroOutputs() {
-    SwerveModuleState[] states = new SwerveOutputPipeline().toModuleStates(
-        new ChassisSpeeds(), zeroAngles());
+  void exactZeroChassisSpeedsPreserveFourDifferentCurrentAnglesInOrder() {
+    Rotation2d[] currentAngles = differentAngles();
+    SwerveModuleState[] states =
+        new SwerveOutputPipeline().toModuleStates(new ChassisSpeeds(), currentAngles);
 
     assertEquals(4, states.length);
-    for (SwerveModuleState state : states) {
-      assertEquals(0.0, state.speedMetersPerSecond, TOLERANCE);
-      assertEquals(0.0, state.angle.getRadians(), TOLERANCE);
+    for (int moduleIndex = 0; moduleIndex < states.length; moduleIndex++) {
+      assertEquals(0.0, states[moduleIndex].speedMetersPerSecond, TOLERANCE);
+      assertEquals(
+          currentAngles[moduleIndex].getRadians(),
+          states[moduleIndex].angle.getRadians(),
+          TOLERANCE);
     }
+  }
+
+  @Test
+  void zeroAfterNonzeroRequestUsesCurrentAnglesInsteadOfPreviousKinematicHeadings() {
+    SwerveOutputPipeline pipeline = new SwerveOutputPipeline();
+    pipeline.toModuleStates(new ChassisSpeeds(0.0, 1.0, 0.0), zeroAngles());
+    Rotation2d[] currentAngles = differentAngles();
+
+    SwerveModuleState[] states =
+        pipeline.toModuleStates(new ChassisSpeeds(), currentAngles);
+
+    for (int moduleIndex = 0; moduleIndex < states.length; moduleIndex++) {
+      assertEquals(0.0, states[moduleIndex].speedMetersPerSecond, TOLERANCE);
+      assertEquals(
+          currentAngles[moduleIndex].getRadians(),
+          states[moduleIndex].angle.getRadians(),
+          TOLERANCE);
+    }
+  }
+
+  @Test
+  void exactZeroOutputsDoNotExposeOrRetainCallerOwnedAngleData() {
+    Rotation2d[] currentAngles = differentAngles();
+    SwerveModuleState[] states =
+        new SwerveOutputPipeline().toModuleStates(new ChassisSpeeds(), currentAngles);
+    double expectedFrontLeftRadians = states[0].angle.getRadians();
+    double expectedBackLeftRadians = states[2].angle.getRadians();
+
+    assertNotSame(currentAngles[0], states[0].angle);
+    assertNotSame(states[0], states[1]);
+    currentAngles[0] = Rotation2d.fromDegrees(179.0);
+    states[1].angle = Rotation2d.fromDegrees(-179.0);
+
+    assertEquals(expectedFrontLeftRadians, states[0].angle.getRadians(), TOLERANCE);
+    assertEquals(expectedBackLeftRadians, states[2].angle.getRadians(), TOLERANCE);
   }
 
   @Test
@@ -195,6 +235,15 @@ class SwerveOutputPipelineTest {
   private static Rotation2d[] zeroAngles() {
     return new Rotation2d[] {
       new Rotation2d(), new Rotation2d(), new Rotation2d(), new Rotation2d()
+    };
+  }
+
+  private static Rotation2d[] differentAngles() {
+    return new Rotation2d[] {
+      Rotation2d.fromDegrees(-35.0),
+      Rotation2d.fromDegrees(20.0),
+      Rotation2d.fromDegrees(125.0),
+      Rotation2d.fromDegrees(-150.0)
     };
   }
 

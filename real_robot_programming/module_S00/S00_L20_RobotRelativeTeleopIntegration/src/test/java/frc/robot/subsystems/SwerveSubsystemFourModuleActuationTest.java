@@ -122,6 +122,34 @@ class SwerveSubsystemFourModuleActuationTest {
   }
 
   @Test
+  void enabledZeroDemandDispatchesZeroDriveAndCurrentMeasuredSteerAngles() {
+    List<String> dispatchLog = new ArrayList<>();
+    RecordingModuleIO frontLeft = new RecordingModuleIO("FL", -0.10, dispatchLog);
+    RecordingModuleIO frontRight = new RecordingModuleIO("FR", 0.05, dispatchLog);
+    RecordingModuleIO backLeft = new RecordingModuleIO("BL", 0.35, dispatchLog);
+    RecordingModuleIO backRight = new RecordingModuleIO("BR", -0.40, dispatchLog);
+    SwerveSubsystem subsystem =
+        new SwerveSubsystem(
+            frontLeft, frontRight, backLeft, backRight, new RecordingGyroIO());
+
+    subsystem.acceptChassisSpeeds(new ChassisSpeeds());
+    subsystem.periodic();
+
+    assertIterableEquals(
+        List.of("FL.drive", "FL.steer", "FR.drive", "FR.steer", "BL.drive", "BL.steer",
+            "BR.drive", "BR.steer"),
+        dispatchLog);
+    assertStateEquals(
+        new SwerveModuleState(0.0, Rotation2d.fromRotations(-0.10)), frontLeft.lastState());
+    assertStateEquals(
+        new SwerveModuleState(0.0, Rotation2d.fromRotations(0.05)), frontRight.lastState());
+    assertStateEquals(
+        new SwerveModuleState(0.0, Rotation2d.fromRotations(0.35)), backLeft.lastState());
+    assertStateEquals(
+        new SwerveModuleState(0.0, Rotation2d.fromRotations(-0.40)), backRight.lastState());
+  }
+
+  @Test
   void disabledPeriodicRefreshesInputsAndPipelineWithoutActuation() {
     List<String> dispatchLog = new ArrayList<>();
     RecordingModuleIO frontLeft = new RecordingModuleIO("FL", 0.0, dispatchLog);

@@ -1087,8 +1087,7 @@ public class SwerveModuleIOCTRE implements SwerveModuleIO {
             closedLoopEnabled,
             driveClosedLoopConfigurationHealthy,
             encoderBaseConfigurationHealthy);
-    if (!healthy
-        || !Double.isFinite(velocityMetersPerSecond)) {
+    if (driveVelocityRequestRequiresFullModuleStop(healthy, velocityMetersPerSecond)) {
       stop();
       return;
     }
@@ -1096,7 +1095,7 @@ public class SwerveModuleIOCTRE implements SwerveModuleIO {
     double clampedVelocityMetersPerSecond =
         clampDriveVelocityMetersPerSecond(velocityMetersPerSecond);
     if (clampedVelocityMetersPerSecond == kStoppedOutput) {
-      stop();
+      stopDriveMotorOnly();
       return;
     }
 
@@ -1114,6 +1113,11 @@ public class SwerveModuleIOCTRE implements SwerveModuleIO {
         velocityMetersPerSecond,
         -SwerveConstants.kMaxWheelSpeedMetersPerSecond,
         SwerveConstants.kMaxWheelSpeedMetersPerSecond);
+  }
+
+  static boolean driveVelocityRequestRequiresFullModuleStop(
+      boolean healthy, double velocityMetersPerSecond) {
+    return !healthy || !Double.isFinite(velocityMetersPerSecond);
   }
 
   /**
@@ -1275,8 +1279,20 @@ public class SwerveModuleIOCTRE implements SwerveModuleIO {
     stopMotorsOnly();
   }
 
+  private void stopDriveMotorOnly() {
+    stopDriveMotorOnly(driveMotor::stopMotor);
+  }
+
+  static void stopDriveMotorOnly(Runnable driveStopAction) {
+    Objects.requireNonNull(driveStopAction, "driveStopAction").run();
+  }
+
   private void stopMotorsOnly() {
-    driveMotor.stopMotor();
-    steerMotor.stopMotor();
+    stopModuleMotors(driveMotor::stopMotor, steerMotor::stopMotor);
+  }
+
+  static void stopModuleMotors(Runnable driveStopAction, Runnable steerStopAction) {
+    Objects.requireNonNull(driveStopAction, "driveStopAction").run();
+    Objects.requireNonNull(steerStopAction, "steerStopAction").run();
   }
 }

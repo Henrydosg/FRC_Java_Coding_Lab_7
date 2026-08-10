@@ -1,11 +1,10 @@
 # S00_L19 to S00_L20: Robot-Relative Teleop Integration
 
-Status: `IN_PROGRESS / NOT FINAL`
+Status: `FINAL / PASS`
 
 This guide contains the reconciled implementation and verification history for
-`S00_L20_RobotRelativeTeleopIntegration`. Its content is current through the final architecture
-review. It cannot be marked final or PASS while required real-robot verification remains
-`NOT TESTED - hardware unavailable`.
+`S00_L20_RobotRelativeTeleopIntegration`. Its content is final through the post-fix clean build and
+final closure audit. All required implementation and verification gates are complete.
 
 ## Final Implemented Production Path
 
@@ -24,6 +23,12 @@ XboxController
 Each command execution acquires exactly one authoritative driver-input sample. The same immutable
 `DriverInputObservation` supplies control scaling and driver-input telemetry. Approved L20 baseline
 limits are `1.0 m/s` translation and `1.0 rad/s` rotation.
+
+An exact zero chassis request produces four independent zero-speed states at the corresponding
+current measured FL/FR/BL/BR steer angles. The measured angles are refreshed each update; this is
+not a persistent last-commanded-angle latch. Nonzero requests continue through the unchanged
+kinematics, optimization, and desaturation path. At the CTRE IO boundary, zero drive velocity stops
+only the drive motor; explicit and fail-closed full module stops still stop both drive and steer.
 
 ## Step 1 - Copy the completed L19 lesson
 
@@ -143,7 +148,7 @@ limits are `1.0 m/s` translation and `1.0 rad/s` rotation.
   scaling, FL/FR/BL/BR identity/order, disabled gating, stop/interruption, commissioning ownership,
   robot-relative-only behavior, and final post-pipeline IO requests.
 
-## Step 11 - Run the full regression
+## Step 11 - Run the pre-correction full regression
 
 - Step: 11
 - Objective: Confirm L20 and inherited behavior remain coherent after both increments.
@@ -151,43 +156,116 @@ limits are `1.0 m/s` translation and `1.0 rad/s` rotation.
 - Action: Rerun the current full L20 regression suite.
 - Files Changed: Generated test output only.
 - Verification: PASS; the user explicitly supplied current full-regression PASS.
-- Expected Result: No tested inherited behavior regresses under the locked L20 architecture.
+- Expected Result: No tested inherited behavior regresses under the then-current locked L20
+  architecture.
 
-## Step 12 - Run the final clean build
+## Step 12 - Run the historical clean build
 
 - Step: 12
-- Objective: Establish final clean software-build evidence.
-- Why: Closure review requires a clean build after the completed implementation and tests.
+- Objective: Establish clean software-build evidence for the pre-correction implementation.
+- Why: The then-current implementation required a clean build before hardware verification.
 - Action: Run `gradlew clean build`.
 - Files Changed: Regenerated build output only.
 - Verification: PASS; user supplied `BUILD SUCCESSFUL`, 7 actionable tasks, 7 executed.
-- Expected Result: The current L20 project builds successfully from a clean state.
+- Expected Result: The pre-correction L20 project builds successfully from a clean state. This
+  evidence must not be represented as a clean build of the later post-fix source.
 
-## Step 13 - Record real-robot verification debt
+## Step 13 - Correct exact-zero measured-angle behavior
 
 - Step: 13
-- Objective: Preserve the unexecuted physical verification gate without inventing evidence.
-- Why: Simulation does not establish real-hardware actuation, wiring, direction, or safety behavior.
-- Action: Record Real Robot Verification as `NOT TESTED - hardware unavailable` and retain the
-  requirement for later execution.
-- Files Changed: L20 lesson documentation only.
-- Verification: NOT TESTED; hardware was unavailable. No real-robot PASS is claimed.
-- Expected Result: Closure reviewers can distinguish completed software/simulation evidence from
-  outstanding physical verification.
+- Objective: Prevent exact zero demand from creating a synthetic steer-angle jump.
+- Why: Zero drive demand must not create unnecessary steering toward synthetic 0-degree or
+  optimized targets.
+- Action: In `SwerveOutputPipeline`, detect exact zero `ChassisSpeeds` before normal kinematics and
+  return zero-speed states at the corresponding current measured module angles.
+- Files Changed: `SwerveOutputPipeline.java`, `SwerveOutputPipelineTest.java`,
+  `SwerveSubsystemFourModuleActuationTest.java`, and `RobotRelativeTeleopProductionPathTest.java`.
+- Verification: Current repository test artifacts include the focused zero-demand coverage and
+  record zero test failures.
+- Expected Result: Exact zero demand commands zero drive and follows each current measured steer
+  angle in FL/FR/BL/BR order; the nonzero pipeline remains unchanged.
 
-## Step 14 - Complete the final architecture review
+## Step 14 - Separate zero drive stop from full module stop
 
 - Step: 14
+- Objective: Remove the CTRE cross-actuator side effect on zero drive velocity.
+- Why: A zero drive request must not neutralize steer before the subsystem submits its steer target.
+- Action: Change `SwerveModuleIOCTRE.setDriveVelocityMetersPerSecond(0.0)` to stop only the drive
+  motor. Preserve full module stop for unhealthy/nonfinite requests and explicit safety/lifecycle
+  paths.
+- Files Changed: `SwerveModuleIOCTRE.java` and `SwerveModuleIOCTREStopSeparationTest.java`.
+- Verification: The current repository artifacts record all 4 stop-separation tests passing as part
+  of the 166/166 post-fix test result.
+- Expected Result: Zero drive does not interrupt steer PositionVoltage control, while full module
+  stop continues stopping both drive and steer.
+
+## Step 15 - Investigate intermittent steer symptoms
+
+- Step: 15
+- Objective: Bound the intermittent BL/FL steer symptom without speculative software changes.
+- Why: Closure must distinguish a reproducible production defect from a hardware or diagnostic
+  symptom.
+- Action: Audit zero-demand behavior, drive/steer stop separation, enable/disable lifecycle,
+  nonzero motion, optimizer behavior, and steer feedback/configuration. The user mechanically
+  reseated/tightened the encoder assembly before the final retest.
+- Files Changed: None for the audits or mechanical user action.
+- Verification: No absolute hardware root cause was established.
+- Expected Result: Retain only the bounded diagnostic statement: probable mechanical
+  encoder/mounting issue; symptom not reproduced after mechanical correction and post-fix
+  verification.
+
+## Step 16 - Execute post-fix real-robot verification
+
+- Step: 16
+- Objective: Verify L20 production behavior and safety on hardware.
+- Why: Simulation and unit tests do not replace physical actuation verification.
+- Action: Verify the robot on stands, then verify robot-relative driving on the floor.
+- Files Changed: None; user-operated verification only.
+- Verification: PASS from user-supplied evidence: Enable/Disable 10/10; Forward/Backward; Strafe
+  Left/Right; Diagonal; Rotation CW/CCW; transition stress 3/3; floor driving; and no unintended
+  module actuation. BL drift/jitter and FL jitter were not reproduced.
+- Expected Result: Required real-robot actuation and safety evidence is complete without claiming
+  an absolute cause for the prior intermittent symptom.
+
+## Step 17 - Inspect current post-fix test results
+
+- Step: 17
+- Objective: Confirm the repository's current test artifacts cover the corrective changes.
+- Why: The historical clean build predates those production changes.
+- Action: Read the generated JUnit XML results without rerunning Gradle.
+- Files Changed: None.
+- Verification: PASS; 166/166 tests, zero failures, zero errors, and zero skips. Included are 11
+  command tests, 10 production-path tests, 15 output-pipeline tests, and 4 CTRE stop-separation
+  tests.
+- Expected Result: The current post-fix test suite has recorded passing evidence.
+
+## Step 18 - Complete the final closure architecture audit
+
+- Step: 18
 - Objective: Confirm the delivered L20 design remains inside its locked architecture and scope.
 - Why: Final review must ensure verification work did not introduce forbidden production behavior.
-- Action: Confirm robot-relative-only control; one authoritative immutable sample; production
-  telemetry and Observation boundaries unchanged; test-only recording IO; and no L21/L22,
-  `SwerveModuleIOSim`, odometry, pose, IO/CTRE, or Frozen Backbone expansion.
-- Files Changed: None by the architecture review; documentation was reconciled separately.
-- Verification: PASS for architecture preservation. Lesson closure remains pending because required
-  real-robot verification is `NOT TESTED` and ChatGPT Architect has not granted closure.
+- Action: Confirm robot-relative-only control; one authoritative immutable sample; exact-zero
+  measured-angle behavior; drive-only zero-stop correction; full-stop safety; production telemetry
+  and Observation boundaries unchanged; test-only recording IO; and no L21/L22,
+  `SwerveModuleIOSim`, odometry, pose, or Frozen Backbone expansion.
+- Files Changed: L20 documentation was reconciled; Java and tests were not changed by this audit.
+- Verification: PASS for architecture preservation. No unresolved production correctness defect was
+  found. Technical closure remains subject only to the final post-fix clean build recorded in the
+  next step.
 - Expected Result: Production architecture is locked and documentation is ready for closure review,
-  without falsely marking L20 `COMPLETE / FROZEN`.
+  with the final clean-build gate explicitly identified.
+
+## Step 19 - Run the final post-fix clean build
+
+- Step: 19
+- Objective: Establish clean-build evidence for the final corrected L20 source.
+- Why: The previous clean build predated the exact-zero measured-angle and CTRE drive/steer stop
+  separation corrections.
+- Action: Run `gradlew clean build` after both final production corrections.
+- Files Changed: Regenerated build output only.
+- Verification: PASS; user supplied `BUILD SUCCESSFUL in 35s`, 7 actionable tasks, 7 executed, and
+  confirmed that all tests executed by the clean build passed.
+- Expected Result: The final L20 production source and tests build successfully from a clean state.
 
 ## Verification Summary
 
@@ -195,19 +273,24 @@ limits are `1.0 m/s` translation and `1.0 rad/s` rotation.
 | --- | --- |
 | Focused command tests | PASS - user supplied 11/11 |
 | Focused production-path tests | PASS - user supplied 10/10 |
-| Full regression | PASS - user supplied |
-| Final clean build | PASS - user supplied |
+| Current post-fix tests | PASS - repository artifacts, 166/166 |
+| Historical clean build | PASS - user supplied before final corrections |
+| Final post-fix clean build | PASS - user supplied |
 | Simulation | PASS - user supplied |
 | HALSIM joystick | PASS - user supplied |
 | Glass / DriverInput | PASS - user supplied |
-| Real robot | NOT TESTED - hardware unavailable |
+| Robot on stands | PASS - user supplied |
+| Floor verification | PASS - user supplied |
 | Git | NOT RUN - user-owned |
 
 ## Closure and Scope Boundary
 
-The software and simulation evidence is complete. This guide remains `IN_PROGRESS / NOT FINAL`
-because AGENTS requires all required verification before guide finalization and the L20 ADR keeps
-real-robot actuation safety gates in force. Simulation is not a substitute for that debt.
+Architecture, implementation, current post-fix tests, final post-fix clean build,
+Simulation/HALSIM/Glass, real-robot safety and motion verification, diagnostic reconciliation, and
+documentation are complete. This guide is `FINAL / PASS`.
+
+Git remains user-owned and has not run. Under Document B, the clear Git commit is still required
+before the lesson itself may be marked `COMPLETE / FROZEN / READ-ONLY`.
 
 - L21 First Floor Drive Validation: not included.
 - L22 Field-Relative Drive: not included.

@@ -41,6 +41,10 @@ telemetry use that same immutable sample. The approved baseline limits are `1.0 
 - Do not add production-request Observation or requested chassis/module telemetry.
 - Do not add `SwerveModuleIOSim`, odometry, pose, L21, or L22 behavior.
 - Keep L19 Java and tests frozen.
+- For exact zero chassis demand, command zero drive speed and use each module's current measured
+  steer angle in FL/FR/BL/BR order; do not add a second input deadband or motion threshold.
+- Keep zero drive velocity separate from full module stop: drive-only zero must not interrupt steer,
+  while safety/lifecycle stop continues to stop both actuators.
 
 ## Completed Work
 
@@ -58,15 +62,30 @@ telemetry use that same immutable sample. The approved baseline limits are `1.0 
     kinematics, optimization, and desaturation path with recording module IO.
 11. User explicitly reran the end-to-end suite with 10/10 PASS.
 12. User explicitly reran the current full regression with PASS.
-13. User ran `gradlew clean build`; result `BUILD SUCCESSFUL`, 7 actionable tasks executed.
-14. Production architecture was confirmed locked for final Architect review.
+13. User ran the pre-correction `gradlew clean build`; result `BUILD SUCCESSFUL`, 7 actionable tasks
+    executed.
+14. Production architecture was confirmed locked before the subsequent bounded corrective work.
+15. Added the exact-zero measured-angle output policy and its focused tests without changing the
+    normal nonzero kinematics/optimization/desaturation path.
+16. Corrected CTRE zero-drive handling so `setDriveVelocityMetersPerSecond(0.0)` stops only the drive
+    motor; explicit and fail-closed module stop still stops drive and steer.
+17. Repository post-fix test-result artifacts record 166/166 PASS with zero failures, errors, or
+    skips.
+18. User completed post-fix robot-on-stands verification: Enable/Disable 10/10 PASS, all requested
+    robot-relative motion checks PASS, transition stress 3/3 PASS, and no reproduced BL/FL jitter.
+19. User completed floor verification with correct robot-relative driving and no unintended module
+    actuation.
+20. Final closure architecture audit found no unresolved production correctness defect.
+21. User ran the final post-fix clean build after both production corrections: `BUILD SUCCESSFUL in
+    35s`, 7 actionable tasks executed, and all tests executed by the clean build passed.
+22. Finalized `docs/S00_L19_to_S00_L20_Step_by_Step.md` as `FINAL / PASS`.
 
 ## Remaining Work
 
-1. Perform required real-robot actuation and safety verification when hardware becomes available.
-2. Obtain ChatGPT Architect lesson-closure approval after reviewing the explicit verification debt.
-3. Finalize the transition-guide status only when all required verification is complete.
-4. Leave Git commit and push to the user.
+1. User performs the required clear Git commit and supplies the evidence.
+2. Reconcile the Git fields and mark the lesson `COMPLETE / FROZEN / READ-ONLY` after that closure
+   gate is satisfied.
+3. Leave Git push to the user and do not begin L21 in this task.
 
 ## Explicitly Out of Scope
 
@@ -78,6 +97,8 @@ telemetry use that same immutable sample. The approved baseline limits are `1.0 
 
 ## Closure Position
 
-The software and simulation portion of L20 is verified. L20 remains `IN_PROGRESS`; real-robot
-verification is `NOT TESTED - hardware unavailable`, and Simulation is not a substitute. Do not begin
-L21.
+The current post-fix tests, final post-fix clean build, Simulation/HALSIM/Glass, robot-on-stands,
+transition-stress, floor verification, architecture review, and transition guide are complete. L20
+remains `IN_PROGRESS` solely because Document B requires a clear Git commit before lesson/module
+closure and Git is user-owned and has not run. The lesson is ready for user Git closure. Do not
+begin L21.

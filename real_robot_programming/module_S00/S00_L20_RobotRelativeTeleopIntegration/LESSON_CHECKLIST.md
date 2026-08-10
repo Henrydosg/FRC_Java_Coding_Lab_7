@@ -18,7 +18,7 @@ Source lesson: `S00_L19_DriverInputProcessing` - `COMPLETE / FROZEN / READ-ONLY`
 | Governance reconciliation | PASS | L19 closure and L20 identity documentation reconciled. |
 | Increment 1 architecture lock | PASS | Explicit ChatGPT Architect decision. |
 | Request-observability review | PASS | Production-request Observation/telemetry rejected under Document C; production architecture unchanged. |
-| Final production architecture review | PASS | Architecture remains locked; no production expansion approved. |
+| Final production architecture review | PASS | Closure audit found the Frozen Backbone and locked L20 boundaries preserved with no unresolved production correctness defect. |
 
 ## Architecture and Implementation
 
@@ -31,6 +31,8 @@ Source lesson: `S00_L19_DriverInputProcessing` - `COMPLETE / FROZEN / READ-ONLY`
 | Production Swerve path | IMPLEMENTED | Command -> `SwerveSubsystem` -> `SwerveOutputPipeline` -> `SwerveModuleIO`. |
 | Telemetry migration | IMPLEMENTED | `RobotTelemetry` no longer polls Xbox independently. |
 | Safety/lifecycle behavior | IMPLEMENTED | End/interruption and acquisition, submission, or publication failures invoke safe stop. |
+| Exact-zero measured-angle policy | IMPLEMENTED | Exact zero chassis demand produces zero drive speed at each current measured module angle in FL/FR/BL/BR order; normal nonzero processing is unchanged. |
+| Drive/steer stop separation | IMPLEMENTED | CTRE zero drive velocity stops only drive; unhealthy/nonfinite and explicit full-stop paths still stop drive and steer. |
 | End-to-end test-only verification | IMPLEMENTED | Real command/subsystem/kinematics/optimization/desaturation path is checked with recording test IO. |
 | Production telemetry expansion | NOT APPLICABLE | Explicitly rejected by architecture review. |
 | Production Java lock | PASS | No production change was authorized during final documentation reconciliation. |
@@ -41,12 +43,17 @@ Source lesson: `S00_L19_DriverInputProcessing` - `COMPLETE / FROZEN / READ-ONLY`
 | --- | --- | --- |
 | `RobotRelativeTeleopDriveCommandTest` | PASS | User explicitly supplied 11/11 PASS. |
 | `RobotRelativeTeleopProductionPathTest` | PASS | User explicitly reran and supplied 10/10 PASS. |
-| Full regression | PASS | User explicitly reran the current full regression and supplied PASS. |
-| Final clean build | PASS | User ran `gradlew clean build`; `BUILD SUCCESSFUL`, 7 actionable tasks, 7 executed. |
+| Current post-fix tests | PASS | Repository test-result artifacts generated after both fixes record 166/166 PASS with zero failures, errors, or skips. |
+| Historical clean build | PASS | User supplied `gradlew clean build`; `BUILD SUCCESSFUL`, 7 actionable tasks, 7 executed, before the two final production corrections. |
+| Final post-fix clean build | PASS | User supplied `BUILD SUCCESSFUL in 35s`; 7 actionable tasks, 7 executed; all tests executed by the clean build passed. The build followed both final production corrections. |
 | Simulation | PASS | User-supplied final evidence. |
 | HALSIM joystick | PASS | User-supplied final evidence. |
 | Glass / DriverInput | PASS | User-supplied final evidence. |
-| Real robot | NOT TESTED | Hardware unavailable; required real-hardware verification remains outstanding. |
+| Enable/Disable on stands | PASS | User supplied 10/10 PASS after the fixes. |
+| Robot-relative motion on stands | PASS | User supplied Forward/Backward, Strafe Left/Right, Diagonal, and Rotation CW/CCW PASS. |
+| Transition stress | PASS | User supplied 3/3 PASS. |
+| Floor verification | PASS | User reported correct robot-relative driving and no unintended module actuation. |
+| BL/FL symptom recheck | PASS | User did not reproduce BL drift/jitter or FL jitter during the post-fix sequence. |
 
 ## Scope Guard
 
@@ -63,13 +70,15 @@ Source lesson: `S00_L19_DriverInputProcessing` - `COMPLETE / FROZEN / READ-ONLY`
 
 - [x] Implementation complete.
 - [x] Focused verification complete.
-- [x] Full regression complete.
-- [x] Final clean build complete.
+- [x] Current post-fix test artifacts complete: 166/166 PASS.
+- [x] Final post-fix clean build complete.
 - [x] Simulation, HALSIM joystick, and Glass / DriverInput complete.
-- [ ] Real-robot actuation and safety verification complete.
-- [ ] Transition Guide marked final/PASS.
-- [ ] ChatGPT Architect closure granted.
+- [x] Real-robot actuation and safety verification complete.
+- [x] Transition Guide marked final/PASS.
+- [x] Architecture Review PASS recorded.
 - [ ] User Git commit and push complete.
 
-The lesson remains `IN_PROGRESS`. Simulation does not replace the outstanding real-robot gate. Do
-not begin L21.
+All implementation and verification gates are complete, and the transition guide is final/PASS.
+The lesson remains `IN_PROGRESS` solely because Document B requires a clear Git commit before
+lesson/module closure. Git is user-owned and has not run. L20 is ready for user Git closure; do not
+begin L21.

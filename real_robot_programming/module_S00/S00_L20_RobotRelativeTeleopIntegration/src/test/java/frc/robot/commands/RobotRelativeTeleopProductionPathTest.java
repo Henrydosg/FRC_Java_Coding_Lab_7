@@ -139,14 +139,20 @@ class RobotRelativeTeleopProductionPathTest {
   }
 
   @Test
-  void zeroInputDispatchesFourZeroSpeedRequests() {
+  void centeredXboxDispatchesZeroDriveAndPreservesCurrentModuleAngles() {
     Rig rig = new Rig(0.0, 0.0, 0.0);
+    double[] currentAngleRotations = {-0.10, 0.05, 0.35, -0.40};
+    rig.setModuleAnglesRotations(currentAngleRotations);
 
     rig.executeAndDispatch();
 
     assertDispatchOrderAndPipelineMatch(rig);
-    for (RecordingModuleIO module : rig.modules()) {
-      assertState(module.lastState(), 0.0, 0.0);
+    RecordingModuleIO[] modules = rig.modules();
+    for (int moduleIndex = 0; moduleIndex < kModuleCount; moduleIndex++) {
+      assertState(
+          modules[moduleIndex].lastState(),
+          0.0,
+          Rotation2d.fromRotations(currentAngleRotations[moduleIndex]).getDegrees());
     }
   }
 
@@ -316,6 +322,17 @@ class RobotRelativeTeleopProductionPathTest {
       return new RecordingModuleIO[] {frontLeft, frontRight, backLeft, backRight};
     }
 
+    private void setModuleAnglesRotations(double[] moduleAngleRotations) {
+      if (moduleAngleRotations.length != kModuleCount) {
+        throw new IllegalArgumentException("moduleAngleRotations must contain four values");
+      }
+      RecordingModuleIO[] modules = modules();
+      for (int moduleIndex = 0; moduleIndex < kModuleCount; moduleIndex++) {
+        modules[moduleIndex].encoderAbsolutePositionRotations =
+            moduleAngleRotations[moduleIndex];
+      }
+    }
+
     private void clearRecordedRequests() {
       dispatchLog.clear();
       for (RecordingModuleIO module : modules()) {
@@ -377,6 +394,7 @@ class RobotRelativeTeleopProductionPathTest {
     private int stopCount;
     private double lastDriveVelocityMetersPerSecond;
     private Rotation2d lastSteerAngle = new Rotation2d();
+    private double encoderAbsolutePositionRotations;
 
     private RecordingModuleIO(String name, List<String> dispatchLog) {
       this.name = name;
@@ -385,7 +403,7 @@ class RobotRelativeTeleopProductionPathTest {
 
     @Override
     public void updateInputs(SwerveModuleIOInputs inputs) {
-      inputs.encoderAbsolutePositionRotations = 0.0;
+      inputs.encoderAbsolutePositionRotations = encoderAbsolutePositionRotations;
     }
 
     @Override

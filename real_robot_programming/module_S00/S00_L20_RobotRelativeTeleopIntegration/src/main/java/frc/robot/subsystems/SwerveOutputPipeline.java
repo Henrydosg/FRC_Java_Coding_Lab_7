@@ -14,15 +14,14 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.robot.Constants;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
  * Converts robot-relative chassis speeds into final ordered Swerve module outputs.
  *
- * <p>The pipeline performs kinematics, module-state optimization, and wheel-speed desaturation
- * in that order. It is stateless, deterministic, and independent of hardware and runtime robot
- * state.
+ * <p>An exact zero chassis request produces zero-speed states at the current measured module
+ * angles. Nonzero requests perform kinematics, module-state optimization, and wheel-speed
+ * desaturation in that order. The pipeline is deterministic and independent of hardware access.
  */
 public final class SwerveOutputPipeline {
   private static final int MODULE_COUNT = 4;
@@ -79,19 +78,39 @@ public final class SwerveOutputPipeline {
             acceptedSpeeds.vxMetersPerSecond,
             acceptedSpeeds.vyMetersPerSecond,
             acceptedSpeeds.omegaRadiansPerSecond);
-    Rotation2d[] copiedAngles = Arrays.copyOf(acceptedAngles, MODULE_COUNT);
+    Rotation2d[] copiedAngles = new Rotation2d[MODULE_COUNT];
+    for (int moduleIndex = 0; moduleIndex < MODULE_COUNT; moduleIndex++) {
+      Rotation2d acceptedAngle =
+          Objects.requireNonNull(acceptedAngles[moduleIndex], "currentAngles element");
+      copiedAngles[moduleIndex] = new Rotation2d(acceptedAngle.getRadians());
+    }
+
+    if (isExactlyZero(copiedSpeeds)) {
+      SwerveModuleState[] zeroStates = new SwerveModuleState[MODULE_COUNT];
+      for (int moduleIndex = 0; moduleIndex < MODULE_COUNT; moduleIndex++) {
+        zeroStates[moduleIndex] =
+            new SwerveModuleState(
+                0.0, new Rotation2d(copiedAngles[moduleIndex].getRadians()));
+      }
+      return zeroStates;
+    }
+
     SwerveModuleState[] desiredStates = kinematics.toModuleStates(copiedSpeeds);
     SwerveModuleState[] finalStates = new SwerveModuleState[MODULE_COUNT];
 
     for (int moduleIndex = 0; moduleIndex < MODULE_COUNT; moduleIndex++) {
       finalStates[moduleIndex] =
-          optimizer.optimize(
-              desiredStates[moduleIndex],
-              Objects.requireNonNull(copiedAngles[moduleIndex], "currentAngles element"));
+          optimizer.optimize(desiredStates[moduleIndex], copiedAngles[moduleIndex]);
     }
 
     SwerveDriveKinematics.desaturateWheelSpeeds(
         finalStates, maximumWheelSpeedMetersPerSecond);
     return finalStates;
+  }
+
+  private static boolean isExactlyZero(ChassisSpeeds chassisSpeeds) {
+    return chassisSpeeds.vxMetersPerSecond == 0.0
+        && chassisSpeeds.vyMetersPerSecond == 0.0
+        && chassisSpeeds.omegaRadiansPerSecond == 0.0;
   }
 }
