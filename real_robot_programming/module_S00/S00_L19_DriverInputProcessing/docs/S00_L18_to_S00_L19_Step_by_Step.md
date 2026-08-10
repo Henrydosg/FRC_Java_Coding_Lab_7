@@ -162,8 +162,12 @@ revision identifiers that are not present in the lesson history.
   Xbox controller on USB port `0`; inspect Raw, SemanticRaw, and Processed values; verify axis signs,
   processing, and zero near center/deadband; confirm absolutely no drivetrain actuation.
 - Files Changed: None.
-- Verification: PASS; the Architect confirmed completed closure evidence for the required Disabled,
-  non-actuating verification.
+- Verification: PASS from user-supplied real-roboRIO evidence. The robot remained Disabled; Glass
+  connected; `/DriverInput` existed before Xbox connection; Raw `LeftX`, `LeftY`, and `RightX`
+  existed and updated; SemanticRaw `Forward`, `Strafe`, and `Rotation` existed and updated;
+  Processed `Forward`, `Strafe`, and `Rotation` existed and updated; the Xbox operated on USB port
+  `0`; axis signs/mapping and center/deadband behavior were correct; and no drivetrain actuation
+  occurred.
 - Expected Result: The real target published driver-input observations while the drivetrain remained
   completely inactive.
 
@@ -177,7 +181,8 @@ revision identifiers that are not present in the lesson history.
   Architect-confirmed Git completion, and freeze the lesson.
 - Files Changed: L19 documentation only unless a failed verification separately authorizes a source
   correction.
-- Verification: PASS; governance documentation now records L19 as `COMPLETE / FROZEN / READ-ONLY`.
+- Verification: PASS; all required gates, including explicit Disabled real-roboRIO verification,
+  are recorded. The guide is `FINAL / PASS`, and L19 is `COMPLETE / FROZEN / READ-ONLY`.
 - Expected Result: L19 remains a frozen snapshot and L20 becomes the sole active lesson.
 
 ## L19 Boundary

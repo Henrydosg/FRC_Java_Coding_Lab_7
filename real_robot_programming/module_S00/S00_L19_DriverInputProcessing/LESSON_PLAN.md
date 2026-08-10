@@ -45,14 +45,18 @@ The semantic mapping is `forward = -LeftY`, `strafe = -LeftX`, and
 5. Added read-only `/DriverInput` telemetry.
 6. Added focused processing, source, and telemetry tests.
 7. Recorded Simulation, Glass, AdvantageScope, and driver-input topic evidence.
-8. Completed the required closure workflow and Git workflow according to the
+8. Completed the required real-roboRIO verification while Disabled: Glass connection, topic
+   existence and updates, USB port 0, axis mapping/signs, center/deadband behavior, and no
+   drivetrain actuation all passed from user-supplied evidence.
+9. Completed the required closure workflow and Git workflow according to the
    Architect-confirmed lesson history.
-9. Finalized the transition guide and froze L19.
+10. Finalized the transition guide and froze L19.
 
 ## Verification Summary
 
-The authoritative verification states are recorded in `LESSON_STATUS.md`. Governance
-reconciliation does not invent command output, test counts, commit hashes, or remote revision IDs.
+The authoritative verification states are recorded in `LESSON_STATUS.md`. The real-roboRIO debt is
+cleared by the user-supplied Disabled, non-actuating verification. Governance reconciliation does
+not invent command output, test counts, commit hashes, or remote revision IDs.
 
 ## L20 Migration Gate
 
