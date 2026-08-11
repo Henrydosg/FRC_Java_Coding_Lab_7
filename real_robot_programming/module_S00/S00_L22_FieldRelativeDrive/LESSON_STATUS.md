@@ -5,8 +5,8 @@
 - Lesson: `S00_L22_FieldRelativeDrive`
 - Previous Lesson: `S00_L21_FirstFloorDriveValidation`
 - Previous Lesson State: `COMPLETE / FROZEN / READ-ONLY`
-- Status: `IN_PROGRESS` — READY FOR USER GIT CLOSURE
-- Freeze State: `EDITABLE`
+- Status: `COMPLETE / FROZEN / READ-ONLY`
+- Freeze State: `FROZEN`
 - Lesson Goal: Add and validate field-relative teleop conversion while preserving the existing robot-relative drivetrain/output pipeline.
 - Architecture Decision: `APPROVED` - the user-supplied Disabled Pigeon2 hardware gate cleared the audit condition.
 - Architecture Delta: raw gyro yaw -> SwerveSubsystem-owned captured field reference -> wrapped field heading -> robot-relative `ChassisSpeeds` -> existing frozen output pipeline.
@@ -28,8 +28,8 @@
 | Driver Station / Glass | PASS | User supplied PASS. |
 | Real Robot | PASS (user supplied, scoped) | User supplied the final field-relative floor matrix PASS and the correct Disabled capture workflow: align HEAD to field +X, press/release Xbox Back/Button 7 once, enable, then drive. Disable/Enable reference persistence also passed. BL steer drift remains `INTERMITTENT / NOT REPRODUCED`; no root cause is claimed. |
 | Transition Guide | FINAL / PASS | All required implementation, automated, simulation, driver-station, and real-robot evidence is recorded. |
-| Git Commit | NOT TESTED | L22 Git remains user-owned. |
-| Git Push | NOT TESTED | L22 Git remains user-owned. |
+| Git Commit | PASS | User supplied completion commit `79ac5cc Complete S00_L22 field-relative drive`. |
+| Git Push | NOT TESTED | Push evidence was not supplied; Git push remains user-owned. |
 
 ## Architecture Delta
 
@@ -62,4 +62,4 @@ L22 does not include odometry, pose estimation, pose visualization, autonomous b
 
 ## Current State
 
-The software field-heading reference implementation, focused tests, full regression, Java 17 clean build, Simulation/HALSIM, Driver Station/Glass, and final real-robot floor verification are complete. L22 remains `IN_PROGRESS / EDITABLE` and is READY FOR USER GIT CLOSURE.
+The software field-heading reference implementation, focused tests, full regression, Java 17 clean build, Simulation/HALSIM, Driver Station/Glass, and final real-robot floor verification are complete. User supplied completion commit `79ac5cc Complete S00_L22 field-relative drive`. L22 is now `COMPLETE / FROZEN / READ-ONLY`.

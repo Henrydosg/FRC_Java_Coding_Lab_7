@@ -7,7 +7,7 @@
 ## Lesson Identity
 
 - Source: `S00_L21_FirstFloorDriveValidation` - `COMPLETE / FROZEN / READ-ONLY`
-- Current: `S00_L22_FieldRelativeDrive` - `IN_PROGRESS`
+- Current: `S00_L22_FieldRelativeDrive` - `COMPLETE / FROZEN / READ-ONLY`
 - Next: `S00_L23_OdometryAndPoseVisualization` - `OUT OF SCOPE`
 - Objective: add and validate field-relative teleop conversion while preserving the existing robot-relative drivetrain/output pipeline.
 - Architecture audit: `CONDITIONALLY APPROVED`; the user-supplied Disabled Pigeon2 hardware gate subsequently cleared the condition.
@@ -262,11 +262,11 @@ raw gyro yaw
 - Action: recorded user-supplied PASS for Simulation/HALSIM, Driver Station/Glass, Disabled Pigeon hardware direction/magnitude, software field-reference capture, final real-robot floor matrix, and Disable -> Enable reference persistence.
 - Files Changed: L22 documentation only.
 - Verification: PASS - BL steer drift remains `INTERMITTENT / NOT REPRODUCED`; no fix, resolution, or root cause is claimed.
-- Expected Result: the guide is `FINAL / PASS`, while L22 remains `IN_PROGRESS / EDITABLE` for user Git closure.
+- Expected Result: the guide is `FINAL / PASS`, while L22 is frozen after the user completion commit.
 
 ## Closure Status
 
-User supplied Simulation/HALSIM PASS, Driver Station/Glass PASS, final Java 17 clean build PASS, field-reference capture PASS, final floor matrix PASS, and Disable -> Enable persistence PASS. Focused tests are 44/44 PASS and full regression is 189 tests with 0 failures, 0 errors, and 0 skipped. BL steer drift remains `INTERMITTENT / NOT REPRODUCED`; no root cause is claimed. The guide is `FINAL / PASS`. L22 commit and push remain user-owned; Codex did not run Git.
+User supplied Simulation/HALSIM PASS, Driver Station/Glass PASS, final Java 17 clean build PASS, field-reference capture PASS, final floor matrix PASS, and Disable -> Enable persistence PASS. Focused tests are 44/44 PASS and full regression is 189 tests with 0 failures, 0 errors, and 0 skipped. BL steer drift remains `INTERMITTENT / NOT REPRODUCED`; no root cause is claimed. The guide is `FINAL / PASS`. User supplied completion commit `79ac5cc Complete S00_L22 field-relative drive`; push evidence was not supplied.
 
 ## L23 Boundary
 
@@ -274,8 +274,8 @@ L22 excludes odometry, pose estimation, pose visualization, autonomous behavior,
 
 ## Finalization Boundary
 
-This guide is `FINAL / PASS`. L22 remains `IN_PROGRESS / EDITABLE` until the user performs Git closure.
+This guide is `FINAL / PASS`. L22 is `COMPLETE / FROZEN / READ-ONLY`.
 
 ## Git Boundary
 
-L21 push to `origin/main` is recorded from user-supplied evidence. Codex did not run Git. L22 commit and push remain `NOT TESTED` and user-owned.
+L21 push to `origin/main` is recorded from user-supplied evidence. The L22 completion commit `79ac5cc Complete S00_L22 field-relative drive` is recorded from user evidence. Codex did not run Git. Push evidence was not supplied.

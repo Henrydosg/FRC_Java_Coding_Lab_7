@@ -4,7 +4,7 @@
 
 - Lesson: `S00_L22_FieldRelativeDrive`
 - Previous: `S00_L21_FirstFloorDriveValidation` - `COMPLETE / FROZEN / READ-ONLY`
-- Status: `IN_PROGRESS` — READY FOR USER GIT CLOSURE
+- Status: `COMPLETE / FROZEN / READ-ONLY`
 - Next: `S00_L23_OdometryAndPoseVisualization` - `OUT OF SCOPE`
 - Architecture review: `APPROVED` after the user-supplied Disabled Pigeon2 hardware gate passed.
 
@@ -96,7 +96,8 @@ Back / Button 7 does not calibrate, reset, or zero Pigeon hardware.
 - Final clean Java 17 build: PASS - user supplied `BUILD SUCCESSFUL`.
 - Full regression: PASS - 189 tests, 0 failures, 0 errors, 0 skipped.
 - BL steer drift: `INTERMITTENT / NOT REPRODUCED`; no root cause claimed.
-- Git commit and push remain user-owned.
+- Git commit: PASS - user supplied `79ac5cc Complete S00_L22 field-relative drive`.
+- Git push: NOT TESTED - no push evidence supplied.
 
 ## L23 Boundary
 
@@ -114,4 +115,4 @@ The following remain outside L22:
 
 ## Transition Guide
 
-See [`docs/S00_L21_to_S00_L22_Step_by_Step.md`](docs/S00_L21_to_S00_L22_Step_by_Step.md). Its status is `FINAL / PASS`.
+See [`docs/S00_L21_to_S00_L22_Step_by_Step.md`](docs/S00_L21_to_S00_L22_Step_by_Step.md). Its status is `FINAL / PASS`. L22 is now `COMPLETE / FROZEN / READ-ONLY`.

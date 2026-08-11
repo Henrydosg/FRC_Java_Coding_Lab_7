@@ -1,6 +1,6 @@
 # S00_L22 Field-Relative Drive - Checklist
 
-Status: `IN_PROGRESS` — READY FOR USER GIT CLOSURE  
+Status: `COMPLETE / FROZEN / READ-ONLY`  
 Source: `S00_L21_FirstFloorDriveValidation` - `COMPLETE / FROZEN / READ-ONLY`  
 Next: `S00_L23_OdometryAndPoseVisualization` - `OUT OF SCOPE`
 
@@ -59,7 +59,7 @@ Next: `S00_L23_OdometryAndPoseVisualization` - `OUT OF SCOPE`
 - [x] Finalize the transition guide as `FINAL / PASS`.
 - [x] Record BL steer drift as `INTERMITTENT / NOT REPRODUCED`; no root cause claimed.
 - [x] Final clean Java 17 build and full regression recorded PASS.
-- [ ] User Git commit.
+- [x] User completion commit recorded: `79ac5cc Complete S00_L22 field-relative drive`.
 - [ ] User Git push.
 
 ## L23 Boundary

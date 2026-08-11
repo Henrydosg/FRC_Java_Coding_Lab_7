@@ -2,7 +2,7 @@
 
 ## Lesson State
 
-- Status: `IN_PROGRESS` — READY FOR USER GIT CLOSURE
+- Status: `COMPLETE / FROZEN / READ-ONLY`
 - Previous lesson: `S00_L21_FirstFloorDriveValidation` - `COMPLETE / FROZEN / READ-ONLY`
 - Next lesson: `S00_L23_OdometryAndPoseVisualization` - `OUT OF SCOPE`
 - Architecture audit: `APPROVED`; software field-reference architecture implemented.
@@ -71,4 +71,4 @@ The binding captures a software reference only; it does not calibrate or reset P
 
 The user supplied a final field-relative floor matrix PASS, including multiple headings, translation, strafe, rotation, combined motion, centered stop, and Disable -> Enable persistence. BL steer drift is `INTERMITTENT / NOT REPRODUCED`; no root cause is claimed.
 
-L22 remains active and editable, READY FOR USER GIT CLOSURE. Simulation/HALSIM, Driver Station/Glass, the Java 17 clean build, focused tests, full regression, and final real-robot floor matrix are PASS. BL steer drift remains `INTERMITTENT / NOT REPRODUCED`; no root cause is claimed.
+Simulation/HALSIM, Driver Station/Glass, the Java 17 clean build, focused tests, full regression, and final real-robot floor matrix are PASS. BL steer drift remains `INTERMITTENT / NOT REPRODUCED`; no root cause is claimed. User supplied completion commit `79ac5cc Complete S00_L22 field-relative drive`. L22 is now `COMPLETE / FROZEN / READ-ONLY`.
