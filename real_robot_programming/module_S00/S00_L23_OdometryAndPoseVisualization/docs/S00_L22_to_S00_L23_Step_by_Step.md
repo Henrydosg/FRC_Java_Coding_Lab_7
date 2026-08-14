@@ -14,6 +14,8 @@
 - Final WPILib Java 17 clean build: `PASS`
 - Current regression: 29 suites, 262 tests, 0 failures, 0 errors, 0 skipped
 
+The authoritative final calibration and operator reference is the [S00_L23 Final Swerve Calibration and Commissioning Guide](S00_L23_Final_Swerve_Calibration_and_Commissioning_Guide.md). It supersedes disproven or unresolved L14 configuration entries only where frozen L23 source and recorded hardware evidence establish a final value; the L14 matrix itself remains unchanged historical evidence.
+
 ## Final Architecture Delta
 
 ```text

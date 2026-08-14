@@ -28,6 +28,8 @@ raw TalonFX RotorPosition + calibrated module angle + L22 field heading
 
 The implementation, final WPILib Java 17 clean build, focused odometry tests, full regression, Glass inspection, and real-robot validation are complete and PASS.
 
+The authoritative final hardware configuration, superseded L14 values, conversion equations, bounded commissioning procedures, Phoenix readback rules, three-meter validation workflow, and field/pose verification procedure are consolidated in the [S00_L23 Final Swerve Calibration and Commissioning Guide](docs/S00_L23_Final_Swerve_Calibration_and_Commissioning_Guide.md). Use that guide for final L23 calibration facts; preserve older commissioning documents as historical evidence.
+
 ## Verified Measurement Contract
 
 The drive position source is raw TalonFX `RotorPosition`, transported as vendor-neutral `drivePositionRotations`.
