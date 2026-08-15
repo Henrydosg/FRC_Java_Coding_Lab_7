@@ -60,6 +60,7 @@ FRC_Java_Coding_Lab_7/
 │   ├── Document_C/
 │   └── architecture_decisions/
 └── real_robot_programming/
+    ├── module_A00/
     ├── module_D00/
     ├── module_D01/
     └── module_S00/
@@ -460,8 +461,12 @@ Lesson-specific decisions shall be recorded outside global governance and refere
 
 - S00_L19 / S00_L20 driver-input ownership and migration:
   `docs/architecture_decisions/ADR_S00_L19_L20_Driver_Input_Ownership.md`
+- Post-S00 A00 roadmap authorization:
+  `docs/architecture_decisions/ADR_A00_Autonomous_Command_Foundation_Roadmap.md`
 
-This reference does not change the Frozen Backbone, the authority order, or the lesson roadmap.
+The S00_L19/S00_L20 decision does not change the Frozen Backbone, the authority order, or the
+S00_L15-S00_L24 roadmap. The separately referenced A00 decision authorizes only the post-S00
+module and `module_A00` location; it does not change the Frozen Backbone or authority order.
 
 ---
 
@@ -497,3 +502,4 @@ Only report verified facts.
 | 1.0 | 2026-07-18 | FROZEN | Initial repository governance. |
 | 1.1 | 2026-08-01 | FROZEN | APPROVED: recognize `frc.robot.observation` as the permanent immutable read-model boundary; control flow remains unchanged. |
 | 1.2 | 2026-08-08 | FROZEN | APPROVED: fixed role ownership, transition-guide lifecycle, module structure, durable external operator-input Observation exception, and referenced lesson-specific architecture decision records. |
+| 1.3 | 2026-08-16 | FROZEN | APPROVED: authorize the post-S00 A00 roadmap and `module_A00` location without changing S00 or the Frozen Backbone. |
