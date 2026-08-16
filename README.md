@@ -111,6 +111,34 @@ D00_L02
 D00_L03
 ```
 
+## Approved Autonomous Roadmap
+
+### A01 - Autonomous Navigation and Path Following
+
+A01 is the approved successor roadmap after frozen
+`A00_L04_AutonomousMotionSafetyGating`. Its purpose is to progress from the
+autonomous command foundation to deterministic field-based trajectory
+execution and PathPlanner/AutoBuilder integration.
+
+Authority:
+`docs/architecture_decisions/ADR_A01_Autonomous_Navigation_Path_Following_Roadmap.md`
+
+Current implementation state: A01 is authorized, but `module_A01` and all A01
+lessons have not yet been created. A00 is closed at A00_L04; A00_L05 is not
+authorized.
+
+Approved lesson sequence:
+
+1. `A01_L01 - Autonomous Starting-Pose and Field-Frame Contract`
+2. `A01_L02 - Pose-Targeted Autonomous Motion`
+3. `A01_L03 - Trajectory Generation and Sampling Fundamentals`
+4. `A01_L04 - Field and Alliance Transform Contract`
+5. `A01_L05 - Holonomic Trajectory Following`
+6. `A01_L06 - PathPlanner Path and Runtime Integration`
+7. `A01_L07 - AutoBuilder Contract Integration`
+8. `A01_L08 - Autonomous Routine Selection and Safe Composition`
+9. `A01_L09 - PathPlanner NamedCommands and Event Markers`
+
 ---
 
 # Lesson Structure

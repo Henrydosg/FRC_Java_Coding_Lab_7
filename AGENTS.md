@@ -60,10 +60,11 @@ FRC_Java_Coding_Lab_7/
 │   ├── Document_C/
 │   └── architecture_decisions/
 └── real_robot_programming/
-    ├── module_A00/
-    ├── module_D00/
-    ├── module_D01/
-    └── module_S00/
+    ├── module_A00/
+    ├── module_A01/ (authorized; not yet created)
+    ├── module_D00/
+    ├── module_D01/
+    └── module_S00/
         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -463,10 +464,38 @@ Lesson-specific decisions shall be recorded outside global governance and refere
   `docs/architecture_decisions/ADR_S00_L19_L20_Driver_Input_Ownership.md`
 - Post-S00 A00 roadmap authorization:
   `docs/architecture_decisions/ADR_A00_Autonomous_Command_Foundation_Roadmap.md`
+- Post-A00 A01 roadmap authorization:
+  `docs/architecture_decisions/ADR_A01_Autonomous_Navigation_Path_Following_Roadmap.md`
 
 The S00_L19/S00_L20 decision does not change the Frozen Backbone, the authority order, or the
 S00_L15-S00_L24 roadmap. The separately referenced A00 decision authorizes only the post-S00
 module and `module_A00` location; it does not change the Frozen Backbone or authority order.
+
+The approved A01 decision authorizes `A01 - Autonomous Navigation and Path Following` and
+`module_A01` as the successor boundary after frozen A00_L04. A00 is closed at A00_L04; A00_L05
+is prohibited. A01 inherits frozen A00_L04, and its order is governed by the approved A01 ADR.
+Lessons shall not be reordered, renamed, merged, split, inserted, or skipped without the
+architecture/governance approval required by that ADR. One lesson remains one new architectural
+concept, and frozen predecessor protection remains mandatory.
+
+The authorized A01 lesson order is:
+
+1. `A01_L01 - Autonomous Starting-Pose and Field-Frame Contract`
+2. `A01_L02 - Pose-Targeted Autonomous Motion`
+3. `A01_L03 - Trajectory Generation and Sampling Fundamentals`
+4. `A01_L04 - Field and Alliance Transform Contract`
+5. `A01_L05 - Holonomic Trajectory Following`
+6. `A01_L06 - PathPlanner Path and Runtime Integration`
+7. `A01_L07 - AutoBuilder Contract Integration`
+8. `A01_L08 - Autonomous Routine Selection and Safe Composition`
+9. `A01_L09 - PathPlanner NamedCommands and Event Markers`
+
+A00_L04's Autonomous+Enabled safety invariant and centralized
+`SwerveSubsystem.stop()` authority remain authoritative. `RobotContainer` remains the composition
+root only, and Simulation-before-real-robot verification remains mandatory. PathPlanner is
+prohibited before A01_L06, AutoBuilder is prohibited before A01_L07, and the A01_L06 mandatory
+compatibility entry gate remains authoritative. Vision/AprilTags are outside the A01 baseline,
+and D01 retains mechanism architecture ownership.
 
 ---
 
@@ -503,3 +532,4 @@ Only report verified facts.
 | 1.1 | 2026-08-01 | FROZEN | APPROVED: recognize `frc.robot.observation` as the permanent immutable read-model boundary; control flow remains unchanged. |
 | 1.2 | 2026-08-08 | FROZEN | APPROVED: fixed role ownership, transition-guide lifecycle, module structure, durable external operator-input Observation exception, and referenced lesson-specific architecture decision records. |
 | 1.3 | 2026-08-16 | FROZEN | APPROVED: authorize the post-S00 A00 roadmap and `module_A00` location without changing S00 or the Frozen Backbone. |
+| 1.4 | 2026-08-16 | FROZEN | APPROVED: register the post-A00 A01 roadmap and `module_A01` successor boundary without creating lessons or changing frozen S00/A00 architecture. |
