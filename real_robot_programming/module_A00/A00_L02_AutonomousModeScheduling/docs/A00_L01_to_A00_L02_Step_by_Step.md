@@ -6,6 +6,9 @@ This guide records the controlled inheritance from frozen
 `A00_L01_AutonomousCommandLifecycleFoundation` to active
 `A00_L02_AutonomousModeScheduling`.
 
+- Real robot: `PASS` for the user-supplied A00_L02 lifecycle/zero-motion
+  evidence only
+
 The single new concept is autonomous mode composition and scheduler
 requirement ownership. A00_L02 remains zero-motion. A00_L03 remains the first
 A00 lesson permitted to issue a nonzero autonomous drivetrain request.
@@ -265,10 +268,43 @@ transition guide `FINAL / PASS`.
 
 **Verification:** Final review confirmed the Frozen Backbone, IO contracts,
 RobotContainer composition-root role, zero-motion boundary, and supplied
-verification evidence. Real-robot verification remains `HOLD`.
+verification evidence. The supplied A00_L02 real-robot lifecycle/zero-motion
+evidence is recorded as `PASS`.
 
 **Expected Result:** A00_L02 is a frozen inheritance source and A00_L03 is the
 next authorized lesson.
+
+## Real-Robot Verification Amendment
+
+**Objective:** Record the user-supplied A00_L02 hardware evidence without
+changing the frozen implementation, architecture, or zero-motion scope.
+
+**Evidence:**
+
+1. **Autonomous Disabled baseline:** The drivetrain produced zero output.
+2. **Autonomous + Enabled:** For approximately 7.9 seconds, the drivetrain
+   remained zero-motion.
+3. **Autonomous + Enabled -> Disabled:** The transition remained safely at
+   zero-motion.
+4. **Disabled -> Teleop Enabled:** For approximately 7.6 seconds, no stale
+   autonomous drivetrain output appeared.
+5. **Disabled -> Test Enabled:** For approximately 8.5 seconds, the drivetrain
+   remained zero-motion.
+
+**Scope boundary:** This PASS is limited to A00_L02 autonomous composition,
+scheduler ownership, and zero-motion hardware evidence. It does not claim
+A00_L03/L04, pose/localization, PathPlanner, AutoBuilder, or autonomous
+competition readiness.
+
+**Files Changed:** Documentation only: the A00_L02 README, lesson plan,
+checklist, status, and this transition guide.
+
+**Verification:** Documentation consistency audit completed. A00_L02 remains
+`COMPLETE / FROZEN / READ-ONLY`; Java, tests, Gradle, vendordeps, hardware
+configuration, and frozen predecessor or later lessons remain unchanged.
+
+**Expected Result:** The supplied A00_L02 real-robot lifecycle/zero-motion
+evidence is recorded as `PASS` without expanding the lesson concept.
 
 ## Final Transition State
 
@@ -278,11 +314,12 @@ safety hold remains zero-motion, and `kSafetyHoldLifecycleDurationSeconds = 1.0`
 is only a lifecycle repeat interval. A00_L03 remains the first lesson
 permitted to generate nonzero autonomous drivetrain motion.
 
-Real-robot verification remains `HOLD`; no hardware PASS is claimed.
+The supplied A00_L02 real-robot lifecycle/zero-motion evidence is recorded as
+`PASS`; broader real-robot capability remains outside this lesson.
 
 Non-blocking technical debt retained at freeze:
 
 - inherited commissioning tests using `Thread.sleep`;
 - optional stronger default-command precondition assertion;
-- real-robot verification HOLD; and
+- broader real-robot capability beyond the supplied A00_L02 evidence; and
 - deferred Test-mode global motion gating.

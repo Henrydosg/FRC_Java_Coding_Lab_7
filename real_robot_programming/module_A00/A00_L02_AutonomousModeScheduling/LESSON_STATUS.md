@@ -14,7 +14,8 @@
 - Build: `PASS`
 - Simulation: `PASS`
 - Driver Station / Glass: `PASS`
-- Real Robot: `HOLD`
+- Real Robot: `PASS` - user-supplied A00_L02 lifecycle/zero-motion hardware
+  evidence
 - Transition Guide: `FINAL / PASS`
 - Next Lesson: `A00_L03_BoundedRobotRelativeAutonomousMotion`
 - Git Commit: `NOT TESTED` - user-owned; Git not run by Codex
@@ -37,8 +38,28 @@
 | Nonzero joystick during Autonomous does not move Swerve | PASS | User-supplied Simulation evidence |
 | Autonomous to Disabled safe stop | PASS | User-supplied Simulation evidence |
 | Autonomous to Teleop fresh-input recovery | PASS | User-supplied Simulation evidence |
-| Real Robot | HOLD | A00_L02 hardware evidence remains pending |
+| Real Robot | PASS | User-supplied A00_L02 lifecycle/zero-motion hardware evidence |
 | Transition Guide | PASS | Final guide records the complete A00_L01 -> A00_L02 evolution |
+
+## Real-Robot Evidence Amendment
+
+The user supplied the following A00_L02 hardware evidence, recorded as
+`PASS` only for autonomous composition, scheduler ownership, and zero-motion
+behavior:
+
+1. **Autonomous Disabled baseline:** The drivetrain produced zero output.
+2. **Autonomous + Enabled:** For approximately 7.9 seconds, the drivetrain
+   remained zero-motion.
+3. **Autonomous + Enabled -> Disabled:** The transition remained safely at
+   zero-motion.
+4. **Disabled -> Teleop Enabled:** For approximately 7.6 seconds, no stale
+   autonomous drivetrain output appeared.
+5. **Disabled -> Test Enabled:** For approximately 8.5 seconds, the drivetrain
+   remained zero-motion.
+
+This evidence does not claim A00_L03 or A00_L04 verification, pose or
+localization verification, PathPlanner, AutoBuilder, or autonomous
+competition readiness.
 
 ## Implemented Concept
 
@@ -85,27 +106,28 @@ field/alliance transforms, vision, AprilTags, multi-step autonomous routines,
 Test-mode global motion gating, hardware calibration, gain tuning, and all
 changes to frozen A00_L01/S00/L22 remain out of scope.
 
-Real-robot verification remains `HOLD`; no hardware PASS is claimed.
+The supplied A00_L02 real-robot lifecycle/zero-motion evidence is recorded as
+`PASS`; broader real-robot capability remains outside this lesson.
 
 The following remain non-blocking technical debt:
 
 - inherited commissioning tests still use `Thread.sleep` timing;
 - an optional stronger default-command precondition assertion;
-- real-robot verification HOLD; and
+- broader real-robot capability beyond the supplied A00_L02 evidence; and
 - Test-mode global motion gating deferred to a later lesson.
 
 ## Final State
 
 A00_L02 is `COMPLETE / FROZEN / READ-ONLY`. The final architecture review is
-`PASS`, the transition guide is `FINAL / PASS`, and the supplied Java and
-Simulation evidence is recorded accurately. Real-robot verification remains
-`HOLD`; no hardware PASS is claimed. A00_L03 remains the first lesson
-permitted to issue nonzero autonomous drivetrain motion.
+`PASS`, the transition guide is `FINAL / PASS`, and the supplied Java,
+Simulation, and A00_L02 real-robot lifecycle/zero-motion evidence are recorded
+accurately. A00_L03 remains the first lesson permitted to issue nonzero
+autonomous drivetrain motion.
 
 ## Known Issues
 
-- Real-robot verification remains `HOLD`; this is non-blocking for the locked
-  zero-motion A00_L02 scope.
+- Broader real-robot capability remains outside the locked zero-motion A00_L02
+  scope.
 - Inherited commissioning tests still use `Thread.sleep` timing.
 - An optional stronger default-command precondition assertion remains deferred.
 - Test-mode global motion gating is deferred to a later lesson.

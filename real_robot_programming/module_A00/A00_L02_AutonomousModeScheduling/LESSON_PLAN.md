@@ -9,7 +9,8 @@
 - Architecture review: `PASS`
 - Transition guide: `FINAL / PASS`
 - Freeze state: `FROZEN`
-- Real robot: `HOLD`
+- Real robot: `PASS` for the user-supplied A00_L02 lifecycle/zero-motion
+  evidence only
 - Git: user-owned; not run by Codex
 
 ## Single Learning Concept
@@ -99,7 +100,8 @@ The inherited `AutonomousSafetyHoldCommandTest` remains a regression gate.
 - Inherited commissioning tests still use `Thread.sleep` timing.
 - An optional stronger default-command precondition assertion could be added to
   the focused scheduler test.
-- Real-robot verification remains `HOLD`.
+- Broader real-robot capability beyond the supplied A00_L02 evidence remains
+  outside this lesson.
 - Test-mode global motion gating is deferred to a later lesson.
 
 ## Verification Record
@@ -118,7 +120,25 @@ The inherited `AutonomousSafetyHoldCommandTest` remains a regression gate.
 | Nonzero joystick during Autonomous | PASS | Supplied Simulation evidence |
 | Autonomous to Disabled safe stop | PASS | Supplied Simulation evidence |
 | Autonomous to Teleop fresh recovery | PASS | Supplied Simulation evidence |
-| Real robot | HOLD | No A00_L02 hardware evidence supplied |
+| Real robot | PASS | User-supplied A00_L02 lifecycle/zero-motion evidence |
+
+### Real-Robot Verification Amendment
+
+The user supplied and verified these five A00_L02 hardware cases:
+
+1. **Autonomous Disabled baseline:** The drivetrain produced zero output.
+2. **Autonomous + Enabled:** For approximately 7.9 seconds, the drivetrain
+   remained zero-motion.
+3. **Autonomous + Enabled -> Disabled:** The transition remained safely at
+   zero-motion.
+4. **Disabled -> Teleop Enabled:** For approximately 7.6 seconds, no stale
+   autonomous drivetrain output appeared.
+5. **Disabled -> Test Enabled:** For approximately 8.5 seconds, the drivetrain
+   remained zero-motion.
+
+This PASS is limited to A00_L02 autonomous composition, scheduler ownership,
+and zero-motion evidence. It does not claim A00_L03/L04, pose/localization,
+PathPlanner, AutoBuilder, or autonomous competition readiness.
 
 ## Explicit Exclusions
 
@@ -131,6 +151,7 @@ gain tuning, Robot.java changes, or changes to frozen A00_L01/S00/L22.
 
 The implementation and supplied verification satisfy the locked zero-motion
 scope. The final architecture review is `PASS`, the transition guide is
-`FINAL / PASS`, and A00_L02 is now `COMPLETE / FROZEN / READ-ONLY`. Real-robot
-verification remains `HOLD`. A00_L03 remains the first lesson permitted to
-issue nonzero autonomous drivetrain motion.
+`FINAL / PASS`, and A00_L02 is now `COMPLETE / FROZEN / READ-ONLY`. The
+supplied A00_L02 real-robot lifecycle/zero-motion evidence is recorded as
+`PASS`. A00_L03 remains the first lesson permitted to issue nonzero
+autonomous drivetrain motion.

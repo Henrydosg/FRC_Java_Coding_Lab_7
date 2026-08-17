@@ -64,8 +64,17 @@ Git: user-owned; not run by Codex
 
 ## Real-Robot Gate
 
-- [ ] Real-robot A00_L02 verification - HOLD.
-- [x] No real-robot PASS is claimed without user-supplied hardware evidence.
+- [x] Autonomous Disabled baseline: PASS; drivetrain zero output.
+- [x] Autonomous + Enabled: PASS; approximately 7.9 seconds of zero-motion.
+- [x] Autonomous + Enabled -> Disabled: PASS; safe zero-motion transition.
+- [x] Disabled -> Teleop Enabled: PASS; approximately 7.6 seconds with no
+  stale autonomous drivetrain output.
+- [x] Disabled -> Test Enabled: PASS; approximately 8.5 seconds of
+  zero-motion.
+- [x] Real-robot PASS is limited to user-supplied A00_L02 autonomous
+  composition, scheduler ownership, and zero-motion evidence.
+- [x] No claim is made for A00_L03/L04, pose/localization, PathPlanner,
+  AutoBuilder, or autonomous competition readiness.
 
 ## Explicitly Out of Scope
 
@@ -96,5 +105,5 @@ Git: user-owned; not run by Codex
 
 - [x] Inherited commissioning tests using `Thread.sleep` remain deferred.
 - [x] Optional stronger default-command precondition assertion remains deferred.
-- [x] Real-robot verification remains HOLD.
+- [x] Broader real-robot capability remains outside the A00_L02 scope.
 - [x] Test-mode global motion gating remains deferred.
