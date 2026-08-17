@@ -9,7 +9,8 @@
 - Status: `COMPLETE / FROZEN / READ-ONLY`
 - Architecture review: `PASS`
 - Transition guide: `FINAL / PASS`
-- Real robot: `HOLD`
+- Real robot: `PASS` for the user-supplied A00_L01 lifecycle/zero-motion
+  evidence only
 - Git: user-owned; not run by Codex
 
 This project is the first post-S00 lesson. It inherits the frozen S00_L24
@@ -91,7 +92,34 @@ The supplied verification record is:
 - Autonomous Enabled zero-motion/non-regression: `PASS`;
 - Teleop fresh-input recovery after Autonomous/Disabled transition:
   `PASS`;
-- real-robot verification: `HOLD`.
+- A00_L01 real-robot lifecycle/zero-motion verification: `PASS`.
+
+### Real-Robot Verification Amendment
+
+The user supplied the following A00_L01 hardware evidence, recorded as
+`PASS` for this lesson's lifecycle and zero-motion scope:
+
+1. **Disabled baseline:** The robot was Disabled and the drivetrain remained
+   stationary. Drive and steer applied outputs and velocities were zero, and
+   module/gyro connectivity and configuration were healthy.
+2. **Autonomous + Enabled zero-motion:** Driver Station Autonomous + Enabled
+   was held for approximately 51 seconds. Drive and steer applied outputs and
+   velocities remained zero, with no autonomous drivetrain motion observed.
+3. **Autonomous -> Disabled:** The drivetrain remained at zero and no stale
+   output reappeared.
+4. **Autonomous -> Teleoperated:** After transitioning through Disabled into
+   Teleop Enabled, neutral driver input produced zero drive/steer output and
+   no autonomous output persisted.
+5. **Autonomous -> Test:** After transitioning through Disabled into Test
+   Enabled, no test or commissioning command was intentionally activated; no
+   autonomous drivetrain motion persisted and zero-motion safety was
+   preserved.
+
+This evidence is limited to A00_L01 lifecycle and zero-motion hardware
+behavior. It does not verify A00_L02 scheduler ownership or repeating
+autonomous ownership, A00_L03 bounded motion, A00_L04 mode gating,
+pose/odometry/estimator behavior, PathPlanner, AutoBuilder, or autonomous
+competition readiness.
 
 The command is intentionally not dashboard-registered or selected by
 RobotContainer in this lesson.
@@ -119,7 +147,7 @@ boundary. A00_L03 remains the first permitted nonzero-motion lesson.
 ## Finalization State
 
 A00_L01 is `COMPLETE / FROZEN / READ-ONLY`. The Frozen Backbone and interface
-contracts are preserved. Real-robot verification remains `HOLD` and is not
-claimed as hardware PASS. A00_L02 is the next lesson and remains
-zero-motion; A00_L03 remains the first lesson permitted to issue nonzero
-autonomous drivetrain motion.
+contracts are preserved. The recorded real-robot PASS is limited to the
+user-supplied A00_L01 lifecycle/zero-motion evidence. A00_L02 is the next
+lesson and remains zero-motion; A00_L03 remains the first lesson permitted
+to issue nonzero autonomous drivetrain motion.

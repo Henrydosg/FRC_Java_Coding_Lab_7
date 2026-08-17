@@ -9,7 +9,8 @@
 - Module: `A00 - Autonomous Command Foundation`
 - New concept: autonomous command lifecycle and stop ownership
 - Current transition status: `FINAL / PASS`
-- Real robot: `HOLD`
+- Real robot: `PASS` for the user-supplied A00_L01 lifecycle/zero-motion
+  evidence only
 - Git: user-owned; not run by Codex
 
 This guide records the authorized inheritance and the one-concept A00_L01
@@ -201,10 +202,51 @@ autonomous selection in A00_L01.
 teleop behavior remains recoverable, and A00_L03 remains the first permitted
 nonzero-motion lesson.
 
+## Documentation Amendment - Real-Robot Verification
+
+**Objective:** Record the user-supplied A00_L01 hardware evidence without
+changing the frozen implementation, architecture, or verification scope.
+
+**Evidence:**
+
+1. **Disabled baseline:** The robot was Disabled and the drivetrain remained
+   stationary. Drive and steer applied outputs and velocities were zero, and
+   module/gyro connectivity and configuration were healthy.
+2. **Autonomous + Enabled zero-motion:** Driver Station Autonomous + Enabled
+   was held for approximately 51 seconds. Drive and steer applied outputs and
+   velocities remained zero, with no autonomous drivetrain motion observed.
+3. **Autonomous -> Disabled:** The drivetrain remained at zero and no stale
+   output reappeared.
+4. **Autonomous -> Teleoperated:** After transitioning through Disabled into
+   Teleop Enabled, neutral driver input produced zero drive/steer output and
+   no autonomous output persisted.
+5. **Autonomous -> Test:** After transitioning through Disabled into Test
+   Enabled, no test or commissioning command was intentionally activated; no
+   autonomous drivetrain motion persisted and zero-motion safety was
+   preserved.
+
+**Scope boundary:** This evidence is limited to A00_L01 lifecycle and
+zero-motion hardware behavior. It does not verify A00_L02 scheduler ownership
+or repeating autonomous ownership, A00_L03 bounded motion, A00_L04 mode
+gating, pose/odometry/estimator behavior, PathPlanner, AutoBuilder, or
+autonomous competition readiness.
+
+**Files Changed:** Documentation only: the A00_L01 README, lesson plan,
+checklist, status, and this transition guide.
+
+**Verification:** Documentation consistency audit completed. A00_L01 remains
+`COMPLETE / FROZEN / READ-ONLY`; source, tests, Gradle, hardware
+configuration, and frozen predecessor lessons remain unchanged.
+
+**Expected Result:** The supplied A00_L01 real-robot lifecycle/zero-motion
+evidence is recorded as `PASS` without expanding the lesson's concept or
+claiming later autonomous capabilities.
+
 ## Current Closure State
 
 A00_L01 implementation, supplied verification, architecture review, and
 documentation are complete for the locked zero-motion scope. The lesson is
-`COMPLETE / FROZEN / READ-ONLY`. Real-robot verification remains `HOLD`; no
-hardware PASS is claimed. A00_L02 remains zero-motion and A00_L03 remains the
-first lesson permitted to issue nonzero autonomous drivetrain motion.
+`COMPLETE / FROZEN / READ-ONLY`. The recorded real-robot PASS is limited to
+the supplied A00_L01 lifecycle/zero-motion evidence. A00_L02 remains
+zero-motion and A00_L03 remains the first lesson permitted to issue nonzero
+autonomous drivetrain motion.

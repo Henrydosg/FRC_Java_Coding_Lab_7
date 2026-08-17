@@ -64,8 +64,22 @@ Git: user-owned; not run by Codex
 
 ## Real-Robot Gate
 
-- [ ] Real-robot A00_L01 verification - HOLD.
-- [x] No real-robot PASS is claimed without user-supplied hardware evidence.
+- [x] Disabled baseline: PASS; stationary drivetrain with zero drive/steer
+  applied outputs and velocities; module/gyro connectivity and configuration
+  healthy.
+- [x] Autonomous + Enabled zero-motion: PASS; approximately 51 seconds with
+  zero drive/steer applied outputs and velocities and no autonomous motion.
+- [x] Autonomous -> Disabled: PASS; drivetrain remained zero and no stale
+  output reappeared.
+- [x] Autonomous -> Teleoperated: PASS; neutral input remained at zero and no
+  autonomous output persisted.
+- [x] Autonomous -> Test: PASS; no test/commissioning command was
+  intentionally activated and no autonomous motion persisted.
+- [x] Real-robot PASS is limited to user-supplied A00_L01 lifecycle and
+  zero-motion hardware evidence.
+- [x] This evidence does not claim A00_L02 scheduler ownership or repeating
+  ownership, A00_L03 bounded motion, A00_L04 mode gating, pose/odometry/
+  estimator behavior, PathPlanner, AutoBuilder, or competition readiness.
 
 ## Explicitly Out of Scope
 

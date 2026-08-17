@@ -9,7 +9,8 @@
 - Status: `COMPLETE / FROZEN / READ-ONLY`
 - Architecture review: `PASS`
 - Transition guide: `FINAL / PASS`
-- Real robot: `HOLD`
+- Real robot: `PASS` for the user-supplied A00_L01 lifecycle/zero-motion
+  evidence only
 - Git: user-owned; not run by Codex
 
 ## Single Learning Concept
@@ -86,7 +87,31 @@ or mode composition; those concerns belong to A00_L02.
 | Simulation Disabled baseline | PASS | User-supplied Simulation evidence |
 | Autonomous Enabled zero-motion | PASS | User-supplied Simulation evidence |
 | Teleop fresh-input recovery | PASS | User-supplied Simulation evidence |
-| Real robot | HOLD | No A00_L01 hardware evidence supplied |
+| Real robot | PASS | User-supplied A00_L01 lifecycle/zero-motion evidence |
+
+### Real-Robot Verification Amendment
+
+The user supplied and verified these five A00_L01 hardware cases:
+
+1. **Disabled baseline:** The drivetrain was stationary; drive/steer applied
+   outputs and velocities were zero; module/gyro connectivity and
+   configuration were healthy.
+2. **Autonomous + Enabled zero-motion:** Autonomous + Enabled was held for
+   approximately 51 seconds; drive/steer applied outputs and velocities were
+   zero and no autonomous drivetrain motion occurred.
+3. **Autonomous -> Disabled:** The drivetrain remained at zero and no stale
+   output reappeared.
+4. **Autonomous -> Teleoperated:** After passing through Disabled, neutral
+   Teleop input produced zero drive/steer output and no autonomous output
+   persisted.
+5. **Autonomous -> Test:** After passing through Disabled, no test or
+   commissioning command was intentionally activated; no autonomous motion
+   persisted and zero-motion safety was preserved.
+
+This PASS is limited to A00_L01 lifecycle and zero-motion hardware evidence.
+It does not claim A00_L02 scheduler/repeating ownership, A00_L03 bounded
+motion, A00_L04 mode gating, pose/odometry/estimator behavior,
+PathPlanner/AutoBuilder, or competition readiness.
 
 ## Explicit Exclusions
 

@@ -15,7 +15,8 @@
 - Build: `PASS`
 - Simulation: `PASS`
 - Driver Station / Glass: `PASS`
-- Real Robot: `HOLD`
+- Real Robot: `PASS` - user-supplied A00_L01 lifecycle/zero-motion hardware
+  evidence
 - Transition Guide: `FINAL / PASS`
 - Next Lesson: `A00_L02_AutonomousModeScheduling`
 - Git: user-owned; not run by Codex
@@ -34,10 +35,36 @@
 | Autonomous Enabled zero-motion/non-regression | PASS | User-supplied Simulation evidence |
 | Teleop fresh-input recovery | PASS | User-supplied Simulation evidence |
 | Driver Station / Glass | PASS | Supplied zero-motion/non-regression and recovery evidence; command not registered |
-| Real Robot | HOLD | A00_L01 hardware evidence remains pending |
+| Real Robot | PASS | User-supplied A00_L01 lifecycle/zero-motion hardware evidence |
 | Transition Guide | PASS | Final guide records the complete S00_L24 -> A00_L01 evolution |
 | Git Commit | NOT TESTED | User-owned; Git not run by Codex |
 | Git Push | NOT TESTED | User-owned; Git not run by Codex |
+
+## Real-Robot Evidence Amendment
+
+The user supplied the following A00_L01 hardware evidence, recorded as
+`PASS` only for lifecycle and zero-motion behavior:
+
+1. **Disabled baseline:** The robot was Disabled and the drivetrain remained
+   stationary. Drive and steer applied outputs and velocities were zero, and
+   module/gyro connectivity and configuration were healthy.
+2. **Autonomous + Enabled zero-motion:** Driver Station Autonomous + Enabled
+   was held for approximately 51 seconds. Drive and steer applied outputs and
+   velocities remained zero, with no autonomous drivetrain motion observed.
+3. **Autonomous -> Disabled:** The drivetrain remained at zero and no stale
+   output reappeared.
+4. **Autonomous -> Teleoperated:** After transitioning through Disabled into
+   Teleop Enabled, neutral driver input produced zero drive/steer output and
+   no autonomous output persisted.
+5. **Autonomous -> Test:** After transitioning through Disabled into Test
+   Enabled, no test or commissioning command was intentionally activated; no
+   autonomous drivetrain motion persisted and zero-motion safety was
+   preserved.
+
+This amendment does not claim A00_L02 scheduler ownership or repeating
+autonomous ownership, A00_L03 bounded autonomous motion, A00_L04 mode-gating
+verification, pose/odometry/estimator verification, PathPlanner, AutoBuilder,
+or autonomous competition readiness.
 
 ## Implemented Scope
 
@@ -84,7 +111,8 @@ telemetry, estimator internals, or vendor APIs.
 Nonzero autonomous motion, PathPlanner, AutoBuilder, trajectories, path
 following, pose targeting, field/alliance transforms, vision, AprilTags,
 multi-step autonomous routines, hardware calibration, and gain tuning are
-outside A00_L01. Real-robot verification remains `HOLD`.
+outside A00_L01. No broader real-robot capability is claimed beyond the
+recorded A00_L01 lifecycle/zero-motion evidence.
 
 ## Current State
 
@@ -93,7 +121,7 @@ supplied Java/Simulation evidence, and architecture review are complete.
 
 ## Known Issues
 
-- Real-robot A00_L01 verification remains `HOLD`; no hardware PASS is
-  claimed.
+- User-supplied A00_L01 lifecycle/zero-motion real-robot evidence is recorded
+  as `PASS`; no broader hardware capability is claimed.
 - A00_L01 intentionally does not wire the lifecycle command into autonomous
   selection. That zero-motion mode-composition concept belongs to A00_L02.
