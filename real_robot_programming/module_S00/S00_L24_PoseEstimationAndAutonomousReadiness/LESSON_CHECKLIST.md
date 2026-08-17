@@ -73,10 +73,21 @@ Git: user-owned; not run by Codex
 
 ## Real-Robot Gate
 
-- [ ] L24 real-robot estimator verification - HOLD.
-- [ ] L24 real-robot known-field-pose reset verification - HOLD.
-- [ ] L24 real-robot Disabled-transition safety verification - HOLD.
-- [x] No real-robot L24 PASS is claimed without user-supplied hardware evidence.
+- [x] L24 real-robot hardware / Disabled baseline verification - PASS, user supplied.
+- [x] L24 stationary Pose/EstimatedPose verification - PASS, user supplied.
+- [x] L24 translation tracking verification - PASS, user supplied.
+- [x] L24 rotation tracking verification - PASS, user supplied.
+- [x] L24 combined translation/rotation verification - PASS, user supplied.
+- [x] L24 Disabled known-field-pose reset verification - PASS, user supplied.
+- [x] L24 Enabled reset rejection verification - PASS, user supplied.
+- [x] L24 reset followed by translation verification - PASS, user supplied.
+- [x] L24 reset followed by rotation verification - PASS, user supplied.
+- [x] L24 combined motion after reset verification - PASS, user supplied.
+- [x] Odometry Pose uses module measurements plus gyro heading.
+- [x] EstimatedPose remains close/equal to Pose because no vision measurement is fused.
+- [x] Vision/AprilTag fusion was not tested and remains deferred.
+- [x] Evidence is limited to the existing L24 localization/reset foundation.
+- [x] No unsupported competition, autonomous-path, PathPlanner, AutoBuilder, or A01 readiness PASS is claimed.
 
 ## Deferred Technical Debt
 

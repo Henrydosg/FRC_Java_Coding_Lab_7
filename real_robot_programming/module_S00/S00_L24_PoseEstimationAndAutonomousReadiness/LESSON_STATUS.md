@@ -25,7 +25,7 @@
 | Clean build | PASS | User-supplied Java 17 clean build; all tasks executed from clean state. |
 | Simulation | PASS | Pose/EstimatedPose, reset, continuity, and Disabled-transition behavior verified by user. |
 | Driver Station / Glass | PASS | Dashboard reset reuse and localization behavior verified by user. |
-| Real Robot | HOLD | L24-specific estimator/reset/transition hardware verification remains pending. |
+| Real Robot | PASS | User-supplied ten-case L24 localization/reset hardware verification. |
 | Transition Guide | PASS | Complete chronological L23 -> L24 evolution is recorded. |
 | Git Status | NOT RUN | Git is user-owned and was not run by Codex. |
 | Git Commit | NOT TESTED | User-owned. |
@@ -73,6 +73,45 @@ User verification is PASS for the implemented L24 scope:
 - neutral Disabled -> Teleoperated transition remains stopped;
 - fresh valid joystick request resumes motion normally.
 
+## Real-Robot Evidence Amendment
+
+User-supplied L24 real-robot verification is `PASS` for the existing
+localization and reset foundation only. Odometry Pose uses measured module
+positions plus gyro heading. EstimatedPose remains very close to or equal to
+Pose because no vision measurement is fused yet.
+
+1. Hardware / Disabled baseline: four modules and Pigeon were connected and
+   configuration-healthy; drive/steer outputs and velocities were zero while
+   stationary; EstimatedPose was available and measurement-valid.
+2. Stationary pose/estimator: Pose and EstimatedPose remained available and
+   valid; X/Y stayed effectively stationary; heading drift was very small; both
+   poses remained mutually consistent.
+3. Translation tracking: approximately 0.67 m forward; X was approximately
+   `+0.671 m`; Y and heading remained near zero in both poses.
+4. Rotation tracking: approximately 46 degrees was tracked; X/Y changed only
+   by a few millimeters.
+5. Combined translation and rotation: both poses remained available and valid,
+   changed consistently, and remained mutually consistent.
+6. Disabled known-field-pose reset: accepted; Pose and EstimatedPose reset
+   atomically to approximately `(0 m, 0 m, 0 deg)`; physical gyro state was not
+   reset; no drivetrain motion occurred.
+7. Enabled reset rejection: after motion away from zero, Enabled reset was
+   rejected; neither pose reset to zero and localization remained valid.
+8. Reset followed by translation: approximately 0.53 m forward was tracked as
+   X approximately `+0.526 m`; Y and heading remained near zero.
+9. Reset followed by rotation: heading tracked approximately `-88.1 deg`; X/Y
+   remained within a few millimeters of zero.
+10. Combined motion after reset: user explicitly confirmed `PASS`; no additional
+    numerical measurements are added.
+
+The reset evidence confirms Disabled-only acceptance, Enabled rejection,
+atomic odometry/estimator localization update, preservation of physical
+gyro/module sensor state, and no drivetrain motion caused by reset.
+
+Vision/AprilTag fusion was not tested. This evidence does not claim final
+competition localization accuracy, autonomous path following, PathPlanner,
+AutoBuilder, or A01 starting-pose readiness.
+
 ## Architecture Map
 
 ```text
@@ -101,16 +140,16 @@ field-heading semantics, hardware calibration, verified drive ratio `6.75`,
 provisional gains, odometry pose meaning, observation boundary, telemetry, and
 Field2d path remain unchanged.
 
-## Deferred Technical Debt and HOLD Items
+## Deferred Technical Debt and Remaining Items
 
-- L24 real-robot estimator, known-pose reset, and Disabled-transition safety verification remain HOLD.
+- Final competition localization accuracy and tuning remain outside L24.
 - Final drive PID/feedforward optimization remains deferred; provisional L23 gains are unchanged.
 - Normal-drive CTRE `setControl` status handling remains deferred robustness debt.
 - Retained CTRE diagnostic signals, connection-history fields, and dashboard ownership fields may remain IDE unused-field diagnostics.
 - Vision/AprilTag integration, timestamps/latency, uncertainty tuning, PathPlanner/AutoBuilder, trajectories, autonomous routines, alliance transforms, and competition-specific starting poses are outside this lesson.
 
-These are not software/simulation completion blockers for the current L24
-scope, but the real-robot HOLD must remain explicit.
+These remain separate from the software and Simulation/Glass verification
+record and do not change the frozen L24 scope.
 
 ## Documentation Result
 

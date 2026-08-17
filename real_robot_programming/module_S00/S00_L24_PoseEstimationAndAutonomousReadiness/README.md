@@ -10,8 +10,8 @@
 - Git commit and push: user-owned; Git was not run by Codex
 
 L24 is `COMPLETE / FROZEN / READ-ONLY`. The implementation and supplied
-verification evidence are complete for the governed L24 scope; real-robot L24
-verification remains explicitly HOLD pending hardware testing.
+verification evidence are complete for the governed L24 scope, including the
+user-supplied L24 real-robot verification amendment.
 
 ## Objective and Result
 
@@ -196,8 +196,41 @@ User verification is `PASS` for the implemented L24 scope:
 
 ### Real Robot
 
-L24-specific hardware verification remains `HOLD`. No real-robot estimator,
-known-pose reset, or Disabled-transition safety PASS is claimed here.
+User-supplied L24 real-robot verification is `PASS` for the existing localization
+and reset foundation only. Odometry Pose currently uses measured module
+positions plus gyro heading. EstimatedPose remains very close to or equal to
+Pose because no vision measurement is fused yet.
+
+The supplied cases were:
+
+1. Hardware / Disabled baseline: four modules and Pigeon connected and healthy;
+   drive/steer applied outputs and velocities remained zero; EstimatedPose was
+   available and measurement-valid.
+2. Stationary pose/estimator: Pose and EstimatedPose remained available and
+   valid; X/Y stayed effectively stationary; heading drift was very small; both
+   poses remained mutually consistent.
+3. Translation tracking: approximately 0.67 m forward produced Pose and
+   EstimatedPose X of approximately `+0.671 m`, with Y and heading near zero.
+4. Rotation tracking: approximately 46 degrees of rotation was tracked by both
+   poses; X/Y changed only by a few millimeters.
+5. Combined translation and rotation: both poses remained available and valid,
+   changed consistently, and remained mutually consistent.
+6. Disabled known-field-pose reset: reset was accepted; both localization states
+   reset atomically to approximately `(0 m, 0 m, 0 deg)`; physical gyro state
+   was not reset; no drivetrain motion occurred.
+7. Enabled reset rejection: after moving away from zero, an Enabled reset was
+   rejected; neither pose reset to zero and localization remained valid.
+8. Reset followed by translation: after a Disabled reset, approximately 0.53 m
+   forward produced X of approximately `+0.526 m`, with Y and heading near zero.
+9. Reset followed by rotation: after a Disabled reset, rotation was tracked at
+   approximately `-88.1 deg`; X/Y remained within a few millimeters of zero.
+10. Combined motion after reset: user explicitly confirmed `PASS`; no additional
+    measurements are inferred.
+
+This evidence validates the existing L24 odometry, estimator, and reset
+foundation. Vision/AprilTag fusion was not tested and remains deferred. This is
+not a claim of final competition localization accuracy, autonomous path
+following, PathPlanner, AutoBuilder, or A01 starting-pose readiness.
 
 L23 real-robot calibration, 3 m validation, odometry, NT4 pose telemetry, and
 Field2d evidence remain documented in the frozen L23 guide and are not relabeled
@@ -212,7 +245,7 @@ The following are intentionally deferred and are not L24 closure blockers:
   separately reviewed fail-closed policy;
 - remaining VS Code unused-field diagnostics for retained CTRE diagnostic
   signals, connection-history caches, and dashboard ownership fields;
-- real-robot L24 verification.
+- final competition localization accuracy and tuning.
 
 Vision uncertainty tuning, vision/AprilTag integration, timestamp/latency work,
 known-field-pose workflow expansion, and competition-specific field handling

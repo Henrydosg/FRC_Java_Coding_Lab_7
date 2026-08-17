@@ -585,8 +585,8 @@ Updated only:
 - this transition guide.
 
 The documents now record completed increments, both runtime defect fixes,
-Java/Simulation/Glass PASS evidence, real-robot HOLD, deferred debt, and the
-explicit L24 boundary.
+Java/Simulation/Glass PASS evidence, the real-robot evidence status, deferred
+debt, and the explicit L24 boundary.
 
 ### Files Changed
 
@@ -602,6 +602,78 @@ documentation, and governance constraints.
 
 L24 is `COMPLETE / FROZEN / READ-ONLY`.
 
+## Documentation Amendment - L24 Real-Robot Verification
+
+### Objective
+
+Record the user-supplied real-robot verification of the existing L24
+localization and known-field-pose reset foundation without reopening the frozen
+lesson or expanding its architecture.
+
+### Evidence
+
+1. Hardware / Disabled baseline: four swerve modules and Pigeon connected and
+   configuration-healthy; drive/steer applied outputs and velocities were zero
+   while stationary; EstimatedPose was available and measurement-valid.
+2. Stationary Pose/Estimator: Pose and EstimatedPose remained available and
+   valid; X/Y stayed effectively stationary; heading drift was very small; both
+   poses remained mutually consistent.
+3. Translation tracking: approximately 0.67 m forward; Pose/EstimatedPose X was
+   approximately `+0.671 m`; Y and heading remained near zero.
+4. Rotation tracking: approximately 46 degrees was tracked; X/Y changed only
+   by a few millimeters.
+5. Combined translation and rotation: Pose/EstimatedPose remained available and
+   valid, changed consistently, and remained mutually consistent.
+6. Disabled known-field-pose reset: reset was accepted; Pose and EstimatedPose
+   reset atomically to approximately `(0 m, 0 m, 0 deg)`; raw physical gyro
+   measurement was not reset; no drivetrain motion was caused by reset.
+7. Enabled reset rejection: after the robot moved away from zero, an Enabled
+   reset was rejected; neither pose reset to zero and localization remained
+   available and valid.
+8. Reset followed by translation: after a Disabled reset, approximately 0.53 m
+   forward was tracked as X approximately `+0.526 m`; Y and heading remained
+   near zero.
+9. Reset followed by rotation: after a Disabled reset, heading tracked
+   approximately `-88.1 deg`; X/Y remained within a few millimeters of zero.
+10. Combined motion after reset: user explicitly confirmed `PASS`; no additional
+    numerical measurements are invented.
+
+Odometry Pose currently uses measured module positions plus gyro heading.
+EstimatedPose remains very close to or equal to Pose because no vision
+measurement is fused yet. Vision/AprilTag fusion was not tested here and
+remains deferred.
+
+### Safety and Scope Result
+
+The evidence confirms Disabled-only reset acceptance, Enabled reset rejection,
+atomic odometry/estimator localization update, preservation of physical
+gyro/module sensor state, and no drivetrain motion caused by reset.
+
+This record validates only the existing L24 localization/reset foundation. It
+does not claim final competition localization accuracy, autonomous path
+following, PathPlanner, AutoBuilder, or A01 starting-pose readiness.
+
+### Files Changed
+
+Only the five existing S00_L24 documentation files were amended:
+
+- `README.md`;
+- `LESSON_PLAN.md`;
+- `LESSON_CHECKLIST.md`;
+- `LESSON_STATUS.md`; and
+- this transition guide.
+
+### Verification
+
+Documentation consistency was checked against the frozen L24 source/tests,
+existing software and Simulation/Glass evidence, the supplied ten-case
+real-robot evidence, and the deferred vision/autonomous boundaries.
+
+### Expected Result
+
+S00_L24 remains `COMPLETE / FROZEN / READ-ONLY`, with Real Robot verification
+recorded as `PASS` for the existing L24 localization/reset foundation.
+
 ## Verification Summary
 
 | Gate | Result | Scope |
@@ -610,7 +682,7 @@ L24 is `COMPLETE / FROZEN / READ-ONLY`.
 | Full Java regression | PASS | User-supplied Java 17 evidence |
 | Clean build | PASS | User-supplied Java 17 clean build, all tasks executed |
 | Simulation / Glass | PASS | Pose, estimated pose, reset reuse, continuity, and transition safety |
-| Real robot L24 | HOLD | No L24 hardware evidence supplied |
+| Real robot L24 | PASS | User-supplied ten-case localization/reset hardware evidence |
 | L22/L23 integrity | PASS | Frozen source/history preserved |
 | Architecture | PASS | Frozen Backbone, interfaces, observation, telemetry, and RobotContainer preserved |
 
@@ -635,7 +707,7 @@ does not implement autonomous behavior.
 - Final drive PID/feedforward optimization beyond the provisional L23 baseline.
 - Separate design review for normal-drive CTRE `setControl` status handling.
 - IDE unused-field diagnostics for retained CTRE diagnostic and ownership state.
-- L24-specific real-robot estimator/reset/Disabled-transition verification.
+- Final competition localization accuracy and tuning.
 
 ## Final State
 

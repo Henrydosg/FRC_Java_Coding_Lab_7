@@ -168,7 +168,43 @@ The following supplied evidence is complete:
 | Post-reset continuity | PASS | Simulation/Glass |
 | Disabled -> Teleop neutral does not resume stale motion | PASS | Simulation/Glass |
 | Fresh valid request recovers after re-enable | PASS | Simulation/Glass |
-| L24 real-robot verification | HOLD | Hardware evidence not yet supplied |
+| L24 real-robot verification | PASS | User-supplied ten-case localization/reset hardware evidence |
+
+### Real-Robot Verification Amendment
+
+The user supplied the following L24 hardware evidence:
+
+1. Hardware / Disabled baseline: four swerve modules and Pigeon connected and
+   configuration-healthy; drive/steer outputs and velocities zero while
+   stationary; EstimatedPose available and measurement-valid.
+2. Stationary Pose/Estimator: Pose and EstimatedPose available/valid, X/Y
+   effectively stationary, heading drift very small, and mutual consistency.
+3. Translation tracking: approximately 0.67 m forward; X approximately
+   `+0.671 m`, Y near zero, heading near zero.
+4. Rotation tracking: approximately 46 degrees tracked; X/Y changed only by a
+   few millimeters.
+5. Combined translation and rotation: both poses remained available/valid,
+   changed consistently, and remained mutually consistent.
+6. Disabled known-field-pose reset: accepted; both poses reset atomically to
+   approximately `(0 m, 0 m, 0 deg)`; physical gyro state was not reset; no
+   drivetrain motion occurred.
+7. Enabled reset rejection: after moving away from zero, Enabled reset was
+   rejected; neither pose reset to zero and localization remained valid.
+8. Reset followed by translation: approximately 0.53 m forward; X approximately
+   `+0.526 m`, Y near zero, heading near zero.
+9. Reset followed by rotation: heading approximately `-88.1 deg`; X/Y within
+   a few millimeters of zero.
+10. Combined motion after reset: user explicitly confirmed `PASS`; no additional
+    numerical measurements are inferred.
+
+Odometry Pose currently uses module measurements plus gyro heading. EstimatedPose
+remains very close to or equal to Pose because no vision measurement is fused
+yet. Vision/AprilTag fusion was not tested here and remains deferred.
+
+This amendment validates only the existing L24 localization and reset
+foundation. It does not claim final competition localization accuracy,
+autonomous path following, PathPlanner, AutoBuilder, or A01 starting-pose
+readiness.
 
 The final architecture review confirmed this record. No new production feature
 is required by this documentation finalization step.
@@ -196,10 +232,10 @@ word “autonomous”:
   fail-closed design review.
 - Retained CTRE diagnostic signals, connection-history fields, and dashboard
   ownership fields may continue to produce IDE unused-field diagnostics.
-- Real-robot L24 estimator/reset/transition verification remains HOLD.
+- Final competition localization accuracy and tuning remain outside L24.
 
-These items do not change the verified software/simulation scope, but real
-robot evidence must remain visibly separate from software PASS evidence.
+These items do not change the verified software/Simulation scope. Real-robot
+evidence remains visibly separate from software PASS evidence.
 
 ## Finalization Decision
 
