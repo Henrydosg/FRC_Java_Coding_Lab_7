@@ -10,7 +10,8 @@
 - Architecture Review: `PASS`
 - Implementation: `COMPLETE`
 - Guide state: `FINAL / PASS`
-- Real robot: `HOLD`
+- Real robot: `PASS` for the supplied A00_L04 autonomous-mode safety-gating
+  and lifecycle evidence only
 
 This guide records inheritance, implementation, verification, final review,
 and the documentation freeze. It is the final transition guide for A00_L04.
@@ -202,7 +203,8 @@ this transition guide. Set the lesson to `COMPLETE / FROZEN / READ-ONLY`.
 
 **Verification:** Final Architecture Review: `PASS`; focused/full Java 17
 regression: `PASS`; clean build: `PASS`; five supplied Simulation cases:
-`PASS`; Real robot: `HOLD`; Driver Station / Glass: not separately tested.  
+`PASS`; supplied real-robot safety-gating/lifecycle evidence: `PASS`; Driver
+Station / Glass: not separately tested.  
 **Expected Result:** A00_L04 is `COMPLETE / FROZEN / READ-ONLY` and this guide
 is `FINAL / PASS`.
 
@@ -245,6 +247,47 @@ normalization changes documentation only.
 A00_L04 is the final lesson currently authorized by the existing A00 roadmap
 ADR. No A00_L05 is authorized by that ADR.
 
+## Real-Robot Verification Amendment
+
+**Objective:** Record the supplied A00_L04 hardware evidence without changing
+the frozen implementation, architecture, or lesson scope.
+
+**Evidence:**
+
+1. **Disabled baseline:** `PASS`.
+2. **Valid Autonomous bounded motion:** `PASS`; motion completed, the
+   drivetrain stopped, and motion did not restart while Autonomous remained
+   enabled.
+3. **Autonomous -> Disabled:** `PASS`; motion terminated safely with no stale
+   output.
+4. **Autonomous -> Teleop:** `PASS`; autonomous output cleared and fresh
+   Teleop control recovered normally.
+5. **Autonomous -> Test:** `PASS`; no stale or restarted autonomous output
+   appeared.
+6. **Test initial gate:** `PASS`; Test Enabled did not permit autonomous
+   motion.
+7. **Teleop initial gate:** `PASS`; Teleop Enabled with neutral input did not
+   permit autonomous motion, while normal Teleop remained available with fresh
+   input.
+
+A temporary CommandScheduler loop-overrun observation occurred during Teleop
+testing. It is recorded as an observation requiring further evidence and is
+not classified as an A00_L04 defect.
+
+**Scope boundary:** This evidence is limited to A00_L04 autonomous-mode
+safety gating and lifecycle behavior. It does not claim pose/localization,
+PathPlanner, AutoBuilder, trajectory following, or competition readiness.
+
+**Files Changed:** Documentation only: the A00_L04 README, lesson plan,
+checklist, status, and this transition guide.
+
+**Verification:** Documentation consistency audit completed. A00_L04 remains
+`COMPLETE / FROZEN / READ-ONLY`; Java, tests, Gradle, vendordeps, hardware
+configuration, and other lessons remain unchanged.
+
+**Expected Result:** The supplied A00_L04 real-robot safety-gating/lifecycle
+evidence is recorded as `PASS` without expanding the lesson.
+
 ## Current State
 
 A00_L04 is the final currently authorized A00 lesson and is
@@ -256,9 +299,10 @@ A00_L04 is the final currently authorized A00 lesson and is
 - Build: `PASS`, including clean build;
 - L04 Simulation: `PASS` for all five supplied scenarios;
 - L04 Driver Station / Glass: `NOT SEPARATELY TESTED`;
-- Real robot: `HOLD`;
+- Real robot: `PASS` for the supplied A00_L04 safety-gating/lifecycle evidence;
 - this guide: `FINAL / PASS`.
 
-The remaining non-blocking debt is real-robot verification `HOLD`, no separate
-Glass evidence, and inherited sleep-based commissioning tests. No A00_L05 is
-authorized by the current roadmap ADR.
+The remaining non-blocking debt is broader real-robot capability beyond the
+supplied A00_L04 evidence, no separate Glass evidence, and inherited
+sleep-based commissioning tests. No A00_L05 is authorized by the current
+roadmap ADR.

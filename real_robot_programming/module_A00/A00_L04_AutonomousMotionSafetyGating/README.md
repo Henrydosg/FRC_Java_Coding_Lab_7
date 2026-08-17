@@ -14,7 +14,8 @@
 - Java verification: `PASS`
 - Simulation: `PASS`
 - Driver Station / Glass: `NOT SEPARATELY TESTED`
-- Real robot: `HOLD`
+- Real robot: `PASS` for the supplied A00_L04 autonomous-mode safety-gating
+  and lifecycle evidence only
 - Transition Guide: `FINAL / PASS`
 - Git: user-owned; not run by Codex
 
@@ -59,6 +60,35 @@ The user supplied the following Simulation evidence:
    no stale request remains.
 5. Test gating: `PASS` - Test mode permits no autonomous motion; Autonomous
    -> Test during motion terminates motion and does not restart.
+
+### Real-Robot Verification Amendment
+
+The user supplied the following A00_L04 real-robot evidence, recorded as
+`PASS` only for autonomous-mode safety gating and lifecycle behavior:
+
+1. **Disabled baseline:** `PASS`.
+2. **Valid Autonomous bounded motion:** `PASS`; motion completed, the
+   drivetrain stopped, and motion did not restart while Autonomous remained
+   enabled.
+3. **Autonomous -> Disabled:** `PASS`; motion terminated safely with no stale
+   output.
+4. **Autonomous -> Teleop:** `PASS`; autonomous output cleared and fresh
+   Teleop control recovered normally.
+5. **Autonomous -> Test:** `PASS`; no stale or restarted autonomous output
+   appeared.
+6. **Test initial gate:** `PASS`; Test Enabled did not permit autonomous
+   motion.
+7. **Teleop initial gate:** `PASS`; Teleop Enabled with neutral input did not
+   permit autonomous motion, while normal Teleop remained available with
+   fresh input.
+
+A temporary CommandScheduler loop-overrun observation occurred during Teleop
+testing. It is recorded as an observation requiring further evidence and is
+not classified as an A00_L04 defect.
+
+This real-robot evidence is limited to A00_L04 autonomous-mode safety gating
+and lifecycle behavior. It does not claim pose/localization, PathPlanner,
+AutoBuilder, trajectory following, or competition readiness.
 
 ## Disabled Scheduler Expectation
 
@@ -113,14 +143,15 @@ documentation only.
 
 ## Remaining Non-Blocking Debt
 
-- Real-robot verification remains `HOLD`.
+- Broader real-robot capability beyond the supplied A00_L04 evidence remains
+  outside this lesson.
 - Driver Station / Glass has no separate verification evidence.
 - Inherited commissioning tests retain sleep-based timing; those tests were
   not added by A00_L04.
 
 ## Current Verification State
 
-The focused and full Java 17 regressions, clean build, and L04 Simulation are
-recorded as passed from user-supplied evidence. Driver Station / Glass has not
-been separately tested. Real-robot verification remains `HOLD`. A00_L04 is
-`COMPLETE / FROZEN / READ-ONLY`, with the Transition Guide `FINAL / PASS`.
+The focused and full Java 17 regressions, clean build, L04 Simulation, and
+supplied A00_L04 real-robot evidence are recorded as passed. Driver Station /
+Glass has not been separately tested. A00_L04 is `COMPLETE / FROZEN / READ-ONLY`,
+with the Transition Guide `FINAL / PASS`.

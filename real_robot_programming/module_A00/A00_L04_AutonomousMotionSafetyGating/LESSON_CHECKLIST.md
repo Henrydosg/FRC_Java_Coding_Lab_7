@@ -61,7 +61,7 @@ Git: user-owned; not run by Codex
 | Clean build | PASS | User-supplied result |
 | L04 Simulation | PASS | User-supplied five-scenario evidence |
 | L04 Driver Station / Glass | NOT SEPARATELY TESTED | No separate evidence supplied |
-| Real robot | HOLD | No L04 hardware evidence supplied |
+| Real robot | PASS | Supplied A00_L04 autonomous-mode safety-gating and lifecycle evidence |
 | Transition Guide | FINAL / PASS | Final guide completed |
 | Final Architecture Review | PASS | User authorization supplied |
 | Git Commit | NOT TESTED | User-owned; Git not run by Codex |
@@ -75,6 +75,29 @@ Git: user-owned; not run by Codex
 - [x] Autonomous -> Disabled during motion: motion stops/disarms; no stale request remains.
 - [x] Test gating: Test permits no autonomous motion; Autonomous -> Test terminates motion and does not restart.
 
+## Real-Robot Evidence Amendment
+
+- [x] Disabled baseline: PASS.
+- [x] Valid Autonomous bounded motion: PASS; motion completed, the drivetrain
+  stopped, and motion did not restart while Autonomous remained enabled.
+- [x] Autonomous -> Disabled: PASS; motion terminated safely with no stale
+  output.
+- [x] Autonomous -> Teleop: PASS; autonomous output cleared and fresh Teleop
+  control recovered normally.
+- [x] Autonomous -> Test: PASS; no stale or restarted autonomous output
+  appeared.
+- [x] Test initial gate: PASS; Test Enabled did not permit autonomous motion.
+- [x] Teleop initial gate: PASS; Teleop Enabled with neutral input did not
+  permit autonomous motion, while normal Teleop remained available with fresh
+  input.
+- [x] A temporary CommandScheduler loop-overrun observation occurred during
+  Teleop testing; it requires further evidence and is not classified as an
+  A00_L04 defect.
+- [x] Real-robot PASS is limited to A00_L04 autonomous-mode safety gating and
+  lifecycle behavior.
+- [x] No claim is made for pose/localization, PathPlanner, AutoBuilder,
+  trajectory following, or competition readiness.
+
 ## Completion and Freeze Record
 
 - [x] Locked design completed.
@@ -82,7 +105,8 @@ Git: user-owned; not run by Codex
 - [x] Focused and full L04 Java tests completed.
 - [x] L04 clean build completed.
 - [x] L04 Simulation verification completed.
-- [x] L04 real-robot verification formally remains `HOLD`.
+- [x] Supplied L04 real-robot safety-gating/lifecycle verification is recorded
+  as `PASS`.
 - [x] Transition guide finalized as `FINAL / PASS`.
 - [x] Final Architecture Review passed.
 - [x] A00_L04 transitioned to `COMPLETE / FROZEN / READ-ONLY`.
@@ -91,7 +115,7 @@ Git: user-owned; not run by Codex
 
 ## Remaining Non-Blocking Debt
 
-- [x] Real-robot verification remains `HOLD`.
+- [x] Broader real-robot capability remains outside the A00_L04 scope.
 - [x] Driver Station / Glass has no separate verification evidence.
 - [x] Inherited commissioning tests retain sleep-based timing; those tests
   were not added by A00_L04.
