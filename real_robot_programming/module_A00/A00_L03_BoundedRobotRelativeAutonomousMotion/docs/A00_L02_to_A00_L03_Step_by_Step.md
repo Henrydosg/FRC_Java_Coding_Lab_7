@@ -8,7 +8,8 @@
 - Active state: `COMPLETE / FROZEN / READ-ONLY`
 - Guide state: `FINAL / PASS`
 - Final architecture review: `PASS`
-- Real robot: `HOLD`
+- Real robot: `PASS` for the user-supplied A00_L03 bounded-motion and
+  transition evidence only
 
 This guide records the L02-to-L03 inheritance and the single approved learning
 concept. It is not final until implementation, verification, and architecture
@@ -140,6 +141,42 @@ hold does not restart motion.
 **Verification:** Final architecture review: `PASS`; user approved finalization.  
 **Expected Result:** Documentation records the completed and frozen L03 lesson accurately.
 
+## Real-Robot Verification Amendment
+
+**Objective:** Record the user-supplied A00_L03 hardware evidence without
+changing the frozen implementation, architecture, or lesson scope.
+
+**Evidence:**
+
+1. **Disabled baseline:** `PASS`.
+2. **Autonomous bounded real drivetrain motion on the floor:** `PASS`; the
+   command completed, the drivetrain stopped, and motion did not restart
+   while Autonomous remained enabled.
+3. **Autonomous -> Disabled interruption:** `PASS`; the drivetrain stopped
+   with no stale output.
+4. **Autonomous -> Teleop transition:** `PASS`; autonomous ownership cleared
+   and fresh Teleop control recovered normally.
+5. **Autonomous -> Test transition:** `PASS`; no stale or restarted
+   autonomous output appeared.
+
+A temporary E-Stop occurred during testing. The robot was rebooted and Case 3
+was rerun successfully. This event is test context and is not classified as
+an A00_L03 defect.
+
+**Scope boundary:** This PASS is limited to A00_L03 bounded robot-relative
+motion and lifecycle transitions. It does not claim PathPlanner, AutoBuilder,
+localization, autonomous path following, or competition readiness.
+
+**Files Changed:** Documentation only: the A00_L03 README, lesson plan,
+checklist, status, and this transition guide.
+
+**Verification:** Documentation consistency audit completed. A00_L03 remains
+`COMPLETE / FROZEN / READ-ONLY`; Java, tests, Gradle, vendordeps, hardware
+configuration, and other lessons remain unchanged.
+
+**Expected Result:** The supplied A00_L03 real-robot bounded-motion and
+lifecycle evidence is recorded as `PASS` without expanding the lesson.
+
 ## Final State
 
 A00_L03 is `COMPLETE / FROZEN / READ-ONLY`.
@@ -148,7 +185,7 @@ A00_L03 is `COMPLETE / FROZEN / READ-ONLY`.
 - this guide: `FINAL / PASS`;
 - Java verification: `PASS`;
 - Simulation verification: `PASS`; and
-- real-robot verification: `HOLD`.
+- real-robot bounded-motion/lifecycle verification: `PASS`.
 
 No new Glass-specific behavior or evidence was introduced; separate Glass
 evidence remains `NOT TESTED`.

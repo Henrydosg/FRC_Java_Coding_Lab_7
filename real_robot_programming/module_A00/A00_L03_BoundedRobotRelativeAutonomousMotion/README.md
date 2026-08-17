@@ -9,7 +9,8 @@
 - Architecture review: `PASS`
 - Transition guide: `FINAL / PASS`
 - Freeze state: `FROZEN`
-- Real robot: `HOLD`
+- Real robot: `PASS` for the user-supplied A00_L03 bounded-motion and
+  transition evidence only
 - Git: user-owned; not run by Codex
 
 A00_L03 is the first A00 lesson authorized to issue a nonzero autonomous
@@ -92,7 +93,29 @@ Simulation and Driver Station evidence supplied by the user:
 - Autonomous to Disabled performed a safe stop: `PASS`; and
 - Teleop fresh-input recovery worked after Autonomous: `PASS`.
 
-No real-robot PASS is claimed. Real-robot verification remains `HOLD`.
+### Real-Robot Verification Amendment
+
+The user supplied the following A00_L03 real-robot evidence, recorded as
+`PASS` only for the bounded robot-relative motion and lifecycle scope:
+
+1. **Disabled baseline:** `PASS`.
+2. **Autonomous bounded real drivetrain motion on the floor:** `PASS`; the
+   command completed, the drivetrain stopped, and motion did not restart
+   while Autonomous remained enabled.
+3. **Autonomous -> Disabled interruption:** `PASS`; the drivetrain stopped
+   with no stale output.
+4. **Autonomous -> Teleop transition:** `PASS`; autonomous ownership cleared
+   and fresh Teleop control recovered normally.
+5. **Autonomous -> Test transition:** `PASS`; no stale or restarted
+   autonomous output appeared.
+
+A temporary E-Stop occurred during testing. The robot was rebooted and Case 3
+was rerun successfully. This event is recorded as test context and is not
+classified as an A00_L03 defect.
+
+This evidence does not claim PathPlanner, AutoBuilder, localization,
+autonomous path following, or competition readiness.
+
 
 ## Preserved Architecture
 
@@ -121,7 +144,8 @@ read-only telemetry remain inherited. No vendor API is added outside real IO.
 
 ## Deferred / Non-Blocking Items
 
-- real-robot verification remains `HOLD`;
+- broader real-robot capability beyond the supplied A00_L03 evidence remains
+  outside this lesson;
 - Test-mode global motion gating belongs to A00_L04;
 - final drivetrain tuning remains outside this lesson; and
 - inherited commissioning timing tests remain technical debt; and

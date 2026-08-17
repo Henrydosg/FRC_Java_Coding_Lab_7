@@ -14,7 +14,8 @@
 - Build: `PASS`
 - Simulation: `PASS`
 - Driver Station / Glass: `NOT TESTED` - supplied evidence covers Simulation/Driver Station cases; no separate Glass evidence supplied
-- Real Robot: `HOLD`
+- Real Robot: `PASS` - user-supplied A00_L03 bounded-motion and transition
+  evidence
 - Transition Guide: `FINAL / PASS`
 - Git Commit: `NOT TESTED` - user-owned; Git not run by Codex
 - Git Push: `NOT TESTED` - user-owned; Git not run by Codex
@@ -33,9 +34,32 @@
 | Joystick isolation during Autonomous | PASS | User-supplied Case 3 |
 | Autonomous to Disabled safe stop | PASS | User-supplied Case 4 |
 | Teleop fresh-input recovery | PASS | User-supplied Case 5 |
-| Real Robot | HOLD | No real-robot evidence supplied |
+| Real Robot | PASS | User-supplied A00_L03 bounded-motion and transition evidence |
 | Architecture Review | PASS | Final architecture review completed |
 | Transition Guide | PASS | Guide finalized as FINAL / PASS |
+
+## Real-Robot Evidence Amendment
+
+The user supplied the following A00_L03 real-robot evidence, recorded as
+`PASS` only for bounded robot-relative motion and lifecycle transitions:
+
+1. **Disabled baseline:** `PASS`.
+2. **Autonomous bounded real drivetrain motion on the floor:** `PASS`; the
+   command completed, the drivetrain stopped, and motion did not restart
+   while Autonomous remained enabled.
+3. **Autonomous -> Disabled interruption:** `PASS`; the drivetrain stopped
+   with no stale output.
+4. **Autonomous -> Teleop transition:** `PASS`; autonomous ownership cleared
+   and fresh Teleop control recovered normally.
+5. **Autonomous -> Test transition:** `PASS`; no stale or restarted
+   autonomous output appeared.
+
+A temporary E-Stop occurred during testing. The robot was rebooted and Case 3
+was rerun successfully. This event is test context and is not classified as
+an A00_L03 defect.
+
+This evidence does not claim PathPlanner, AutoBuilder, localization,
+autonomous path following, or competition readiness.
 
 ## Implemented Concept
 
@@ -72,11 +96,13 @@ calibration, drive tuning, and IO/telemetry schema changes.
 
 Non-blocking technical debt includes inherited sleep-based commissioning tests,
 final drivetrain tuning, no new Glass-specific behavior or evidence, and
-real-robot verification HOLD. Separate Glass evidence remains `NOT TESTED`.
+broader real-robot capability beyond the supplied A00_L03 evidence. Separate
+Glass evidence remains `NOT TESTED`.
 
 ## Final State and Known Issues
 
 A00_L03 is `COMPLETE / FROZEN / READ-ONLY`. The final architecture review is
 `PASS`, and the transition guide is `FINAL / PASS`.
 
-- Real-robot A00_L03 verification remains `HOLD`; no hardware PASS is claimed.
+- User-supplied A00_L03 real-robot bounded-motion and transition evidence is
+  recorded as `PASS`; no broader hardware capability is claimed.

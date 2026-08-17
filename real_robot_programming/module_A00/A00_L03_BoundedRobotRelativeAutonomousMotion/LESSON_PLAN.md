@@ -9,7 +9,8 @@
 - Architecture review: `PASS`
 - Transition guide: `FINAL / PASS`
 - Freeze state: `FROZEN`
-- Real robot: `HOLD`
+- Real robot: `PASS` for the user-supplied A00_L03 bounded-motion and
+  transition evidence only
 
 ## Learning Objective
 
@@ -79,7 +80,30 @@ robot-relative request.
 | Joystick isolation during Autonomous | PASS | User-supplied Simulation Case 3 |
 | Autonomous to Disabled safe stop | PASS | User-supplied Simulation Case 4 |
 | Teleop fresh-input recovery | PASS | User-supplied Simulation Case 5 |
-| Real robot | HOLD | No real-robot evidence supplied |
+| Real robot | PASS | User-supplied A00_L03 bounded-motion and transition evidence |
+
+### Real-Robot Verification Amendment
+
+The user supplied and verified these five A00_L03 real-robot cases:
+
+1. **Disabled baseline:** `PASS`.
+2. **Autonomous bounded real drivetrain motion on the floor:** `PASS`; the
+   command completed, the drivetrain stopped, and motion did not restart
+   while Autonomous remained enabled.
+3. **Autonomous -> Disabled interruption:** `PASS`; the drivetrain stopped
+   with no stale output.
+4. **Autonomous -> Teleop transition:** `PASS`; autonomous ownership cleared
+   and fresh Teleop control recovered normally.
+5. **Autonomous -> Test transition:** `PASS`; no stale or restarted
+   autonomous output appeared.
+
+A temporary E-Stop occurred during testing. The robot was rebooted and Case 3
+was rerun successfully. This event is test context and is not classified as
+an A00_L03 defect.
+
+This PASS is limited to A00_L03 bounded robot-relative motion and lifecycle
+transitions. It does not claim PathPlanner, AutoBuilder, localization,
+autonomous path following, or competition readiness.
 | Architecture review | PASS | Completed final architecture review |
 
 ## Deterministic Test Scope
@@ -101,8 +125,8 @@ observation/telemetry changes, Robot.java changes, and frozen lesson changes.
 ## Final State
 
 A00_L03 is `COMPLETE / FROZEN / READ-ONLY`. Architecture Review is `PASS`,
-and the transition guide is `FINAL / PASS`. Java and Simulation verification
-are recorded as `PASS`; real-robot verification remains explicitly `HOLD`.
+and the transition guide is `FINAL / PASS`. Java, Simulation, and the supplied
+A00_L03 real-robot bounded-motion/lifecycle evidence are recorded as `PASS`.
 A00_L04 is the next authorized roadmap lesson.
 No new Glass-specific behavior or evidence was introduced; separate Glass
 evidence remains `NOT TESTED`.

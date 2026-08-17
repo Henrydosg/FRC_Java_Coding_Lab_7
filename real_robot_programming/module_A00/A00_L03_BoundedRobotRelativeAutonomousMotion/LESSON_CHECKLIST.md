@@ -72,8 +72,22 @@ Git: user-owned; not run by Codex
 
 ## Real-Robot Gate
 
-- [ ] Real-robot A00_L03 verification - HOLD.
-- [x] No real-robot PASS is claimed without user-supplied hardware evidence.
+- [x] Disabled baseline: PASS.
+- [x] Autonomous bounded real drivetrain motion on the floor: PASS; the
+  command completed, stopped, and did not restart while Autonomous remained
+  enabled.
+- [x] Autonomous -> Disabled interruption: PASS; drivetrain stopped with no
+  stale output.
+- [x] Autonomous -> Teleop transition: PASS; autonomous ownership cleared and
+  fresh Teleop control recovered normally.
+- [x] Autonomous -> Test transition: PASS; no stale or restarted autonomous
+  output appeared.
+- [x] A temporary E-Stop was followed by a robot reboot; Case 3 was rerun
+  successfully and the event is not classified as an A00_L03 defect.
+- [x] Real-robot PASS is limited to user-supplied A00_L03 bounded-motion and
+  lifecycle-transition evidence.
+- [x] No claim is made for PathPlanner, AutoBuilder, localization, autonomous
+  path following, or competition readiness.
 
 ## Explicitly Out of Scope
 
@@ -99,7 +113,7 @@ Git: user-owned; not run by Codex
 
 ## Deferred / Non-Blocking Items
 
-- [x] Real-robot verification remains HOLD.
+- [x] Broader real-robot capability remains outside this lesson.
 - [x] Test-mode/global motion gating is deferred to A00_L04.
 - [x] Final drivetrain tuning remains outside this lesson.
 - [x] Inherited commissioning timing tests remain technical debt.
