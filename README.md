@@ -127,7 +127,8 @@ Current implementation state: A01 is authorized and `module_A01` exists.
 `A01_L01`, `A01_L02`, and
 `A01_L03_TrajectoryGenerationAndSamplingFundamentals` are `COMPLETE /
 FROZEN / READ-ONLY`.
-`A01_L04` through `A01_L09` are authorized by the approved ADR but have not
+`A01_L04_FieldAndAllianceTransformContract` is `COMPLETE / FROZEN / READ-ONLY`.
+`A01_L05` through `A01_L09` are authorized by the approved ADR but have not
 yet been created or started.
 A00 is closed at A00_L04; A00_L05 is not authorized.
 
