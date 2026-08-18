@@ -4,7 +4,7 @@
 - Lesson: S00_L07_Runtime_Telemetry_Integration
 - Previous Lesson: S00_L06_Telemetry_Foundation
 - Source: S00_L06_Telemetry_Foundation
-- Source Status: IN_PROGRESS; inherited facade, architecture, implementation, and build evidence are recorded in S00_L06.
+- Source Status: COMPLETE / FROZEN / READ-ONLY; historical S00 closure is governed by ADR_A00 and the final S00_L24 status. S00_L06 Commit and Push remain NOT TESTED.
 - Owner: UNASSIGNED
 - Date: UNSET
 - Reviewer: USER-APPROVED
@@ -88,7 +88,7 @@ Do not modify SwerveObservation, SwerveTelemetryFacade, IO interfaces, CTRE impl
 
 # Current Known Issues
 
-- S00_L06 remains IN_PROGRESS because commit, push, and freeze evidence are not verified; inherited facade evidence is usable but not promoted to current-lesson completion.
+- S00_L06 is historically COMPLETE / FROZEN under the S00 closure record. Its Commit and Push fields remain NOT TESTED and are not reclassified by this recovery.
 - Noop IOs intentionally provide no simulation physics or motor behavior.
 
 # Architecture Decision

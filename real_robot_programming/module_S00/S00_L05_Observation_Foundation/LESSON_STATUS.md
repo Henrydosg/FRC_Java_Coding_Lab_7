@@ -6,7 +6,7 @@
 - Lesson: S00_L05_Observation_Foundation
 - Previous Lesson: S00_L04_Swerve_Subsystem_Foundation
 - Source: S00_L04_Swerve_Subsystem_Foundation
-- Status: IN_PROGRESS
+- Status: COMPLETE / FROZEN / READ-ONLY
 
 ## Inherited Evidence
 
@@ -31,7 +31,7 @@ No inherited simulation, Driver Station / Glass, or Real Robot PASS is carried f
 | Transition Guide | PASS | docs/S00_L04_to_S00_L05_Step_by_Step.md created. |
 | Commit | NOT TESTED | No commit performed. |
 | Push | NOT TESTED | No push performed. |
-| Freeze | NOT TESTED | Lesson remains IN_PROGRESS. |
+| Freeze | FROZEN | Historical S00 closure is governed by ADR_A00 and the final S00_L24 status. Commit and Push remain NOT TESTED. |
 
 ## Known Issues
 

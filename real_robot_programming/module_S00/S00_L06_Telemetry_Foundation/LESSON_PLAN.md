@@ -4,7 +4,7 @@
 - Lesson: S00_L06_Telemetry_Foundation
 - Previous Lesson: S00_L05_Observation_Foundation
 - Source: S00_L05_Observation_Foundation
-- Source Status: IN_PROGRESS; inherited architecture, implementation, and build evidence are recorded in S00_L05.
+- Source Status: COMPLETE / FROZEN / READ-ONLY; historical S00 closure is governed by ADR_A00 and the final S00_L24 status. S00_L05 Commit and Push remain NOT TESTED.
 - Owner: UNASSIGNED
 - Date: UNSET
 - Reviewer: USER-APPROVED
@@ -80,7 +80,7 @@ Do not modify Robot.java, RobotContainer.java, Constants.java, IO interfaces, CT
 
 # Current Known Issues
 
-- S00_L05 remains IN_PROGRESS because commit, push, and freeze evidence are not verified; inherited technical context is usable but not promoted to current-lesson completion.
+- S00_L05 is historically COMPLETE / FROZEN under the S00 closure record. Its Commit and Push fields remain NOT TESTED and are not reclassified by this recovery.
 - S00_L06 runtime composition and coordinator behavior remain deferred.
 
 # Architecture Decision
