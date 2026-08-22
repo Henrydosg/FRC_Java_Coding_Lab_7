@@ -124,11 +124,14 @@ Authority:
 `docs/architecture_decisions/ADR_A01_Autonomous_Navigation_Path_Following_Roadmap.md`
 
 Current implementation state: A01 is authorized and `module_A01` exists.
-`A01_L01` through `A01_L05_HolonomicTrajectoryFollowing` are `COMPLETE /
-FROZEN / READ-ONLY`.
-There is no active A01 lesson after L05 closure.
-`A01_L06` through `A01_L09` are authorized by the approved ADR but have not
-yet been created or started.
+`A01_L01` through `A01_L06_PathPlannerPathAndRuntimeIntegration` are `COMPLETE /
+FROZEN / READ-ONLY`. After the latest Swerve zero-offset recalibration, the user
+physically executed the L06 one-meter autonomous on both Blue and Red. A slight
+Blue endpoint overshoot followed by a small reverse correction was observed;
+exact endpoint accuracy is not formally measured or claimed, and final
+PID/feedforward and physical-model tuning remain deferred. `A01_L07` is the
+single active lesson (`IN_PROGRESS`) with no AutoBuilder implementation yet;
+`A01_L08` and `A01_L09` remain authorized but not started.
 A00 is closed at A00_L04; A00_L05 is not authorized.
 
 Approved lesson sequence:
