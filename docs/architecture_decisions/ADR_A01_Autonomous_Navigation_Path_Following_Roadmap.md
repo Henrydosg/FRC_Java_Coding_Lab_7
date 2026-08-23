@@ -2,6 +2,7 @@
 
 - Status: APPROVED
 - Date: 2026-08-16
+- Amendment: APPROVED 2026-08-23 - A01_L09 demonstration-binding boundary
 - Scope: Post-A00 autonomous-navigation module and lesson sequence
 - Authority: Approved successor ADR to
   `ADR_A00_Autonomous_Command_Foundation_Roadmap.md`. The repository authority
@@ -89,8 +90,9 @@ not a prerequisite for the first PathPlanner capability.
 ### Sequence decision
 
 The proposed sequence is retained with PathPlanner/AutoBuilder split into two
-lessons. The resulting roadmap contains nine core lessons. No lesson is
-created or activated by this draft.
+lessons. The resulting roadmap contains nine core lessons. This ADR amendment
+does not implement production code or tests; lesson activation remains a
+separate documentation workflow.
 
 ## Proposed Decision
 
@@ -319,6 +321,31 @@ The following lessons are proposed for authorization after ADR approval.
 - Exclusions: new mechanism architecture, new mechanism IO contracts, vision,
   AprilTags, and dynamic replanning. Any broader mechanism-autonomous strategy
   requires a future ADR or amendment.
+
+### Approved A01_L09 Integration-Boundary Amendment
+
+D01 is an independent Tank Drive WPILib project and has no approved shared
+command boundary with A01; real D01 mechanism integration is therefore
+unavailable to A01_L09.
+
+A01_L09 may prove PathPlanner NamedCommands and event-marker dispatch using
+safe, observable, deterministic non-mechanism demonstration Command bindings.
+
+Demonstration bindings are not mechanism integration.
+
+A future approved robot-integration layer may replace those demonstration
+bindings with real mechanism Commands without changing the A01 event-dispatch
+architecture.
+
+A01 must not absorb mechanism subsystems, IO, vendor APIs, business logic, or
+mechanism contracts.
+
+The approved L09 implementation direction is a typed event binding carrying a
+stable event name, a fresh `Supplier<Command>`, and explicit
+`Set<Subsystem>` requirements. The composition root registers a deferred
+command through `Commands.defer(...)`; no `AutonomousEventCommandProvider`
+interface is authorized at this stage. This amendment does not add a lesson or
+change the approved A01 lesson order.
 
 ## Dependency Order
 
