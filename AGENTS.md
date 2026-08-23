@@ -61,10 +61,11 @@ FRC_Java_Coding_Lab_7/
 │   └── architecture_decisions/
 └── real_robot_programming/
     ├── module_A00/
-    ├── module_A01/ (authorized; not yet created)
+    ├── module_A01/
     ├── module_D00/
     ├── module_D01/
-    └── module_S00/
+    ├── module_S00/
+    └── module_V00/ (authorized; not yet created)
         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -466,6 +467,8 @@ Lesson-specific decisions shall be recorded outside global governance and refere
   `docs/architecture_decisions/ADR_A00_Autonomous_Command_Foundation_Roadmap.md`
 - Post-A00 A01 roadmap authorization:
   `docs/architecture_decisions/ADR_A01_Autonomous_Navigation_Path_Following_Roadmap.md`
+- Post-A01 V00 roadmap authorization:
+  `docs/architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`
 
 The S00_L19/S00_L20 decision does not change the Frozen Backbone, the authority order, or the
 S00_L15-S00_L24 roadmap. The separately referenced A00 decision authorizes only the post-S00
@@ -496,6 +499,40 @@ root only, and Simulation-before-real-robot verification remains mandatory. Path
 prohibited before A01_L06, AutoBuilder is prohibited before A01_L07, and the A01_L06 mandatory
 compatibility entry gate remains authoritative. Vision/AprilTags are outside the A01 baseline,
 and D01 retains mechanism architecture ownership.
+
+The approved V00 decision authorizes `V00 - AprilTag Vision Observation and Pose Fusion` and the
+future `module_V00` location as the successor boundary after frozen A01_L09. A01 is closed at
+A01_L09; A01_L10 is prohibited. V00_L01 shall inherit frozen A01_L09 through the standard copy,
+rename, generated-artifact cleanup, baseline-build, and transition-guide workflow. This governance
+registration does not create `module_V00`, activate V00_L01, or select a camera vendor.
+
+The authorized V00 lesson order is:
+
+1. `V00_L01 - Vision Coordinate Frames and Camera Extrinsics`
+2. `V00_L02 - AprilTag Field Layout Contract`
+3. `V00_L03 - Vision IO and Immutable Observation Contract`
+4. `V00_L04 - Deterministic Vision Simulation`
+5. `V00_L05 - AprilTag Robot Pose Estimation`
+6. `V00_L06 - Vision Measurement Quality Contract`
+7. `V00_L07 - Vision Timestamp and Latency Contract`
+8. `V00_L08 - Real Vision Adapter Integration`
+9. `V00_L09 - Swerve Pose Estimator Vision Fusion`
+
+V00 preserves the Frozen Backbone and Observation Architecture. Vision vendor APIs may exist only
+inside the selected real VisionIO adapter; Vision models and evaluators remain immutable and
+vendor-neutral; telemetry remains read-only; and `SwerveSubsystem` remains the sole owner of
+`SwerveDrivePoseEstimator`. Vision supplies accepted timestamped measurements only, and the
+approved fusion boundary uses `addVisionMeasurement(...)` rather than continuous pose reset.
+Autonomous continues to consume `getEstimatedPose()` and shall not access camera, VisionIO, or
+vendor APIs directly. A01_L04 remains the sole alliance-transform owner; vision measurements use
+canonical WPILib field coordinates and are not alliance-flipped. Simulation shall not use
+EstimatedPose as camera ground truth and shall pass before real-robot fusion verification.
+
+No camera or vendor is selected in V00_L01 through V00_L07. V00_L08 may select exactly one real
+vision implementation only after explicit review of actual camera hardware, WPILib 2026
+compatibility, the exact vendor library/version, timestamp semantics, dependency resolution, and
+simulation support where applicable. Lessons shall not be reordered, renamed, merged, split,
+inserted, or skipped without the architecture/governance approval required by the V00 ADR.
 
 ---
 
@@ -533,3 +570,4 @@ Only report verified facts.
 | 1.2 | 2026-08-08 | FROZEN | APPROVED: fixed role ownership, transition-guide lifecycle, module structure, durable external operator-input Observation exception, and referenced lesson-specific architecture decision records. |
 | 1.3 | 2026-08-16 | FROZEN | APPROVED: authorize the post-S00 A00 roadmap and `module_A00` location without changing S00 or the Frozen Backbone. |
 | 1.4 | 2026-08-16 | FROZEN | APPROVED: register the post-A00 A01 roadmap and `module_A01` successor boundary without creating lessons or changing frozen S00/A00 architecture. |
+| 1.5 | 2026-08-23 | FROZEN | APPROVED: register the post-A01 V00 roadmap and future `module_V00` successor boundary without creating or activating V00_L01, selecting a camera vendor, or changing frozen S00/A00/A01 architecture. |

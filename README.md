@@ -155,7 +155,8 @@ stop, no automatic restart, and Real Robot PASS. The event remains a
 non-mechanism demonstration; no Intake, Feeder, Flywheel, or other D01 mechanism
 integration is claimed. Exact endpoint accuracy, final PID/feedforward tuning,
 and final physical characterization remain explicitly unclaimed. A01 ends at
-frozen L09; no A01_L10 or successor module/lesson has been created or started.
+frozen L09; A01_L10 is not authorized. The approved V00 successor roadmap is
+registered below, but no V00 module or lesson has been created or started.
 A00 is closed at A00_L04; A00_L05 is not authorized.
 
 Approved lesson sequence:
@@ -169,6 +170,48 @@ Approved lesson sequence:
 7. `A01_L07 - AutoBuilder Contract Integration`
 8. `A01_L08 - Autonomous Routine Selection and Safe Composition`
 9. `A01_L09 - PathPlanner NamedCommands and Event Markers`
+
+### V00 - AprilTag Vision Observation and Pose Fusion
+
+V00 is the approved successor roadmap after frozen
+`A01_L09_PathPlannerNamedCommandsAndEventMarkers`.
+
+Authority:
+`docs/architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`
+
+Current state: roadmap `APPROVED / FROZEN`; `module_V00` is authorized as the
+future independent module location but is `NOT CREATED`. V00_L01 is `NOT
+CREATED / NOT STARTED / NOT ACTIVATED`. No camera or vendor implementation is
+selected.
+
+V00_L01 must inherit from frozen A01_L09 through the standard copy, rename,
+generated-artifact cleanup, baseline-build, and transition-guide workflow only
+after a separate activation decision.
+
+Approved lesson sequence:
+
+1. `V00_L01 - Vision Coordinate Frames and Camera Extrinsics`
+2. `V00_L02 - AprilTag Field Layout Contract`
+3. `V00_L03 - Vision IO and Immutable Observation Contract`
+4. `V00_L04 - Deterministic Vision Simulation`
+5. `V00_L05 - AprilTag Robot Pose Estimation`
+6. `V00_L06 - Vision Measurement Quality Contract`
+7. `V00_L07 - Vision Timestamp and Latency Contract`
+8. `V00_L08 - Real Vision Adapter Integration`
+9. `V00_L09 - Swerve Pose Estimator Vision Fusion`
+
+The roadmap preserves frozen S00 and A01, RobotContainer's composition-root
+role, vendor-neutral VisionIO and Observation contracts, read-only telemetry,
+SwerveSubsystem ownership of `SwerveDrivePoseEstimator`, autonomous consumption
+of `getEstimatedPose()`, and A01_L04 ownership of the sole alliance transform.
+Vision measurements use canonical WPILib field coordinates and are not
+alliance-flipped. Simulation must use independent ground truth, must not use
+EstimatedPose as camera truth, and must pass before real-robot fusion
+verification.
+
+No camera/vendor is selected in V00_L01 through V00_L07. V00_L08 may select one
+real implementation only after the ADR's hardware, WPILib 2026, vendor-version,
+timestamp, dependency, and applicable simulation compatibility gate passes.
 
 ---
 
