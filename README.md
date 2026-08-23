@@ -140,8 +140,22 @@ repaired as minimal L08 test-contract migrations, with no production defect
 found. L08 preserves the locked routine-selection, readiness, alliance,
 requirement, and centralized-stop contracts and is the frozen inheritance source
 for L09. Exact endpoint accuracy, final PID/feedforward tuning, and final
-physical characterization remain explicitly unclaimed. `A01_L09` remains
-authorized but `NOT CREATED / NOT STARTED`.
+physical characterization remain explicitly unclaimed.
+`A01_L09_PathPlannerNamedCommandsAndEventMarkers` is now `COMPLETE / FROZEN /
+READ-ONLY`. Its approved ADR amendment permits one safe, observable,
+deterministic non-mechanism `LEARNING_EVENT` binding because D01 remains an
+independent Tank Drive project with no approved shared command boundary. The
+implemented `ONE_METER_WITH_EVENT` routine preserves `SAFE_STOP` as the chooser
+default and the inherited `ONE_METER_PATH` routine. Repository evidence records
+compileJava and compileTestJava PASS, focused L09 tests PASS, 384 unchanged
+inherited regression tests PASS, the full 446/446 suite PASS, and isolated
+clean-build PASS. The user supplied Simulation PASS for Blue and Red, event
+dispatch and telemetry, concurrent path/event execution, Disable/mode-loss
+stop, no automatic restart, and Real Robot PASS. The event remains a
+non-mechanism demonstration; no Intake, Feeder, Flywheel, or other D01 mechanism
+integration is claimed. Exact endpoint accuracy, final PID/feedforward tuning,
+and final physical characterization remain explicitly unclaimed. A01 ends at
+frozen L09; no A01_L10 or successor module/lesson has been created or started.
 A00 is closed at A00_L04; A00_L05 is not authorized.
 
 Approved lesson sequence:
