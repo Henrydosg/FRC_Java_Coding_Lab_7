@@ -129,10 +129,19 @@ FROZEN / READ-ONLY`. After the latest Swerve zero-offset recalibration, the user
 physically executed the L06 one-meter autonomous on both Blue and Red. A slight
 Blue endpoint overshoot followed by a small reverse correction was observed;
 exact endpoint accuracy is not formally measured or claimed, and final
-PID/feedforward and physical-model tuning remain deferred. `A01_L07` is now
+PID/feedforward and physical-model tuning remain deferred. `A01_L07` is
 `COMPLETE / FROZEN / READ-ONLY` after the user-confirmed implementation,
-Simulation, and real-robot verification gates passed. `A01_L08` and `A01_L09`
-remain authorized but not started.
+Simulation, and real-robot verification gates passed. `A01_L08` is now
+`COMPLETE / FROZEN / READ-ONLY` after the user-verified
+post-repair WPILib VS Code build (`BUILD SUCCESSFUL in 1s`; 6 actionable tasks:
+1 executed, 5 up-to-date), the accepted 430/430 test result, Simulation PASS,
+and Real Robot PASS. The 11 initial failures were independently classified and
+repaired as minimal L08 test-contract migrations, with no production defect
+found. L08 preserves the locked routine-selection, readiness, alliance,
+requirement, and centralized-stop contracts and is the frozen inheritance source
+for L09. Exact endpoint accuracy, final PID/feedforward tuning, and final
+physical characterization remain explicitly unclaimed. `A01_L09` remains
+authorized but `NOT CREATED / NOT STARTED`.
 A00 is closed at A00_L04; A00_L05 is not authorized.
 
 Approved lesson sequence:
