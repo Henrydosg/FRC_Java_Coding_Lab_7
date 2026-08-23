@@ -5,7 +5,7 @@
 - Lesson: `A01_L07_AutoBuilderContractIntegration`.
 - Title: `A01_L07 - AutoBuilder Contract Integration`.
 - Previous lesson: `A01_L06_PathPlannerPathAndRuntimeIntegration - COMPLETE / FROZEN / READ-ONLY`.
-- Status: `IN_PROGRESS / EDITABLE`.
+- Status: `COMPLETE / FROZEN / READ-ONLY`.
 - Strict inheritance: `PASS` - copied from frozen L06.
 - User baseline: `PASS` - compileJava, compileTestJava, tests, and clean build.
 - Architecture Review: `PASS`.
@@ -14,8 +14,8 @@
   factory, trajectory-adapter exposure, and RobotContainer wiring are complete.
 - Simulation: `PASS / USER-SUPPLIED` - Blue/Red execution, exactly-one transform,
   pose validity, heading stability, disable stop, and no automatic restart.
-- Real Robot: `DEFERRED / NOT TESTED` - user-owned verification is planned for
-  Monday; L07 remains `IN_PROGRESS / EDITABLE`.
+- Real Robot: `PASS / USER-CONFIRMED` - the user confirmed physical execution
+  of the current L07 AutoBuilder Contract Integration lesson.
 
 Activation and the approved implementation boundary are complete. No chooser,
 multiple routines, NamedCommands, event markers, asset, IO, hardware,
@@ -93,10 +93,10 @@ and no-second-flip policy. It does not add chooser, multiple routines,
 NamedCommands, event markers, mechanism coordination, vision, AprilTags,
 pathfinding, or replanning.
 
-Simulation now passes from user-supplied evidence, including the Red geometry
-and mode-loss checks. User-owned real-robot verification remains required
-before lesson completion. L07 remains `IN_PROGRESS / EDITABLE` and must not be
-marked COMPLETE / FROZEN by this step.
+Simulation passes from user-supplied evidence, including the Red geometry and
+mode-loss checks. The user-owned real-robot gate is now also confirmed PASS.
+L07 is COMPLETE / FROZEN / READ-ONLY. No exact endpoint-accuracy, final
+PID/feedforward, or final physical-model characterization claim is made.
 
 ## Simulation Evidence Reconciliation
 
@@ -115,3 +115,11 @@ The user supplied the following evidence for the current L07 implementation:
 This is Simulation and telemetry evidence, not real-robot evidence. Exact
 endpoint accuracy remains unclaimed; the small Red X difference is not a
 precision characterization.
+
+## Final Closure
+
+- User-confirmed L07 Real Robot: `PASS`.
+- All A01_L07 completion gates: `PASS`.
+- Transition Guide: `FINAL / PASS`.
+- L07 state: `COMPLETE / FROZEN / READ-ONLY`.
+- A01_L08 remains not created; no next-lesson implementation was started.

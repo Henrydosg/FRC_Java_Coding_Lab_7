@@ -7,9 +7,9 @@
 - Title: `A01_L07 - AutoBuilder Contract Integration`
 - Previous Lesson: `A01_L06_PathPlannerPathAndRuntimeIntegration`
 - Previous Lesson State: `COMPLETE / FROZEN / READ-ONLY`
-- Status: `IN_PROGRESS`
-- Active State: `IN_PROGRESS / EDITABLE`
-- Freeze State: `NOT FROZEN`
+- Status: `COMPLETE`
+- Active State: `COMPLETE / FROZEN / READ-ONLY`
+- Freeze State: `FROZEN`
 - Lesson Goal: integrate AutoBuilder against the existing pose, reset, measured-speed, output, controller, RobotConfig, requirement, alliance, and safety contracts.
 
 ## Activation and Baseline Gates
@@ -49,10 +49,12 @@
 - Driver Station / Glass: `PASS / USER-SUPPLIED SIMULATION EVIDENCE` - supplied
   EstimatedPose and heading observations are recorded; this is not real-robot
   evidence.
-- Real Robot: `DEFERRED / NOT YET TESTED` - user-owned verification remains
-  pending.
-- Transition Guide: `IN_PROGRESS` - implementation and Simulation evidence are
-  recorded; final lesson closure remains pending real-robot verification.
+- Real Robot: `PASS / USER-CONFIRMED` - the user explicitly confirmed physical
+  execution of the current L07 AutoBuilder Contract Integration lesson.
+- Transition Guide: `FINAL / PASS` - implementation, Simulation, and
+  user-confirmed Real Robot evidence are recorded.
+- Closure Audit: `PASS` - all required A01_L07 implementation, build/test,
+  Simulation, documentation, and user-owned Real Robot gates passed.
 - Git Commit: `NOT TESTED` - user-owned; Codex does not run Git.
 - Git Push: `NOT TESTED` - user-owned; Codex does not run Git.
 
@@ -101,9 +103,10 @@ characterization.
 
 ## Known Issues and Deferred Scope
 
-- L07 Simulation and supplied telemetry evidence pass. Real-robot verification
-  remains a pending user-owned gate; L07 remains IN_PROGRESS and is not frozen.
-- L07 real-robot verification is planned for Monday and has not been tested.
+- L07 Simulation, supplied telemetry evidence, and user-confirmed Real Robot
+  evidence pass. L07 is COMPLETE / FROZEN / READ-ONLY.
+- Exact real-robot endpoint accuracy is not claimed. Final PID/feedforward and
+  physical-model characterization remain deferred.
 - The copied pre-activation design record remains historical evidence; its
   unresolved pre-activation state is superseded by the approved Design Lock and
   implementation recorded above.

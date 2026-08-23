@@ -6,9 +6,9 @@ Audience: a new FRC mentor or student who knows basic Java and WPILib, but may
 never have attended an FRC match.
 
 This guide explains the current L07 architecture and the user-supplied
-Simulation evidence. It is a learning document, not a competition tuning
-record. L07 is still `IN_PROGRESS / EDITABLE`; real-robot verification is
-`DEFERRED / NOT TESTED`.
+Simulation and Real Robot evidence. It is a learning document, not a
+competition tuning record. L07 is `COMPLETE / FROZEN / READ-ONLY`; the user
+confirmed the current L07 physical-robot execution PASS.
 
 ## How to use this guide
 
@@ -702,17 +702,20 @@ Final PID/FF and physical-model tuning: deferred
 L07 real robot:
 
 ```text
-NOT YET TESTED
-Planned by the user for Monday.
+PASS — user-confirmed physical execution of the current L07 AutoBuilder
+Contract Integration lesson.
+Exact endpoint accuracy: not claimed
+Final PID/FF and physical-model tuning: deferred
 ```
 
-Therefore L07 remains:
+Therefore L07 is now:
 
 ```text
-IN_PROGRESS / EDITABLE
+COMPLETE / FROZEN / READ-ONLY
 ```
 
-It is not `COMPLETE`, `FROZEN`, or `READ-ONLY`.
+No exact endpoint-accuracy, final PID/FF, or final physical-model
+characterization claim is made.
 
 ---
 

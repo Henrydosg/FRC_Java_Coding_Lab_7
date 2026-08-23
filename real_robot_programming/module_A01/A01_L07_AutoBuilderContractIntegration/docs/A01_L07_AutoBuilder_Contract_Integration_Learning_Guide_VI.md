@@ -5,10 +5,10 @@
 Đối tượng: mentor hoặc học viên mới biết Java và WPILib cơ bản, nhưng có thể
 chưa từng tham dự một trận FRC.
 
-Tài liệu này giải thích kiến trúc L07 hiện tại và bằng chứng Simulation do
-người dùng cung cấp. Đây là tài liệu học, không phải hồ sơ tinh chỉnh thi đấu.
-L07 vẫn là `IN_PROGRESS / EDITABLE`; kiểm tra robot thật là
-`DEFERRED / NOT TESTED`.
+Tài liệu này giải thích kiến trúc L07 hiện tại và bằng chứng Simulation cùng
+robot thật do người dùng cung cấp. Đây là tài liệu học, không phải hồ sơ tinh
+chỉnh thi đấu. L07 là `COMPLETE / FROZEN / READ-ONLY`; người dùng đã xác nhận
+chạy thực tế kiến trúc AutoBuilder L07 hiện tại đạt PASS.
 
 ## Cách dùng tài liệu
 
@@ -675,17 +675,19 @@ PID/FF và physical-model tuning cuối: deferred
 L07 robot thật:
 
 ```text
-CHƯA TEST
-Người dùng dự kiến thực hiện vào thứ Hai.
+PASS — người dùng xác nhận chạy thực tế lesson AutoBuilder L07 hiện tại.
+Độ chính xác endpoint: không claim
+PID/FF và physical-model tuning cuối: deferred
 ```
 
-Vì vậy L07 vẫn là:
+Vì vậy L07 hiện là:
 
 ```text
-IN_PROGRESS / EDITABLE
+COMPLETE / FROZEN / READ-ONLY
 ```
 
-Không được đổi thành `COMPLETE`, `FROZEN`, hoặc `READ-ONLY`.
+Không claim độ chính xác endpoint cuối, PID/FF cuối hoặc physical-model
+characterization cuối.
 
 ---
 

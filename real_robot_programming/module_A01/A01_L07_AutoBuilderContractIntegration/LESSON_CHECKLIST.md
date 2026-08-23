@@ -1,6 +1,6 @@
 # A01_L07 - AutoBuilder Contract Integration - Checklist
 
-Status: `IN_PROGRESS / EDITABLE`  
+Status: `COMPLETE / FROZEN / READ-ONLY`  
 Previous lesson: `A01_L06_PathPlannerPathAndRuntimeIntegration - COMPLETE / FROZEN / READ-ONLY`  
 Git: user-owned; not run by Codex
 
@@ -16,7 +16,8 @@ Git: user-owned; not run by Codex
 - [x] Inherited generated artifacts were removed from the copied L07 only.
 - [x] User supplied Java 17 baseline evidence: compileJava, compileTestJava,
       tests, and clean build PASS.
-- [x] L07 is the single active lesson and is IN_PROGRESS.
+- [x] L07 was the single active lesson during implementation and is now
+      COMPLETE / FROZEN / READ-ONLY.
 - [x] Transition record `docs/A01_L06_to_A01_L07_Step_by_Step.md` exists.
 - [x] Pre-activation AutoBuilder design knowledge is preserved by copied record
       and explicit cross-reference.
@@ -62,13 +63,26 @@ Git: user-owned; not run by Codex
 - [x] User supplied pose-validity and heading-stability PASS evidence.
 - [x] User supplied Simulation telemetry/EstimatedPose evidence for the
       Driver Station / Glass boundary; this is not real-robot evidence.
-- [ ] Obtain user-owned L07 real-robot evidence.
+- [x] User-owned L07 real-robot evidence is confirmed PASS for the current
+      AutoBuilder Contract Integration lesson.
 
 ## Evidence Boundary
 
-Simulation is `PASS / USER-SUPPLIED`. L07 remains `IN_PROGRESS / EDITABLE`
-because real-robot verification is still pending. Do not mark this lesson
-COMPLETE, FROZEN, or READ-ONLY from Simulation alone.
+Simulation is `PASS / USER-SUPPLIED`, and the user-owned Real Robot gate is
+`PASS`. The accumulated evidence satisfies the closure gates; L07 is now
+`COMPLETE / FROZEN / READ-ONLY`.
+
+## Final Closure
+
+- [x] Implementation, focused tests, inherited regression, and clean build are
+      PASS.
+- [x] Blue and Red Simulation evidence is PASS.
+- [x] Disable/mode-loss stop and no-automatic-restart evidence is PASS.
+- [x] User-confirmed L07 Real Robot evidence is PASS.
+- [x] No exact endpoint-accuracy, final PID/feedforward, or final physical-model
+      characterization claim is made.
+- [x] Transition guide is `FINAL / PASS`.
+- [x] L07 is `COMPLETE / FROZEN / READ-ONLY`.
 
 ## Out-of-Scope Boundary
 

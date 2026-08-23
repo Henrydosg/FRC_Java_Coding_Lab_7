@@ -5,7 +5,7 @@
 - Source lesson: `A01_L06_PathPlannerPathAndRuntimeIntegration`.
 - Source status: `COMPLETE / FROZEN / READ-ONLY`.
 - Active lesson: `A01_L07_AutoBuilderContractIntegration`.
-- Active status: `IN_PROGRESS / EDITABLE`.
+- Active status: `COMPLETE / FROZEN / READ-ONLY`.
 - Authoritative title: `A01_L07 - AutoBuilder Contract Integration`.
 - Activation scope: documentation and lesson identity, followed by the
   approved single AutoBuilder contract implementation.
@@ -497,5 +497,46 @@ user-owned.
 
 ### Expected Result
 
-The active L07 lesson remains editable and ready for the user-owned real-robot
-verification step.
+The active L07 lesson remained editable and ready for the user-owned real-robot
+verification step at this point in the recorded workflow. The later closure step
+supersedes this temporary open state.
+
+## Step 16 - Reconcile Final User-Owned Real-Robot Evidence and Freeze L07
+
+### Objective
+
+Close L07 only after the user confirms the current AutoBuilder implementation
+passed physical real-robot execution.
+
+### Why
+
+The A01 ADR requires explicit user-owned Real Robot evidence before a lesson can
+be marked COMPLETE / FROZEN / READ-ONLY. Simulation and builds alone are not
+hardware evidence.
+
+### Action
+
+Recorded the user's explicit confirmation that the current A01_L07
+AutoBuilderContractIntegration physical-robot execution passed. Updated the
+lesson identity, status, plan, checklist, README, learning guides, and this
+transition guide to close the lesson.
+
+### Files Changed
+
+Documentation/status artifacts only: repository README, L07 README,
+LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, this transition guide,
+and the English/Vietnamese learning guides.
+
+### Verification
+
+Implementation, compileJava, compileTestJava, focused L07 tests, AutoBuilder and
+PathPlanner tests, inherited L01-L06 regression, full 424-test suite with zero
+failures, clean build, Blue and Red Simulation, exactly-one L04 transform,
+disable/mode-loss stop, no automatic restart, documentation, and user-confirmed
+Real Robot evidence are all PASS.
+
+### Expected Result
+
+A01_L07 is `COMPLETE / FROZEN / READ-ONLY`. No exact real-robot endpoint
+accuracy, final PID/feedforward tuning, or final physical-model
+characterization is claimed. A01_L08 is not created or implemented.

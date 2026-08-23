@@ -129,9 +129,10 @@ FROZEN / READ-ONLY`. After the latest Swerve zero-offset recalibration, the user
 physically executed the L06 one-meter autonomous on both Blue and Red. A slight
 Blue endpoint overshoot followed by a small reverse correction was observed;
 exact endpoint accuracy is not formally measured or claimed, and final
-PID/feedforward and physical-model tuning remain deferred. `A01_L07` is the
-single active lesson (`IN_PROGRESS`) with no AutoBuilder implementation yet;
-`A01_L08` and `A01_L09` remain authorized but not started.
+PID/feedforward and physical-model tuning remain deferred. `A01_L07` is now
+`COMPLETE / FROZEN / READ-ONLY` after the user-confirmed implementation,
+Simulation, and real-robot verification gates passed. `A01_L08` and `A01_L09`
+remain authorized but not started.
 A00 is closed at A00_L04; A00_L05 is not authorized.
 
 Approved lesson sequence:

@@ -6,8 +6,9 @@
 - Lesson: `A01_L07_AutoBuilderContractIntegration`
 - Title: `A01_L07 - AutoBuilder Contract Integration`
 - Previous lesson: `A01_L06_PathPlannerPathAndRuntimeIntegration - COMPLETE / FROZEN / READ-ONLY`
-- Status: `IN_PROGRESS`
-- Active State: `IN_PROGRESS / EDITABLE`
+- Status: `COMPLETE`
+- Active State: `COMPLETE / FROZEN / READ-ONLY`
+- Freeze State: `FROZEN`
 - Inheritance baseline: `PASS` - copied from the complete, frozen A01_L06 project.
 - User baseline evidence: `PASS` - `compileJava`, `compileTestJava`, tests, and clean build.
 - Architecture Review: `PASS` - approved A01 ADR and alliance-transform Design Lock.
@@ -18,8 +19,8 @@
 - Driver Station / Glass: `PASS / USER-SUPPLIED SIMULATION EVIDENCE` - the
   supplied EstimatedPose and heading observations are recorded; this is not
   real-robot evidence.
-- Real Robot: `DEFERRED / NOT YET TESTED` for L07; verification remains
-  user-owned.
+- Real Robot: `PASS / USER-CONFIRMED` for the current L07 AutoBuilder
+  Contract Integration lesson.
 - Git Commit / Push: `NOT TESTED` - user-owned; Codex does not run Git.
 
 ## Lesson Objective
@@ -55,10 +56,10 @@ is deliberately limited to the adapter/configuration boundary:
 - mechanisms, vision, AprilTags, pathfinding, or replanning; and
 - CTRE, CAN, IO, SwerveSubsystem, or frozen predecessor changes.
 
-The implementation does not add chooser or routine selection. Simulation and
-the supplied telemetry evidence now pass, but L07 remains `IN_PROGRESS /
-EDITABLE` until the user-owned real-robot gate is completed. This is not a
-lesson-completion or freeze record.
+The implementation does not add chooser or routine selection. Simulation,
+supplied telemetry evidence, and the user-confirmed real-robot gate all pass.
+L07 is now `COMPLETE / FROZEN / READ-ONLY`; no endpoint-accuracy, final
+PID/feedforward, or final physical-model characterization claim is made.
 
 ## Locked Alliance-Transform Design
 
@@ -125,6 +126,6 @@ following Simulation evidence:
   readiness left the simulated robot stopped.
 
 The Red endpoint difference is retained as Simulation geometry evidence, not
-precision characterization. L07 real-robot verification remains user-owned,
-planned for Monday, and not yet tested. The transition guide remains
-`IN_PROGRESS`; this is not a lesson-completion or freeze record.
+precision characterization. The user explicitly confirmed PASS for current L07
+physical-robot execution. Final PID/feedforward and physical-model tuning remain
+deferred. The transition guide is finalized as `FINAL / PASS`.
