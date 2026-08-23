@@ -128,14 +128,28 @@ public final class PathPlannerTrajectoryAdapter {
    * @throws IllegalStateException if the asset, generated data, or required semantics are invalid
    */
   public Trajectory createCanonicalTrajectory() {
-    PathPlannerPath path = loadApprovedPath();
-    validateApprovedPath(path);
+    PathPlannerPath path = createCanonicalPath();
 
     PathPlannerTrajectory pathPlannerTrajectory =
         path.generateTrajectory(
             new edu.wpi.first.math.kinematics.ChassisSpeeds(), Rotation2d.kZero, robotConfig);
     validatePathPlannerTrajectory(pathPlannerTrajectory);
     return convertToNativeTrajectory(pathPlannerTrajectory);
+  }
+
+  /**
+   * Loads and validates the canonical Blue-frame path for AutoBuilder integration.
+   *
+   * <p>The returned PathPlanner path is the validated source path. Callers must create a fresh
+   * execution copy before applying any alliance transformation.
+   *
+   * @return validated canonical Blue-frame path
+   * @throws IllegalStateException if the asset or locked path semantics are invalid
+   */
+  PathPlannerPath createCanonicalPath() {
+    PathPlannerPath path = loadApprovedPath();
+    validateApprovedPath(path);
+    return path;
   }
 
   private static PathPlannerPath loadApprovedPath() {

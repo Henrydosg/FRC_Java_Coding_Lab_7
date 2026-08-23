@@ -26,7 +26,7 @@ Git: user-owned; not run by Codex
 - [x] Transform owner is `A01/L04 FieldAllianceTransform`.
 - [x] AutoBuilder vendor flipping is disabled.
 - [x] `shouldFlipPath` is locked to `false`.
-- [x] The fresh execution path will use `preventFlipping = true`.
+- [x] The fresh execution path uses `preventFlipping = true`.
 - [x] Canonical Blue path remains unchanged.
 - [x] Exactly one alliance transform is required.
 - [x] `SwerveSubsystem` remains the drivetrain requirement and stop authority.
@@ -42,21 +42,37 @@ Git: user-owned; not run by Codex
 - [x] BR offset remains `-0.057373046875`.
 - [x] No CAN, CTRE, IO, SwerveSubsystem, or frozen predecessor source changed.
 
-## Future Implementation Gates
+## Implementation Gates
 
-- [ ] Add `AutoBuilderContractAdapter`.
-- [ ] Invoke `AutoBuilder.configure(...)` exactly once.
-- [ ] Obtain commands through `AutoBuilder.followPath(...)`.
-- [ ] Add the fresh transformed execution-path factory.
-- [ ] Test Optional-to-vendor callback bridges and fail-closed behavior.
-- [ ] Test fault latch, terminal stop, requirement ownership, no second flip,
+- [x] Add `AutoBuilderContractAdapter`.
+- [x] Invoke `AutoBuilder.configure(...)` exactly once.
+- [x] Obtain commands through `AutoBuilder.followPath(...)`.
+- [x] Add the fresh transformed execution-path factory.
+- [x] Test Optional-to-vendor callback bridges and fail-closed behavior.
+- [x] Test fault latch, terminal stop, requirement ownership, no second flip,
       and no automatic restart.
-- [ ] Run focused tests, full regression, clean build, and Simulation.
-- [ ] Obtain user-owned Driver Station / Glass and real-robot evidence.
+- [x] Run focused tests, full regression, and clean build.
+- [x] User supplied Blue Simulation PASS: starting readiness, valid pose, and
+      known one-meter autonomous execution.
+- [x] User supplied Red Simulation PASS: final pose and heading are consistent
+      with the exactly-one L04 alliance transform.
+- [x] User supplied disable/mode-loss stop PASS.
+- [x] User supplied no-automatic-restart PASS after re-enable without fresh
+      readiness.
+- [x] User supplied pose-validity and heading-stability PASS evidence.
+- [x] User supplied Simulation telemetry/EstimatedPose evidence for the
+      Driver Station / Glass boundary; this is not real-robot evidence.
+- [ ] Obtain user-owned L07 real-robot evidence.
 
-## Forbidden Scope
+## Evidence Boundary
 
-AutoBuilder implementation before the implementation gate, chooser, multiple
-routines, routine composition, NamedCommands, event markers, mechanisms,
-vision, AprilTags, pathfinding, replanning, CTRE/CAN changes, IO redesign,
-SwerveSubsystem redesign, telemetry changes, and L01-L06 modification.
+Simulation is `PASS / USER-SUPPLIED`. L07 remains `IN_PROGRESS / EDITABLE`
+because real-robot verification is still pending. Do not mark this lesson
+COMPLETE, FROZEN, or READ-ONLY from Simulation alone.
+
+## Out-of-Scope Boundary
+
+Chooser, multiple routines, routine composition, NamedCommands, event markers,
+mechanisms, vision, AprilTags, pathfinding, replanning, CTRE/CAN changes, IO
+redesign, SwerveSubsystem redesign, telemetry changes, and L01-L06 modification
+remain out of scope.

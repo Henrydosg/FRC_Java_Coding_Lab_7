@@ -11,10 +11,15 @@
 - Inheritance baseline: `PASS` - copied from the complete, frozen A01_L06 project.
 - User baseline evidence: `PASS` - `compileJava`, `compileTestJava`, tests, and clean build.
 - Architecture Review: `PASS` - approved A01 ADR and alliance-transform Design Lock.
-- Implementation: `NOT STARTED` - activation only; no AutoBuilder production code exists.
-- Simulation: `NOT TESTED` for L07.
-- Driver Station / Glass: `NOT TESTED` for L07.
-- Real Robot: `NOT TESTED` for L07; verification remains user-owned.
+- Implementation: `PASS` - the approved AutoBuilder contract adapter, execution-path factory, and RobotContainer wiring are implemented; no out-of-scope autonomous features were added.
+- Simulation: `PASS / USER-SUPPLIED` - Blue and Red known one-meter execution,
+  pose validity, heading stability, exactly-one alliance transform, disable
+  stop, and no automatic restart were verified in Simulation.
+- Driver Station / Glass: `PASS / USER-SUPPLIED SIMULATION EVIDENCE` - the
+  supplied EstimatedPose and heading observations are recorded; this is not
+  real-robot evidence.
+- Real Robot: `DEFERRED / NOT YET TESTED` for L07; verification remains
+  user-owned.
 - Git Commit / Push: `NOT TESTED` - user-owned; Codex does not run Git.
 
 ## Lesson Objective
@@ -35,20 +40,25 @@ AutoBuilder remains an adapter/configuration boundary. It must not own the
 drivetrain, IO, hardware, localization authority, telemetry, or alliance
 transformation.
 
-## Activation Boundary
+## Implementation Boundary
 
-This activation creates the single editable L07 project through strict
-inheritance from frozen L06. It does not implement AutoBuilder. The following
-remain deferred to the separately authorized implementation phase:
+This lesson was activated through strict inheritance from frozen L06 and now
+contains the approved single AutoBuilder contract concept. The implementation
+is deliberately limited to the adapter/configuration boundary:
 
-- `AutoBuilderContractAdapter`;
-- `AutoBuilder.configure(...)`;
-- `AutoBuilder.followPath(...)`;
-- transformed execution-path construction;
+- `AutoBuilderContractAdapter` configures the verified Consumer overload exactly once;
+- `AutoBuilder.followPath(...)` receives a fresh validated execution path;
+- `PathPlannerExecutionPathFactory` performs the single L04 alliance transform;
+- pose, reset, measured-speed, output, fault, lifecycle, timeout, and stop contracts are bridged fail-closed;
 - chooser, multiple routines, or routine composition;
 - NamedCommands or event markers;
 - mechanisms, vision, AprilTags, pathfinding, or replanning; and
 - CTRE, CAN, IO, SwerveSubsystem, or frozen predecessor changes.
+
+The implementation does not add chooser or routine selection. Simulation and
+the supplied telemetry evidence now pass, but L07 remains `IN_PROGRESS /
+EDITABLE` until the user-owned real-robot gate is completed. This is not a
+lesson-completion or freeze record.
 
 ## Locked Alliance-Transform Design
 
@@ -73,11 +83,12 @@ The canonical path remains unchanged. AutoBuilder vendor flipping is disabled,
 The copied L06 contracts remain authoritative. `RobotContainer` remains the
 composition root, `SwerveSubsystem` remains the localization and drivetrain
 requirement owner, and centralized `SwerveSubsystem.stop()` remains the safety
-authority. The future adapter must preserve the pre-activation design record's
-contracts for the `Optional` pose/speed values versus vendor-required callbacks,
-finite reset/output validation, exact-once static AutoBuilder configuration,
-shared RobotConfig reuse, the monotonic session fault latch, terminal stop on
-every completion/interruption/fault path, and no automatic restart.
+authority. The implemented adapter preserves the pre-activation design
+record's contracts for the `Optional` pose/speed values versus vendor-required
+callbacks, finite reset/output validation, exact-once static AutoBuilder
+configuration, shared RobotConfig reuse, the monotonic session fault latch,
+terminal stop on every completion/interruption/fault path, and no automatic
+restart.
 
 The copied pre-activation record remains at
 `docs/A01_L07_AutoBuilder_Contract_Integration_PreActivation_Design_Record.md`
@@ -98,7 +109,22 @@ are marked provisional remain provisional.
 
 ## Verification Boundary
 
-The supplied inherited baseline is PASS. L07 implementation, focused tests,
-Simulation, Driver Station / Glass, and real-robot verification are not yet
-performed. The transition guide records activation and the future
-implementation gate; it is not a lesson-completion record.
+The inherited baseline and the approved L07 implementation verification are
+PASS: focused L07 tests, the full 424-test suite with zero failures, and a clean
+build all passed under Java 17 with `-PteamNumber=0`. The user supplied the
+following Simulation evidence:
+
+- Blue autonomous: PASS; heading reference established while Disabled,
+  known starting pose accepted, valid EstimatedPose, and successful known
+  one-meter execution.
+- Red autonomous: PASS; final EstimatedPose was `(15.535553 m, 8.069000 m,
+  -180.000000 deg)`, consistent with the locked one-transform geometry for the
+  `REBUILT_WELDED` field.
+- Disable/mode-loss stop: PASS; Blue stopped near `(0.400765 m, 0 m, 0 deg)`.
+- No automatic restart: PASS; re-enabling without BACK, a new reset, or fresh
+  readiness left the simulated robot stopped.
+
+The Red endpoint difference is retained as Simulation geometry evidence, not
+precision characterization. L07 real-robot verification remains user-owned,
+planned for Monday, and not yet tested. The transition guide remains
+`IN_PROGRESS`; this is not a lesson-completion or freeze record.

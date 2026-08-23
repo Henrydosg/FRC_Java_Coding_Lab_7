@@ -12,27 +12,23 @@ package frc.robot;
 import com.pathplanner.lib.config.ModuleConfig;
 import com.pathplanner.lib.config.RobotConfig;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AutonomousSafetyHoldCommand;
 import frc.robot.commands.AllianceAwareAutonomousStartPoseResetCommand;
 import frc.robot.commands.AutonomousStartContext;
+import frc.robot.commands.AutoBuilderContractAdapter;
 import frc.robot.commands.CaptureFieldHeadingReferenceCommand;
 import frc.robot.commands.DriveThreeMeterValidationDashboard;
 import frc.robot.commands.FieldRelativeTeleopDriveCommand;
 import frc.robot.commands.KnownFieldPoseResetDashboard;
-import frc.robot.commands.HolonomicTrajectoryFollowingCommand;
 import frc.robot.commands.PathPlannerTrajectoryAdapter;
 import frc.robot.commands.SwerveFourModuleTestDashboard;
 import frc.robot.commands.SwerveFrontLeftCommissioningDashboard;
@@ -66,6 +62,7 @@ public class RobotContainer {
   private final AllianceAwareAutonomousStartPoseResetCommand startPoseResetCommand;
   private final KnownFieldPoseResetDashboard knownFieldPoseResetDashboard;
   private final PathPlannerTrajectoryAdapter pathPlannerTrajectoryAdapter;
+  private final AutoBuilderContractAdapter autoBuilderContractAdapter;
   private final Command autonomousCommand;
   private final RobotTelemetry robotTelemetry;
 
@@ -118,8 +115,12 @@ public class RobotContainer {
             backLeft,
             backRight,
             gyro);
-    pathPlannerTrajectoryAdapter =
-        new PathPlannerTrajectoryAdapter(createPathPlannerRobotConfig());
+    RobotConfig pathPlannerRobotConfig = createPathPlannerRobotConfig();
+    pathPlannerTrajectoryAdapter = new PathPlannerTrajectoryAdapter(pathPlannerRobotConfig);
+    autoBuilderContractAdapter =
+        new AutoBuilderContractAdapter(
+            swerveSubsystem, pathPlannerTrajectoryAdapter, pathPlannerRobotConfig);
+    autoBuilderContractAdapter.configure();
     startPoseResetCommand =
         new AllianceAwareAutonomousStartPoseResetCommand(
             swerveSubsystem, this::createDisabledStartContext);
@@ -198,54 +199,7 @@ public class RobotContainer {
     if (context.isEmpty()) {
       return Commands.runOnce(swerveSubsystem::stop, swerveSubsystem);
     }
-    try {
-      AutonomousStartContext acceptedContext = context.orElseThrow();
-      Trajectory executionTrajectory =
-          FieldAllianceTransform.fromCanonicalBlueTrajectory(
-              pathPlannerTrajectoryAdapter.createCanonicalTrajectory(),
-              acceptedContext.fieldVariant(),
-              acceptedContext.alliance());
-      Rotation2d executionHeading =
-          FieldAllianceTransform.fromCanonicalBlueHeading(
-              Constants.HolonomicTrajectoryFollowingConstants.kCanonicalHolonomicHeading,
-              acceptedContext.fieldVariant(),
-              acceptedContext.alliance());
-      if (!samePose(executionTrajectory.getInitialPose(), acceptedContext.executionStartPose())) {
-        return Commands.runOnce(swerveSubsystem::stop, swerveSubsystem);
-      }
-      HolonomicTrajectoryFollowingCommand.Configuration configuration =
-          new HolonomicTrajectoryFollowingCommand.Configuration(
-              Constants.HolonomicTrajectoryFollowingConstants.kXKpPerSecond,
-              Constants.HolonomicTrajectoryFollowingConstants.kYKpPerSecond,
-              Constants.HolonomicTrajectoryFollowingConstants.kThetaKpPerSecond,
-              Constants.HolonomicTrajectoryFollowingConstants.kMaxTranslationSpeedMetersPerSecond,
-              Constants.HolonomicTrajectoryFollowingConstants.kMaxAngularSpeedRadiansPerSecond,
-              Constants.HolonomicTrajectoryFollowingConstants.kThetaProfileMaxVelocityRadiansPerSecond,
-              Constants.HolonomicTrajectoryFollowingConstants.kThetaProfileMaxAccelerationRadiansPerSecondSquared,
-              Constants.HolonomicTrajectoryFollowingConstants.kTranslationToleranceMeters,
-              Constants.HolonomicTrajectoryFollowingConstants.kHeadingToleranceRadians,
-              Constants.HolonomicTrajectoryFollowingConstants.kTimeoutMarginSeconds);
-      Command follower =
-          new HolonomicTrajectoryFollowingCommand(
-              swerveSubsystem,
-              executionTrajectory,
-              executionHeading,
-              configuration,
-              Timer::getFPGATimestamp);
-      Command safetyHold =
-          new AutonomousSafetyHoldCommand(
-                  swerveSubsystem,
-                  Constants.AutonomousConstants.kSafetyHoldLifecycleDurationSeconds,
-                  Timer::getFPGATimestamp)
-              .repeatedly();
-      return Commands.either(
-              follower.andThen(safetyHold),
-              Commands.runOnce(swerveSubsystem::stop, swerveSubsystem),
-              DriverStation::isAutonomousEnabled)
-          .onlyWhile(DriverStation::isAutonomousEnabled);
-    } catch (RuntimeException failure) {
-      return Commands.runOnce(swerveSubsystem::stop, swerveSubsystem);
-    }
+    return autoBuilderContractAdapter.createPathCommand(context.orElseThrow());
   }
 
   private static RobotConfig createPathPlannerRobotConfig() {
@@ -268,12 +222,6 @@ public class RobotContainer {
         new Translation2d(halfWheelbaseMeters, -halfTrackWidthMeters),
         new Translation2d(-halfWheelbaseMeters, halfTrackWidthMeters),
         new Translation2d(-halfWheelbaseMeters, -halfTrackWidthMeters));
-  }
-
-  private static boolean samePose(Pose2d first, Pose2d second) {
-    return first.getTranslation().getDistance(second.getTranslation()) <= 1.0e-9
-        && Math.abs(MathUtil.angleModulus(first.getRotation().getRadians() - second.getRotation().getRadians()))
-            <= 1.0e-9;
   }
 
   /**

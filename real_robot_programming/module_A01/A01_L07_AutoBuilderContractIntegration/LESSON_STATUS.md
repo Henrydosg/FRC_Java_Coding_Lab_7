@@ -19,7 +19,8 @@
   Lock were reviewed.
 - Directory Identity: `PASS` - `A01_L07_AutoBuilderContractIntegration`.
 - Strict Inheritance: `PASS` - copied from complete/frozen A01_L06; production
-  Java and tests remain hash-identical to the L06 inheritance baseline.
+  Java and tests matched the L06 inheritance baseline before the authorized L07
+  delta.
 - Generated Artifact Removal: `PASS` - inherited generated artifacts were
   removed from the copied L07 only.
 - Baseline Build: `PASS` - user supplied Java 17 baseline evidence.
@@ -34,15 +35,24 @@
 
 ## Implementation and Verification Gates
 
-- Production Implementation: `NOT STARTED` - activation only.
-- Focused L07 Tests: `NOT TESTED`.
-- Full Regression After L07 Delta: `NOT TESTED` - no L07 production delta exists.
-- Build After L07 Delta: `NOT TESTED` - no L07 production delta exists.
-- Simulation: `NOT TESTED`.
-- Driver Station / Glass: `NOT TESTED`.
-- Real Robot: `NOT TESTED / HOLD` - user-owned and not authorized by activation.
-- Transition Guide: `IN_PROGRESS` - activation record complete; final lesson
-  closure remains pending implementation and verification.
+- Production Implementation: `PASS` - approved adapter, execution-path factory,
+  trajectory-adapter exposure, and RobotContainer wiring only.
+- Focused L07 Tests: `PASS` - execution-path factory, AutoBuilder configuration,
+  and autonomous lifecycle/requirement coverage.
+- Full Regression After L07 Delta: `PASS` - 424 tests, 0 failures.
+- Build After L07 Delta: `PASS` - compileJava, compileTestJava, and clean build.
+- Build Toolchain Evidence: `PASS` - Java 17 with `-PteamNumber=0`; the final
+  clean build includes production compilation, test compilation, and tests.
+- Simulation: `PASS / USER-SUPPLIED` - Blue and Red known one-meter
+  AutoBuilder execution, pose validity, heading stability, exactly-one
+  alliance transform, disable stop, and no automatic restart.
+- Driver Station / Glass: `PASS / USER-SUPPLIED SIMULATION EVIDENCE` - supplied
+  EstimatedPose and heading observations are recorded; this is not real-robot
+  evidence.
+- Real Robot: `DEFERRED / NOT YET TESTED` - user-owned verification remains
+  pending.
+- Transition Guide: `IN_PROGRESS` - implementation and Simulation evidence are
+  recorded; final lesson closure remains pending real-robot verification.
 - Git Commit: `NOT TESTED` - user-owned; Codex does not run Git.
 - Git Push: `NOT TESTED` - user-owned; Codex does not run Git.
 
@@ -69,12 +79,34 @@
 - BL CANcoder offset: `+0.46240234375`.
 - BR CANcoder offset: `-0.057373046875`.
 
+## User-Owned L07 Simulation Evidence
+
+- Blue autonomous: `PASS` - Disabled heading reference established, known
+  starting pose reset accepted, valid EstimatedPose observed, and the known
+  one-meter autonomous executed successfully.
+- Red autonomous: `PASS` - final EstimatedPose was `X=15.535553 m`,
+  `Y=8.069000 m`, `Heading=-180.000000 deg`.
+- Exactly-one alliance transform: `PASS` - the Red result is consistent with
+  the locked `REBUILT_WELDED` transform using `L=16.541 m` and `W=8.069 m`.
+- Disable/mode-loss stop: `PASS` - Blue stopped near `X=0.400765 m`,
+  `Y=0.000000 m`, `Heading=0.000000 deg` after Disable during motion.
+- No automatic restart: `PASS` - re-enable without BACK, a new known-pose
+  reset, or fresh readiness did not resume motion.
+- Pose validity and heading stability: `PASS`.
+
+The expected Red endpoint is approximately `(15.541 m, 8.069 m, +/-180 deg)`.
+The observed `-180 deg` is equivalent to `+180 deg` modulo 360 degrees. The
+small X difference is Simulation geometry evidence only, not precision
+characterization.
+
 ## Known Issues and Deferred Scope
 
-- No AutoBuilder implementation exists yet.
+- L07 Simulation and supplied telemetry evidence pass. Real-robot verification
+  remains a pending user-owned gate; L07 remains IN_PROGRESS and is not frozen.
+- L07 real-robot verification is planned for Monday and has not been tested.
 - The copied pre-activation design record remains historical evidence; its
-  unresolved pre-activation state is superseded by the approved Design Lock
-  recorded above.
+  unresolved pre-activation state is superseded by the approved Design Lock and
+  implementation recorded above.
 - L06 post-recalibration Blue and Red one-meter autonomous execution is now
   recorded as user-supplied PASS evidence. Exact endpoint precision and final
   PID/feedforward or physical-model tuning remain deferred; L06 remains frozen

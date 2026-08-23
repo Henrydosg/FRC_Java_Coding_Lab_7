@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.hal.AllianceStationID;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.MathUtil;
@@ -65,6 +66,7 @@ class RobotContainerPathPlannerIntegrationTest {
   @BeforeEach
   void createCompositionRootWithTemporaryDeployment(@TempDir Path temporaryDirectory)
       throws IOException {
+    AutoBuilder.resetForTesting();
     previousUserDirectory = System.getProperty("user.dir");
     temporaryAsset =
         temporaryDirectory
@@ -97,6 +99,7 @@ class RobotContainerPathPlannerIntegrationTest {
     setDisabledMode(AllianceStationID.Blue1);
     scheduler.run();
     PathPlannerPath.clearCache();
+    AutoBuilder.resetForTesting();
     System.setProperty("user.dir", previousUserDirectory);
   }
 
@@ -113,6 +116,12 @@ class RobotContainerPathPlannerIntegrationTest {
   void preservesTheSingleSwerveRequirement() {
     assertEquals(1, autonomousCommand.getRequirements().size());
     assertTrue(autonomousCommand.getRequirements().contains(swerveSubsystem));
+  }
+
+  @Test
+  void configuresAutoBuilderWithFlippingDisabled() {
+    assertTrue(AutoBuilder.isConfigured());
+    assertFalse(AutoBuilder.shouldFlip());
   }
 
   @Test

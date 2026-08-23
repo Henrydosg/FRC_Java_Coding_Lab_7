@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.AllianceStationID;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -50,6 +51,7 @@ class RobotContainerAutonomousModeSchedulingTest {
   @BeforeAll
   static void initializeHalAndCompositionRoot() {
     HAL.initialize(500, 0);
+    AutoBuilder.resetForTesting();
     robotContainer = new RobotContainer();
     autonomousCommand = robotContainer.getAutonomousCommand();
     swerveSubsystem =
@@ -89,6 +91,7 @@ class RobotContainerAutonomousModeSchedulingTest {
     CommandScheduler.getInstance().cancelAll();
     setDisabledMode();
     CommandScheduler.getInstance().run();
+    AutoBuilder.resetForTesting();
   }
 
   @Test
