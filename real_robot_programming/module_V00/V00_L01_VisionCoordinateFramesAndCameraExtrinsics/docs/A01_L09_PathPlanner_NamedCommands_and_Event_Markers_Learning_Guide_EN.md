@@ -1,5 +1,13 @@
 # A01_L09 - PathPlanner NamedCommands and Event Markers - Learning Guide
 
+> Historical Phase 2A note: the working L09 project was reconstructed from
+> final A01_L08 before the event feature was reapplied. The current L09 event
+> implementation is complete and technically verified.
+
+Current lesson content/state: `COMPLETE / FROZEN / READ-ONLY` after final
+architecture and closure review PASS. Git publication remains pending User
+commit/push and is not claimed complete here.
+
 ## 1. Learning Objective
 
 A01_L09 teaches how a PathPlanner event marker dispatches one fresh WPILib
@@ -146,5 +154,6 @@ PID/feedforward tuning, final physical characterization, competition readiness,
 or real mechanism behavior. D01 remains an independent Tank Drive project and
 no D01 mechanism contract is imported into A01.
 
-A01_L09 is `COMPLETE / FROZEN / READ-ONLY`. It is the approved completion point
-of A01. No A01_L10 or next lesson/module has been created or started.
+A01_L09 is `COMPLETE / FROZEN / READ-ONLY` after final closure approval. Git
+publication remains pending User commit/push. It is the approved final lesson
+boundary of A01; no A01_L10 or next lesson/module has been created or started.

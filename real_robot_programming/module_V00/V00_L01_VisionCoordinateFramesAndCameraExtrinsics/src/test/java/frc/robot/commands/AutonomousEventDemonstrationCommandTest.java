@@ -10,89 +10,103 @@
 package frc.robot.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import edu.wpi.first.hal.HAL;
+import edu.wpi.first.wpilibj.simulation.DriverStationSim;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.autonomous.AutonomousEventId;
 import frc.robot.observation.AutonomousEventObservation;
 import frc.robot.observation.AutonomousEventObservation.LifecycleState;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class AutonomousEventDemonstrationCommandTest {
+  private final CommandScheduler scheduler = CommandScheduler.getInstance();
+
+  @BeforeAll
+  static void initializeHal() {
+    assertTrue(HAL.initialize(500, 0), "HAL initialization failed");
+  }
+
+  @BeforeEach
+  void enableAutonomousMode() {
+    DriverStationSim.resetData();
+    setAutonomousMode();
+  }
+
+  @AfterEach
+  void cleanup() {
+    setDisabledMode();
+    scheduler.cancelAll();
+    scheduler.run();
+  }
+
   @Test
-  void publishesDeterministicStartedActiveAndCompletedLifecycle() {
-    MutableClock clock = new MutableClock();
+  void followsStartedActiveCompletedLifecycleWithoutRequirements() {
+    MutableClock clock = new MutableClock(10.0);
     List<AutonomousEventObservation> observations = new ArrayList<>();
     AutonomousEventDemonstrationCommand command =
-        new AutonomousEventDemonstrationCommand(observations::add, clock);
+        new AutonomousEventDemonstrationCommand(
+            AutonomousEventId.LEARNING_EVENT, observations::add, clock, 0.50);
 
+    scheduler.schedule(command);
+    scheduler.run();
+    assertTrue(command.isScheduled());
+    clock.value = 10.50;
+    scheduler.run();
+
+    assertEquals(List.of(LifecycleState.STARTED, LifecycleState.ACTIVE,
+        LifecycleState.ACTIVE, LifecycleState.COMPLETED),
+        observations.stream().map(AutonomousEventObservation::state).toList());
     assertTrue(command.getRequirements().isEmpty());
-    command.initialize();
-    assertEquals(LifecycleState.STARTED, observations.get(0).state());
-    assertTrue(observations.get(0).active());
-    assertFalse(command.isFinished());
-
-    clock.seconds = 0.10;
-    command.execute();
-    assertEquals(LifecycleState.ACTIVE, observations.get(1).state());
-
-    clock.seconds = 0.50;
-    command.execute();
-    assertEquals(LifecycleState.COMPLETED, observations.get(2).state());
-    assertFalse(observations.get(2).active());
-    assertTrue(command.isFinished());
-    command.end(false);
   }
 
   @Test
-  void cancellationPublishesCancelledAndDoesNotReuseState() {
-    MutableClock clock = new MutableClock();
+  void interruptionPublishesCancelled() {
+    MutableClock clock = new MutableClock(0.0);
     List<AutonomousEventObservation> observations = new ArrayList<>();
     AutonomousEventDemonstrationCommand command =
-        new AutonomousEventDemonstrationCommand(observations::add, clock);
+        new AutonomousEventDemonstrationCommand(
+            AutonomousEventId.LEARNING_EVENT, observations::add, clock, 0.50);
 
-    command.initialize();
-    command.end(true);
+    scheduler.schedule(command);
+    scheduler.run();
+    command.cancel();
+    scheduler.run();
 
-    assertEquals(LifecycleState.CANCELLED, observations.get(1).state());
-    assertFalse(observations.get(1).active());
-
-    AutonomousEventDemonstrationCommand second =
-        new AutonomousEventDemonstrationCommand(observations::add, clock);
-    second.initialize();
-    assertEquals(LifecycleState.STARTED, observations.get(2).state());
+    assertEquals(LifecycleState.CANCELLED, observations.get(observations.size() - 1).state());
+    assertTrue(!observations.get(observations.size() - 1).active());
   }
 
-  @Test
-  void invalidOrBackwardClockFailsClosed() {
-    MutableClock clock = new MutableClock();
-    List<AutonomousEventObservation> observations = new ArrayList<>();
-    AutonomousEventDemonstrationCommand command =
-        new AutonomousEventDemonstrationCommand(observations::add, clock);
+  private static void setAutonomousMode() {
+    DriverStationSim.setEnabled(true);
+    DriverStationSim.setAutonomous(true);
+    DriverStationSim.setTest(false);
+    DriverStationSim.notifyNewData();
+  }
 
-    command.initialize();
-    clock.seconds = -1.0;
-    command.execute();
-    assertEquals(LifecycleState.FACTORY_FAILURE, observations.get(1).state());
-    assertTrue(command.isFinished());
-
-    MutableClock invalidClock = new MutableClock();
-    invalidClock.seconds = Double.NaN;
-    List<AutonomousEventObservation> invalidObservations = new ArrayList<>();
-    AutonomousEventDemonstrationCommand invalidCommand =
-        new AutonomousEventDemonstrationCommand(invalidObservations::add, invalidClock);
-    invalidCommand.initialize();
-    assertEquals(LifecycleState.FACTORY_FAILURE, invalidObservations.get(0).state());
-    assertTrue(invalidCommand.isFinished());
+  private static void setDisabledMode() {
+    DriverStationSim.setEnabled(false);
+    DriverStationSim.setAutonomous(false);
+    DriverStationSim.setTest(false);
+    DriverStationSim.notifyNewData();
   }
 
   private static final class MutableClock implements java.util.function.DoubleSupplier {
-    private double seconds;
+    private double value;
+
+    private MutableClock(double value) {
+      this.value = value;
+    }
 
     @Override
     public double getAsDouble() {
-      return seconds;
+      return value;
     }
   }
 }

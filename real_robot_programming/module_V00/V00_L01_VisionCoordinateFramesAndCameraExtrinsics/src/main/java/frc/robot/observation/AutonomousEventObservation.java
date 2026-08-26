@@ -9,24 +9,23 @@
 
 package frc.robot.observation;
 
-import frc.robot.commands.AutonomousEventId;
+import frc.robot.autonomous.AutonomousEventId;
 import java.util.Objects;
 
-/** Immutable, vendor-neutral lifecycle observation for one autonomous event. */
+/** Immutable, vendor-neutral read model of one autonomous event lifecycle. */
 public record AutonomousEventObservation(
     AutonomousEventId eventId, LifecycleState state, boolean active) {
-  /** Validates one complete event observation. */
-  public AutonomousEventObservation {
-    Objects.requireNonNull(eventId, "eventId");
-    Objects.requireNonNull(state, "state");
-  }
-
-  /** Lifecycle states exposed to telemetry and deterministic tests. */
+  /** Stable lifecycle states published by the event boundary. */
   public enum LifecycleState {
     STARTED,
     ACTIVE,
     COMPLETED,
     CANCELLED,
     FACTORY_FAILURE
+  }
+
+  public AutonomousEventObservation {
+    eventId = Objects.requireNonNull(eventId, "eventId");
+    state = Objects.requireNonNull(state, "state");
   }
 }

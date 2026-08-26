@@ -133,6 +133,17 @@ public final class Constants {
     private AutonomousConstants() {}
   }
 
+  /** Stores provisional A01_L08 autonomous-preparation validation values. */
+  public static final class AutonomousPreparationConstants {
+    /** Maximum accepted start-context translation error, in meters. */
+    public static final double kTranslationToleranceMeters = 0.03;
+
+    /** Maximum accepted wrapped start-context heading error, in radians. */
+    public static final double kHeadingToleranceRadians = Units.degreesToRadians(2.0);
+
+    private AutonomousPreparationConstants() {}
+  }
+
   /** Stores the conservative L02 pose-targeted autonomous learning configuration. */
   public static final class PoseTargetedAutonomousConstants {
     /** One small field-relative learning target from the inherited known origin. */
@@ -197,11 +208,10 @@ public final class Constants {
     /** PathPlanner asset name without the {@code .path} suffix. */
     public static final String kPathAssetName = "A01_L06_OneMeter_Forward";
 
-    /** L09 event-marker learning path asset name without the {@code .path} suffix. */
-    public static final String kLearningEventPathAssetName =
-        "A01_L09_OneMeter_With_Learning_Event";
+    /** L09 event-marker path asset name without the {@code .path} suffix. */
+    public static final String kEventPathAssetName = "A01_L09_OneMeter_With_Learning_Event";
 
-    /** Bounded duration of the L09 demonstration event, in seconds. */
+    /** Fixed duration of the non-mechanism L09 event demonstration. */
     public static final double kLearningEventDurationSeconds = 0.50;
 
     /** PROVISIONAL — LEARNING/SIMULATION ONLY — NOT MEASURED — NOT FINAL. */

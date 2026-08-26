@@ -218,13 +218,179 @@ autonomous accuracy.
 7. What happens on mode loss?  
    The active command is canceled and centralized Swerve stop is preserved.
 
-## 12. Final lesson state
+## 12. Historical lesson closure
 
-A01_L08 is `COMPLETE / FROZEN / READ-ONLY`. The post-repair WPILib VS Code
+A01_L08 was `COMPLETE / FROZEN / READ-ONLY`. The post-repair WPILib VS Code
 build was user-verified as `BUILD SUCCESSFUL in 1s` with `6 actionable tasks: 1
 executed, 5 up-to-date`; the full test result is 430/430 PASS, and Simulation
 and Real Robot evidence are PASS. A01_L08 is the frozen inheritance source for
-A01_L09, which remains `NOT CREATED / NOT STARTED`.
+A01_L09, which was `NOT CREATED / NOT STARTED` at that closure.
 
 This closure does not claim exact endpoint accuracy, final PID/feedforward
 tuning, or final physical characterization.
+
+## 13. Reopened safety / robustness repair - historical implementation record
+
+A01_L08 was temporarily `REOPENED / IN_PROGRESS / EDITABLE`. The operator workflow
+is: Disabled, choose routine, physically align the robot, press
+`Prepare Autonomous`, verify READY, then enable Autonomous. Prepare captures the
+heading, waits one subsystem refresh, resets the known start pose, and preflights
+pose, speeds, path, RobotConfig, and AutoBuilder state without scheduling motion.
+
+Driving READY is a single-use, provenance-bound attempt. It records alliance,
+routine, field variant, expected start pose, heading-capture attempt, and path
+identity. SAFE_STOP needs no driving READY and does not consume it. A fresh
+driving command is constructed before the exact attempt is atomically claimed.
+
+Preparation uses provisional `0.03 m` translation and `2.0 degree` heading
+tolerances. Heading error is wrapped with `MathUtil.angleModulus`; these are not
+endpoint, tuning, or characterization claims. Recoverable conditions may be
+corrected and prepared again without restart. Fatal software/configuration
+faults preserve the first reason and remain fail-closed for the process.
+
+The intermediate local implementation evidence was compileJava PASS,
+compileTestJava PASS, 45/45 focused/integration tests PASS, 445/445 full tests
+PASS, and clean build PASS. The final user-owned Simulation and Real Robot gates
+are recorded in Section 15. At that historical intermediate checkpoint,
+A01_L09 was treated as frozen and unmodified. After the later L09 event
+implementation and final closure review, the current L09 records identify it as
+`COMPLETE / FROZEN / READ-ONLY`. Git publication remains pending User commit/push.
+
+## 14. Terminal ownership safety repair
+
+The repaired scheduler lifecycle is:
+
+`CONSUMED -> RUNNING -> path completion -> centralized stop -> HOLDING ->
+Autonomous exit -> COMPLETE`.
+
+`HOLDING` is the only new state. It means path motion is finished and Swerve is
+stopped, but the autonomous command still owns the Swerve requirement. The
+default Teleop command therefore cannot take ownership before Autonomous ends.
+SAFE_STOP uses the same session-long ownership without consuming driving
+readiness.
+
+WPILib command composition now owns every child lifecycle callback. The former
+custom wrapper no longer calls `initialize()`, `execute()`, `isFinished()`, or
+`end()` on its child. An outer Autonomous-enabled lifetime guard provides
+prompt mode-exit cleanup, while `kCancelIncoming` protects the active session.
+
+As a second defense, `FieldRelativeTeleopDriveCommand` checks
+`DriverStation.isTeleopEnabled()` before reading the Xbox controller. Outside
+Teleop it calls centralized stop and returns without publishing or submitting
+controller-derived intent. Its normal Teleop behavior is unchanged.
+
+Local evidence is 32/32 focused terminal/Teleop tests, 12/12 preparation
+regression tests, 29/29 autonomous scheduling tests, 442/442 full tests, and a
+clean build PASS. The final user-owned Simulation and Real Robot gates passed.
+No PID/feedforward, CANcoder calibration, SwerveSubsystem, CTRE/IO, RobotConfig,
+or PathPlanner asset was changed, and no claim is made that every one-time
+physical steering transient is eliminated.
+
+## 15. Why L06 and L08 stop differently
+
+The different stopping behavior is intentional because the lessons use
+different motion-completion contracts.
+
+In L06, the learned follower is endpoint-tolerance and pose-correction based.
+It compares the current pose with the target, so it can overshoot the endpoint
+and then reverse-correct while it reduces the remaining pose error. Its
+autonomous safety hold retains Swerve after the follower stops so no other
+command can take the drivetrain during the active autonomous session.
+
+In L08, `ONE_METER_PATH` is completed by PathPlanner's time-based path command.
+The repaired composition therefore adds an explicit terminal ownership phase:
+path completion -> centralized stop -> `HOLDING`. `HOLDING` retains Swerve until
+Autonomous exits. The defensive Teleop-enabled gate prevents controller input
+from leaking into the drivetrain pipeline while Autonomous is still enabled.
+This is a command-ownership distinction, not a change to drivetrain tuning.
+
+## 16. Architecture layer relationship
+
+The autonomous request crosses the architecture in this order:
+
+```text
+Autonomous Routine
+    -> PathPlanner / command composition
+    -> SwerveSubsystem
+    -> Swerve module state/output pipeline
+    -> IO
+    -> CTRE hardware
+```
+
+The routine and PathPlanner layers decide and compose commands. The
+`SwerveSubsystem` remains the sole owner of drivetrain behavior, state, and
+centralized stop. The module output pipeline converts chassis intent into module
+states and outputs. IO translates those outputs into vendor hardware calls.
+This separation explains why the L08 repair belongs in command composition and
+the Teleop command boundary, not in `SwerveSubsystem`, CTRE configuration, or
+module calibration.
+
+## 17. Why the steering twitch was investigated
+
+The terminal steering twitch was investigated because path completion released
+the Swerve requirement before Autonomous ended. That created a possible
+ownership gap in which the default Teleop command could reacquire Swerve while
+the Driver Station still reported Autonomous Enabled. Source review also found
+manual child-command lifecycle delegation in the preparation wrapper, which
+violated the scheduler-native composition contract.
+
+The repair retained Swerve through terminal `HOLDING` and SAFE_STOP, added the
+minimum Teleop mode gate, and let WPILib own child lifecycle callbacks. The
+steering twitch disappeared in the user's post-repair real-robot observation.
+That observation is useful validation consistent with the ownership repair, but
+it does not prove every possible physical cause.
+
+PID/feedforward tuning and CANcoder recalibration were deliberately not used:
+the evidence pointed to a software ownership/mode-boundary defect, not a proven
+control-gain, encoder-offset, or hardware defect. Scheduler-native composition
+is preferred over manual lifecycle delegation because the scheduler owns
+requirements, interruption, initialization, execution, completion, and cleanup
+as one coherent lifecycle.
+
+## 18. Final verification record
+
+The user verified Blue and Red execution, Prepare -> READY, recoverable
+`RESET_REJECTED` reprepare without restart, approximately `1.005 m` final Blue
+pose, terminal hold, no simulated joystick movement after path completion,
+Autonomous -> Disabled -> Teleop, normal Teleop, SAFE_STOP, no-restart recovery,
+and no automatic restart. Real Robot verification additionally covered repaired
+deployment, preparation telemetry, repeated Blue, Blue -> Red without restart,
+mode-loss stop, and the absence of the post-repair steering twitch. A01_L08 is
+remains `REOPENED / IN_PROGRESS / EDITABLE`; Git publication remains
+user-owned. Final re-freeze is currently `HOLD`: the active
+`AutoBuilderContractAdapter.SafeAutoBuilderCommand` still manually delegates
+its child command lifecycle callbacks, so the scheduler-native no-manual-
+lifecycle gate is unresolved. No production or test change is authorized by
+this documentation-only audit.
+
+## 19. Final re-freeze record
+
+The preceding section preserves the earlier architecture HOLD. The authorized
+repair later removed `SafeAutoBuilderCommand` and all manual child lifecycle
+delegation from the active path. WPILib's scheduler now owns the PathPlanner
+child lifecycle, with the Robot-level exception boundary, coordinator fault
+bridge, centralized stop, immutable `FAULTED`, terminal `HOLDING`, SAFE_STOP,
+Teleop mode gate, and no automatic restart preserved.
+
+Final verification passed `compileJava`, `compileTestJava`,
+`RobotSchedulerExceptionBoundaryTest`, all 449 tests, and the clean build. The
+user verified Simulation and the final real-robot retest, including Blue and
+Red path behavior, preparation/recovery, terminal ownership, SAFE_STOP,
+Autonomous-to-Teleop recovery, and no automatic restart.
+
+The brief one-time steer event near path completion is a `KNOWN / BOUNDED
+TERMINAL STEER TRANSIENT`, `ACCEPTED FOR CURRENT LESSON`, and `DEFERRED FOR
+FUTURE DRIVETRAIN / PATH-FOLLOWING TUNING`. Its exact physical root cause is
+not fully proven. There is no verified sustained oscillation, PID instability,
+CANcoder defect, hardware defect, PathPlanner defect, Swerve architecture
+defect, ownership gap, or uncontrolled drivetrain motion, so no corresponding
+production change is justified. One approximately 5.9 ms desktop periodic
+sample is not representative proof of roboRIO performance and is not a closure
+blocker.
+
+The Frozen Backbone and Frozen Interface Contract remain preserved.
+RobotContainer remains the composition root; SwerveSubsystem remains the
+drivetrain/output/localization owner; A01_L04 remains the sole alliance
+transform owner; `shouldFlipPath = false`; and `preventFlipping = true`.
+A01_L08 is `COMPLETE / FROZEN / READ-ONLY` after its authorized reopen.
+V00_L02 remains `SUSPENDED / READ-ONLY` until separately reconciled and resumed.

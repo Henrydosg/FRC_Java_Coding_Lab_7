@@ -1,135 +1,134 @@
-# V00_L01 - Vision Coordinate Frames and Camera Extrinsics - Plan
+# V00_L01 - Documentation Reconciliation Plan and Record
 
 ## Current State
 
+- Lesson: `V00_L01_VisionCoordinateFramesAndCameraExtrinsics`
+- Authoritative predecessor: `A01_L09 @ 6b243bb`.
 - Status: `COMPLETE / FROZEN / READ-ONLY`.
-- Source: `A01_L09_PathPlannerNamedCommandsAndEventMarkers - COMPLETE / FROZEN / READ-ONLY`.
-- Baseline build and inherited tests: `PASS / USER-VERIFIED`.
-- Architecture audit and design lock: `PASS`.
-- Production implementation: `IMPLEMENTED AS APPROVED`.
-- Git/GitHub: user-owned; not run by Codex.
+- Production implementation: `COMPLETE / VERIFIED / NO CHANGE AUTHORIZED`.
+- Test implementation: `COMPLETE / VERIFIED / NO CHANGE AUTHORIZED`.
+- Documentation reconciliation: `COMPLETE / PASS`.
+- Final Architecture Review: `PASS`.
+- Final Closure Review and freeze: `PASS / APPROVED`.
+- Git publication: `PENDING / USER OWNED`.
 
-## One Learning Objective
+## Reason for Reconstruction
 
-Define one unambiguous, vendor-neutral SE(3) frame contract for the canonical
-field, robot, camera, and AprilTag frames, centered on the immutable
-`robotToCamera` mounting transform. L01 does not acquire images, identify tags,
-load a field layout, estimate robot pose, evaluate measurements, model timing,
-simulate vision, integrate a real camera, or fuse vision.
+The historical V00_L01 baseline was not allowed to remain authoritative after
+final A01_L09 was reconstructed and published. It predated the accepted A01
+safety/event lineage. Treating it as the predecessor would have skipped the
+immediately preceding frozen lesson and preserved stale package locations.
 
-## Frame and Transform Design Lock
-
-All geometry is normalized to WPILib NWU:
-
-- +X forward, +Y left, +Z up.
-- Roll, pitch, and yaw rotate about +X, +Y, and +Z respectively.
-- Positive rotation follows the right-hand rule; viewed along a positive axis
-  toward the origin, counter-clockwise is positive.
-- Translation is stored in meters and rotation in radians. Degrees may be used
-  only at a documented human-input boundary and must be converted explicitly.
-
-Frame meanings:
-
-- `field`: the single canonical, always-blue WPILib field frame. The exact
-  official tag layout and tag identities belong to V00_L02.
-- `robot`: the existing Swerve localization reference at the drivetrain center
-  of rotation; axes rotate with the robot.
-- `camera`: the camera body frame normalized to WPILib NWU; a future real
-  adapter must convert any vendor optical convention before data leaves IO.
-- `tag`: an NWU frame centered on the AprilTag; +X is the outward face normal,
-  +Y is tag-left when looking in +X, and +Z is tag-up. Its field pose belongs
-  to V00_L02.
-
-Names always identify direction. `aToB` maps a pose at frame A to frame B when
-applied in A's pose frame:
+The approved remedy was a controlled reconstruction:
 
 ```text
-fieldToCamera = fieldToRobot transformBy robotToCamera
-cameraToRobot = inverse(robotToCamera)
-fieldToTag = fieldToCamera transformBy cameraToTarget
+final A01_L09 @ 6b243bb
+    -> isolated V00_L01 candidate
+    -> inheritance and architecture audit
+    -> locked Vision implementation and independent oracle tests
+    -> candidate focused/full verification
+    -> controlled canonical transfer
+    -> canonical clean/focused/full User verification
+    -> documentation reconciliation
 ```
 
-`robotToCamera` therefore contains the camera origin expressed from the robot
-origin and the camera orientation relative to the robot. Its inverse is not
-interchangeable with it.
+No historical Git command, transfer command, duration, or count is invented in
+this record.
 
-## Camera Mounting Configuration
+## Locked Lesson Objective
 
-The smallest permanent configuration location is one immutable
-`Transform3d kRobotToCamera` in `Constants.VisionConstants`. It shall be added
-only after the user supplies validated X/Y/Z, roll/pitch/yaw measurements. L01
-must not install identity, zeros, guesses, or example values as production
-calibration.
+Teach only the deterministic relationship among canonical field, robot, and
+camera frames using one fixed `robotToCamera` extrinsic.
 
-Before physical measurements exist, future L01 frame-math code must accept an
-explicit `robotToCamera` parameter. Synthetic values are permitted only in
-tests and must be labeled as test geometry.
+Locked formulas:
 
-## Implemented Production Delta
+```text
+cameraToRobot = inverse(robotToCamera)
+fieldToCamera = fieldToRobot.transformBy(robotToCamera)
+fieldToRobot  = fieldToCamera.transformBy(cameraToRobot)
+```
 
-The approved L01 delta is one
-vendor-neutral, non-instantiable pure helper named
-`frc.robot.observation.vision.VisionFrameTransform` that:
+Locked production API:
 
-1. accepts explicit immutable WPILib `Pose3d`/`Transform3d` values;
-2. validates null and nonfinite translation/rotation components;
-3. exposes only named composition/inversion operations required to prove the
-   locked directions; and
-4. reads no clocks, hardware, DriverStation, NetworkTables, subsystem, or
-   mutable global state.
+```java
+VisionFrameTransform.fieldToCamera(Pose3d, Transform3d)
+VisionFrameTransform.cameraToRobot(Transform3d)
+VisionFrameTransform.fieldToRobotFromCamera(Pose3d, Transform3d)
+```
 
-The physical `Constants.VisionConstants.kRobotToCamera` value is a separate
-calibration input and remains deferred while measurements are TBD. No
-RobotContainer, SwerveSubsystem, autonomous, IO, telemetry, deploy asset, or
-vendor change is required for L01 frame-math implementation.
+The helper remains in `frc.robot.vision`, not
+`frc.robot.observation.vision`, because pure coordinate mathematics is not an
+Observation sample or mechanism read model.
 
-## Implemented Test Delta
+## Completed Engineering Boundary
 
-One focused `VisionFrameTransformTest` class covers:
+### Inherited from final A01_L09
 
-1. `robotToCamera` direction and `cameraToRobot` inversion;
-2. `fieldToRobot` plus `robotToCamera` composition;
-3. identity and nontrivial translation/roll/pitch/yaw cases;
-4. inverse round-trip and composition-order noncommutativity;
-5. NWU axis signs, meters/radians, null, NaN, and infinity rejection; and
-6. deterministic repeatability and caller-input immutability with no vendor
-   imports.
+- 73 production and 56 test files are hash-identical.
+- Gradle, vendordeps, deploy assets, and inherited lesson architecture remain
+  unchanged.
+- The final A01 preparation, scheduler exception, fatal bridge, terminal
+  HOLDING, stop ownership, Teleop gate, NamedCommands, deferred event command,
+  event observation/telemetry, and no-restart contracts remain present.
+- Manual child-command lifecycle delegation remains absent.
 
-Camera-target to field-tag composition remains deferred because L01 has no
-target observation contract and does not need another public method.
+### New in V00_L01
 
-The full inherited regression and clean build remain required after any future
-implementation.
+- `src/main/java/frc/robot/vision/VisionFrameTransform.java`.
+- `src/test/java/frc/robot/vision/VisionFrameTransformTest.java`.
 
-## Preserved Ownership
+The tests include independent numerical oracles so the implementation is not
+verified only by repeating the same WPILib composition expression. The locked
+example proves that a robot at `(1, 2, 0)` with yaw `+90 degrees` and a camera
+one meter robot-forward places the camera at `(1, 3, 0)`.
 
-- `RobotContainer`: construction, implementation selection, injection, and
-  bindings only.
-- `SwerveSubsystem`: sole estimator/localization owner and future fusion entry.
-- Autonomous/AutoBuilder: `getEstimatedPose()` consumer only.
-- L04: sole alliance transform owner.
-- Telemetry: immutable observation consumer only.
-- No vendor selection before V00_L08.
+## Completed Documentation Work
 
-## Locked Future Lesson Boundaries
+1. Reconciled lesson README from copied A01_L09 metadata to V00_L01 history,
+   scope, architecture, verification, and current reopened state.
+2. Reconciled LESSON_STATUS with truthful verification ownership and pending
+   final-review gates.
+3. Reconciled this plan and LESSON_CHECKLIST.
+4. Created a chronological student-facing reconstruction guide.
+5. Created English and Vietnamese learning guides teaching the architecture and
+   mathematics rather than merely listing files.
+6. Classified and preserved all 61 inherited A01 documents; no useful history
+   was renamed, deleted, or rewritten.
 
-- V00_L02: official AprilTag IDs and poses in the canonical field layout.
-- V00_L03: vendor-neutral VisionIO, VisionIOInputs, and immutable observation.
-- V00_L04: deterministic vision simulation with independent ground truth.
-- V00_L05: derive a canonical field-relative robot-pose candidate.
-- V00_L06: measurement quality and uncertainty decisions.
-- V00_L07: capture timestamp, latency, freshness, ordering, and duplicates.
-- V00_L08: one real adapter only after the compatibility/vendor gate.
-- V00_L09: accepted timestamped measurement fusion at the Swerve-owned
-  `addVisionMeasurement(...)` boundary.
+## Verification Record
 
-## Final Closure and Inheritance
+Authoritative User evidence for the canonical Java 17 project:
 
-All L01 implementation, automated verification, user WPILib VS Code build,
-architecture review, changed-file audit, and documentation gates are complete.
-V00_L01 is `COMPLETE / FROZEN / READ-ONLY` and must not be modified.
+- Clean: `PASS`.
+- Focused Vision test: `PASS`.
+- Full build: `PASS`.
+- Accidental `-Recurse` artifact: `ABSENT`.
 
-The missing physical extrinsic measurements remain explicitly TBD and must not
-be guessed. V00_L01 is the inheritance source for
-`V00_L02_AprilTagFieldLayoutContract`, which remains
-`NOT CREATED / NOT STARTED` and requires a separate activation workflow.
+Codex's read-only audit independently confirms the exact inherited/new source
+boundary and required stale-path absence. The task does not authorize Codex to
+rerun or reinterpret the User-owned verification as HOLD.
+
+Simulation, Driver Station / Glass, and real robot are `NOT APPLICABLE` to the
+new L01 concept because it has no runtime camera, IO, telemetry, scheduler,
+drivetrain, fusion, lookup, or actuation path.
+
+## Deferred and Prohibited Work
+
+- No VisionIO, vendor, hardware, AprilTag lookup, target selection, quality,
+  timestamp, latency, pose estimation, or fusion.
+- No physical extrinsic values until measured and separately reviewed.
+- No autonomous, PathPlanner, Swerve, RobotContainer, telemetry, IO, Gradle,
+  vendordep, deploy asset, source, or test change.
+- No A01 change and no A01_L10.
+- No V00_L02 edit, activation, copy, merge, or implementation.
+- No Git operation by Codex.
+
+## Final Closure Record
+
+1. Final Architecture Review: `PASS`.
+2. Final Closure / freeze authorization: `PASS / APPROVED`.
+3. Lesson metadata: `COMPLETE / FROZEN / READ-ONLY`.
+4. User Git add/commit/push: `PENDING / USER OWNED`.
+5. Any V00_L02 reconciliation remains separately governed and is not automatic.
+
+V00_L01 is frozen. This closure does not start, resume, or modify V00_L02.

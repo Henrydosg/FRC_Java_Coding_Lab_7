@@ -6,132 +6,101 @@
 - Lesson: `V00_L01_VisionCoordinateFramesAndCameraExtrinsics`
 - Title: `V00_L01 - Vision Coordinate Frames and Camera Extrinsics`
 - Previous Lesson: `A01_L09_PathPlannerNamedCommandsAndEventMarkers`
-- Previous Lesson State: `COMPLETE / FROZEN / READ-ONLY`
+- Authoritative Predecessor: `A01_L09 @ 6b243bb`
+- Predecessor Commit Message: `Complete reconstructed A01_L09 named commands and event markers`
+- Previous Lesson State: `COMPLETE / FROZEN / READ-ONLY / PUBLISHED` by authoritative User evidence
 - Status: `COMPLETE`
 - Active State: `COMPLETE / FROZEN / READ-ONLY`
-- Freeze State: `FROZEN`
-- Lesson Goal: define the vendor-neutral WPILib field, robot, camera, and
-  AprilTag coordinate-frame contract and the direction of `robotToCamera`.
+- Freeze State: `FROZEN / READ-ONLY`
+- Lesson Goal: pure canonical field/robot/camera frame and fixed camera-extrinsic mathematics
 
-## Governance and Activation
+## Reconciliation Authority and History
 
-- Governance: `PASS` - AGENTS.md, root README, the approved V00 ADR,
-  authoritative English Documents A/B/C, Frozen Backbone, Frozen Interface
-  Contract, frozen A01_L09 documentation, architecture, source, and tests, and
-  the copied V00_L01 project were reviewed.
-- Authoritative Roadmap Entry: `PASS` - V00_L01 is the first lesson in the
-  approved V00 roadmap.
-- Source Lesson: `PASS` - A01_L09 remains COMPLETE / FROZEN / READ-ONLY.
-- Inheritance: `PASS` - 125 inherited source, test, deploy, Gradle-wrapper, and
-  vendor-dependency files are byte-identical to A01_L09.
-- Generated-Artifact Cleanup: `PASS` - the copied project predates the current
-  `build/` and `.gradle/` directories; those directories were recreated by the
-  inherited baseline build after the required cleanup.
-- Directory Identity: `PASS` -
-  `V00_L01_VisionCoordinateFramesAndCameraExtrinsics`.
-- Single Active Lesson: `PASS` - V00_L01 was the only editable lesson during
-  implementation and is now closed; no V00 lesson is IN_PROGRESS.
-- Architecture Review: `PASS` - the design lock preserves the Frozen Backbone,
-  observation flow, Swerve localization ownership, autonomous pose-consumer
-  boundary, and V00 lesson boundaries.
-- Design Lock: `PASS / IMPLEMENTED AS APPROVED`.
-- Production Implementation: `PASS` - one pure vendor-neutral helper with no
-  runtime integration or physical camera values.
+- Controlled documentation reconciliation: `APPROVED` by Architect and User.
+- Historical V00_L01 implementation baseline: `STALE / NON-AUTHORITATIVE`.
+- Reason: it predated the final reconstructed A01_L09 predecessor and could not
+  preserve the final accepted safety/event lineage.
+- Reconstruction: `COMPLETE` through an isolated candidate derived from final
+  A01_L09 and then transferred into the canonical lesson directory.
+- Editable boundary: `NONE`; V00_L01 is `COMPLETE / FROZEN / READ-ONLY`.
+- A01_L10: `PROHIBITED`.
+- V00_L02: `SUSPENDED / READ-ONLY / UNMODIFIED`.
 
-## Build and Automated Verification
+## Architecture and Inheritance Audit
 
-- Baseline Build: `PASS / USER-VERIFIED`.
-- Baseline Evidence: `BUILD SUCCESSFUL in 1m 4s`; `6 actionable tasks: 6
-  executed`.
-- Baseline Tests: `PASS / USER-VERIFIED`; current inherited XML reports record
-  `446/446 PASS`, zero failures, errors, or skips.
-- compileJava: `PASS / CODEX-VERIFIED` using the WPILib 2026 Java 17 runtime.
-- compileTestJava: `PASS / CODEX-VERIFIED`.
-- Focused Tests: `18/18 PASS / CODEX-VERIFIED`.
-- Inherited Regression: `446/446 PASS / CODEX-VERIFIED`, zero failures,
-  errors, or skips.
-- Full Test Suite: `464/464 PASS / CODEX-VERIFIED`, zero failures, errors, or
-  skips.
-- Clean Build: `PASS / CODEX-VERIFIED`; `BUILD SUCCESSFUL in 29s`; seven
-  actionable tasks executed.
-- WPILib VS Code Build Robot Code: `PASS / USER-VERIFIED`;
-  `BUILD SUCCESSFUL`.
+- Frozen Backbone: `PASS / PRESERVED`.
+- Frozen Interface Contract: `PASS / PRESERVED`.
+- Documents A/B/C observation architecture: `PASS / PRESERVED`.
+- RobotContainer composition-root role: `PASS / UNCHANGED`.
+- Production inheritance: `PASS` - 73 files hash-identical to final A01_L09.
+- Test inheritance: `PASS` - 56 files hash-identical to final A01_L09.
+- Gradle, vendordeps, and deploy assets: `PASS / INHERITED UNCHANGED`.
+- Final A01_L09 safety/event architecture: `PASS / INHERITED UNCHANGED`.
+- Manual child-command lifecycle delegation: `ABSENT`.
+- Historical stale Vision production/test locations: `ABSENT`.
+- Historical `frc.robot.commands.AutonomousEventId`: `ABSENT`.
+- Final `frc.robot.autonomous.AutonomousEventId`: `PRESENT / INHERITED`.
 
-## Runtime Verification
+## V00_L01 Design Lock
 
-- Simulation: `NOT APPLICABLE` - L01 contains only pure deterministic
-  coordinate-frame/Transform3d geometry and no runtime Vision/camera behavior.
-- Driver Station / Glass: `NOT APPLICABLE` - no runtime Vision observation or
-  telemetry exists in L01.
-- Real Robot: `NOT APPLICABLE` - no real Vision adapter or physical
-  `robotToCamera` calibration values exist. No camera-hardware PASS is claimed.
+- Production delta: one file,
+  `src/main/java/frc/robot/vision/VisionFrameTransform.java`.
+- Test delta: one file,
+  `src/test/java/frc/robot/vision/VisionFrameTransformTest.java`.
+- Package: `frc.robot.vision`.
+- Role: stateless, non-instantiable, vendor-neutral WPILib geometry utility.
+- Public API: `fieldToCamera(...)`, `cameraToRobot(...)`, and
+  `fieldToRobotFromCamera(...)` only.
+- Units/convention: meters, radians, right-handed WPILib NWU.
+- Observation classification: `NOT AN OBSERVATION`.
+- Runtime wiring: `NONE`.
+- Deferred scope: VisionIO, vendors/hardware, AprilTag lookup, target quality,
+  timing/latency, estimation/fusion, autonomous, PathPlanner, Swerve, and
+  physical calibration values.
 
-## Locked Architecture
+## Build and Verification
 
-- Frozen control flow and immutable observation flow remain unchanged.
-- `RobotContainer` remains the composition root only.
-- `SwerveSubsystem` remains the sole owner of `SwerveDrivePoseEstimator`,
-  localization state, EstimatedPose, and the future vision-fusion entry point.
-- Autonomous and AutoBuilder continue consuming only
-  `SwerveSubsystem.getEstimatedPose()` and never camera data, VisionIO, or a
-  vendor API.
-- L04 remains the sole alliance-transform owner. Vision geometry uses the
-  canonical WPILib field frame and is never alliance-flipped.
-- L01 introduces coordinate-frame and camera-extrinsic semantics only.
-- No camera/vendor is selected in V00_L01-L07.
-- No VisionIO, AprilTag detection, field layout, pose estimation, measurement
-  quality, timing, real adapter, simulation adapter, or fusion is implemented.
+- Baseline Inheritance Audit: `PASS / CODEX READ-ONLY HASH AUDIT`.
+- Baseline Build: `NOT SEPARATELY RECORDED` - no unsupported pre-feature build
+  claim is added retroactively.
+- Independent Mathematical Oracle Review: `PASS / CANDIDATE EVIDENCE`.
+- Canonical Clean: `PASS / USER-VERIFIED / JAVA 17`.
+- Focused `VisionFrameTransformTest`: `PASS / USER-VERIFIED`.
+- Full Build: `PASS / USER-VERIFIED`.
+- Accidental `-Recurse` artifact: `ABSENT / USER-VERIFIED`.
+- Simulation: `NOT APPLICABLE` - pure deterministic geometry; no new runtime behavior.
+- Driver Station / Glass: `NOT APPLICABLE` - no new telemetry or runtime observation.
+- Real Robot: `NOT APPLICABLE` - no camera, adapter, fusion, drivetrain change, or actuation.
 
-## Camera Extrinsic Gate
+## Documentation and Closure
 
-- Permanent configuration authority: `Constants.VisionConstants`, containing
-  one immutable `Transform3d kRobotToCamera` only after all six physical mounting
-  measurements are supplied and validated.
-- Required measurements: X, Y, and Z translation plus roll, pitch, and yaw of
-  the camera relative to the robot frame.
-- Physical values: `TBD / USER MEASUREMENT REQUIRED`.
-- No zero, identity, estimated, or example value may be installed as production
-  calibration.
-
-## Documentation and Git
-
-- Transition Guide: `FINAL / PASS` -
-  `docs/A01_L09_to_V00_L01_Step_by_Step.md` records activation, design lock,
-  implementation, verification, changed-file audit, and closure.
-- Git Commit: `NOT TESTED` - user-owned; Codex ran no Git operations.
-- Git Push: `NOT TESTED` - user-owned; Codex ran no Git operations.
+- README reconciliation: `COMPLETE`.
+- LESSON_STATUS reconciliation: `COMPLETE`.
+- LESSON_PLAN reconciliation: `COMPLETE`.
+- LESSON_CHECKLIST reconciliation: `COMPLETE`.
+- Transition Guide: `FINAL / PASS`.
+- English Learning Guide: `FINAL / PASS`.
+- Vietnamese Learning Guide: `FINAL / PASS`.
+- Inherited documentation classification: `COMPLETE`; 61 inherited A01 files
+  preserved, none deleted or rewritten.
+- Final Architecture Review: `PASS`.
+- Final Closure Review: `PASS / APPROVED`.
+- Git Commit: `PENDING / USER OWNED`.
+- Git Push: `PENDING / USER OWNED`.
 
 ## Known Issues and Unclaimed Scope
 
-- Actual camera mounting translation and orientation are not yet measured.
-- No vendor, field layout, target observation, pose estimate, quality decision,
-  timestamp policy, simulation, real-camera result, or fusion result is claimed.
-- Exact localization accuracy, final covariance/rejection thresholds, final
-  tuning, physical characterization, and competition readiness are unclaimed.
-- A sandboxed compiler run could not read generated classpath entries; the
-  same verification commands and the final clean build succeeded with normal
-  filesystem access. This was an execution-environment constraint, not a
-  repository blocker.
+- Physical camera X/Y/Z/roll/pitch/yaw values remain unknown and explicitly
+  deferred; no value is guessed.
+- No camera/vendor, AprilTag lookup, target detection, pose accuracy, quality,
+  latency, fusion, autonomous behavior, drivetrain behavior, endpoint accuracy,
+  or competition-readiness result is claimed.
+- Repository-level governance and lesson metadata record the final frozen state.
+- Git publication remains pending and User-owned.
 
-## Exact Changed-File Reconciliation
+## Current Result
 
-- Intended production delta: one new `VisionFrameTransform.java`.
-- Intended test delta: one new `VisionFrameTransformTest.java`.
-- Intended lesson documentation/activation delta: seven files.
-- The implementation tool's 20-file report consisted of these nine intended
-  files plus eleven temporary authoritative-PDF text-extraction files under
-  `tmp/pdfs/`; all eleven scratch files and the temporary directory were
-  removed before closure and are not publication content.
-- Generated/IDE outputs in `build/`, `.gradle/`, and `bin/` are excluded by
-  repository ignore rules and are not publication content.
-- All inherited production and test files, Gradle configuration, vendordeps,
-  PathPlanner assets, `.wpilib`, and `.vscode` remain byte-identical to frozen
-  A01_L09.
-- Unexpected files or modifications: `NONE`.
-
-## Final Closure
-
-- Final lesson state: `COMPLETE / FROZEN / READ-ONLY`.
-- Frozen inheritance source for:
-  `V00_L02_AprilTagFieldLayoutContract`.
-- V00_L02: `NOT CREATED / NOT STARTED`.
+Implementation, canonical verification, documentation reconciliation, final
+architecture review, and final closure review are PASS. V00_L01 is
+`COMPLETE / FROZEN / READ-ONLY`. Git publication remains pending User
+commit/push.

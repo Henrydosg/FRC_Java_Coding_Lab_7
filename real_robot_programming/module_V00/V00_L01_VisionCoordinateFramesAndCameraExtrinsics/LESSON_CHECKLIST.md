@@ -1,79 +1,111 @@
-# V00_L01 - Vision Coordinate Frames and Camera Extrinsics - Checklist
+# V00_L01 - Documentation Reconciliation Checklist
 
 Status: `COMPLETE / FROZEN / READ-ONLY`  
-Previous lesson: `A01_L09_PathPlannerNamedCommandsAndEventMarkers - COMPLETE / FROZEN / READ-ONLY`  
-Git: user-owned; not run by Codex
+Predecessor: `A01_L09 @ 6b243bb - COMPLETE / FROZEN / READ-ONLY / PUBLISHED`  
+Git: User-owned; Codex must not run Git commands
 
-## Activation and Inheritance
+## Governance and Authority
 
-- [x] AGENTS.md, root README, and V00 ADR reviewed.
-- [x] Authoritative English Documents A/B/C reviewed.
-- [x] Frozen Backbone and Frozen Interface Contract reviewed.
-- [x] Frozen A01_L09 documentation, architecture, source, and tests reviewed.
-- [x] Exact V00_L01 roadmap identity verified.
-- [x] Copied project identity verified.
-- [x] Generated build artifacts were removed before the baseline and recreated
-      by it.
-- [x] User-verified baseline build PASS: `BUILD SUCCESSFUL in 1m 4s`.
-- [x] User-verified inherited tests PASS; XML reports show `446/446 PASS`.
-- [x] Inherited source, tests, deploy assets, and dependencies are byte-identical.
-- [x] V00_L01 is the only IN_PROGRESS / EDITABLE lesson.
+- [x] AGENTS.md and repository README read.
+- [x] All authoritative English Documents A, B, and C read.
+- [x] Relevant A00, A01, A01_L08, S00 input-ownership, and V00 ADRs read.
+- [x] Final A01_L09 metadata, transition guide, implementation record, and
+      bilingual learning guides read.
+- [x] Canonical V00_L01 source, tests, metadata, and inherited docs audited.
+- [x] Historical V00_L01 docs treated only as stale historical evidence.
+- [x] Protected V00_L02 status/docs inspected only as needed for protection.
+- [x] Controlled V00_L01 documentation-only reconciliation authority confirmed.
+- [x] A01 ends at L09; A01_L10 is prohibited.
 
-## Architecture and Design Lock
+## Authoritative Inheritance
 
-- [x] Frozen control and immutable observation flows are preserved.
+- [x] Authoritative predecessor recorded as A01_L09 at `6b243bb`.
+- [x] Historical V00_L01 classified as stale and non-authoritative.
+- [x] Reconstruction from final A01_L09 recorded truthfully.
+- [x] Isolated candidate, candidate verification, controlled canonical transfer,
+      and canonical User verification recorded without invented commands.
+- [x] 73 inherited production files are hash-identical to final A01_L09.
+- [x] 56 inherited test files are hash-identical to final A01_L09.
+- [x] Gradle, vendordeps, and deploy assets match final A01_L09.
+- [x] Exactly one V00 production helper and one focused V00 test are additive.
+- [x] Stale `frc.robot.observation.vision` helper/test paths are absent.
+- [x] Stale `frc.robot.commands.AutonomousEventId` is absent.
+- [x] Final `frc.robot.autonomous.AutonomousEventId` is present.
+
+## Frozen Architecture
+
+- [x] Driver -> Xbox Controller -> controls -> commands -> subsystems -> io -> hardware preserved.
+- [x] Hardware -> IOInputs -> subsystem/estimator -> immutable Observation -> telemetry preserved.
+- [x] Frozen Interface Contract and vendor boundary preserved.
 - [x] RobotContainer remains composition root only.
-- [x] SwerveSubsystem remains sole `SwerveDrivePoseEstimator` owner.
-- [x] SwerveSubsystem retains localization, EstimatedPose, stop, and future
-      fusion-entry ownership.
-- [x] Autonomous and AutoBuilder consume only `getEstimatedPose()`.
-- [x] L04 remains the sole alliance-transform owner.
-- [x] Vision geometry uses the canonical field frame and is not alliance-flipped.
-- [x] Field, robot, camera, and AprilTag frames are defined in WPILib NWU.
-- [x] `robotToCamera` direction and inverse are unambiguous.
-- [x] Axis, sign, angle, and unit conventions are explicit.
-- [x] Camera extrinsic configuration has one smallest future authority.
-- [x] Unknown physical X/Y/Z and roll/pitch/yaw remain TBD; no values invented.
-- [x] No vendor is selected.
-- [x] L02, L03, L04, L05, L06, L07, L08, and L09 boundaries remain deferred.
+- [x] AutonomousPreparationCoordinator and PrepareAutonomousCommand preserved.
+- [x] AutonomousPreparationObservation and its read-only telemetry facade preserved.
+- [x] Scheduler-native AutoBuilder composition preserved.
+- [x] Robot-level scheduler exception boundary and fatal-fault bridge preserved.
+- [x] Terminal HOLDING and centralized Swerve stop ownership preserved.
+- [x] Defensive Teleop-enabled output gate preserved.
+- [x] Commands.defer(...) fresh events and NamedCommands/event markers preserved.
+- [x] Manual child-command lifecycle delegation remains absent.
 
-## Current Task Scope
+## V00_L01 Design Lock
 
-- [x] Documentation activation and approved implementation completed.
-- [x] Transition guide created, maintained, and finalized PASS.
-- [x] One pure `VisionFrameTransform` production helper added.
-- [x] One focused `VisionFrameTransformTest` class added.
-- [x] No configuration or PathPlanner asset modified.
-- [x] No frozen A01_L09 or earlier lesson modified.
-- [x] No vision simulation, camera integration, deployment, or fusion performed.
-- [x] No Git/GitHub operation performed.
+- [x] Only field, robot, and camera frames are taught.
+- [x] WPILib NWU, meters, radians, and right-handed rotations are explicit.
+- [x] `robotToCamera` direction and inverse are explicit.
+- [x] Composition order and reverse reconstruction are explicit.
+- [x] Locked three-method API is unchanged.
+- [x] Helper is stateless, non-instantiable, deterministic, and vendor-neutral.
+- [x] Helper is correctly located in `frc.robot.vision`.
+- [x] Helper is explicitly not an Observation, IO, subsystem, command,
+      telemetry component, or hardware adapter.
+- [x] Independent numeric oracle `(1, 2, 0) + yaw 90 deg + 1 m forward -> (1, 3, 0)` is taught.
+- [x] VisionIO, vendors, hardware, AprilTag lookup, quality, timing, latency,
+      fusion, autonomous, PathPlanner, Swerve, and calibration values remain deferred.
 
-## Future Implementation and Verification
+## Verification Evidence
 
-- [x] ChatGPT-approved implementation design followed.
-- [x] Pure vendor-neutral frame-transform production delta implemented.
-- [x] Focused deterministic frame/transform tests implemented.
-- [x] compileJava PASS / Codex direct verification.
-- [x] compileTestJava PASS / Codex direct verification.
-- [x] Focused tests `18/18 PASS` / Codex direct verification.
-- [x] Full inherited regression `446/446 PASS` / Codex direct verification.
-- [x] Full suite `464/464 PASS` / Codex direct verification.
-- [x] Clean build PASS / Codex direct verification: `BUILD SUCCESSFUL in 29s`;
-      seven actionable tasks executed.
-- [x] WPILib VS Code Build Robot Code PASS / user verified:
-      `BUILD SUCCESSFUL`.
-- [x] Simulation marked NOT APPLICABLE for pure L01 geometry scope.
-- [x] Driver Station / Glass marked NOT APPLICABLE; no runtime observation.
-- [x] Real Robot marked NOT APPLICABLE; no camera hardware/calibration claim.
-- [x] English learning guide created.
-- [x] Vietnamese explanatory learning guide created.
-- [x] Transition guide maintained through implementation and verification.
-- [x] Exact 20-file implementation report reconciled: nine intended final
-      files plus eleven removed PDF text-extraction scratch files.
-- [x] Generated `build/`, `.gradle/`, and `bin/` outputs excluded from
-      publication by repository ignore rules.
-- [x] Inherited source/tests, Gradle files, vendordeps, PathPlanner assets,
-      `.wpilib`, and `.vscode` verified unchanged.
-- [x] Final architecture review PASS.
-- [x] V00_L01 completion/freeze explicitly approved.
-- [x] V00_L02 remains NOT CREATED / NOT STARTED.
+- [x] Candidate independent mathematical oracle review PASS recorded.
+- [x] Candidate focused Vision test PASS recorded.
+- [x] Candidate full build PASS recorded.
+- [x] Canonical Clean PASS / User verified under Java 17.
+- [x] Canonical focused Vision test PASS / User verified.
+- [x] Canonical full build PASS / User verified.
+- [x] Accidental `-Recurse` artifact ABSENT / User verified.
+- [x] Simulation classified NOT APPLICABLE with design-scope reason.
+- [x] Driver Station / Glass classified NOT APPLICABLE with design-scope reason.
+- [x] Real Robot classified NOT APPLICABLE with design-scope reason.
+
+## Documentation Classification and Reconciliation
+
+- [x] Category A required inherited learning/history preserved.
+- [x] Category B required transition evidence preserved.
+- [x] Category C copied lesson metadata reconciled in README, status, plan, and checklist.
+- [x] Category D unnecessary duplicates: none identified.
+- [x] All 61 inherited A01 docs remain unchanged.
+- [x] `docs/A01_L09_to_V00_L01_Step_by_Step.md` created.
+- [x] English V00_L01 learning guide created.
+- [x] Vietnamese V00_L01 learning guide created.
+- [x] Historical stale V00_L01 docs were not blindly restored.
+
+## Scope Protection
+
+- [x] Production Java changed by this reconciliation: NONE.
+- [x] Test Java changed by this reconciliation: NONE.
+- [x] Gradle, vendordeps, and PathPlanner assets changed: NONE.
+- [x] A01 changed: NONE.
+- [x] Root AGENTS.md and README stale V00_L01 lifecycle metadata reconciled
+      under separate explicit authorization; no governance rule changed.
+- [x] V00_L02 remains SUSPENDED / READ-ONLY / UNMODIFIED.
+- [x] Git commands performed by Codex: NONE.
+
+## Final Closure Gates
+
+- [x] Documentation reconciliation complete.
+- [x] Separate Final Architecture Review PASS.
+- [x] Separate Final Closure Review / freeze authorization PASS.
+- [x] Change V00_L01 to COMPLETE / FROZEN / READ-ONLY under that authorization.
+- [ ] User Git add/commit/push.
+- [ ] Any later V00_L02 reconciliation separately authorized after V00_L01 freeze.
+
+V00_L01 is `COMPLETE / FROZEN / READ-ONLY`. This closure does not authorize
+work in V00_L02.

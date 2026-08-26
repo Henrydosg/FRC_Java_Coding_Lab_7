@@ -4,186 +4,184 @@
 
 - Module: `V00 - AprilTag Vision Observation and Pose Fusion`
 - Lesson: `V00_L01_VisionCoordinateFramesAndCameraExtrinsics`
-- Previous lesson: `A01_L09_PathPlannerNamedCommandsAndEventMarkers - COMPLETE / FROZEN / READ-ONLY`
-- Status: `COMPLETE / FROZEN / READ-ONLY`
-- Architecture audit: `PASS`
-- Design lock: `PASS / IMPLEMENTED AS APPROVED`
-- Baseline build: `PASS / USER-VERIFIED`
-- Baseline tests: `PASS / USER-VERIFIED`; inherited reports show `446/446 PASS`
-- Production implementation: `PASS` - one pure vendor-neutral frame helper
-- Focused tests: `18/18 PASS / CODEX-VERIFIED`
-- Inherited regression: `446/446 PASS / CODEX-VERIFIED`
-- Full test suite: `464/464 PASS / CODEX-VERIFIED`
-- Clean build: `PASS / CODEX-VERIFIED`
-- WPILib VS Code Build Robot Code: `PASS / USER-VERIFIED`; `BUILD SUCCESSFUL`
-- Simulation / Driver Station / Real Robot: `NOT APPLICABLE` for V00_L01
-  because no runtime Vision/camera behavior, real adapter, or physical camera
-  calibration exists
-- Git Commit / Push: `NOT TESTED` - user-owned; Codex ran no Git operations
+- Status: `COMPLETE`
+- Active State: `COMPLETE / FROZEN / READ-ONLY`
+- Implementation: `COMPLETE / VERIFIED`
+- Documentation reconciliation: `COMPLETE / PASS`
+- Final Architecture Review: `PASS`
+- Final Closure Review: `PASS`
+- Freeze State: `FROZEN / READ-ONLY`
+- Git publication: `PENDING USER COMMIT/PUSH`
 
-## Authoritative Objective
+The reconstructed lesson passed final architecture and closure review and is
+now a frozen, read-only lesson snapshot. Git publication remains a separate
+User-owned operation.
 
-V00_L01 teaches one concept: the coordinate-frame and immutable camera-mounting
-contract needed before any AprilTag vision observation or pose estimation can
-exist. It defines the field, robot, camera, and tag frames and fixes the exact
-meaning of `robotToCamera`.
+## Authoritative Inheritance
 
-It does not select a camera, import a vision vendor library, acquire data,
-identify a tag, load the 2026 field layout, estimate robot pose, evaluate a
-measurement, model latency, simulate vision, integrate real hardware, or fuse a
-measurement.
+The authoritative predecessor is:
 
-## WPILib Frame Convention
+`A01_L09 @ 6b243bb - Complete reconstructed A01_L09 named commands and event markers`
 
-All L01 geometry uses WPILib NWU coordinates:
+A01 ends at A01_L09; A01_L10 is prohibited. The earlier historical V00_L01
+predated the final reconstructed A01_L09 baseline and therefore became stale.
+Continuing from it would have omitted accepted A01 safety/event architecture
+and violated the immediate-predecessor inheritance rule.
 
-- +X forward
-- +Y left
-- +Z up
-- roll about +X
-- pitch about +Y
-- yaw about +Z
-- positive rotation by the right-hand rule
-- meters for translation
-- radians for stored/computed rotation
+The canonical V00_L01 was consequently reconstructed from final A01_L09 in an
+isolated candidate, audited, verified, and transferred into this lesson
+directory. The current source/test comparison establishes this boundary:
 
-When looking along a positive axis toward the origin, counter-clockwise is
-positive. From above the robot, positive yaw turns +X toward +Y.
+| Classification | Canonical content |
+| --- | --- |
+| Inherited from final A01_L09 | 73 production files and 56 test files are hash-identical to the authoritative predecessor. Gradle, vendordeps, and deploy assets are also preserved. |
+| New in V00_L01 | `src/main/java/frc/robot/vision/VisionFrameTransform.java` and `src/test/java/frc/robot/vision/VisionFrameTransformTest.java` only. |
+| Historical stale locations | The old `frc.robot.observation.vision` helper/test and `frc.robot.commands.AutonomousEventId` are absent. |
 
-## Four Frames
+This documentation records the user-supplied commit identity; Codex did not
+run a Git command to derive or alter it.
 
-### Field frame
+## One Learning Objective
 
-The single canonical, always-blue WPILib field frame is fixed to the field.
-Its origin is at the right side of the blue alliance wall, +X points toward the
-red end, +Y points left when viewed from the blue end, and +Z points up. Vision
-poses remain in this frame for both alliances and are never alliance-flipped.
-V00_L02 owns the official AprilTag field layout.
+V00_L01 establishes the pure geometry foundation for later vision lessons:
 
-### Robot frame
+- canonical field, robot-body, and camera coordinate frames;
+- WPILib NWU axes and right-handed rotation semantics;
+- a fixed `robotToCamera` mounting extrinsic;
+- rigid 3D composition and inversion; and
+- reconstruction of a robot field pose from a known camera field pose.
 
-The robot frame is attached to the chassis at the existing Swerve localization
-reference and drivetrain center of rotation. +X is robot-forward, +Y is
-robot-left, and +Z is up. The frame moves and rotates with the robot.
-
-### Camera frame
-
-The camera frame is attached to the camera mounting body and normalized to the
-same WPILib NWU axes: +X camera-forward, +Y camera-left, and +Z camera-up. Any
-future vendor optical convention must be converted inside the real VisionIO
-adapter before vendor-neutral data leaves IO.
-
-### AprilTag frame
-
-The AprilTag frame is centered on the tag. +X is normal to and outward from the
-tag face, +Y is tag-left when looking in the +X direction, and +Z is tag-up.
-The frame rotates with the physical tag. L01 defines only this geometric
-meaning; V00_L02 owns tag IDs and canonical field poses.
-
-## Transform Direction Contract
-
-An `aToB` name means the transform that maps a pose at A to the corresponding
-pose at B when applied relative to A's pose frame. WPILib applies the transform
-translation in the starting pose frame and then applies its rotation.
-
-`robotToCamera` is the immutable camera mounting extrinsic:
-
-```text
-Robot frame
-    |
-    | robotToCamera
-    v
-Camera frame
-```
-
-Its translation is the camera origin relative to the robot origin, expressed
-in robot axes. Its rotation is the camera orientation relative to the robot.
-`cameraToRobot` is exactly `robotToCamera.inverse()` and must never be
-substituted without inversion.
-
-Use composition in this order:
-
-```text
-fieldToCamera = fieldToRobot.transformBy(robotToCamera)
-fieldToTag = fieldToCamera.transformBy(cameraToTarget)
-cameraToRobot = robotToCamera.inverse()
-```
-
-The named transforms are not interchangeable:
-
-- `fieldToRobot`: robot pose in the canonical field frame.
-- `robotToCamera`: fixed camera mount relative to the robot.
-- `fieldToCamera`: camera pose in the canonical field frame.
-- `cameraToTarget`: observed target relative to the camera; future scope.
-- `fieldToTag`: tag pose in the canonical field frame; V00_L02 authority.
-- `cameraToRobot`: inverse camera mounting transform.
-
-## Physical Camera Extrinsics
-
-The future production mounting transform requires six measured inputs:
-
-1. X position in meters: forward positive from robot origin.
-2. Y position in meters: left positive from robot origin.
-3. Z position in meters: up positive from robot origin.
-4. Roll in radians about +X.
-5. Pitch in radians about +Y.
-6. Yaw in radians about +Z.
-
-All six values are `TBD / USER MEASUREMENT REQUIRED`. No identity transform,
-zero vector, estimate, example, or vendor default may masquerade as production
-calibration.
-
-Once measured and validated, the smallest permanent authority is one immutable
-`Transform3d kRobotToCamera` inside `Constants.VisionConstants`. Until then,
-pure frame-math code must receive the transform explicitly and tests may use
-clearly labeled synthetic geometry only.
-
-## Implemented L01 API
-
-`frc.robot.observation.vision.VisionFrameTransform` is a stateless,
-non-instantiable helper with exactly three public operations:
+The locked API is:
 
 ```java
-Pose3d fieldToCamera(Pose3d fieldToRobot, Transform3d robotToCamera)
-Transform3d cameraToRobot(Transform3d robotToCamera)
-Pose3d fieldToRobotFromCamera(Pose3d fieldToCamera, Transform3d robotToCamera)
+public static Pose3d fieldToCamera(
+    Pose3d fieldToRobot,
+    Transform3d robotToCamera)
+
+public static Transform3d cameraToRobot(
+    Transform3d robotToCamera)
+
+public static Pose3d fieldToRobotFromCamera(
+    Pose3d fieldToCamera,
+    Transform3d robotToCamera)
 ```
 
-Every input and computed result is checked for null and nonfinite translation
-or rotation components. The helper reads no camera, vendor API, subsystem,
-clock, Driver Station, NetworkTables, telemetry, configuration, or mutable
-state. Target observations and `cameraToTarget` composition remain deferred.
+The helper is stateless, non-instantiable, deterministic, vendor-neutral, and
+limited to WPILib geometry. It belongs in `frc.robot.vision` because it
+performs frame mathematics; it is not a sampled fact or immutable mechanism
+Observation and therefore does not belong in `frc.robot.observation.vision`.
 
-## Preserved Architecture
+## Mathematics Contract
 
-- The Frozen Backbone and immutable observation flow remain unchanged.
-- `RobotContainer` remains composition root only.
-- `SwerveSubsystem` remains sole owner of `SwerveDrivePoseEstimator`,
-  localization state, EstimatedPose, and the future fusion entry point.
-- Autonomous and AutoBuilder continue consuming only `getEstimatedPose()`.
-- A01_L04 remains the sole alliance-transform owner.
-- Telemetry remains read-only.
-- No vendor is selected in V00_L01-L07; V00_L08 owns the compatibility gate.
+All translations use meters. Rotations use radians and WPILib's right-handed
+NWU convention: +X forward, +Y left, and +Z up.
 
-## Deferred Roadmap Boundaries
+```text
+cameraToRobot = inverse(robotToCamera)
+fieldToCamera = fieldToRobot.transformBy(robotToCamera)
+fieldToRobot  = fieldToCamera.transformBy(cameraToRobot)
+```
 
-- V00_L02: official AprilTag field layout.
-- V00_L03: VisionIO and immutable observation.
-- V00_L04: deterministic vision simulation.
-- V00_L05: AprilTag robot-pose estimation.
-- V00_L06: measurement-quality contract.
-- V00_L07: timestamp and latency contract.
-- V00_L08: one reviewed real vision adapter.
-- V00_L09: accepted timestamped measurement fusion through the Swerve-owned
-  `addVisionMeasurement(...)` boundary.
+Composition order matters because the mounting translation is expressed in
+robot axes. A robot at `(1 m, 2 m, 0 m)` with yaw `+90 degrees` and a camera
+mounted `1 m` robot-forward places the camera at `(1 m, 3 m, 0 m)`. It is not
+at `(2 m, 2 m, 0 m)`, because robot-forward points along field +Y after the
+robot rotates.
 
-## Final Lesson State
+## Preserved A01 Architecture
 
-V00_L01 is `COMPLETE / FROZEN / READ-ONLY`. The approved pure
-frame-transform delta, focused tests, inherited regression, full suite, clean
-build, user-verified WPILib VS Code build, architecture review, and lesson
-documentation gates are reconciled and PASS.
+The reconstructed baseline preserves the Frozen Backbone:
 
-V00_L01 is the frozen inheritance source for
-`V00_L02_AprilTagFieldLayoutContract`. V00_L02 remains
-`NOT CREATED / NOT STARTED`; this closure does not authorize its creation.
+```text
+Driver -> Xbox Controller -> controls -> commands -> subsystems -> io -> hardware
+```
+
+It also preserves the mechanism observation flow:
+
+```text
+hardware -> IOInputs -> subsystem/estimator -> immutable Observation
+         -> telemetry -> NT4 / Glass / log
+```
+
+Final A01_L09 safety/event behavior is inherited unchanged, including the
+preparation coordinator and observation/telemetry path, scheduler-native
+AutoBuilder composition, Robot-level scheduler exception boundary, fatal-fault
+bridge, terminal `HOLDING`, centralized Swerve stop authority, defensive
+Teleop-enabled output gate, `frc.robot.autonomous.AutonomousEventId`, deferred
+fresh event commands, NamedCommands/event markers, and the prohibition on
+manual child-command lifecycle delegation.
+
+The V00_L01 helper is not wired into RobotContainer, autonomous, Swerve, IO,
+telemetry, or hardware. It changes neither control nor observation flow.
+
+## Verification Evidence
+
+Authoritative User verification of the reconstructed canonical lesson under
+Java 17 records:
+
+- Clean: `PASS`.
+- Focused `VisionFrameTransformTest`: `PASS`.
+- Full build: `PASS`.
+- Accidental `-Recurse` artifact: `ABSENT`.
+
+The candidate had previously passed independent mathematical-oracle review,
+the focused Vision test, and the full build. No unsupported command line,
+duration, measurement, test count, or Git result is claimed here.
+
+Simulation, Driver Station / Glass, and real-robot testing are `NOT APPLICABLE`
+for this lesson's new concept. V00_L01 adds no runtime camera acquisition,
+VisionIO, NetworkTables behavior, scheduler behavior, drivetrain behavior,
+AprilTag lookup, pose-estimator integration, fusion, or robot actuation.
+
+## Explicitly Deferred
+
+V00_L01 does not add or claim:
+
+- VisionIO or a camera vendor such as PhotonVision or Limelight;
+- camera hardware or physical camera calibration values;
+- AprilTag field-layout lookup, target selection, or quality evaluation;
+- timestamps or latency compensation;
+- pose-estimator integration or vision fusion;
+- autonomous, PathPlanner, Swerve, telemetry, or hardware behavior changes.
+
+Those responsibilities remain with their later V00 lessons and required
+reviews. No physical mounting values may be guessed or stored as production
+authority in this lesson.
+
+## Inherited Documentation Classification
+
+The 61 files currently inherited under `docs/` remain byte-identical to final
+A01_L09 and are preserved as useful curriculum history. The following table is
+an exhaustive classification; ranges refer to the matching filenames already
+present in this directory and do not authorize creation of a missing lesson.
+
+| Category | Inherited files covered |
+| --- | --- |
+| **A - Required inherited learning/history** | `New_WPILib_Project_to_S00_L01_Step_by_Step.md`; every existing `S00_L01_to_S00_L02` through `S00_L24_to_A00_L01` transition guide; `S00_L02_Swerve_Hardware_Audit.md`; `S00_L14_Swerve_Hardware_Commissioning_Matrix.md`; `A00_L01_to_A00_L02_Step_by_Step.md`; `A00_L02_to_A00_L03_Step_by_Step.md`; `A00_L04_to_A01_L01_Step_by_Step.md`; `A00_Robot_Autonomous_Architecture_Layers.md`; every existing A01 transition guide from `A01_L01_to_A01_L02` through `A01_L07_to_A01_L08`; `A01_L02_Pose_Targeted_Autonomous_Motion_Verification_Guide.md`; both A01_L06 learning guides; all A01_L07 preactivation/bilingual learning guides; both A01_L08 learning guides; both A01_L09 learning guides; `Blue_Red_Transform_Mathematics.md`; `hardware_map.png`; `L01_to_L05_Autonomous_Learning_Map.md`; `L03_to_L04_to_L05_Data_Flow.md`; `Official_2026_Field_Variants.md`; `Swerve_Robot_Hardware_Map_v2.0.docx`; `Swerve_Robot_Hardware_Map_v2.0.pdf`; `Trajectory_Transform_Semantics.md`; `Transform_Ownership_and_Double_Transform_Prevention.md`; `Unknown_Alliance_Safety_Contract.md`; and `WPILib_Field_Coordinate_System.md`. |
+| **B - Required transition evidence** | `A01_L08_to_A01_L09_Step_by_Step.md` and `A01_L09_Phase_2B_Implementation_Record.md`. |
+| **C - Stale metadata reconciled in this task** | The copied lesson-root `README.md`, `LESSON_STATUS.md`, `LESSON_PLAN.md`, and `LESSON_CHECKLIST.md`. These are not part of the 61-file `docs/` count. |
+| **D - Unnecessary duplicate** | None identified. |
+
+No inherited document was deleted, renamed, or rewritten.
+
+The new V00 transition guide and bilingual learning guides are additive lesson
+documents, not renamed A01 history.
+
+## Protected Successor and Closure Boundary
+
+`V00_L02_AprilTagFieldLayoutContract` remains
+`SUSPENDED / READ-ONLY / UNMODIFIED`. It is not this lesson's predecessor and
+was not activated, copied, merged, or changed.
+
+Final closure sequence:
+
+```text
+documentation reconciliation complete
+    -> Final Architecture Review PASS
+    -> Final Closure Review PASS
+    -> COMPLETE / FROZEN / READ-ONLY
+    -> User-owned Git add/commit/push pending
+```
+
+V00_L01 is `COMPLETE / FROZEN / READ-ONLY`. V00_L02 remains separately
+suspended and is not resumed or modified by this closure.

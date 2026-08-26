@@ -211,13 +211,175 @@ mass/MOI/COF characterization hay autonomous accuracy sẵn sàng cho thi đấu
 7. Khi mode loss xảy ra thì sao?  
    Command bị cancel và centralized Swerve stop vẫn được thực hiện.
 
-## 12. Trạng thái lesson cuối cùng
+## 12. Trạng thái closure lịch sử
 
-A01_L08 là `COMPLETE / FROZEN / READ-ONLY`. User đã xác nhận build WPILib VS
+A01_L08 trước đây là `COMPLETE / FROZEN / READ-ONLY`. User đã xác nhận build WPILib VS
 Code sau repair: `BUILD SUCCESSFUL in 1s`, `6 actionable tasks: 1 executed, 5
 up-to-date`; kết quả test đầy đủ là 430/430 PASS, và bằng chứng Simulation
 cùng Real Robot là PASS. A01_L08 là frozen inheritance source cho A01_L09;
-A01_L09 vẫn `NOT CREATED / NOT STARTED`.
+A01_L09 là `NOT CREATED / NOT STARTED` tại thời điểm closure đó.
 
 Closure này không tuyên bố exact endpoint accuracy, final PID/feedforward
 tuning, hoặc final physical characterization.
+
+## 13. Repair an toàn / độ bền sau khi mở lại - ghi nhận lịch sử
+
+A01_L08 từng ở trạng thái tạm thời `REOPENED / IN_PROGRESS / EDITABLE`. Quy trình operator hiện
+tại: Disabled, chọn routine, đặt robot đúng vị trí vật lý, nhấn
+`Prepare Autonomous`, xác nhận READY, rồi mới enable Autonomous. Prepare capture
+heading, chờ một chu kỳ refresh subsystem, reset known start pose, và preflight
+pose, measured speeds, path, RobotConfig cùng AutoBuilder mà không schedule
+motion.
+
+Driving READY là một attempt dùng một lần, có provenance gồm alliance, routine,
+field variant, expected start pose, heading-capture attempt và path identity.
+SAFE_STOP không cần và không consume driving READY. Fresh driving command được
+construct trước khi đúng attempt được atomic claim.
+
+Validation dùng tolerance tạm thời `0.03 m` và `2.0 degree`. Heading error dùng
+`MathUtil.angleModulus`; đây không phải claim về endpoint, tuning hay physical
+characterization. Điều kiện recoverable có thể được sửa rồi Prepare lại mà
+không restart. Fatal software/configuration fault giữ nguyên first reason và
+fail closed trong suốt process.
+
+Evidence local ở checkpoint trung gian: compileJava PASS, compileTestJava PASS,
+45/45 focused/integration tests PASS, 445/445 full tests PASS và clean build
+PASS. Final Simulation và Real Robot do User xác nhận được ghi ở Section 15.
+Tại checkpoint lịch sử đó, A01_L09 được xem là frozen và chưa sửa đổi. Sau khi
+triển khai event L09 và final closure review, các record L09 hiện tại xác định
+lesson là `COMPLETE / FROZEN / READ-ONLY`. Git publication vẫn chờ User
+commit/push.
+
+## 14. Repair an toàn về terminal ownership
+
+Scheduler lifecycle sau repair là:
+
+`CONSUMED -> RUNNING -> path completion -> centralized stop -> HOLDING ->
+Autonomous exit -> COMPLETE`.
+
+`HOLDING` là state mới duy nhất. Nó có nghĩa path motion đã kết thúc và Swerve
+đã stop, nhưng autonomous command vẫn giữ Swerve requirement. Vì vậy default
+Teleop command không thể lấy ownership trước khi Autonomous kết thúc. SAFE_STOP
+dùng cùng session-long ownership và không consume driving readiness.
+
+WPILib command composition hiện sở hữu toàn bộ child lifecycle callback. Custom
+wrapper trước đây không còn tự gọi `initialize()`, `execute()`, `isFinished()`
+hoặc `end()` của child. Outer Autonomous-enabled lifetime guard thực hiện
+cleanup ngay khi đổi mode, còn `kCancelIncoming` bảo vệ active session.
+
+Lớp phòng vệ thứ hai là `FieldRelativeTeleopDriveCommand` kiểm tra
+`DriverStation.isTeleopEnabled()` trước khi đọc Xbox controller. Ngoài Teleop,
+command gọi centralized stop rồi return, không publish hay submit intent từ
+controller. Hành vi bình thường trong Teleop không đổi.
+
+Evidence local: focused terminal/Teleop 32/32 PASS, preparation regression
+12/12 PASS, autonomous scheduling 29/29 PASS, full suite 442/442 PASS và clean
+build PASS. Final Simulation và Real Robot do User xác nhận đều PASS. Không có
+thay đổi PID/feedforward, CANcoder calibration, SwerveSubsystem, CTRE/IO,
+RobotConfig hoặc PathPlanner asset; không tuyên bố rằng mọi one-time physical
+steering transient đã bị loại bỏ.
+
+## 15. Vì sao L06 và L08 dừng khác nhau?
+
+Sự khác nhau là có chủ ý vì hai lesson dùng hai contract hoàn thành chuyển động
+khác nhau.
+
+Ở L06, follower học theo endpoint-tolerance và pose-correction. Nó so sánh pose
+hiện tại với target, vì vậy robot có thể overshoot endpoint rồi reverse-correct
+để giảm pose error còn lại. Autonomous safety hold vẫn giữ quyền sở hữu Swerve
+sau khi follower dừng để command khác không thể lấy drivetrain trong cùng
+autonomous session.
+
+Ở L08, `ONE_METER_PATH` hoàn tất theo command có thời gian của PathPlanner.
+Composition sau repair vì vậy có terminal ownership rõ ràng:
+path completion -> centralized stop -> `HOLDING`. `HOLDING` giữ Swerve cho đến
+khi Autonomous thoát. Defensive Teleop-enabled gate ngăn controller input lọt
+vào pipeline drivetrain khi Autonomous vẫn đang enabled. Đây là khác biệt về
+command ownership, không phải thay đổi tuning drivetrain.
+
+## 16. Quan hệ giữa các layer kiến trúc
+
+Autonomous request đi qua các layer như sau:
+
+```text
+Autonomous Routine
+    -> PathPlanner / command composition
+    -> SwerveSubsystem
+    -> Swerve module state/output pipeline
+    -> IO
+    -> CTRE hardware
+```
+
+Routine và PathPlanner layer quyết định và kết hợp command. `SwerveSubsystem`
+vẫn là owner duy nhất của hành vi drivetrain, state và centralized stop. Module
+output pipeline đổi chassis intent thành module state/output. IO chuyển output
+đó thành lời gọi tới vendor hardware. Vì vậy repair L08 nằm ở command
+composition và Teleop command boundary, không nằm ở `SwerveSubsystem`, CTRE
+configuration hay module calibration.
+
+## 17. Vì sao phải điều tra steering twitch?
+
+Steering twitch ở terminal được điều tra vì path completion đã release Swerve
+requirement trước khi Autonomous kết thúc. Điều đó tạo ownership gap: default
+Teleop command có thể reacquire Swerve trong lúc Driver Station vẫn báo
+Autonomous Enabled. Source review cũng phát hiện preparation wrapper tự gọi
+manual child-command lifecycle, trái với contract scheduler-native của A01.
+
+Repair giữ Swerve qua terminal `HOLDING` và SAFE_STOP, thêm Teleop mode gate tối
+thiểu, và để WPILib sở hữu child lifecycle callback. User quan sát trên real
+robot rằng steering twitch biến mất sau repair. Đây là validation phù hợp với
+ownership repair, nhưng không chứng minh mọi physical cause có thể xảy ra.
+
+PID/feedforward tuning và CANcoder recalibration không được dùng vì evidence
+chỉ ra lỗi phần mềm về ownership/mode boundary, không phải lỗi gain, encoder
+offset hay hardware đã được chứng minh. Scheduler-native composition được ưu
+tiên hơn manual lifecycle delegation vì scheduler sở hữu requirement,
+interruption, initialize, execute, completion và cleanup trong một lifecycle
+thống nhất.
+
+## 18. Ghi nhận verification cuối cùng
+
+User đã xác nhận Blue và Red execution, Prepare -> READY, recoverable
+`RESET_REJECTED` rồi Prepare READY lần hai không restart, final Blue pose gần
+`1.005 m`, terminal hold, không có drivetrain movement khi joystick mô phỏng
+sau path completion, Autonomous -> Disabled -> Teleop, Teleop bình thường,
+SAFE_STOP, recovery không restart và không automatic restart. Real Robot còn
+bao phủ repaired deployment, preparation telemetry, repeat Blue, Blue -> Red
+không restart, mode-loss stop và steering twitch không còn sau repair. A01_L08
+vẫn là `REOPENED / IN_PROGRESS / EDITABLE`; Git publication vẫn thuộc User.
+Final re-freeze hiện là `HOLD`: `AutoBuilderContractAdapter.SafeAutoBuilderCommand`
+vẫn tự delegate các child lifecycle callback, nên gate scheduler-native không
+manual lifecycle chưa được giải quyết. Audit documentation-only này không cho
+phép sửa production hoặc test.
+
+## 19. Ghi nhận re-freeze cuối cùng
+
+Phần trước giữ nguyên bằng chứng lịch sử của architecture HOLD. Repair được phê
+duyệt sau đó đã loại bỏ `SafeAutoBuilderCommand` và toàn bộ manual child
+lifecycle delegation khỏi active path. WPILib scheduler hiện sở hữu PathPlanner
+child lifecycle; Robot-level exception boundary, coordinator fault bridge,
+centralized stop, immutable `FAULTED`, terminal `HOLDING`, SAFE_STOP, Teleop
+mode gate và nguyên tắc không automatic restart đều được giữ nguyên.
+
+Verification cuối cùng đã PASS `compileJava`, `compileTestJava`,
+`RobotSchedulerExceptionBoundaryTest`, toàn bộ 449 test và clean build. User đã
+xác nhận Simulation và real-robot retest cuối cùng, gồm Blue/Red path,
+preparation/recovery, terminal ownership, SAFE_STOP, chuyển từ Autonomous sang
+Teleop và không automatic restart.
+
+Steer event ngắn, chỉ xảy ra một lần gần path completion được phân loại là
+`KNOWN / BOUNDED TERMINAL STEER TRANSIENT`, `ACCEPTED FOR CURRENT LESSON` và
+`DEFERRED FOR FUTURE DRIVETRAIN / PATH-FOLLOWING TUNING`. Root cause vật lý
+chính xác chưa được chứng minh đầy đủ. Không có sustained oscillation, PID
+instability, CANcoder defect, hardware defect, PathPlanner defect, Swerve
+architecture defect, ownership gap hoặc uncontrolled drivetrain motion nào đã
+được xác minh, vì vậy không có production change tương ứng nào được biện minh.
+Một sample desktop khoảng 5.9 ms của periodic không phải bằng chứng đại diện
+cho roboRIO và không chặn closure.
+
+Frozen Backbone và Frozen Interface Contract được giữ nguyên. RobotContainer
+vẫn chỉ là composition root; SwerveSubsystem vẫn sở hữu drivetrain/output/
+localization; A01_L04 vẫn là owner duy nhất của alliance transform;
+`shouldFlipPath = false`; và `preventFlipping = true`. A01_L08 được đặt thành
+`COMPLETE / FROZEN / READ-ONLY` sau exceptional reopen. V00_L02 vẫn
+`SUSPENDED / READ-ONLY` cho đến khi có reconciliation và resume riêng.

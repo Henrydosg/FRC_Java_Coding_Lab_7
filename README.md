@@ -154,8 +154,8 @@ focused L09 tests PASS, 384 unchanged inherited regression tests PASS, the full
 Driver Station / Glass, and Real Robot PASS evidence for Blue and Red, event
 dispatch and telemetry, concurrent path/event execution, Disable/mode-loss
 stop, no automatic restart, and recovery to Teleop. Documentation reconciliation,
-final architecture review, and final closure review are PASS. Git publication
-remains pending User commit/push; the event remains a
+final architecture review, and final closure review are PASS. User-owned Git
+publication is complete at `6b243bb`; the event remains a
 non-mechanism demonstration, and no Intake, Feeder, Flywheel, or other D01
 mechanism integration is claimed. Exact endpoint accuracy, final
 PID/feedforward tuning, and final physical characterization remain explicitly
@@ -180,8 +180,8 @@ production/test boundary; no SwerveSubsystem, CTRE/IO, tuning, calibration,
 PathPlanner asset, Gradle, vendordep, frozen predecessor, successor, or V00 file
 was changed. Exact endpoint accuracy, final PID/feedforward tuning, and final
 physical characterization remain explicitly unclaimed. A01_L09 is
-`COMPLETE / FROZEN / READ-ONLY`; User-owned Git publication remains pending and
-the A01 lesson order remains unchanged.
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED` at `6b243bb`, and the A01 lesson
+order remains unchanged.
 A01 ends at L09; A01_L10 is not authorized. A00 is closed at A00_L04; A00_L05
 is not authorized.
 
@@ -239,17 +239,19 @@ V00 is the approved successor roadmap after final closure and freezing of
 Authority:
 `docs/architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`
 
-Current state: roadmap `APPROVED / FROZEN`; `module_V00` exists. V00_L01 is
-`COMPLETE / FROZEN / READ-ONLY`. V00_L02 was activated, implemented, and
-verified, but is unfinished and now `SUSPENDED / READ-ONLY` while the
-higher-priority A01_L08 safety/robustness repair is governed. V00_L02 is not
-COMPLETE and not FROZEN; its engineering work is preserved and unmodified. No
-camera or vendor implementation is selected.
+Current state: roadmap `APPROVED / FROZEN`; `module_V00` exists. The historical
+V00_L01 had previously reached `COMPLETE / FROZEN / READ-ONLY`, but that lineage
+became stale when final A01_L09 was reconstructed and published at `6b243bb`.
+The current canonical V00_L01 was reconstructed from final A01_L09, is
+technically verified, and has reconciled documentation. Its final architecture
+and closure reviews are PASS, and it is now `COMPLETE / FROZEN / READ-ONLY`.
+User-owned Git publication remains pending commit/push.
 
-V00_L02 may resume only after A01_L08 is repaired, re-verified, and explicitly
-re-frozen, followed by separate governance reconciliation. Resume is not
-automatic, and any required forward-port through the inherited A01_L09/V00_L01
-lineage requires explicit approval after suspension ends.
+V00_L02 was activated, implemented, and verified from the historical lineage,
+but it is unfinished and remains `SUSPENDED / READ-ONLY / UNMODIFIED`. It is not
+COMPLETE, not FROZEN, and not editable. V00_L01 closure does not resume it.
+Resume is not automatic and requires a separate governance reconciliation. No
+camera or vendor implementation is selected.
 
 Approved lesson sequence:
 

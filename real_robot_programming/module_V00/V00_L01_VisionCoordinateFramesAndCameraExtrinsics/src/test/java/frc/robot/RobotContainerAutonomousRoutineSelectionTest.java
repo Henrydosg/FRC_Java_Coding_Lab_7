@@ -9,6 +9,7 @@
 
 package frc.robot;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -21,10 +22,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutonomousRoutineFactory;
 import frc.robot.commands.AutonomousSafetyHoldCommand;
+import frc.robot.commands.PrepareAutonomousCommand;
 import java.lang.reflect.Field;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class RobotContainerAutonomousRoutineSelectionTest {
@@ -33,16 +34,10 @@ class RobotContainerAutonomousRoutineSelectionTest {
     HAL.initialize(500, 0);
   }
 
-  @BeforeEach
-  void clearNamedCommandsBeforeCompositionRoot() {
-    AutoBuilder.resetForTesting();
-    NamedCommands.clearAll();
-  }
-
   @AfterEach
   void resetAutoBuilder() {
-    AutoBuilder.resetForTesting();
     NamedCommands.clearAll();
+    AutoBuilder.resetForTesting();
   }
 
   @Test
@@ -54,6 +49,9 @@ class RobotContainerAutonomousRoutineSelectionTest {
         (SendableChooser<AutonomousRoutineFactory.AutonomousRoutineId>)
             SmartDashboard.getData("Autonomous Routine");
     assertSame(AutonomousRoutineFactory.AutonomousRoutineId.SAFE_STOP, chooser.getSelected());
+    assertInstanceOf(
+        PrepareAutonomousCommand.class,
+        SmartDashboard.getData("Prepare Autonomous"));
 
     Command first = robotContainer.getAutonomousCommand();
     Command second = robotContainer.getAutonomousCommand();
@@ -82,9 +80,9 @@ class RobotContainerAutonomousRoutineSelectionTest {
   }
 
   @Test
-  void chooserExposesTheExplicitNonDefaultEventRoutine() throws Exception {
-    new RobotContainer();
-
+  void chooserExposesTheExplicitEventRoutineWithoutChangingTheSafeStopDefault()
+      throws Exception {
+    RobotContainer robotContainer = new RobotContainer();
     @SuppressWarnings("unchecked")
     SendableChooser<AutonomousRoutineFactory.AutonomousRoutineId> chooser =
         (SendableChooser<AutonomousRoutineFactory.AutonomousRoutineId>)
@@ -93,7 +91,7 @@ class RobotContainerAutonomousRoutineSelectionTest {
     selectedField.setAccessible(true);
     selectedField.set(chooser, "ONE_METER_WITH_EVENT");
 
-    assertSame(
+    assertEquals(
         AutonomousRoutineFactory.AutonomousRoutineId.ONE_METER_WITH_EVENT,
         chooser.getSelected());
   }

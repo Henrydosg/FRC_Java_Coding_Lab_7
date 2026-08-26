@@ -11,123 +11,85 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
+import frc.robot.autonomous.AutonomousEventId;
 import frc.robot.observation.AutonomousEventObservation;
 import frc.robot.observation.AutonomousEventObservation.LifecycleState;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.DoubleSupplier;
 
-/** Deterministic, mechanism-independent bounded event command for L09 learning. */
+/** Deterministic, non-mechanism demonstration command for the lesson event marker. */
 public final class AutonomousEventDemonstrationCommand extends Command {
+  private final AutonomousEventId eventId;
   private final Consumer<AutonomousEventObservation> observationSink;
-  private final DoubleSupplier monotonicClock;
-  private final double durationSeconds = Constants.PathPlannerLearningConstants.kLearningEventDurationSeconds;
+  private final DoubleSupplier clock;
+  private final double durationSeconds;
 
   private double startTimeSeconds;
-  private boolean initialized;
-  private boolean running;
-  private boolean terminalObservationPublished;
 
-  /** Creates a production command using the WPILib FPGA clock. */
+  /** Creates a demonstration event using the WPILib FPGA timestamp and lesson duration. */
   public AutonomousEventDemonstrationCommand(
-      Consumer<AutonomousEventObservation> observationSink) {
-    this(observationSink, Timer::getFPGATimestamp);
+      AutonomousEventId eventId,
+      Consumer<AutonomousEventObservation> observationSink,
+      double durationSeconds) {
+    this(eventId, observationSink, Timer::getFPGATimestamp, durationSeconds);
   }
 
-  /** Creates a command with an injectable monotonic clock for deterministic tests. */
-  AutonomousEventDemonstrationCommand(
-      Consumer<AutonomousEventObservation> observationSink, DoubleSupplier monotonicClock) {
+  /** Creates a demonstration event with an injectable monotonic clock for deterministic tests. */
+  public AutonomousEventDemonstrationCommand(
+      AutonomousEventId eventId,
+      Consumer<AutonomousEventObservation> observationSink,
+      DoubleSupplier clock,
+      double durationSeconds) {
+    this.eventId = Objects.requireNonNull(eventId, "eventId");
     this.observationSink = Objects.requireNonNull(observationSink, "observationSink");
-    this.monotonicClock = Objects.requireNonNull(monotonicClock, "monotonicClock");
+    this.clock = Objects.requireNonNull(clock, "clock");
     if (!Double.isFinite(durationSeconds) || durationSeconds <= 0.0) {
-      throw new IllegalStateException("learning event duration must be finite and positive");
+      throw new IllegalArgumentException("durationSeconds must be finite and positive");
     }
+    this.durationSeconds = durationSeconds;
   }
 
   @Override
   public void initialize() {
-    initialized = true;
-    running = false;
-    terminalObservationPublished = false;
-
-    double nowSeconds = readClock();
-    if (!Double.isFinite(nowSeconds)) {
-      publishTerminal(LifecycleState.FACTORY_FAILURE);
-      return;
-    }
-
-    startTimeSeconds = nowSeconds;
-    running = true;
-    publish(new AutonomousEventObservation(AutonomousEventId.LEARNING_EVENT, LifecycleState.STARTED, true));
+    startTimeSeconds = readClock();
+    publish(LifecycleState.STARTED, true);
   }
 
   @Override
   public void execute() {
-    if (!initialized || !running) {
-      return;
-    }
-
-    double nowSeconds = readClock();
-    if (!Double.isFinite(nowSeconds) || nowSeconds < startTimeSeconds) {
-      publishTerminal(LifecycleState.FACTORY_FAILURE);
-      return;
-    }
-
-    if (nowSeconds - startTimeSeconds >= durationSeconds) {
-      running = false;
-      publishTerminal(LifecycleState.COMPLETED);
-      return;
-    }
-
-    publish(new AutonomousEventObservation(AutonomousEventId.LEARNING_EVENT, LifecycleState.ACTIVE, true));
+    double currentTimeSeconds = readClock();
+    validateForwardTime(currentTimeSeconds);
+    publish(LifecycleState.ACTIVE, true);
   }
 
   @Override
   public boolean isFinished() {
-    return initialized && !running;
+    double currentTimeSeconds = readClock();
+    validateForwardTime(currentTimeSeconds);
+    return currentTimeSeconds - startTimeSeconds >= durationSeconds;
   }
 
   @Override
   public void end(boolean interrupted) {
-    if (interrupted && initialized && running) {
-      running = false;
-      publishTerminal(LifecycleState.CANCELLED);
-    }
-    initialized = false;
+    publish(interrupted ? LifecycleState.CANCELLED : LifecycleState.COMPLETED, false);
   }
 
   private double readClock() {
-    try {
-      return monotonicClock.getAsDouble();
-    } catch (RuntimeException failure) {
-      return Double.NaN;
+    double value = clock.getAsDouble();
+    if (!Double.isFinite(value)) {
+      throw new IllegalStateException("event clock must be finite");
+    }
+    return value;
+  }
+
+  private void validateForwardTime(double currentTimeSeconds) {
+    if (currentTimeSeconds < startTimeSeconds) {
+      throw new IllegalStateException("event clock moved backwards");
     }
   }
 
-  private void publishTerminal(LifecycleState state) {
-    running = false;
-    if (!terminalObservationPublished) {
-      terminalObservationPublished = true;
-      publish(new AutonomousEventObservation(AutonomousEventId.LEARNING_EVENT, state, false));
-    }
-  }
-
-  private void publish(AutonomousEventObservation observation) {
-    try {
-      observationSink.accept(observation);
-    } catch (RuntimeException failure) {
-      running = false;
-      if (!terminalObservationPublished) {
-        terminalObservationPublished = true;
-        try {
-          observationSink.accept(
-              new AutonomousEventObservation(
-                  AutonomousEventId.LEARNING_EVENT, LifecycleState.FACTORY_FAILURE, false));
-        } catch (RuntimeException ignored) {
-          // A failing observation sink cannot safely be recovered by this command.
-        }
-      }
-    }
+  private void publish(LifecycleState state, boolean active) {
+    observationSink.accept(new AutonomousEventObservation(eventId, state, active));
   }
 }

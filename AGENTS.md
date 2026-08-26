@@ -65,7 +65,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D00/
     ├── module_D01/
     ├── module_S00/
-    └── module_V00/ (authorized; V00_L01 complete, V00_L02 suspended)
+    └── module_V00/ (authorized; V00_L01 complete/frozen, V00_L02 suspended)
         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -527,8 +527,14 @@ The approved V00 decision authorizes `V00 - AprilTag Vision Observation and Pose
 A01_L09 after the required closure approval; A01_L10 is prohibited. V00_L01 shall inherit the
 then-frozen A01_L09 through the standard copy,
 rename, generated-artifact cleanup, baseline-build, and transition-guide workflow. This governance
-registration does not select a camera vendor. V00_L01 has since completed and frozen; V00_L02 was
-activated and implemented, then suspended read-only by the exceptional A01_L08 safety decision.
+registration does not select a camera vendor. The historical pre-reconstruction V00_L01 later
+completed and froze, and V00_L02 was activated and implemented from that lineage before being
+suspended read-only by the exceptional A01_L08 safety decision. After final A01_L09 was
+reconstructed and published at `6b243bb`, the historical V00_L01 lineage was classified stale.
+The current canonical V00_L01 was reconstructed from that final A01_L09, passed
+its final architecture and closure reviews, and is now
+`COMPLETE / FROZEN / READ-ONLY`. V00_L02 remains
+`SUSPENDED / READ-ONLY / UNMODIFIED`.
 
 The authorized V00 lesson order is:
 
@@ -568,15 +574,19 @@ child-command lifecycle delegation that conflicts with the A01 scheduler-native
 composition contract. With explicit Architect and User approval:
 
 - A01_L01-L07 and A01_L09 are `COMPLETE / FROZEN / READ-ONLY`; A01_L09 final
-  architecture and closure reviews are PASS, while User-owned Git publication
-  remains pending;
-- V00_L01 remains COMPLETE / FROZEN / READ-ONLY;
+  architecture and closure reviews are PASS, and User-owned Git publication is
+  complete at `6b243bb`;
+- the historical pre-reconstruction V00_L01 had reached
+  `COMPLETE / FROZEN / READ-ONLY`, but that lineage is stale and non-authoritative;
+- the current reconstructed V00_L01 passed final architecture and closure
+  review and is `COMPLETE / FROZEN / READ-ONLY`;
 - A01_L08 completed its authorized reopen and is now
   `COMPLETE / FROZEN / READ-ONLY`;
 - V00_L02 has Status SUSPENDED and Active State
   `SUSPENDED / READ-ONLY`; its unfinished engineering is preserved;
-- no lesson is made editable by this closed exception; V00_L02 remains
-  suspended until separately resumed;
+- this closed A01_L08 exception does not itself make a lesson editable; current
+  reconstructed V00_L01 is frozen after its separately authorized closure, and
+  V00_L02 remains suspended until separately resumed;
 - the future terminal repair may use a scheduler-native Swerve-owning hold,
   make SAFE_STOP retain safe ownership during active Autonomous, add a minimum
   defensive Teleop-enabled output gate, replace the affected manual lifecycle
@@ -735,3 +745,5 @@ Only report verified facts.
 | 1.7 | 2026-08-24 | FROZEN | APPROVED: expand the A01_L08 reopen scope for scheduler-native autonomous terminal ownership, SAFE_STOP ownership, a defensive Teleop-mode output gate, and removal of manual child lifecycle delegation; implementation remains unauthorized. |
 | 1.8 | 2026-08-25 | FROZEN | APPROVED: expand the A01_L08 governance boundary for the scheduler-native AutoBuilder exception design and Robot-level scheduler `RuntimeException` boundary across the exact four-file production scope and named focused tests; implementation remains unauthorized. |
 | 1.9 | 2026-08-26 | FROZEN | APPROVED: record final A01_L08 verification and re-freeze it as `COMPLETE / FROZEN / READ-ONLY`; V00_L02 remains `SUSPENDED / READ-ONLY` pending separate reconciliation and resume approval. |
+| 1.10 | 2026-08-26 | FROZEN | APPROVED: reconcile stale historical V00_L01 lifecycle metadata; current reconstructed V00_L01 is the sole `REOPENED / IN_PROGRESS / EDITABLE` lesson pending final closure, and V00_L02 remains `SUSPENDED / READ-ONLY / UNMODIFIED`. |
+| 1.11 | 2026-08-26 | FROZEN | APPROVED: record final V00_L01 architecture and closure review PASS and freeze the reconstructed lesson as `COMPLETE / FROZEN / READ-ONLY`; V00_L02 remains `SUSPENDED / READ-ONLY / UNMODIFIED`. |

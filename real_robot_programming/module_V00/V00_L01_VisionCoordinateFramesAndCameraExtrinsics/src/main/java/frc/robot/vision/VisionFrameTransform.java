@@ -7,7 +7,7 @@
  * Mentor: SSIS
  */
 
-package frc.robot.observation.vision;
+package frc.robot.vision;
 
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Quaternion;
@@ -35,7 +35,8 @@ public final class VisionFrameTransform {
    * @param robotToCamera camera mounting transform from robot frame to camera frame
    * @return camera pose in the canonical field frame
    * @throws NullPointerException when either argument or one of its geometry components is null
-   * @throws IllegalArgumentException when either argument contains a nonfinite value
+   * @throws IllegalArgumentException when either argument or the result contains a nonfinite
+   *     value
    */
   public static Pose3d fieldToCamera(Pose3d fieldToRobot, Transform3d robotToCamera) {
     Pose3d validFieldToRobot = requireFinitePose(fieldToRobot, "fieldToRobot");
@@ -51,7 +52,7 @@ public final class VisionFrameTransform {
    * @param robotToCamera camera mounting transform from robot frame to camera frame
    * @return mounting transform from camera frame to robot frame
    * @throws NullPointerException when the argument or one of its geometry components is null
-   * @throws IllegalArgumentException when the argument contains a nonfinite value
+   * @throws IllegalArgumentException when the argument or the result contains a nonfinite value
    */
   public static Transform3d cameraToRobot(Transform3d robotToCamera) {
     Transform3d validRobotToCamera =
@@ -60,7 +61,8 @@ public final class VisionFrameTransform {
   }
 
   /**
-   * Recovers the robot pose in the canonical field frame from a camera pose and mounting transform.
+   * Recovers the robot pose in the canonical field frame from a camera pose and mounting
+   * transform.
    *
    * <p>This applies {@link #cameraToRobot(Transform3d)} in the camera pose frame.
    *
@@ -68,7 +70,8 @@ public final class VisionFrameTransform {
    * @param robotToCamera camera mounting transform from robot frame to camera frame
    * @return robot pose in the canonical field frame
    * @throws NullPointerException when either argument or one of its geometry components is null
-   * @throws IllegalArgumentException when either argument contains a nonfinite value
+   * @throws IllegalArgumentException when either argument or the result contains a nonfinite
+   *     value
    */
   public static Pose3d fieldToRobotFromCamera(
       Pose3d fieldToCamera, Transform3d robotToCamera) {
