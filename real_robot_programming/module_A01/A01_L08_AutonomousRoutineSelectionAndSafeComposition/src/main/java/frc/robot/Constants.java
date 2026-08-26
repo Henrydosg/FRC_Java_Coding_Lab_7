@@ -133,6 +133,17 @@ public final class Constants {
     private AutonomousConstants() {}
   }
 
+  /** Stores provisional A01_L08 autonomous-preparation validation values. */
+  public static final class AutonomousPreparationConstants {
+    /** Maximum accepted start-context translation error, in meters. */
+    public static final double kTranslationToleranceMeters = 0.03;
+
+    /** Maximum accepted wrapped start-context heading error, in radians. */
+    public static final double kHeadingToleranceRadians = Units.degreesToRadians(2.0);
+
+    private AutonomousPreparationConstants() {}
+  }
+
   /** Stores the conservative L02 pose-targeted autonomous learning configuration. */
   public static final class PoseTargetedAutonomousConstants {
     /** One small field-relative learning target from the inherited known origin. */

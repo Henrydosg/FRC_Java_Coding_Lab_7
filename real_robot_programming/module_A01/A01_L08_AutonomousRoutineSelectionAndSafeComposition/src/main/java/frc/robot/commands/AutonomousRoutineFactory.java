@@ -9,13 +9,14 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
+import frc.robot.commands.AutoBuilderContractAdapter.CommandCreationResult;
+import frc.robot.commands.AutoBuilderContractAdapter.CommandCreationStatus;
+import frc.robot.observation.autonomous.AutonomousPreparationObservation.ReturnedCommand;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.DoubleSupplier;
 import java.util.function.Function;
 
 /** Creates one fresh, fail-closed autonomous command from a snapshotted routine identity. */
@@ -27,91 +28,106 @@ public final class AutonomousRoutineFactory {
   }
 
   private final SwerveSubsystem swerveSubsystem;
-  private final Function<AutonomousStartContext, Command> oneMeterPathFactory;
-  private final DoubleSupplier monotonicClock;
+  private final Function<AutonomousStartContext, CommandCreationResult> oneMeterPathFactory;
+  private final AutonomousPreparationCoordinator preparationCoordinator;
 
   /** Creates a production routine factory using the WPILib monotonic clock. */
   public AutonomousRoutineFactory(
       SwerveSubsystem swerveSubsystem,
-      AutoBuilderContractAdapter autoBuilderContractAdapter) {
+      AutoBuilderContractAdapter autoBuilderContractAdapter,
+      AutonomousPreparationCoordinator preparationCoordinator) {
     this(
         swerveSubsystem,
         Objects.requireNonNull(autoBuilderContractAdapter, "autoBuilderContractAdapter")
-            ::createPathCommand,
-        Timer::getFPGATimestamp);
+            ::createPathCommandResult,
+        preparationCoordinator);
   }
 
-  /** Test-only constructor that keeps the production adapter boundary injectable. */
   AutonomousRoutineFactory(
       SwerveSubsystem swerveSubsystem,
-      Function<AutonomousStartContext, Command> oneMeterPathFactory,
-      DoubleSupplier monotonicClock) {
+      Function<AutonomousStartContext, CommandCreationResult> oneMeterPathFactory,
+      AutonomousPreparationCoordinator preparationCoordinator) {
     this.swerveSubsystem = Objects.requireNonNull(swerveSubsystem, "swerveSubsystem");
     this.oneMeterPathFactory =
         Objects.requireNonNull(oneMeterPathFactory, "oneMeterPathFactory");
-    this.monotonicClock = Objects.requireNonNull(monotonicClock, "monotonicClock");
+    this.preparationCoordinator =
+        Objects.requireNonNull(preparationCoordinator, "preparationCoordinator");
   }
 
   /**
-   * Creates a routine factory with an injectable clock for deterministic command lifecycle tests.
+   * Creates a fresh command from one chooser snapshot and current alliance snapshot.
    *
-   * @param swerveSubsystem existing drivetrain and centralized stop authority
-   * @param autoBuilderContractAdapter existing L07 safe path boundary
-   * @param monotonicClock monotonic time source in seconds
-   */
-  public AutonomousRoutineFactory(
-      SwerveSubsystem swerveSubsystem,
-      AutoBuilderContractAdapter autoBuilderContractAdapter,
-      DoubleSupplier monotonicClock) {
-    this(
-        swerveSubsystem,
-        Objects.requireNonNull(autoBuilderContractAdapter, "autoBuilderContractAdapter")
-            ::createPathCommand,
-        monotonicClock);
-  }
-
-  /**
-   * Creates a new command from one already snapshotted identity and readiness result.
-   *
-   * <p>Every invalid input and every construction failure resolves to a non-driving safety hold.
-   * The factory deliberately performs no chooser, DriverStation, or hardware access.
-   *
-   * @param routineId snapshotted chooser identity
-   * @param acceptedStartContext one-shot Disabled-only readiness context, when available
-   * @return a fresh command instance
+   * <p>Driving readiness is previewed, the command is constructed, and then the exact preparation
+   * is atomically consumed. SAFE_STOP never consumes driving readiness.
    */
   public Command create(
-      AutonomousRoutineId routineId, Optional<AutonomousStartContext> acceptedStartContext) {
+      AutonomousRoutineId routineId, Optional<Alliance> currentAlliance) {
+    Optional<Alliance> alliance =
+        currentAlliance == null ? Optional.empty() : currentAlliance;
     if (routineId == null) {
+      preparationCoordinator.recordReturnedCommand(ReturnedCommand.SAFE_STOP_FALLBACK);
       return createSafeStop();
     }
 
-    switch (routineId) {
-      case SAFE_STOP:
-        return createSafeStop();
-      case ONE_METER_PATH:
-        if (acceptedStartContext == null || acceptedStartContext.isEmpty()) {
-          return createSafeStop();
-        }
-        try {
-          Command pathCommand = oneMeterPathFactory.apply(acceptedStartContext.orElseThrow());
-          if (pathCommand == null
-              || !pathCommand.getRequirements().contains(swerveSubsystem)) {
-            return createSafeStop();
-          }
-          return pathCommand;
-        } catch (RuntimeException failure) {
-          return createSafeStop();
-        }
-      default:
-        return createSafeStop();
+    if (routineId == AutonomousRoutineId.SAFE_STOP) {
+      preparationCoordinator.observeSafeStopSelection(alliance);
+      preparationCoordinator.recordReturnedCommand(ReturnedCommand.SAFE_STOP);
+      return createSafeStop();
     }
+
+    Optional<AutonomousPreparationCoordinator.PreparationClaim> preview =
+        preparationCoordinator.previewDrivingPreparation(routineId, alliance);
+    if (preview.isEmpty()) {
+      preparationCoordinator.recordReturnedCommand(ReturnedCommand.SAFE_STOP_FALLBACK);
+      return createSafeStop();
+    }
+
+    CommandCreationResult creationResult;
+    try {
+      creationResult =
+          Objects.requireNonNull(
+              oneMeterPathFactory.apply(preview.orElseThrow().startContext()),
+              "oneMeterPathFactory result");
+    } catch (RuntimeException failure) {
+      preparationCoordinator.recordFatalInvariant(
+          "autonomous path factory threw during command construction");
+      preparationCoordinator.recordReturnedCommand(ReturnedCommand.SAFE_STOP_FALLBACK);
+      return createSafeStop();
+    }
+
+    if (creationResult.status() == CommandCreationStatus.NOT_READY) {
+      preparationCoordinator.recordRecoverableConstructionFailure();
+      preparationCoordinator.recordReturnedCommand(ReturnedCommand.SAFE_STOP_FALLBACK);
+      return createSafeStop();
+    }
+    if (creationResult.status() == CommandCreationStatus.FAULTED) {
+      preparationCoordinator.recordReturnedCommand(ReturnedCommand.SAFE_STOP_FALLBACK);
+      return createSafeStop();
+    }
+
+    Command pathCommand = creationResult.command().orElse(null);
+    if (pathCommand == null
+        || !pathCommand.getRequirements().contains(swerveSubsystem)) {
+      preparationCoordinator.recordFatalInvariant(
+          "constructed autonomous command did not own SwerveSubsystem");
+      preparationCoordinator.recordReturnedCommand(ReturnedCommand.SAFE_STOP_FALLBACK);
+      return createSafeStop();
+    }
+
+    AutonomousPreparationCoordinator.PreparationClaim claim = preview.orElseThrow();
+    if (!preparationCoordinator.claim(claim, alliance)) {
+      preparationCoordinator.recordReturnedCommand(ReturnedCommand.SAFE_STOP_FALLBACK);
+      return createSafeStop();
+    }
+
+    Command lifecycleCommand =
+        preparationCoordinator.wrapClaimedDrivingCommand(
+            pathCommand, createSafeStop(), claim.attemptId());
+    preparationCoordinator.recordReturnedCommand(ReturnedCommand.ONE_METER_PATH);
+    return lifecycleCommand;
   }
 
   private Command createSafeStop() {
-    return new AutonomousSafetyHoldCommand(
-        swerveSubsystem,
-        Constants.AutonomousConstants.kSafetyHoldLifecycleDurationSeconds,
-        monotonicClock);
+    return new AutonomousSafetyHoldCommand(swerveSubsystem);
   }
 }

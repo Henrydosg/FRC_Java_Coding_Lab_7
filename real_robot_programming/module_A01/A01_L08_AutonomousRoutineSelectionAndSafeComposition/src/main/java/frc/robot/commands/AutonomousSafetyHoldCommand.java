@@ -9,54 +9,32 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.util.Objects;
-import java.util.function.DoubleSupplier;
 
 /**
- * Holds the drivetrain stopped for one bounded autonomous command lifecycle.
+ * Retains stopped drivetrain ownership for one active autonomous session.
  *
- * <p>This command intentionally performs no drivetrain request. It establishes the autonomous
- * command requirement, bounded timing, and stop-on-exit contract for A00_L01.
+ * <p>This command submits no motion request. It prevents the default Teleop command from
+ * reacquiring Swerve until the Driver Station leaves Autonomous Enabled.
  */
 public final class AutonomousSafetyHoldCommand extends Command {
   private final SwerveSubsystem swerveSubsystem;
-  private final double durationSeconds;
-  private final DoubleSupplier monotonicClock;
-
-  private double startTimeSeconds = Double.NaN;
-  private boolean initialized;
-  private boolean invalidClock;
 
   /**
-   * Creates a bounded zero-motion autonomous lifecycle command.
+   * Creates a zero-motion autonomous-session hold.
    *
    * @param swerveSubsystem drivetrain subsystem that owns the stop authority
-   * @param durationSeconds finite positive command duration in seconds
-   * @param monotonicClock monotonic time source in seconds
    */
-  public AutonomousSafetyHoldCommand(
-      SwerveSubsystem swerveSubsystem,
-      double durationSeconds,
-      DoubleSupplier monotonicClock) {
+  public AutonomousSafetyHoldCommand(SwerveSubsystem swerveSubsystem) {
     this.swerveSubsystem = Objects.requireNonNull(swerveSubsystem, "swerveSubsystem");
-    if (!Double.isFinite(durationSeconds) || durationSeconds <= 0.0) {
-      throw new IllegalArgumentException("durationSeconds must be finite and positive");
-    }
-    this.durationSeconds = durationSeconds;
-    this.monotonicClock = Objects.requireNonNull(monotonicClock, "monotonicClock");
     addRequirements(swerveSubsystem);
   }
 
   @Override
   public void initialize() {
-    initialized = true;
-    invalidClock = false;
-    startTimeSeconds = readClock();
-    if (!Double.isFinite(startTimeSeconds)) {
-      invalidClock = true;
-    }
     swerveSubsystem.stop();
   }
 
@@ -67,20 +45,7 @@ public final class AutonomousSafetyHoldCommand extends Command {
 
   @Override
   public boolean isFinished() {
-    if (!initialized || invalidClock) {
-      return initialized;
-    }
-
-    double currentTimeSeconds = readClock();
-    double elapsedSeconds = currentTimeSeconds - startTimeSeconds;
-    if (!Double.isFinite(currentTimeSeconds)
-        || !Double.isFinite(elapsedSeconds)
-        || elapsedSeconds < 0.0) {
-      invalidClock = true;
-      swerveSubsystem.stop();
-      return true;
-    }
-    return elapsedSeconds >= durationSeconds;
+    return !DriverStation.isAutonomousEnabled();
   }
 
   @Override
@@ -93,11 +58,8 @@ public final class AutonomousSafetyHoldCommand extends Command {
     return false;
   }
 
-  private double readClock() {
-    try {
-      return monotonicClock.getAsDouble();
-    } catch (RuntimeException failure) {
-      return Double.NaN;
-    }
+  @Override
+  public InterruptionBehavior getInterruptionBehavior() {
+    return InterruptionBehavior.kCancelIncoming;
   }
 }

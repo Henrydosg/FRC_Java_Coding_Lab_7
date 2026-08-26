@@ -5,7 +5,8 @@
 - Source lesson: `A01_L07_AutoBuilderContractIntegration`.
 - Source status: `COMPLETE / FROZEN / READ-ONLY`.
 - Active lesson: `A01_L08_AutonomousRoutineSelectionAndSafeComposition`.
-- Active status: `COMPLETE / FROZEN / READ-ONLY`.
+- Active status: `REOPENED / IN_PROGRESS / EDITABLE` pending the final
+  architecture gate.
 - Authoritative title: `A01_L08 - Autonomous Routine Selection and Safe Composition`.
 - Git: user-owned; Codex ran no Git commands.
 - Implementation boundary: the historical steps record the approved L08
@@ -705,12 +706,319 @@ configuration, assets, or frozen L01-L07 files were modified.
 
 ### Verification
 
-A01_L08 is `COMPLETE / FROZEN / READ-ONLY`; the transition guide is final and
-PASS. A01_L08 is the frozen inheritance source for A01_L09. A01_L09 remains
-`NOT CREATED / NOT STARTED`. Git commit and push remain user-owned and were not
-run by Codex.
+A01_L08 was `COMPLETE / FROZEN / READ-ONLY`; the transition guide was final and
+PASS at the original closure. A01_L08 later became the frozen inheritance
+source for A01_L09. A01_L09 was `NOT CREATED / NOT STARTED` at that historical
+point and now remains `COMPLETE / FROZEN / READ-ONLY` outside this reopen. Git
+commit and push remain user-owned and were not run by Codex.
 
 ### Expected Result
 
 Documentation closure is PASS, the L08 snapshot is protected for future
 inheritance, and no implementation work is started for L09.
+
+## Step 22 - Reopen L08 for the Approved Safety / Robustness Repair
+
+### Objective
+
+Replace fragile autonomous preparation behavior without adding a new routine,
+path, mechanism event, or strategy feature.
+
+### Why
+
+Post-freeze real-robot evidence showed that chooser identity did not prove a
+driving command was returned, transient preparation failures could require a
+Robot Code restart, exact `1e-9` pose comparisons rejected normal sensor state,
+and production preparation actions could conflict with active autonomous.
+
+### Action
+
+Implemented one coordinator-owned lifecycle, a unified Disabled Prepare action,
+provenance-bound READY, Option 3 readiness consumption, recoverable/fatal fault
+classification, provisional `0.03 m` / `2.0 degree` validation with wrapped
+heading, scheduler cancellation protection, typed preflight, immutable
+observation, and read-only telemetry. Heading capture and known-pose reset are
+split across one subsystem refresh so estimator prerequisites remain valid.
+
+### Files Changed
+
+- Added coordinator, Prepare command, autonomous-preparation observation, and
+  telemetry facade production classes.
+- Modified Constants, AutoBuilder adapter, routine factory, RobotContainer, and
+  RobotTelemetry within the approved repair boundary.
+- Added focused coordinator, adapter recovery, Prepare, and telemetry tests.
+- Updated active-L08 routine, scheduling, integration, and selection tests.
+
+### Verification
+
+No SwerveSubsystem, Robot, IO, CTRE configuration, RobotConfig, PathPlanner
+asset, frozen predecessor, successor, or V00 file changed. L04 remains the
+single alliance-transform owner; AutoBuilder flipping remains disabled.
+
+### Expected Result
+
+The operator can correct a recoverable condition and Prepare again without
+restarting Robot Code, while genuine invariant/configuration faults remain
+latched and fail closed.
+
+## Step 23 - Run Local Implementation Gates and Hold for User Runtime Evidence
+
+### Objective
+
+Verify the repair locally without claiming Simulation or real-robot results.
+
+### Why
+
+Codex owns local implementation verification; the User owns Simulation,
+Driver Station, real robot, and Git evidence.
+
+### Action
+
+Ran compileJava, compileTestJava, 45 focused/integration tests, the full suite,
+and a clean build under WPILib Java 17. Used only an external temporary
+short-path Gradle init script plus a temporary `subst` mapping to work around
+the documented Windows javac failure on the lesson's long absolute path.
+
+### Files Changed
+
+L08 documentation only during reconciliation. No repository Gradle or build
+configuration was changed by the workaround.
+
+### Verification
+
+- compileJava: PASS.
+- compileTestJava: PASS.
+- Focused/integration: 45/45 PASS.
+- Full suite: 445/445 PASS; zero failures, errors, or skips.
+- Clean build: PASS - `BUILD SUCCESSFUL in 1m 14s`, 7 executed tasks.
+- Simulation: NOT RUN / USER GATE.
+- Real Robot: NOT RUN / USER GATE.
+
+### Expected Result
+
+A01_L08 remains `REOPENED / IN_PROGRESS / EDITABLE` and is ready for ChatGPT
+implementation review. It is not re-frozen, forward-ported, committed, pushed,
+simulated, or deployed by Codex.
+
+## Step 24 - Implement Scheduler-Native Terminal Ownership
+
+### Objective
+
+Keep Swerve safely owned after ONE_METER_PATH motion completes and throughout
+every SAFE_STOP Autonomous session.
+
+### Why
+
+Releasing Swerve before Autonomous ended allowed the default Teleop command to
+become scheduler owner. Its former production path had no independent Teleop
+mode gate, so controller-derived drivetrain intent was theoretically possible
+outside Teleop.
+
+### Action
+
+Replaced the timer-bounded hold with a fresh Autonomous-session hold; composed
+RUNNING, the fresh path command, HOLDING, and terminal hold using WPILib-native
+commands; removed the custom manual child lifecycle wrapper; added exactly one
+`HOLDING` state; and added an early Teleop-enabled guard before controller
+acquisition or drivetrain submission. The complete composition uses an outer
+Autonomous-enabled lifetime guard and `kCancelIncoming`.
+
+### Files Changed
+
+- Production: `AutonomousSafetyHoldCommand.java`,
+  `AutonomousRoutineFactory.java`, `AutonomousPreparationCoordinator.java`,
+  `AutonomousPreparationObservation.java`, and
+  `FieldRelativeTeleopDriveCommand.java`.
+- Tests: focused hold, routine factory, preparation coordinator, Teleop command,
+  Teleop production path, and RobotContainer scheduling tests.
+- Documentation: active L08 README, status, plan, checklist, transition guide,
+  and EN/VI learning guides.
+
+### Verification
+
+- compileJava: PASS.
+- compileTestJava: PASS.
+- Focused terminal/Teleop tests: 32/32 PASS.
+- Preparation regression: 12/12 PASS.
+- Autonomous scheduling regression: 29/29 PASS.
+- Full suite: 442/442 PASS; zero failures or errors.
+- Clean build: PASS - `BUILD SUCCESSFUL in 29s`, six executed tasks and one up-to-date.
+- Simulation: NOT RUN / USER GATE.
+- Real Robot: NOT RUN / USER GATE.
+
+No SwerveSubsystem, CTRE/IO, PID/feedforward, CANcoder calibration, RobotConfig,
+PathPlanner asset, Gradle, vendordep, frozen predecessor/successor, or V00 file
+changed. A residual physical steering transient is not claimed eliminated.
+
+### Expected Result
+
+ONE_METER_PATH reaches centralized stop and HOLDING without a default-command
+ownership gap; SAFE_STOP retains the same safe ownership; all holds release on
+mode exit; normal Teleop can resume only in Teleop Enabled. A01_L08 remains
+`REOPENED / IN_PROGRESS / EDITABLE` pending Architect and user runtime gates.
+
+## Step 25 - Final Documentation Closure and Re-Freeze
+
+### Objective
+
+Reconcile the final user-owned runtime evidence and determine whether the
+repaired A01_L08 snapshot may be re-frozen without changing production code,
+tests, assets, configuration, or Git state.
+
+### Why
+
+The exceptional reopen permits re-freeze only after every applicable automated,
+architecture, Simulation, real-robot, documentation, and changed-file gate
+passes. Historical closure evidence remains preserved and is not overwritten.
+The active source audit found a manual child-lifecycle delegation in the
+AutoBuilder adapter, so the architecture gate is HOLD.
+
+### Action
+
+Recorded the final user verification exactly as supplied. Simulation passed Blue
+and Red `ONE_METER_PATH`, SAFE_STOP, Prepare -> READY, recoverable first-attempt
+`RESET_REJECTED` followed by a second READY without Robot Code restart, final
+pose approximately `1.005 m`, terminal hold while Autonomous remained Enabled,
+no drivetrain movement from simulated joystick input after path completion,
+Autonomous -> Disabled -> Teleop, normal Teleop recovery, no-restart recovery,
+and no automatic autonomous restart.
+
+Real Robot passed repaired-code deployment, Teleop sanity, visible
+AutonomousPreparation telemetry, Blue and Red Prepare -> READY and execution,
+repeat Blue execution, SAFE_STOP, Blue -> Red without restart, recoverable
+preparation without restart, Disable/mode-loss stop, no automatic restart, and
+normal Teleop after Autonomous. Steering twitch was present before repair and
+absent after repair as a user observation consistent with the ownership repair.
+No PID/FF change, CANcoder recalibration, or hardware defect was established.
+
+### Files Changed
+
+- Documentation/status/governance records only during this closure:
+  repository `AGENTS.md`, repository `README.md`, the L08 README/status/plan/
+  checklist, the L08 transition guide, both L08 learning guides, and the A01_L08
+  reopen ADR.
+- No production Java, tests, PathPlanner assets, Gradle/vendordeps, frozen
+  predecessor/successor lesson, or V00 file was changed by this closure.
+
+### Verification
+
+The final automated evidence is compileJava PASS, compileTestJava PASS,
+focused terminal/Teleop `32/32 PASS`, preparation regression `12/12 PASS`,
+autonomous scheduling `29/29 PASS`, full suite `442/442 PASS`, and clean build
+`BUILD SUCCESSFUL in 29s`. The changed-file audit is PASS, but architecture
+review and documentation closure are HOLD because the active adapter still
+manually delegates child lifecycle callbacks. Configuration, PathPlanner
+assets, vendordeps, and unexpected files are NONE. Git commit and push were not
+run because they remain User-owned.
+
+### Expected Result
+
+A01_L08 remains `REOPENED / IN_PROGRESS / EDITABLE`; the Transition Guide is
+`FINAL / HOLD`; the final verdict is `HOLD`; A01_L09 was not created or
+activated by this task; and V00_L02 remains `SUSPENDED / READ-ONLY` pending
+separate downstream reconciliation.
+
+## Step 26 - Implement the Final Scheduler-Native Exception Boundary
+
+### Objective
+
+Remove the active AutoBuilder manual child-lifecycle delegation and install the
+approved Robot-level fail-closed scheduler exception boundary without changing
+the frozen drivetrain, IO, PathPlanner, or downstream lesson scope.
+
+### Why
+
+The final architecture audit found that `SafeAutoBuilderCommand` manually
+invoked child lifecycle methods. The final Architect/User action authorized the
+four-file production repair and the named focused scheduler-exception test.
+
+### Action
+
+`AutoBuilder.followPath(executionPath)` is now composed with WPILib-native race,
+timeout, mode-loss, and `finallyDo` behavior. The coordinator owns terminal
+`HOLDING`; RobotContainer provides the narrow safety bridge; Robot catches the
+scheduler `RuntimeException`; and the adapter/coordinator fail closed through
+centralized Swerve stop, first-fault latching, immutable `FAULTED`, and no
+automatic autonomous restart.
+
+### Files Changed
+
+- Production: `AutoBuilderContractAdapter.java`,
+  `AutonomousPreparationCoordinator.java`, `RobotContainer.java`, and
+  `Robot.java`.
+- Tests: `AutonomousPreparationCoordinatorTest.java` and new
+  `RobotSchedulerExceptionBoundaryTest.java`.
+- No excluded production, test, configuration, asset, frozen-lesson, or V00
+  file was changed by this implementation.
+
+### Verification
+
+- `compileJava`: PASS under WPILib Java 17.
+- `compileTestJava`: ENVIRONMENT HOLD. Normal and short-path attempts retain
+  the Windows Gradle/Javac classpath-resolution failure; Gradle was not changed.
+- Focused tests, full suite, and clean build: not run because the test compile
+  gate did not pass.
+- Simulation, Driver Station / Glass, and real robot: NOT RERUN / USER GATE.
+
+### Expected Result
+
+The scheduler owns the path child lifecycle; unexpected scheduler exceptions
+fail closed; terminal `HOLDING`, SAFE_STOP, centralized stop, the Teleop gate,
+and PathPlanner/alliance-transform contracts remain preserved. A01_L08 remains
+`REOPENED / IN_PROGRESS / EDITABLE` and is not re-frozen by this step.
+
+## Step 27 - Final Documentation Closure and Re-Freeze
+
+### Objective
+
+Close every post-reopen verification and documentation gate, then re-freeze
+A01_L08 without changing production code, tests, configuration, dependencies,
+or PathPlanner assets.
+
+### Why
+
+The scheduler-native repair was complete, but the historical implementation
+record correctly remained on HOLD until test-environment recovery, focused and
+full automated verification, Simulation, final real-robot verification, and
+explicit closure evidence were all available.
+
+### Action
+
+Record the later `compileJava`, `compileTestJava`, scheduler exception test,
+449/449 suite, and clean-build PASS evidence; record user-verified Simulation
+and real-robot PASS; preserve the earlier HOLD chronology; classify the brief
+terminal steering event without claiming a proven root cause; confirm the final
+architecture contract; and set A01_L08 to `COMPLETE / FROZEN / READ-ONLY`.
+Keep V00_L02 `SUSPENDED / READ-ONLY` pending separate reconciliation.
+
+### Files Changed
+
+- Repository governance/status documentation: `AGENTS.md`, root `README.md`,
+  and `ADR_A01_L08_Autonomous_Safety_Robustness_Reopen.md`.
+- A01_L08 documentation: lesson `README.md`, `LESSON_STATUS.md`,
+  `LESSON_PLAN.md`, `LESSON_CHECKLIST.md`, this transition guide, and the
+  English/Vietnamese learning guides.
+- Production Java, tests, Gradle, vendordeps, PathPlanner assets, drivetrain,
+  IO, CTRE, PID/feedforward, CANcoder, and V00_L02: none.
+
+### Verification
+
+- Automated: `compileJava` PASS, `compileTestJava` PASS,
+  `RobotSchedulerExceptionBoundaryTest` PASS, 449/449 PASS, clean build PASS.
+- Simulation: USER VERIFIED / PASS for Blue/Red ONE_METER_PATH, terminal hold,
+  Autonomous joystick blocking, mode-transition recovery, SAFE_STOP, and no
+  restart.
+- Real Robot: USER VERIFIED / PASS for the approximately one-metre path,
+  terminal ownership, recovery, no restart, and no uncontrolled drivetrain
+  motion.
+- Terminal steer: `KNOWN / BOUNDED TERMINAL STEER TRANSIENT`; `ACCEPTED FOR
+  CURRENT LESSON`; `DEFERRED FOR FUTURE DRIVETRAIN / PATH-FOLLOWING TUNING`.
+  Exact root cause is not fully proven.
+- Architecture and documentation closure: PASS.
+
+### Expected Result
+
+A01_L08 is a complete frozen lesson whose original closure, exceptional reopen,
+repair, historical HOLD, and final re-freeze evidence remain traceable. The
+Frozen Backbone and Frozen Interface Contract remain unchanged. V00_L02 remains
+suspended and is not automatically resumed.

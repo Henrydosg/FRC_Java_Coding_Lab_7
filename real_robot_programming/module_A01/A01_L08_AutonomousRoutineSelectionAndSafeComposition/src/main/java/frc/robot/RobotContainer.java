@@ -12,10 +12,8 @@ package frc.robot;
 import com.pathplanner.lib.config.ModuleConfig;
 import com.pathplanner.lib.config.RobotConfig;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -23,15 +21,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AllianceAwareAutonomousStartPoseResetCommand;
-import frc.robot.commands.AutonomousStartContext;
+import frc.robot.commands.AutonomousPreparationCoordinator;
 import frc.robot.commands.AutonomousRoutineFactory;
 import frc.robot.commands.AutoBuilderContractAdapter;
-import frc.robot.commands.CaptureFieldHeadingReferenceCommand;
 import frc.robot.commands.DriveThreeMeterValidationDashboard;
 import frc.robot.commands.FieldRelativeTeleopDriveCommand;
-import frc.robot.commands.KnownFieldPoseResetDashboard;
 import frc.robot.commands.PathPlannerTrajectoryAdapter;
+import frc.robot.commands.PrepareAutonomousCommand;
 import frc.robot.commands.SwerveFourModuleTestDashboard;
 import frc.robot.commands.SwerveFrontLeftCommissioningDashboard;
 import frc.robot.controls.XboxDriverInputSource;
@@ -46,10 +42,11 @@ import frc.robot.io.swerve.SwerveModuleIOSim;
 import frc.robot.subsystems.SwerveKinematics;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.telemetry.RobotTelemetry;
+import frc.robot.telemetry.autonomous.AutonomousPreparationTelemetryFacade;
 import frc.robot.telemetry.driver.DriverInputTelemetryFacade;
 import frc.robot.telemetry.swerve.SwerveTelemetryFacade;
 import frc.robot.telemetry.validation.DriveThreeMeterValidationTelemetryFacade;
-import frc.robot.util.FieldAllianceTransform;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -60,10 +57,10 @@ public class RobotContainer {
   private final SwerveFrontLeftCommissioningDashboard commissioningDashboard;
   private final SwerveFourModuleTestDashboard fourModuleTestDashboard;
   private final DriveThreeMeterValidationDashboard driveThreeMeterValidationDashboard;
-  private final AllianceAwareAutonomousStartPoseResetCommand startPoseResetCommand;
-  private final KnownFieldPoseResetDashboard knownFieldPoseResetDashboard;
   private final PathPlannerTrajectoryAdapter pathPlannerTrajectoryAdapter;
   private final AutoBuilderContractAdapter autoBuilderContractAdapter;
+  private final AutonomousPreparationCoordinator autonomousPreparationCoordinator;
+  private final PrepareAutonomousCommand prepareAutonomousCommand;
   private final AutonomousRoutineFactory autonomousRoutineFactory;
   private final SendableChooser<AutonomousRoutineFactory.AutonomousRoutineId>
       autonomousRoutineChooser;
@@ -124,9 +121,13 @@ public class RobotContainer {
         new AutoBuilderContractAdapter(
             swerveSubsystem, pathPlannerTrajectoryAdapter, pathPlannerRobotConfig);
     autoBuilderContractAdapter.configure();
-    startPoseResetCommand =
-        new AllianceAwareAutonomousStartPoseResetCommand(
-            swerveSubsystem, this::createDisabledStartContext);
+    autonomousPreparationCoordinator =
+        new AutonomousPreparationCoordinator(
+            swerveSubsystem,
+            pathPlannerTrajectoryAdapter,
+            autoBuilderContractAdapter,
+            Constants.HolonomicTrajectoryFollowingConstants.kLearningFieldVariant,
+            Constants.PathPlannerLearningConstants.kPathAssetName);
     commissioningDashboard = new SwerveFrontLeftCommissioningDashboard(swerveSubsystem);
     fourModuleTestDashboard = new SwerveFourModuleTestDashboard(swerveSubsystem);
     driveThreeMeterValidationDashboard =
@@ -136,15 +137,24 @@ public class RobotContainer {
                 NetworkTableInstance
                     .getDefault()
                      .getTable("DriveThreeMeterValidation")));
-    knownFieldPoseResetDashboard = new KnownFieldPoseResetDashboard(startPoseResetCommand);
     autonomousRoutineFactory =
-        new AutonomousRoutineFactory(swerveSubsystem, autoBuilderContractAdapter);
+        new AutonomousRoutineFactory(
+            swerveSubsystem,
+            autoBuilderContractAdapter,
+            autonomousPreparationCoordinator);
     autonomousRoutineChooser = new SendableChooser<>();
     autonomousRoutineChooser.setDefaultOption(
         "SAFE_STOP", AutonomousRoutineFactory.AutonomousRoutineId.SAFE_STOP);
     autonomousRoutineChooser.addOption(
         "ONE_METER_PATH", AutonomousRoutineFactory.AutonomousRoutineId.ONE_METER_PATH);
     SmartDashboard.putData("Autonomous Routine", autonomousRoutineChooser);
+    prepareAutonomousCommand =
+        new PrepareAutonomousCommand(
+            swerveSubsystem,
+            autonomousPreparationCoordinator,
+            autonomousRoutineChooser::getSelected,
+            DriverStation::getAlliance);
+    SmartDashboard.putData("Prepare Autonomous", prepareAutonomousCommand);
 
     SwerveTelemetryFacade swerveTelemetryFacade =
         new SwerveTelemetryFacade(
@@ -166,14 +176,23 @@ public class RobotContainer {
             driverInputTelemetryFacade);
     swerveSubsystem.setDefaultCommand(fieldRelativeTeleopDriveCommand);
 
-    // Xbox Back/View is unused by the inherited L22 bindings and captures field zero only Disabled.
+    // Back/View is the single explicit operator preparation action and is gated before scheduling.
     new JoystickButton(driverController, XboxController.Button.kBack.value)
-        .onTrue(new CaptureFieldHeadingReferenceCommand(swerveSubsystem));
-    robotTelemetry = new RobotTelemetry(swerveSubsystem, swerveTelemetryFacade);
+        .and(DriverStation::isDisabled)
+        .onTrue(prepareAutonomousCommand);
+    AutonomousPreparationTelemetryFacade autonomousPreparationTelemetryFacade =
+        new AutonomousPreparationTelemetryFacade(
+            NetworkTableInstance.getDefault().getTable("AutonomousPreparation"));
+    robotTelemetry =
+        new RobotTelemetry(
+            swerveSubsystem,
+            swerveTelemetryFacade,
+            autonomousPreparationCoordinator::getObservation,
+            autonomousPreparationTelemetryFacade);
   }
 
   /**
-   * Returns one fresh command for the chooser selection and one readiness snapshot.
+   * Returns one fresh command for the chooser and current-alliance snapshots.
    *
    * @return the command to run in autonomous
    */
@@ -184,31 +203,14 @@ public class RobotContainer {
     } catch (RuntimeException ignored) {
       // A chooser failure is an invalid selection and therefore fails closed in the factory.
     }
-    Optional<AutonomousStartContext> acceptedStartContext =
-        startPoseResetCommand.consumeAcceptedStartContext();
-    return autonomousRoutineFactory.create(selectedRoutine, acceptedStartContext);
+    Optional<DriverStation.Alliance> currentAlliance = DriverStation.getAlliance();
+    return autonomousRoutineFactory.create(selectedRoutine, currentAlliance);
   }
 
-  private Optional<AutonomousStartContext> createDisabledStartContext() {
-    Optional<DriverStation.Alliance> alliance = DriverStation.getAlliance();
-    if (alliance.isEmpty()) {
-      return Optional.empty();
-    }
-    try {
-      Trajectory canonicalTrajectory = pathPlannerTrajectoryAdapter.createCanonicalTrajectory();
-      Pose2d executionStartPose =
-          FieldAllianceTransform.fromCanonicalBluePose(
-              canonicalTrajectory.getInitialPose(),
-              Constants.HolonomicTrajectoryFollowingConstants.kLearningFieldVariant,
-              alliance.orElseThrow());
-      return Optional.of(
-          new AutonomousStartContext(
-              Constants.HolonomicTrajectoryFollowingConstants.kLearningFieldVariant,
-              alliance.orElseThrow(),
-              executionStartPose));
-    } catch (RuntimeException failure) {
-      return Optional.empty();
-    }
+  /** Routes an unexpected Robot-level scheduler failure to the autonomous safety owners. */
+  public void handleSchedulerRuntimeException(RuntimeException failure) {
+    autonomousPreparationCoordinator.recordSchedulerFatal(
+        Objects.requireNonNull(failure, "failure"));
   }
 
   private static RobotConfig createPathPlannerRobotConfig() {

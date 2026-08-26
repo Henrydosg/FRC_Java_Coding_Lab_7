@@ -65,7 +65,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D00/
     ├── module_D01/
     ├── module_S00/
-    └── module_V00/ (authorized; not yet created)
+    └── module_V00/ (authorized; V00_L01 complete, V00_L02 suspended)
         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -232,10 +232,25 @@ Copy previous completed lesson
 Rules
 
 - Never recreate from scratch.
-- Never modify the source code of completed lessons.
+- Never modify the source code of completed lessons except under the narrowly
+  approved exceptional frozen-reopen rule in Section 14.
 - Documentation or metadata may be updated only with explicit user approval.
 - Only the lesson with Status = IN_PROGRESS is editable.
 - COMPLETE lessons are frozen snapshots.
+
+### Exceptional Suspension and Reopen Lifecycle
+
+- `SUSPENDED / READ-ONLY` preserves unfinished work exactly as-is. It is not
+  COMPLETE, not FROZEN, not editable, and does not count as the active editable
+  lesson. No production, test, documentation, configuration, dependency,
+  asset, or feature change is permitted while suspended. Resume requires
+  explicit governance approval and uses the exact preserved state unless a
+  separately approved reconciliation is required.
+- `SUSPENDED / READ-ONLY` is reserved for exceptional higher-priority safety or
+  robustness work; it is not a normal lesson workflow state.
+- `REOPENED` is a provenance qualifier for an `IN_PROGRESS` lesson, not an
+  additional generic lifecycle status.
+- The exceptional frozen-reopen requirements are defined in Section 14.
 
 ### Fixed Role Ownership
 
@@ -270,6 +285,11 @@ Lesson status
 
 - IN_PROGRESS
 - COMPLETE
+- SUSPENDED
+
+Only `IN_PROGRESS` is editable. `SUSPENDED` is always read-only and is neither
+COMPLETE nor FROZEN. `REOPENED` may qualify an IN_PROGRESS lesson's active state
+but is not a separate lesson status.
 
 Verification
 
@@ -469,6 +489,8 @@ Lesson-specific decisions shall be recorded outside global governance and refere
   `docs/architecture_decisions/ADR_A01_Autonomous_Navigation_Path_Following_Roadmap.md`
 - Post-A01 V00 roadmap authorization:
   `docs/architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`
+- A01_L08 exceptional autonomous safety/robustness reopen:
+  `docs/architecture_decisions/ADR_A01_L08_Autonomous_Safety_Robustness_Reopen.md`
 
 The S00_L19/S00_L20 decision does not change the Frozen Backbone, the authority order, or the
 S00_L15-S00_L24 roadmap. The separately referenced A00 decision authorizes only the post-S00
@@ -500,11 +522,12 @@ prohibited before A01_L06, AutoBuilder is prohibited before A01_L07, and the A01
 compatibility entry gate remains authoritative. Vision/AprilTags are outside the A01 baseline,
 and D01 retains mechanism architecture ownership.
 
-The approved V00 decision authorizes `V00 - AprilTag Vision Observation and Pose Fusion` and the
-future `module_V00` location as the successor boundary after frozen A01_L09. A01 is closed at
+The approved V00 decision authorizes `V00 - AprilTag Vision Observation and Pose Fusion` and
+`module_V00` as the successor boundary after frozen A01_L09. A01 is closed at
 A01_L09; A01_L10 is prohibited. V00_L01 shall inherit frozen A01_L09 through the standard copy,
 rename, generated-artifact cleanup, baseline-build, and transition-guide workflow. This governance
-registration does not create `module_V00`, activate V00_L01, or select a camera vendor.
+registration does not select a camera vendor. V00_L01 has since completed and frozen; V00_L02 was
+activated and implemented, then suspended read-only by the exceptional A01_L08 safety decision.
 
 The authorized V00 lesson order is:
 
@@ -533,6 +556,140 @@ vision implementation only after explicit review of actual camera hardware, WPIL
 compatibility, the exact vendor library/version, timestamp semantics, dependency resolution, and
 simulation support where applicable. Lessons shall not be reordered, renamed, merged, split,
 inserted, or skipped without the architecture/governance approval required by the V00 ADR.
+
+### Exceptional A01_L08 Safety / Robustness Reopen
+
+The approved A01_L08 reopen ADR temporarily supplements the ordinary A01/V00
+lifecycle without changing either roadmap. New post-freeze and post-reopen
+real-robot evidence identified material autonomous preparation/readiness and
+terminal mode-ownership defects. Source review also identified manual
+child-command lifecycle delegation that conflicts with the A01 scheduler-native
+composition contract. With explicit Architect and User approval:
+
+- A01_L01-L07 and A01_L09 remain COMPLETE / FROZEN / READ-ONLY;
+- V00_L01 remains COMPLETE / FROZEN / READ-ONLY;
+- A01_L08 completed its authorized reopen and is now
+  `COMPLETE / FROZEN / READ-ONLY`;
+- V00_L02 has Status SUSPENDED and Active State
+  `SUSPENDED / READ-ONLY`; its unfinished engineering is preserved;
+- no lesson is made editable by this closed exception; V00_L02 remains
+  suspended until separately resumed;
+- the future terminal repair may use a scheduler-native Swerve-owning hold,
+  make SAFE_STOP retain safe ownership during active Autonomous, add a minimum
+  defensive Teleop-enabled output gate, replace the affected manual lifecycle
+  delegation with WPILib-native composition, and add exactly one `HOLDING`
+  lifecycle state if required; and
+- the original scope amendment authorized governance scope only; a later
+  separately recorded implementation authorization permitted the exact repair
+  boundary. The implementation has now removed the active adapter's manual
+  child lifecycle delegation and added the approved scheduler-native Robot
+  exception boundary. Later environment recovery and verification passed
+  `compileTestJava`, the scheduler exception test, the full 449/449 suite, and
+  the clean build. User-owned Simulation and real-robot re-verification passed,
+  and the lesson was explicitly re-frozen on 2026-08-26.
+
+The authorized target terminal lifecycle is
+`CONSUMED -> RUNNING -> HOLDING -> COMPLETE`. While `HOLDING`, path motion is
+complete, centralized Swerve stop has occurred, the Autonomous session remains
+active, Swerve remains required, default Teleop drive cannot reacquire it, and
+no autonomous motion restarts. Changes to SwerveSubsystem, CTRE or other IO,
+CANcoder offsets, calibration, PID/feedforward, PathPlanner assets, Gradle,
+vendordeps, RobotContainer without separate review, or downstream frozen or
+suspended lessons are not authorized.
+
+A frozen lesson may use this exception only for new post-freeze evidence of a
+material safety, correctness, architecture, hardware-runtime, or verification
+defect that invalidates a frozen assumption. It requires explicit Architect and
+User approval, written evidence, exact scope, preserved historical evidence,
+one editable lesson, focused and inherited regression gates, applicable
+Simulation and real-robot verification, explicit re-freeze, and no unrelated
+feature or refactor.
+
+V00_L02 may resume only by explicit governance approval after A01_L08 is
+repaired, fully re-verified, and explicitly re-frozen. Those A01_L08 gates are
+now complete. V00_L02 nevertheless remains suspended until a separate
+downstream reconciliation confirms V00 work remained unchanged and determines
+whether the accepted L08 repair must be forward-ported through the inherited
+lineage. Resume is never automatic.
+
+### A01_L08 Scheduler Exception Boundary Governance Amendment — 2026-08-25
+
+New source evidence confirms that the active `SafeAutoBuilderCommand` manually
+delegates child `initialize()`, `execute()`, `isFinished()`, and `end()` callbacks.
+This violates the A01 scheduler-native composition contract. A single adapter-only
+replacement cannot preserve equivalent fail-closed exception safety because the
+WPILib 2026.2.1 `CommandScheduler` and PathPlanner 2026.1.2 do not provide the
+required project fault boundary around arbitrary child lifecycle exceptions, and
+`finallyDo`/decorators do not catch those exceptions.
+
+Architect and User approval is `APPROVED` for governance scope expansion only.
+The approved future design is Option F: scheduler-native AutoBuilder composition,
+existing narrow callback/output protections, a Robot-level scheduler
+`RuntimeException` boundary, a coordinator/adapter fault bridge, centralized
+Swerve stop, immutable `FAULTED` observation, and no automatic restart. This
+amendment does not authorize implementation.
+
+After separate implementation authorization, the exact production scope for this
+scheduler exception-boundary repair is limited to:
+
+- `AutoBuilderContractAdapter.java`;
+- `AutonomousPreparationCoordinator.java`;
+- `RobotContainer.java`; and
+- `Robot.java`.
+
+The directly authorized test scope is limited to
+`RobotContainerPathPlannerIntegrationTest.java`, `AutonomousRoutineFactoryTest.java`,
+`AutonomousPreparationCoordinatorTest.java`, and the new
+`RobotSchedulerExceptionBoundaryTest.java`; unchanged related safety tests may be
+rerun. No other production or test file is authorized by this amendment. The
+SwerveSubsystem, IO, CTRE, tuning, calibration, Constants tuning, PathPlanner
+assets, RobotConfig, Gradle, vendordeps, frozen lessons, and suspended V00_L02
+remain excluded.
+
+The required safety contract is fail-closed Swerve behavior, centralized stop,
+latched first-fault preservation, immutable operator-visible `FAULTED`, no
+automatic autonomous restart, and terminal `HOLDING` where applicable. Re-freeze
+remains `HOLD` until the scheduler-native lifecycle, Robot-level exception
+boundary, focused exception tests, inherited regression, clean build, Simulation,
+real-robot verification, changed-file audit, documentation closure, and explicit
+Architect/User re-freeze gates all pass.
+
+### A01_L08 Final Scheduler-Native Implementation Authorization — 2026-08-25
+
+The final Architect/User action separately authorized implementation of the
+exact four-file production boundary and named test boundary described above.
+The implementation removed `SafeAutoBuilderCommand` manual child lifecycle
+delegation and added the approved scheduler-native composition and Robot-level
+exception boundary. A01_L08 remains `REOPENED / IN_PROGRESS / EDITABLE` and
+V00_L02 remains `SUSPENDED / READ-ONLY`.
+
+The local production compile passed under WPILib Java 17. Test compilation is
+currently held by the existing Windows Gradle/Javac classpath-resolution
+failure; Simulation and real-robot verification remain User-owned gates and
+were not rerun. Re-freeze remains `HOLD`.
+
+### A01_L08 Final Re-Freeze Closure — 2026-08-26
+
+The preceding implementation-authorization result is preserved as historical
+evidence. Subsequent environment recovery established `compileJava` PASS,
+`compileTestJava` PASS, `RobotSchedulerExceptionBoundaryTest` PASS, the full
+449/449 test suite PASS, and clean build PASS. User-supplied Simulation and
+real-robot re-verification also passed the Blue/Red path, terminal ownership,
+SAFE_STOP, Teleop gate, recovery, and no-automatic-restart gates.
+
+The observed one-time terminal steering event is classified as `KNOWN / BOUNDED
+TERMINAL STEER TRANSIENT`, `ACCEPTED FOR CURRENT LESSON`, and `DEFERRED FOR
+FUTURE DRIVETRAIN / PATH-FOLLOWING TUNING`. Its exact physical root cause is not
+fully proven, and it does not justify a PID/feedforward, CANcoder, CTRE,
+PathPlanner, Swerve, configuration, or asset change. A single approximately
+5.9 ms desktop `SwerveSubsystem.periodic()` sample is not roboRIO performance
+proof; no blocking CAN wait or production performance defect was found, and it
+is not a closure blocker.
+
+A01_L08 is therefore `COMPLETE / FROZEN / READ-ONLY` after its authorized
+safety/robustness reopen. The Frozen Backbone and Frozen Interface Contract are
+preserved. V00_L02 remains `SUSPENDED / READ-ONLY / UNMODIFIED`; this closure
+does not resume it.
 
 ---
 
@@ -571,3 +728,7 @@ Only report verified facts.
 | 1.3 | 2026-08-16 | FROZEN | APPROVED: authorize the post-S00 A00 roadmap and `module_A00` location without changing S00 or the Frozen Backbone. |
 | 1.4 | 2026-08-16 | FROZEN | APPROVED: register the post-A00 A01 roadmap and `module_A01` successor boundary without creating lessons or changing frozen S00/A00 architecture. |
 | 1.5 | 2026-08-23 | FROZEN | APPROVED: register the post-A01 V00 roadmap and future `module_V00` successor boundary without creating or activating V00_L01, selecting a camera vendor, or changing frozen S00/A00/A01 architecture. |
+| 1.6 | 2026-08-24 | FROZEN | APPROVED: add the exceptional SUSPENDED / READ-ONLY lifecycle and narrowly reopen A01_L08 for safety/robustness governance review while preserving V00_L02 unfinished work read-only; implementation is not authorized. |
+| 1.7 | 2026-08-24 | FROZEN | APPROVED: expand the A01_L08 reopen scope for scheduler-native autonomous terminal ownership, SAFE_STOP ownership, a defensive Teleop-mode output gate, and removal of manual child lifecycle delegation; implementation remains unauthorized. |
+| 1.8 | 2026-08-25 | FROZEN | APPROVED: expand the A01_L08 governance boundary for the scheduler-native AutoBuilder exception design and Robot-level scheduler `RuntimeException` boundary across the exact four-file production scope and named focused tests; implementation remains unauthorized. |
+| 1.9 | 2026-08-26 | FROZEN | APPROVED: record final A01_L08 verification and re-freeze it as `COMPLETE / FROZEN / READ-ONLY`; V00_L02 remains `SUSPENDED / READ-ONLY` pending separate reconciliation and resume approval. |

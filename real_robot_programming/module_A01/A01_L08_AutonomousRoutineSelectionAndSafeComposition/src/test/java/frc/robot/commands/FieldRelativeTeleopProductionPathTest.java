@@ -142,7 +142,7 @@ class FieldRelativeTeleopProductionPathTest {
   }
 
   @Test
-  void disabledModeRefreshesAndAcceptsButDoesNotDispatchProductionOutputs() {
+  void disabledModeStopsWithoutReadingPublishingAcceptingOrDispatching() {
     Rig rig = new Rig(-1.0, -1.0, -1.0, 90.0);
     DriverStationSim.setEnabled(false);
     DriverStationSim.notifyNewData();
@@ -155,7 +155,10 @@ class FieldRelativeTeleopProductionPathTest {
     rig.command.execute();
     rig.subsystem.periodic();
 
-    assertEquals(1, rig.publisher.publishCount);
+    assertEquals(0, rig.controller.leftYReadCount);
+    assertEquals(0, rig.controller.leftXReadCount);
+    assertEquals(0, rig.controller.rightXReadCount);
+    assertEquals(0, rig.publisher.publishCount);
     assertEquals(0, rig.dispatchLog.size());
     for (RecordingModuleIO module : rig.modules()) {
       assertEquals(0, module.driveRequestCount);
@@ -243,6 +246,8 @@ class FieldRelativeTeleopProductionPathTest {
       primeGyro();
       assertTrue(subsystem.captureFieldHeadingReference());
       DriverStationSim.setEnabled(true);
+      DriverStationSim.setAutonomous(false);
+      DriverStationSim.setTest(false);
       DriverStationSim.notifyNewData();
       gyro.yawDegrees = targetYawDegrees;
       primeGyro();

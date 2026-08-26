@@ -30,12 +30,17 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.AutonomousSafetyHoldCommand;
 import frc.robot.commands.AutonomousRoutineFactory;
+import frc.robot.commands.AutonomousPreparationCoordinator;
+import frc.robot.commands.AllianceAwareAutonomousStartPoseResetCommand;
+import frc.robot.commands.AutonomousStartContext;
+import frc.robot.commands.CaptureFieldHeadingReferenceCommand;
 import frc.robot.io.gyro.GyroIO;
 import frc.robot.io.swerve.SwerveModuleIO;
-import frc.robot.commands.AllianceAwareAutonomousStartPoseResetCommand;
+import frc.robot.commands.PrepareAutonomousCommand;
 import frc.robot.commands.PoseTargetedAutonomousMotionCommand;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.lang.reflect.Field;
+import java.util.Optional;
 import java.util.function.DoubleSupplier;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -49,7 +54,7 @@ class RobotContainerAutonomousModeSchedulingTest {
   private static RobotContainer robotContainer;
   private static Command autonomousCommand;
   private static SwerveSubsystem swerveSubsystem;
-  private static AllianceAwareAutonomousStartPoseResetCommand startingPoseResetCommand;
+  private static PrepareAutonomousCommand prepareAutonomousCommand;
 
   @BeforeAll
   static void initializeHalAndCompositionRoot() {
@@ -60,10 +65,10 @@ class RobotContainerAutonomousModeSchedulingTest {
     swerveSubsystem =
         (SwerveSubsystem)
             autonomousCommand.getRequirements().stream().findFirst().orElseThrow();
-    startingPoseResetCommand =
+    prepareAutonomousCommand =
         assertInstanceOf(
-            AllianceAwareAutonomousStartPoseResetCommand.class,
-            SmartDashboard.getData("Reset Known Starting Pose"));
+            PrepareAutonomousCommand.class,
+            SmartDashboard.getData("Prepare Autonomous"));
   }
 
   @BeforeEach
@@ -72,11 +77,13 @@ class RobotContainerAutonomousModeSchedulingTest {
     scheduler.cancelAll();
     setDisabledMode();
     scheduler.run();
-    assertTrue(swerveSubsystem.captureFieldHeadingReference());
+    selectOneMeterPath();
+    scheduler.schedule(prepareAutonomousCommand);
     scheduler.run();
-    scheduler.schedule(startingPoseResetCommand);
-    scheduler.run();
-    assertFalse(startingPoseResetCommand.isScheduled());
+    assertFalse(prepareAutonomousCommand.isScheduled());
+    assertTrue(
+        preparationCoordinator().getObservation().ready(),
+        preparationCoordinator().getObservation().toString());
     setAutonomousMode();
     scheduler.run();
   }
@@ -114,8 +121,11 @@ class RobotContainerAutonomousModeSchedulingTest {
 
     scheduler.schedule(selectedCommand);
     scheduler.run();
+    scheduler.run();
 
-    assertTrue(selectedCommand.isScheduled());
+    assertTrue(
+        selectedCommand.isScheduled(),
+        preparationCoordinator().getObservation().toString());
     assertFalse(swerveSubsystem.getDefaultCommand().isScheduled());
     assertTrue(swerveSubsystem.getFinalModuleStates()[0].speedMetersPerSecond > 0.0);
   }
@@ -125,13 +135,14 @@ class RobotContainerAutonomousModeSchedulingTest {
     CommandScheduler scheduler = CommandScheduler.getInstance();
 
     setTeleoperatedMode();
-    scheduler.schedule(startingPoseResetCommand);
+    scheduler.schedule(prepareAutonomousCommand);
     scheduler.run();
 
     setAutonomousMode();
     Command selectedCommand = requestOneMeterPathCommand();
     assertInstanceOf(AutonomousSafetyHoldCommand.class, selectedCommand);
     scheduler.schedule(selectedCommand);
+    scheduler.run();
     scheduler.run();
 
     assertZeroFinalModuleStates(swerveSubsystem);
@@ -145,6 +156,7 @@ class RobotContainerAutonomousModeSchedulingTest {
 
     scheduler.schedule(selectedCommand);
     scheduler.run();
+    scheduler.run();
     assertTrue(swerveSubsystem.getFinalModuleStates()[0].speedMetersPerSecond > 0.0);
 
     selectedCommand.cancel();
@@ -155,6 +167,7 @@ class RobotContainerAutonomousModeSchedulingTest {
     Command secondCommand = requestOneMeterPathCommand();
     assertInstanceOf(AutonomousSafetyHoldCommand.class, secondCommand);
     scheduler.schedule(secondCommand);
+    scheduler.run();
     scheduler.run();
 
     assertZeroFinalModuleStates(swerveSubsystem);
@@ -173,13 +186,14 @@ class RobotContainerAutonomousModeSchedulingTest {
     setDisabledMode();
     scheduler.run();
 
-    scheduler.schedule(startingPoseResetCommand);
+    scheduler.schedule(prepareAutonomousCommand);
     scheduler.run();
-    assertFalse(startingPoseResetCommand.isScheduled());
+    assertFalse(prepareAutonomousCommand.isScheduled());
 
     setAutonomousMode();
     Command secondCommand = requestOneMeterPathCommand();
     scheduler.schedule(secondCommand);
+    scheduler.run();
     scheduler.run();
 
     assertTrue(secondCommand.isScheduled());
@@ -187,27 +201,57 @@ class RobotContainerAutonomousModeSchedulingTest {
   }
 
   @Test
-  void repeatedHoldRetainsRequirementAfterUnderlyingIntervalExpires() {
+  void incomingPreparationAndLegacyActionsCannotCancelActiveAutonomous() {
+    CommandScheduler scheduler = CommandScheduler.getInstance();
+    Command selectedCommand = requestOneMeterPathCommand();
+    scheduler.schedule(selectedCommand);
+    scheduler.run();
+    assertTrue(
+        selectedCommand.isScheduled(),
+        preparationCoordinator().getObservation().toString());
+
+    scheduler.schedule(prepareAutonomousCommand);
+    scheduler.run();
+    assertTrue(
+        selectedCommand.isScheduled(),
+        preparationCoordinator().getObservation().toString());
+    assertFalse(prepareAutonomousCommand.isScheduled());
+
+    AutonomousStartContext context =
+        new AutonomousStartContext(
+            Constants.HolonomicTrajectoryFollowingConstants.kLearningFieldVariant,
+            DriverStation.Alliance.Blue,
+            Constants.PathPlannerLearningConstants.kCanonicalPathStartingPose);
+    Command legacyReset =
+        new AllianceAwareAutonomousStartPoseResetCommand(
+            swerveSubsystem, () -> Optional.of(context));
+    scheduler.schedule(legacyReset);
+    scheduler.run();
+    assertTrue(selectedCommand.isScheduled());
+    assertFalse(legacyReset.isScheduled());
+
+    Command legacyHeading =
+        new CaptureFieldHeadingReferenceCommand(swerveSubsystem);
+    scheduler.schedule(legacyHeading);
+    scheduler.run();
+    assertTrue(selectedCommand.isScheduled());
+    assertFalse(legacyHeading.isScheduled());
+  }
+
+  @Test
+  void sessionHoldRetainsRequirementForEntireAutonomousMode() {
     RecordingSwerveSubsystem subsystem = new RecordingSwerveSubsystem();
-    MutableClock clock = new MutableClock(0.0);
-    AutonomousSafetyHoldCommand hold =
-        new AutonomousSafetyHoldCommand(
-            subsystem,
-            Constants.AutonomousConstants.kSafetyHoldLifecycleDurationSeconds,
-            clock);
-    Command repeated = hold.repeatedly();
+    AutonomousSafetyHoldCommand hold = new AutonomousSafetyHoldCommand(subsystem);
     Command defaultCommand = Commands.run(() -> {}, subsystem);
     subsystem.setDefaultCommand(defaultCommand);
 
     CommandScheduler scheduler = CommandScheduler.getInstance();
-    scheduler.schedule(repeated);
+    scheduler.schedule(hold);
+    scheduler.run();
+    scheduler.run();
     scheduler.run();
 
-    clock.set(Constants.AutonomousConstants.kSafetyHoldLifecycleDurationSeconds + 0.01);
-    scheduler.run();
-    scheduler.run();
-
-    assertTrue(repeated.isScheduled());
+    assertTrue(hold.isScheduled());
     assertFalse(defaultCommand.isScheduled());
     assertEquals(0, subsystem.acceptCount);
     assertZeroFinalModuleStates(subsystem);
@@ -371,7 +415,9 @@ class RobotContainerAutonomousModeSchedulingTest {
     setTeleoperatedMode();
     scheduler.run();
 
-    assertFalse(selectedCommand.isScheduled());
+    assertFalse(
+        selectedCommand.isScheduled(),
+        preparationCoordinator().getObservation().toString());
     assertTrue(swerveSubsystem.getDefaultCommand().isScheduled());
 
     setAutonomousMode();
@@ -456,6 +502,17 @@ class RobotContainerAutonomousModeSchedulingTest {
     }
   }
 
+  private static AutonomousPreparationCoordinator preparationCoordinator() {
+    try {
+      Field field =
+          RobotContainer.class.getDeclaredField("autonomousPreparationCoordinator");
+      field.setAccessible(true);
+      return (AutonomousPreparationCoordinator) field.get(robotContainer);
+    } catch (ReflectiveOperationException exception) {
+      throw new AssertionError(exception);
+    }
+  }
+
   private static Command createGatedAutonomousCommand(
       SwerveSubsystem subsystem, DoubleSupplier clock) {
     setDisabledMode();
@@ -475,12 +532,7 @@ class RobotContainerAutonomousModeSchedulingTest {
             Constants.PoseTargetedAutonomousConstants.kHeadingToleranceRadians,
             Constants.PoseTargetedAutonomousConstants.kTimeoutSeconds,
             clock);
-    Command repeatingSafetyHold =
-        new AutonomousSafetyHoldCommand(
-                subsystem,
-                Constants.AutonomousConstants.kSafetyHoldLifecycleDurationSeconds,
-                clock)
-            .repeatedly();
+    Command repeatingSafetyHold = new AutonomousSafetyHoldCommand(subsystem);
     Command inheritedAutonomousSession =
         poseTargetedMotion.andThen(repeatingSafetyHold);
     return Commands.either(
@@ -495,6 +547,7 @@ class RobotContainerAutonomousModeSchedulingTest {
     DriverStationSim.setEnabled(true);
     DriverStationSim.setAutonomous(true);
     DriverStationSim.setTest(false);
+    DriverStationSim.setAllianceStationId(AllianceStationID.Blue1);
     DriverStationSim.notifyNewData();
   }
 

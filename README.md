@@ -124,22 +124,22 @@ Authority:
 `docs/architecture_decisions/ADR_A01_Autonomous_Navigation_Path_Following_Roadmap.md`
 
 Current implementation state: A01 is authorized and `module_A01` exists.
-`A01_L01` through `A01_L06_PathPlannerPathAndRuntimeIntegration` are `COMPLETE /
+`A01_L01` through `A01_L07_AutoBuilderContractIntegration` are `COMPLETE /
 FROZEN / READ-ONLY`. After the latest Swerve zero-offset recalibration, the user
 physically executed the L06 one-meter autonomous on both Blue and Red. A slight
 Blue endpoint overshoot followed by a small reverse correction was observed;
 exact endpoint accuracy is not formally measured or claimed, and final
 PID/feedforward and physical-model tuning remain deferred. `A01_L07` is
 `COMPLETE / FROZEN / READ-ONLY` after the user-confirmed implementation,
-Simulation, and real-robot verification gates passed. `A01_L08` is now
-`COMPLETE / FROZEN / READ-ONLY` after the user-verified
+Simulation, and real-robot verification gates passed. `A01_L08` was
+`COMPLETE / FROZEN / READ-ONLY` at its original closure after the user-verified
 post-repair WPILib VS Code build (`BUILD SUCCESSFUL in 1s`; 6 actionable tasks:
 1 executed, 5 up-to-date), the accepted 430/430 test result, Simulation PASS,
 and Real Robot PASS. The 11 initial failures were independently classified and
 repaired as minimal L08 test-contract migrations, with no production defect
 found. L08 preserves the locked routine-selection, readiness, alliance,
-requirement, and centralized-stop contracts and is the frozen inheritance source
-for L09. Exact endpoint accuracy, final PID/feedforward tuning, and final
+requirement, and centralized-stop contracts and was the frozen inheritance
+source for L09. Exact endpoint accuracy, final PID/feedforward tuning, and final
 physical characterization remain explicitly unclaimed.
 `A01_L09_PathPlannerNamedCommandsAndEventMarkers` is now `COMPLETE / FROZEN /
 READ-ONLY`. Its approved ADR amendment permits one safe, observable,
@@ -154,10 +154,64 @@ dispatch and telemetry, concurrent path/event execution, Disable/mode-loss
 stop, no automatic restart, and Real Robot PASS. The event remains a
 non-mechanism demonstration; no Intake, Feeder, Flywheel, or other D01 mechanism
 integration is claimed. Exact endpoint accuracy, final PID/feedforward tuning,
-and final physical characterization remain explicitly unclaimed. A01 ends at
-frozen L09; A01_L10 is not authorized. The approved V00 successor roadmap is
-registered below, but no V00 module or lesson has been created or started.
-A00 is closed at A00_L04; A00_L05 is not authorized.
+and final physical characterization remain explicitly unclaimed.
+
+The original A01_L08 closure evidence remains preserved as historical evidence,
+but post-freeze real-robot evidence identified material preparation/readiness and
+terminal mode-ownership defects. Under the approved supplemental ADR, A01_L08
+was reopened narrowly for safety/robustness repair; V00_L02 remains
+`SUSPENDED / READ-ONLY`. The preparation/readiness repair and the separately
+authorized Option D terminal repair are implemented and locally verified. The
+final user-owned Simulation and Real Robot evidence confirms recoverable
+preparation without Robot Code restart, deterministic Blue/Red execution,
+session-long terminal Swerve ownership, no controller leakage while Autonomous
+remains enabled, safe mode-loss handling, and normal Teleop recovery. The final
+pre-implementation architecture audit was `HOLD`: the active
+`AutoBuilderContractAdapter.SafeAutoBuilderCommand` manually delegated
+child lifecycle callbacks, conflicting with the scheduler-native re-freeze gate.
+At that pre-implementation audit stage, A01_L08 remained `REOPENED /
+IN_PROGRESS / EDITABLE`. The repair changed only the approved L08
+production/test boundary; no SwerveSubsystem, CTRE/IO, tuning, calibration,
+PathPlanner asset, Gradle, vendordep, frozen predecessor, successor, or V00 file
+was changed. Exact endpoint accuracy, final PID/feedforward tuning, and final
+physical characterization remain explicitly unclaimed. A01_L09 remains
+`COMPLETE / FROZEN / READ-ONLY`, and the A01 lesson order remains unchanged.
+A01 ends at L09; A01_L10 is not authorized. A00 is closed at A00_L04; A00_L05
+is not authorized.
+
+On 2026-08-25, the A01_L08 governance amendment expanded the future repair
+boundary for the scheduler exception design to exactly four production files:
+`AutoBuilderContractAdapter.java`, `AutonomousPreparationCoordinator.java`,
+`RobotContainer.java`, and `Robot.java`, with four named focused test files. The
+amendment was governance-only; a separate final implementation action is
+recorded below. At that historical stage, the final architecture re-freeze gate
+remained `HOLD` pending the required test, runtime, and user-owned
+re-verification gates.
+
+Temporary change-control authority:
+`docs/architecture_decisions/ADR_A01_L08_Autonomous_Safety_Robustness_Reopen.md`
+
+The final 2026-08-25 A01_L08 implementation action separately authorized and
+implemented that exact four-file scheduler-native exception-boundary repair.
+`SafeAutoBuilderCommand` manual child lifecycle delegation is removed; the
+Robot-level scheduler exception boundary, RobotContainer safety bridge, and
+coordinator fatal entry are present. That implementation record did not itself
+re-freeze A01_L08: local `compileJava` passed under WPILib Java 17 while
+`compileTestJava` was still held by the then-existing Windows Gradle/Javac
+classpath-resolution failure, and Simulation and real-robot re-verification
+remained user gates.
+
+On 2026-08-26, later verification closed those gates: `compileJava` PASS,
+`compileTestJava` PASS, `RobotSchedulerExceptionBoundaryTest` PASS, full 449/449
+test suite PASS, and clean build PASS. User-verified Simulation and real-robot
+retests passed Blue/Red execution, terminal ownership, SAFE_STOP, the Teleop
+mode gate, recovery, and no automatic restart. A brief terminal steering event
+is recorded as `KNOWN / BOUNDED TERMINAL STEER TRANSIENT`, `ACCEPTED FOR CURRENT
+LESSON`, and `DEFERRED FOR FUTURE DRIVETRAIN / PATH-FOLLOWING TUNING`; its exact
+physical root cause is not fully proven and no drivetrain, tuning, encoder,
+CTRE, PathPlanner, or asset change is justified. A01_L08 is now `COMPLETE /
+FROZEN / READ-ONLY` after its authorized reopen. V00_L02 remains `SUSPENDED /
+READ-ONLY` and is not automatically resumed.
 
 Approved lesson sequence:
 
@@ -179,14 +233,17 @@ V00 is the approved successor roadmap after frozen
 Authority:
 `docs/architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`
 
-Current state: roadmap `APPROVED / FROZEN`; `module_V00` is authorized as the
-future independent module location but is `NOT CREATED`. V00_L01 is `NOT
-CREATED / NOT STARTED / NOT ACTIVATED`. No camera or vendor implementation is
-selected.
+Current state: roadmap `APPROVED / FROZEN`; `module_V00` exists. V00_L01 is
+`COMPLETE / FROZEN / READ-ONLY`. V00_L02 was activated, implemented, and
+verified, but is unfinished and now `SUSPENDED / READ-ONLY` while the
+higher-priority A01_L08 safety/robustness repair is governed. V00_L02 is not
+COMPLETE and not FROZEN; its engineering work is preserved and unmodified. No
+camera or vendor implementation is selected.
 
-V00_L01 must inherit from frozen A01_L09 through the standard copy, rename,
-generated-artifact cleanup, baseline-build, and transition-guide workflow only
-after a separate activation decision.
+V00_L02 may resume only after A01_L08 is repaired, re-verified, and explicitly
+re-frozen, followed by separate governance reconciliation. Resume is not
+automatic, and any required forward-port through the inherited A01_L09/V00_L01
+lineage requires explicit approval after suspension ends.
 
 Approved lesson sequence:
 

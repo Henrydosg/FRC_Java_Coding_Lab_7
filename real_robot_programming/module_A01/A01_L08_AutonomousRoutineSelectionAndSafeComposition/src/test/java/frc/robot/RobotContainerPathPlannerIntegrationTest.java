@@ -27,11 +27,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.AllianceAwareAutonomousStartPoseResetCommand;
+import frc.robot.commands.AutonomousPreparationCoordinator;
 import frc.robot.commands.AutonomousStartContext;
 import frc.robot.commands.AutonomousRoutineFactory;
 import frc.robot.commands.AutonomousSafetyHoldCommand;
 import frc.robot.commands.PathPlannerTrajectoryAdapter;
+import frc.robot.commands.PrepareAutonomousCommand;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.util.FieldAllianceTransform;
 import java.io.IOException;
@@ -55,7 +56,8 @@ class RobotContainerPathPlannerIntegrationTest {
   private RobotContainer robotContainer;
   private Command autonomousCommand;
   private SwerveSubsystem swerveSubsystem;
-  private AllianceAwareAutonomousStartPoseResetCommand resetCommand;
+  private PrepareAutonomousCommand prepareCommand;
+  private AutonomousPreparationCoordinator preparationCoordinator;
   private String previousUserDirectory;
   private Path temporaryAsset;
 
@@ -86,12 +88,11 @@ class RobotContainerPathPlannerIntegrationTest {
     swerveSubsystem =
         (SwerveSubsystem)
             autonomousCommand.getRequirements().stream().findFirst().orElseThrow();
-    resetCommand =
-        (AllianceAwareAutonomousStartPoseResetCommand)
-            SmartDashboard.getData("Reset Known Starting Pose");
+    prepareCommand =
+        (PrepareAutonomousCommand)
+            SmartDashboard.getData("Prepare Autonomous");
+    preparationCoordinator = preparationCoordinator();
 
-    scheduler.run();
-    assertTrue(swerveSubsystem.captureFieldHeadingReference());
     scheduler.run();
   }
 
@@ -293,9 +294,10 @@ class RobotContainerPathPlannerIntegrationTest {
 
   private void completeResetWithoutConsuming(AllianceStationID station) {
     setDisabledMode(station);
-    scheduler.schedule(resetCommand);
+    selectOneMeterPath();
+    scheduler.schedule(prepareCommand);
     scheduler.run();
-    assertFalse(resetCommand.isScheduled());
+    assertFalse(prepareCommand.isScheduled());
     assertPoseEquals(
         Constants.PathPlannerLearningConstants.kCanonicalPathStartingPose,
         swerveSubsystem.getEstimatedPose().orElseThrow());
@@ -303,10 +305,27 @@ class RobotContainerPathPlannerIntegrationTest {
 
   private Optional<AutonomousStartContext> acceptReset(AllianceStationID station) {
     setDisabledMode(station);
-    scheduler.schedule(resetCommand);
+    selectOneMeterPath();
+    scheduler.schedule(prepareCommand);
     scheduler.run();
-    assertFalse(resetCommand.isScheduled());
-    return resetCommand.consumeAcceptedStartContext();
+    assertFalse(prepareCommand.isScheduled());
+    Optional<DriverStation.Alliance> alliance = DriverStation.getAlliance();
+    return preparationCoordinator
+        .previewDrivingPreparation(
+            AutonomousRoutineFactory.AutonomousRoutineId.ONE_METER_PATH,
+            alliance)
+        .map(AutonomousPreparationCoordinator.PreparationClaim::startContext);
+  }
+
+  private AutonomousPreparationCoordinator preparationCoordinator() {
+    try {
+      Field field =
+          RobotContainer.class.getDeclaredField("autonomousPreparationCoordinator");
+      field.setAccessible(true);
+      return (AutonomousPreparationCoordinator) field.get(robotContainer);
+    } catch (ReflectiveOperationException exception) {
+      throw new AssertionError(exception);
+    }
   }
 
   private PathPlannerTrajectoryAdapter adapter() {
