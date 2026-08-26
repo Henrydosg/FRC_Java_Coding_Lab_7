@@ -9,106 +9,100 @@
 - Previous Lesson State: `COMPLETE / FROZEN / READ-ONLY`
 - Status: `COMPLETE`
 - Active State: `COMPLETE / FROZEN / READ-ONLY`
-- Freeze State: `FROZEN`
-- Lesson Goal: controlled event-marker dispatch using NamedCommands and a
+- Authoritative Parent: `A01_L08 @ 135272c`
+- Lesson Goal: controlled `LEARNING_EVENT` dispatch using NamedCommands and a
   fresh, observable, non-mechanism WPILib Command.
+- Event Feature Status: `IMPLEMENTED / VERIFIED`
 
-## Governance and Architecture Gates
+## Governance
 
-- Governance: `PASS` - AGENTS.md, root README, authoritative English Documents
-  A/B/C, Frozen Backbone, Frozen Interface Contract, A01 ADR and amendment,
-  frozen L01-L08, active L09 documentation, production, tests, and PathPlanner
-  assets were reviewed.
-- ADR Real-Robot HOLD Reconciliation: `PASS` - historical HOLD was the
-  user-owned pre-verification gate. The ADR states that HOLD remains until the
-  user supplies applicable hardware evidence; the supplied real-robot PASS
-  satisfies that gate. No ADR amendment is required.
-- Architecture Review: `PASS` - all locked L09 and inherited L08 contracts are
-  preserved.
-- Source Lesson: `PASS` - L08 remains COMPLETE / FROZEN / READ-ONLY.
-- Directory Identity: `PASS`.
-- ADR Amendment: `PASS / RECORDED` - demonstration binding is authorized; D01
-  remains outside the A01 compile and ownership boundary.
+- Phase 2A baseline reconstruction: `PASS` by user-authoritative evidence.
+- Phase 2A user verification: `compileJava PASS`, `compileTestJava PASS`, full
+  inherited test suite `PASS`, and clean build `PASS`.
+- Phase 2A final baseline audit: `PASS`.
+- Phase 2B implementation: authorized by the Phase 2B implementation record.
+- A01_L08: `COMPLETE / FROZEN / READ-ONLY`.
+- Historical L09 event material: preserved through existing history and docs.
+- No editable lesson remains in A01; A01_L09 is frozen after final closure.
+- V00_L02: `SUSPENDED / READ-ONLY / UNMODIFIED`.
+- Frozen Backbone: `PRESERVED`.
+- Frozen Interface Contract: `PRESERVED`.
+- Phase 1 event architecture: `PASS / LOCKED`.
 
-## Build and Automated Verification
+## Phase 2B Implementation
 
-- Baseline Build: `PASS / USER-CONFIRMED`.
-- compileJava: `PASS` - repository evidence and user-verified final build.
-- compileTestJava: `PASS` - repository evidence and user-verified final build.
-- Focused L09 Tests: `PASS` - event binding, lifecycle, registration,
-  telemetry, PathPlanner event preservation, routine selection, and composition.
-- Inherited Regression: `PASS` - 384 tests across 41 unchanged inherited test
-  classes passed.
-- Full Test Suite: `PASS` - 446/446, zero failures, errors, or skips.
-- Clean Build: `PASS` - isolated clean-output verification is recorded. The
-  historical Windows lock on the default Gradle problems report is not a
-  production, test, architecture, or project-configuration defect.
-- Build: `PASS / USER-VERIFIED`.
+- Event ID: `frc.robot.autonomous.AutonomousEventId`.
+- Stable PathPlanner name: `LEARNING_EVENT`.
+- Registration uses scheduler-native `Commands.defer(...)` with an immutable
+  requirement set and a fresh command supplier per dispatch.
+- The demonstration event has no Swerve or mechanism requirement and publishes
+  immutable STARTED, ACTIVE, COMPLETED, CANCELLED, and FACTORY_FAILURE states.
+- Read-only event telemetry publishes `LastEvent`, `State`, `Active`, and
+  `DispatchCount` through the central RobotTelemetry boundary.
+- `ONE_METER_WITH_EVENT` uses the inherited final-L08 preparation, claim,
+  scheduler-native path execution, terminal HOLDING, SAFE_STOP, and no-restart
+  architecture.
+- `A01_L09_OneMeter_With_Learning_Event.path` is unchanged and retains one
+  `LEARNING_EVENT` marker at relative position `0.5`.
 
-## Runtime Verification
+## Inheritance and Scope Audit
 
-- Simulation: `PASS / USER-VERIFIED`.
-- Blue Simulation: `PASS`.
-- Red Simulation: `PASS`.
-- ONE_METER_WITH_EVENT: `PASS`.
-- Event Dispatch: `PASS` - one `LEARNING_EVENT` dispatch observed.
-- Event Telemetry: `PASS` - `Active=false`, `DispatchCount=1`,
-  `LastEvent="LEARNING_EVENT"`, `State="COMPLETED"`.
-- Path/Event Concurrency: `PASS` - path execution continued while the event
-  command executed.
-- Disable / Mode-Loss Stop: `PASS` - robot stopped when Disabled during
-  Autonomous.
-- No Automatic Restart: `PASS` - re-enabling Autonomous without a fresh
-  readiness/reset sequence did not restart the previous routine.
-- Driver Station / Glass: `PASS / USER-VERIFIED EVENT TELEMETRY`.
-- Real Robot: `PASS / USER-VERIFIED` - current L09 ran on the real Swerve robot.
-- Real-Robot Evidence Owner: `USER`.
+- Final-L08-equivalent production files: `63` from the Phase 2A baseline;
+  final-L08 safety files remain hash-identical after Phase 2B.
+- Final-L08-equivalent test files: `52` from the Phase 2A baseline.
+- Authorized production merge files modified: `9`.
+- New production event files: `6`.
+- Authorized test merge files modified: `6`.
+- New event test files: `4`.
+- `PrepareAutonomousCommand.java`: inherited exactly; not modified.
+- `SafeAutoBuilderCommand`: absent.
+- Manual child lifecycle delegation: absent.
+- Gradle, vendordeps, Swerve, CTRE, CANcoder, PID/feedforward, gyro IO,
+  PathPlanner assets, and V00_L02: unmodified by this implementation. `.Glass`
+  remains an operator-view configuration artifact outside the production/test
+  architecture boundary.
 
-## Locked Architecture
+## Historical Verification Hold
 
-- Runtime chain: PathPlanner path -> event marker -> NamedCommands -> typed
-  binding -> `Commands.defer(...)` -> fresh WPILib Command.
-- Stable event: `LEARNING_EVENT` only.
-- Demonstration event: deterministic, bounded, observable, non-mechanism,
-  hardware-free, and without direct NetworkTables access.
-- RobotContainer: composition root only.
-- L04: sole alliance-transform owner.
-- AutoBuilder flipping: `shouldFlipPath = false`.
-- Execution paths: `preventFlipping = true`.
-- `SAFE_STOP`: chooser default.
-- `ONE_METER_PATH`: preserved.
-- `ONE_METER_WITH_EVENT`: explicit non-default routine.
-- Drivetrain requirement and stop owner: `SwerveSubsystem`.
-- Event requirement: does not require `SwerveSubsystem`.
-- Fail-closed, Disable/mode-loss stop, cancellation, and no-restart contracts:
-  preserved.
-- D01 mechanism architecture, mechanism IO, vendor APIs, mechanism contracts,
-  and fake mechanism implementations: absent.
+The original Phase 2B checkpoint recorded a Windows Gradle/Javac
+`compileTestJava` classpath hold. The remaining automated and user-owned gates
+were not claimed at that intermediate checkpoint. That history remains
+preserved in the Phase 2B implementation record and is not the current result.
 
-## Documentation and Publication
+## Verification
 
-- Transition Guide: `FINAL / PASS` -
-  `docs/A01_L08_to_A01_L09_Step_by_Step.md`.
-- English Learning Guide: `FINAL / PASS`.
-- Vietnamese Learning Guide: `FINAL / PASS`.
-- Git Commit: `NOT TESTED` - user-owned; Codex ran no Git operations.
-- Git Push: `NOT TESTED` - user-owned; Codex ran no Git operations.
+- Architecture Review: `PASS`.
+- Baseline Build: `PASS` by Phase 2A user-authoritative evidence.
+- Build: `PASS` - `compileJava`, `compileTestJava`, and isolated clean build.
+- `compileJava`: `PASS` under the WPILib Java 17 runtime.
+- `compileTestJava`: `PASS`.
+- Focused L09 event, path, routine, integration, observation, and telemetry
+  tests: `PASS`.
+- Inherited safety regressions: `PASS`.
+- Full test suite: `446/446 PASS`.
+- Simulation: `PASS` for Blue and Red event/path behavior, telemetry,
+  coexistence, mode-loss stop, no automatic restart, and Teleop recovery.
+- Driver Station / Glass: `PASS` for `/AutonomousEvent` and
+  `/AutonomousPreparation` inspection.
+- Real Robot: `PASS` for SAFE_STOP, `ONE_METER_PATH`,
+  `ONE_METER_WITH_EVENT`, LEARNING_EVENT behavior, terminal HOLDING, no
+  automatic restart, Disabled-to-Teleop recovery, marker preservation, and
+  event/path coexistence on Blue and Red.
 
-## Known Issues and Unclaimed Scope
+## Documentation
 
-- No unresolved L09 architecture, implementation, build, test, Simulation, or
-  real-robot blocker remains.
-- Exact endpoint accuracy is not claimed.
-- Final PID/feedforward tuning is not claimed.
-- Final physical characterization and competition readiness are not claimed.
-- `LEARNING_EVENT` is not real Intake, Feeder, Flywheel, or other mechanism
-  integration.
-- Vision, AprilTags, dynamic replanning, obstacle avoidance, competition
-  strategy, and new mechanism architecture remain outside A01.
+- Phase 2B implementation record: maintained in `docs/`.
+- Transition Guide: `FINAL / PASS`; the guide establishes the final-L08 to L09
+  inheritance chain and records the verified event feature.
+- Documentation reconciliation: `PASS`.
+- Final Architecture Review: `PASS`.
+- Final Closure Review: `PASS`.
+- Git Commit: `PENDING - USER OWNED`.
+- Git Push: `PENDING - USER OWNED`.
 
-## Final Closure
+## Known Issues
 
-- Final lesson state: `COMPLETE / FROZEN / READ-ONLY`.
-- A01 roadmap completion point: `A01_L09`.
-- A01_L10: `NOT CREATED / NOT STARTED / NOT AUTHORIZED`.
-- Next lesson/module: `NOT CREATED / NOT STARTED`; requires separate governance.
+- Exact endpoint accuracy, final PID/feedforward tuning, and final physical
+  characterization remain explicitly unclaimed.
+- A01_L09 is `COMPLETE / FROZEN / READ-ONLY` after final closure review PASS.
+  Git publication remains pending User commit/push and is not claimed complete.

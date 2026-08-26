@@ -1,5 +1,13 @@
 # A01_L09 - PathPlanner NamedCommands và Event Markers - Tài liệu học tập
 
+> Ghi chú lịch sử Phase 2A: project L09 được dựng lại từ A01_L08 cuối cùng
+> trước khi áp dụng lại event feature. Triển khai event L09 hiện tại đã hoàn
+> tất và đã được xác minh kỹ thuật.
+
+Trạng thái nội dung/state hiện tại: `COMPLETE / FROZEN / READ-ONLY` sau khi
+final architecture review và final closure review PASS. Git publication vẫn
+chờ User commit/push và chưa được tuyên bố hoàn tất.
+
 ## 1. Mục tiêu học tập
 
 A01_L09 hướng dẫn cách một event marker của PathPlanner kích hoạt một WPILib
@@ -146,5 +154,7 @@ PID/feedforward cuối cùng, physical characterization cuối cùng, mức sẵ
 thi đấu hoặc hành vi mechanism thật. D01 vẫn là project Tank Drive độc lập và
 không có mechanism contract D01 nào được đưa vào A01.
 
-A01_L09 là `COMPLETE / FROZEN / READ-ONLY`. Đây là điểm hoàn tất được phê duyệt
-của A01. Không có A01_L10 hoặc lesson/module tiếp theo nào được tạo hay bắt đầu.
+A01_L09 là `COMPLETE / FROZEN / READ-ONLY` sau khi final closure được phê
+duyệt. Git publication vẫn chờ User commit/push. Đây là ranh giới lesson cuối
+được phê duyệt của A01; chưa có A01_L10 hoặc lesson/module tiếp theo nào được
+tạo hay bắt đầu.

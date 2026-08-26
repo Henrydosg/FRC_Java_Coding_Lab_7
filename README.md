@@ -142,19 +142,24 @@ requirement, and centralized-stop contracts and was the frozen inheritance
 source for L09. Exact endpoint accuracy, final PID/feedforward tuning, and final
 physical characterization remain explicitly unclaimed.
 `A01_L09_PathPlannerNamedCommandsAndEventMarkers` is now `COMPLETE / FROZEN /
-READ-ONLY`. Its approved ADR amendment permits one safe, observable,
-deterministic non-mechanism `LEARNING_EVENT` binding because D01 remains an
-independent Tank Drive project with no approved shared command boundary. The
-implemented `ONE_METER_WITH_EVENT` routine preserves `SAFE_STOP` as the chooser
-default and the inherited `ONE_METER_PATH` routine. Repository evidence records
-compileJava and compileTestJava PASS, focused L09 tests PASS, 384 unchanged
-inherited regression tests PASS, the full 446/446 suite PASS, and isolated
-clean-build PASS. The user supplied Simulation PASS for Blue and Red, event
+READ-ONLY` after the final Architect/Reviewer closure decision PASS. Its
+approved ADR amendment
+permits one safe, observable, deterministic non-mechanism `LEARNING_EVENT`
+binding because D01 remains an independent Tank Drive project with no approved
+shared command boundary. The implemented `ONE_METER_WITH_EVENT` routine
+preserves `SAFE_STOP` as the chooser default and the inherited `ONE_METER_PATH`
+routine. Repository evidence records compileJava and compileTestJava PASS,
+focused L09 tests PASS, 384 unchanged inherited regression tests PASS, the full
+446/446 suite PASS, and isolated clean-build PASS. The user supplied Simulation,
+Driver Station / Glass, and Real Robot PASS evidence for Blue and Red, event
 dispatch and telemetry, concurrent path/event execution, Disable/mode-loss
-stop, no automatic restart, and Real Robot PASS. The event remains a
-non-mechanism demonstration; no Intake, Feeder, Flywheel, or other D01 mechanism
-integration is claimed. Exact endpoint accuracy, final PID/feedforward tuning,
-and final physical characterization remain explicitly unclaimed.
+stop, no automatic restart, and recovery to Teleop. Documentation reconciliation,
+final architecture review, and final closure review are PASS. Git publication
+remains pending User commit/push; the event remains a
+non-mechanism demonstration, and no Intake, Feeder, Flywheel, or other D01
+mechanism integration is claimed. Exact endpoint accuracy, final
+PID/feedforward tuning, and final physical characterization remain explicitly
+unclaimed.
 
 The original A01_L08 closure evidence remains preserved as historical evidence,
 but post-freeze real-robot evidence identified material preparation/readiness and
@@ -174,8 +179,9 @@ IN_PROGRESS / EDITABLE`. The repair changed only the approved L08
 production/test boundary; no SwerveSubsystem, CTRE/IO, tuning, calibration,
 PathPlanner asset, Gradle, vendordep, frozen predecessor, successor, or V00 file
 was changed. Exact endpoint accuracy, final PID/feedforward tuning, and final
-physical characterization remain explicitly unclaimed. A01_L09 remains
-`COMPLETE / FROZEN / READ-ONLY`, and the A01 lesson order remains unchanged.
+physical characterization remain explicitly unclaimed. A01_L09 is
+`COMPLETE / FROZEN / READ-ONLY`; User-owned Git publication remains pending and
+the A01 lesson order remains unchanged.
 A01 ends at L09; A01_L10 is not authorized. A00 is closed at A00_L04; A00_L05
 is not authorized.
 
@@ -227,7 +233,7 @@ Approved lesson sequence:
 
 ### V00 - AprilTag Vision Observation and Pose Fusion
 
-V00 is the approved successor roadmap after frozen
+V00 is the approved successor roadmap after final closure and freezing of
 `A01_L09_PathPlannerNamedCommandsAndEventMarkers`.
 
 Authority:

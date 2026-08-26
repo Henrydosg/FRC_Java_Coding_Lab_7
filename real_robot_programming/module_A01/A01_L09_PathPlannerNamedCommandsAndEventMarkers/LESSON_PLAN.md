@@ -1,95 +1,74 @@
-# A01_L09 - PathPlanner NamedCommands and Event Markers - Final Plan
+# A01_L09 - Phase 2B Implementation Plan and Record
 
-## Final State
+## Status
 
-- Lesson: `A01_L09_PathPlannerNamedCommandsAndEventMarkers`.
-- Previous lesson: `A01_L08_AutonomousRoutineSelectionAndSafeComposition - COMPLETE / FROZEN / READ-ONLY`.
-- Status: `COMPLETE / FROZEN / READ-ONLY`.
-- Architecture Review: `PASS`.
-- Implementation: `COMPLETE`.
-- Build and tests: `PASS`.
-- Simulation: `PASS / USER-VERIFIED`.
-- Real Robot: `PASS / USER-VERIFIED`.
-- Git/GitHub: user-owned; not run by Codex.
+- Lesson: `A01_L09_PathPlannerNamedCommandsAndEventMarkers`
+- Previous Lesson: `A01_L08_AutonomousRoutineSelectionAndSafeComposition - COMPLETE / FROZEN / READ-ONLY`
+- Status: `COMPLETE / FROZEN / READ-ONLY`
+- Parent: `A01_L08 @ 135272c`
+- Phase 2A baseline: `PASS` by user-authoritative evidence.
+- Phase 2B implementation: complete in the authorized source boundary.
+- Technical verification: `PASS`.
+- Documentation reconciliation: `PASS`.
+- Final architecture review: `PASS`.
+- Final closure review: `PASS`.
+- User Git publication: `PENDING USER COMMIT/PUSH`.
+- Lifecycle: `COMPLETE / FROZEN / READ-ONLY`.
 
-## Completed Learning Objective
+## Preserved Phase 2A Record
 
-L09 teaches one concept: controlled PathPlanner event-marker dispatch using
-NamedCommands, a validated typed event binding, and a fresh WPILib Command.
-The implementation proves dispatch, lifecycle, requirements, observability,
-concurrency, and failure behavior without adding mechanism architecture.
+Phase 2A reconstructed the editable L09 project from final frozen L08. The
+result preserved the final-L08 production and test baseline, removed stale
+historical event runtime code, retained the event asset unwired, and left
+`PrepareAutonomousCommand.java` exact. The user supplied `compileJava PASS`,
+`compileTestJava PASS`, full inherited tests `PASS`, and clean build `PASS` for
+that baseline.
 
-## Final Runtime Design
+## Phase 2B Ordered Work
 
-```text
-PathPlanner path
-    -> LEARNING_EVENT marker
-    -> NamedCommands
-    -> AutonomousEventBinding
-    -> Commands.defer(...)
-    -> fresh AutonomousEventDemonstrationCommand
-    -> immutable AutonomousEventObservation
-    -> AutonomousEventTelemetryFacade
-```
+1. Add the neutral `frc.robot.autonomous.AutonomousEventId` with stable
+   `LEARNING_EVENT` identity.
+2. Add immutable `AutonomousEventObservation` with the locked lifecycle states.
+3. Add `AutonomousEventBinding` with defensive requirement validation and
+   Swerve rejection.
+4. Add the scheduler-owned deterministic demonstration command.
+5. Register the event through `Commands.defer(...)` with fresh construction per
+   dispatch and safe factory-failure handling.
+6. Add read-only event telemetry and central RobotTelemetry publication.
+7. Preserve and validate the event marker through canonical, Blue, and Red
+   execution-path construction.
+8. Add the additive `ONE_METER_WITH_EVENT` routine identity and provenance.
+9. Wire registration and chooser selection in RobotContainer.
+10. Add focused event tests and merge only the necessary path/chooser assertions.
 
-The typed binding contains one stable event ID, a `Supplier<Command>`, and an
-explicit immutable `Set<Subsystem>`. Duplicate names, invalid suppliers, null
-commands, mismatched requirements, and any Swerve event requirement fail
-closed. No `AutonomousEventCommandProvider` interface was introduced.
+## Verification Record
 
-## Final Routine Design
+Historical intermediate result: the original Phase 2B `compileTestJava`
+environment/classpath hold stopped the remaining automated gates. That
+checkpoint is preserved in the Phase 2B implementation record and is not the
+current lesson result.
 
-- `SAFE_STOP`: safe chooser default.
-- `ONE_METER_PATH`: preserved event-free inherited routine.
-- `ONE_METER_WITH_EVENT`: explicit non-default L09 routine.
-- Event path: one marker named `LEARNING_EVENT` at relative position `0.5`.
-- Event duration: `0.50 s`.
-- Path owns Swerve; the event owns no subsystem and may run concurrently.
+Current automated verification: `compileJava PASS`, `compileTestJava PASS`,
+focused event/path/routine/integration tests `PASS`, 384 unchanged inherited
+regression tests `PASS`, full suite `446/446 PASS`, and isolated clean build
+`PASS`.
 
-## Preserved Contracts
+Simulation: `PASS` for Blue and Red event/path execution, telemetry,
+coexistence, mode-loss stop, no automatic restart, and Teleop recovery.
 
-- Frozen Backbone and Frozen Interface Contract.
-- RobotContainer as composition root only.
-- L04 as the sole alliance-transform owner.
-- `shouldFlipPath = false`.
-- `preventFlipping = true`.
-- SwerveSubsystem as localization, drivetrain requirement, and centralized
-  stop owner.
-- One-shot accepted readiness and selection snapshot.
-- Fail-closed invalid state and construction behavior.
-- Disable/mode-loss stop, interruption/cancellation stop, and no automatic
-  restart.
-- No D01 dependency, mechanism IO, mechanism subsystem, mechanism business
-  logic, vendor mechanism API, or fake mechanism.
+Driver Station / Glass: `PASS` for event and preparation telemetry inspection.
 
-## Completed Verification Plan
+Real Robot: `PASS` for SAFE_STOP, `ONE_METER_PATH`,
+`ONE_METER_WITH_EVENT`, LEARNING_EVENT, terminal HOLDING, no automatic
+restart, Disabled-to-Teleop recovery, marker preservation, and event/path
+coexistence on Blue and Red.
 
-1. Governance and ADR review: `PASS`.
-2. Frozen predecessor and inheritance review: `PASS`.
-3. compileJava: `PASS`.
-4. compileTestJava: `PASS`.
-5. Focused L09 tests: `PASS`.
-6. Unchanged inherited regression: `384 PASS`.
-7. Full suite: `446/446 PASS`.
-8. Isolated clean build: `PASS`.
-9. Simulation Blue and Red: `PASS / USER-VERIFIED`.
-10. Event dispatch, telemetry, and path/event concurrency: `PASS / USER-VERIFIED`.
-11. Disable/mode-loss stop and no automatic restart: `PASS / USER-VERIFIED`.
-12. Real Robot: `PASS / USER-VERIFIED`.
-13. Documentation and transition guide: `FINAL / PASS`.
+No production repair or build configuration workaround was applied for the
+historical fixture/environment records.
 
-## ADR HOLD Reconciliation
+## Final Closure Gate
 
-The historical lesson entry `Real robot: HOLD` was the required user-owned
-pre-verification state, not a permanent ban. The ADR says the HOLD remains
-visible until the user supplies applicable hardware evidence. The supplied L09
-real-robot PASS satisfies that gate, while the ADR's ownership and safety policy
-remain unchanged.
-
-## Closure Boundary
-
-The lesson claims only successful event-marker dispatch and the supplied
-runtime evidence. It does not claim exact endpoint accuracy, final
-PID/feedforward tuning, final physical characterization, competition readiness,
-or real mechanism behavior. A01 ends at L09. No A01_L10 or successor
-lesson/module is created or started by this closure.
+The technical gates, transition guide, documentation reconciliation, final
+architecture review, and final closure review all pass. A01_L09 is now
+`COMPLETE / FROZEN / READ-ONLY`. Git publication remains pending User commit/push
+and is not claimed complete here.

@@ -18,6 +18,7 @@ import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.simulation.DriverStationSim;
 import frc.robot.Constants;
 import frc.robot.controls.XboxDriverInputSource;
 import frc.robot.io.gyro.GyroIO;
@@ -25,7 +26,9 @@ import frc.robot.io.swerve.SwerveModuleIO;
 import frc.robot.observation.DriverInputObservation;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.util.function.Consumer;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FieldRelativeTeleopDriveCommandTest {
@@ -34,6 +37,23 @@ class FieldRelativeTeleopDriveCommandTest {
   @BeforeAll
   static void initializeHal() {
     HAL.initialize(500, 0);
+  }
+
+  @BeforeEach
+  void enableTeleop() {
+    DriverStationSim.resetData();
+    DriverStationSim.setEnabled(true);
+    DriverStationSim.setAutonomous(false);
+    DriverStationSim.setTest(false);
+    DriverStationSim.notifyNewData();
+  }
+
+  @AfterEach
+  void disableRobot() {
+    DriverStationSim.setEnabled(false);
+    DriverStationSim.setAutonomous(false);
+    DriverStationSim.setTest(false);
+    DriverStationSim.notifyNewData();
   }
 
   @Test
@@ -121,6 +141,14 @@ class FieldRelativeTeleopDriveCommandTest {
   }
 
   @Test
+  void outsideTeleopStopsWithoutReadingPublishingOrSubmitting() {
+    assertModeGate(false, false, false);
+    assertModeGate(true, true, false);
+    assertModeGate(true, false, true);
+    assertModeGate(true, true, false, 0.0, 0.0, 0.0);
+  }
+
+  @Test
   void acquisitionFailureStopsBeforeRethrow() {
     Rig rig = new Rig(0.0, 0.0, 0.0);
     rig.controller.throwOnRead = true;
@@ -175,6 +203,33 @@ class FieldRelativeTeleopDriveCommandTest {
         expectedOmega,
         rig.subsystem.acceptedFieldRelativeSpeeds.omegaRadiansPerSecond,
         kTolerance);
+  }
+
+  private static void assertModeGate(boolean enabled, boolean autonomous, boolean test) {
+    assertModeGate(enabled, autonomous, test, -1.0, -1.0, -1.0);
+  }
+
+  private static void assertModeGate(
+      boolean enabled,
+      boolean autonomous,
+      boolean test,
+      double leftY,
+      double leftX,
+      double rightX) {
+    DriverStationSim.setEnabled(enabled);
+    DriverStationSim.setAutonomous(autonomous);
+    DriverStationSim.setTest(test);
+    DriverStationSim.notifyNewData();
+    Rig rig = new Rig(leftY, leftX, rightX);
+
+    rig.command.execute();
+
+    assertEquals(1, rig.subsystem.stopCount);
+    assertEquals(0, rig.controller.leftYReadCount);
+    assertEquals(0, rig.controller.leftXReadCount);
+    assertEquals(0, rig.controller.rightXReadCount);
+    assertEquals(0, rig.subsystem.acceptCount);
+    assertEquals(0, rig.publisher.publishCount);
   }
 
   private static final class Rig {

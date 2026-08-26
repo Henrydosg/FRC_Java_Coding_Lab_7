@@ -28,11 +28,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.AllianceAwareAutonomousStartPoseResetCommand;
+import frc.robot.commands.AutonomousPreparationCoordinator;
 import frc.robot.commands.AutonomousStartContext;
 import frc.robot.commands.AutonomousRoutineFactory;
 import frc.robot.commands.AutonomousSafetyHoldCommand;
 import frc.robot.commands.PathPlannerTrajectoryAdapter;
+import frc.robot.commands.PrepareAutonomousCommand;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.util.FieldAllianceTransform;
 import java.io.IOException;
@@ -51,16 +52,15 @@ import org.junit.jupiter.api.io.TempDir;
 class RobotContainerPathPlannerIntegrationTest {
   private static final double kTolerance = 1.0e-9;
   private static final String kPathFileName = "A01_L06_OneMeter_Forward.path";
-  private static final String kEventPathFileName = "A01_L09_OneMeter_With_Learning_Event.path";
 
   private static CommandScheduler scheduler;
   private RobotContainer robotContainer;
   private Command autonomousCommand;
   private SwerveSubsystem swerveSubsystem;
-  private AllianceAwareAutonomousStartPoseResetCommand resetCommand;
+  private PrepareAutonomousCommand prepareCommand;
+  private AutonomousPreparationCoordinator preparationCoordinator;
   private String previousUserDirectory;
   private Path temporaryAsset;
-  private Path temporaryEventAsset;
 
   @BeforeAll
   static void initializeHal() {
@@ -71,8 +71,8 @@ class RobotContainerPathPlannerIntegrationTest {
   @BeforeEach
   void createCompositionRootWithTemporaryDeployment(@TempDir Path temporaryDirectory)
       throws IOException {
-    AutoBuilder.resetForTesting();
     NamedCommands.clearAll();
+    AutoBuilder.resetForTesting();
     previousUserDirectory = System.getProperty("user.dir");
     temporaryAsset =
         temporaryDirectory
@@ -80,8 +80,6 @@ class RobotContainerPathPlannerIntegrationTest {
             .resolve(kPathFileName);
     Files.createDirectories(temporaryAsset.getParent());
     Files.copy(sourceAsset(), temporaryAsset, StandardCopyOption.REPLACE_EXISTING);
-    temporaryEventAsset = temporaryAsset.getParent().resolve(kEventPathFileName);
-    Files.copy(sourceEventAsset(), temporaryEventAsset, StandardCopyOption.REPLACE_EXISTING);
     System.setProperty("user.dir", temporaryDirectory.toString());
     PathPlannerPath.clearCache();
 
@@ -92,12 +90,11 @@ class RobotContainerPathPlannerIntegrationTest {
     swerveSubsystem =
         (SwerveSubsystem)
             autonomousCommand.getRequirements().stream().findFirst().orElseThrow();
-    resetCommand =
-        (AllianceAwareAutonomousStartPoseResetCommand)
-            SmartDashboard.getData("Reset Known Starting Pose");
+    prepareCommand =
+        (PrepareAutonomousCommand)
+            SmartDashboard.getData("Prepare Autonomous");
+    preparationCoordinator = preparationCoordinator();
 
-    scheduler.run();
-    assertTrue(swerveSubsystem.captureFieldHeadingReference());
     scheduler.run();
   }
 
@@ -131,25 +128,6 @@ class RobotContainerPathPlannerIntegrationTest {
   void configuresAutoBuilderWithFlippingDisabled() {
     assertTrue(AutoBuilder.isConfigured());
     assertFalse(AutoBuilder.shouldFlip());
-  }
-
-  @Test
-  void eventPathContainsTheExplicitLearningMarkerAndEventRoutineRequiresSwerve() {
-    PathPlannerPath eventPath = adapter().createCanonicalEventPath();
-    assertEquals(1, eventPath.getEventMarkers().size());
-    assertEquals("LEARNING_EVENT", eventPath.getEventMarkers().get(0).triggerName());
-    assertEquals(0.5, eventPath.getEventMarkers().get(0).position(), kTolerance);
-    assertNotNull(eventPath.getEventMarkers().get(0).command());
-    assertTrue(NamedCommands.hasCommand("LEARNING_EVENT"));
-
-    completeResetWithoutConsuming(AllianceStationID.Blue1);
-    setAutonomousMode();
-    selectEventRoutine();
-    Command selectedCommand = robotContainer.getAutonomousCommand();
-    assertFalse(selectedCommand instanceof AutonomousSafetyHoldCommand);
-    assertTrue(selectedCommand.getRequirements().contains(swerveSubsystem));
-    scheduler.schedule(selectedCommand);
-    scheduler.run();
   }
 
   @Test
@@ -317,25 +295,12 @@ class RobotContainerPathPlannerIntegrationTest {
     }
   }
 
-  private void selectEventRoutine() {
-    @SuppressWarnings("unchecked")
-    SendableChooser<AutonomousRoutineFactory.AutonomousRoutineId> chooser =
-        (SendableChooser<AutonomousRoutineFactory.AutonomousRoutineId>)
-            SmartDashboard.getData("Autonomous Routine");
-    try {
-      Field selectedField = SendableChooser.class.getDeclaredField("m_selected");
-      selectedField.setAccessible(true);
-      selectedField.set(chooser, "ONE_METER_WITH_EVENT");
-    } catch (ReflectiveOperationException exception) {
-      throw new AssertionError(exception);
-    }
-  }
-
   private void completeResetWithoutConsuming(AllianceStationID station) {
     setDisabledMode(station);
-    scheduler.schedule(resetCommand);
+    selectOneMeterPath();
+    scheduler.schedule(prepareCommand);
     scheduler.run();
-    assertFalse(resetCommand.isScheduled());
+    assertFalse(prepareCommand.isScheduled());
     assertPoseEquals(
         Constants.PathPlannerLearningConstants.kCanonicalPathStartingPose,
         swerveSubsystem.getEstimatedPose().orElseThrow());
@@ -343,10 +308,27 @@ class RobotContainerPathPlannerIntegrationTest {
 
   private Optional<AutonomousStartContext> acceptReset(AllianceStationID station) {
     setDisabledMode(station);
-    scheduler.schedule(resetCommand);
+    selectOneMeterPath();
+    scheduler.schedule(prepareCommand);
     scheduler.run();
-    assertFalse(resetCommand.isScheduled());
-    return resetCommand.consumeAcceptedStartContext();
+    assertFalse(prepareCommand.isScheduled());
+    Optional<DriverStation.Alliance> alliance = DriverStation.getAlliance();
+    return preparationCoordinator
+        .previewDrivingPreparation(
+            AutonomousRoutineFactory.AutonomousRoutineId.ONE_METER_PATH,
+            alliance)
+        .map(AutonomousPreparationCoordinator.PreparationClaim::startContext);
+  }
+
+  private AutonomousPreparationCoordinator preparationCoordinator() {
+    try {
+      Field field =
+          RobotContainer.class.getDeclaredField("autonomousPreparationCoordinator");
+      field.setAccessible(true);
+      return (AutonomousPreparationCoordinator) field.get(robotContainer);
+    } catch (ReflectiveOperationException exception) {
+      throw new AssertionError(exception);
+    }
   }
 
   private PathPlannerTrajectoryAdapter adapter() {
@@ -375,19 +357,6 @@ class RobotContainerPathPlannerIntegrationTest {
             "pathplanner",
             "paths",
             kPathFileName)
-        .toAbsolutePath()
-        .normalize();
-  }
-
-  private static Path sourceEventAsset() {
-    return Path.of(
-            System.getProperty("user.dir"),
-            "src",
-            "main",
-            "deploy",
-            "pathplanner",
-            "paths",
-            kEventPathFileName)
         .toAbsolutePath()
         .normalize();
   }

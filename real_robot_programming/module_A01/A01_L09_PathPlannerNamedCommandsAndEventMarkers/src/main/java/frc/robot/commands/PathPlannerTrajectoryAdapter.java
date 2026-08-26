@@ -11,11 +11,10 @@ package frc.robot.commands;
 
 import com.pathplanner.lib.config.ModuleConfig;
 import com.pathplanner.lib.config.RobotConfig;
-import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.path.EventMarker;
 import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.Waypoint;
-import com.pathplanner.lib.path.EventMarker;
 import com.pathplanner.lib.trajectory.PathPlannerTrajectory;
 import com.pathplanner.lib.trajectory.PathPlannerTrajectoryState;
 import edu.wpi.first.math.MathUtil;
@@ -26,6 +25,7 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.Filesystem;
 import frc.robot.Constants;
+import frc.robot.autonomous.AutonomousEventId;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -149,27 +149,20 @@ public final class PathPlannerTrajectoryAdapter {
    * @throws IllegalStateException if the asset or locked path semantics are invalid
    */
   PathPlannerPath createCanonicalPath() {
-    PathPlannerPath path = loadApprovedPath();
+    PathPlannerPath path = loadApprovedPath(Constants.PathPlannerLearningConstants.kPathAssetName);
     validateApprovedPath(path);
     return path;
   }
 
-  /** Loads and validates the dedicated L09 path containing exactly one learning event marker. */
-  public PathPlannerPath createCanonicalEventPath() {
-    PathPlannerPath path = loadApprovedEventPath();
+  /** Loads and validates the single approved L09 path with its named event marker. */
+  PathPlannerPath createCanonicalEventPath() {
+    PathPlannerPath path =
+        loadApprovedPath(Constants.PathPlannerLearningConstants.kEventPathAssetName);
     validateApprovedEventPath(path);
     return path;
   }
 
-  private static PathPlannerPath loadApprovedPath() {
-    return loadPath(Constants.PathPlannerLearningConstants.kPathAssetName);
-  }
-
-  private static PathPlannerPath loadApprovedEventPath() {
-    return loadPath(Constants.PathPlannerLearningConstants.kLearningEventPathAssetName);
-  }
-
-  private static PathPlannerPath loadPath(String assetName) {
+  private static PathPlannerPath loadApprovedPath(String assetName) {
     try {
       PathPlannerPath path = PathPlannerPath.fromPathFile(assetName);
       path.preventFlipping = true;
@@ -188,36 +181,35 @@ public final class PathPlannerTrajectoryAdapter {
   }
 
   private static void validateApprovedPath(PathPlannerPath path) {
-    validateApprovedPathGeometry(path);
-    if (!path.getEventMarkers().isEmpty()) {
-      throw new IllegalStateException("The approved event-free path contains event markers");
-    }
+    validateApprovedGeometryAndContract(path, false);
   }
 
   private static void validateApprovedEventPath(PathPlannerPath path) {
-    validateApprovedPathGeometry(path);
+    validateApprovedGeometryAndContract(path, true);
     List<EventMarker> eventMarkers = path.getEventMarkers();
     if (eventMarkers == null || eventMarkers.size() != 1) {
-      throw new IllegalStateException("The L09 event path must contain exactly one event marker");
+      throw new IllegalStateException("The event path must contain exactly one event marker");
     }
     EventMarker marker = eventMarkers.get(0);
     if (marker == null
-        || !AutonomousEventId.LEARNING_EVENT.stableName().equals(marker.triggerName())
-        || !close(marker.position(), 0.5)
-        || marker.command() == null
-        || !NamedCommands.hasCommand(marker.triggerName())) {
-      throw new IllegalStateException("The L09 event marker is not the explicit learning event");
+        || !AutonomousEventId.LEARNING_EVENT.pathPlannerName().equals(marker.triggerName())
+        || !close(marker.position(), 0.5)) {
+      throw new IllegalStateException(
+          "The event path must contain LEARNING_EVENT at relative position 0.5");
     }
   }
 
-  private static void validateApprovedPathGeometry(PathPlannerPath path) {
+  private static void validateApprovedGeometryAndContract(
+      PathPlannerPath path, boolean eventPath) {
     Objects.requireNonNull(path, "path");
     if (path.isChoreoPath() || path.isReversed()) {
       throw new IllegalStateException("The approved path must be a non-reversed PathPlanner path");
     }
     if (!path.getRotationTargets().isEmpty()
         || !path.getPointTowardsZones().isEmpty()
-        || !path.getConstraintZones().isEmpty()) {
+        || !path.getConstraintZones().isEmpty()
+        || path.getEventMarkers() == null
+        || (!eventPath && !path.getEventMarkers().isEmpty())) {
       throw new IllegalStateException("The approved path contains unsupported PathPlanner features");
     }
 

@@ -25,7 +25,7 @@ import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.autonomous.AutonomousEventId;
 import frc.robot.Constants;
 import frc.robot.Constants.FieldTransformConstants.FieldVariant;
 import frc.robot.util.FieldAllianceTransform;
@@ -92,27 +92,26 @@ class PathPlannerExecutionPathFactoryTest {
   }
 
   @Test
-  void eventExecutionPathPreservesTheLearningMarkerAndTransformsGeometryOnce() {
-    EventMarker marker =
-        new EventMarker(AutonomousEventId.LEARNING_EVENT.stableName(), 0.5, Commands.none());
-    PathPlannerPath canonical = createPath(List.of(), List.of(marker), false);
+  void eventExecutionPathPreservesMarkerForBlueAndRed() {
+    PathPlannerPath canonical =
+        createPath(List.of(), List.of(new EventMarker("LEARNING_EVENT", 0.5)), false);
 
-    PathPlannerPath execution =
-        PathPlannerExecutionPathFactory.createExecutionPathWithEvents(
-            canonical, kFieldVariant, DriverStation.Alliance.Red);
+    PathPlannerPath blue =
+        PathPlannerExecutionPathFactory.createEventExecutionPath(
+            canonical, kFieldVariant, DriverStation.Alliance.Blue,
+            AutonomousEventId.LEARNING_EVENT);
+    PathPlannerPath red =
+        PathPlannerExecutionPathFactory.createEventExecutionPath(
+            canonical, kFieldVariant, DriverStation.Alliance.Red,
+            AutonomousEventId.LEARNING_EVENT);
 
-    assertNotSame(canonical, execution);
-    assertTrue(execution.preventFlipping);
-    assertEquals(List.of(marker), execution.getEventMarkers());
-    assertEquals(
-        FieldAllianceTransform.fromCanonicalBluePose(
-                new edu.wpi.first.math.geometry.Pose2d(
-                    canonical.getWaypoints().get(0).anchor(),
-                    Rotation2d.kZero),
-                kFieldVariant,
-                DriverStation.Alliance.Red)
-            .getTranslation(),
-        execution.getWaypoints().get(0).anchor());
+    assertEquals(1, blue.getEventMarkers().size());
+    assertEquals(1, red.getEventMarkers().size());
+    assertEquals("LEARNING_EVENT", blue.getEventMarkers().get(0).triggerName());
+    assertEquals(0.5, blue.getEventMarkers().get(0).position(), kTolerance);
+    assertEquals(0.5, red.getEventMarkers().get(0).position(), kTolerance);
+    assertTrue(blue.preventFlipping);
+    assertTrue(red.preventFlipping);
   }
 
   @Test

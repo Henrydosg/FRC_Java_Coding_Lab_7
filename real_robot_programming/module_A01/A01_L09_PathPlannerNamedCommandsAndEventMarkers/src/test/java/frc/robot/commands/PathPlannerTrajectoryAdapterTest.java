@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.pathplanner.lib.config.RobotConfig;
-import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.path.EventMarker;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.trajectory.PathPlannerTrajectory;
 import com.pathplanner.lib.trajectory.PathPlannerTrajectoryState;
@@ -28,7 +28,6 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import java.io.IOException;
@@ -64,18 +63,18 @@ class PathPlannerTrajectoryAdapterTest {
             .resolve(kPathFileName);
     Files.createDirectories(temporaryAsset.getParent());
     Files.copy(sourceAsset(), temporaryAsset, StandardCopyOption.REPLACE_EXISTING);
-    temporaryEventAsset = temporaryAsset.getParent().resolve(kEventPathFileName);
+    temporaryEventAsset =
+        temporaryLaunchDirectory
+            .resolve("src/main/deploy/pathplanner/paths")
+            .resolve(kEventPathFileName);
     Files.copy(sourceEventAsset(), temporaryEventAsset, StandardCopyOption.REPLACE_EXISTING);
     System.setProperty("user.dir", temporaryLaunchDirectory.toString());
     PathPlannerPath.clearCache();
-    NamedCommands.clearAll();
-    NamedCommands.registerCommand(AutonomousEventId.LEARNING_EVENT.stableName(), Commands.none());
   }
 
   @AfterEach
   void restoreDeployment() {
     PathPlannerPath.clearCache();
-    NamedCommands.clearAll();
     System.setProperty("user.dir", previousUserDirectory);
   }
 
@@ -207,16 +206,14 @@ class PathPlannerTrajectoryAdapterTest {
   }
 
   @Test
-  void eventAssetLoadsWithExactlyOneExplicitLearningMarker() {
+  void eventAssetLoadsWithExactlyOneStableMarkerAtHalfway() {
     PathPlannerPath path = createAdapter().createCanonicalEventPath();
 
-    assertEquals(1, path.getEventMarkers().size());
-    assertEquals(
-        AutonomousEventId.LEARNING_EVENT.stableName(),
-        path.getEventMarkers().get(0).triggerName());
-    assertEquals(0.5, path.getEventMarkers().get(0).position(), kTolerance);
-    assertNotNull(path.getEventMarkers().get(0).command());
     assertTrue(path.preventFlipping);
+    assertEquals(1, path.getEventMarkers().size());
+    EventMarker marker = path.getEventMarkers().get(0);
+    assertEquals("LEARNING_EVENT", marker.triggerName());
+    assertEquals(0.5, marker.position(), kTolerance);
   }
 
   @Test
@@ -332,19 +329,14 @@ class PathPlannerTrajectoryAdapterTest {
   }
 
   private static Path sourceAsset() {
-    return Path.of(
-            System.getProperty("user.dir"),
-            "src",
-            "main",
-            "deploy",
-            "pathplanner",
-            "paths",
-            kPathFileName)
-        .toAbsolutePath()
-        .normalize();
+    return sourceAsset(kPathFileName);
   }
 
   private static Path sourceEventAsset() {
+    return sourceAsset(kEventPathFileName);
+  }
+
+  private static Path sourceAsset(String fileName) {
     return Path.of(
             System.getProperty("user.dir"),
             "src",
@@ -352,7 +344,7 @@ class PathPlannerTrajectoryAdapterTest {
             "deploy",
             "pathplanner",
             "paths",
-            kEventPathFileName)
+            fileName)
         .toAbsolutePath()
         .normalize();
   }

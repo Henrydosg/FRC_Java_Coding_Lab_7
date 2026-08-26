@@ -523,8 +523,9 @@ compatibility entry gate remains authoritative. Vision/AprilTags are outside the
 and D01 retains mechanism architecture ownership.
 
 The approved V00 decision authorizes `V00 - AprilTag Vision Observation and Pose Fusion` and
-`module_V00` as the successor boundary after frozen A01_L09. A01 is closed at
-A01_L09; A01_L10 is prohibited. V00_L01 shall inherit frozen A01_L09 through the standard copy,
+`module_V00` as the successor boundary after final closure of A01_L09. A01 closes at
+A01_L09 after the required closure approval; A01_L10 is prohibited. V00_L01 shall inherit the
+then-frozen A01_L09 through the standard copy,
 rename, generated-artifact cleanup, baseline-build, and transition-guide workflow. This governance
 registration does not select a camera vendor. V00_L01 has since completed and frozen; V00_L02 was
 activated and implemented, then suspended read-only by the exceptional A01_L08 safety decision.
@@ -566,7 +567,9 @@ terminal mode-ownership defects. Source review also identified manual
 child-command lifecycle delegation that conflicts with the A01 scheduler-native
 composition contract. With explicit Architect and User approval:
 
-- A01_L01-L07 and A01_L09 remain COMPLETE / FROZEN / READ-ONLY;
+- A01_L01-L07 and A01_L09 are `COMPLETE / FROZEN / READ-ONLY`; A01_L09 final
+  architecture and closure reviews are PASS, while User-owned Git publication
+  remains pending;
 - V00_L01 remains COMPLETE / FROZEN / READ-ONLY;
 - A01_L08 completed its authorized reopen and is now
   `COMPLETE / FROZEN / READ-ONLY`;

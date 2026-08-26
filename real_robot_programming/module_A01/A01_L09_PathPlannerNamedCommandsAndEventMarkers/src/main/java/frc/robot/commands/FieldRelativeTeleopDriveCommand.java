@@ -10,6 +10,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.controls.XboxDriverInputSource;
@@ -71,6 +72,10 @@ public final class FieldRelativeTeleopDriveCommand extends Command {
 
   @Override
   public void execute() {
+    if (!DriverStation.isTeleopEnabled()) {
+      swerveSubsystem.stop();
+      return;
+    }
     try {
       DriverInputObservation observation = driverInputSource.read();
       ChassisSpeeds fieldRelativeSpeeds =

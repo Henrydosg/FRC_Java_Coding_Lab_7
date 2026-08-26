@@ -9,9 +9,9 @@
 
 package frc.robot.commands;
 
+import com.pathplanner.lib.path.EventMarker;
 import com.pathplanner.lib.path.GoalEndState;
 import com.pathplanner.lib.path.IdealStartingState;
-import com.pathplanner.lib.path.EventMarker;
 import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.Waypoint;
@@ -19,6 +19,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import frc.robot.autonomous.AutonomousEventId;
 import frc.robot.Constants.FieldTransformConstants.FieldVariant;
 import frc.robot.util.FieldAllianceTransform;
 import java.util.List;
@@ -43,21 +44,28 @@ final class PathPlannerExecutionPathFactory {
    */
   static PathPlannerPath createExecutionPath(
       PathPlannerPath canonicalPath, FieldVariant fieldVariant, Alliance alliance) {
-    return createExecutionPath(canonicalPath, fieldVariant, alliance, false);
+    return createExecutionPath(canonicalPath, fieldVariant, alliance, null);
   }
 
-  /** Creates an execution copy while preserving the one explicitly approved L09 event marker. */
-  static PathPlannerPath createExecutionPathWithEvents(
-      PathPlannerPath canonicalPath, FieldVariant fieldVariant, Alliance alliance) {
-    return createExecutionPath(canonicalPath, fieldVariant, alliance, true);
+  /** Creates a fresh transformed execution path while preserving the approved event marker. */
+  static PathPlannerPath createEventExecutionPath(
+      PathPlannerPath canonicalPath,
+      FieldVariant fieldVariant,
+      Alliance alliance,
+      AutonomousEventId eventId) {
+    return createExecutionPath(
+        canonicalPath,
+        fieldVariant,
+        alliance,
+        Objects.requireNonNull(eventId, "eventId"));
   }
 
   private static PathPlannerPath createExecutionPath(
       PathPlannerPath canonicalPath,
       FieldVariant fieldVariant,
       Alliance alliance,
-      boolean preserveLearningEvent) {
-    validateSupportedPath(canonicalPath, fieldVariant, alliance, preserveLearningEvent);
+      AutonomousEventId eventId) {
+    validateSupportedPath(canonicalPath, fieldVariant, alliance, eventId);
 
     List<Waypoint> executionWaypoints =
         canonicalPath.getWaypoints().stream()
@@ -77,13 +85,15 @@ final class PathPlannerExecutionPathFactory {
             FieldAllianceTransform.fromCanonicalBlueHeading(
                 canonicalGoal.rotation(), fieldVariant, alliance));
 
+    List<EventMarker> executionEventMarkers =
+        eventId == null ? List.of() : List.copyOf(canonicalPath.getEventMarkers());
     PathPlannerPath executionPath =
         new PathPlannerPath(
             executionWaypoints,
             List.of(),
             List.of(),
             List.of(),
-            preserveLearningEvent ? canonicalPath.getEventMarkers() : List.of(),
+            executionEventMarkers,
             canonicalPath.getGlobalConstraints(),
             executionStart,
             executionGoal,
@@ -117,7 +127,7 @@ final class PathPlannerExecutionPathFactory {
       PathPlannerPath path,
       FieldVariant fieldVariant,
       Alliance alliance,
-      boolean preserveLearningEvent) {
+      AutonomousEventId eventId) {
     Objects.requireNonNull(path, "canonicalPath");
     Objects.requireNonNull(fieldVariant, "fieldVariant");
     Objects.requireNonNull(alliance, "alliance");
@@ -137,20 +147,14 @@ final class PathPlannerExecutionPathFactory {
       throw new IllegalArgumentException("Constraint zones are unsupported in A01_L07");
     }
     if (path.getEventMarkers() == null
-        || (!preserveLearningEvent && !path.getEventMarkers().isEmpty())) {
+        || (eventId == null && !path.getEventMarkers().isEmpty())) {
       throw new IllegalArgumentException("Event markers are unsupported in A01_L07");
     }
-    if (preserveLearningEvent) {
-      if (path.getEventMarkers().size() != 1) {
-        throw new IllegalArgumentException("L09 requires exactly one event marker");
-      }
-      EventMarker marker = path.getEventMarkers().get(0);
-      if (marker == null
-          || !AutonomousEventId.LEARNING_EVENT.stableName().equals(marker.triggerName())
-          || !Double.isFinite(marker.position())
-          || Math.abs(marker.position() - 0.5) > 1.0e-9
-          || marker.command() == null) {
-        throw new IllegalArgumentException("L09 event marker is invalid");
+    if (eventId != null) {
+      if (path.getEventMarkers().size() != 1
+          || !eventId.pathPlannerName().equals(path.getEventMarkers().get(0).triggerName())
+          || !isFinite(path.getEventMarkers().get(0).position())) {
+        throw new IllegalArgumentException("Event path marker contract is invalid");
       }
     }
     if (path.name == null) {
@@ -217,6 +221,10 @@ final class PathPlannerExecutionPathFactory {
 
   private static boolean isFinitePositive(double value) {
     return Double.isFinite(value) && value > 0.0;
+  }
+
+  private static boolean isFinite(double value) {
+    return Double.isFinite(value);
   }
 
   private static boolean isFiniteNonnegative(double value) {

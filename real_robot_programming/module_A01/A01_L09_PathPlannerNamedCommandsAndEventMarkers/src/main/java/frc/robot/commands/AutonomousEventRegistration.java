@@ -14,56 +14,46 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.observation.AutonomousEventObservation;
 import frc.robot.observation.AutonomousEventObservation.LifecycleState;
-import frc.robot.subsystems.SwerveSubsystem;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-/** Performs narrow, fail-closed registration of one typed event binding. */
+/** Registers fresh scheduler-owned event commands with PathPlanner NamedCommands. */
 public final class AutonomousEventRegistration {
-  private AutonomousEventRegistration() {}
+  private final Consumer<AutonomousEventObservation> observationSink;
 
-  /** Registers one event before its PathPlanner asset is loaded or executed. */
-  public static synchronized void register(
-      AutonomousEventBinding binding, Consumer<AutonomousEventObservation> observationSink) {
-    AutonomousEventBinding acceptedBinding = Objects.requireNonNull(binding, "binding");
-    Consumer<AutonomousEventObservation> acceptedSink =
-        Objects.requireNonNull(observationSink, "observationSink");
-    String eventName = acceptedBinding.eventName();
+  public AutonomousEventRegistration(Consumer<AutonomousEventObservation> observationSink) {
+    this.observationSink = Objects.requireNonNull(observationSink, "observationSink");
+  }
 
-    if (NamedCommands.hasCommand(eventName)) {
-      throw new IllegalStateException("duplicate NamedCommands name: " + eventName);
+  /** Registers one event once; duplicate names are rejected before registry mutation. */
+  public void register(AutonomousEventBinding binding) {
+    AutonomousEventBinding acceptedBinding =
+        Objects.requireNonNull(binding, "binding");
+    if (NamedCommands.hasCommand(acceptedBinding.pathPlannerName())) {
+      throw new IllegalStateException(
+          "NamedCommands event is already registered: " + acceptedBinding.pathPlannerName());
     }
 
     Command deferredCommand =
         Commands.defer(
-            () -> resolve(acceptedBinding, acceptedSink), acceptedBinding.requirements());
-    NamedCommands.registerCommand(eventName, deferredCommand);
+            () -> createFreshCommand(acceptedBinding), acceptedBinding.requirements());
+    NamedCommands.registerCommand(acceptedBinding.pathPlannerName(), deferredCommand);
   }
 
-  private static Command resolve(
-      AutonomousEventBinding binding, Consumer<AutonomousEventObservation> observationSink) {
-    final Command command;
+  private Command createFreshCommand(AutonomousEventBinding binding) {
     try {
-      command = binding.commandSupplier().get();
+      Command command =
+          Objects.requireNonNull(
+              binding.commandSupplier().get(), "event command supplier returned null");
+      if (!command.getRequirements().equals(binding.requirements())) {
+        throw new IllegalStateException("event command requirements did not match its binding");
+      }
+      return command;
     } catch (RuntimeException failure) {
-      publishFactoryFailure(binding.eventId(), observationSink);
+      observationSink.accept(
+          new AutonomousEventObservation(
+              binding.eventId(), LifecycleState.FACTORY_FAILURE, false));
       return Commands.none();
-    }
-    if (command == null
-        || !command.getRequirements().equals(binding.requirements())
-        || command.getRequirements().stream().anyMatch(SwerveSubsystem.class::isInstance)) {
-      publishFactoryFailure(binding.eventId(), observationSink);
-      return Commands.none();
-    }
-    return command;
-  }
-
-  private static void publishFactoryFailure(
-      AutonomousEventId eventId, Consumer<AutonomousEventObservation> observationSink) {
-    try {
-      observationSink.accept(new AutonomousEventObservation(eventId, LifecycleState.FACTORY_FAILURE, false));
-    } catch (RuntimeException ignored) {
-      // A telemetry failure cannot safely change the autonomous command contract.
     }
   }
 }
