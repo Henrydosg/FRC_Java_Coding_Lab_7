@@ -252,7 +252,8 @@ The current canonical V00_L02 was reconstructed from published V00_L01. Its
 inheritance audit, Java 17 baseline build, full inherited test suite,
 architecture audit, pre-implementation design lock, implementation,
 verification, documentation, final architecture review, and final closure
-review are PASS. It is now `COMPLETE / FROZEN / READ-ONLY`. The exact V00_L02 Java delta is
+review are PASS. It is now `COMPLETE / FROZEN / READ-ONLY / PUBLISHED` at
+`53e9b9f`. The exact V00_L02 Java delta is
 `AprilTagFieldLayoutContract.java` plus
 `AprilTagFieldLayoutContractTest.java`; no other production or test file
 changed. Authoritative User verification under WPILib Java 17 records the
@@ -267,8 +268,39 @@ mutable layout/tag state. It does not use `kDefaultField`, alliance flipping,
 pose inversion, `fromLayout(...)`, runtime wiring, camera/vendor integration,
 VisionIO, Observation, telemetry, autonomous, PathPlanner, or Swerve behavior.
 Simulation, Driver Station / Glass, real robot, and physical camera are `NOT
-APPLICABLE`. Git publication remains `PENDING USER COMMIT/PUSH`; V00_L03 has not
-been created or activated.
+APPLICABLE`. User-owned Git publication is complete at `53e9b9f`.
+
+The User prepared `V00_L03_VisionIOAndImmutableObservationContract` directly
+from published V00_L02. Its WPILib Java 17 baseline build is User-verified
+PASS, its no-Git inheritance audit found zero differences across 219 comparable
+non-generated files, its architecture audit and Design Lock are PASS/APPROVED,
+and the separately authorized implementation is complete. V00_L03 is now
+`COMPLETE / FROZEN / READ-ONLY` after the final architecture and closure
+reviews passed. Its final state is `IMPLEMENTATION COMPLETE / USER-VERIFIED /
+DOCUMENTATION COMPLETE / FINAL ARCHITECTURE AUDIT PASS / PREDECESSOR
+PROVENANCE PASS / FINAL CLOSURE REVIEW PASS`.
+
+The completed L03 concept is vendor-neutral one-cycle VisionIO transport plus
+an immutable Vision Observation contract. The exact production boundary is
+`VisionIO.java` and `VisionObservation.java`; the exact focused-test boundary
+is `VisionIOTest.java` and `VisionObservationTest.java`. No runtime producer,
+vendor adapter, NetworkTables acquisition, telemetry, simulation
+implementation, Limelight, PhotonVision, physical-camera work, pose
+estimation, quality/ambiguity, timestamps/latency, fusion, Swerve,
+autonomous, PathPlanner, Robot, or RobotContainer change was added.
+
+The earlier effectively-zero-quaternion test failure was a false oracle at the
+locked `Transform3d` boundary because WPILib `Rotation3d` canonicalization had
+already produced a valid identity rotation. The authorized repair changed the
+test oracle to verify valid identity rotation; no raw quaternion API or
+production contract expansion was introduced. Focused tests, inherited L01/L02
+regressions, the full suite, clean build, final documentation, and the
+read-only architecture audit are PASS. Simulation, Driver Station / Glass,
+physical camera, and real robot remain not applicable to this contract-only
+lesson and are deferred to the governed V00 lessons. V00_L01 remains published
+at `7d52ebf`, V00_L02 remains published at `53e9b9f`, and A01_L10 remains
+prohibited. No active lesson remains. Git publication of V00_L03 remains
+`PENDING / USER OWNED` until the User performs and reports the commit/push.
 
 Approved lesson sequence:
 
