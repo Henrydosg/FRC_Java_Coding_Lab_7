@@ -9,7 +9,7 @@
 - **Documentation:** `COMPLETE`
 - **Final Architecture Review:** `PASS`
 - **Final Closure / Freeze:** `PASS / COMPLETE`
-- **Git publication:** `PENDING USER COMMIT/PUSH`
+- **Git publication:** `PUBLISHED @ 53e9b9f / USER VERIFIED`
 
 ## One-concept objective
 
@@ -132,12 +132,12 @@ Confirm:
 
 **Result:** PASS. V00_L02 is `COMPLETE / FROZEN / READ-ONLY`.
 
-## Pending phase 9 — User-owned publication
+## Historical phase 9 — User-owned publication
 
 After final closure, the User performs Git add, commit, and push. Codex does not
 perform or claim these operations.
 
-**Current result:** PENDING USER COMMIT/PUSH.
+**Current result:** COMPLETE / USER VERIFIED at `53e9b9f`.
 
 ## Stop conditions
 

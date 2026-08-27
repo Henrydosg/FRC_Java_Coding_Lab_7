@@ -11,7 +11,8 @@
   dùng để giải thích.
 
 Hướng dẫn này mô tả hợp đồng reference geometry đã được triển khai. V00_L02
-chưa COMPLETE/FROZEN vì vẫn cần final review và closure riêng.
+đã `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 53e9b9f` sau khi hoàn tất
+final review và closure; User đã xác nhận publication.
 
 ## 1. Vì sao V00_L02 đi sau V00_L01?
 
@@ -250,5 +251,5 @@ Vì lesson chỉ thêm immutable deterministic reference geometry:
 - Physical Camera: `NOT APPLICABLE`.
 
 Implementation và documentation đã complete/verified. Lesson là
-`COMPLETE / FROZEN / READ-ONLY`; Git publication vẫn `PENDING USER
-COMMIT/PUSH`.
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 53e9b9f`; User đã xác nhận
+publication và vẫn là người sở hữu các thao tác Git.

@@ -318,6 +318,6 @@ Simulation, Driver Station / Glass, and real robot are not applicable to this
 new concept because it has no runtime camera, IO, telemetry, scheduler,
 drivetrain, lookup, fusion, or actuation behavior.
 
-V00_L01 is `COMPLETE / FROZEN / READ-ONLY` after Final Architecture Review and
-Final Closure Review PASS. Git add, commit, and push remain User-owned and
-pending.
+V00_L01 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 7d52ebf` after Final
+Architecture Review and Final Closure Review PASS. Git add, commit, and push
+remain User-owned; the User confirmed publication at that commit.

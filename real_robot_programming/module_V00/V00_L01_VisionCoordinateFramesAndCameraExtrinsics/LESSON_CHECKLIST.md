@@ -95,7 +95,8 @@ Git: User-owned; Codex must not run Git commands
 - [x] A01 changed: NONE.
 - [x] Root AGENTS.md and README stale V00_L01 lifecycle metadata reconciled
       under separate explicit authorization; no governance rule changed.
-- [x] V00_L02 remains SUSPENDED / READ-ONLY / UNMODIFIED.
+- [x] V00_L02 was later reconciled as COMPLETE / FROZEN / READ-ONLY / PUBLISHED
+      at `53e9b9f`; it was not modified by the V00_L01 closure.
 - [x] Git commands performed by Codex: NONE.
 
 ## Final Closure Gates
@@ -104,8 +105,10 @@ Git: User-owned; Codex must not run Git commands
 - [x] Separate Final Architecture Review PASS.
 - [x] Separate Final Closure Review / freeze authorization PASS.
 - [x] Change V00_L01 to COMPLETE / FROZEN / READ-ONLY under that authorization.
-- [ ] User Git add/commit/push.
-- [ ] Any later V00_L02 reconciliation separately authorized after V00_L01 freeze.
+- [x] User Git add/commit/push confirmed at `7d52ebf`.
+- [x] Later V00_L02 publication reconciliation was separately authorized after
+      V00_L01 freeze and completed at `53e9b9f`.
 
-V00_L01 is `COMPLETE / FROZEN / READ-ONLY`. This closure does not authorize
-work in V00_L02.
+V00_L01 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 7d52ebf`. This closure
+did not authorize work in V00_L02; V00_L02 was later completed and published
+under separate authorization.

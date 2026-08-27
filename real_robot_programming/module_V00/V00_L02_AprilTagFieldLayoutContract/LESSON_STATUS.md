@@ -27,7 +27,7 @@
 | Production Implementation | PASS | Exact authorized production file implemented. |
 | Focused Test Implementation | PASS | Exact authorized focused test file implemented. |
 | Documentation Completion | PASS | README, status, plan, checklist, transition guide, and bilingual learning guides reconciled. |
-| Transition Guide | FINAL / PASS | All 21 chronological steps are documented through final review, closure, freeze, and pending User publication. |
+| Transition Guide | FINAL / PASS | All 21 chronological steps are documented through final review, closure, freeze, and User publication at `53e9b9f`. |
 | Pre-Closure Architecture Audit | PASS | Two-file delta, no wiring, no dependency/config/asset drift, predecessor protection, and Document C boundaries verified. |
 | Final Architecture Review | PASS | Final read-only audit found no technical, architectural, semantic, documentation, inheritance, or scope blocker. |
 | Final Closure Review | PASS | Architect explicitly authorized final closure and freeze metadata. |
@@ -87,9 +87,9 @@ V00_L01 are unchanged.
 - Final read-only Architecture Review: `PASS`
 - Final Closure Authorization: `PASS`
 - COMPLETE / FROZEN transition: `COMPLETE`
-- Git Commit: `PENDING / USER OWNED`
-- Git Push: `PENDING / USER OWNED`
-- Git Publication: `PENDING USER COMMIT/PUSH`
+- Git Commit: `PUBLISHED @ 53e9b9f / USER VERIFIED`
+- Git Push: `PUBLISHED @ 53e9b9f / USER VERIFIED`
+- Git Publication: `PUBLISHED @ 53e9b9f / USER VERIFIED`
 
 ## Known issues / limitations
 
@@ -99,10 +99,9 @@ V00_L01 are unchanged.
 - Physical field construction must still be selected explicitly.
 - Camera runtime, VisionIO, Observation, quality, timing, estimation, fusion,
   telemetry, autonomous integration, and hardware calibration remain deferred.
-- Git publication remains pending User commit/push.
+- Git publication is complete at `53e9b9f` and remains User-owned.
 
 ## Current result
 
-`COMPLETE / FROZEN / READ-ONLY / IMPLEMENTATION VERIFIED / DOCUMENTATION
-COMPLETE / FINAL ARCHITECTURE REVIEW PASS / FINAL CLOSURE PASS / GIT
-PUBLICATION PENDING USER COMMIT/PUSH`
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 53e9b9f / IMPLEMENTATION VERIFIED /
+DOCUMENTATION COMPLETE / FINAL ARCHITECTURE REVIEW PASS / FINAL CLOSURE PASS`

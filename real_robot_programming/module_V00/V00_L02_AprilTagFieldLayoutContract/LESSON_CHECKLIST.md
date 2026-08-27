@@ -103,13 +103,12 @@
 - [x] Final Closure Authorization PASS.
 - [x] Freeze metadata update completed.
 - [x] Lesson marked `COMPLETE / FROZEN / READ-ONLY`.
-- [ ] User Git add.
-- [ ] User Git commit.
-- [ ] User Git push.
-- [ ] User confirms Git publication.
+- [x] User Git add.
+- [x] User Git commit.
+- [x] User Git push.
+- [x] User confirms Git publication at `53e9b9f`.
 
 ## Current result
 
-`COMPLETE / FROZEN / READ-ONLY / IMPLEMENTATION VERIFIED / DOCUMENTATION
-COMPLETE / FINAL ARCHITECTURE REVIEW PASS / FINAL CLOSURE PASS / GIT
-PUBLICATION PENDING USER COMMIT/PUSH`
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 53e9b9f / IMPLEMENTATION VERIFIED /
+DOCUMENTATION COMPLETE / FINAL ARCHITECTURE REVIEW PASS / FINAL CLOSURE PASS`

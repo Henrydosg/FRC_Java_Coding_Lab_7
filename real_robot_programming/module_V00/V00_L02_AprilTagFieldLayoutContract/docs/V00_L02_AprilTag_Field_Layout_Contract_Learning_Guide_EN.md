@@ -265,5 +265,5 @@ Because this lesson adds deterministic immutable reference geometry only:
 - Physical Camera: `NOT APPLICABLE`.
 
 The implementation and documentation are complete and verified. The lesson is
-`COMPLETE / FROZEN / READ-ONLY`; Git publication remains `PENDING USER
-COMMIT/PUSH`.
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 53e9b9f`; the User confirmed the
+publication while retaining ownership of Git operations.

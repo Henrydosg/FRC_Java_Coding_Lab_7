@@ -24,7 +24,7 @@
   A01_L09 and then transferred into the canonical lesson directory.
 - Editable boundary: `NONE`; V00_L01 is `COMPLETE / FROZEN / READ-ONLY`.
 - A01_L10: `PROHIBITED`.
-- V00_L02: `SUSPENDED / READ-ONLY / UNMODIFIED`.
+- V00_L02: `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 53e9b9f`.
 
 ## Architecture and Inheritance Audit
 
@@ -85,8 +85,8 @@
   preserved, none deleted or rewritten.
 - Final Architecture Review: `PASS`.
 - Final Closure Review: `PASS / APPROVED`.
-- Git Commit: `PENDING / USER OWNED`.
-- Git Push: `PENDING / USER OWNED`.
+- Git Commit: `PUBLISHED @ 7d52ebf / USER VERIFIED`.
+- Git Push: `PUBLISHED @ 7d52ebf / USER VERIFIED`.
 
 ## Known Issues and Unclaimed Scope
 
@@ -96,11 +96,10 @@
   latency, fusion, autonomous behavior, drivetrain behavior, endpoint accuracy,
   or competition-readiness result is claimed.
 - Repository-level governance and lesson metadata record the final frozen state.
-- Git publication remains pending and User-owned.
+- Git publication is complete at `7d52ebf` and remains User-owned.
 
 ## Current Result
 
 Implementation, canonical verification, documentation reconciliation, final
 architecture review, and final closure review are PASS. V00_L01 is
-`COMPLETE / FROZEN / READ-ONLY`. Git publication remains pending User
-commit/push.
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 7d52ebf`.

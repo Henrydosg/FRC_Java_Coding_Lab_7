@@ -12,12 +12,12 @@
   `V00_L01_VisionCoordinateFramesAndCameraExtrinsics @ 7d52ebf`
 - **Inherited A01 foundation:**
   `A01_L09_PathPlannerNamedCommandsAndEventMarkers @ 6b243bb`
-- **Git publication:** `PENDING USER COMMIT/PUSH`
+- **Git publication:** `PUBLISHED @ 53e9b9f / USER VERIFIED`
 
 This chronological guide explains why the current V00_L02 was reconstructed,
 what was inherited, what the lesson added, how it was verified, and which final
-closure gates remain. No unrecorded command, test count, measurement, or Git
-result is invented.
+closure gates were completed. No unrecorded command, test count, measurement,
+or Git result is invented.
 
 ## Architecture classification
 
@@ -400,9 +400,11 @@ performs Git add, commit, and push.
 
 **Files Changed:** User-owned repository metadata after future closure.
 
-**Verification:** `PENDING USER COMMIT/PUSH`; Codex performed no Git operation.
+**Verification:** User evidence confirms publication at `53e9b9f`; Codex
+performed no Git operation.
 
-**Expected Result:** Publication is claimed only after User confirmation.
+**Expected Result:** Publication is claimed after User confirmation at
+`53e9b9f`.
 
 ## Current transition conclusion
 
@@ -410,5 +412,4 @@ Canonical V00_L02 was reconstructed from final V00_L01, implemented through
 exactly one production and one focused test file, independently verified by the
 User, and fully documented. Frozen architecture and predecessor boundaries are
 preserved. Final Architecture Review and Final Closure Review are PASS, and the
-lesson is `COMPLETE / FROZEN / READ-ONLY`. User-owned Git publication remains
-`PENDING USER COMMIT/PUSH`.
+lesson is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 53e9b9f`.

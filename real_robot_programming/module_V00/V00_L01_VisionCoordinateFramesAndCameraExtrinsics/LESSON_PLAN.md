@@ -10,7 +10,7 @@
 - Documentation reconciliation: `COMPLETE / PASS`.
 - Final Architecture Review: `PASS`.
 - Final Closure Review and freeze: `PASS / APPROVED`.
-- Git publication: `PENDING / USER OWNED`.
+- Git publication: `PUBLISHED @ 7d52ebf / USER VERIFIED`.
 
 ## Reason for Reconstruction
 
@@ -128,7 +128,9 @@ drivetrain, fusion, lookup, or actuation path.
 1. Final Architecture Review: `PASS`.
 2. Final Closure / freeze authorization: `PASS / APPROVED`.
 3. Lesson metadata: `COMPLETE / FROZEN / READ-ONLY`.
-4. User Git add/commit/push: `PENDING / USER OWNED`.
-5. Any V00_L02 reconciliation remains separately governed and is not automatic.
+4. User Git add/commit/push: `PUBLISHED @ 7d52ebf / USER VERIFIED`.
+5. V00_L02 was separately reconciled and published at `53e9b9f`; no automatic
+   activation or modification was performed by this closure.
 
-V00_L01 is frozen. This closure does not start, resume, or modify V00_L02.
+V00_L01 is frozen and published. This closure did not start, resume, or modify
+V00_L02.

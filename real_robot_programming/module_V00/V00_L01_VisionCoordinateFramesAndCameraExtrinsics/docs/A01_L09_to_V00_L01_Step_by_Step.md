@@ -18,7 +18,7 @@ Final V00_L01 state:
 
 The implementation and canonical User verification pass. Documentation has
 been reconciled, and the separate Final Architecture Review and Final Closure
-Review are PASS. User-owned Git publication remains pending.
+Review are PASS. User-owned Git publication was confirmed at `7d52ebf`.
 
 ## What Is Inherited and What Is New
 
@@ -479,8 +479,9 @@ frozen and a separate successor action is authorized.
 **Verification:** Current metadata records Final Architecture Review PASS,
 Final Closure Review PASS, and `COMPLETE / FROZEN / READ-ONLY`.
 
-**Expected Result:** V00_L01 is frozen and read-only; V00_L02 remains suspended
-until a separate action is authorized.
+**Expected Result:** V00_L01 is frozen and read-only; at this historical point
+V00_L02 remained protected until a separate successor action was authorized.
+That successor was later reconciled and published at `53e9b9f`.
 
 ## Step 18 - Keep Git User-owned
 
@@ -491,17 +492,17 @@ until a separate action is authorized.
 **Why:** Codex may document and audit the lesson but may not stage, commit,
 push, inspect, or claim completion of User-owned Git operations.
 
-**Action:** After the completed closure and freeze authorization, the User alone
-performs Git add, commit, and push. Record V00_L01 Git publication as pending
-until those User-owned operations succeed.
+**Action:** At the time of the original closure, after closure and freeze
+authorization, the User alone performed Git add, commit, and push. This guide
+preserves that User-owned process while recording the later confirmed result.
 
 **Files Changed:** None by this step.
 
 **Verification:** Codex ran no Git command during reconstruction documentation
-reconciliation. Target lesson commit and push remain `PENDING / USER OWNED`.
+reconciliation. User evidence confirms V00_L01 publication at `7d52ebf`.
 
-**Expected Result:** Documentation readiness and Git publication remain two
-truthfully separate states.
+**Expected Result:** Documentation readiness and User-owned Git publication are
+separate responsibilities; both are complete for V00_L01.
 
 ## Verification and Scope Summary
 
@@ -516,9 +517,9 @@ truthfully separate states.
 | Canonical verification | PASS | User-verified Clean, focused Vision test, full build; `-Recurse` artifact absent. |
 | Simulation / DS / Glass / real robot | NOT APPLICABLE | Pure deterministic geometry with no runtime or hardware path. |
 | Documentation | FINAL / PASS | Seven V00_L01 documentation files reconciled/created and final closure recorded. |
-| V00_L02 | PROTECTED | Suspended, read-only, unmodified, and not activated. |
+| V00_L02 | PROTECTED | Later separately reconciled as `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 53e9b9f`; not changed by V00_L01. |
 | Final review/freeze | PASS | Final Architecture Review and Final Closure Review passed; lesson frozen. |
-| Git | USER OWNED / PENDING | No Git operation performed by Codex. |
+| Git | USER OWNED / PUBLISHED @ 7d52ebf | No Git operation performed by Codex. |
 
 This guide makes no claim about physical camera mounting values, camera/vendor
 operation, AprilTag lookup, target quality, timestamp/latency, pose-estimator

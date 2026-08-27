@@ -11,11 +11,11 @@
 - Final Architecture Review: `PASS`
 - Final Closure Review: `PASS`
 - Freeze State: `FROZEN / READ-ONLY`
-- Git publication: `PENDING USER COMMIT/PUSH`
+- Git publication: `PUBLISHED @ 7d52ebf / USER VERIFIED`
 
 The reconstructed lesson passed final architecture and closure review and is
-now a frozen, read-only lesson snapshot. Git publication remains a separate
-User-owned operation.
+now a frozen, read-only lesson snapshot. User-owned Git publication was
+confirmed at `7d52ebf`.
 
 ## Authoritative Inheritance
 
@@ -169,9 +169,10 @@ documents, not renamed A01 history.
 
 ## Protected Successor and Closure Boundary
 
-`V00_L02_AprilTagFieldLayoutContract` remains
-`SUSPENDED / READ-ONLY / UNMODIFIED`. It is not this lesson's predecessor and
-was not activated, copied, merged, or changed.
+`V00_L02_AprilTagFieldLayoutContract` is a separate
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED` lesson at `53e9b9f`. It is not this
+lesson's predecessor; its later controlled reconstruction and publication did
+not change V00_L01.
 
 Final closure sequence:
 
@@ -180,8 +181,9 @@ documentation reconciliation complete
     -> Final Architecture Review PASS
     -> Final Closure Review PASS
     -> COMPLETE / FROZEN / READ-ONLY
-    -> User-owned Git add/commit/push pending
+    -> User-owned Git add/commit/push confirmed @ 7d52ebf
 ```
 
-V00_L01 is `COMPLETE / FROZEN / READ-ONLY`. V00_L02 remains separately
-suspended and is not resumed or modified by this closure.
+V00_L01 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 7d52ebf`. V00_L02 is
+separately `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 53e9b9f`; it was not
+resumed or modified by this V00_L01 closure.

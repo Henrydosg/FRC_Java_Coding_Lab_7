@@ -313,6 +313,6 @@ Simulation, Driver Station / Glass và robot thật không áp dụng cho concep
 này vì không có camera runtime, IO, telemetry, scheduler, drivetrain, lookup,
 fusion hoặc actuation.
 
-V00_L01 là `COMPLETE / FROZEN / READ-ONLY` sau khi Final Architecture Review và
-Final Closure Review PASS. Git add, commit và push vẫn do User sở hữu và đang
-chờ thực hiện.
+V00_L01 là `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 7d52ebf` sau khi Final
+Architecture Review và Final Closure Review PASS. Git add, commit và push vẫn
+do User sở hữu; User đã xác nhận publication tại commit này.

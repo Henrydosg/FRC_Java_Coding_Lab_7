@@ -11,12 +11,12 @@
 - **Freeze State:** `FROZEN / READ-ONLY`
 - **Canonical predecessor:** `V00_L01_VisionCoordinateFramesAndCameraExtrinsics @ 7d52ebf`
 - **A01 foundation:** `A01_L09_PathPlannerNamedCommandsAndEventMarkers @ 6b243bb`
-- **Git publication:** `PENDING USER COMMIT/PUSH`
+- **Git publication:** `PUBLISHED @ 53e9b9f / USER VERIFIED`
 
 V00_L02 is a complete, frozen, read-only lesson snapshot. V00_L01 remains
 `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 7d52ebf`. A01 ends at A01_L09;
-A01_L10 is prohibited. This closure does not start V00_L03, and Git publication
-remains User-owned and pending.
+A01_L10 is prohibited. This closure does not start V00_L03. User-owned Git
+publication was confirmed at `53e9b9f`.
 
 ## Authoritative reconstruction history
 
@@ -170,9 +170,9 @@ documentation complete
     -> final closure authorization PASS
     -> freeze metadata complete
     -> COMPLETE / FROZEN / READ-ONLY
-    -> User-owned Git add/commit/push pending
+    -> User-owned Git add/commit/push confirmed @ 53e9b9f
 ```
 
-Current state: `COMPLETE / FROZEN / READ-ONLY / IMPLEMENTATION VERIFIED /
-DOCUMENTATION COMPLETE / FINAL ARCHITECTURE REVIEW PASS / FINAL CLOSURE PASS /
-GIT PUBLICATION PENDING USER COMMIT/PUSH`.
+Current state: `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 53e9b9f /
+IMPLEMENTATION VERIFIED / DOCUMENTATION COMPLETE / FINAL ARCHITECTURE REVIEW
+PASS / FINAL CLOSURE PASS`.
