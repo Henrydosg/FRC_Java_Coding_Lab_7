@@ -65,7 +65,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D00/
     ├── module_D01/
     ├── module_S00/
-    └── module_V00/ (authorized; V00_L01 complete/frozen, V00_L02 suspended)
+    └── module_V00/ (authorized; V00_L01 published/frozen, V00_L02 complete/frozen; publication pending)
         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -532,9 +532,14 @@ completed and froze, and V00_L02 was activated and implemented from that lineage
 suspended read-only by the exceptional A01_L08 safety decision. After final A01_L09 was
 reconstructed and published at `6b243bb`, the historical V00_L01 lineage was classified stale.
 The current canonical V00_L01 was reconstructed from that final A01_L09, passed
-its final architecture and closure reviews, and is now
-`COMPLETE / FROZEN / READ-ONLY`. V00_L02 remains
-`SUSPENDED / READ-ONLY / UNMODIFIED`.
+its final architecture and closure reviews, and is
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED` at `7d52ebf`. The stale historical
+V00_L02 was preserved outside the active lesson lineage. The current canonical
+V00_L02 was reconstructed from published V00_L01, passed its inheritance,
+baseline-build, architecture, design-lock, controlled-activation,
+implementation, User-verification, documentation-completion, final architecture,
+and final closure gates. It is `COMPLETE / FROZEN / READ-ONLY`; User-owned Git
+publication remains `PENDING USER COMMIT/PUSH`.
 
 The authorized V00 lesson order is:
 
@@ -625,6 +630,11 @@ downstream reconciliation confirms V00 work remained unchanged and determines
 whether the accepted L08 repair must be forward-ported through the inherited
 lineage. Resume is never automatic.
 
+That paragraph records the prerequisite state established by the A01_L08
+exception. The later controlled reconstruction and activation decision dated
+2026-08-27, recorded below, completed the required downstream reconciliation
+and supersedes the suspension for the current canonical V00_L02 only.
+
 ### A01_L08 Scheduler Exception Boundary Governance Amendment — 2026-08-25
 
 New source evidence confirms that the active `SafeAutoBuilderCommand` manually
@@ -704,6 +714,89 @@ safety/robustness reopen. The Frozen Backbone and Frozen Interface Contract are
 preserved. V00_L02 remains `SUSPENDED / READ-ONLY / UNMODIFIED`; this closure
 does not resume it.
 
+### V00_L02 Controlled Reconstruction and Activation — 2026-08-27
+
+The preceding V00_L02 suspension statements are retained as historical records
+of the A01_L08 exception and the stale downstream lineage. After A01_L08 was
+re-frozen, final A01_L09 was published at `6b243bb`, and reconstructed V00_L01
+was published at `7d52ebf`, the stale historical V00_L02 was backed up outside
+the active lesson lineage. The current canonical V00_L02 was reconstructed from
+published V00_L01 through the required copy, rename, generated-artifact cleanup,
+Java 17 baseline-build, and transition-document workflow.
+
+Architect and User approval was `APPROVED` for controlled activation and
+documentation/lifecycle reconciliation only. Repository inheritance review,
+the reconstructed baseline, the full inherited test suite, the architecture
+audit, and the pre-implementation design lock were PASS. At that historical
+activation stage, V00_L02 became the sole `IN_PROGRESS / EDITABLE` lesson with
+active state `RECONSTRUCTED BASELINE VERIFIED / DESIGN LOCK REVIEWED /
+IMPLEMENTATION NOT YET AUTHORIZED`. V00_L01 remained `COMPLETE / FROZEN /
+READ-ONLY / PUBLISHED` at `7d52ebf`.
+
+The approved future lesson boundary is package `frc.robot.vision`, future class
+`AprilTagFieldLayoutContract`, future API
+`loadOfficial2026(Constants.FieldTransformConstants.FieldVariant)` and
+`getTagPose(int)`, and the existing field variants `REBUILT_WELDED` and
+`REBUILT_ANDYMARK`. Returned poses use canonical WPILib Blue-origin
+`fieldToTag` semantics. This lesson shall not alliance-flip or invert those
+poses and shall not expose the mutable raw layout or mutable tag objects. A
+future lookup of an unknown positive ID returns `Optional.empty()`; a
+nonpositive ID throws `IllegalArgumentException`. The future production
+dependency boundary is WPILib AprilTag/geometry plus the JDK and the existing
+`FieldVariant` ownership only.
+
+The package-private `fromLayout(AprilTagFieldLayout)` seam is explicitly not
+approved. Adding that seam or any equivalent injection surface requires a
+separate Architect decision. VisionIO, runtime camera access, Observation
+production, NetworkTables, RobotContainer, Swerve, autonomous, PathPlanner,
+pose fusion, Java implementation, and test implementation remain outside this
+activation. Simulation, Driver Station / Glass, real-robot, and physical-camera
+verification are `NOT APPLICABLE` to the current pure reference-data scope.
+Future implementation requires separate explicit authorization.
+
+### V00_L02 Implementation Verification and Documentation Completion — 2026-08-27
+
+The preceding controlled-activation section records the historical state before
+implementation authorization. A later explicit Architect/User action authorized
+exactly one production file,
+`frc/robot/vision/AprilTagFieldLayoutContract.java`, and exactly one focused test,
+`frc/robot/vision/AprilTagFieldLayoutContractTest.java`. No other production or
+test file changed. The implementation maps `REBUILT_WELDED` to
+`AprilTagFields.k2026RebuiltWelded` and `REBUILT_ANDYMARK` to
+`AprilTagFields.k2026RebuiltAndymark`, snapshots validated canonical Blue-origin
+`fieldToTag` poses into immutable owned state, and exposes only the approved load
+and lookup API. It does not use `kDefaultField`, alliance flipping, pose
+inversion, `fromLayout(...)`, raw mutable layout/tag exposure, or runtime wiring.
+
+Authoritative User verification under WPILib Java 17 records
+`AprilTagFieldLayoutContractTest` PASS, inherited `VisionFrameTransformTest`
+PASS, full test suite PASS, and clean full build PASS with `BUILD SUCCESSFUL in
+24s` and `7 actionable tasks: 7 executed`. The earlier Codex-side incremental
+classpath failure is an environment/process discrepancy and is not an accepted
+implementation defect. Simulation, Driver Station / Glass, real robot, and
+physical camera remain `NOT APPLICABLE` because V00_L02 adds immutable reference
+geometry only.
+
+Documentation completion and the pre-closure architecture audit were PASS. At
+that pre-closure stage, V00_L02 remained the sole `IN_PROGRESS / EDITABLE`
+lesson while final read-only architecture review, closure authorization, freeze
+metadata, and User-owned Git publication remained pending. That historical
+entry did not mark the lesson `COMPLETE` or `FROZEN` and did not start V00_L03.
+
+### V00_L02 Final Closure and Freeze — 2026-08-27
+
+The final read-only architecture and closure audit returned `PASS`, and the
+Architect explicitly authorized final closure. V00_L02 is therefore
+`COMPLETE / FROZEN / READ-ONLY`. Implementation verification, documentation,
+the transition guide, the Frozen Backbone, Frozen Interface Contract, and
+Document C boundaries are PASS. Simulation, Driver Station / Glass, real robot,
+and physical camera remain `NOT APPLICABLE` because the lesson adds immutable
+deterministic field-reference geometry only.
+
+V00_L01 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED` at `7d52ebf`.
+V00_L03 was not created or activated. User-owned Git publication for V00_L02
+remains `PENDING USER COMMIT/PUSH`.
+
 ---
 
 ## 15. Final Report
@@ -747,3 +840,6 @@ Only report verified facts.
 | 1.9 | 2026-08-26 | FROZEN | APPROVED: record final A01_L08 verification and re-freeze it as `COMPLETE / FROZEN / READ-ONLY`; V00_L02 remains `SUSPENDED / READ-ONLY` pending separate reconciliation and resume approval. |
 | 1.10 | 2026-08-26 | FROZEN | APPROVED: reconcile stale historical V00_L01 lifecycle metadata; current reconstructed V00_L01 is the sole `REOPENED / IN_PROGRESS / EDITABLE` lesson pending final closure, and V00_L02 remains `SUSPENDED / READ-ONLY / UNMODIFIED`. |
 | 1.11 | 2026-08-26 | FROZEN | APPROVED: record final V00_L01 architecture and closure review PASS and freeze the reconstructed lesson as `COMPLETE / FROZEN / READ-ONLY`; V00_L02 remains `SUSPENDED / READ-ONLY / UNMODIFIED`. |
+| 1.12 | 2026-08-27 | FROZEN | APPROVED: complete the downstream reconstruction reconciliation and activate current canonical V00_L02 as the sole `IN_PROGRESS / EDITABLE` lesson with verified reconstructed baseline and reviewed design lock; implementation remains unauthorized, and V00_L01 remains published and frozen at `7d52ebf`. |
+| 1.13 | 2026-08-27 | FROZEN | APPROVED: record the exact two-file V00_L02 implementation, authoritative User verification PASS, documentation completion, and pre-closure architecture preservation; V00_L02 remains `IN_PROGRESS / EDITABLE` pending final read-only architecture review and closure authorization. |
+| 1.14 | 2026-08-27 | FROZEN | APPROVED: record final V00_L02 architecture and closure review PASS and freeze the lesson as `COMPLETE / FROZEN / READ-ONLY`; User-owned Git publication remains pending and V00_L03 is not activated. |

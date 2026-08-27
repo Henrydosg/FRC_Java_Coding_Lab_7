@@ -164,8 +164,8 @@ unclaimed.
 The original A01_L08 closure evidence remains preserved as historical evidence,
 but post-freeze real-robot evidence identified material preparation/readiness and
 terminal mode-ownership defects. Under the approved supplemental ADR, A01_L08
-was reopened narrowly for safety/robustness repair; V00_L02 remains
-`SUSPENDED / READ-ONLY`. The preparation/readiness repair and the separately
+was reopened narrowly for safety/robustness repair; at that historical stage,
+V00_L02 was `SUSPENDED / READ-ONLY`. The preparation/readiness repair and the separately
 authorized Option D terminal repair are implemented and locally verified. The
 final user-owned Simulation and Real Robot evidence confirms recoverable
 preparation without Robot Code restart, deterministic Blue/Red execution,
@@ -216,8 +216,9 @@ is recorded as `KNOWN / BOUNDED TERMINAL STEER TRANSIENT`, `ACCEPTED FOR CURRENT
 LESSON`, and `DEFERRED FOR FUTURE DRIVETRAIN / PATH-FOLLOWING TUNING`; its exact
 physical root cause is not fully proven and no drivetrain, tuning, encoder,
 CTRE, PathPlanner, or asset change is justified. A01_L08 is now `COMPLETE /
-FROZEN / READ-ONLY` after its authorized reopen. V00_L02 remains `SUSPENDED /
-READ-ONLY` and is not automatically resumed.
+FROZEN / READ-ONLY` after its authorized reopen. At that closure point V00_L02
+remained `SUSPENDED / READ-ONLY`; the later controlled reconstruction and
+activation described in the V00 section was a separate governance decision.
 
 Approved lesson sequence:
 
@@ -240,18 +241,34 @@ Authority:
 `docs/architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`
 
 Current state: roadmap `APPROVED / FROZEN`; `module_V00` exists. The historical
-V00_L01 had previously reached `COMPLETE / FROZEN / READ-ONLY`, but that lineage
-became stale when final A01_L09 was reconstructed and published at `6b243bb`.
-The current canonical V00_L01 was reconstructed from final A01_L09, is
-technically verified, and has reconciled documentation. Its final architecture
-and closure reviews are PASS, and it is now `COMPLETE / FROZEN / READ-ONLY`.
-User-owned Git publication remains pending commit/push.
+V00_L01 lineage became stale when final A01_L09 was reconstructed and published
+at `6b243bb`. The current canonical V00_L01 was reconstructed from final
+A01_L09, passed final architecture and closure review, and is `COMPLETE /
+FROZEN / READ-ONLY / PUBLISHED` at `7d52ebf`.
 
-V00_L02 was activated, implemented, and verified from the historical lineage,
-but it is unfinished and remains `SUSPENDED / READ-ONLY / UNMODIFIED`. It is not
-COMPLETE, not FROZEN, and not editable. V00_L01 closure does not resume it.
-Resume is not automatic and requires a separate governance reconciliation. No
-camera or vendor implementation is selected.
+The V00_L02 that had been activated and implemented from the stale historical
+lineage was suspended and later preserved outside the active lesson lineage.
+The current canonical V00_L02 was reconstructed from published V00_L01. Its
+inheritance audit, Java 17 baseline build, full inherited test suite,
+architecture audit, pre-implementation design lock, implementation,
+verification, documentation, final architecture review, and final closure
+review are PASS. It is now `COMPLETE / FROZEN / READ-ONLY`. The exact V00_L02 Java delta is
+`AprilTagFieldLayoutContract.java` plus
+`AprilTagFieldLayoutContractTest.java`; no other production or test file
+changed. Authoritative User verification under WPILib Java 17 records the
+focused AprilTag test PASS, inherited `VisionFrameTransformTest` PASS, full test
+suite PASS, and clean full build PASS (`BUILD SUCCESSFUL in 24s`; 7 actionable
+tasks, 7 executed).
+
+V00_L02 now has state `COMPLETE / FROZEN / READ-ONLY`. The contract explicitly
+selects the welded or AndyMark official 2026
+resource, returns canonical Blue-origin `fieldToTag` poses, and retains no raw
+mutable layout/tag state. It does not use `kDefaultField`, alliance flipping,
+pose inversion, `fromLayout(...)`, runtime wiring, camera/vendor integration,
+VisionIO, Observation, telemetry, autonomous, PathPlanner, or Swerve behavior.
+Simulation, Driver Station / Glass, real robot, and physical camera are `NOT
+APPLICABLE`. Git publication remains `PENDING USER COMMIT/PUSH`; V00_L03 has not
+been created or activated.
 
 Approved lesson sequence:
 
