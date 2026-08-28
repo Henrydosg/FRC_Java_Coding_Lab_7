@@ -65,7 +65,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D00/
     ├── module_D01/
     ├── module_S00/
-    └── module_V00/ (authorized; V00_L01-L03 published/frozen; V00_L04 complete/frozen; no active lesson)
+    └── module_V00/ (authorized; V00_L01-L04 published/frozen; V00_L05 frozen/unpublished; no active V00 lesson; V00_L06+ not started)
         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -1042,6 +1042,81 @@ clean working tree, and a successful push to `origin/main`. No production,
 test, configuration, dependency, deploy, predecessor, or V00_L05 content was
 changed by this metadata reconciliation.
 
+### V00_L05 Controlled Activation and Design Lock — 2026-08-28
+
+The User then prepared `V00_L05_AprilTagRobotPoseEstimation` from the final
+published V00_L04 snapshot through the approved copy, rename, generated-artifact
+cleanup, and inherited WPILib Java 17 baseline-build workflow. The read-only
+inheritance and architecture audits recorded 229 comparable non-generated files,
+zero differences, identical production and test Java, unchanged build/config,
+vendordeps, deploy/resources/PathPlanner content, and preserved predecessor
+protection. The earlier candidate naming HOLD was resolved by retaining the
+ADR-locked V00_L05 identity; no ADR amendment was required.
+
+The Architect approved the V00_L05 Design Lock. The lesson teaches one pure,
+deterministic, vendor-neutral responsibility: derive a canonical Blue-origin
+`fieldToRobot` robot-pose candidate from `fieldToTag`, `cameraToTarget`, and
+`robotToCamera`. The locked estimator belongs in `frc.robot.vision` as the
+stateless `AprilTagRobotPoseEstimator` utility with exactly one public method,
+`estimateFieldToRobotCandidate(Pose3d, Transform3d, Transform3d)`. The approved
+structural validation, output semantics, frozen dependency ownership, test
+matrix, and L06 quality boundary are recorded in the active lesson documents.
+
+This controlled activation changes lifecycle/documentation metadata only.
+V00_L05 is now the repository's sole `IN_PROGRESS / EDITABLE` lesson with
+active lesson count `1`. Production implementation and focused-test
+implementation remain `NOT STARTED / NOT AUTHORIZED`. Focused tests, inherited
+regressions, full-suite verification, clean build, Simulation, Driver Station /
+Glass, and real-robot verification remain pending or not applicable according
+to the pure-geometry Design Lock. V00_L01-L04 remain complete, frozen, and
+protected; A01_L04 remains the sole alliance-transform owner; V00_L06 and later
+lessons remain deferred; and A01_L10 remains prohibited.
+
+The User-owned Git add, commit, and push operations remain separate future
+gates. Codex performed no Git operation.
+
+### V00_L05 Post-Implementation Verification and Documentation Reconciliation — 2026-08-28
+
+The separately authorized V00_L05 implementation and focused test are complete
+within the approved two-file boundary. The Java 17 compatibility adjustment
+from `getFirst()` to `get(0)` was test-only. The original noncommutativity
+fixture defect was also repaired in the focused test only: its compared inverse
+transforms were pure translations and therefore commuted. The replacement
+nondegenerate fixture proves the locked order by producing translations
+`(3, 2, 1.5)` and `(0, 1, 1.5)` for locked and reversed composition. API
+reflection hardening now protects the final class and exactly one public
+declared method.
+
+Authoritative User verification under WPILib Temurin Java 17.0.16 is PASS for
+clean `compileTestJava`, focused L05 tests, inherited vision regressions, the
+full test suite, and clean build (`BUILD SUCCESSFUL`). The post-implementation
+architecture review, Frozen Backbone, Frozen Interface Contract, Documents
+A/B/C, and frozen V00_L01-L04 predecessor protection are PASS. V00_L05 remains
+the sole `IN_PROGRESS / EDITABLE` lesson; final closure authorization, freeze,
+and User-owned Git publication remain pending. No Git publication hash is
+claimed and Codex performed no Git operation.
+
+### V00_L05 Final Closure and Freeze — 2026-08-28
+
+The preceding activation and post-implementation sections are preserved as
+historical lifecycle records. Architect closure authorization is now
+`APPROVED`. V00_L05 is therefore `COMPLETE / FROZEN / READ-ONLY`.
+
+Implementation, production architecture review, public API, locked transform
+order, validation, conceptual test matrix, API reflection hardening,
+noncommutativity repair, independent oracle, frozen predecessor protection,
+build/configuration/dependency protection, Frozen Backbone, Frozen Interface
+Contract, Documents A/B/C, User Java 17 verification, post-hardening
+verification, and documentation reconciliation are `PASS`. Simulation, Driver
+Station, Glass, and real-robot verification remain `NOT APPLICABLE` because
+this lesson is pure deterministic geometry without runtime camera or hardware
+integration.
+
+V00_L05 is no longer an active lesson; no V00 lesson is active, and V00_L06
+has not been activated or created by this closure. Git publication remains
+`PENDING USER GIT PUBLICATION`; no commit hash, push result, or published state
+is claimed. The User remains the sole Git operator.
+
 ---
 
 ## 15. Final Report
@@ -1097,3 +1172,6 @@ Only report verified facts.
 | 1.21 | 2026-08-28 | FROZEN | APPROVED: record the exact two-file V00_L04 implementation, authoritative User verification PASS, post-implementation architecture review PASS, artifact cleanup PASS, and documentation reconciliation; V00_L04 remains the sole `IN_PROGRESS / EDITABLE` lesson pending final closure review, freeze, and User-owned Git publication. |
 | 1.22 | 2026-08-28 | FROZEN | APPROVED: close and freeze V00_L04 as `COMPLETE / FROZEN / READ-ONLY` after final architecture/documentation review PASS; no V00 lesson remains active, V00_L05 is not created, and publication remains `PENDING USER GIT`. |
 | 1.23 | 2026-08-28 | FROZEN | APPROVED: reconcile User-confirmed V00_L04 publication at `5461555`; V00_L04 remains `COMPLETE / FROZEN / READ-ONLY`, no V00 lesson is active, and publication is recorded as `PUBLISHED @ 5461555 / USER VERIFIED`. |
+| 1.24 | 2026-08-28 | FROZEN | APPROVED: activate the prepared ADR-locked V00_L05 identity as the sole `IN_PROGRESS / EDITABLE` lesson and record the Architect-approved pure pose-candidate Design Lock; implementation remains `NOT STARTED / NOT AUTHORIZED`, predecessor lessons remain frozen, and User-owned Git operations remain pending. |
+| 1.25 | 2026-08-28 | FROZEN | APPROVED: record the authorized V00_L05 implementation, test-only Java 17 compatibility and noncommutativity-fixture repairs, API reflection hardening, authoritative User verification PASS, and architecture/documentation PASS; V00_L05 remains `IN_PROGRESS / EDITABLE` pending final closure authorization and User-owned publication. |
+| 1.26 | 2026-08-28 | FROZEN | APPROVED: close and freeze V00_L05 as `COMPLETE / FROZEN / READ-ONLY` after final architecture, verification, and documentation PASS; V00_L06 remains inactive/not created, and User Git publication remains pending. |

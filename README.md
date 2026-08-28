@@ -329,9 +329,50 @@ post-implementation architecture review and User-owned artifact cleanup are
 PASS, and the required L03-to-L04 transition guide and lesson documentation are
 reconciled. The final read-only architecture/documentation review and Architect
 closure authorization are PASS. V00_L04 is now
-`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 5461555 / USER VERIFIED`; no V00
-lesson is active. The active V00 lesson count is `0`. V00_L05 has not been
-created.
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 5461555 / USER VERIFIED`. At the
+V00_L04 publication point, no V00 lesson was active and the active V00 lesson
+count was `0`; the prepared V00_L05 successor was not yet activated.
+
+The User subsequently prepared the ADR-locked
+`V00_L05_AprilTagRobotPoseEstimation` directory from the final V00_L04
+snapshot. The inheritance and architecture audits recorded 229 comparable
+non-generated files, zero differences, identical production/test Java and
+documentation, unchanged build/configuration/dependencies/deploy resources,
+and preserved V00_L01-L04 protection. The prior candidate naming HOLD was
+resolved by using the official ADR identity, with no ADR amendment.
+
+The Architect approved the V00_L05 Design Lock. The authorized implementation
+is complete. The narrow Java 17 compatibility repair (`getFirst()` to
+`get(0)`) and noncommutativity test-fixture repair were test-only, and the API
+reflection hardening is complete. The implementation architecture review and
+authoritative post-hardening User verification are PASS, including clean
+`compileTestJava`, focused L05 tests, inherited vision regressions, the full
+suite, and clean build. Final documentation reconciliation and Architect
+closure authorization are also PASS. V00_L05 is now
+`COMPLETE / FROZEN / READ-ONLY`; its pure deterministic canonical AprilTag
+robot-pose candidate estimation remains the locked concept:
+
+```text
+fieldToTag + cameraToTarget + robotToCamera
+    -> canonical Blue-origin fieldToRobot pose candidate
+```
+
+Simulation, Driver Station, Glass, and real-robot verification remain
+`NOT APPLICABLE` because V00_L05 adds no runtime camera or hardware integration.
+
+The approved package is `frc.robot.vision`; the approved class is the final,
+stateless, non-instantiable `AprilTagRobotPoseEstimator`; and the only approved
+public method is
+`estimateFieldToRobotCandidate(Pose3d, Transform3d, Transform3d)`. The exact
+mathematics, structural validation, output semantics, dependency ownership,
+test matrix, and V00_L06 quality boundary are recorded in the lesson
+documentation. No runtime wiring, camera vendor, telemetry, Swerve, alliance
+transform, or pose fusion is authorized.
+
+V00_L01-L04 remain complete, frozen, and protected. No V00 lesson is currently
+active. V00_L06 and later remain deferred and not started, A01_L10 remains
+prohibited, and User-owned Git publication remains `PENDING USER GIT
+PUBLICATION`; no L05 commit hash or push result is claimed.
 
 Approved lesson sequence:
 
