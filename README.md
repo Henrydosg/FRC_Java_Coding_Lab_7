@@ -275,10 +275,11 @@ from published V00_L02. Its WPILib Java 17 baseline build is User-verified
 PASS, its no-Git inheritance audit found zero differences across 219 comparable
 non-generated files, its architecture audit and Design Lock are PASS/APPROVED,
 and the separately authorized implementation is complete. V00_L03 is now
-`COMPLETE / FROZEN / READ-ONLY` after the final architecture and closure
-reviews passed. Its final state is `IMPLEMENTATION COMPLETE / USER-VERIFIED /
-DOCUMENTATION COMPLETE / FINAL ARCHITECTURE AUDIT PASS / PREDECESSOR
-PROVENANCE PASS / FINAL CLOSURE REVIEW PASS`.
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED` at `cc20d62` after the final
+architecture and closure reviews passed and the User confirmed publication.
+Its final state is `IMPLEMENTATION COMPLETE / USER-VERIFIED / DOCUMENTATION
+COMPLETE / FINAL ARCHITECTURE AUDIT PASS / PREDECESSOR PROVENANCE PASS / FINAL
+CLOSURE REVIEW PASS`.
 
 The completed L03 concept is vendor-neutral one-cycle VisionIO transport plus
 an immutable Vision Observation contract. The exact production boundary is
@@ -299,8 +300,37 @@ read-only architecture audit are PASS. Simulation, Driver Station / Glass,
 physical camera, and real robot remain not applicable to this contract-only
 lesson and are deferred to the governed V00 lessons. V00_L01 remains published
 at `7d52ebf`, V00_L02 remains published at `53e9b9f`, and A01_L10 remains
-prohibited. No active lesson remains. Git publication of V00_L03 remains
-`PENDING / USER OWNED` until the User performs and reports the commit/push.
+prohibited. User-owned Git publication of V00_L03 is complete at `cc20d62`.
+
+The User subsequently prepared
+`V00_L04_DeterministicVisionSimulation` from authoritative V00_L03 by the
+approved copy/rename and generated-artifact cleanup workflow and supplied
+WPILib Java 17 inherited baseline-build PASS evidence. Its read-only
+inheritance, roadmap-scope, Frozen Backbone, Frozen Interface Contract, and
+Document C audits passed, and the Architect approved the refined
+deterministic-vision-simulation Design Lock. V00_L04 is now the sole
+`IN_PROGRESS / EDITABLE` lesson. Separate authorization later permitted exactly
+`VisionIOSim.java` and `VisionIOSimTest.java`; implementation is now
+`IMPLEMENTED / VERIFIED`.
+
+The locked L04 scope is one deterministic, vendor-neutral `VisionIOSim`
+implementation of the frozen `VisionIO` contract. It uses official AprilTag
+field geometry, a fixed `robotToCamera`, an immutable caller-selected frame,
+explicit ground truth only for target-present frames, direct WPILib forward
+geometry, and complete per-cycle `VisionIOInputs` overwrite. L05 pose
+estimation, L06 quality, L07 timing, L08 real-camera integration, and L09
+fusion remain deferred.
+
+Authoritative User verification under WPILib Java 17 records
+`compileTestJava` PASS, `VisionIOSimTest` PASS, inherited vision regressions
+PASS, full test suite PASS, and clean build PASS. The earlier Codex-local
+classpath failure is `RESOLVED / SUPERSEDED / NON-REPRODUCIBLE`. The
+post-implementation architecture review and User-owned artifact cleanup are
+PASS, and the required L03-to-L04 transition guide and lesson documentation are
+reconciled. The final read-only architecture/documentation review and Architect
+closure authorization are PASS. V00_L04 is now
+`COMPLETE / FROZEN / READ-ONLY`; no V00 lesson is active. Git publication is
+`PENDING USER GIT`, no commit hash is claimed, and V00_L05 has not been created.
 
 Approved lesson sequence:
 

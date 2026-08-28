@@ -65,7 +65,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D00/
     ├── module_D01/
     ├── module_S00/
-    └── module_V00/ (authorized; V00_L01 and V00_L02 published/frozen; V00_L03 frozen/read-only awaiting User publication; no active lesson)
+    └── module_V00/ (authorized; V00_L01-L03 published/frozen; V00_L04 complete/frozen; no active lesson)
         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -544,11 +544,25 @@ The current canonical V00_L03 was then prepared by the User from published
 V00_L02, passed its User-owned Java 17 baseline build, inheritance audit,
 architecture audit, approved Design Lock, exact implementation boundary,
 focused tests, inherited regressions, full suite, clean build, and
-documentation-completion audit. It is now `COMPLETE / FROZEN / READ-ONLY`;
-User-owned Git publication remains pending. There is no active editable lesson.
-Its final state is `IMPLEMENTATION COMPLETE / USER-VERIFIED / DOCUMENTATION
-COMPLETE / FINAL ARCHITECTURE AUDIT PASS / PREDECESSOR PROVENANCE PASS /
-FINAL CLOSURE REVIEW PASS`.
+documentation-completion audit. It is now `COMPLETE / FROZEN / READ-ONLY /
+PUBLISHED` at `cc20d62`. Its final state is `IMPLEMENTATION COMPLETE /
+USER-VERIFIED / DOCUMENTATION COMPLETE / FINAL ARCHITECTURE AUDIT PASS /
+PREDECESSOR PROVENANCE PASS / FINAL CLOSURE REVIEW PASS`. The User then
+prepared V00_L04 from that authoritative snapshot through copy/rename,
+generated-artifact cleanup, and a User-verified WPILib Java 17 inherited
+baseline build. Its inheritance, roadmap-scope, Frozen Backbone, Frozen
+Interface Contract, and Document C audits passed, and the Architect approved
+the refined deterministic-vision-simulation Design Lock. V00_L04 is now the
+sole `IN_PROGRESS / EDITABLE` lesson. Separate implementation authorization
+was later granted for exactly `VisionIOSim.java` and `VisionIOSimTest.java`.
+That implementation is complete and User-verified. `compileTestJava`, the
+focused test, inherited vision regressions, the full suite, and the clean build
+are `PASS`; the earlier Codex-local classpath result is `RESOLVED /
+SUPERSEDED / NON-REPRODUCIBLE`. The post-implementation architecture review,
+artifact cleanup, documentation reconciliation, final read-only review, and
+closure authorization are `PASS`. V00_L04 is now
+`COMPLETE / FROZEN / READ-ONLY`; no V00 lesson is active. User-owned Git
+publication remains pending.
 
 The authorized V00 lesson order is:
 
@@ -903,15 +917,115 @@ Frozen Interface Contract, Document A/B/C compliance, the exact implementation
 boundary, documentation completion, and predecessor provenance are PASS.
 
 V00_L03 is now `COMPLETE / FROZEN / READ-ONLY`. The lesson content/state is
-complete and frozen; Git publication is separate and remains `PENDING / USER
-OWNED` until the User performs and reports the add/commit/push operation. No
-active lesson remains. Simulation, Driver Station / Glass, physical camera,
-and real-robot vision are `NOT APPLICABLE` or deferred by the contract-only
-scope; they are not claimed as runtime PASS results.
+complete and frozen. At this closure point, Git publication was still
+`PENDING / USER OWNED`; the later User publication is recorded in the
+reconciliation section below. No active lesson remained. Simulation, Driver
+Station / Glass, physical camera, and real-robot vision are `NOT APPLICABLE` or
+deferred by the contract-only scope; they are not claimed as runtime PASS
+results.
 
 V00_L01 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED` at `7d52ebf` and
 V00_L02 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED` at `53e9b9f`.
-V00_L04 has not been created or activated, and A01_L10 remains prohibited.
+At this closure point V00_L04 had not yet been prepared or activated, and
+A01_L10 remained prohibited.
+
+### V00_L03 User Publication and V00_L04 Preparation Reconciliation — 2026-08-27
+
+The User subsequently confirmed V00_L03 publication at `cc20d62`
+(`cc20d62c5ce1c2d0411375eaccd9b98b0c53cf33`) with `HEAD == origin/main`.
+V00_L03 is therefore `COMPLETE / FROZEN / READ-ONLY / PUBLISHED`.
+
+After confirming a clean working tree, the User copied authoritative V00_L03
+to `V00_L04_DeterministicVisionSimulation`, renamed the copy, removed generated
+build artifacts, selected WPILib Java 17, and supplied inherited baseline-build
+PASS evidence. The V00_L04 directory therefore exists as a prepared inherited
+copy, but the lesson is not activated, not `IN_PROGRESS`, and not editable.
+Its architecture audit and Design Lock remain pending, and implementation is
+not authorized. The repository has zero active lessons. V00_L01 and V00_L02
+remain published and frozen, V00_L03 remains published and frozen, and
+A01_L10 remains prohibited.
+
+### V00_L04 Controlled Activation — 2026-08-28
+
+The preceding preparation record is retained as historical evidence. A later
+read-only audit confirmed V00_L04 faithfully inherits published V00_L03 at
+`cc20d62`; the inheritance, roadmap-scope, Frozen Backbone, Frozen Interface
+Contract, and Document C gates are `PASS`. The Architect approved the refined
+V00_L04 Design Lock.
+
+V00_L04 is therefore the repository's sole `IN_PROGRESS / EDITABLE` lesson.
+Its one concept is a deterministic, vendor-neutral `VisionIOSim`
+implementation of the frozen `VisionIO` contract. The locked design uses an
+immutable caller-selected frame, official AprilTag field geometry, a fixed
+`robotToCamera`, explicit simulation ground truth only when targets are
+present, direct WPILib forward geometry, and a complete `VisionIOInputs`
+overwrite on every update. Duplicate visible tag IDs are rejected; progression
+is explicit; initial state is `UNAVAILABLE`.
+
+This activation authorizes lifecycle/documentation metadata only. Production
+and test implementation are `NOT STARTED`; implementation authorization is the
+next gate. No clock, FPGA time, randomness, threads, NetworkTables, Driver
+Station, alliance, scheduler, Observation producer, RobotContainer wiring,
+Swerve change, telemetry, vendor integration, physical camera, pose
+estimation, quality/ambiguity, timestamp/latency, or fusion is authorized.
+V00_L01-L03 remain published and frozen, V00_L05-L09 remain deferred, and
+A01_L10 remains prohibited.
+
+### V00_L04 Implementation Verification and Documentation Reconciliation — 2026-08-28
+
+The preceding activation section is preserved as the historical state before
+separate implementation authorization. A later Architect/User action
+authorized exactly one production file,
+`src/main/java/frc/robot/io/vision/VisionIOSim.java`, and exactly one focused
+test, `src/test/java/frc/robot/io/vision/VisionIOSimTest.java`. No other
+production or test implementation was authorized.
+
+The implementation provides deterministic, vendor-neutral forward measurement
+synthesis. For target-present frames it combines known `fieldToRobot` ground
+truth, the fixed `robotToCamera`, and official `fieldToTag` geometry to produce
+`fieldToCamera` and then camera-relative `cameraToTarget` values. Progression
+occurs only through `setFrame(...)`; complete-cycle overwrite prevents stale
+targets; validation is fail-atomic; and no clock, randomness, vendor API,
+NetworkTables, Driver Station, scheduler, runtime wiring, Observation producer,
+or telemetry dependency was added. V00_L05 pose-candidate estimation and all
+later V00 responsibilities remain deferred.
+
+Authoritative User verification under WPILib Java 17 records
+`compileTestJava` PASS, `VisionIOSimTest` PASS, required inherited vision
+regressions PASS, full test suite PASS, and clean build PASS, each with exit
+code 0 where supplied. The earlier Codex-local test-classpath failure is
+`RESOLVED / SUPERSEDED / NON-REPRODUCIBLE` and is not a current blocker. The
+post-implementation read-only architecture review returned `PASS`, including
+the corrected independent `-2.5 m` geometry oracle, Frozen Backbone, Frozen
+Interface Contract, Document C, and V00_L01-L03 protection.
+
+The User also deleted the audited temporary compile-forensics log and
+accidental untracked V00_L03 path copy. Documentation reconciliation and the
+required `V00_L03_to_V00_L04_Step_by_Step.md` transition guide are complete.
+V00_L04 remains the sole `IN_PROGRESS / EDITABLE` lesson with state
+`IMPLEMENTED / VERIFIED / DOCUMENTATION RECONCILED / CLOSURE PENDING`.
+Final closure review, freeze metadata, and User-owned Git publication remain
+pending. V00_L05 has not been created.
+
+### V00_L04 Controlled Closure and Freeze — 2026-08-28
+
+The preceding activation and implementation sections are preserved as
+historical lifecycle records. After the final read-only architecture and
+documentation review returned `READY FOR ARCHITECT CLOSURE AUTHORIZATION /
+PASS`, the Architect authorized controlled closure.
+
+V00_L04 is now `COMPLETE / FROZEN / READ-ONLY`. Architecture, Design Lock,
+implementation, `compileTestJava`, `VisionIOSimTest`, inherited vision
+regressions, full test suite, clean build, post-implementation architecture
+review, artifact cleanup, documentation reconciliation, transition guide,
+Frozen Backbone, Frozen Interface Contract, Document C, V00_L01 protection,
+V00_L02 protection, V00_L03 protection, and V00_L05-L09 scope isolation are
+`PASS`.
+
+The earlier Gradle/classpath failure remains only historical as `RESOLVED /
+SUPERSEDED / NON-REPRODUCIBLE`. No active V00 lesson remains, V00_L05 has not
+been created, and A01_L10 remains prohibited. Git publication is
+`PENDING USER GIT`; no commit hash is claimed.
 
 ---
 
@@ -963,3 +1077,7 @@ Only report verified facts.
 | 1.16 | 2026-08-27 | FROZEN | APPROVED: activate prepared V00_L03 as the sole `IN_PROGRESS / EDITABLE` lesson after clean inheritance, User-verified Java 17 baseline build, architecture audit PASS, and approved Design Lock; implementation remains unauthorized, while V00_L01 and V00_L02 remain published and frozen. |
 | 1.17 | 2026-08-27 | FROZEN | APPROVED: record V00_L03 implementation verification, test-oracle clarification, documentation completion, and final read-only architecture audit PASS; V00_L03 remains `IN_PROGRESS / EDITABLE` pending ChatGPT closure review and freeze, with Git publication User-owned and pending. |
 | 1.18 | 2026-08-27 | FROZEN | APPROVED: record V00_L03 final closure review PASS and freeze the lesson as `COMPLETE / FROZEN / READ-ONLY`; no lesson is active, User-owned Git publication remains pending, V00_L04 is not started, and A01_L10 remains prohibited. |
+| 1.19 | 2026-08-27 | FROZEN | APPROVED: reconcile User-confirmed V00_L03 publication at `cc20d62` and record V00_L04 as a prepared inherited copy with User-verified Java 17 baseline build PASS; V00_L04 is not activated, not editable, and implementation remains unauthorized; no lesson is active. |
+| 1.20 | 2026-08-28 | FROZEN | APPROVED: activate V00_L04 as the sole `IN_PROGRESS / EDITABLE` lesson after inheritance and architecture PASS and Architect approval of the refined Design Lock; implementation is not started and remains pending separate authorization. |
+| 1.21 | 2026-08-28 | FROZEN | APPROVED: record the exact two-file V00_L04 implementation, authoritative User verification PASS, post-implementation architecture review PASS, artifact cleanup PASS, and documentation reconciliation; V00_L04 remains the sole `IN_PROGRESS / EDITABLE` lesson pending final closure review, freeze, and User-owned Git publication. |
+| 1.22 | 2026-08-28 | FROZEN | APPROVED: close and freeze V00_L04 as `COMPLETE / FROZEN / READ-ONLY` after final architecture/documentation review PASS; no V00 lesson remains active, V00_L05 is not created, and publication remains `PENDING USER GIT`. |
