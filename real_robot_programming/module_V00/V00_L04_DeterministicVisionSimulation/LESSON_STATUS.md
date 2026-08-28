@@ -25,8 +25,8 @@
 - **Real Robot:** `NOT APPLICABLE / SIMULATION-ADAPTER-ONLY SCOPE`
 - **Transition Guide:** `FINAL / PASS / CLOSURE COMPLETE`
 - **Documentation:** `COMPLETE / PASS`
-- **Git Commit:** `PENDING USER GIT`
-- **Git Push:** `PENDING USER GIT`
+- **Git Commit:** `5461555 / USER VERIFIED`
+- **Git Push:** `PASS / USER VERIFIED`
 - **Known Issues:** `NONE CURRENT`. The earlier Codex-local
   `compileTestJava` classpath failure is `RESOLVED / SUPERSEDED /
   NON-REPRODUCIBLE` by later User verification and is retained only as
@@ -46,7 +46,7 @@
 | Frozen Interface Contract | PASS / PRESERVED | Frozen `VisionIO` and `VisionIOInputs` remain unchanged. |
 | Document C | PASS / PRESERVED | Observation ownership and immutability remain unchanged. |
 | Refined Design Lock | APPROVED | ChatGPT Architect approved the minimum `VisionIOSim` design. |
-| Controlled Activation | PASS | V00_L04 is the sole `IN_PROGRESS / EDITABLE` lesson. |
+| Controlled Activation | PASS | Historical activation stage made V00_L04 the sole `IN_PROGRESS / EDITABLE` lesson; closure later superseded that state. |
 | Implementation Authorization | PASS | Separate authorization covered only `VisionIOSim.java` and `VisionIOSimTest.java`. |
 | Implementation | PASS | The exact approved production and focused-test boundary was implemented. |
 | `compileTestJava` | PASS | User reran repository-standard WPILib Java 17 verification; exit code 0. |
@@ -60,7 +60,7 @@
 | Final Read-Only Architecture / Documentation Review | PASS | Review returned `READY FOR ARCHITECT CLOSURE AUTHORIZATION`. |
 | Architect Closure Authorization | PASS | Controlled closure was authorized. |
 | Freeze | PASS | V00_L04 is `COMPLETE / FROZEN / READ-ONLY`. |
-| Git Publication | PENDING USER GIT | User-owned Git add/commit/push has not yet been performed. |
+| Git Publication | PUBLISHED @ 5461555 / USER VERIFIED | User confirmed commit `5461555`, push success, `HEAD == origin/main`, and a clean working tree. |
 
 ## Educational architecture summary
 
@@ -93,9 +93,8 @@ current frame, preserving fail-atomic behavior.
 ## Current result
 
 `COMPLETE / FROZEN / READ-ONLY / IMPLEMENTED / VERIFIED / DOCUMENTATION
-COMPLETE / FINAL ARCHITECTURE REVIEW PASS / CLOSURE AUTHORIZED / GIT PUBLICATION
-PENDING USER GIT`
+COMPLETE / FINAL ARCHITECTURE REVIEW PASS / CLOSURE AUTHORIZED / PUBLISHED @
+5461555 / USER VERIFIED`
 
-Remaining separate operation:
-
-`USER-OWNED GIT ADD / COMMIT / PUSH`
+User-owned Git add/commit/push publication is complete and verified at
+`5461555`.

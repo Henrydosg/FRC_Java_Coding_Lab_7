@@ -552,17 +552,18 @@ prepared V00_L04 from that authoritative snapshot through copy/rename,
 generated-artifact cleanup, and a User-verified WPILib Java 17 inherited
 baseline build. Its inheritance, roadmap-scope, Frozen Backbone, Frozen
 Interface Contract, and Document C audits passed, and the Architect approved
-the refined deterministic-vision-simulation Design Lock. V00_L04 is now the
-sole `IN_PROGRESS / EDITABLE` lesson. Separate implementation authorization
-was later granted for exactly `VisionIOSim.java` and `VisionIOSimTest.java`.
+the refined deterministic-vision-simulation Design Lock. At the historical
+activation stage, V00_L04 became the sole `IN_PROGRESS / EDITABLE` lesson.
+Separate implementation authorization was later granted for exactly
+`VisionIOSim.java` and `VisionIOSimTest.java`.
 That implementation is complete and User-verified. `compileTestJava`, the
 focused test, inherited vision regressions, the full suite, and the clean build
 are `PASS`; the earlier Codex-local classpath result is `RESOLVED /
 SUPERSEDED / NON-REPRODUCIBLE`. The post-implementation architecture review,
 artifact cleanup, documentation reconciliation, final read-only review, and
 closure authorization are `PASS`. V00_L04 is now
-`COMPLETE / FROZEN / READ-ONLY`; no V00 lesson is active. User-owned Git
-publication remains pending.
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 5461555 / USER VERIFIED`; no V00
+lesson is active. User-owned Git publication is confirmed at `5461555`.
 
 The authorized V00 lesson order is:
 
@@ -1027,6 +1028,20 @@ SUPERSEDED / NON-REPRODUCIBLE`. No active V00 lesson remains, V00_L05 has not
 been created, and A01_L10 remains prohibited. Git publication is
 `PENDING USER GIT`; no commit hash is claimed.
 
+### V00_L04 Publication Metadata Reconciliation — 2026-08-28
+
+The preceding activation, implementation, and closure sections are preserved
+as chronological records. The User subsequently confirmed the completed
+publication of the frozen V00_L04 snapshot:
+
+`5461555 Complete V00_L04 deterministic vision simulation`
+
+V00_L04 is now recorded as `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @
+5461555 / USER VERIFIED`. The User also confirmed `HEAD == origin/main`, a
+clean working tree, and a successful push to `origin/main`. No production,
+test, configuration, dependency, deploy, predecessor, or V00_L05 content was
+changed by this metadata reconciliation.
+
 ---
 
 ## 15. Final Report
@@ -1081,3 +1096,4 @@ Only report verified facts.
 | 1.20 | 2026-08-28 | FROZEN | APPROVED: activate V00_L04 as the sole `IN_PROGRESS / EDITABLE` lesson after inheritance and architecture PASS and Architect approval of the refined Design Lock; implementation is not started and remains pending separate authorization. |
 | 1.21 | 2026-08-28 | FROZEN | APPROVED: record the exact two-file V00_L04 implementation, authoritative User verification PASS, post-implementation architecture review PASS, artifact cleanup PASS, and documentation reconciliation; V00_L04 remains the sole `IN_PROGRESS / EDITABLE` lesson pending final closure review, freeze, and User-owned Git publication. |
 | 1.22 | 2026-08-28 | FROZEN | APPROVED: close and freeze V00_L04 as `COMPLETE / FROZEN / READ-ONLY` after final architecture/documentation review PASS; no V00 lesson remains active, V00_L05 is not created, and publication remains `PENDING USER GIT`. |
+| 1.23 | 2026-08-28 | FROZEN | APPROVED: reconcile User-confirmed V00_L04 publication at `5461555`; V00_L04 remains `COMPLETE / FROZEN / READ-ONLY`, no V00 lesson is active, and publication is recorded as `PUBLISHED @ 5461555 / USER VERIFIED`. |

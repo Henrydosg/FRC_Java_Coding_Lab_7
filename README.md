@@ -308,9 +308,9 @@ approved copy/rename and generated-artifact cleanup workflow and supplied
 WPILib Java 17 inherited baseline-build PASS evidence. Its read-only
 inheritance, roadmap-scope, Frozen Backbone, Frozen Interface Contract, and
 Document C audits passed, and the Architect approved the refined
-deterministic-vision-simulation Design Lock. V00_L04 is now the sole
-`IN_PROGRESS / EDITABLE` lesson. Separate authorization later permitted exactly
-`VisionIOSim.java` and `VisionIOSimTest.java`; implementation is now
+deterministic-vision-simulation Design Lock. At the historical activation
+stage, V00_L04 became the sole `IN_PROGRESS / EDITABLE` lesson. Separate
+authorization later permitted exactly `VisionIOSim.java` and `VisionIOSimTest.java`; implementation is now
 `IMPLEMENTED / VERIFIED`.
 
 The locked L04 scope is one deterministic, vendor-neutral `VisionIOSim`
@@ -329,8 +329,9 @@ post-implementation architecture review and User-owned artifact cleanup are
 PASS, and the required L03-to-L04 transition guide and lesson documentation are
 reconciled. The final read-only architecture/documentation review and Architect
 closure authorization are PASS. V00_L04 is now
-`COMPLETE / FROZEN / READ-ONLY`; no V00 lesson is active. Git publication is
-`PENDING USER GIT`, no commit hash is claimed, and V00_L05 has not been created.
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 5461555 / USER VERIFIED`; no V00
+lesson is active. The active V00 lesson count is `0`. V00_L05 has not been
+created.
 
 Approved lesson sequence:
 

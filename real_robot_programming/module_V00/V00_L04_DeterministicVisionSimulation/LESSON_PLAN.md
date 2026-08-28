@@ -11,7 +11,7 @@
 - **Documentation:** `COMPLETE / PASS`
 - **Closure:** `AUTHORIZED / PASS`
 - **Freeze:** `COMPLETE / FROZEN / READ-ONLY`
-- **Publication:** `PENDING USER GIT`
+- **Publication:** `PUBLISHED @ 5461555 / USER VERIFIED`
 - **Active lesson count:** `0`
 
 ## One-concept objective
@@ -47,6 +47,8 @@ timing, real-camera integration, or pose-estimator fusion.
     readiness for Architect closure authorization.
 19. The Architect authorized controlled closure.
 20. V00_L04 was recorded as `COMPLETE / FROZEN / READ-ONLY`.
+21. The User confirmed publication at `5461555`, with successful push,
+    `HEAD == origin/main`, and a clean working tree.
 
 ## Implemented architecture
 
@@ -106,10 +108,10 @@ NON-REPRODUCIBLE`. No Gradle repair is proposed or authorized.
 ## Current closure point
 
 The lesson content and lifecycle state are complete, frozen, and read-only.
-Git publication remains pending User-owned Git add/commit/push. No V00_L05
-lesson has been created.
+User-owned Git publication is confirmed at `5461555`.
+No V00_L05 lesson has been created.
 
 ```text
-CURRENT STATE: COMPLETE / FROZEN / READ-ONLY
-PUBLICATION: PENDING USER GIT
+CURRENT STATE: COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 5461555 / USER VERIFIED
+PUBLICATION: PUBLISHED @ 5461555 / USER VERIFIED
 ```

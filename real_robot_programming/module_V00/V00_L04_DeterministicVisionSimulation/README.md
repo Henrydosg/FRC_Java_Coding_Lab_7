@@ -16,11 +16,11 @@
 - **Documentation:** `COMPLETE / PASS`
 - **Closure:** `AUTHORIZED / PASS`
 - **Freeze:** `COMPLETE / FROZEN / READ-ONLY`
-- **Git publication:** `PENDING USER GIT`
+- **Git publication:** `PUBLISHED @ 5461555 / USER VERIFIED`
 
 V00_L04 is no longer active or editable. Its lesson content and lifecycle state
-are complete, frozen, and read-only. Git publication remains a separate
-User-owned operation and is pending.
+are complete, frozen, and read-only. User-owned Git publication is confirmed
+at `5461555`.
 
 ## What L04 adds
 
@@ -112,8 +112,10 @@ behavior is verified through automated deterministic contract tests.
 ## Cleanup evidence
 
 The User deleted the audited temporary forensic log and the accidental
-untracked V00_L03 path copy. The User-reported post-cleanup state contains no
-remaining V00_L03 modification; V00_L04 remains the active uncommitted lesson.
+untracked V00_L03 path copy. At that historical cleanup stage, V00_L04 was the
+active uncommitted lesson; subsequent closure and publication are recorded
+below. The User-reported post-cleanup state contained no remaining V00_L03
+modification.
 
 ## Deferred scope
 
@@ -132,8 +134,8 @@ prohibited.
 final read-only architecture/documentation review PASS
     -> Architect closure authorization PASS
     -> COMPLETE / FROZEN / READ-ONLY
-    -> User-owned Git add/commit/push
+    -> User-owned Git add/commit/push confirmed @ 5461555
 ```
 
-The User has not yet performed Git publication. No commit hash is claimed.
-V00_L05 remains deferred and has not been created.
+The User confirmed Git publication at `5461555` with `PUBLISHED @ 5461555 /
+USER VERIFIED`. V00_L05 remains deferred and has not been created.

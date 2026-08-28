@@ -6,6 +6,7 @@ Implementation: `IMPLEMENTED / VERIFIED`
 Documentation: `COMPLETE / PASS`
 Closure: `AUTHORIZED / PASS`
 Active lesson count: `0`
+Git publication: `PUBLISHED @ 5461555 / USER VERIFIED`
 
 ## Governance and predecessor
 
@@ -79,14 +80,12 @@ Active lesson count: `0`
 - [x] ChatGPT Architect final read-only architecture/documentation review.
 - [x] Explicit closure and freeze authorization.
 - [x] Freeze metadata update after authorization.
-- [ ] User-owned Git add/commit/push after freeze.
+- [x] User-owned Git add/commit/push after freeze: `PUBLISHED @ 5461555 / USER VERIFIED`.
 
 ## Current result
 
 `COMPLETE / FROZEN / READ-ONLY / IMPLEMENTED / VERIFIED / DOCUMENTATION
-COMPLETE / CLOSURE AUTHORIZED / PUBLICATION PENDING USER GIT / NO ACTIVE
-LESSON / ACTIVE LESSON COUNT 0`
+COMPLETE / CLOSURE AUTHORIZED / PUBLISHED @ 5461555 / USER VERIFIED / NO
+ACTIVE LESSON / ACTIVE LESSON COUNT 0`
 
-Remaining separate operation:
-
-`USER-OWNED GIT ADD / COMMIT / PUSH`
+User-owned Git publication is complete and verified at `5461555`.

@@ -12,10 +12,10 @@ and the remaining closure boundary.
 Current state:
 
 `COMPLETE / FROZEN / READ-ONLY / IMPLEMENTED / VERIFIED / DOCUMENTATION
-COMPLETE / CLOSURE AUTHORIZED / PUBLICATION PENDING USER GIT`
+COMPLETE / CLOSURE AUTHORIZED / PUBLISHED @ 5461555 / USER VERIFIED`
 
 V00_L04 lesson content and lifecycle state are complete, frozen, and read-only.
-Git publication remains User-owned and pending. No commit hash is claimed.
+User-owned Git publication is confirmed at `5461555`.
 
 ## Architecture learned in this transition
 
@@ -340,6 +340,24 @@ measurements to create robot-pose candidates.
 - **Expected Result:** Lesson content/state is frozen and no V00 lesson is active.
 - **Status:** `PASS / CLOSURE AUTHORIZED`.
 
+## Step 27 - Reconcile User-confirmed publication metadata
+
+- **Objective:** Record the completed User-owned publication of the frozen
+  V00_L04 snapshot.
+- **Why:** Publication is a separate lifecycle gate from lesson closure and
+  must be recorded only after the User supplies the commit, push, and repository
+  state evidence.
+- **Action:** Record commit `5461555` with message
+  `Complete V00_L04 deterministic vision simulation`, successful push to
+  `origin/main`, `HEAD == origin/main`, and a clean working tree.
+- **Files Changed:** Publication metadata in the authorized documentation
+  files only.
+- **Verification:** User-verified publication is
+  `PUBLISHED @ 5461555 / USER VERIFIED`.
+- **Expected Result:** V00_L04 remains `COMPLETE / FROZEN / READ-ONLY` and its
+  publication state is consistent across repository and lesson metadata.
+- **Status:** `PASS / USER VERIFIED`.
+
 ## Final student summary
 
 V00_L04 inherited the final published V00_L03 contracts and added one
@@ -354,11 +372,7 @@ was not reproducible in the authoritative User workflow. Test compilation,
 focused testing, inherited regressions, the full suite, and clean build all
 passed. Architecture review and cleanup passed. Documentation is reconciled.
 
-The remaining separate operation is:
-
-```text
-User-owned Git add/commit/push
-```
-
-Git publication is not completed by this guide. V00_L05 remains deferred and
-has not been created.
+The User subsequently confirmed Git publication at `5461555`, with
+`HEAD == origin/main`, a clean working tree, and a successful push. V00_L04 is
+therefore recorded as `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 5461555 /
+USER VERIFIED`. V00_L05 remains deferred and has not been created.
