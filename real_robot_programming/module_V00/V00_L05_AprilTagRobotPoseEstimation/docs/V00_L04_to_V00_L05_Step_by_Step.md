@@ -24,7 +24,8 @@ POST-REPAIR USER VERIFICATION: PASS / WPILib Java 17
 POST-HARDENING USER VERIFICATION: PASS / WPILib Java 17
 FINAL ARCHITECT CLOSURE: APPROVED / COMPLETE
 ACTIVE V00 LESSON COUNT: 0
-GIT PUBLICATION: PENDING USER GIT PUBLICATION
+GIT PUBLICATION: PUBLISHED @ 6482160 / USER VERIFIED
+METADATA RECONCILIATION: PENDING USER GIT
 ```
 
 The inherited `V00_L03_to_V00_L04_Step_by_Step.md` remains historical L04
@@ -332,18 +333,34 @@ permission to mutate odometry.
 - **Expected Result:** L05 is technically closed, frozen, and read-only.
 - **Status:** `PASS / APPROVED`.
 
-## Step 22 - User Git publication and later metadata reconciliation - PENDING
+## Step 22 - User Git publication and publication identity - PASS
 
-- **Objective:** Publish the frozen lesson without taking ownership of Git.
+- **Objective:** Record the actual publication of the frozen lesson.
 - **Why:** Lesson closure and Git publication are separate lifecycle gates.
-- **Action:** The User performs Git add, commit, and push, then supplies the
-  actual commit hash and push result for later publication-metadata
-  reconciliation if required by repository governance.
+- **Action:** The User performed Git add, commit, and push for the lesson.
 - **Files Changed:** User-owned Git state; no Codex Git operation.
-- **Verification:** Pending User Git publication evidence.
-- **Expected Result:** Publication is recorded only after a real User commit and
-  push; no fabricated hash is used.
-- **Status:** `PENDING / USER OWNED`.
+- **Verification:** User confirmed commit `6482160`, subject `Complete V00_L05
+  AprilTag robot pose estimation`, was pushed to `origin/main`; `HEAD` and
+  `origin/main` resolved to the full publication commit at publication time.
+- **Expected Result:** The actual lesson publication identity is recorded
+  without confusing it with a later metadata-reconciliation commit.
+- **Status:** `PASS / USER OWNED`.
+
+## Step 23 - Post-publication metadata reconciliation - PENDING
+
+- **Objective:** Reconcile the repository metadata with the actual lesson
+  publication.
+- **Why:** Publication metadata can be updated after the lesson commit without
+  changing the frozen lesson content.
+- **Action:** Record `6482160` as the actual lesson publication and preserve
+  the distinction that this documentation update requires a separate future
+  User-owned commit.
+- **Files Changed:** Authorized documentation metadata only.
+- **Verification:** Read-only cross-file consistency audit; no Git write
+  operation by Codex.
+- **Expected Result:** All current records identify the same lesson publication;
+  the future reconciliation commit remains unknown until User publication.
+- **Status:** `PASS / RECONCILIATION CONTENT COMPLETE / USER GIT PENDING`.
 
 ## Student boundary summary
 

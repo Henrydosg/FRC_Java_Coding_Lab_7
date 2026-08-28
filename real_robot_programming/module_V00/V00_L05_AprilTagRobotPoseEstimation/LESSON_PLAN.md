@@ -13,7 +13,8 @@
 - **Post-repair user verification:** `PASS / WPILib Java 17`
 - **Documentation:** `COMPLETE / PASS`
 - **Final closure:** `APPROVED / COMPLETE`
-- **Git publication:** `PENDING USER GIT PUBLICATION`
+- **Git publication:** `PUBLISHED @ 6482160 / USER VERIFIED`
+- **Metadata reconciliation:** `PENDING USER GIT`
 
 ## One-concept objective
 
@@ -140,9 +141,14 @@ latency semantics.
 24. **Final Architect closure and freeze — PASS / APPROVED.** The Architect
     authorized final closure. V00_L05 is now `COMPLETE / FROZEN / READ-ONLY`,
     with no active V00 lesson.
-25. **User-owned publication — PENDING.** The User alone performs Git add,
-    commit, and push; publication metadata will be reconciled only after a
-    real User commit/push provides the actual hash and result.
+25. **Actual User lesson publication — PASS / USER VERIFIED.** The User
+    confirmed commit `6482160`, subject `Complete V00_L05 AprilTag robot pose
+    estimation`, was pushed to `origin/main`; `HEAD` and `origin/main` resolved
+    to the full publication commit at publication time.
+26. **Post-publication metadata reconciliation — PENDING / USER OWNED.** The
+    current documentation reconciliation is separate from the actual lesson
+    publication commit. The User must commit and push this metadata update; its
+    future hash is not yet known.
 
 ## Verification surfaces
 

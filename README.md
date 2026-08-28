@@ -370,9 +370,14 @@ documentation. No runtime wiring, camera vendor, telemetry, Swerve, alliance
 transform, or pose fusion is authorized.
 
 V00_L01-L04 remain complete, frozen, and protected. No V00 lesson is currently
-active. V00_L06 and later remain deferred and not started, A01_L10 remains
-prohibited, and User-owned Git publication remains `PENDING USER GIT
-PUBLICATION`; no L05 commit hash or push result is claimed.
+active (active V00 lesson count: `0`). V00_L06 and later remain deferred and
+not started, A01_L10 remains prohibited, and V00_L05 is published at `6482160`
+after the User-confirmed push to `origin/main`. Any later
+metadata-reconciliation commit is separate,
+User-owned, and not yet created or published.
+
+Publication identity: `6482160 Complete V00_L05 AprilTag robot pose
+estimation` (`648216094fbea7eb5ebf26252f1ea457b93fcce8`).
 
 Approved lesson sequence:
 

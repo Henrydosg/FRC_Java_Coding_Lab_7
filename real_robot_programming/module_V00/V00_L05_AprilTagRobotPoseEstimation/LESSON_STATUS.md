@@ -7,7 +7,9 @@
 - **Title:** `V00_L05 - AprilTag Robot Pose Estimation`
 - **Previous Lesson:** `V00_L04_DeterministicVisionSimulation @ 5461555`
 - **Previous Lesson State:** `COMPLETE / FROZEN / READ-ONLY / PUBLISHED`
-- **Publication Metadata Reconciliation:** `96dcb4d`
+- **Predecessor Publication Metadata Reconciliation:** `96dcb4d`
+- **Actual Lesson Publication:** `6482160 / USER VERIFIED TO origin/main`
+- **Publication Subject:** `Complete V00_L05 AprilTag robot pose estimation`
 - **Status:** `COMPLETE`
 - **Active State:** `COMPLETE / FROZEN / READ-ONLY`
 - **Freeze State:** `FROZEN / READ-ONLY`
@@ -27,10 +29,12 @@
 - **Transition Guide:** `COMPLETE / PASS`
 - **Documentation:** `COMPLETE / PASS`
 - **Closure:** `APPROVED / COMPLETE`
-- **Git Commit:** `PENDING USER GIT PUBLICATION`
-- **Git Push:** `PENDING USER GIT PUBLICATION`
-- **Known Issues:** `NONE CURRENT`. Technical closure is complete; only User
-  Git publication and any later publication-metadata reconciliation remain.
+- **Git Commit:** `PUBLISHED @ 6482160 / USER VERIFIED`
+- **Git Push:** `PUBLISHED TO origin/main / USER VERIFIED`
+- **Metadata Reconciliation:** `PENDING USER GIT`
+- **Known Issues:** `NONE CURRENT`. Technical closure and lesson publication
+  are complete; this metadata reconciliation remains User-owned and is not
+  yet published.
 
 ## Lifecycle gates
 
@@ -63,11 +67,12 @@
 | Driver Station / Glass | NOT APPLICABLE | No runtime telemetry is introduced. |
 | Real Robot | NOT APPLICABLE | No camera, actuation, or robot wiring is introduced. |
 | Post-Implementation Architecture Review | PASS | The implementation architecture passed; no production architecture defect exists. |
-| Documentation Reconciliation | PASS | Active L05 records reconcile implementation, verification, closure, freeze, and pending User publication. |
+| Documentation Reconciliation | PASS | Active L05 records reconcile implementation, verification, closure, freeze, and the actual User-published lesson identity. |
 | API Reflection-Test Hardening | PASS | The focused test locks final class behavior and exactly one public declared method; User post-hardening verification passed. |
 | Final Architect Closure Review | APPROVED / COMPLETE | Architect authorized final closure; the lesson is frozen and read-only. |
 | Freeze Transition | PASS | V00_L05 transitioned to `COMPLETE / FROZEN / READ-ONLY`. |
-| Git Publication | PENDING | User owns add, commit, and push; no publication hash or push result is claimed. |
+| Git Publication | PASS | User confirmed lesson publication at `6482160` and push to `origin/main`; no metadata-reconciliation hash is claimed. |
+| Metadata Reconciliation Publication | PENDING | User must commit and push this documentation-only reconciliation separately from the lesson publication. |
 
 ## Architect-approved Design Lock
 
@@ -158,8 +163,9 @@ numeric expected values cover the key translation, rotation, order, and
 nontrivial 3D cases.
 
 The round-trip test supplements, and does not replace, the independent oracle
-tests. Post-hardening User verification is PASS. Technical closure and freeze
-are complete; User Git publication remains pending.
+tests. Post-hardening User verification is PASS. Technical closure, freeze,
+and the actual lesson publication at `6482160` are complete; this metadata
+reconciliation remains User-owned and pending publication.
 
 ## Protected and deferred scope
 
@@ -186,5 +192,6 @@ POST-IMPLEMENTATION ARCHITECTURE REVIEW: PASS
 DOCUMENTATION: COMPLETE / PASS
 FINAL ARCHITECT CLOSURE: APPROVED / COMPLETE
 ACTIVE V00 LESSON COUNT: 0
-GIT PUBLICATION: PENDING USER GIT PUBLICATION
+GIT PUBLICATION: PUBLISHED @ 6482160 / USER VERIFIED
+METADATA RECONCILIATION: PENDING USER GIT
 ```

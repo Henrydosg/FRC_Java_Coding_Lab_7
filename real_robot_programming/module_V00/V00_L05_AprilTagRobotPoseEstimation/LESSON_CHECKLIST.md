@@ -7,7 +7,9 @@ Implementation: `COMPLETE / AUTHORIZED BOUNDARY`
 Post-repair user verification: `PASS / WPILib Java 17`
 Final closure: `APPROVED / COMPLETE`
 Active lesson count: `0`
-Git publication: `PENDING USER GIT PUBLICATION`
+Git publication: `PUBLISHED @ 6482160 / USER VERIFIED`
+Publication subject: `Complete V00_L05 AprilTag robot pose estimation`
+Metadata reconciliation: `PENDING USER GIT`
 
 ## Governance and predecessor
 
@@ -95,7 +97,9 @@ Git publication: `PENDING USER GIT PUBLICATION`
       focused tests, inherited regressions, full suite, and clean build PASS.
 - [x] Final Architect closure authorization.
 - [x] Freeze metadata update.
-- [ ] User-owned Git add/commit/push.
+- [x] User-owned Git add/commit/push for the actual lesson publication at
+      `6482160`; push to `origin/main` was User-verified.
+- [ ] User-owned metadata-reconciliation commit/push.
 
 ## Verification surfaces
 
@@ -131,4 +135,5 @@ Git publication: `PENDING USER GIT PUBLICATION`
 `COMPLETE / FROZEN / READ-ONLY / DESIGN LOCK APPROVED / IMPLEMENTATION COMPLETE /
 POST-REPAIR USER VERIFICATION PASS / POST-HARDENING USER VERIFICATION PASS /
 FINAL ARCHITECT CLOSURE APPROVED / COMPLETE / DOCUMENTATION COMPLETE /
-ACTIVE V00 LESSON COUNT 0 / GIT PUBLICATION PENDING USER ACTION`
+ACTIVE V00 LESSON COUNT 0 / GIT PUBLICATION PUBLISHED @ 6482160 /
+METADATA RECONCILIATION PENDING USER ACTION`

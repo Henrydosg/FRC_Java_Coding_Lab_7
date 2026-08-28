@@ -15,12 +15,25 @@
 - **API reflection hardening:** `COMPLETED / PASS / USER VERIFIED`
 - **Documentation:** `COMPLETE / PASS`
 - **Closure:** `APPROVED / COMPLETE`
-- **Git publication:** `PENDING USER GIT PUBLICATION`
+- **Git publication:** `PUBLISHED @ 6482160 / USER VERIFIED`
 
 V00_L05 is closed and frozen. This document records the approved Design Lock,
 the completed narrow implementation, the completed verification evidence, and
-the approved final closure. Git publication remains a separate User-owned
-operation and has not yet occurred.
+the approved final closure. The actual lesson publication was User-confirmed
+at `6482160` with subject `Complete V00_L05 AprilTag robot pose estimation`.
+This documentation-only reconciliation is separate from that lesson
+publication commit; its future commit remains User-owned and is not yet known.
+
+## Publication identity
+
+```text
+ACTUAL LESSON PUBLICATION COMMIT:
+648216094fbea7eb5ebf26252f1ea457b93fcce8
+SHORT SHA: 6482160
+SUBJECT: Complete V00_L05 AprilTag robot pose estimation
+PUSH: USER VERIFIED TO origin/main
+FUTURE METADATA-RECONCILIATION COMMIT: NOT YET CREATED
+```
 
 ## Inheritance and predecessor authority
 
@@ -235,9 +248,10 @@ POST-REPAIR USER VERIFICATION: PASS / WPILib Java 17
 POST-HARDENING USER VERIFICATION: PASS / WPILib Java 17
 FINAL ARCHITECT CLOSURE: APPROVED / COMPLETE
 ACTIVE V00 LESSON COUNT: 0
-GIT PUBLICATION: PENDING USER GIT PUBLICATION
+GIT PUBLICATION: PUBLISHED @ 6482160 / USER VERIFIED
+METADATA RECONCILIATION: PENDING USER GIT
 ```
 
-Closure and freeze are complete. User-owned Git add/commit/push and any later
-publication-metadata reconciliation remain separate future gates. Codex
-performs no Git operations.
+Closure, freeze, and the actual lesson publication are complete. The later
+metadata-reconciliation commit remains User-owned and is not yet created.
+Codex performs no Git operations.

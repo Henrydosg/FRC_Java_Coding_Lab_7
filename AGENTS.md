@@ -65,7 +65,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D00/
     ├── module_D01/
     ├── module_S00/
-    └── module_V00/ (authorized; V00_L01-L04 published/frozen; V00_L05 frozen/unpublished; no active V00 lesson; V00_L06+ not started)
+    └── module_V00/ (authorized; V00_L01-L05 published/frozen; no active V00 lesson; V00_L06+ not started)
         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -1113,9 +1113,27 @@ this lesson is pure deterministic geometry without runtime camera or hardware
 integration.
 
 V00_L05 is no longer an active lesson; no V00 lesson is active, and V00_L06
-has not been activated or created by this closure. Git publication remains
-`PENDING USER GIT PUBLICATION`; no commit hash, push result, or published state
-is claimed. The User remains the sole Git operator.
+has not been activated or created by this closure. At this historical closure
+point, Git publication remained `PENDING USER GIT PUBLICATION`; no commit hash,
+push result, or published state was claimed. The User remains the sole Git
+operator.
+
+### V00_L05 Publication Metadata Reconciliation — 2026-08-28
+
+The User subsequently confirmed the actual V00_L05 lesson publication:
+
+`6482160 Complete V00_L05 AprilTag robot pose estimation`
+
+The full publication commit is
+`648216094fbea7eb5ebf26252f1ea457b93fcce8`, and the User confirmed that
+`HEAD` and `origin/main` resolved to that commit at publication time. V00_L05
+is therefore recorded as `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 6482160`.
+
+This entry reconciles publication metadata only. Any later commit that records
+this metadata reconciliation is separate from the actual lesson publication
+commit and remains User-owned, not yet created, and not yet published. No
+production, test, configuration, dependency, deploy, asset, predecessor, or
+V00_L06 content is changed by this reconciliation.
 
 ---
 
@@ -1174,4 +1192,5 @@ Only report verified facts.
 | 1.23 | 2026-08-28 | FROZEN | APPROVED: reconcile User-confirmed V00_L04 publication at `5461555`; V00_L04 remains `COMPLETE / FROZEN / READ-ONLY`, no V00 lesson is active, and publication is recorded as `PUBLISHED @ 5461555 / USER VERIFIED`. |
 | 1.24 | 2026-08-28 | FROZEN | APPROVED: activate the prepared ADR-locked V00_L05 identity as the sole `IN_PROGRESS / EDITABLE` lesson and record the Architect-approved pure pose-candidate Design Lock; implementation remains `NOT STARTED / NOT AUTHORIZED`, predecessor lessons remain frozen, and User-owned Git operations remain pending. |
 | 1.25 | 2026-08-28 | FROZEN | APPROVED: record the authorized V00_L05 implementation, test-only Java 17 compatibility and noncommutativity-fixture repairs, API reflection hardening, authoritative User verification PASS, and architecture/documentation PASS; V00_L05 remains `IN_PROGRESS / EDITABLE` pending final closure authorization and User-owned publication. |
-| 1.26 | 2026-08-28 | FROZEN | APPROVED: close and freeze V00_L05 as `COMPLETE / FROZEN / READ-ONLY` after final architecture, verification, and documentation PASS; V00_L06 remains inactive/not created, and User Git publication remains pending. |
+| 1.26 | 2026-08-28 | FROZEN | APPROVED: close and freeze V00_L05 as `COMPLETE / FROZEN / READ-ONLY` after final architecture, verification, and documentation PASS; V00_L06 remains inactive/not created, and User Git publication remained pending at that historical closure point. |
+| 1.27 | 2026-08-28 | FROZEN | APPROVED: reconcile User-confirmed V00_L05 publication at `6482160`; retain `COMPLETE / FROZEN / READ-ONLY`, distinguish the actual lesson publication from the future metadata-reconciliation commit, and keep V00_L06 inactive. |
