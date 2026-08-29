@@ -91,6 +91,35 @@ top-level cố định cho các read model bất biến và độc lập với v
 
 ---
 
+## Governance PDFs and VERIFIED Markdown Mirrors
+
+Authoritative English governance PDFs remain authoritative. Their co-located
+VERIFIED Markdown mirrors are machine-readable representations and do not have
+independent or equal authority. The normative operating rules are in
+`AGENTS.md`; source/mirror paths, trust metadata, and final mirror hashes are
+indexed in `docs/GOVERNANCE_DOCUMENT_MANIFEST.md`.
+
+At first governance use in a task or at formal audit start, run:
+
+```powershell
+py -3 docs/tools/governance/validate_governance_mirrors.py
+```
+
+Then consult the manifest, confirm the applicable mirror is VERIFIED and
+registered, compare its current Markdown SHA-256 with the manifest, and read
+all applicable sections sufficiently for the decision. Targeted section
+retrieval is allowed for follow-up work in the same unchanged scope after these
+checks. Use the authoritative PDF when a mirror is missing, not VERIFIED,
+hash-mismatched, disputed, ambiguous, under fidelity review, needed for
+forensics, or otherwise subject to the fallback rules in `AGENTS.md`.
+
+The Architecture Poster mirror may represent its explicit text and
+relationships. Consult the authoritative poster PDF whenever spatial layout,
+adjacency, shared boxes, color emphasis, grouping, relative prominence, or
+visual hierarchy matters.
+
+---
+
 ## real_robot_programming/
 
 Contains every lesson project.

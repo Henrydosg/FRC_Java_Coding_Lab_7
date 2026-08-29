@@ -44,6 +44,52 @@ If documents conflict, the higher priority document wins.
 
 Stop immediately if repository code conflicts with Document A or Document B.
 
+### Verified Markdown Mirror Reading Policy
+
+Activated on 2026-08-29. Authoritative English PDFs remain authoritative, and
+the authority order above is unchanged. A required English PDF reading item may
+be satisfied for routine machine-readable reading by its co-located Markdown
+mirror only when the mirror is `VERIFIED`, is registered in
+`docs/GOVERNANCE_DOCUMENT_MANIFEST.md`, passes the required integrity checks,
+and is used within its fidelity-class limits. A mirror has no independent or
+equal authority, and the PDF controls every conflict.
+
+At the first governance use in a task, and at the start of every formal
+governance or architecture audit, Codex MUST:
+
+1. run or confirm a current PASS from
+   `py -3 docs/tools/governance/validate_governance_mirrors.py`;
+2. consult `docs/GOVERNANCE_DOCUMENT_MANIFEST.md`;
+3. confirm every applicable mirror is `VERIFIED` and registered;
+4. compare each applicable current Markdown SHA-256 with its manifest hash; and
+5. sufficiently read every applicable VERIFIED mirror to cover all potentially
+   governing sections. Narrow snippets alone do not satisfy a formal audit.
+
+After those checks pass, targeted retrieval of relevant mirror sections is
+allowed for follow-up work within the same unchanged task and scope. Reading
+must expand whenever another section could govern the decision. Targeted
+reading never permits skipping relevant governance requirements.
+
+Direct authoritative PDF consultation is mandatory when a mirror or manifest
+record is missing; a mirror is `UNVERIFIED`, `STALE`, or `HOLD`; a source or
+Markdown hash mismatches; PDF and Markdown conflict; wording is ambiguous;
+fidelity is questioned or under review; forensic or historical reconstruction
+is required; a formal review explicitly requires source confirmation; or the
+Architecture Poster's spatial or visual meaning matters. Mirror consumption
+stops for a conflicting or disputed area. Do not silently rewrite a PDF,
+mirror, hash, or trust state; governed reconciliation is required.
+
+The 11 `TEXTUAL` mirrors may support routine semantic reading after integrity
+verification, but they are not authoritative. The VERIFIED Architecture Poster
+mirror is `SEMANTIC_WITH_VISUAL_REFERENCE` and may represent explicit text,
+relationships, and source-preserved flow wording. Its authoritative PDF remains
+mandatory for landscape arrangement, adjacency, shared boxes, color emphasis,
+spatial grouping, relative prominence, or visual hierarchy.
+
+The manifest is an integrity and verification index only, not semantic
+authority. It supports source/mirror mapping, provenance checks, and final
+Markdown hash lookup. It does not automatically transition mirror trust state.
+
 ---
 
 ## 2. Repository Structure
@@ -1194,3 +1240,4 @@ Only report verified facts.
 | 1.25 | 2026-08-28 | FROZEN | APPROVED: record the authorized V00_L05 implementation, test-only Java 17 compatibility and noncommutativity-fixture repairs, API reflection hardening, authoritative User verification PASS, and architecture/documentation PASS; V00_L05 remains `IN_PROGRESS / EDITABLE` pending final closure authorization and User-owned publication. |
 | 1.26 | 2026-08-28 | FROZEN | APPROVED: close and freeze V00_L05 as `COMPLETE / FROZEN / READ-ONLY` after final architecture, verification, and documentation PASS; V00_L06 remains inactive/not created, and User Git publication remained pending at that historical closure point. |
 | 1.27 | 2026-08-28 | FROZEN | APPROVED: reconcile User-confirmed V00_L05 publication at `6482160`; retain `COMPLETE / FROZEN / READ-ONLY`, distinguish the actual lesson publication from the future metadata-reconciliation commit, and keep V00_L06 inactive. |
+| 1.28 | 2026-08-29 | FROZEN | APPROVED: activate the VERIFIED Markdown mirror reading policy while preserving authoritative English PDF precedence, integrity verification, direct-PDF fallback, and poster visual-reference requirements. |

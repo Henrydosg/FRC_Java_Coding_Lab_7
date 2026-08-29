@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "manifest_required": true,
+  "mirrors": [
+    {
+      "path": "docs/Document_B/English/00_Engineering_Standard_Overview_EN.md",
+      "expected_document_id": "ES-00-ENGINEERING-STANDARD-OVERVIEW",
+      "expected_title": "ENGINEERING STANDARD",
+      "expected_language": "English",
+      "expected_document_class": "Document B",
+      "expected_fidelity_class": "TEXTUAL",
+      "expected_source_version": "1.0",
+      "expected_source_status": "FROZEN"
+    },
+    {
+      "path": "docs/Document_B/English/01_Frozen_Development_Workflow_EN.md",
+      "expected_document_id": "ES-01-FROZEN-DEVELOPMENT-WORKFLOW",
+      "expected_title": "FROZEN DEVELOPMENT WORKFLOW",
+      "expected_language": "English",
+      "expected_document_class": "Document B",
+      "expected_fidelity_class": "TEXTUAL",
+      "expected_source_version": "1.0",
+      "expected_source_status": "FROZEN"
+    },
+    {
+      "path": "docs/Document_B/English/02_Java_Coding_Standard_EN.md",
+      "expected_document_id": "ES-02-JAVA-CODING-STANDARD",
+      "expected_title": "JAVA CODING STANDARD",
+      "expected_language": "English",
+      "expected_document_class": "Document B",
+      "expected_fidelity_class": "TEXTUAL",
+      "expected_source_version": "1.0",
+      "expected_source_status": "FROZEN"
+    },
+    {
+      "path": "docs/Document_B/English/03_Architecture_Review_Checklist_EN.md",
+      "expected_document_id": "ES-03-ARCHITECTURE-REVIEW-CHECKLIST",
+      "expected_title": "ARCHITECTURE REVIEW CHECKLIST",
+      "expected_language": "English",
+      "expected_fidelity_class": "TEXTUAL",
+      "expected_document_class": "Document B",
+      "expected_source_version": "1.1",
+      "expected_source_status": "FROZEN",
+      "expected_checkbox_total": 28,
+      "expected_checked_total": 0,
+      "headerless_tables": [
+        {
+          "heading": "## Review Result",
+          "expected_table_count": 1,
+          "rows": 4,
+          "columns": 2,
+          "expected_empty_cells": 3,
+          "suspicious_headers": ["Field | Value"]
+        }
+      ]
+    },
+    {
+      "path": "docs/Document_B/English/04_Lesson_Module_Checklist_EN.md",
+      "expected_document_id": "ES-04-LESSON-AND-MODULE-CHECKLIST",
+      "expected_title": "LESSON AND MODULE CHECKLIST",
+      "expected_language": "English",
+      "expected_fidelity_class": "TEXTUAL",
+      "expected_document_class": "Document B",
+      "expected_source_version": "1.0",
+      "expected_source_status": "FROZEN",
+      "expected_checkbox_total": 12,
+      "expected_checked_total": 0,
+      "headerless_tables": [
+        {
+          "heading": "## Information",
+          "expected_table_count": 1,
+          "rows": 4,
+          "columns": 2,
+          "expected_empty_cells": 4,
+          "suspicious_headers": ["Field | Value"]
+        }
+      ]
+    },
+    {
+      "path": "docs/Document_C/English/00_Observation_Architecture_Overview_EN.md",
+      "expected_document_id": "OC-00",
+      "expected_title": "OBSERVATION ARCHITECTURE OVERVIEW",
+      "expected_language": "English",
+      "expected_fidelity_class": "TEXTUAL",
+      "expected_document_class": "Document C",
+      "expected_source_version": "1.0",
+      "expected_source_status": "FROZEN"
+    },
+    {
+      "path": "docs/Document_C/English/01_Observation_Model_Contract_EN.md",
+      "expected_document_id": "OC-01",
+      "expected_title": "OBSERVATION MODEL CONTRACT",
+      "expected_language": "English",
+      "expected_fidelity_class": "TEXTUAL",
+      "expected_document_class": "Document C",
+      "expected_source_version": "1.0",
+      "expected_source_status": "FROZEN"
+    },
+    {
+      "path": "docs/Document_C/English/02_Observation_Package_Standard_EN.md",
+      "expected_document_id": "OC-02",
+      "expected_title": "OBSERVATION PACKAGE STANDARD",
+      "expected_language": "English",
+      "expected_fidelity_class": "TEXTUAL",
+      "expected_document_class": "Document C",
+      "expected_source_version": "1.0",
+      "expected_source_status": "FROZEN"
+    },
+    {
+      "path": "docs/Document_C/English/03_Observation_Architecture_Checklist_EN.md",
+      "expected_document_id": "OC-03",
+      "expected_title": "OBSERVATION ARCHITECTURE CHECKLIST",
+      "expected_language": "English",
+      "expected_fidelity_class": "TEXTUAL",
+      "expected_document_class": "Document C",
+      "expected_source_version": "1.0",
+      "expected_source_status": "FROZEN",
+      "expected_checkbox_total": 30,
+      "expected_checked_total": 0
+    },
+    {
+      "path": "docs/Document_A/FRC_Final_Frozen_Backbone_Guide_EN.md",
+      "expected_document_id": "FRC-FINAL-FROZEN-PACKAGE-BACKBONE",
+      "expected_title": "FINAL FROZEN PACKAGE BACKBONE",
+      "expected_language": "English",
+      "expected_document_class": "Document A",
+      "expected_fidelity_class": "TEXTUAL",
+      "expected_source_version": "1.1",
+      "expected_source_status": "FROZEN"
+    },
+    {
+      "path": "docs/Document_A/ES-06_Frozen_Interface_Contract_EN.md",
+      "expected_document_id": "ES-06-FROZEN-INTERFACE-CONTRACT",
+      "expected_title": "FROZEN INTERFACE CONTRACT",
+      "expected_language": "English",
+      "expected_document_class": "Document A",
+      "expected_fidelity_class": "TEXTUAL",
+      "expected_source_version": "1.0",
+      "expected_source_status": "FROZEN"
+    },
+    {
+      "path": "docs/Document_A/FRC_Final_Frozen_Backbone_Architecture_Poster.md",
+      "expected_document_id": "FRC-FINAL-FROZEN-BACKBONE-ARCHITECTURE-POSTER",
+      "expected_title": "FINAL FROZEN BACKBONE ARCHITECTURE",
+      "expected_language": "English",
+      "expected_document_class": "Document A",
+      "expected_fidelity_class": "SEMANTIC_WITH_VISUAL_REFERENCE",
+      "expected_source_version": "1.1",
+      "expected_source_status": "FROZEN"
+    }
+  ]
+}
