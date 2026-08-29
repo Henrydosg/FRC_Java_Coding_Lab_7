@@ -5,7 +5,9 @@
 This guide explains how V00_L06_VisionMeasurementQualityContract is derived
 from the final authoritative V00_L05_AprilTagRobotPoseEstimation snapshot.
 This guide is finalized as part of the V00_L06 closure record. V00_L06 is now
-COMPLETE / FROZEN / READ-ONLY; User Git publication remains pending.
+COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 1327bf4. The lesson publication
+commit is confirmed; the separate documentation-reconciliation commit has no
+claimed hash here.
 
 Authoritative lineage:
 
@@ -258,7 +260,7 @@ regressions, the full test suite, and the clean build with `BUILD SUCCESSFUL`.
 **Expected Result:** Focused, inherited, full-suite, and standard clean-build
 evidence all pass. No Gradle or classpath repair is required.
 
-## Step 12 - Reconcile evidence and close later
+## Step 12 - Finalize closure and publication metadata
 
 **Objective:** Preserve an accurate long-term lifecycle record.
 
@@ -268,15 +270,21 @@ final architecture approval, lesson freeze, or Git publication.
 **Action:** Reconcile the five lesson-local documents with the current User
 verification and the independent final architecture review. Following the
 Architect's closure authorization, record V00_L06 as COMPLETE / FROZEN /
-READ-ONLY. The User then owns Git add, commit, and push.
+READ-ONLY / PUBLISHED. The User publication evidence is:
+
+- Full commit: `1327bf41736c8fe79ba58ec5eea9e0120bd978fb`
+- Short hash: `1327bf4`
+- Subject: `Complete V00_L06 vision measurement quality contract`
+- Push: `origin/main`
 
 **Files Changed:** The five lesson-local documentation files only.
 
 **Verification:** Documentation reconciliation PASS. User standard WPILib Java
 17 verification is PASS, and the independent architecture review was PASS WITH
 DOCUMENTATION REPAIR REQUIRED; this reconciliation completed that requirement.
-Final closure and freeze metadata are approved and complete. User Git
-publication remains pending.
+Final closure, freeze metadata, and lesson publication are approved and
+complete. The separate documentation-reconciliation commit is not yet
+created, and no hash is claimed for it.
 
 **Expected Result:** A final transition guide that clearly distinguishes
 inheritance, new V00_L06 behavior, automated evidence, User-owned evidence,

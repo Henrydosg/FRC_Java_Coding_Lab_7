@@ -17,11 +17,15 @@
 - Verification: PASS / USER VERIFIED / WPILib Java 17 / STANDARD CLEAN BUILD
 - Documentation: COMPLETE / PASS
 - Closure: APPROVED / COMPLETE
-- Git publication: PENDING USER GIT
+- Git publication: PUBLISHED @ 1327bf4 / USER VERIFIED
+- Publication commit: 1327bf41736c8fe79ba58ec5eea9e0120bd978fb
+- Publication subject: Complete V00_L06 vision measurement quality contract
 
 V00_L06 is complete, frozen, and read-only. V00_L01 through V00_L05 remain
 frozen historical snapshots and must not be modified. No current blocker
-remains. Git publication is still pending the User's commit and push.
+remains. Git publication is confirmed at `1327bf4` and matches `origin/main`.
+The separate post-publication documentation reconciliation commit has no
+claimed hash here.
 
 ## One-concept objective
 
@@ -169,6 +173,8 @@ owns accepted timestamped fusion into the Swerve-owned estimator.
 
 ## Lifecycle boundary
 
-This lesson is COMPLETE / FROZEN / READ-ONLY. User verification,
-documentation reconciliation, final architecture review, and closure approval
-are complete. User-owned Git publication remains pending.
+This lesson is COMPLETE / FROZEN / READ-ONLY / PUBLISHED. User verification,
+documentation reconciliation, final architecture review, closure approval, and
+User-owned Git publication is complete. The publication commit is
+`1327bf41736c8fe79ba58ec5eea9e0120bd978fb` with subject
+`Complete V00_L06 vision measurement quality contract`.

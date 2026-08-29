@@ -10,7 +10,9 @@ Implementation: COMPLETE / AUTHORIZED BOUNDARY
 Verification: PASS / USER VERIFIED / WPILib Java 17 / STANDARD CLEAN BUILD
 Final closure: APPROVED / COMPLETE
 Active lesson count: 0
-Git publication: PENDING USER GIT
+Git publication: PUBLISHED @ 1327bf4 / USER VERIFIED
+Publication commit: 1327bf41736c8fe79ba58ec5eea9e0120bd978fb
+Publication subject: Complete V00_L06 vision measurement quality contract
 
 ## Governance and predecessor
 
@@ -92,7 +94,10 @@ Git publication: PENDING USER GIT
 - [x] Final architecture review PASS; required documentation repair completed.
 - [x] Final closure approval authorized by the ChatGPT Architect.
 - [x] Freeze metadata updated to COMPLETE / FROZEN / READ-ONLY.
-- [ ] User-owned Git add/commit/push.
+- [x] User-owned V00_L06 lesson commit `1327bf41736c8fe79ba58ec5eea9e0120bd978fb`
+      was pushed to `origin/main`.
+- [ ] Separate post-publication documentation-reconciliation commit; no hash
+      is claimed here.
 
 ## Protected boundaries
 
@@ -115,4 +120,8 @@ FULL SUITE USER-VERIFIED PASS / STANDARD compileTestJava PASS / CLEAN BUILD PASS
 BUILD SUCCESSFUL / EARLIER TERRA-CODEX HOLD SUPERSEDED /
 ENVIRONMENT-PROCESS-ONLY / NOT A CURRENT BLOCKER / DOCUMENTATION RECONCILED /
 FINAL CLOSURE APPROVED / COMPLETE /
-GIT PUBLICATION PENDING USER ACTION
+GIT PUBLICATION PUBLISHED @ 1327bf4 / USER VERIFIED
+PUBLICATION COMMIT 1327bf41736c8fe79ba58ec5eea9e0120bd978fb
+PUBLICATION SUBJECT Complete V00_L06 vision measurement quality contract
+PUSH USER VERIFIED TO origin/main
+RECONCILIATION COMMIT NOT YET CREATED / NO HASH CLAIMED

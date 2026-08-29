@@ -16,7 +16,9 @@
 - **Verification:** PASS / USER VERIFIED / WPILib Java 17 / STANDARD CLEAN BUILD
 - **Documentation:** COMPLETE / PASS
 - **Final closure:** APPROVED / COMPLETE
-- **Git publication:** PENDING USER GIT
+- **Git publication:** PUBLISHED @ 1327bf4 / USER VERIFIED
+- **Publication commit:** 1327bf41736c8fe79ba58ec5eea9e0120bd978fb
+- **Publication subject:** Complete V00_L06 vision measurement quality contract
 
 ## One-concept objective
 
@@ -101,8 +103,11 @@ the V00_L05 Pose3d candidate, add timing, select a camera vendor, or fuse pose.
     architecture review PASS with no current blocker.
 30. The Architect authorized final closure and the lesson-local freeze
     metadata update. V00_L06 is now COMPLETE / FROZEN / READ-ONLY.
-31. The User alone performs Git add, commit, and push; Git publication remains
-    PENDING USER ACTION and is not claimed here.
+31. The User alone owns Git operations. The V00_L06 lesson publication is
+    confirmed at `1327bf41736c8fe79ba58ec5eea9e0120bd978fb` with subject
+    `Complete V00_L06 vision measurement quality contract` and push to
+    `origin/main`. The separate documentation-reconciliation commit is not yet
+    created and has no claimed hash.
 
 ## Locked classification semantics
 

@@ -27,8 +27,10 @@
 - **Transition Guide:** COMPLETE / PASS
 - **Documentation:** COMPLETE / PASS
 - **Closure:** APPROVED / COMPLETE
-- **Git Commit:** PENDING USER GIT
-- **Git Push:** PENDING USER GIT
+- **Git Commit:** PUBLISHED @ 1327bf4 / USER VERIFIED
+- **Git Push:** PUBLISHED TO origin/main / USER VERIFIED
+- **Publication Commit:** 1327bf41736c8fe79ba58ec5eea9e0120bd978fb
+- **Publication Subject:** Complete V00_L06 vision measurement quality contract
 - **Known Issues:** NONE CURRENT. The earlier TERRA/Codex-local Windows
   Gradle/JDK test-classpath failure is historical and classified as
   `SUPERSEDED / ENVIRONMENT-PROCESS-ONLY`; User-controlled standard WPILib
@@ -64,8 +66,8 @@
 | Clean build | PASS / USER VERIFIED | Standard clean build passed with BUILD SUCCESSFUL. |
 | Final architecture review | PASS | Independent read-only review found architecture and implementation PASS; the required lesson-local documentation reconciliation is complete. |
 | Final closure | APPROVED / COMPLETE | ChatGPT Architect authorized final closure and freeze metadata. |
-| Git publication | PENDING | User owns add, commit, and push. |
-| Freeze transition | PASS | V00_L06 is COMPLETE / FROZEN / READ-ONLY; Git publication remains separate and pending. |
+| Git publication | PASS / USER VERIFIED | Commit `1327bf41736c8fe79ba58ec5eea9e0120bd978fb` was pushed to `origin/main`; HEAD and origin/main match. |
+| Freeze transition | PASS | V00_L06 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED; the separate reconciliation commit is not claimed here. |
 
 ## Architect-approved Design Lock
 
@@ -176,7 +178,7 @@ CONTROLLED ACTIVATION: PASS
 DESIGN LOCK: APPROVED
 IMPLEMENTATION AUTHORIZATION: GRANTED
 IMPLEMENTATION: COMPLETE / AUTHORIZED BOUNDARY
-PRODUCTION COMPILE: PASS / CODEX-LOCAL / JAVA 17
+PRODUCTION COMPILE: PASS / USER VERIFIED / WPILib Java 17
 FOCUSED TEST: PASS / USER VERIFIED / WPILib Java 17
 INHERITED VISION REGRESSIONS: PASS / USER VERIFIED / WPILib Java 17
 FULL TEST SUITE: PASS / USER VERIFIED / WPILib Java 17
@@ -188,5 +190,9 @@ FINAL ARCHITECTURE REVIEW: PASS / DOCUMENTATION RECONCILIATION COMPLETE
 FINAL CLOSURE: APPROVED / COMPLETE
 FREEZE STATE: FROZEN / READ-ONLY
 ACTIVE V00 LESSON COUNT: 0
-GIT PUBLICATION: PENDING USER GIT
+GIT PUBLICATION: PUBLISHED @ 1327bf4 / USER VERIFIED
+PUBLICATION COMMIT: 1327bf41736c8fe79ba58ec5eea9e0120bd978fb
+PUBLICATION SUBJECT: Complete V00_L06 vision measurement quality contract
+PUSH: USER VERIFIED TO origin/main
+RECONCILIATION COMMIT: NOT YET CREATED / NO HASH CLAIMED
 ~~~
