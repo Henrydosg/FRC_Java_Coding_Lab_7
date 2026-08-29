@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import contextlib
+import hashlib
 import io
 import json
 import shutil
@@ -72,9 +73,12 @@ class GovernanceMirrorValidatorTest(unittest.TestCase):
         entry_mutate=None,
         source_bytes: bytes | None = None,
         raw_override: bytes | None = None,
+        attributes_bytes: bytes | None = validator.CANONICAL_GITATTRIBUTES_BYTES,
     ) -> tuple[tempfile.TemporaryDirectory[str], Path]:
         temporary = tempfile.TemporaryDirectory()
         root = Path(temporary.name)
+        if attributes_bytes is not None:
+            (root / ".gitattributes").write_bytes(attributes_bytes)
         mirror_directory = root / "docs" / "Document_B" / "English"
         mirror_directory.mkdir(parents=True)
         shutil.copyfile(SOURCE_FIXTURE, mirror_directory / "authoritative_source.pdf")
@@ -639,6 +643,134 @@ class GovernanceMirrorValidatorTest(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         self.assertEqual(code, 1)
         self.assertIn("ENC-006", output)
+
+    def test_canonical_attributes_and_lf_mirror_pass(self) -> None:
+        code, output, temporary = self._run_fixture("valid_textual_candidate.md")
+        self.addCleanup(temporary.cleanup)
+        self.assertEqual(code, 0, output)
+
+    def test_crlf_mirror_fails_without_normalization(self) -> None:
+        content = (FIXTURES / "valid_textual_candidate.md").read_bytes().replace(
+            b"\n", b"\r\n"
+        )
+        code, output, temporary = self._run_fixture(
+            "valid_textual_candidate.md", raw_override=content
+        )
+        self.addCleanup(temporary.cleanup)
+        staged_mirror = (
+            Path(temporary.name)
+            / "docs"
+            / "Document_B"
+            / "English"
+            / "authoritative_source.md"
+        )
+        self.assertEqual(code, 1)
+        self.assertIn("EOL-001", output)
+        self.assertEqual(staged_mirror.read_bytes(), content)
+
+    def test_bare_cr_mirror_fails(self) -> None:
+        content = (FIXTURES / "valid_textual_candidate.md").read_bytes()
+        content += b"\rBare CR is prohibited.\n"
+        code, output, temporary = self._run_fixture(
+            "valid_textual_candidate.md", raw_override=content
+        )
+        self.addCleanup(temporary.cleanup)
+        self.assertEqual(code, 1)
+        self.assertIn("EOL-002", output)
+
+    def test_missing_gitattributes_fails(self) -> None:
+        code, output, temporary = self._run_fixture(
+            "valid_textual_candidate.md", attributes_bytes=None
+        )
+        self.addCleanup(temporary.cleanup)
+        self.assertEqual(code, 1)
+        self.assertIn("ATTR-001", output)
+
+    def test_missing_governed_lf_rule_fails(self) -> None:
+        attributes = validator.CANONICAL_GITATTRIBUTES_BYTES.replace(
+            b"/docs/Document_B/**/*.md text eol=lf\n", b""
+        )
+        code, output, temporary = self._run_fixture(
+            "valid_textual_candidate.md", attributes_bytes=attributes
+        )
+        self.addCleanup(temporary.cleanup)
+        self.assertEqual(code, 1)
+        self.assertIn("ATTR-003", output)
+
+    def test_altered_governed_lf_rule_fails(self) -> None:
+        attributes = validator.CANONICAL_GITATTRIBUTES_BYTES.replace(
+            b"/docs/Document_B/**/*.md text eol=lf",
+            b"/docs/Document_B/**/*.md text eol=crlf",
+        )
+        code, output, temporary = self._run_fixture(
+            "valid_textual_candidate.md", attributes_bytes=attributes
+        )
+        self.addCleanup(temporary.cleanup)
+        self.assertEqual(code, 1)
+        self.assertIn("ATTR-003", output)
+        self.assertIn("ATTR-005", output)
+
+    def test_missing_pdf_binary_rule_fails(self) -> None:
+        attributes = validator.CANONICAL_GITATTRIBUTES_BYTES.replace(
+            b"*.pdf binary\n", b""
+        )
+        code, output, temporary = self._run_fixture(
+            "valid_textual_candidate.md", attributes_bytes=attributes
+        )
+        self.addCleanup(temporary.cleanup)
+        self.assertEqual(code, 1)
+        self.assertIn("ATTR-004", output)
+
+    def test_altered_pdf_binary_rule_fails(self) -> None:
+        attributes = validator.CANONICAL_GITATTRIBUTES_BYTES.replace(
+            b"*.pdf binary", b"*.pdf -text"
+        )
+        code, output, temporary = self._run_fixture(
+            "valid_textual_candidate.md", attributes_bytes=attributes
+        )
+        self.addCleanup(temporary.cleanup)
+        self.assertEqual(code, 1)
+        self.assertIn("ATTR-004", output)
+        self.assertIn("ATTR-005", output)
+
+    def test_duplicate_and_conflicting_attribute_rules_fail(self) -> None:
+        attributes = (
+            validator.CANONICAL_GITATTRIBUTES_BYTES
+            + b"/docs/Document_B/**/*.md text eol=lf\n"
+            + b"/docs/Document_B/**/*.md text eol=crlf\n"
+        )
+        code, output, temporary = self._run_fixture(
+            "valid_textual_candidate.md", attributes_bytes=attributes
+        )
+        self.addCleanup(temporary.cleanup)
+        self.assertEqual(code, 1)
+        self.assertIn("ATTR-005", output)
+
+    def test_reordered_canonical_attribute_rules_fail(self) -> None:
+        rules = list(validator.CANONICAL_GITATTRIBUTES_RULES)
+        rules[0], rules[1] = rules[1], rules[0]
+        attributes = ("\n".join(rules) + "\n").encode("utf-8")
+        code, output, temporary = self._run_fixture(
+            "valid_textual_candidate.md", attributes_bytes=attributes
+        )
+        self.addCleanup(temporary.cleanup)
+        self.assertEqual(code, 1)
+        self.assertIn("ATTR-006", output)
+
+    def test_ascii_pdf_fixture_matches_binary_contract(self) -> None:
+        self.assertEqual(
+            hashlib.sha256(SOURCE_FIXTURE.read_bytes()).hexdigest(), SOURCE_HASH
+        )
+        self.assertIn(b"*.pdf binary\n", validator.CANONICAL_GITATTRIBUTES_BYTES)
+        code, output, temporary = self._run_fixture("valid_textual_candidate.md")
+        self.addCleanup(temporary.cleanup)
+        self.assertEqual(code, 0, output)
+
+    def test_semantic_certification_boundary_remains_explicit(self) -> None:
+        code, output, temporary = self._run_fixture("valid_textual_candidate.md")
+        self.addCleanup(temporary.cleanup)
+        self.assertEqual(code, 0, output)
+        self.assertIn("Semantic fidelity certification: NOT PERFORMED", output)
 
     def test_duplicate_json_configuration_key_fails_with_exit_two(self) -> None:
         temporary = tempfile.TemporaryDirectory()

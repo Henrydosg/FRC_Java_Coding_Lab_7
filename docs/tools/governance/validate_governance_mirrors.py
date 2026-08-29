@@ -89,6 +89,26 @@ UNVERIFIED_NOTICE = (
     "> authority rank. If a conflict exists, the PDF controls."
 )
 FENCE_MARKERS = {"`", "~"}
+CANONICAL_GITATTRIBUTES_RULES = (
+    "/.gitattributes text eol=lf",
+    "/AGENTS.md text eol=lf",
+    "/README.md text eol=lf",
+    "/docs/Document_A/*.md text eol=lf",
+    "/docs/Document_B/**/*.md text eol=lf",
+    "/docs/Document_C/**/*.md text eol=lf",
+    "/docs/GOVERNANCE_DOCUMENT_MANIFEST.md text eol=lf",
+    "/docs/GOVERNANCE_MIRROR_CONVERSION_CONTRACT.md text eol=lf",
+    "/docs/architecture_decisions/"
+    "ADR_Governance_PDF_Verified_Markdown_Mirrors.md text eol=lf",
+    "/docs/tools/governance/**/*.py text eol=lf",
+    "/docs/tools/governance/**/*.json text eol=lf",
+    "/docs/tools/governance/**/*.md text eol=lf",
+    "/docs/tools/governance/**/*.txt text eol=lf",
+    "*.pdf binary",
+)
+CANONICAL_GITATTRIBUTES_BYTES = (
+    "\n".join(CANONICAL_GITATTRIBUTES_RULES) + "\n"
+).encode("utf-8")
 
 
 class ConfigError(ValueError):
@@ -132,6 +152,121 @@ class ValidationReport:
         line: int | None = None,
     ) -> None:
         self.findings.append(Finding(path, rule_id, message, category, line))
+
+
+def _line_number_for_byte_offset(raw: bytes, offset: int) -> int:
+    return raw[:offset].count(b"\n") + 1
+
+
+def _validate_lf_only(
+    raw: bytes, display_path: str, report: ValidationReport
+) -> None:
+    crlf_offset = raw.find(b"\r\n")
+    if crlf_offset >= 0:
+        report.add(
+            display_path,
+            "EOL-001",
+            "CRLF bytes are prohibited; governed text must use canonical LF",
+            "byte integrity",
+            _line_number_for_byte_offset(raw, crlf_offset),
+        )
+    bare_cr_offset = next(
+        (
+            offset
+            for offset, byte in enumerate(raw)
+            if byte == 0x0D and (offset + 1 == len(raw) or raw[offset + 1] != 0x0A)
+        ),
+        -1,
+    )
+    if bare_cr_offset >= 0:
+        report.add(
+            display_path,
+            "EOL-002",
+            "bare CR bytes are prohibited; governed text must use canonical LF",
+            "byte integrity",
+            _line_number_for_byte_offset(raw, bare_cr_offset),
+        )
+
+
+def _validate_gitattributes(repo_root: Path, report: ValidationReport) -> None:
+    attributes_path = repo_root / ".gitattributes"
+    display_path = ".gitattributes"
+    if not attributes_path.is_file():
+        report.add(
+            display_path,
+            "ATTR-001",
+            "required governed byte-integrity attributes file is missing",
+            "attribute contract",
+        )
+        return
+
+    raw = attributes_path.read_bytes()
+    _validate_lf_only(raw, display_path, report)
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        report.add(
+            display_path,
+            "ATTR-002",
+            f"attributes file is not valid UTF-8: {exc}",
+            "attribute contract",
+        )
+        return
+    if text.startswith("\ufeff"):
+        report.add(
+            display_path,
+            "ATTR-002",
+            "attributes file contains a UTF-8 BOM",
+            "attribute contract",
+            1,
+        )
+
+    active_rules = [
+        (line_number, line)
+        for line_number, line in enumerate(text.splitlines(), start=1)
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    active_values = [line for _, line in active_rules]
+
+    for rule in CANONICAL_GITATTRIBUTES_RULES:
+        count = active_values.count(rule)
+        if count == 0:
+            rule_id = "ATTR-004" if rule == "*.pdf binary" else "ATTR-003"
+            report.add(
+                display_path,
+                rule_id,
+                f"required canonical attribute rule is missing: {rule}",
+                "attribute contract",
+            )
+        elif count > 1:
+            report.add(
+                display_path,
+                "ATTR-005",
+                f"duplicate canonical attribute rule: {rule}",
+                "attribute contract",
+            )
+
+    for line_number, rule in active_rules:
+        if rule not in CANONICAL_GITATTRIBUTES_RULES:
+            report.add(
+                display_path,
+                "ATTR-005",
+                f"unexpected or conflicting active attribute rule: {rule}",
+                "attribute contract",
+                line_number,
+            )
+
+    if (
+        len(active_values) == len(CANONICAL_GITATTRIBUTES_RULES)
+        and set(active_values) == set(CANONICAL_GITATTRIBUTES_RULES)
+        and tuple(active_values) != CANONICAL_GITATTRIBUTES_RULES
+    ):
+        report.add(
+            display_path,
+            "ATTR-006",
+            "canonical attribute rule ordering differs from the governed contract",
+            "attribute contract",
+        )
 
 
 def _reject_duplicate_json_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -1247,6 +1382,7 @@ def validate_mirror(
         )
         return
     raw = mirror_path.read_bytes()
+    _validate_lf_only(raw, display_path, report)
     text = _check_encoding(raw, display_path, report)
     if text is None:
         return
@@ -1314,6 +1450,7 @@ def validate_mirror(
 
 def validate_repository(repo_root: Path, config: dict[str, Any]) -> ValidationReport:
     report = ValidationReport(mirrors_discovered=len(config["mirrors"]))
+    _validate_gitattributes(repo_root, report)
     seen_ids: set[str] = set()
     for entry in config["mirrors"]:
         mirror_path = (repo_root / Path(entry["path"])).resolve()

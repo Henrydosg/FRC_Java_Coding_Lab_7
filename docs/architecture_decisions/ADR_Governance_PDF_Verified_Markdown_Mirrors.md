@@ -229,6 +229,28 @@ Future lessons may consume `VERIFIED` mirrors only after the later policy
 activation. A future mirror defect does not invalidate the authoritative PDF or
 completed historical PDF-based reviews.
 
+## Post-G9 Byte-Integrity Hardening Amendment — 2026-08-29
+
+After User publication commit `54aae0d`, a read-only portability audit found
+that Windows `core.autocrlf=true` checkout filtering could transform the exact
+LF bytes of a VERIFIED Markdown mirror into CRLF bytes and thereby invalidate
+its manifest SHA-256 without changing its semantic meaning.
+
+The integrity model remains exact raw-byte SHA-256. Governance
+machine-readable text uses canonical LF, and the root `.gitattributes` is a
+governed integrity artifact that enforces byte-stable LF checkout. Governance
+PDFs are explicitly binary and must not undergo end-of-line conversion. Hashes
+continue to prove byte identity and integrity only; they do not certify
+semantic fidelity.
+
+This is forward hardening. Commit `54aae0d` remains valid and published, and no
+history rewrite is required. The authority hierarchy is unchanged, and the
+authoritative English PDF continues to control every conflict. Existing
+VERIFIED mirror semantic bodies and full file bytes remain unchanged, so their
+manifest hashes remain unchanged and mirror recertification is not required
+solely for this hardening. Manifest hash records change only if mirror bytes
+change, which this amendment does not authorize.
+
 ## Conflict, HOLD, and Rollback
 
 If the PDF and a mirror conflict, the PDF controls; the affected mirror enters

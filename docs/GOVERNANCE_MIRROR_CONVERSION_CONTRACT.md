@@ -75,17 +75,30 @@ strings, literal `null`, no nested objects, no arrays, no multiline YAML, no
 duplicate keys, and no unknown keys. Include the canonical trust notice that
 the English PDF controls conflicts.
 
-### M-10 Hash separation
+### M-10 Hash separation and byte identity
 
 The mirror records the authoritative PDF SHA-256 in its provenance header. The
 final Markdown mirror SHA-256 belongs later in the G6 manifest. Never embed the
 mirror's own final hash in the mirror.
 
-### M-11 Encoding
+The final Markdown mirror SHA-256 is calculated over the exact raw UTF-8 file
+bytes after final stabilization. Hashing performs no line-ending or Unicode
+normalization. The manifest records that exact raw-byte hash. Hash equality
+proves byte identity and integrity only; it does not prove semantic fidelity.
+
+### M-11 Encoding and line endings
 
 Use strict UTF-8. Reject replacement characters, disallowed control characters,
 and high-confidence PDF extraction corruption such as the private-use bullet
 U+F0B7.
+
+Governance machine-readable text uses canonical LF (`0x0A`) line endings. CRLF
+(`0x0D 0x0A`) and bare CR (`0x0D`) are prohibited and are not
+integrity-equivalent to LF. Repository `.gitattributes` is part of this
+integrity contract and enforces LF checkout for governed text.
+
+Governance PDFs are exact binary bytes, are classified as binary through
+repository attributes, and must not undergo end-of-line conversion.
 
 ### M-12 Validator boundary
 

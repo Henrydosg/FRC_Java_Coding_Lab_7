@@ -1,0 +1,14 @@
+/.gitattributes text eol=lf
+/AGENTS.md text eol=lf
+/README.md text eol=lf
+/docs/Document_A/*.md text eol=lf
+/docs/Document_B/**/*.md text eol=lf
+/docs/Document_C/**/*.md text eol=lf
+/docs/GOVERNANCE_DOCUMENT_MANIFEST.md text eol=lf
+/docs/GOVERNANCE_MIRROR_CONVERSION_CONTRACT.md text eol=lf
+/docs/architecture_decisions/ADR_Governance_PDF_Verified_Markdown_Mirrors.md text eol=lf
+/docs/tools/governance/**/*.py text eol=lf
+/docs/tools/governance/**/*.json text eol=lf
+/docs/tools/governance/**/*.md text eol=lf
+/docs/tools/governance/**/*.txt text eol=lf
+*.pdf binary
