@@ -111,7 +111,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D00/
     ├── module_D01/
     ├── module_S00/
-    └── module_V00/ (authorized; V00_L01-L06 published/frozen; no active V00 lesson; V00_L07 is a prepared inherited pre-activation candidate)
+    └── module_V00/ (authorized; V00_L01-L07 published/frozen; no active V00 lesson; V00_L08 is not started)
         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -617,11 +617,18 @@ VERIFIED`, and V00_L06 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @
 `1327bf41736c8fe79ba58ec5eea9e0120bd978fb` with subject `Complete V00_L06
 vision measurement quality contract`; its lesson-local publication metadata
 reconciliation is recorded at `49c4286` as `Reconcile V00_L06 publication
-metadata`. No V00 lesson is currently active. The User has prepared
-V00_L07_VisionTimestampAndLatencyContract as an inherited pre-activation
-candidate from frozen V00_L06; its User-verified inherited baseline clean
-build passed, but V00_L07 is not activated, editable, Design Locked,
-implemented, or published.
+metadata`.
+
+The latest completed and published vision lesson is now
+V00_L07_VisionTimestampAndLatencyContract:
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ d58bef0 / USER VERIFIED`.
+Its lesson publication commit is
+`d58bef0d17d202ce1dd0b8645635a8c35095dd3f` with subject `Complete V00_L07
+vision timestamp and latency contract`; its lesson-local publication metadata
+reconciliation is recorded at `618dd09` as `Reconcile V00_L07 publication
+metadata`. No V00 lesson is currently active. V00_L08 is the next roadmap
+lesson and remains `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT
+PUBLISHED`.
 
 The authorized V00 lesson order is:
 
@@ -1213,6 +1220,28 @@ file.
 
 ---
 
+### V00_L07 Repository Lifecycle Reconciliation — 2026-08-30
+
+The User subsequently confirmed publication of the frozen V00_L07 snapshot and
+its lesson-local publication metadata reconciliation:
+
+`d58bef0 Complete V00_L07 vision timestamp and latency contract`
+
+`618dd09 Reconcile V00_L07 publication metadata`
+
+V00_L07 is therefore recorded as `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @
+d58bef0 / USER VERIFIED`. The current V00 lifecycle contains no active lesson.
+V00_L08 remains the next roadmap lesson and is `NOT STARTED / NOT ACTIVATED /
+NOT IMPLEMENTED / NOT PUBLISHED`. This repository-level reconciliation changes
+documentation metadata only; it does not change lesson implementation,
+production/test code, the V00 roadmap, or any frozen predecessor.
+
+The documentation changes in this reconciliation remain subject to the User's
+separate Git publication operation. No future repository-reconciliation commit
+hash is recorded here.
+
+---
+
 ## 15. Final Report
 
 Always report
@@ -1272,3 +1301,4 @@ Only report verified facts.
 | 1.27 | 2026-08-28 | FROZEN | APPROVED: reconcile User-confirmed V00_L05 publication at `6482160`; retain `COMPLETE / FROZEN / READ-ONLY`, distinguish the actual lesson publication from the future metadata-reconciliation commit, and keep V00_L06 inactive. |
 | 1.28 | 2026-08-29 | FROZEN | APPROVED: activate the VERIFIED Markdown mirror reading policy while preserving authoritative English PDF precedence, integrity verification, direct-PDF fallback, and poster visual-reference requirements. |
 | 1.29 | 2026-08-30 | FROZEN | APPROVED: reconcile User-confirmed V00_L06 publication at `1327bf4` and lesson-local metadata reconciliation at `49c4286`; record V00_L01-L06 as published/frozen, no active V00 lesson, and V00_L07 as a prepared inherited pre-activation candidate. |
+| 1.30 | 2026-08-30 | FROZEN | APPROVED: reconcile repository current lifecycle through User-published V00_L07 at `d58bef0` and lesson-local metadata reconciliation at `618dd09`; record no active V00 lesson and keep V00_L08 `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT PUBLISHED`. |

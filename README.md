@@ -398,17 +398,21 @@ test matrix, and V00_L06 quality boundary are recorded in the lesson
 documentation. No runtime wiring, camera vendor, telemetry, Swerve, alliance
 transform, or pose fusion is authorized.
 
-V00_L01-L06 remain complete, frozen, protected, and published. V00_L06 is
+V00_L01-L07 remain complete, frozen, protected, and published. V00_L06 is
 `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 1327bf4 / USER VERIFIED` after
 the User-confirmed publication commit
 `1327bf41736c8fe79ba58ec5eea9e0120bd978fb` (`Complete V00_L06 vision
 measurement quality contract`) and lesson-local metadata reconciliation
-`49c4286` (`Reconcile V00_L06 publication metadata`). No V00 lesson is
-currently active (active V00 lesson count: `0`). The User has prepared
-`V00_L07_VisionTimestampAndLatencyContract` as an inherited pre-activation
-candidate from frozen V00_L06; its baseline clean build is User-verified PASS,
-but it is not active, IN_PROGRESS, editable, Design Locked, implemented, or
-published. A01_L10 remains prohibited.
+`49c4286` (`Reconcile V00_L06 publication metadata`). V00_L07 is the latest
+completed and published vision lesson:
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ d58bef0 / USER VERIFIED`.
+Its User-confirmed publication commit is
+`d58bef0d17d202ce1dd0b8645635a8c35095dd3f` (`Complete V00_L07 vision
+timestamp and latency contract`) and its lesson-local metadata reconciliation
+is `618dd09` (`Reconcile V00_L07 publication metadata`). No V00 lesson is
+currently active (active V00 lesson count: `0`). V00_L08 is the next roadmap
+lesson and remains `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT
+PUBLISHED`. A01_L10 remains prohibited.
 
 Publication identity: `6482160 Complete V00_L05 AprilTag robot pose
 estimation` (`648216094fbea7eb5ebf26252f1ea457b93fcce8`).
