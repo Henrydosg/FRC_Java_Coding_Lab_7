@@ -17,9 +17,13 @@
 - Final Architecture Review: PASS
 - Final Closure / Freeze Authorization: PASS
 - Documentation: FINAL CLOSURE RECONCILIATION COMPLETE
-- Publication: NOT YET PUBLISHED
-- Git commit: PENDING USER GIT
-- Git push: PENDING USER GIT
+- Publication: PUBLISHED @ d58bef0 / USER VERIFIED
+- Publication commit: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+- Publication subject: Complete V00_L07 vision timestamp and latency contract
+- Git commit: PASS / USER VERIFIED
+- Git push: PASS / origin/main / USER VERIFIED
+- HEAD: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+- origin/main: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
 
 V00_L07 was prepared by copying the final V00_L06 project and cleaning copied
 generated output before the inherited baseline build. The inherited candidate
@@ -36,8 +40,9 @@ unchanged.
 
 Implementation and automated verification are complete for this boundary. The
 final read-only architecture review and closure/freeze authorization are also
-PASS. V00_L07 is now complete, frozen, and read-only. Git publication remains a
-separate User-owned lifecycle gate and has not yet occurred.
+PASS. V00_L07 is complete, frozen, read-only, and User-published at
+`d58bef0`. The publication commit and push are complete; the separate
+repository-level lifecycle reconciliation remains pending.
 
 Historical lifecycle note: before the final review, this lesson was recorded as
 `IN_PROGRESS / DESIGN LOCKED / EDITABLE` while implementation and verification
@@ -166,5 +171,8 @@ FULL TEST SUITE: PASS / 593 TESTS / 0 FAILURES / 0 ERRORS / 0 SKIPPED
 CLEAN BUILD: PASS / BUILD SUCCESSFUL in 22s / 7 ACTIONABLE TASKS EXECUTED / EXIT CODE 0
 FINAL ARCHITECTURE REVIEW: PASS
 FINAL CLOSURE / FREEZE: PASS
-PUBLICATION: PENDING USER GIT PUBLICATION
+PUBLICATION: PUBLISHED @ d58bef0 / USER VERIFIED
+PUBLICATION COMMIT: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+PUBLICATION SUBJECT: Complete V00_L07 vision timestamp and latency contract
+HEAD == origin/main: PASS
 ~~~

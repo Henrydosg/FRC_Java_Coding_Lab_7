@@ -17,8 +17,11 @@
 - **Final Architecture Review:** PASS
 - **Documentation:** FINAL CLOSURE RECONCILIATION COMPLETE
 - **Final closure:** PASS / COMPLETE / FROZEN / READ-ONLY
-- **Publication:** NOT YET PUBLISHED
-- **Git publication:** PENDING USER GIT
+- **Publication:** PUBLISHED @ d58bef0 / USER VERIFIED
+- **Publication commit:** d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+- **Publication subject:** Complete V00_L07 vision timestamp and latency contract
+- **Git publication:** PASS / USER VERIFIED / origin/main
+- **HEAD == origin/main:** PASS
 
 ## One-concept objective
 
@@ -120,7 +123,8 @@ not a code failure.
 The following workflow was pending when the implementation documentation was
 first reconciled. It is retained as historical provenance; the first three
 items were subsequently completed by the final read-only review and authorized
-closure update. User-owned Git publication remains pending.
+closure update. At that historical stage, User-owned Git publication remained
+pending; it was subsequently completed at `d58bef0`.
 
 1. Complete final architecture review and record its decision.
 2. Obtain the separate User/Architect closure decision.
@@ -140,7 +144,7 @@ V00_L09 owns accepted vision fusion through
 `SwerveDrivePoseEstimator.addVisionMeasurement(...)`, estimator wiring,
 covariance/stddev selection, and runtime estimator correction.
 
-## Final closure and freeze
+## Historical pre-publication closure and freeze
 
 The final read-only architecture review passed with no blocking finding. The
 Architect authorized the lesson-local lifecycle transition from
@@ -149,9 +153,21 @@ Architect authorized the lesson-local lifecycle transition from
 Frozen Backbone, observation purity, L08 deferral, and L09 deferral remain
 unchanged by this metadata transition.
 
-Publication is a separate User-owned gate:
-`PENDING USER GIT PUBLICATION`. This lesson must not be described as published
-until the User performs the real commit and push.
+At that historical closure point, publication was a separate User-owned gate:
+`PENDING USER GIT PUBLICATION`. The subsequent User publication is recorded in
+the current-state section below.
+
+## Lesson-local publication reconciliation
+
+The User subsequently published the frozen V00_L07 lesson with commit
+`d58bef0d17d202ce1dd0b8645635a8c35095dd3f` (`d58bef0`). The commit subject is
+`Complete V00_L07 vision timestamp and latency contract`. User verification
+recorded commit PASS, push PASS to `origin/main`, and HEAD equal to
+`origin/main` at the same full commit.
+
+This records lesson-local publication metadata only. Repository-level
+reconciliation of AGENTS.md and the root README remains a separate pending
+task before V00_L08 preparation.
 
 ## Verification strategy
 
@@ -165,7 +181,7 @@ verification are not required for this contract-only lesson.
 V00_L07 was historically active because the Architect Design Lock was complete.
 Its authorized implementation and automated verification are complete, and the
 final architecture review authorized closure and freeze. Publication remains
-separate:
+separate and complete at the lesson level:
 
 ~~~text
 STATUS: COMPLETE
@@ -178,5 +194,9 @@ FULL TEST SUITE: PASS / 593 TESTS / 0 FAILURES / 0 ERRORS / 0 SKIPPED
 CLEAN BUILD: PASS / BUILD SUCCESSFUL in 22s / 7 ACTIONABLE TASKS EXECUTED / EXIT CODE 0
 FINAL ARCHITECTURE REVIEW: PASS
 FINAL CLOSURE / FREEZE: PASS
-PUBLICATION: PENDING USER GIT PUBLICATION
+PUBLICATION: PUBLISHED @ d58bef0 / USER VERIFIED
+PUBLICATION COMMIT: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+PUBLICATION SUBJECT: Complete V00_L07 vision timestamp and latency contract
+PUSH: PASS / origin/main / USER VERIFIED
+HEAD == origin/main: PASS
 ~~~

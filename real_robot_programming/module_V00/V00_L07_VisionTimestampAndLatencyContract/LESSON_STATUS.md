@@ -28,9 +28,13 @@
 - **Final Architecture Review:** PASS / READ-ONLY CLOSURE REVIEW
 - **Documentation:** PASS / FINAL CLOSURE RECONCILIATION COMPLETE
 - **Closure:** PASS / AUTHORIZED COMPLETE AND FROZEN
-- **Publication:** NOT YET PUBLISHED
-- **Git Commit:** PENDING USER GIT
-- **Git Push:** PENDING USER GIT
+- **Publication:** PUBLISHED @ d58bef0 / USER VERIFIED
+- **Publication Commit:** d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+- **Publication Subject:** Complete V00_L07 vision timestamp and latency contract
+- **Git Commit:** PASS / USER VERIFIED
+- **Git Push:** PASS / origin/main / USER VERIFIED
+- **HEAD:** d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+- **origin/main:** d58bef0d17d202ce1dd0b8645635a8c35095dd3f
 - **Known Issues:** NONE CURRENT. The first sandbox-local Java compiler attempt
   exposed a classpath/file-access environment defect; the authorized Java 17
   runs with normal filesystem access passed and supersede that diagnostic.
@@ -63,7 +67,8 @@
 | Final architecture review | PASS | The read-only review found no architecture, scope, inheritance, or verification blocker. |
 | Final closure / freeze authorization | PASS | Architect-authorized lesson closure metadata records `COMPLETE / FROZEN / READ-ONLY`. |
 | Documentation reconciliation | PASS | Lesson-local README, status, plan, checklist, and transition guide record the final closure state and preserve historical intermediate state. |
-| Git publication | PENDING | User owns add, commit, and push. |
+| Lesson-local publication metadata reconciliation | PASS | User publication is recorded at `d58bef0`; commit and push passed, and HEAD matches origin/main. |
+| Repository-level lifecycle reconciliation | PENDING | AGENTS.md and root README.md require a separate authorized reconciliation task. |
 
 ## Automated verification commands
 
@@ -133,9 +138,14 @@ AUTOMATED VERIFICATION: PASS
 BUILD: PASS / CLEAN BUILD
 FINAL ARCHITECTURE REVIEW: PASS
 FINAL CLOSURE / FREEZE: PASS
-PUBLICATION: PENDING USER GIT PUBLICATION
+PUBLICATION: PUBLISHED @ d58bef0 / USER VERIFIED
+PUBLICATION COMMIT: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+PUBLICATION SUBJECT: Complete V00_L07 vision timestamp and latency contract
+PUSH: PASS / origin/main / USER VERIFIED
+HEAD == origin/main: PASS
 ~~~
 
-The historical activation state was `IN_PROGRESS / DESIGN LOCKED / EDITABLE`;
-the final lesson content is now `COMPLETE / FROZEN / READ-ONLY`. No Git commit
-or push is claimed.
+The historical activation and pre-publication closure states are preserved in
+the preceding records. The final lesson content is now
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ d58bef0 / USER VERIFIED`.
+Repository-level lifecycle reconciliation remains a separate pending task.

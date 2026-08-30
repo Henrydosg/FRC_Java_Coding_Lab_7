@@ -26,10 +26,15 @@ passed. The current state is:
 V00_L07: COMPLETE / FROZEN / READ-ONLY
 FINAL ARCHITECTURE REVIEW: PASS
 FINAL CLOSURE / FREEZE: PASS
-PUBLICATION: PENDING USER GIT PUBLICATION
+PUBLICATION: PUBLISHED @ d58bef0 / USER VERIFIED
+PUBLICATION COMMIT: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+PUBLICATION SUBJECT: Complete V00_L07 vision timestamp and latency contract
+PUSH: PASS / origin/main / USER VERIFIED
+HEAD == origin/main: PASS
 ```
 
-Publication remains a separate User-owned lifecycle gate and has not occurred.
+The User-owned publication gate has been completed. Repository-level lifecycle
+reconciliation remains a separate pending task.
 
 Authoritative lineage:
 
@@ -45,7 +50,8 @@ V00_L06 @ 1327bf4
 -> full suite and clean build
 -> final read-only architecture review
 -> authorized closure and freeze metadata
--> User-owned Git publication pending
+-> User-owned Git publication @ d58bef0
+-> successful push and HEAD/origin agreement
 ```
 
 ## Step 1 - Confirm the authoritative predecessor
@@ -483,10 +489,9 @@ gates were accepted as PASS. The User supplied Java 17 evidence with exit code
 **Expected Result:** V00_L07 is authorized for closure and freeze, with no
 production, test, predecessor, governance, or future-lesson scope expansion.
 
-## Step 20 - Apply final closure and freeze metadata
+## Step 20 - Apply historical pre-publication closure and freeze metadata
 
-**Objective:** Record the authorized final lesson state without claiming Git
-publication.
+**Objective:** Record the authorized final lesson state before Git publication.
 
 **Why:** The lesson content can be complete and frozen before the User performs
 the separate commit and push operation.
@@ -494,7 +499,8 @@ the separate commit and push operation.
 **Action:** Update only the V00_L07 lesson-local README, status, plan,
 checklist, and this transition guide from the historical active state to
 `COMPLETE / FROZEN / READ-ONLY`. Record Final Architecture Review PASS and
-retain `PENDING USER GIT PUBLICATION` as the publication state.
+retain `PENDING USER GIT PUBLICATION` as the publication state at that
+historical point.
 
 **Files Changed:**
 
@@ -509,7 +515,37 @@ lesson state. No production Java, test Java, V00_L06, governance, A01, or
 other module file is changed. No commit hash or publication claim is added.
 
 **Expected Result:** V00_L07 is a complete frozen read-only lesson awaiting
-User-owned Git publication.
+User-owned Git publication. The later publication is recorded in Step 21.
+
+## Step 21 - Reconcile lesson-local publication metadata
+
+**Objective:** Record the actual User-owned publication without rewriting the
+historical pre-publication chronology.
+
+**Why:** Lesson content was frozen before the publication commit existed; the
+current lesson documents must later identify the real published snapshot.
+
+**Action:** Record the User-confirmed publication commit
+`d58bef0d17d202ce1dd0b8645635a8c35095dd3f` (`d58bef0`) with subject
+`Complete V00_L07 vision timestamp and latency contract`. Record commit PASS,
+push PASS to `origin/main`, and HEAD equal to `origin/main`.
+
+**Files Changed:**
+
+- `README.md`
+- `LESSON_STATUS.md`
+- `LESSON_PLAN.md`
+- `LESSON_CHECKLIST.md`
+- `docs/V00_L06_to_V00_L07_Step_by_Step.md`
+
+**Verification:** User supplied zero unexpected staged files, zero unexpected
+committed files, commit exit code `0`, push exit code `0`, and matching full
+HEAD/origin commit identities. The separate reconciliation commit for these
+metadata edits does not yet exist; no hash is invented for it.
+
+**Expected Result:** The lesson-local records identify V00_L07 as
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ d58bef0 / USER VERIFIED` while
+repository-level lifecycle reconciliation remains pending.
 
 ## Final closure result
 
@@ -524,11 +560,15 @@ FULL TEST SUITE: PASS / 593 TESTS / 0 FAILURES / 0 ERRORS / 0 SKIPPED
 CLEAN BUILD: PASS / BUILD SUCCESSFUL in 22s / 7 ACTIONABLE TASKS EXECUTED / EXIT CODE 0
 FINAL ARCHITECTURE REVIEW: PASS
 FINAL CLOSURE / FREEZE: PASS
-PUBLICATION: PENDING USER GIT PUBLICATION
+PUBLICATION: PUBLISHED @ d58bef0 / USER VERIFIED
+PUBLICATION COMMIT: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+PUBLICATION SUBJECT: Complete V00_L07 vision timestamp and latency contract
+PUSH: PASS / origin/main / USER VERIFIED
+HEAD == origin/main: PASS
 ```
 
 The frozen V00_L06 predecessor remains unchanged. The implementation adds no
 vendor dependency, runtime wiring, telemetry, estimator fusion, or hardware
 behavior. The historical `IN_PROGRESS / DESIGN LOCKED / EDITABLE` state is
-preserved above as lifecycle provenance. User-owned Git publication remains
-pending.
+preserved above as lifecycle provenance. The User-owned V00_L07 publication is
+complete at `d58bef0`; repository-level reconciliation remains pending.

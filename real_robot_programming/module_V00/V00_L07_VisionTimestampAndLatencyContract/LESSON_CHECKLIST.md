@@ -11,8 +11,14 @@ Verification: PASS / FOCUSED, VISION REGRESSION, FULL SUITE, CLEAN BUILD
 Active lesson count: 0
 Final Architecture Review: PASS
 Final Closure / Freeze: PASS
-Publication: NOT YET PUBLISHED
-Git publication: PENDING USER GIT
+Publication: PUBLISHED @ d58bef0 / USER VERIFIED
+Publication commit: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+Publication subject: Complete V00_L07 vision timestamp and latency contract
+Controlled staging: PASS / unexpected staged 0
+Unexpected committed: 0
+Commit: PASS / exit 0
+Push: PASS / exit 0
+HEAD == origin/main: PASS
 
 ## Governance and predecessor
 
@@ -99,7 +105,10 @@ Git publication: PENDING USER GIT
 - [x] Final architecture review.
 - [x] Final closure authorization.
 - [x] Freeze metadata update.
-- [ ] User-owned Git commit and push.
+- [x] User-owned Git commit and push: PASS / exit 0.
+- [x] Publication commit recorded: `d58bef0`.
+- [ ] Separate repository-level lifecycle metadata reconciliation for
+      `AGENTS.md` and the root `README.md`.
 
 ## Protected and deferred scope
 
@@ -125,5 +134,9 @@ FULL TEST SUITE: PASS / 593 TESTS / 0 FAILURES / 0 ERRORS / 0 SKIPPED
 CLEAN BUILD: PASS / BUILD SUCCESSFUL in 22s / 7 ACTIONABLE TASKS EXECUTED / EXIT CODE 0
 FINAL ARCHITECTURE REVIEW: PASS
 FINAL CLOSURE / FREEZE: PASS
-PUBLICATION: PENDING USER GIT PUBLICATION
+PUBLICATION: PUBLISHED @ d58bef0 / USER VERIFIED
+PUBLICATION COMMIT: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+PUBLICATION SUBJECT: Complete V00_L07 vision timestamp and latency contract
+PUSH: PASS / origin/main / USER VERIFIED
+HEAD == origin/main: PASS
 ~~~
