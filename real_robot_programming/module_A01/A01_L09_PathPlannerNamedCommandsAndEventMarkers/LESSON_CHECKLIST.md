@@ -2,7 +2,7 @@
 
 Status: `COMPLETE / FROZEN / READ-ONLY`  
 Parent: `A01_L08 @ 135272c`  
-Git: user-owned; no Git operations were run by Codex
+Git: `PUBLISHED @ 6b243bb / USER VERIFIED`; no Git operations were run by Codex
 
 ## Governance and Inheritance
 
@@ -56,9 +56,11 @@ Git: user-owned; no Git operations were run by Codex
 - [x] Current `compileTestJava PASS`.
 - [x] Focused L09 event, path, routine, integration, observation, and telemetry
       tests `PASS`.
-- [x] 384 unchanged inherited regression tests `PASS`.
-- [x] Full suite `446/446 PASS`.
-- [x] Isolated clean build `PASS`.
+- [x] User-owned Java 17 re-verification on 2026-08-31.
+- [x] `gradlew clean` exited `0`; `BUILD SUCCESSFUL`.
+- [x] `gradlew test --rerun-tasks` exited `0`; `BUILD SUCCESSFUL`.
+- [x] Current full suite `460/460 PASS`; `0` failures, `0` errors, `0` skipped.
+- [x] `gradlew clean build` exited `0`; `BUILD SUCCESSFUL`.
 - [x] Simulation `PASS` for Blue and Red event/path and safety cases.
 - [x] Driver Station / Glass `PASS` for event and preparation telemetry.
 - [x] Real Robot `PASS` for the required Blue and Red cases.
@@ -68,4 +70,4 @@ Git: user-owned; no Git operations were run by Codex
 - [x] Final closure review and approval `PASS`.
 - [x] Complete/freeze lesson after closure approval.
 - [x] Lesson content/state is `COMPLETE / FROZEN / READ-ONLY`.
-- [ ] User Git commit/push; Git publication remains User-owned and pending.
+- [x] User-owned Git commit/push; publication verified at `6b243bb`.

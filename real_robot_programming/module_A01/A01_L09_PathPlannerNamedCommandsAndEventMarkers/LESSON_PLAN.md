@@ -12,7 +12,7 @@
 - Documentation reconciliation: `PASS`.
 - Final architecture review: `PASS`.
 - Final closure review: `PASS`.
-- User Git publication: `PENDING USER COMMIT/PUSH`.
+- User Git publication: `PUBLISHED @ 6b243bb / USER VERIFIED`.
 - Lifecycle: `COMPLETE / FROZEN / READ-ONLY`.
 
 ## Preserved Phase 2A Record
@@ -48,10 +48,10 @@ environment/classpath hold stopped the remaining automated gates. That
 checkpoint is preserved in the Phase 2B implementation record and is not the
 current lesson result.
 
-Current automated verification: `compileJava PASS`, `compileTestJava PASS`,
-focused event/path/routine/integration tests `PASS`, 384 unchanged inherited
-regression tests `PASS`, full suite `446/446 PASS`, and isolated clean build
-`PASS`.
+Current automated verification was rerun by the User on 2026-08-31 under Java
+17. `gradlew clean`, `gradlew test --rerun-tasks`, and `gradlew clean build`
+all exited `0` with `BUILD SUCCESSFUL`. The final JUnit XML summary records
+`460/460 PASS`, `0` failures, `0` errors, and `0` skipped.
 
 Simulation: `PASS` for Blue and Red event/path execution, telemetry,
 coexistence, mode-loss stop, no automatic restart, and Teleop recovery.
@@ -70,5 +70,5 @@ historical fixture/environment records.
 
 The technical gates, transition guide, documentation reconciliation, final
 architecture review, and final closure review all pass. A01_L09 is now
-`COMPLETE / FROZEN / READ-ONLY`. Git publication remains pending User commit/push
-and is not claimed complete here.
+`COMPLETE / FROZEN / READ-ONLY`. User-owned Git publication is complete at
+`6b243bb` (`Complete reconstructed A01_L09 named commands and event markers`).

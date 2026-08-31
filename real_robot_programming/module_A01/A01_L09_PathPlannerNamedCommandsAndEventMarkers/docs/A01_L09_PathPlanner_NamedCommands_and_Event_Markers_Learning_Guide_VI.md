@@ -5,8 +5,8 @@
 > tất và đã được xác minh kỹ thuật.
 
 Trạng thái nội dung/state hiện tại: `COMPLETE / FROZEN / READ-ONLY` sau khi
-final architecture review và final closure review PASS. Git publication vẫn
-chờ User commit/push và chưa được tuyên bố hoàn tất.
+final architecture review và final closure review PASS. Git publication do
+User sở hữu đã hoàn tất tại `6b243bb`.
 
 ## 1. Mục tiêu học tập
 
@@ -127,13 +127,13 @@ không thay thế hoặc bỏ qua quyền sở hữu này.
 
 ## 9. Bằng chứng xác minh cuối cùng
 
-Bằng chứng tự động:
+Bằng chứng tự động của snapshot hiện tại do User cung cấp ngày 2026-08-31:
 
-- compileJava PASS;
-- compileTestJava PASS;
+- Java 17 `gradlew clean` PASS;
+- Java 17 `gradlew test --rerun-tasks` PASS;
 - focused event, path, routine và integration tests PASS;
-- 384 inherited regression tests không thay đổi PASS; và
-- full suite 446/446 PASS cùng isolated clean build PASS.
+- JUnit XML `460/460 PASS`, với 0 failures, 0 errors và 0 skipped; và
+- Java 17 `gradlew clean build` PASS.
 
 Bằng chứng runtime do User sở hữu:
 
@@ -154,7 +154,7 @@ PID/feedforward cuối cùng, physical characterization cuối cùng, mức sẵ
 thi đấu hoặc hành vi mechanism thật. D01 vẫn là project Tank Drive độc lập và
 không có mechanism contract D01 nào được đưa vào A01.
 
-A01_L09 là `COMPLETE / FROZEN / READ-ONLY` sau khi final closure được phê
-duyệt. Git publication vẫn chờ User commit/push. Đây là ranh giới lesson cuối
-được phê duyệt của A01; chưa có A01_L10 hoặc lesson/module tiếp theo nào được
-tạo hay bắt đầu.
+A01_L09 là `COMPLETE / FROZEN / READ-ONLY / PUBLISHED` sau khi final closure
+được phê duyệt. User-owned publication đã hoàn tất tại `6b243bb`. Đây là ranh
+giới lesson cuối được phê duyệt của A01; chưa có A01_L10 nào được tạo hay bắt
+đầu.

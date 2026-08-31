@@ -73,13 +73,15 @@ preserved in the Phase 2B implementation record and is not the current result.
 
 - Architecture Review: `PASS`.
 - Baseline Build: `PASS` by Phase 2A user-authoritative evidence.
-- Build: `PASS` - `compileJava`, `compileTestJava`, and isolated clean build.
+- Build: `PASS` - User-owned Java 17 re-verification on 2026-08-31 passed
+  `gradlew clean`, `gradlew test --rerun-tasks`, and `gradlew clean build`.
 - `compileJava`: `PASS` under the WPILib Java 17 runtime.
 - `compileTestJava`: `PASS`.
 - Focused L09 event, path, routine, integration, observation, and telemetry
   tests: `PASS`.
 - Inherited safety regressions: `PASS`.
-- Full test suite: `446/446 PASS`.
+- Current full test suite: `460/460 PASS` - JUnit XML records `0` failures,
+  `0` errors, and `0` skipped.
 - Simulation: `PASS` for Blue and Red event/path behavior, telemetry,
   coexistence, mode-loss stop, no automatic restart, and Teleop recovery.
 - Driver Station / Glass: `PASS` for `/AutonomousEvent` and
@@ -97,12 +99,14 @@ preserved in the Phase 2B implementation record and is not the current result.
 - Documentation reconciliation: `PASS`.
 - Final Architecture Review: `PASS`.
 - Final Closure Review: `PASS`.
-- Git Commit: `PENDING - USER OWNED`.
-- Git Push: `PENDING - USER OWNED`.
+- Git Commit: `PASS / USER-PUBLISHED @ 6b243bb` - `Complete reconstructed
+  A01_L09 named commands and event markers`.
+- Git Push: `PASS / USER-VERIFIED` - repository publication metadata and the
+  remote-main reflog record publication of `6b243bb`.
 
 ## Known Issues
 
 - Exact endpoint accuracy, final PID/feedforward tuning, and final physical
   characterization remain explicitly unclaimed.
 - A01_L09 is `COMPLETE / FROZEN / READ-ONLY` after final closure review PASS.
-  Git publication remains pending User commit/push and is not claimed complete.
+  Git publication is complete at `6b243bb` by User-owned commit/push.

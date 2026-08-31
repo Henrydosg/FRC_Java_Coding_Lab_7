@@ -5,8 +5,8 @@
 > implementation is complete and technically verified.
 
 Current lesson content/state: `COMPLETE / FROZEN / READ-ONLY` after final
-architecture and closure review PASS. Git publication remains pending User
-commit/push and is not claimed complete here.
+architecture and closure review PASS. User-owned Git publication is complete at
+`6b243bb`.
 
 ## 1. Learning Objective
 
@@ -127,13 +127,13 @@ Drivetrain terminal behavior remains centralized in
 
 ## 9. Final Verification Evidence
 
-Automated evidence:
+Current-snapshot automated evidence supplied by the User on 2026-08-31:
 
-- compileJava PASS;
-- compileTestJava PASS;
+- Java 17 `gradlew clean` PASS;
+- Java 17 `gradlew test --rerun-tasks` PASS;
 - focused event, path, routine, and integration tests PASS;
-- 384 unchanged inherited regression tests PASS; and
-- full suite 446/446 PASS with an isolated clean build PASS.
+- JUnit XML `460/460 PASS`, with 0 failures, 0 errors, and 0 skipped; and
+- Java 17 `gradlew clean build` PASS.
 
 User-owned runtime evidence:
 
@@ -154,6 +154,6 @@ PID/feedforward tuning, final physical characterization, competition readiness,
 or real mechanism behavior. D01 remains an independent Tank Drive project and
 no D01 mechanism contract is imported into A01.
 
-A01_L09 is `COMPLETE / FROZEN / READ-ONLY` after final closure approval. Git
-publication remains pending User commit/push. It is the approved final lesson
-boundary of A01; no A01_L10 or next lesson/module has been created or started.
+A01_L09 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED` after final closure
+approval. User-owned publication is complete at `6b243bb`. It is the approved
+final lesson boundary of A01; no A01_L10 has been created or started.

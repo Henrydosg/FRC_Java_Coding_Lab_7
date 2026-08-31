@@ -13,7 +13,7 @@
 - Documentation reconciliation: `PASS`.
 - Final Architecture Review: `PASS`.
 - Final Closure Review: `PASS`.
-- Git publication: `PENDING USER COMMIT/PUSH`.
+- Git publication: `PUBLISHED @ 6b243bb / USER VERIFIED`.
 - Lesson Content/State: `COMPLETE / FROZEN / READ-ONLY`.
 
 ## Scope
@@ -61,15 +61,16 @@ record as an intermediate result. It was resolved by the later authoritative
 verification evidence; no production repair or build-configuration workaround
 was required for the L09 event feature.
 
-Current technical verification is PASS:
+Current technical verification is PASS. User-owned re-verification of the
+present snapshot on 2026-08-31 recorded:
 
-- `compileJava`: PASS.
-- `compileTestJava`: PASS.
+- Java 17 `gradlew clean`: PASS; `BUILD SUCCESSFUL`.
+- Java 17 `gradlew test --rerun-tasks`: PASS; `BUILD SUCCESSFUL`.
+- JUnit XML: `460` tests, `0` failures, `0` errors, `0` skipped.
+- Java 17 `gradlew clean build`: PASS; `BUILD SUCCESSFUL`.
 - Focused L09 event, path, routine, integration, observation, and telemetry
   tests: PASS.
-- 384 unchanged inherited regression tests: PASS.
-- Full suite: `446/446 PASS`.
-- Isolated clean build: PASS.
+- Current full snapshot suite: `460/460 PASS`.
 - Simulation: PASS for Blue and Red event/path, telemetry, coexistence,
   mode-loss stop, no automatic restart, and Teleop recovery.
 - Driver Station / Glass: PASS for `/AutonomousEvent` and
@@ -88,5 +89,6 @@ and clean build `PASS` for the reconstructed final-L08 baseline.
 - A01_L08 remains `COMPLETE / FROZEN / READ-ONLY`.
 - A01_L09 is `COMPLETE / FROZEN / READ-ONLY` after final closure review PASS.
 - V00_L02 remains `SUSPENDED / READ-ONLY / UNMODIFIED`.
-- Git/GitHub remains user-owned; publication is pending User commit/push and
-  Codex ran no Git operations.
+- Git/GitHub remains user-owned. Publication is complete at `6b243bb`
+  (`Complete reconstructed A01_L09 named commands and event markers`); Codex
+  ran no Git operations for this reconciliation.

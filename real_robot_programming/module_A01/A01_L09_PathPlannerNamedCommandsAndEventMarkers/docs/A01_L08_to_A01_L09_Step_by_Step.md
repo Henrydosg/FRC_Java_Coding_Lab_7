@@ -20,9 +20,8 @@ README, the approved A01 roadmap ADR, the approved A01_L08 reopen ADR, and the
 user-authoritative final verification report. Earlier Phase 2B records preserve
 the historical verification-hold checkpoint; the current lesson records now
 identify the final PASS evidence, documentation reconciliation, and final
-closure decision. A01_L09 is `COMPLETE / FROZEN / READ-ONLY`; Git publication
-remains pending User commit/push. Codex did not run Git; Git history and
-publication remain User-owned.
+closure decision. A01_L09 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED` at
+`6b243bb`. Publication was performed by the User; Codex did not run Git.
 
 The authoritative English governance documents reviewed were:
 
@@ -389,16 +388,18 @@ full tests, and a clean build before Simulation and hardware verification.
 - `compileTestJava`: PASS.
 - focused L09 event, path, routine, integration, observation, and telemetry
   tests: PASS.
-- full test suite: PASS. The repository closure summary records 446/446 for
-  L09, including 384 unchanged inherited regression tests.
+- historical full-suite statement: the repository closure summary recorded
+  `446/446 PASS`, including 384 unchanged inherited regression tests.
 - clean Gradle build: PASS; `BUILD SUCCESSFUL`.
 
 **Files Changed:** Test fixtures only, as described in Step 11. No production
 repair was required.
 
-**Verification:** The final verification report and repository closure summary
-provide the PASS evidence. The A01_L08 re-freeze count of 449/449 is a separate
-L08 evidence record and must not be confused with the L09 446/446 suite.
+**Verification:** The `446/446` statement is retained as the historical closure
+record. A later reverse audit proved that it did not describe the present
+source/test snapshot. It is superseded for current-snapshot verification by
+the User-owned 2026-08-31 `460/460 PASS` rerun recorded below. The A01_L08
+re-freeze count of 449/449 remains a separate L08 evidence record.
 
 **Expected Result:** Automated verification proves the L09 event boundary and
 the inherited L08 safety regression without a production safety change.
@@ -597,15 +598,46 @@ PathPlanner assets, V00_L02, or frozen predecessor file was changed by this
 documentation task.
 
 **Verification:** Transition Guide: `FINAL / PASS` based on the authoritative
-PASS evidence recorded in Steps 12-15. Automated verification, Simulation,
-Driver Station / Glass, Real Robot, and documentation reconciliation gates are
-all recorded as PASS. Git commit and push remain `USER OWNED / NOT TESTED` by
-Codex.
+PASS evidence recorded in Steps 12-15 and the later current-snapshot
+re-verification below. Automated verification, Simulation, Driver Station /
+Glass, Real Robot, and documentation reconciliation gates are all recorded as
+PASS. The User later completed publication at `6b243bb`; Codex did not perform
+Git operations.
 
 **Expected Result:** A01_L09 is documentation-complete, technically verified,
 and `COMPLETE / FROZEN / READ-ONLY` after the final Architect/Reviewer decision.
-User-owned Git publication remains pending; this guide does not claim that Git
-publication is complete.
+User-owned Git publication is complete at `6b243bb`.
+
+## Post-closure current-snapshot re-verification - 2026-08-31
+
+**Objective:** Reconcile the historical test-count statement with the present
+frozen lesson snapshot without changing source or architecture.
+
+**Why:** A reverse inheritance audit found that the historical `446/446`
+statement could not describe the current source/test tree. Static analysis
+predicted 460 JUnit invocations, so a fresh execution was required before the
+documentation could make a current-snapshot claim.
+
+**Action:** The User independently ran the current A01_L09 snapshot under Java
+17:
+
+- `gradlew clean` - exit `0`, `BUILD SUCCESSFUL`;
+- `gradlew test --rerun-tasks` - exit `0`, `BUILD SUCCESSFUL`;
+- JUnit XML - `460` tests, `0` failures, `0` errors, `0` skipped; and
+- `gradlew clean build` - exit `0`, `BUILD SUCCESSFUL`.
+
+**Files Changed:** Documentation/metadata only. Production Java, test Java,
+Gradle, vendordeps, PathPlanner assets, V00, and frozen predecessor files were
+not changed.
+
+**Verification:** `A01_L09 RE-VERIFICATION: PASS`; current full snapshot suite
+`460/460 PASS`. Repository governance and raw commit/push reflogs independently
+identify User publication commit `6b243bb5995bd880ea5b2d245e575067d3b8152a`,
+subject `Complete reconstructed A01_L09 named commands and event markers`.
+
+**Expected Result:** The chronology preserves the historical `446/446`
+statement while making `460/460 PASS` the sole current-snapshot verification
+claim. A01_L09 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED`.
 
 ## Final evidence summary
 
@@ -617,12 +649,13 @@ publication is complete.
 | Path asset | PASS | One unchanged L09 event path with `LEARNING_EVENT` at relative position `0.5`. |
 | Initial failures | Diagnosed | Nine failures were test-fixture defects: four DriverStationSim mode fixtures and five static NamedCommands contamination cases. |
 | Production repair for those failures | NONE | Authorized repair was test-only; the duplicate-registration guard remains. |
-| Automated verification | PASS | `compileJava`, `compileTestJava`, focused tests, full suite, and clean build. |
+| Historical automated record | SUPERSEDED | The closure-era `446/446` statement is retained as history and is not a current-snapshot claim. |
+| Current automated verification | PASS | User rerun on 2026-08-31: `460/460`, 0 failures/errors/skips; rerun-tasks and clean build PASS. |
 | Simulation | PASS | User-verified Blue/Red event/path, telemetry, safety, mode-loss, and no-restart behavior. |
 | Driver Station / Glass | PASS | User-verified `/AutonomousEvent` and `/AutonomousPreparation` inspection. |
 | Real Robot | PASS | User-verified SAFE_STOP, baseline, Blue/Red event paths, HOLDING, recovery, marker preservation, and coexistence. |
 | Documentation reconciliation | PASS | Current L09 records agree on technical PASS and the final `COMPLETE / FROZEN / READ-ONLY` lesson state. |
-| Git | USER OWNED | Codex did not run add, commit, or push. |
+| Git | PUBLISHED | User-owned publication complete at `6b243bb`; Codex did not run Git. |
 
 The accepted scope does not claim exact endpoint accuracy, final PID/feedforward
 tuning, final physical characterization, competition readiness, or new D01

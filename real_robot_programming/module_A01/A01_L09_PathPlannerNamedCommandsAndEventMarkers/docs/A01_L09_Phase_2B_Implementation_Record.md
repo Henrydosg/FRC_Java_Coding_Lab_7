@@ -59,11 +59,14 @@ remaining focused tests, inherited regressions, full suite, clean build, and
 user-owned runtime gates were not claimed at that intermediate checkpoint.
 This record is preserved as history and is not the current lesson result.
 
-## Final Verification Record
+## Historical Closure Verification Record
 
-The later authoritative evidence passed `compileJava`, `compileTestJava`, the
+The closure-era documentation recorded `compileJava`, `compileTestJava`, the
 focused L09 event/path/routine/integration tests, 384 unchanged inherited
-regression tests, the full `446/446` suite, and an isolated clean build.
+regression tests, the full `446/446` suite, and an isolated clean build as
+PASS. This statement is retained as historical evidence. A later reverse audit
+proved that `446/446` did not describe the present source/test snapshot, so it
+is not the current verification count.
 
 User-owned runtime evidence also passed Simulation, Driver Station / Glass,
 and Real Robot verification for SAFE_STOP, `ONE_METER_PATH`,
@@ -71,9 +74,22 @@ and Real Robot verification for SAFE_STOP, `ONE_METER_PATH`,
 restart, Disabled-to-Teleop recovery, marker preservation, event/path
 coexistence, and both Blue and Red alliances.
 
+## Current-Snapshot Re-verification - 2026-08-31
+
+The User independently reran the present A01_L09 snapshot under Java 17:
+
+- `gradlew clean`: exit `0`, `BUILD SUCCESSFUL`;
+- `gradlew test --rerun-tasks`: exit `0`, `BUILD SUCCESSFUL`;
+- final JUnit XML: `460` tests, `0` failures, `0` errors, `0` skipped; and
+- `gradlew clean build`: exit `0`, `BUILD SUCCESSFUL`.
+
+Therefore `A01_L09 RE-VERIFICATION: PASS`, and `460/460 PASS` supersedes the
+historical `446/446` statement for the current snapshot. No production source,
+test source, build configuration, dependency, or asset repair was required.
+
 ## Final Closure Gate
 
 Technical verification, documentation reconciliation, the transition guide,
 final architecture review, and final closure review are PASS. A01_L09 is now
-`COMPLETE / FROZEN / READ-ONLY`. Git publication remains pending User commit/push
-and is not claimed complete here.
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED`. User-owned publication is verified
+at `6b243bb` (`Complete reconstructed A01_L09 named commands and event markers`).
