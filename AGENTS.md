@@ -646,8 +646,7 @@ tuning/calibration, or issue resolution is claimed. Under the explicit
 Architect/User disposition it does not block the Vision curriculum closure
 sequence. The final read-only closure review passed and the Architect/User
 authorized re-freeze. V00_L07 is now `COMPLETE / FROZEN / READ-ONLY`; the
-corrected repair publication remains `PENDING USER PUBLICATION`. V00_L08 is the
-next roadmap
+corrected repair publication is now `PUBLISHED @ 4704cfc`; V00_L08 is the next roadmap
 lesson but remains `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT
 PUBLISHED / NON-AUTHORITATIVE / READ-ONLY` and must not be activated or
 modified before the separately governed reconstruction workflow. V00_L09
@@ -1340,11 +1339,25 @@ Teleop and Autonomous usability remain User-verified. The BL quantitative
 drivetrain anomaly remains `KNOWN / DEFERRED HARDWARE MAINTENANCE`; no BL PASS,
 quantitative drivetrain PASS, matched-module result, completed tuning or
 calibration, or issue resolution is claimed. Historical `d58bef0` remains the
-pre-repair V00_L07 publication only. The corrected repair publication does not
-yet exist and remains `PENDING USER PUBLICATION`. No V00 lesson is active;
+pre-repair V00_L07 publication only. The corrected repair publication is
+`PUBLISHED @ 4704cfc0801910e30c8abb7cffcc467e4f4df016` with subject
+`Complete corrected V00_L07 Swerve integrity repair`; User commit and push are
+verified, and HEAD equals origin/main at that commit. No V00 lesson is active;
 V00_L08 remains unactivated, non-authoritative, read-only, stale pre-repair
-inheritance and untouched pending a separately authorized reconstruction after
-corrected V00_L07 publication.
+inheritance and untouched. V00_L09 remains not started.
+
+### V00_L07 Corrected Publication-Metadata Reconciliation — 2026-09-07
+
+The User performed the authorized exact-allowlist publication. The corrected
+post-repair V00_L07 publication is `PUBLISHED / USER VERIFIED` at
+`4704cfc0801910e30c8abb7cffcc467e4f4df016`, with subject
+`Complete corrected V00_L07 Swerve integrity repair`. HEAD and origin/main both
+resolve to that commit. The earlier `d58bef0d17d202ce1dd0b8645635a8c35095dd3f`
+publication remains preserved as historical pre-repair provenance.
+
+V00_L07 remains `COMPLETE / FROZEN / READ-ONLY`. V00_L08 remains untouched and
+unactivated; its fresh reconstruction is a separate governed action. V00_L09
+remains not started. This reconciliation changes documentation metadata only.
 
 ---
 
@@ -1411,3 +1424,4 @@ Only report verified facts.
 | 1.31 | 2026-08-31 | FROZEN | APPROVED: record the documentation-only exceptional V00_L07 reopen for exactly R1/R2/R3; V00_L07 is the sole `REOPENED / IN_PROGRESS / EDITABLE` lesson, implementation remains unauthorized, V00_L08 remains unactivated, and the original `d58bef0` publication remains historical. |
 | 1.32 | 2026-09-07 | FROZEN | APPROVED: reconcile later User-verified Teleop/Autonomous usability, retain the unresolved BL quantitative anomaly as `KNOWN / DEFERRED HARDWARE MAINTENANCE` without a quantitative drivetrain PASS claim, and record V00_L07 as closure-ready while it remains `REOPENED / IN_PROGRESS / EDITABLE` pending final read-only closure review, explicit re-freeze approval, and User-owned corrected repair publication; V00_L08 remains untouched and unactivated. |
 | 1.33 | 2026-09-07 | FROZEN | APPROVED: record final V00_L07 closure review PASS and re-freeze the repaired lesson as `COMPLETE / FROZEN / READ-ONLY`; retain historical `d58bef0` as pre-repair provenance, keep corrected publication `PENDING USER PUBLICATION`, record no active V00 lesson, and leave stale unactivated V00_L08 untouched. |
+| 1.34 | 2026-09-07 | FROZEN | APPROVED: reconcile User-confirmed corrected V00_L07 publication at `4704cfc`; retain historical `d58bef0`, record `COMPLETE / FROZEN / READ-ONLY / PUBLISHED`, verify HEAD == origin/main, and leave V00_L08 untouched and unactivated. |

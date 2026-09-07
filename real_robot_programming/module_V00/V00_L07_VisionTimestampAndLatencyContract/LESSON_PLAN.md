@@ -17,11 +17,13 @@
 - **Post-Implementation Architecture Review:** PASS / READ-ONLY R1/R2/R3 REVIEW
 - **Documentation:** PASS / FINAL RE-FREEZE METADATA RECONCILED
 - **Final closure:** PASS / AUTHORIZED COMPLETE AND FROZEN
-- **Publication:** HISTORICAL PRE-REPAIR BASELINE @ d58bef0 / CORRECTED REPAIR PUBLICATION PENDING USER PUBLICATION
-- **Publication commit:** HISTORICAL d58bef0d17d202ce1dd0b8645635a8c35095dd3f
-- **Publication subject:** HISTORICAL: Complete V00_L07 vision timestamp and latency contract
-- **Git publication:** HISTORICAL BASELINE PASS / CORRECTED REPAIR PENDING USER PUBLICATION
-- **HEAD == origin/main:** HISTORICAL BASELINE ONLY / CURRENT REPAIR NOT PUBLISHED
+- **Publication:** HISTORICAL PRE-REPAIR BASELINE @ d58bef0 / CORRECTED REPAIR PUBLISHED @ 4704cfc / USER VERIFIED
+- **Historical publication commit:** d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+- **Historical publication subject:** HISTORICAL: Complete V00_L07 vision timestamp and latency contract
+- **Corrected publication commit:** 4704cfc0801910e30c8abb7cffcc467e4f4df016
+- **Corrected publication subject:** Complete corrected V00_L07 Swerve integrity repair
+- **Git publication:** HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / USER VERIFIED
+- **HEAD == origin/main:** PASS / 4704cfc0801910e30c8abb7cffcc467e4f4df016 / USER VERIFIED
 
 ## Exceptional inherited Swerve integrity repair cycle (current)
 
@@ -69,8 +71,9 @@ The required sequence is:
 
 The repaired lesson passed final read-only closure review, received explicit
 Architect/User re-freeze authorization, and is now `COMPLETE / FROZEN /
-READ-ONLY`. Corrected publication remains pending User commit and push. The
-independent V00_L08 Limelight physical-evidence HOLD remains unchanged.
+READ-ONLY / PUBLISHED @ 4704cfc`. Corrected publication is User-verified at
+`4704cfc0801910e30c8abb7cffcc467e4f4df016`. The independent V00_L08
+Limelight physical-evidence HOLD remains unchanged.
 
 ## Current repair verification and final closure state
 
@@ -312,7 +315,10 @@ BL QUANTITATIVE ANOMALY: KNOWN / DEFERRED HARDWARE MAINTENANCE
 QUANTITATIVE DRIVETRAIN PASS: NOT CLAIMED
 FINAL READ-ONLY CLOSURE REVIEW: PASS
 RE-FREEZE: PASS / EXPLICIT ARCHITECT/USER AUTHORIZATION
-REPAIR PUBLICATION: PENDING USER PUBLICATION
+REPAIR PUBLICATION: PUBLISHED @ 4704cfc / USER VERIFIED
+REPAIR PUBLICATION COMMIT: 4704cfc0801910e30c8abb7cffcc467e4f4df016
+REPAIR PUBLICATION SUBJECT: Complete corrected V00_L07 Swerve integrity repair
+HEAD == origin/main: PASS / USER VERIFIED
 ~~~
 
 The original timing lesson closure and publication at `d58bef0` remain
@@ -322,5 +328,5 @@ maintenance classification are reconciled. The repaired lesson passed final
 read-only closure review, received explicit Architect/User re-freeze
 authorization, and is `COMPLETE / FROZEN / READ-ONLY`.
 V00_L08 remains protected and will require a fresh reconstruction from the
-later corrected V00_L07 publication. This documentation reconciliation changes
-no production or test implementation.
+published corrected V00_L07. This documentation reconciliation changes no
+production or test implementation.

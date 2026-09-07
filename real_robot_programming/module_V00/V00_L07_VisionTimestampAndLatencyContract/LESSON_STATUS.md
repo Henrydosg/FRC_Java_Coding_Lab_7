@@ -28,13 +28,15 @@
 - **Final Architecture Review:** PASS / FINAL READ-ONLY CLOSURE REVIEW
 - **Documentation:** PASS / FINAL RE-FREEZE METADATA RECONCILED
 - **Closure:** PASS / AUTHORIZED COMPLETE AND FROZEN
-- **Publication:** HISTORICAL PRE-REPAIR BASELINE @ d58bef0 / CORRECTED REPAIR PUBLICATION PENDING USER PUBLICATION
-- **Publication Commit:** HISTORICAL d58bef0d17d202ce1dd0b8645635a8c35095dd3f
-- **Publication Subject:** HISTORICAL: Complete V00_L07 vision timestamp and latency contract
-- **Git Commit:** HISTORICAL BASELINE PASS / CORRECTED REPAIR PENDING USER COMMIT
-- **Git Push:** HISTORICAL BASELINE PASS / CORRECTED REPAIR PENDING USER PUSH
-- **Current Repository HEAD:** `a1c3b9f4be0a706812156a8dda36a78c67db22db` (`Reconcile A01_L09 verification and publication metadata`)
-- **Current Repository origin/main:** `a1c3b9f4be0a706812156a8dda36a78c67db22db` / CURRENT V00_L07 REPAIR NOT PUBLISHED
+- **Publication:** HISTORICAL PRE-REPAIR BASELINE @ d58bef0 / CORRECTED REPAIR PUBLISHED @ 4704cfc / USER VERIFIED
+- **Historical Publication Commit:** d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+- **Historical Publication Subject:** HISTORICAL: Complete V00_L07 vision timestamp and latency contract
+- **Git Commit:** HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / USER VERIFIED
+- **Git Push:** HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / origin/main / USER VERIFIED
+- **Corrected Publication Commit:** 4704cfc0801910e30c8abb7cffcc467e4f4df016
+- **Corrected Publication Subject:** Complete corrected V00_L07 Swerve integrity repair
+- **Current Repository HEAD:** `4704cfc0801910e30c8abb7cffcc467e4f4df016` (`Complete corrected V00_L07 Swerve integrity repair`)
+- **Current Repository origin/main:** `4704cfc0801910e30c8abb7cffcc467e4f4df016` / CORRECTED V00_L07 REPAIR PUBLISHED
 - **Known Issues:** BL QUANTITATIVE DRIVETRAIN ANOMALY — KNOWN / DEFERRED
   HARDWARE MAINTENANCE. It is not a quantitative drivetrain PASS, is not
   resolved, and does not block this Vision-curriculum closure sequence under
@@ -88,7 +90,7 @@ Limelight physical-evidence HOLD remains unresolved and outside this reopen.
 | Pre-closure documentation reconciliation | PASS | Later User hardware evidence and the deferred BL condition are reconciled without rewriting historical records. |
 | Final read-only closure review | PASS | The independent final review returned `READY_FOR_EXPLICIT_L07_REFREEZE_AUTHORIZATION`. |
 | Re-freeze | PASS | Explicit Architect/User authorization records `COMPLETE / FROZEN / READ-ONLY`. |
-| Repair publication | PENDING USER PUBLICATION | Re-freeze is complete; no corrected publication hash exists yet. |
+| Repair publication | PASS / PUBLISHED / USER VERIFIED | Corrected publication is `4704cfc0801910e30c8abb7cffcc467e4f4df016`; HEAD equals origin/main. |
 | Fresh V00_L08 reconstruction | PENDING | Starts only after corrected V00_L07 is published. |
 
 ## Post-Repair Verification and Hardware-Evidence State
@@ -149,8 +151,8 @@ validation, or PathPlanner validation is included in this repair.
 
 The final read-only closure review passed and explicit Architect/User re-freeze
 authorization was granted. The lesson is therefore `COMPLETE / FROZEN /
-READ-ONLY`. Corrected repair publication remains User-owned and pending; no
-corrected publication hash is claimed.
+READ-ONLY / PUBLISHED`. Corrected repair publication is User-verified at
+`4704cfc0801910e30c8abb7cffcc467e4f4df016`.
 
 ## Historical Original V00_L07 Lifecycle Gates (Preserved)
 
@@ -262,5 +264,5 @@ the preceding records. The `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @
 d58bef0 / USER VERIFIED` statement applies only to the historical pre-repair
 snapshot. The repaired lesson passed final read-only closure review, received
 explicit Architect/User re-freeze authorization, and is now `COMPLETE / FROZEN
-/ READ-ONLY`. Its corrected repair publication remains pending User commit and
-push.
+/ READ-ONLY / PUBLISHED @ 4704cfc`. Its corrected repair publication is
+User-verified at `4704cfc0801910e30c8abb7cffcc467e4f4df016`.

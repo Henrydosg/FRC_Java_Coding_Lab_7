@@ -4,7 +4,7 @@
 - Date: `2026-08-31`
 - Decision owners: Architect and User
 - Implementation at ADR issuance: `NOT AUTHORIZED` (historical)
-- Current repair disposition: `R1/R2/R3 COMPLETE; FINAL CLOSURE REVIEW PASS; COMPLETE / FROZEN / READ-ONLY; CORRECTED PUBLICATION PENDING USER`
+- Current repair disposition: `R1/R2/R3 COMPLETE; FINAL CLOSURE REVIEW PASS; COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 4704cfc; USER VERIFIED`
 - Change type: exceptional inherited-defect repair lifecycle
 
 ## 1. Status
@@ -323,9 +323,10 @@ PASS, completed tuning, completed calibration, or issue resolution is claimed.
 
 The publication at `d58bef0d17d202ce1dd0b8645635a8c35095dd3f` with subject
 `Complete V00_L07 vision timestamp and latency contract` remains historical
-pre-repair evidence only. Corrected repair publication is `PENDING USER
-PUBLICATION`; no corrected publication hash is claimed before the User commits
-and pushes it.
+pre-repair evidence only. The corrected repair publication is
+`PUBLISHED / USER VERIFIED` at
+`4704cfc0801910e30c8abb7cffcc467e4f4df016` with subject `Complete corrected
+V00_L07 Swerve integrity repair`; HEAD equals origin/main at that commit.
 
 V00_L08 remains not started, unactivated, non-authoritative, read-only, and
 untouched. Reconstructing it from the corrected published V00_L07 remains a

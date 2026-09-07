@@ -4,15 +4,15 @@
 
 - **Lesson:** V00_L07 - Vision Timestamp and Latency Contract
 - **Record type:** Current exceptional-repair transition guide
-- **State:** `FINAL / RE-FROZEN / PUBLICATION PENDING`
+- **State:** `FINAL / RE-FROZEN / PUBLISHED`
 - **Implementation:** `COMPLETE / AUTHORIZED R1/R2/R3 BOUNDARY`
 - **Authoritative pre-repair publication:** `d58bef0`
 - **Current lesson state:** `COMPLETE / FROZEN / READ-ONLY`
 - **Scope:** R1/R2/R3 only
 
 This guide explains why V00_L07 was selected as the controlled repair point,
-how the repair was derived from the published V00_L07 snapshot, and what
-remains before corrected publication. It is a student-facing lifecycle record. The original
+how the repair was derived from the published V00_L07 snapshot, and how the
+corrected publication was reconciled. It is a student-facing lifecycle record. The original
 V00_L07 timing lesson remains valid; the reopen addressed inherited Swerve
 architecture and integrity findings in the descendant snapshot.
 
@@ -221,20 +221,20 @@ hardware usability must not be overstated as quantitative drivetrain proof.
    quantitative drivetrain PASS or issue resolution is claimed.
 10. The pre-closure documentation reconciliation, final read-only closure
     review, and explicit Architect/User re-freeze authorization are complete.
-11. User-owned corrected repair publication remains pending.
+11. The User then completed the corrected repair publication at
+    `4704cfc0801910e30c8abb7cffcc467e4f4df016`.
 
 **Files Changed:** The implementation and test files were changed only under
-the separate explicit authorization. This guide records their result; Git
-publication remains User-owned and pending.
+the separate explicit authorization. This guide records their result; the User
+owned and completed the Git publication.
 
-**Verification:** Items 1 through 10 are complete for the reopened cycle. Item
-11 remains pending User publication. The
+**Verification:** Items 1 through 11 are complete for the reopened cycle. The
 593-test baseline is pre-repair evidence for this cycle, while the 600-test
 result and clean build are post-repair evidence. Teleop and Autonomous usability
 are User-verified. This does not establish quantitative drivetrain PASS.
 
-**Expected Result:** V00_L07 is `COMPLETE / FROZEN / READ-ONLY`; corrected
-publication remains pending User commit and push.
+**Expected Result:** V00_L07 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED` at
+the corrected User publication identity.
 
 ## Step 7 — Re-freeze and publish the corrected lesson
 
@@ -244,18 +244,20 @@ frozen state.
 **Why:** Implementation completion alone does not close an exceptional reopen.
 
 **Action:** The final read-only closure review passed and explicit
-Architect/User re-freeze authorization was recorded. The User now owns the
-add/commit/push operation and supplies the new repair publication identity. Do
-not claim the new publication before the User confirms it.
+Architect/User re-freeze authorization was recorded. The User then performed
+the exact-allowlist add/commit/push operation and supplied the corrected
+publication identity. The repository commit and origin/main ref were verified
+directly before this reconciliation.
 
 **Files Changed:** Final lifecycle metadata only; Git publication is
 User-owned.
 
-**Verification:** Current result is `COMPLETE / FROZEN / READ-ONLY`; no repaired
-publication identity has been created or claimed.
+**Verification:** Current result is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @
+4704cfc / USER VERIFIED`; the corrected publication identity is
+`4704cfc0801910e30c8abb7cffcc467e4f4df016`.
 
-**Expected Result:** V00_L07 remains `COMPLETE / FROZEN / READ-ONLY` while the
-corrected repair publication remains pending User commit and push.
+**Expected Result:** V00_L07 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED`
+with the corrected User publication identity recorded.
 
 ### Current hardware evidence and deferred maintenance
 
@@ -316,5 +318,8 @@ BL QUANTITATIVE ANOMALY: KNOWN / DEFERRED HARDWARE MAINTENANCE
 QUANTITATIVE DRIVETRAIN PASS: NOT CLAIMED
 FINAL READ-ONLY CLOSURE REVIEW: PASS
 RE-FREEZE: PASS / EXPLICIT ARCHITECT/USER AUTHORIZATION
-Repair publication: PENDING USER PUBLICATION
+Repair publication: PUBLISHED @ 4704cfc / USER VERIFIED
+Repair publication commit: 4704cfc0801910e30c8abb7cffcc467e4f4df016
+Repair publication subject: Complete corrected V00_L07 Swerve integrity repair
+HEAD == origin/main: PASS / USER VERIFIED
 ```

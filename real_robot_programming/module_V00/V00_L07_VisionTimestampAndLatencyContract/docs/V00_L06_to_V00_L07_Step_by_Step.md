@@ -15,7 +15,9 @@ evidence are recorded in
 `V00_L07_Exceptional_Swerve_Integrity_Repair_Step_by_Step.md`. The repaired
 lesson passed final read-only closure review, received explicit Architect/User
 re-freeze authorization, and is now `COMPLETE / FROZEN / READ-ONLY`. Corrected
-User-owned publication remains pending.
+User-owned publication is `PUBLISHED / USER VERIFIED` at
+`4704cfc0801910e30c8abb7cffcc467e4f4df016` with subject `Complete corrected
+V00_L07 Swerve integrity repair`.
 
 Historical pre-closure state:
 

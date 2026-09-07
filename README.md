@@ -433,9 +433,12 @@ issue, and the approved disposition does not make it a Vision-curriculum
 closure blocker.
 
 The final read-only closure review passed and the Architect/User explicitly
-authorized re-freeze. V00_L07 is now `COMPLETE / FROZEN / READ-ONLY`; no V00
-lesson is active. The corrected repair publication remains `PENDING USER
-PUBLICATION`. Historical `d58bef0` is not that corrected repair publication.
+authorized re-freeze. V00_L07 is now `COMPLETE / FROZEN / READ-ONLY / PUBLISHED
+@ 4704cfc / USER VERIFIED`; no V00 lesson is active. The corrected repair
+publication commit is
+`4704cfc0801910e30c8abb7cffcc467e4f4df016` with subject `Complete corrected
+V00_L07 Swerve integrity repair`. Historical `d58bef0` is not that corrected
+repair publication.
 V00_L08 is the next roadmap lesson but remains `NOT STARTED / NOT
 ACTIVATED / NOT IMPLEMENTED / NOT PUBLISHED / NON-AUTHORITATIVE / READ-ONLY`.
 It must later be freshly reconstructed from the corrected published V00_L07

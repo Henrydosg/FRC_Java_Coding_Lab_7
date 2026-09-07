@@ -19,13 +19,15 @@
 - Final Read-Only Closure Review: PASS
 - Final Closure / Freeze Authorization: PASS / AUTHORIZED COMPLETE AND FROZEN
 - Documentation: PASS / FINAL RE-FREEZE METADATA RECONCILED
-- Publication: HISTORICAL PRE-REPAIR BASELINE @ d58bef0 / CORRECTED REPAIR PENDING USER PUBLICATION
-- Publication commit: HISTORICAL d58bef0d17d202ce1dd0b8645635a8c35095dd3f
-- Publication subject: HISTORICAL: Complete V00_L07 vision timestamp and latency contract
-- Git commit: HISTORICAL BASELINE PASS / CORRECTED REPAIR PENDING USER COMMIT
-- Git push: HISTORICAL BASELINE PASS / CORRECTED REPAIR PENDING USER PUSH
-- Current repository HEAD: `a1c3b9f4be0a706812156a8dda36a78c67db22db` (`Reconcile A01_L09 verification and publication metadata`)
-- Current repository origin/main: `a1c3b9f4be0a706812156a8dda36a78c67db22db` / CURRENT V00_L07 REPAIR NOT PUBLISHED
+- Publication: HISTORICAL PRE-REPAIR BASELINE @ d58bef0 / CORRECTED REPAIR PUBLISHED @ 4704cfc / USER VERIFIED
+- Historical publication commit: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+- Historical publication subject: HISTORICAL: Complete V00_L07 vision timestamp and latency contract
+- Git commit: HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / USER VERIFIED
+- Git push: HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / origin/main / USER VERIFIED
+- Corrected publication commit: 4704cfc0801910e30c8abb7cffcc467e4f4df016
+- Corrected publication subject: Complete corrected V00_L07 Swerve integrity repair
+- Current repository HEAD: `4704cfc0801910e30c8abb7cffcc467e4f4df016` (`Complete corrected V00_L07 Swerve integrity repair`)
+- Current repository origin/main: `4704cfc0801910e30c8abb7cffcc467e4f4df016` / CORRECTED V00_L07 REPAIR PUBLISHED
 
 ## Exceptional repair and re-freeze notice
 
@@ -259,7 +261,10 @@ BL QUANTITATIVE ANOMALY: KNOWN / DEFERRED HARDWARE MAINTENANCE
 QUANTITATIVE DRIVETRAIN PASS: NOT CLAIMED
 FINAL READ-ONLY CLOSURE REVIEW: PASS
 RE-FREEZE: PASS / AUTHORIZED COMPLETE AND FROZEN
-REPAIR PUBLICATION: PENDING USER PUBLICATION
+REPAIR PUBLICATION: PUBLISHED @ 4704cfc / USER VERIFIED
+REPAIR PUBLICATION COMMIT: 4704cfc0801910e30c8abb7cffcc467e4f4df016
+REPAIR PUBLICATION SUBJECT: Complete corrected V00_L07 Swerve integrity repair
+HEAD == origin/main: PASS / USER VERIFIED
 ~~~
 
 The complete/frozen/published state shown in the historical section describes
@@ -267,6 +272,7 @@ the pre-repair snapshot only. The repaired implementation, automated evidence,
 Simulation, later User functional hardware evidence, and deferred BL
 maintenance classification are reconciled. The final read-only closure review
 passed and the Architect/User authorized re-freeze. The repaired lesson is now
-`COMPLETE / FROZEN / READ-ONLY`; corrected publication remains User-owned and
-pending. V00_L08 remains protected and unactivated; no production or test
-implementation was changed by this documentation transition.
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 4704cfc`; corrected publication is
+User-verified at the recorded commit and subject. V00_L08 remains protected and
+unactivated; no production or test implementation was changed by this
+documentation transition.

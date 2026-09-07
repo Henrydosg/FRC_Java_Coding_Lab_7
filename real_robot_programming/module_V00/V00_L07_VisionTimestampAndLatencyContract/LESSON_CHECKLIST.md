@@ -12,14 +12,16 @@ Active lesson count: 0
 Post-Implementation Architecture Review: PASS
 Final Read-Only Closure Review: PASS
 Final Closure / Freeze: PASS / AUTHORIZED COMPLETE AND FROZEN
-Publication: HISTORICAL PRE-REPAIR BASELINE @ d58bef0 / CORRECTED REPAIR PENDING USER PUBLICATION
-Publication commit: HISTORICAL d58bef0d17d202ce1dd0b8645635a8c35095dd3f
-Publication subject: HISTORICAL: Complete V00_L07 vision timestamp and latency contract
+Publication: HISTORICAL PRE-REPAIR BASELINE @ d58bef0 / CORRECTED REPAIR PUBLISHED @ 4704cfc / USER VERIFIED
+Historical publication commit: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+Historical publication subject: HISTORICAL: Complete V00_L07 vision timestamp and latency contract
+Corrected publication commit: 4704cfc0801910e30c8abb7cffcc467e4f4df016
+Corrected publication subject: Complete corrected V00_L07 Swerve integrity repair
 Controlled staging: PASS / unexpected staged 0
 Unexpected committed: 0
-Commit: HISTORICAL BASELINE PASS / CORRECTED REPAIR PENDING USER PUBLICATION
-Push: HISTORICAL BASELINE PASS / CORRECTED REPAIR PENDING USER PUBLICATION
-HEAD == origin/main: HISTORICAL BASELINE ONLY / CURRENT REPAIR NOT PUBLISHED
+Commit: HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / USER VERIFIED
+Push: HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / origin/main / USER VERIFIED
+HEAD == origin/main: PASS / 4704cfc0801910e30c8abb7cffcc467e4f4df016 / USER VERIFIED
 
 ## Current Exceptional Reopen Checklist
 
@@ -230,11 +232,15 @@ BL QUANTITATIVE ANOMALY: KNOWN / DEFERRED HARDWARE MAINTENANCE
 QUANTITATIVE DRIVETRAIN PASS: NOT CLAIMED
 FINAL READ-ONLY CLOSURE REVIEW: PASS
 RE-FREEZE: PASS / EXPLICIT ARCHITECT/USER AUTHORIZATION
-REPAIR PUBLICATION: PENDING USER PUBLICATION
+REPAIR PUBLICATION: PUBLISHED @ 4704cfc / USER VERIFIED
+REPAIR PUBLICATION COMMIT: 4704cfc0801910e30c8abb7cffcc467e4f4df016
+REPAIR PUBLICATION SUBJECT: Complete corrected V00_L07 Swerve integrity repair
+HEAD == origin/main: PASS / USER VERIFIED
 V00_L08: NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / PROTECTED
 ~~~
 
 The original completion checklist remains preserved as historical provenance.
 The repaired lesson passed final read-only closure review, received explicit
 Architect/User re-freeze authorization, and is now `COMPLETE / FROZEN /
-READ-ONLY`. Corrected repair publication remains pending User commit and push.
+READ-ONLY / PUBLISHED @ 4704cfc`. Corrected repair publication is User-verified
+at `4704cfc0801910e30c8abb7cffcc467e4f4df016`.
