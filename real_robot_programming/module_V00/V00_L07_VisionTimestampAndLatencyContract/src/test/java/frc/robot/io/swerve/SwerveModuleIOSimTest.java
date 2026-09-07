@@ -112,6 +112,23 @@ class SwerveModuleIOSimTest {
   }
 
   @Test
+  void negativePhysicalForwardSignPublishesNegativeRawForwardMotion() {
+    MutableClock clock = new MutableClock();
+    SwerveModuleIOSim simulation = new SwerveModuleIOSim(-1.0, clock);
+    update(simulation);
+    simulation.setDriveVelocityMetersPerSecond(0.30);
+
+    clock.seconds = 1.0;
+    SwerveModuleIO.SwerveModuleIOInputs inputs = update(simulation);
+
+    assertEquals(toRawRotorVelocity(0.30, -1.0), inputs.driveVelocityRotationsPerSecond, kTolerance);
+    assertEquals(toRawRotorVelocity(0.30, -1.0), inputs.drivePositionRotations, kTolerance);
+    assertTrue(inputs.driveVelocityRotationsPerSecond < 0.0);
+    assertTrue(inputs.drivePositionRotations < 0.0);
+    assertEquals(0.30, toNormalizedDistanceMeters(inputs.drivePositionRotations, -1.0), kTolerance);
+  }
+
+  @Test
   void openLoopDriveMapsToConfiguredMaximumWheelSpeedAndClamps() {
     MutableClock clock = new MutableClock();
     SwerveModuleIOSim simulation = new SwerveModuleIOSim(1.0, clock);

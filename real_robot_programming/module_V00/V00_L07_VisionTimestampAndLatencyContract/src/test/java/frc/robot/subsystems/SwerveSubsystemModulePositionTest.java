@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.simulation.DriverStationSim;
 import frc.robot.Constants;
 import frc.robot.io.gyro.GyroIO;
 import frc.robot.io.swerve.SwerveModuleIO;
+import frc.robot.observation.SwerveObservation;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -148,6 +149,14 @@ class SwerveSubsystemModulePositionTest {
   }
 
   @Test
+  void negativePhysicalForwardSignConvertsNegativeRawPositionToPositiveDistance() {
+    SwerveModulePosition position =
+        SwerveSubsystem.toMeasuredModulePosition(moduleObservation(-2.0, 0.0), -1.0);
+
+    assertEquals(expectedDistanceMeters(2.0), position.distanceMeters, kTolerance);
+  }
+
+  @Test
   void repeatedReadsAreFiniteDeterministicAndDefensive() {
     Rig rig = new Rig();
     rig.frontLeft.drivePositionRotations = 1.25;
@@ -180,6 +189,33 @@ class SwerveSubsystemModulePositionTest {
         Rotation2d.fromRotations(expectedAngleRotations).getRadians(),
         actual.angle.getRadians(),
         kTolerance);
+  }
+
+  private static SwerveObservation.ModuleObservation moduleObservation(
+      double drivePositionRotations, double driveVelocityRotationsPerSecond) {
+    return new SwerveObservation.ModuleObservation(
+        0.0,
+        drivePositionRotations,
+        driveVelocityRotationsPerSecond,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true);
   }
 
   private static final class Rig {

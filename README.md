@@ -398,21 +398,49 @@ test matrix, and V00_L06 quality boundary are recorded in the lesson
 documentation. No runtime wiring, camera vendor, telemetry, Swerve, alliance
 transform, or pose fusion is authorized.
 
-V00_L01-L07 remain complete, frozen, protected, and published. V00_L06 is
+V00_L01-L06 remain complete, frozen, protected, and published. V00_L06 is
 `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 1327bf4 / USER VERIFIED` after
 the User-confirmed publication commit
 `1327bf41736c8fe79ba58ec5eea9e0120bd978fb` (`Complete V00_L06 vision
 measurement quality contract`) and lesson-local metadata reconciliation
-`49c4286` (`Reconcile V00_L06 publication metadata`). V00_L07 is the latest
-completed and published vision lesson:
+`49c4286` (`Reconcile V00_L06 publication metadata`). The original V00_L07
+lesson publication remains historical pre-repair evidence:
 `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ d58bef0 / USER VERIFIED`.
 Its User-confirmed publication commit is
 `d58bef0d17d202ce1dd0b8645635a8c35095dd3f` (`Complete V00_L07 vision
 timestamp and latency contract`) and its lesson-local metadata reconciliation
-is `618dd09` (`Reconcile V00_L07 publication metadata`). No V00 lesson is
-currently active (active V00 lesson count: `0`). V00_L08 is the next roadmap
-lesson and remains `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT
-PUBLISHED`. A01_L10 remains prohibited.
+is `618dd09` (`Reconcile V00_L07 publication metadata`).
+
+At exceptional-reopen activation, V00_L07 became the sole current editable
+lesson under an Architect/User-approved reopen:
+`IN_PROGRESS / REOPENED / EDITABLE`. The reopen was limited to inherited
+Swerve integrity repairs R1/R2/R3; implementation, fresh verification,
+re-freeze, and repair publication were then pending. The original d58bef0
+publication remains historical pre-repair evidence.
+
+The authorized V00_L07 repair is now implemented and documented. The fresh
+pre-repair baseline passed with 593/593 tests and a clean build; the post-repair
+full suite passed with 600/600 tests and a clean build. Runtime WPILib
+Simulation and the post-implementation read-only architecture/Frozen Backbone
+review passed.
+At an earlier stage, real-robot verification was deferred because the robot was
+unavailable. Later User-supplied evidence verifies Teleop and Autonomous
+usability. No stronger bounded stop, Disable, or no-unintended-restart claim is
+added beyond that supplied evidence. The separately observed BL quantitative
+drivetrain anomaly remains `KNOWN / DEFERRED HARDWARE MAINTENANCE`; it is not BL
+PASS, quantitative drivetrain PASS, completed tuning/calibration, or a resolved
+issue, and the approved disposition does not make it a Vision-curriculum
+closure blocker.
+
+The final read-only closure review passed and the Architect/User explicitly
+authorized re-freeze. V00_L07 is now `COMPLETE / FROZEN / READ-ONLY`; no V00
+lesson is active. The corrected repair publication remains `PENDING USER
+PUBLICATION`. Historical `d58bef0` is not that corrected repair publication.
+V00_L08 is the next roadmap lesson but remains `NOT STARTED / NOT
+ACTIVATED / NOT IMPLEMENTED / NOT PUBLISHED / NON-AUTHORITATIVE / READ-ONLY`.
+It must later be freshly reconstructed from the corrected published V00_L07
+through a separately authorized workflow. V00_L09 is not started. A01_L10
+remains prohibited.
 
 Publication identity: `6482160 Complete V00_L05 AprilTag robot pose
 estimation` (`648216094fbea7eb5ebf26252f1ea457b93fcce8`).

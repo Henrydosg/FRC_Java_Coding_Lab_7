@@ -28,6 +28,8 @@ import frc.robot.io.swerve.SwerveModuleIO;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -110,6 +112,23 @@ class SwerveFrontLeftOpenLoopCommissioningCommandTest {
   }
 
   @Test
+  void staticFrictionCharacterizationCommandHasNoIoDependency() throws Exception {
+    String source =
+        Files.readString(
+            Path.of(
+                "src",
+                "main",
+                "java",
+                "frc",
+                "robot",
+                "commands",
+                "SwerveFrontLeftDriveStaticFrictionCharacterizationCommand.java"));
+
+    assertFalse(source.contains("frc.robot.io"));
+    assertFalse(source.contains("SwerveModuleIO"));
+  }
+
+  @Test
   void staticFrictionCommandSendsOnePositiveFrontLeftVoltageAndStopsOnInterruption() {
     setTestMode();
     Rig rig = new Rig();
@@ -169,6 +188,37 @@ class SwerveFrontLeftOpenLoopCommissioningCommandTest {
         SwerveModuleIO.StaticFrictionStopReason.TIMEOUT,
         rig.frontLeft.lastStaticFrictionStopReason);
     assertNoOtherModuleActuation(rig);
+  }
+
+  @Test
+  void staticFrictionCommandPreservesDisableAndModeExitReasons() {
+    setTestMode();
+    Rig disabledRig = new Rig();
+    Command disabledCommand =
+        SwerveFrontLeftDriveStaticFrictionCharacterizationCommand.atVoltage(
+            disabledRig.subsystem, 0.10);
+    disabledCommand.initialize();
+
+    setDisabledMode();
+    disabledCommand.execute();
+
+    assertEquals(
+        SwerveModuleIO.StaticFrictionStopReason.DISABLE,
+        disabledRig.frontLeft.lastStaticFrictionStopReason);
+
+    setTestMode();
+    Rig modeExitRig = new Rig();
+    Command modeExitCommand =
+        SwerveFrontLeftDriveStaticFrictionCharacterizationCommand.atVoltage(
+            modeExitRig.subsystem, 0.10);
+    modeExitCommand.initialize();
+
+    setTeleopMode();
+    modeExitCommand.execute();
+
+    assertEquals(
+        SwerveModuleIO.StaticFrictionStopReason.MODE_EXIT,
+        modeExitRig.frontLeft.lastStaticFrictionStopReason);
   }
 
   @Test

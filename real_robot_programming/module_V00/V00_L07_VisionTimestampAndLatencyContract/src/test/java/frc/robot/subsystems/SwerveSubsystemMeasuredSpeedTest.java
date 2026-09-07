@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.simulation.DriverStationSim;
 import frc.robot.Constants;
 import frc.robot.io.gyro.GyroIO;
 import frc.robot.io.swerve.SwerveModuleIO;
+import frc.robot.observation.SwerveObservation;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -128,6 +129,28 @@ class SwerveSubsystemMeasuredSpeedTest {
   }
 
   @Test
+  void negativePhysicalForwardSignConvertsNegativeRawVelocityToPositiveChassisSpeed() {
+    double expectedWheelSpeedMetersPerSecond = 0.30;
+    double rawRotorVelocityRotationsPerSecond =
+        -toRawRotorVelocityRotationsPerSecond(expectedWheelSpeedMetersPerSecond);
+    SwerveObservation.ModuleObservation module =
+        moduleObservation(rawRotorVelocityRotationsPerSecond, Rotation2d.kZero);
+
+    SwerveModuleState frontLeft = SwerveSubsystem.toMeasuredModuleState(module, -1.0);
+    SwerveModuleState frontRight = SwerveSubsystem.toMeasuredModuleState(module, -1.0);
+    SwerveModuleState backLeft = SwerveSubsystem.toMeasuredModuleState(module, -1.0);
+    SwerveModuleState backRight = SwerveSubsystem.toMeasuredModuleState(module, -1.0);
+    ChassisSpeeds measured =
+        new SwerveKinematics()
+            .toChassisSpeeds(new SwerveModuleState[] {frontLeft, frontRight, backLeft, backRight});
+
+    assertEquals(expectedWheelSpeedMetersPerSecond, frontLeft.speedMetersPerSecond, kTolerance);
+    assertEquals(expectedWheelSpeedMetersPerSecond, measured.vxMetersPerSecond, kTolerance);
+    assertEquals(0.0, measured.vyMetersPerSecond, kTolerance);
+    assertEquals(0.0, measured.omegaRadiansPerSecond, kTolerance);
+  }
+
+  @Test
   void measuredSpeedsRemainDistinctFromFinalCommandedStates() {
     Rig rig = new Rig();
     DriverStationSim.setEnabled(true);
@@ -216,6 +239,39 @@ class SwerveSubsystemMeasuredSpeedTest {
     assertEquals(expected.vxMetersPerSecond, actual.vxMetersPerSecond, kTolerance);
     assertEquals(expected.vyMetersPerSecond, actual.vyMetersPerSecond, kTolerance);
     assertEquals(expected.omegaRadiansPerSecond, actual.omegaRadiansPerSecond, kTolerance);
+  }
+
+  private static double toRawRotorVelocityRotationsPerSecond(double wheelSpeedMetersPerSecond) {
+    return wheelSpeedMetersPerSecond
+        / (2.0 * Math.PI * Constants.SwerveConstants.kWheelRadiusMeters)
+        * Constants.SwerveConstants.kDriveGearRatio;
+  }
+
+  private static SwerveObservation.ModuleObservation moduleObservation(
+      double driveVelocityRotationsPerSecond, Rotation2d encoderAbsolutePosition) {
+    return new SwerveObservation.ModuleObservation(
+        0.0,
+        0.0,
+        driveVelocityRotationsPerSecond,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        encoderAbsolutePosition.getRotations(),
+        0.0,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true);
   }
 
   private static final class Rig {

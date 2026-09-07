@@ -1,11 +1,21 @@
 # V00_L06 to V00_L07 Step-by-Step Transition Guide
 
-## Purpose and current lifecycle state
+## Purpose and lifecycle provenance
 
 This guide explains how
 `V00_L07_VisionTimestampAndLatencyContract` was prepared from the final
 authoritative V00_L06 snapshot. It is a student-facing record of the
 reasoning, boundaries, and preparation gates for the next lesson.
+
+Current-provenance note: the `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @
+d58bef0` closure statements below describe the original timing-lesson
+publication and remain historical pre-repair evidence. The later exceptional
+R1/R2/R3 Swerve-integrity reopen, implementation, verification, and hardware
+evidence are recorded in
+`V00_L07_Exceptional_Swerve_Integrity_Repair_Step_by_Step.md`. The repaired
+lesson passed final read-only closure review, received explicit Architect/User
+re-freeze authorization, and is now `COMPLETE / FROZEN / READ-ONLY`. Corrected
+User-owned publication remains pending.
 
 Historical pre-closure state:
 
@@ -18,9 +28,9 @@ BUILD: PASS / CLEAN BUILD
 GIT PUBLICATION: PENDING USER GIT
 ```
 
-That was the state during implementation reconciliation. The final
-read-only architecture review and closure/freeze authorization have now
-passed. The current state is:
+That was the state during the original implementation reconciliation. For the
+historical pre-repair snapshot, the original read-only architecture review and
+closure/freeze authorization then passed, producing this historical state:
 
 ```text
 V00_L07: COMPLETE / FROZEN / READ-ONLY
@@ -33,8 +43,9 @@ PUSH: PASS / origin/main / USER VERIFIED
 HEAD == origin/main: PASS
 ```
 
-The User-owned publication gate has been completed. Repository-level lifecycle
-reconciliation remains a separate pending task.
+For that original snapshot, the User-owned publication gate was completed.
+Repository-level lifecycle reconciliation was a separate pending task at that
+historical point.
 
 Authoritative lineage:
 

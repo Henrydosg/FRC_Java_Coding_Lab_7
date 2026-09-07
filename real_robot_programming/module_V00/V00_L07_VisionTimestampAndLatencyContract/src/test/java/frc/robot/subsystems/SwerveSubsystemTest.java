@@ -10,8 +10,12 @@
 package frc.robot.subsystems;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -22,6 +26,8 @@ import frc.robot.io.gyro.GyroIO;
 import frc.robot.io.swerve.SwerveModuleIO;
 import java.lang.reflect.Field;
 import java.lang.reflect.RecordComponent;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -138,6 +144,55 @@ class SwerveSubsystemTest {
     assertEquals(1, frontRight.stopCount);
     assertEquals(1, backLeft.stopCount);
     assertEquals(1, backRight.stopCount);
+  }
+
+  @Test
+  void stopAttemptsEveryModuleAfterAnyIndividualRuntimeException()
+      throws ReflectiveOperationException {
+    for (int failingModuleIndex = 0; failingModuleIndex < 4; failingModuleIndex++) {
+      List<String> stopAttemptOrder = new ArrayList<>();
+      RecordingModuleIO[] modules = createModules();
+      SwerveSubsystem subsystem = createSubsystem(modules);
+      configureStopTracking(modules, subsystem, stopAttemptOrder);
+      RuntimeException expectedFailure = new RuntimeException("module stop failure " + failingModuleIndex);
+      modules[failingModuleIndex].stopFailure = expectedFailure;
+      subsystem.acceptChassisSpeeds(new ChassisSpeeds(1.0, 2.0, 3.0));
+
+      RuntimeException actualFailure = assertThrows(RuntimeException.class, subsystem::stop);
+
+      assertSame(expectedFailure, actualFailure);
+      assertEquals(0, actualFailure.getSuppressed().length);
+      assertIterableEquals(List.of("FL", "FR", "BL", "BR"), stopAttemptOrder);
+      assertIntent(subsystem, 0.0, 0.0, 0.0);
+      assertAllFinalStatesZero(subsystem);
+      assertEachModuleStoppedOnce(modules);
+      for (RecordingModuleIO module : modules) {
+        assertTrue(module.sawSafeStateBeforeStop);
+      }
+    }
+  }
+
+  @Test
+  void stopPreservesFirstFailureAndSuppressesLaterFailuresInEncounterOrder() {
+    List<String> stopAttemptOrder = new ArrayList<>();
+    RecordingModuleIO[] modules = createModules();
+    SwerveSubsystem subsystem = createSubsystem(modules);
+    configureStopTracking(modules, subsystem, stopAttemptOrder);
+    RuntimeException frontLeftFailure = new RuntimeException("front left failure");
+    RuntimeException backLeftFailure = new RuntimeException("back left failure");
+    RuntimeException backRightFailure = new RuntimeException("back right failure");
+    modules[0].stopFailure = frontLeftFailure;
+    modules[2].stopFailure = backLeftFailure;
+    modules[3].stopFailure = backRightFailure;
+
+    RuntimeException actualFailure = assertThrows(RuntimeException.class, subsystem::stop);
+
+    assertSame(frontLeftFailure, actualFailure);
+    assertEquals(2, actualFailure.getSuppressed().length);
+    assertSame(backLeftFailure, actualFailure.getSuppressed()[0]);
+    assertSame(backRightFailure, actualFailure.getSuppressed()[1]);
+    assertIterableEquals(List.of("FL", "FR", "BL", "BR"), stopAttemptOrder);
+    assertEachModuleStoppedOnce(modules);
   }
 
   @Test
@@ -416,6 +471,37 @@ class SwerveSubsystemTest {
     }
   }
 
+  private static void configureStopTracking(
+      RecordingModuleIO[] modules, SwerveSubsystem subsystem, List<String> stopAttemptOrder) {
+    String[] moduleNames = {"FL", "FR", "BL", "BR"};
+    for (int moduleIndex = 0; moduleIndex < modules.length; moduleIndex++) {
+      modules[moduleIndex].configureStopTracking(
+          moduleNames[moduleIndex], stopAttemptOrder, subsystem);
+    }
+  }
+
+  private static boolean safeStopStateWasEstablished(SwerveSubsystem subsystem) {
+    try {
+      Field intentField = SwerveSubsystem.class.getDeclaredField("chassisIntent");
+      intentField.setAccessible(true);
+      Object intent = intentField.get(subsystem);
+      for (RecordComponent component : intent.getClass().getRecordComponents()) {
+        component.getAccessor().setAccessible(true);
+        if ((double) component.getAccessor().invoke(intent) != 0.0) {
+          return false;
+        }
+      }
+      for (SwerveModuleState state : subsystem.getFinalModuleStates()) {
+        if (state.speedMetersPerSecond != 0.0 || state.angle.getRadians() != 0.0) {
+          return false;
+        }
+      }
+      return true;
+    } catch (ReflectiveOperationException failure) {
+      throw new AssertionError(failure);
+    }
+  }
+
   private static final class RecordingModuleIO implements SwerveModuleIO {
     private final double encoderAbsolutePositionRotations;
     private int updateCount;
@@ -423,6 +509,11 @@ class SwerveSubsystemTest {
     private int driveVelocityCount;
     private int steerAngleCount;
     private int stopCount;
+    private String stopName;
+    private List<String> stopAttemptOrder;
+    private SwerveSubsystem observedSubsystem;
+    private RuntimeException stopFailure;
+    private boolean sawSafeStateBeforeStop;
 
     private RecordingModuleIO() {
       this(0.0);
@@ -459,6 +550,20 @@ class SwerveSubsystemTest {
     @Override
     public void stop() {
       stopCount++;
+      if (stopAttemptOrder != null) {
+        stopAttemptOrder.add(stopName);
+        sawSafeStateBeforeStop = safeStopStateWasEstablished(observedSubsystem);
+      }
+      if (stopFailure != null) {
+        throw stopFailure;
+      }
+    }
+
+    private void configureStopTracking(
+        String stopName, List<String> stopAttemptOrder, SwerveSubsystem observedSubsystem) {
+      this.stopName = stopName;
+      this.stopAttemptOrder = stopAttemptOrder;
+      this.observedSubsystem = observedSubsystem;
     }
   }
 

@@ -57,6 +57,16 @@ public class SwerveSubsystem extends SubsystemBase {
     STEER_NEGATIVE
   }
 
+  /** Explicit Front Left static-friction characterization completion reasons. */
+  public enum StaticFrictionStopReason {
+    TIMEOUT,
+    DISABLE,
+    MODE_EXIT,
+    INTERRUPTED,
+    EXCEPTION,
+    REJECTED
+  }
+
   private final SwerveModuleIO frontLeft;
   private final SwerveModuleIO frontRight;
   private final SwerveModuleIO backLeft;
@@ -382,10 +392,14 @@ public class SwerveSubsystem extends SubsystemBase {
 
     SwerveObservation observation = latestObservation.orElseThrow();
     return new SwerveModuleState[] {
-      toMeasuredModuleState(observation.frontLeft()),
-      toMeasuredModuleState(observation.frontRight()),
-      toMeasuredModuleState(observation.backLeft()),
-      toMeasuredModuleState(observation.backRight())
+      toMeasuredModuleState(
+          observation.frontLeft(), Constants.SwerveConstants.kFrontLeftDrivePositionSign),
+      toMeasuredModuleState(
+          observation.frontRight(), Constants.SwerveConstants.kFrontRightDrivePositionSign),
+      toMeasuredModuleState(
+          observation.backLeft(), Constants.SwerveConstants.kBackLeftDrivePositionSign),
+      toMeasuredModuleState(
+          observation.backRight(), Constants.SwerveConstants.kBackRightDrivePositionSign)
     };
   }
 
@@ -421,10 +435,14 @@ public class SwerveSubsystem extends SubsystemBase {
 
     try {
       SwerveModuleState[] measuredStates = {
-        toMeasuredModuleState(modules[0]),
-        toMeasuredModuleState(modules[1]),
-        toMeasuredModuleState(modules[2]),
-        toMeasuredModuleState(modules[3])
+        toMeasuredModuleState(
+            modules[0], Constants.SwerveConstants.kFrontLeftDrivePositionSign),
+        toMeasuredModuleState(
+            modules[1], Constants.SwerveConstants.kFrontRightDrivePositionSign),
+        toMeasuredModuleState(
+            modules[2], Constants.SwerveConstants.kBackLeftDrivePositionSign),
+        toMeasuredModuleState(
+            modules[3], Constants.SwerveConstants.kBackRightDrivePositionSign)
       };
       ChassisSpeeds measuredSpeeds = measuredSpeedKinematics.toChassisSpeeds(measuredStates);
       if (!isFiniteChassisSpeeds(measuredSpeeds)) {
@@ -575,27 +593,27 @@ public class SwerveSubsystem extends SubsystemBase {
       double requestedVoltageVolts) {
     if (!DriverStation.isTestEnabled() || !DriverStation.isEnabled()) {
       stopFrontLeftStaticFrictionCharacterization(
-          requestedVoltageVolts, SwerveModuleIO.StaticFrictionStopReason.REJECTED);
+          requestedVoltageVolts, StaticFrictionStopReason.REJECTED);
       return false;
     }
 
     double clampedVoltageVolts = clampFrontLeftDriveStaticFrictionVoltageVolts(requestedVoltageVolts);
     if (!Double.isFinite(requestedVoltageVolts) || clampedVoltageVolts <= 0.0) {
       stopFrontLeftStaticFrictionCharacterization(
-          requestedVoltageVolts, SwerveModuleIO.StaticFrictionStopReason.REJECTED);
+          requestedVoltageVolts, StaticFrictionStopReason.REJECTED);
       return false;
     }
     if (!startFrontLeftCommissioningSession(
         Constants.SwerveConstants.kFrontLeftDriveStaticFrictionPulseDurationSeconds)) {
       stopFrontLeftStaticFrictionCharacterization(
-          clampedVoltageVolts, SwerveModuleIO.StaticFrictionStopReason.REJECTED);
+          clampedVoltageVolts, StaticFrictionStopReason.REJECTED);
       return false;
     }
 
     try {
       if (!frontLeft.setDriveStaticFrictionCharacterizationVoltageVolts(clampedVoltageVolts)) {
         stopFrontLeftStaticFrictionCharacterization(
-            clampedVoltageVolts, SwerveModuleIO.StaticFrictionStopReason.REJECTED);
+            clampedVoltageVolts, StaticFrictionStopReason.REJECTED);
         return false;
       }
       frontLeftStaticFrictionCommissioningActive = true;
@@ -604,7 +622,7 @@ public class SwerveSubsystem extends SubsystemBase {
     } catch (RuntimeException failure) {
       try {
         stopFrontLeftStaticFrictionCharacterization(
-            clampedVoltageVolts, SwerveModuleIO.StaticFrictionStopReason.EXCEPTION);
+            clampedVoltageVolts, StaticFrictionStopReason.EXCEPTION);
       } catch (RuntimeException stopFailure) {
         failure.addSuppressed(stopFailure);
       }
@@ -667,9 +685,10 @@ public class SwerveSubsystem extends SubsystemBase {
   /** Finalizes a manual Front Left static-friction pulse with its explicit stop reason. */
   public void stopFrontLeftStaticFrictionCharacterization(
       double requestedVoltageVolts,
-      SwerveModuleIO.StaticFrictionStopReason stopReason) {
+      StaticFrictionStopReason stopReason) {
     try {
-      frontLeft.finishDriveStaticFrictionCharacterization(requestedVoltageVolts, stopReason);
+      frontLeft.finishDriveStaticFrictionCharacterization(
+          requestedVoltageVolts, toIOStaticFrictionStopReason(stopReason));
     } finally {
       frontLeftStaticFrictionCommissioningActive = false;
       frontLeftStaticFrictionRequestedVoltageVolts = Double.NaN;
@@ -679,10 +698,11 @@ public class SwerveSubsystem extends SubsystemBase {
     }
   }
 
-  private static SwerveModuleState toMeasuredModuleState(
-      SwerveObservation.ModuleObservation module) {
+  static SwerveModuleState toMeasuredModuleState(
+      SwerveObservation.ModuleObservation module, double physicalForwardSign) {
     double wheelSpeedMetersPerSecond =
-        module.driveVelocityRotationsPerSecond()
+        physicalForwardSign
+            * module.driveVelocityRotationsPerSecond()
             / Constants.SwerveConstants.kDriveGearRatio
             * (2.0 * Math.PI * Constants.SwerveConstants.kWheelRadiusMeters);
 
@@ -691,7 +711,7 @@ public class SwerveSubsystem extends SubsystemBase {
         Rotation2d.fromRotations(module.encoderAbsolutePositionRotations()));
   }
 
-  private static SwerveModulePosition toMeasuredModulePosition(
+  static SwerveModulePosition toMeasuredModulePosition(
       SwerveObservation.ModuleObservation module,
       double physicalForwardSign) {
     double wheelRotations =
@@ -977,10 +997,14 @@ public class SwerveSubsystem extends SubsystemBase {
     for (int moduleIndex = 0; moduleIndex < MODULE_COUNT; moduleIndex++) {
       finalModuleStates[moduleIndex] = new SwerveModuleState();
     }
-    stopFrontLeftCommissioning();
-    frontRight.stop();
-    backLeft.stop();
-    backRight.stop();
+    RuntimeException firstFailure = null;
+    firstFailure = attemptModuleStop(this::stopFrontLeftCommissioning, firstFailure);
+    firstFailure = attemptModuleStop(frontRight::stop, firstFailure);
+    firstFailure = attemptModuleStop(backLeft::stop, firstFailure);
+    firstFailure = attemptModuleStop(backRight::stop, firstFailure);
+    if (firstFailure != null) {
+      throw firstFailure;
+    }
   }
 
   private void updateFinalModuleStates() {
@@ -1090,12 +1114,12 @@ public class SwerveSubsystem extends SubsystemBase {
             || frontLeftCommissioningWatchdog.hasElapsed(
                 frontLeftCommissioningTimeoutSeconds))) {
       if (frontLeftStaticFrictionCommissioningActive) {
-        SwerveModuleIO.StaticFrictionStopReason reason =
+        StaticFrictionStopReason reason =
             !DriverStation.isEnabled()
-                ? SwerveModuleIO.StaticFrictionStopReason.DISABLE
+                ? StaticFrictionStopReason.DISABLE
                 : !DriverStation.isTestEnabled()
-                    ? SwerveModuleIO.StaticFrictionStopReason.MODE_EXIT
-                    : SwerveModuleIO.StaticFrictionStopReason.TIMEOUT;
+                    ? StaticFrictionStopReason.MODE_EXIT
+                    : StaticFrictionStopReason.TIMEOUT;
         stopFrontLeftStaticFrictionCharacterization(
             frontLeftStaticFrictionRequestedVoltageVolts, reason);
       } else {
@@ -1104,14 +1128,39 @@ public class SwerveSubsystem extends SubsystemBase {
     }
   }
 
-  private SwerveModuleIO.StaticFrictionStopReason implicitStaticFrictionStopReason() {
+  private StaticFrictionStopReason implicitStaticFrictionStopReason() {
     if (!DriverStation.isEnabled()) {
-      return SwerveModuleIO.StaticFrictionStopReason.DISABLE;
+      return StaticFrictionStopReason.DISABLE;
     }
     if (!DriverStation.isTestEnabled()) {
-      return SwerveModuleIO.StaticFrictionStopReason.MODE_EXIT;
+      return StaticFrictionStopReason.MODE_EXIT;
     }
-    return SwerveModuleIO.StaticFrictionStopReason.INTERRUPTED;
+    return StaticFrictionStopReason.INTERRUPTED;
+  }
+
+  private static SwerveModuleIO.StaticFrictionStopReason toIOStaticFrictionStopReason(
+      StaticFrictionStopReason stopReason) {
+    return switch (Objects.requireNonNull(stopReason, "stopReason")) {
+      case TIMEOUT -> SwerveModuleIO.StaticFrictionStopReason.TIMEOUT;
+      case DISABLE -> SwerveModuleIO.StaticFrictionStopReason.DISABLE;
+      case MODE_EXIT -> SwerveModuleIO.StaticFrictionStopReason.MODE_EXIT;
+      case INTERRUPTED -> SwerveModuleIO.StaticFrictionStopReason.INTERRUPTED;
+      case EXCEPTION -> SwerveModuleIO.StaticFrictionStopReason.EXCEPTION;
+      case REJECTED -> SwerveModuleIO.StaticFrictionStopReason.REJECTED;
+    };
+  }
+
+  private static RuntimeException attemptModuleStop(
+      Runnable stopAction, RuntimeException firstFailure) {
+    try {
+      stopAction.run();
+    } catch (RuntimeException failure) {
+      if (firstFailure == null) {
+        return failure;
+      }
+      firstFailure.addSuppressed(failure);
+    }
+    return firstFailure;
   }
 
   private boolean startFrontLeftCommissioningSession(double timeoutSeconds) {

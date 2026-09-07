@@ -10,18 +10,111 @@
 - **Status:** COMPLETE / FROZEN / READ-ONLY
 - **Freeze state:** FROZEN
 - **Active lesson count:** 0
-- **Design Lock:** LOCKED BY CHATGPT ARCHITECT
-- **Implementation authorization:** AUTHORIZED BY ARCHITECT
-- **Implementation:** COMPLETE / AUTHORIZED BOUNDARY
-- **Verification:** PASS / FOCUSED, VISION REGRESSION, FULL SUITE, CLEAN BUILD
-- **Final Architecture Review:** PASS
-- **Documentation:** FINAL CLOSURE RECONCILIATION COMPLETE
-- **Final closure:** PASS / COMPLETE / FROZEN / READ-ONLY
-- **Publication:** PUBLISHED @ d58bef0 / USER VERIFIED
-- **Publication commit:** d58bef0d17d202ce1dd0b8645635a8c35095dd3f
-- **Publication subject:** Complete V00_L07 vision timestamp and latency contract
-- **Git publication:** PASS / USER VERIFIED / origin/main
-- **HEAD == origin/main:** PASS
+- **Design Lock:** PASS / R1/R2/R3 REPAIR DESIGN LOCK
+- **Implementation authorization:** PASS / EXACT AUTHORIZED REPAIR BOUNDARY
+- **Implementation:** PASS / R1/R2/R3 COMPLETE
+- **Verification:** PASS / 600 TESTS, CLEAN BUILD, AND SIMULATION
+- **Post-Implementation Architecture Review:** PASS / READ-ONLY R1/R2/R3 REVIEW
+- **Documentation:** PASS / FINAL RE-FREEZE METADATA RECONCILED
+- **Final closure:** PASS / AUTHORIZED COMPLETE AND FROZEN
+- **Publication:** HISTORICAL PRE-REPAIR BASELINE @ d58bef0 / CORRECTED REPAIR PUBLICATION PENDING USER PUBLICATION
+- **Publication commit:** HISTORICAL d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+- **Publication subject:** HISTORICAL: Complete V00_L07 vision timestamp and latency contract
+- **Git publication:** HISTORICAL BASELINE PASS / CORRECTED REPAIR PENDING USER PUBLICATION
+- **HEAD == origin/main:** HISTORICAL BASELINE ONLY / CURRENT REPAIR NOT PUBLISHED
+
+## Exceptional inherited Swerve integrity repair cycle (current)
+
+This documentation reconciliation records the completed authorized repair.
+The original V00_L07 timing objective remains valid; the reopen addressed
+exactly three inherited Swerve integrity findings selected by the Architect
+and approved by the User:
+
+- R1: remove the command-layer dependency on the IO-owned
+  `SwerveModuleIO.StaticFrictionStopReason` type.
+- R2: make `SwerveSubsystem` all-module stop fanout best-effort when one stop
+  throws.
+- R3: make `physicalForwardSign = -1` coherent for measured drive position and
+  velocity.
+
+The authoritative drive ratio remains `6.75:1`. Excluded are live module-health
+policy, CAN/status redesign, nonfinite/general IO cleanup, telemetry, tuning,
+calibration, odometry, pose estimation, autonomous, PathPlanner, vision,
+Limelight, AprilTag, pose fusion, and unrelated refactoring. The Frozen
+Backbone, Frozen Interface Contract, and roadmap remain unchanged.
+
+The required sequence is:
+
+1. Record Architect/User governance authorization and the exceptional reopen.
+2. Perform the documentation-only transition to the sole
+   `REOPENED / IN_PROGRESS / EDITABLE` V00_L07 lesson.
+3. Have the User establish a fresh Java 17 inherited baseline and changed-file
+   boundary — **COMPLETE; 593/593 baseline tests PASS**.
+4. Perform the focused Architecture Audit and obtain the exact R1/R2/R3
+   Design Lock — **COMPLETE / PASS**.
+5. Obtain separate implementation authorization naming the minimum files —
+   **COMPLETE / PASS**.
+6. Implement only R1/R2/R3 and add only authorized focused tests —
+   **COMPLETE / PASS**.
+7. Run focused regressions, inherited/full tests, and a clean build —
+   **COMPLETE / PASS; 600/600 full suite, clean build PASS**.
+8. Complete applicable Simulation and reconcile later real-robot evidence —
+   **Simulation PASS; Teleop and Autonomous usability USER VERIFIED; BL
+   quantitative anomaly KNOWN / DEFERRED HARDWARE MAINTENANCE and not a
+   quantitative drivetrain PASS**.
+9. Complete the post-implementation architecture review, documentation
+   reconciliation, final read-only closure review, and explicit re-freeze —
+   **COMPLETE / PASS / AUTHORIZED**.
+10. Only then freshly reconstruct V00_L08 from the corrected published V00_L07.
+
+The repaired lesson passed final read-only closure review, received explicit
+Architect/User re-freeze authorization, and is now `COMPLETE / FROZEN /
+READ-ONLY`. Corrected publication remains pending User commit and push. The
+independent V00_L08 Limelight physical-evidence HOLD remains unchanged.
+
+## Current repair verification and final closure state
+
+The following evidence applies to the repaired cycle and is distinct from the
+historical original timing-lesson closure recorded later in this document:
+
+- Pre-repair reopened baseline: 593 tests, 0 failures, 0 errors, 0 skipped;
+  clean build PASS.
+- Focused R1/R2/R3 verification: PASS.
+- Inherited Swerve regressions: PASS.
+- Post-repair full suite: 600 tests, 0 failures, 0 errors, 0 skipped.
+- Post-repair clean build: PASS.
+- Runtime WPILib Simulation: PASS.
+- Post-implementation read-only architecture review: PASS.
+- Frozen Backbone review: PASS.
+
+R1 moves command-facing `StaticFrictionStopReason` ownership to
+`SwerveSubsystem`. The command no longer depends on `frc.robot.io`; the
+subsystem privately translates to the unchanged `SwerveModuleIO` reason, and
+commissioning lifecycle semantics remain equivalent.
+
+R2 makes `SwerveSubsystem.stop()` clear actuation state before attempting FL,
+FR, BL, and BR. Every module is attempted after a `RuntimeException`; the
+first exception is preserved, later exceptions are suppressed in encounter
+order, and the first is rethrown after fanout. CTRE drive/steer module-local
+exception isolation was not part of the repair.
+
+R3 keeps IO and Observation values in the raw sensor domain while making
+`SwerveSubsystem` the owner of physical-forward normalization. Measured
+position and velocity use the same `physicalForwardSign` semantics. The
+current robot configuration and `6.75:1` drive ratio are unchanged, and CTRE
+IO and Sim IO production code remain unchanged.
+
+At an earlier repair stage the robot was unavailable, so the real-robot gate
+was recorded as deferred. Later User evidence verifies Teleop and Autonomous
+usability. This reconciliation does not add a stronger bounded
+stop/Disable/no-unintended-restart claim beyond the supplied evidence and does
+not claim quantitative drivetrain verification.
+
+The BL quantitative drivetrain anomaly remains **KNOWN / DEFERRED HARDWARE
+MAINTENANCE**. It is unresolved and is not BL PASS, quantitative drivetrain
+PASS, matched-module evidence, completed tuning, or completed calibration.
+Under the explicit Architect/User disposition, it does not block continued
+Vision curriculum closure. No Swerve diagnosis or repair is part of this task.
 
 ## One-concept objective
 
@@ -66,7 +159,7 @@ are programming-contract errors. They must not be silently normalized or
 reported as ordinary measurement-quality rejection. This error boundary is
 implemented by the authorized production contract.
 
-## Completed preparation and activation
+## Historical original preparation and activation (preserved)
 
 1. The final frozen V00_L06 predecessor was confirmed at `1327bf4`; its
    lesson-local publication metadata reconciliation is `49c4286`.
@@ -89,7 +182,7 @@ implemented by the authorized production contract.
 10. Focused timing tests, inherited vision regressions, the complete 593-test
     suite, and a clean build all passed under the WPILib Java 17 environment.
 
-## Completed implementation and verification
+## Historical original implementation and verification (preserved)
 
 The authorized implementation added only:
 
@@ -169,14 +262,14 @@ This records lesson-local publication metadata only. Repository-level
 reconciliation of AGENTS.md and the root README remains a separate pending
 task before V00_L08 preparation.
 
-## Verification strategy
+## Historical original verification strategy
 
 Because the locked responsibility is a pure deterministic contract, verification
 used focused unit testing, inherited regression, the complete test suite, and a
 clean build. HALSIM, Glass, Driver Station, real-robot, and physical-camera
 verification are not required for this contract-only lesson.
 
-## Final lifecycle boundary
+## Historical original final lifecycle boundary
 
 V00_L07 was historically active because the Architect Design Lock was complete.
 Its authorized implementation and automated verification are complete, and the
@@ -200,3 +293,34 @@ PUBLICATION SUBJECT: Complete V00_L07 vision timestamp and latency contract
 PUSH: PASS / origin/main / USER VERIFIED
 HEAD == origin/main: PASS
 ~~~
+
+## Current exceptional repair result
+
+~~~text
+STATUS: COMPLETE
+ACTIVE STATE: COMPLETE / FROZEN / READ-ONLY
+FREEZE STATE: FROZEN
+REPAIR SCOPE: R1 / R2 / R3 ONLY
+DESIGN LOCK: PASS
+IMPLEMENTATION AUTHORIZATION: PASS / EXACT AUTHORIZED BOUNDARY
+IMPLEMENTATION: PASS / R1/R2/R3 COMPLETE
+AUTOMATED VERIFICATION: PASS / 600 TESTS / 0 FAILURES / 0 ERRORS / 0 SKIPPED
+SIMULATION: PASS
+POST-IMPLEMENTATION ARCHITECTURE REVIEW: PASS
+REAL ROBOT: USER VERIFIED / TELEOP AND AUTONOMOUS USABILITY
+BL QUANTITATIVE ANOMALY: KNOWN / DEFERRED HARDWARE MAINTENANCE
+QUANTITATIVE DRIVETRAIN PASS: NOT CLAIMED
+FINAL READ-ONLY CLOSURE REVIEW: PASS
+RE-FREEZE: PASS / EXPLICIT ARCHITECT/USER AUTHORIZATION
+REPAIR PUBLICATION: PENDING USER PUBLICATION
+~~~
+
+The original timing lesson closure and publication at `d58bef0` remain
+historical pre-repair evidence. The current repair implementation, automated
+evidence, Simulation, later User functional hardware evidence, and deferred BL
+maintenance classification are reconciled. The repaired lesson passed final
+read-only closure review, received explicit Architect/User re-freeze
+authorization, and is `COMPLETE / FROZEN / READ-ONLY`.
+V00_L08 remains protected and will require a fresh reconstruction from the
+later corrected V00_L07 publication. This documentation reconciliation changes
+no production or test implementation.

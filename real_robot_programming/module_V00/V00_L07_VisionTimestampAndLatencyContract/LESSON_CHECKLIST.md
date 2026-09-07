@@ -4,21 +4,95 @@ Status: COMPLETE / FROZEN / READ-ONLY
 Freeze state: FROZEN
 Predecessor: V00_L06 @ 1327bf4 - COMPLETE / FROZEN / READ-ONLY / PUBLISHED
 Predecessor metadata reconciliation: 49c4286
-Design Lock: LOCKED / CHATGPT ARCHITECT
-Implementation authorization: AUTHORIZED BY ARCHITECT
-Implementation: COMPLETE / AUTHORIZED BOUNDARY
-Verification: PASS / FOCUSED, VISION REGRESSION, FULL SUITE, CLEAN BUILD
+Design Lock: PASS / R1/R2/R3 REPAIR DESIGN LOCK
+Implementation authorization: PASS / EXACT AUTHORIZED REPAIR BOUNDARY
+Implementation: PASS / R1/R2/R3 COMPLETE
+Verification: PASS / FOCUSED, INHERITED, AND 600/600 FULL SUITE
 Active lesson count: 0
-Final Architecture Review: PASS
-Final Closure / Freeze: PASS
-Publication: PUBLISHED @ d58bef0 / USER VERIFIED
-Publication commit: d58bef0d17d202ce1dd0b8645635a8c35095dd3f
-Publication subject: Complete V00_L07 vision timestamp and latency contract
+Post-Implementation Architecture Review: PASS
+Final Read-Only Closure Review: PASS
+Final Closure / Freeze: PASS / AUTHORIZED COMPLETE AND FROZEN
+Publication: HISTORICAL PRE-REPAIR BASELINE @ d58bef0 / CORRECTED REPAIR PENDING USER PUBLICATION
+Publication commit: HISTORICAL d58bef0d17d202ce1dd0b8645635a8c35095dd3f
+Publication subject: HISTORICAL: Complete V00_L07 vision timestamp and latency contract
 Controlled staging: PASS / unexpected staged 0
 Unexpected committed: 0
-Commit: PASS / exit 0
-Push: PASS / exit 0
-HEAD == origin/main: PASS
+Commit: HISTORICAL BASELINE PASS / CORRECTED REPAIR PENDING USER PUBLICATION
+Push: HISTORICAL BASELINE PASS / CORRECTED REPAIR PENDING USER PUBLICATION
+HEAD == origin/main: HISTORICAL BASELINE ONLY / CURRENT REPAIR NOT PUBLISHED
+
+## Current Exceptional Reopen Checklist
+
+- [x] AUDIT-REV-03B evidence identifies R1, R2, and R3.
+- [x] Repair-placement governance audit selects V00_L07.
+- [x] Architect approves V00_L07 as the exceptional repair location.
+- [x] User approves the exact R1/R2/R3 governance lifecycle.
+- [x] Governance proposal and reopen ADR are PASS / recorded.
+- [x] Documentation-only lifecycle transition is authorized.
+- [x] Fresh reopened inherited baseline: 593/593 tests PASS; clean build PASS.
+- [x] Focused post-baseline Architecture Audit.
+- [x] Exact R1/R2/R3 Design Lock.
+- [x] Separate implementation authorization.
+- [x] Production implementation within the exact authorized boundary.
+- [x] Test implementation or focused test additions within the exact authorized boundary.
+- [x] Focused regression tests.
+- [x] Full inherited test suite: 600/600 tests PASS.
+- [x] Clean build.
+- [x] Simulation verification.
+- [ ] Driver Station / Glass verification: no separate post-repair Glass evidence; no telemetry change.
+- [x] Later User hardware evidence reconciled: Teleop and Autonomous usability USER VERIFIED.
+- [x] BL quantitative anomaly retained as KNOWN / DEFERRED HARDWARE MAINTENANCE; no quantitative drivetrain PASS claimed.
+- [x] Post-implementation architecture and Frozen Backbone review.
+- [x] Final read-only closure review.
+- [x] Explicit re-freeze approval.
+- [ ] Repair publication by User.
+- [ ] Fresh V00_L08 reconstruction from corrected published V00_L07.
+
+The remaining unchecked lifecycle work is User-owned corrected repair
+publication followed by a separately governed fresh V00_L08 reconstruction.
+Driver Station / Glass has no separate post-repair evidence and is not promoted to PASS. The
+later User functional hardware evidence is accepted at exactly the recorded
+Teleop/Autonomous usability level. The BL quantitative anomaly is separate
+deferred maintenance and is not a quantitative drivetrain PASS. No historical
+PASS below is reused as fresh evidence for the reopened repair.
+
+## Current Repair Evidence and Final Closure Gate
+
+The authorized repair is complete from the architecture, implementation, and
+automated-verification perspectives. R1 moves command-facing
+`StaticFrictionStopReason` ownership to `SwerveSubsystem`, privately
+translating to the unchanged `SwerveModuleIO` reason. R2 makes
+`SwerveSubsystem.stop()` clear actuation state, attempt FL → FR → BL → BR,
+preserve the first `RuntimeException`, suppress later exceptions in encounter
+order, and rethrow the first after all attempts. CTRE drive/steer module-local
+exception isolation was not part of the repair. R3 keeps raw IO/Observation
+values raw while applying the same physical-forward sign to measured position
+and velocity in `SwerveSubsystem`; the current configuration and `6.75:1`
+drive ratio remain unchanged, and CTRE/Sim production IO remain unchanged.
+
+The post-repair evidence is: focused R1/R2/R3 PASS, inherited Swerve
+regressions PASS, full suite 600 tests with 0 failures/0 errors/0 skipped,
+clean build PASS, runtime WPILib Simulation PASS, final read-only architecture
+review PASS, and Frozen Backbone review PASS.
+
+At an earlier repair stage the robot was unavailable, so real-robot
+verification was recorded as deferred. Later User evidence verifies Teleop and
+Autonomous usability. No stronger bounded stop/Disable/no-unintended-restart
+claim is added beyond the supplied evidence.
+
+The BL quantitative drivetrain anomaly remains **KNOWN / DEFERRED HARDWARE
+MAINTENANCE**. This checklist does not claim BL PASS, quantitative drivetrain
+PASS, matched module measurements, completed tuning, completed calibration, or
+issue resolution. Under the explicit Architect/User disposition, that separate
+maintenance condition does not block the Vision curriculum closure sequence.
+No tuning, recalibration, autonomous redesign, vision, Limelight, or
+PathPlanner validation belongs to this repair.
+
+## Historical Original V00_L07 Closure Checklist (Preserved)
+
+The checked items below document the original Vision Timestamp and Latency
+Contract lesson and its historical closure at `d58bef0`; they did not
+independently close the later exceptional repair cycle.
 
 ## Governance and predecessor
 
@@ -67,7 +141,7 @@ HEAD == origin/main: PASS
 - [x] V00_L07 activated as IN_PROGRESS / DESIGN LOCKED / EDITABLE.
 - [x] Architect authorized the exact implementation boundary.
 
-## Implementation
+## Historical Original Implementation
 
 - [x] Receive separate exact implementation authorization.
 - [x] Create only the authorized vendor-neutral timing production types.
@@ -77,7 +151,7 @@ HEAD == origin/main: PASS
 - [x] Do not modify Swerve, RobotContainer, telemetry, NetworkTables, or
       autonomous behavior.
 
-## Required future focused coverage
+## Historical Original Required Focused Coverage
 
 - [x] Zero latency.
 - [x] Positive finite latency.
@@ -93,7 +167,7 @@ HEAD == origin/main: PASS
 - [x] Seconds-unit consistency.
 - [x] No hidden clock, hardware, or vendor dependency.
 
-## Verification and closure
+## Historical Original Verification and Closure
 
 - [x] Production compile after implementation authorization.
 - [x] Test compile after implementation authorization.
@@ -110,7 +184,7 @@ HEAD == origin/main: PASS
 - [ ] Separate repository-level lifecycle metadata reconciliation for
       `AGENTS.md` and the root `README.md`.
 
-## Protected and deferred scope
+## Historical Original Protected and Deferred Scope
 
 V00_L08 owns real camera integration, Limelight/PhotonVision compatibility,
 vendor timestamp/latency fields, vendor timebase conversion, synchronization,
@@ -123,7 +197,7 @@ estimator correction.
 No HALSIM, Glass, Driver Station, real robot, or physical Limelight gate is
 required for this pure deterministic contract lesson.
 
-## Final result
+## Historical Original Final Result
 
 ~~~text
 V00_L07: COMPLETE / FROZEN / READ-ONLY
@@ -140,3 +214,27 @@ PUBLICATION SUBJECT: Complete V00_L07 vision timestamp and latency contract
 PUSH: PASS / origin/main / USER VERIFIED
 HEAD == origin/main: PASS
 ~~~
+
+## Current Exceptional Repair Result
+
+~~~text
+V00_L07: COMPLETE / FROZEN / READ-ONLY
+REPAIR SCOPE: R1 / R2 / R3 ONLY
+IMPLEMENTATION AUTHORIZATION: PASS / EXACT AUTHORIZED BOUNDARY
+IMPLEMENTATION: COMPLETE / R1/R2/R3
+AUTOMATED VERIFICATION: PASS / 600 TESTS / 0 FAILURES / 0 ERRORS / 0 SKIPPED
+SIMULATION: PASS
+POST-IMPLEMENTATION ARCHITECTURE REVIEW: PASS
+REAL ROBOT: USER VERIFIED / TELEOP AND AUTONOMOUS USABILITY
+BL QUANTITATIVE ANOMALY: KNOWN / DEFERRED HARDWARE MAINTENANCE
+QUANTITATIVE DRIVETRAIN PASS: NOT CLAIMED
+FINAL READ-ONLY CLOSURE REVIEW: PASS
+RE-FREEZE: PASS / EXPLICIT ARCHITECT/USER AUTHORIZATION
+REPAIR PUBLICATION: PENDING USER PUBLICATION
+V00_L08: NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / PROTECTED
+~~~
+
+The original completion checklist remains preserved as historical provenance.
+The repaired lesson passed final read-only closure review, received explicit
+Architect/User re-freeze authorization, and is now `COMPLETE / FROZEN /
+READ-ONLY`. Corrected repair publication remains pending User commit and push.

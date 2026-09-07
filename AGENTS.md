@@ -111,7 +111,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D00/
     ├── module_D01/
     ├── module_S00/
-    └── module_V00/ (authorized; V00_L01-L07 published/frozen; no active V00 lesson; V00_L08 is not started)
+    └── module_V00/ (authorized; V00_L01-L07 complete/frozen; no active V00 lesson; V00_L08 is not started)
         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -537,6 +537,8 @@ Lesson-specific decisions shall be recorded outside global governance and refere
   `docs/architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`
 - A01_L08 exceptional autonomous safety/robustness reopen:
   `docs/architecture_decisions/ADR_A01_L08_Autonomous_Safety_Robustness_Reopen.md`
+- V00_L07 inherited Swerve architecture/robustness integrity reopen:
+  `docs/architecture_decisions/ADR_V00_L07_Inherited_Swerve_Architecture_Robustness_Integrity_Reopen.md`
 
 The S00_L19/S00_L20 decision does not change the Frozen Backbone, the authority order, or the
 S00_L15-S00_L24 roadmap. The separately referenced A00 decision authorizes only the post-S00
@@ -619,16 +621,37 @@ vision measurement quality contract`; its lesson-local publication metadata
 reconciliation is recorded at `49c4286` as `Reconcile V00_L06 publication
 metadata`.
 
-The latest completed and published vision lesson is now
-V00_L07_VisionTimestampAndLatencyContract:
+The latest published vision snapshot remains the original
+V00_L07_VisionTimestampAndLatencyContract publication:
 `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ d58bef0 / USER VERIFIED`.
 Its lesson publication commit is
 `d58bef0d17d202ce1dd0b8645635a8c35095dd3f` with subject `Complete V00_L07
 vision timestamp and latency contract`; its lesson-local publication metadata
 reconciliation is recorded at `618dd09` as `Reconcile V00_L07 publication
-metadata`. No V00 lesson is currently active. V00_L08 is the next roadmap
-lesson and remains `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT
-PUBLISHED`.
+metadata`. At the time of the separately approved exceptional inherited-Swerve
+reopen, V00_L07 became the sole current editable lesson with state
+`REOPENED / IN_PROGRESS / EDITABLE`; implementation, fresh verification,
+re-freeze, and repair publication were then pending, and the original d58bef0
+publication remains historical pre-repair evidence.
+
+The authorized V00_L07 R1/R2/R3 repair is now implemented and documented. The
+fresh pre-repair baseline passed with 593/593 tests and a clean build; the
+post-repair full suite passed with 600/600 tests and a clean build. Runtime
+WPILib Simulation and the post-implementation read-only architecture/Frozen
+Backbone review passed. At the earlier repair stage, real-robot verification
+was `DEFERRED — ROBOT UNAVAILABLE`. Later User evidence verifies Teleop and
+Autonomous usability. The BL quantitative drivetrain anomaly remains `KNOWN /
+DEFERRED HARDWARE MAINTENANCE`; no quantitative drivetrain PASS, completed
+tuning/calibration, or issue resolution is claimed. Under the explicit
+Architect/User disposition it does not block the Vision curriculum closure
+sequence. The final read-only closure review passed and the Architect/User
+authorized re-freeze. V00_L07 is now `COMPLETE / FROZEN / READ-ONLY`; the
+corrected repair publication remains `PENDING USER PUBLICATION`. V00_L08 is the
+next roadmap
+lesson but remains `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT
+PUBLISHED / NON-AUTHORITATIVE / READ-ONLY` and must not be activated or
+modified before the separately governed reconstruction workflow. V00_L09
+remains not started.
 
 The authorized V00 lesson order is:
 
@@ -1240,6 +1263,89 @@ The documentation changes in this reconciliation remain subject to the User's
 separate Git publication operation. No future repository-reconciliation commit
 hash is recorded here.
 
+### V00_L07 Exceptional Swerve Integrity Reopen — 2026-08-31 (Historical activation record)
+
+The Architect and User approved a documentation-only exceptional reopen of
+V00_L07 for exactly three inherited Swerve integrity repairs: R1 removal of a
+command-layer dependency on the IO-owned
+`SwerveModuleIO.StaticFrictionStopReason` type; R2 best-effort all-module stop
+fanout when one module stop throws; and R3 coherent physical-forward measured
+drive position and velocity when `physicalForwardSign = -1`. The authoritative
+drive ratio remains `6.75:1`.
+
+The decision is recorded in
+`docs/architecture_decisions/ADR_V00_L07_Inherited_Swerve_Architecture_Robustness_Integrity_Reopen.md`.
+At this activation point, V00_L07 was the sole current
+`IN_PROGRESS / REOPENED / EDITABLE` lesson. The original publication at
+`d58bef0` remains historical pre-repair evidence; at that time no Design Lock,
+implementation authorization, implementation, fresh baseline, verification,
+re-freeze, or repair publication had yet occurred. The exact repair boundary
+and all exclusions were subject to the ADR and a later Design Lock; no
+production or test file was changed by that documentation-only lifecycle
+update.
+
+V00_L08 remains unactivated, non-authoritative, read-only, and
+`NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT PUBLISHED`. After V00_L07
+is repaired, re-verified, re-frozen, and published, V00_L08 must be freshly
+reconstructed from that corrected parent. The independent V00_L08 Limelight
+physical-evidence HOLD is unchanged. The V00 roadmap and lesson identities are
+unchanged, and A01_L10 remains prohibited.
+
+This latest reconciliation changes governance and lesson documentation only.
+Git publication remains User-owned and pending.
+
+### V00_L07 Post-Repair Documentation Reconciliation — 2026-08-31 (Historical robot-unavailable stage)
+
+The separately authorized R1/R2/R3 implementation is complete within the
+approved boundary. The fresh pre-repair baseline passed with 593/593 tests and
+a clean build. The post-repair focused tests, inherited regressions, and full
+600/600 test suite passed, and the clean build passed. Runtime WPILib
+Simulation and the final read-only architecture/Frozen Backbone review passed.
+Real-robot verification is `DEFERRED — ROBOT UNAVAILABLE`, so V00_L07 remains
+the sole `REOPENED / IN_PROGRESS / EDITABLE` lesson; re-freeze and repair
+publication remain pending. V00_L08 remains unactivated and read-only, must be
+reconstructed only from corrected published V00_L07, and its independent
+Limelight physical-evidence HOLD is unchanged. This reconciliation changes
+documentation metadata only.
+
+### V00_L07 Pre-Closure Hardware-Evidence Reconciliation — 2026-09-07
+
+The preceding 2026-08-31 record preserves the historical stage at which the
+robot was unavailable. Later User evidence verifies Teleop and Autonomous
+usability. The BL quantitative drivetrain anomaly remains `KNOWN / DEFERRED
+HARDWARE MAINTENANCE`; it is unresolved and is not BL PASS, quantitative
+drivetrain PASS, matched-module evidence, completed tuning/calibration, or
+issue resolution. The Architect/User disposition makes that separate
+maintenance condition non-blocking for continued Vision curriculum closure.
+
+The R1/R2/R3 implementation boundary, 593/593 reopened baseline, focused and
+inherited regressions, 600/600 post-repair suite, clean build, runtime WPILib
+Simulation, post-implementation architecture review, and Frozen Backbone
+review remain PASS. Pre-closure documentation evidence is reconciled. V00_L07
+remains the sole `REOPENED / IN_PROGRESS / EDITABLE` lesson and is
+`CLOSURE-READY / PENDING FINAL READ-ONLY CLOSURE REVIEW`. Explicit
+Architect/User re-freeze approval and User-owned corrected repair publication
+remain pending. Historical `d58bef0` remains the pre-repair publication.
+V00_L08 remains unactivated, non-authoritative, read-only, and untouched.
+
+### V00_L07 Final Re-Freeze Closure — 2026-09-07
+
+The final read-only closure review returned
+`READY_FOR_EXPLICIT_L07_REFREEZE_AUTHORIZATION`, and the Architect/User
+explicitly authorized the documentation-only re-freeze. V00_L07 is therefore
+`COMPLETE / FROZEN / READ-ONLY`. The R1/R2/R3 repair, verification evidence,
+Frozen Backbone, Frozen Interface Contract, and documentation are PASS.
+
+Teleop and Autonomous usability remain User-verified. The BL quantitative
+drivetrain anomaly remains `KNOWN / DEFERRED HARDWARE MAINTENANCE`; no BL PASS,
+quantitative drivetrain PASS, matched-module result, completed tuning or
+calibration, or issue resolution is claimed. Historical `d58bef0` remains the
+pre-repair V00_L07 publication only. The corrected repair publication does not
+yet exist and remains `PENDING USER PUBLICATION`. No V00 lesson is active;
+V00_L08 remains unactivated, non-authoritative, read-only, stale pre-repair
+inheritance and untouched pending a separately authorized reconstruction after
+corrected V00_L07 publication.
+
 ---
 
 ## 15. Final Report
@@ -1302,3 +1408,6 @@ Only report verified facts.
 | 1.28 | 2026-08-29 | FROZEN | APPROVED: activate the VERIFIED Markdown mirror reading policy while preserving authoritative English PDF precedence, integrity verification, direct-PDF fallback, and poster visual-reference requirements. |
 | 1.29 | 2026-08-30 | FROZEN | APPROVED: reconcile User-confirmed V00_L06 publication at `1327bf4` and lesson-local metadata reconciliation at `49c4286`; record V00_L01-L06 as published/frozen, no active V00 lesson, and V00_L07 as a prepared inherited pre-activation candidate. |
 | 1.30 | 2026-08-30 | FROZEN | APPROVED: reconcile repository current lifecycle through User-published V00_L07 at `d58bef0` and lesson-local metadata reconciliation at `618dd09`; record no active V00 lesson and keep V00_L08 `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT PUBLISHED`. |
+| 1.31 | 2026-08-31 | FROZEN | APPROVED: record the documentation-only exceptional V00_L07 reopen for exactly R1/R2/R3; V00_L07 is the sole `REOPENED / IN_PROGRESS / EDITABLE` lesson, implementation remains unauthorized, V00_L08 remains unactivated, and the original `d58bef0` publication remains historical. |
+| 1.32 | 2026-09-07 | FROZEN | APPROVED: reconcile later User-verified Teleop/Autonomous usability, retain the unresolved BL quantitative anomaly as `KNOWN / DEFERRED HARDWARE MAINTENANCE` without a quantitative drivetrain PASS claim, and record V00_L07 as closure-ready while it remains `REOPENED / IN_PROGRESS / EDITABLE` pending final read-only closure review, explicit re-freeze approval, and User-owned corrected repair publication; V00_L08 remains untouched and unactivated. |
+| 1.33 | 2026-09-07 | FROZEN | APPROVED: record final V00_L07 closure review PASS and re-freeze the repaired lesson as `COMPLETE / FROZEN / READ-ONLY`; retain historical `d58bef0` as pre-repair provenance, keep corrected publication `PENDING USER PUBLICATION`, record no active V00 lesson, and leave stale unactivated V00_L08 untouched. |

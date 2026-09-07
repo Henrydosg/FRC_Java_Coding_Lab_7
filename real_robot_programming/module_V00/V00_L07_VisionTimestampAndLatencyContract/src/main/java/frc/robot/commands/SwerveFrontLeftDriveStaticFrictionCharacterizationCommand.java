@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.io.swerve.SwerveModuleIO;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.util.Objects;
 
@@ -61,7 +60,7 @@ public final class SwerveFrontLeftDriveStaticFrictionCharacterizationCommand ext
 
     if (!DriverStation.isTestEnabled() || !DriverStation.isEnabled()) {
       swerveSubsystem.stopFrontLeftStaticFrictionCharacterization(
-          requestedVoltageVolts, SwerveModuleIO.StaticFrictionStopReason.REJECTED);
+          requestedVoltageVolts, SwerveSubsystem.StaticFrictionStopReason.REJECTED);
       outputStopped = true;
       rejected = true;
       return;
@@ -88,8 +87,8 @@ public final class SwerveFrontLeftDriveStaticFrictionCharacterizationCommand ext
       swerveSubsystem.stopFrontLeftStaticFrictionCharacterization(
           requestedVoltageVolts,
           !DriverStation.isEnabled()
-              ? SwerveModuleIO.StaticFrictionStopReason.DISABLE
-              : SwerveModuleIO.StaticFrictionStopReason.MODE_EXIT);
+              ? SwerveSubsystem.StaticFrictionStopReason.DISABLE
+              : SwerveSubsystem.StaticFrictionStopReason.MODE_EXIT);
       outputStopped = true;
       rejected = true;
       return;
@@ -100,7 +99,7 @@ public final class SwerveFrontLeftDriveStaticFrictionCharacterizationCommand ext
         && timeoutTimer.hasElapsed(
             Constants.SwerveConstants.kFrontLeftDriveStaticFrictionPulseDurationSeconds)) {
       swerveSubsystem.stopFrontLeftStaticFrictionCharacterization(
-          requestedVoltageVolts, SwerveModuleIO.StaticFrictionStopReason.TIMEOUT);
+          requestedVoltageVolts, SwerveSubsystem.StaticFrictionStopReason.TIMEOUT);
       outputStopped = true;
       timedOut = true;
     }
@@ -125,12 +124,12 @@ public final class SwerveFrontLeftDriveStaticFrictionCharacterizationCommand ext
       swerveSubsystem.stopFrontLeftStaticFrictionCharacterization(
           requestedVoltageVolts,
           interrupted
-              ? SwerveModuleIO.StaticFrictionStopReason.INTERRUPTED
+              ? SwerveSubsystem.StaticFrictionStopReason.INTERRUPTED
               : !DriverStation.isEnabled()
-                  ? SwerveModuleIO.StaticFrictionStopReason.DISABLE
+                  ? SwerveSubsystem.StaticFrictionStopReason.DISABLE
                   : !DriverStation.isTestEnabled()
-                      ? SwerveModuleIO.StaticFrictionStopReason.MODE_EXIT
-                      : SwerveModuleIO.StaticFrictionStopReason.TIMEOUT);
+                      ? SwerveSubsystem.StaticFrictionStopReason.MODE_EXIT
+                      : SwerveSubsystem.StaticFrictionStopReason.TIMEOUT);
       outputStopped = true;
     }
   }
