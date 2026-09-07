@@ -23,7 +23,7 @@
 - **Corrected publication commit:** 4704cfc0801910e30c8abb7cffcc467e4f4df016
 - **Corrected publication subject:** Complete corrected V00_L07 Swerve integrity repair
 - **Git publication:** HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / USER VERIFIED
-- **HEAD == origin/main:** PASS / 4704cfc0801910e30c8abb7cffcc467e4f4df016 / USER VERIFIED
+- **HEAD == origin/main at corrected repair publication:** PASS / 4704cfc0801910e30c8abb7cffcc467e4f4df016 / USER VERIFIED
 
 ## Exceptional inherited Swerve integrity repair cycle (current)
 
@@ -67,7 +67,9 @@ The required sequence is:
 9. Complete the post-implementation architecture review, documentation
    reconciliation, final read-only closure review, and explicit re-freeze —
    **COMPLETE / PASS / AUTHORIZED**.
-10. Only then freshly reconstruct V00_L08 from the corrected published V00_L07.
+10. Only then, under the separately authorized one-time amendment, preserve
+    and reconcile the existing V00_L08 candidate by forward-porting exactly the
+    seven authorized R1/R2/R3 files from corrected published V00_L07.
 
 The repaired lesson passed final read-only closure review, received explicit
 Architect/User re-freeze authorization, and is now `COMPLETE / FROZEN /
@@ -327,6 +329,6 @@ evidence, Simulation, later User functional hardware evidence, and deferred BL
 maintenance classification are reconciled. The repaired lesson passed final
 read-only closure review, received explicit Architect/User re-freeze
 authorization, and is `COMPLETE / FROZEN / READ-ONLY`.
-V00_L08 remains protected and will require a fresh reconstruction from the
-published corrected V00_L07. This documentation reconciliation changes no
-production or test implementation.
+V00_L08 remains protected and will require the separately authorized
+preservation-based reconciliation from the published corrected V00_L07. This
+documentation reconciliation changes no production or test implementation.

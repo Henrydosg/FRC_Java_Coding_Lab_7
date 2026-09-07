@@ -441,9 +441,11 @@ V00_L07 Swerve integrity repair`. Historical `d58bef0` is not that corrected
 repair publication.
 V00_L08 is the next roadmap lesson but remains `NOT STARTED / NOT
 ACTIVATED / NOT IMPLEMENTED / NOT PUBLISHED / NON-AUTHORITATIVE / READ-ONLY`.
-It must later be freshly reconstructed from the corrected published V00_L07
-through a separately authorized workflow. V00_L09 is not started. A01_L10
-remains prohibited.
+The existing candidate must be preserved and may proceed only through the
+AUTHORIZED ONE-TIME preservation-based reconciliation defined by the V00_L07
+reopen ADR; the historical reconstruction-only procedure is SUPERSEDED
+PROSPECTIVELY for this candidate. V00_L09 is not started. A01_L10 remains
+prohibited.
 
 Publication identity: `6482160 Complete V00_L05 AprilTag robot pose
 estimation` (`648216094fbea7eb5ebf26252f1ea457b93fcce8`).

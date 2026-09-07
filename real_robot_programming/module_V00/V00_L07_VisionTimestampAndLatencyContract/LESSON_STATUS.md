@@ -35,8 +35,9 @@
 - **Git Push:** HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / origin/main / USER VERIFIED
 - **Corrected Publication Commit:** 4704cfc0801910e30c8abb7cffcc467e4f4df016
 - **Corrected Publication Subject:** Complete corrected V00_L07 Swerve integrity repair
-- **Current Repository HEAD:** `4704cfc0801910e30c8abb7cffcc467e4f4df016` (`Complete corrected V00_L07 Swerve integrity repair`)
-- **Current Repository origin/main:** `4704cfc0801910e30c8abb7cffcc467e4f4df016` / CORRECTED V00_L07 REPAIR PUBLISHED
+- **Current Repository HEAD:** `5c4ceb469f218a02daa1b9aecbe89890b7992daa` (`Reconcile corrected V00_L07 publication metadata`)
+- **Current Repository origin/main:** `5c4ceb469f218a02daa1b9aecbe89890b7992daa`
+- **Corrected V00_L07 Repair Publication:** `4704cfc0801910e30c8abb7cffcc467e4f4df016` / USER VERIFIED
 - **Known Issues:** BL QUANTITATIVE DRIVETRAIN ANOMALY — KNOWN / DEFERRED
   HARDWARE MAINTENANCE. It is not a quantitative drivetrain PASS, is not
   resolved, and does not block this Vision-curriculum closure sequence under
@@ -64,9 +65,11 @@ recorded 600/600 tests PASS, with 0 failures, 0 errors, and 0 skipped, and the
 clean build passed. The drive ratio remains `6.75:1`.
 
 The Frozen Backbone, Frozen Interface Contract, and V00 roadmap are unchanged.
-V00_L08 remains unactivated, non-authoritative, read-only, and protected for a
-later fresh reconstruction from a corrected published V00_L07. The independent
-Limelight physical-evidence HOLD remains unresolved and outside this reopen.
+V00_L08 remains unactivated, non-authoritative, read-only, and protected. The
+historical reconstruction-only procedure is SUPERSEDED PROSPECTIVELY for the
+existing candidate by the authorized one-time preservation-based reconciliation
+from corrected published V00_L07. The independent Limelight physical-evidence
+HOLD remains unresolved and outside this reopen.
 
 ## Current Reopen Gate State
 

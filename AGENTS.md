@@ -648,8 +648,9 @@ sequence. The final read-only closure review passed and the Architect/User
 authorized re-freeze. V00_L07 is now `COMPLETE / FROZEN / READ-ONLY`; the
 corrected repair publication is now `PUBLISHED @ 4704cfc`; V00_L08 is the next roadmap
 lesson but remains `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT
-PUBLISHED / NON-AUTHORITATIVE / READ-ONLY` and must not be activated or
-modified before the separately governed reconstruction workflow. V00_L09
+PUBLISHED / NON-AUTHORITATIVE / READ-ONLY`. Its existing candidate must remain
+preserved and may proceed only through the separately authorized, one-time
+preservation-based reconciliation defined by the V00_L07 reopen ADR. V00_L09
 remains not started.
 
 The authorized V00 lesson order is:
@@ -1283,12 +1284,14 @@ and all exclusions were subject to the ADR and a later Design Lock; no
 production or test file was changed by that documentation-only lifecycle
 update.
 
-V00_L08 remains unactivated, non-authoritative, read-only, and
-`NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT PUBLISHED`. After V00_L07
-is repaired, re-verified, re-frozen, and published, V00_L08 must be freshly
-reconstructed from that corrected parent. The independent V00_L08 Limelight
-physical-evidence HOLD is unchanged. The V00 roadmap and lesson identities are
-unchanged, and A01_L10 remains prohibited.
+At that historical stage, V00_L08 remained unactivated, non-authoritative,
+read-only, and `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT PUBLISHED`,
+with fresh reconstruction from corrected V00_L07 as the then-authorized next
+procedure. That prospective procedure is now superseded for the existing
+candidate by the one-time preservation-based reconciliation authorized by the
+V00_L07 reopen ADR. The independent V00_L08 Limelight physical-evidence HOLD
+is unchanged. The V00 roadmap and lesson identities are unchanged, and
+A01_L10 remains prohibited.
 
 This latest reconciliation changes governance and lesson documentation only.
 Git publication remains User-owned and pending.
@@ -1352,12 +1355,43 @@ The User performed the authorized exact-allowlist publication. The corrected
 post-repair V00_L07 publication is `PUBLISHED / USER VERIFIED` at
 `4704cfc0801910e30c8abb7cffcc467e4f4df016`, with subject
 `Complete corrected V00_L07 Swerve integrity repair`. HEAD and origin/main both
-resolve to that commit. The earlier `d58bef0d17d202ce1dd0b8645635a8c35095dd3f`
+resolved to that commit at the time of that publication. The earlier
+`d58bef0d17d202ce1dd0b8645635a8c35095dd3f`
 publication remains preserved as historical pre-repair provenance.
 
 V00_L07 remains `COMPLETE / FROZEN / READ-ONLY`. V00_L08 remains untouched and
-unactivated; its fresh reconstruction is a separate governed action. V00_L09
-remains not started. This reconciliation changes documentation metadata only.
+unactivated; its one-time preservation-based reconciliation is a separate
+governed action. V00_L09 remains not started. This reconciliation changes
+documentation metadata only.
+
+### V00_L08 One-Time Preservation-Based Reconciliation Amendment — 2026-09-07
+
+The previous reconstruction-only procedure is HISTORICAL and is SUPERSEDED
+PROSPECTIVELY only for the existing V00_L08 candidate. The candidate remains
+preserved, NOT STARTED, NOT ACTIVATED, and READ-ONLY. Before any authorized
+reconciliation change, the User must create and verify a byte-preserving
+filesystem checkpoint outside the repository, including hidden files, `.Glass`,
+build, `bin`, `.gradle`, test artifacts, deploy assets, configuration, and
+documentation; the checkpoint is not staged or committed here.
+
+The only permitted forward-port boundary is the exact seven-file R1/R2/R3
+boundary from corrected V00_L07 publication
+`4704cfc0801910e30c8abb7cffcc467e4f4df016`, as enumerated in the ADR. Focused
+tests, inherited Swerve/vision/autonomous regressions, the full suite, clean
+build, changed-file verification, and a post-reconciliation inheritance /
+architecture review are mandatory. Only after those gates may normal L08
+Real Vision Adapter Design Lock and controlled activation proceed.
+
+This amendment changes no Documents A/B/C, Frozen Backbone, Frozen Interface
+Contract, roadmap, lesson scope, or User Git ownership. It authorizes no
+Limelight implementation, NetworkTables acquisition, vendor dependency, pose
+normalization, estimator fusion, PathPlanner change, drivetrain tuning, BL
+investigation, or V00_L09 work. The Limelight evidence distinction remains
+`Limelight -> roboRIO NetworkTables server -> Glass` as VERIFIED USER HARDWARE
+EVIDENCE, while `Limelight -> Java VisionIO -> immutable VisionObservation`
+remains NOT YET IMPLEMENTED. Detailed evidence must later be captured in a
+dedicated L08 experiment/evidence document; unresolved physical measurements
+are not governance authority.
 
 ---
 
@@ -1425,3 +1459,4 @@ Only report verified facts.
 | 1.32 | 2026-09-07 | FROZEN | APPROVED: reconcile later User-verified Teleop/Autonomous usability, retain the unresolved BL quantitative anomaly as `KNOWN / DEFERRED HARDWARE MAINTENANCE` without a quantitative drivetrain PASS claim, and record V00_L07 as closure-ready while it remains `REOPENED / IN_PROGRESS / EDITABLE` pending final read-only closure review, explicit re-freeze approval, and User-owned corrected repair publication; V00_L08 remains untouched and unactivated. |
 | 1.33 | 2026-09-07 | FROZEN | APPROVED: record final V00_L07 closure review PASS and re-freeze the repaired lesson as `COMPLETE / FROZEN / READ-ONLY`; retain historical `d58bef0` as pre-repair provenance, keep corrected publication `PENDING USER PUBLICATION`, record no active V00 lesson, and leave stale unactivated V00_L08 untouched. |
 | 1.34 | 2026-09-07 | FROZEN | APPROVED: reconcile User-confirmed corrected V00_L07 publication at `4704cfc`; retain historical `d58bef0`, record `COMPLETE / FROZEN / READ-ONLY / PUBLISHED`, verify HEAD == origin/main, and leave V00_L08 untouched and unactivated. |
+| 1.35 | 2026-09-07 | FROZEN | APPROVED: supersede the prospective reconstruction-only procedure for the exact existing V00_L08 candidate with a one-time preservation-based reconciliation; preserve the exact seven-file donor boundary, mandatory checkpoint and fresh verification, and keep L08 unactivated/read-only until post-reconciliation review. |

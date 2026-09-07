@@ -200,12 +200,16 @@ HOLD and not frozen.
 Git publication remains User-owned. Codex must not add, commit, push, or claim
 publication. The original d58bef0 remains historical pre-repair evidence.
 
-## 26. V00_L08 Reconstruction Requirement
+## 26. V00_L08 Reconstruction Requirement — HISTORICAL / SUPERSEDED PROSPECTIVELY
 
-After repaired V00_L07 is verified, re-frozen, and published, the current V00_L08
-candidate must be replaced by a fresh copy/reconstruction from that corrected
-authoritative predecessor. It must then undergo cleanup, baseline build,
-Architecture Audit, Design Lock, and the independent Limelight evidence gate.
+Before the later forensic comparison of the existing candidate, the authorized
+procedure was to replace the current V00_L08 candidate with a fresh
+copy/reconstruction from the corrected V00_L07 predecessor, followed by cleanup,
+baseline build, Architecture Audit, Design Lock, and the independent Limelight
+evidence gate. That was the correct plan for the evidence then available and is
+retained as historical context. Section 33 now supersedes that prospective
+replacement/reconstruction procedure only for the exact existing V00_L08
+candidate named there; it creates no precedent for other lessons.
 
 ## 27. Existing Independent Limelight HOLD
 
@@ -329,5 +333,79 @@ pre-repair evidence only. The corrected repair publication is
 V00_L07 Swerve integrity repair`; HEAD equals origin/main at that commit.
 
 V00_L08 remains not started, unactivated, non-authoritative, read-only, and
-untouched. Reconstructing it from the corrected published V00_L07 remains a
-separate governed action. V00_L09 remains not started.
+untouched. The historical reconstruction procedure in Section 26 is
+SUPERSEDED PROSPECTIVELY for this exact candidate by Section 33; its
+preservation-based reconciliation remains a separate governed action. V00_L09
+remains not started.
+
+## 33. Authorized One-Time Preservation-Based V00_L08 Reconciliation — 2026-09-07
+
+The prior forensic and governance reviews established the following complete
+basis for a narrow, candidate-specific exception:
+
+1. The existing V00_L08 contains valuable User hardware and experimental
+   evidence.
+2. No unexplained production-source divergence was found.
+3. The inherited defect delta is exact, bounded, and understood.
+4. Exactly seven Java/test files differ because this candidate predates the
+   corrected V00_L07 R1/R2/R3 repair.
+5. No V00_L08-specific Java implementation overlaps those seven files.
+6. The immutable corrected donor is the published V00_L07 repair at
+   `4704cfc0801910e30c8abb7cffcc467e4f4df016`.
+7. Fresh post-forward-port verification is mandatory.
+8. A post-reconciliation inheritance and architecture review is mandatory.
+
+Accordingly, preservation-based reconciliation is an AUTHORIZED ONE-TIME
+EXCEPTION for the existing
+`real_robot_programming/module_V00/V00_L08_RealVisionAdapterIntegration`
+candidate. It does not generally authorize forward-porting in future lessons
+and does not weaken ordinary Inheritance Development, the Frozen Backbone, the
+Frozen Interface Contract, one-active-lesson discipline, transition-document
+requirements, baseline verification, architecture audit, Design Lock, or User
+Git ownership.
+
+Before any reconciliation modification, the User must create and verify a
+byte-preserving filesystem checkpoint of the entire current L08 directory
+outside the repository. The checkpoint must preserve all files, hidden files,
+`.Glass` configuration, build output, `bin`, `.gradle`, test reports and
+artifacts, deploy assets, configuration, and documentation. It must not be
+staged or committed to this repository.
+
+The separately authorized reconciliation may forward-port only these seven
+files from the exact corrected donor above:
+
+Production:
+
+- `src/main/java/frc/robot/commands/SwerveFrontLeftDriveStaticFrictionCharacterizationCommand.java`
+- `src/main/java/frc/robot/subsystems/SwerveSubsystem.java`
+
+Tests:
+
+- `src/test/java/frc/robot/commands/SwerveFrontLeftOpenLoopCommissioningCommandTest.java`
+- `src/test/java/frc/robot/io/swerve/SwerveModuleIOSimTest.java`
+- `src/test/java/frc/robot/subsystems/SwerveSubsystemMeasuredSpeedTest.java`
+- `src/test/java/frc/robot/subsystems/SwerveSubsystemModulePositionTest.java`
+- `src/test/java/frc/robot/subsystems/SwerveSubsystemTest.java`
+
+L08 remains NOT ACTIVATED / READ-ONLY during reconciliation, except for files
+explicitly authorized by each controlled reconciliation step. Fresh verification
+after the forward-port must include focused R1/R2/R3 tests, inherited Swerve,
+vision, and autonomous regressions, the full test suite, a clean build,
+changed-file boundary verification, and the post-reconciliation inheritance /
+architecture review. Only after those gates may L08 proceed to its normal Real
+Vision Adapter Design Lock and controlled activation.
+
+This amendment does not authorize a Limelight Java adapter, NetworkTables
+acquisition by robot code, a new vendor dependency, camera pose normalization,
+estimator fusion, `addVisionMeasurement(...)`, PathPlanner changes, drivetrain
+tuning, BL hardware investigation, or any V00_L09 work.
+
+The governance-relevant Limelight distinction remains:
+
+- VERIFIED USER HARDWARE EVIDENCE: Limelight -> roboRIO NetworkTables server ->
+  Glass
+- NOT YET IMPLEMENTED: Limelight -> Java VisionIO -> immutable VisionObservation
+
+Detailed experimental evidence must later be preserved in a dedicated L08
+experiment/evidence document. Provisional physical measurements, including the
+unresolved WPILib pitch sign, are not architecture authority here.

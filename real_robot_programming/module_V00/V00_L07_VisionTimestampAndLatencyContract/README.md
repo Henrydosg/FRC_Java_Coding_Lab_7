@@ -26,8 +26,9 @@
 - Git push: HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / origin/main / USER VERIFIED
 - Corrected publication commit: 4704cfc0801910e30c8abb7cffcc467e4f4df016
 - Corrected publication subject: Complete corrected V00_L07 Swerve integrity repair
-- Current repository HEAD: `4704cfc0801910e30c8abb7cffcc467e4f4df016` (`Complete corrected V00_L07 Swerve integrity repair`)
-- Current repository origin/main: `4704cfc0801910e30c8abb7cffcc467e4f4df016` / CORRECTED V00_L07 REPAIR PUBLISHED
+- Current repository HEAD: `5c4ceb469f218a02daa1b9aecbe89890b7992daa` (`Reconcile corrected V00_L07 publication metadata`)
+- Current repository origin/main: `5c4ceb469f218a02daa1b9aecbe89890b7992daa`
+- Corrected V00_L07 repair publication identity: `4704cfc0801910e30c8abb7cffcc467e4f4df016` / USER VERIFIED
 
 ## Exceptional repair and re-freeze notice
 
@@ -57,9 +58,11 @@ drivetrain anomaly remains **KNOWN / DEFERRED HARDWARE MAINTENANCE**; no BL
 PASS, quantitative drivetrain PASS, matched-module claim, tuning completion,
 calibration completion, or issue resolution is asserted. Under the explicit
 Architect/User disposition, it does not block the Vision curriculum closure
-sequence. V00_L08 is unactivated and protected; it must later be reconstructed
-from a corrected published V00_L07. The independent Limelight physical-evidence
-HOLD remains unchanged.
+sequence. V00_L08 is unactivated and protected. The historical
+reconstruction-only procedure is SUPERSEDED PROSPECTIVELY for this exact
+existing candidate by the authorized one-time preservation-based reconciliation
+in the V00_L07 reopen ADR. The independent Limelight physical-evidence HOLD
+remains unchanged.
 
 ## Current repair result
 
@@ -274,5 +277,6 @@ maintenance classification are reconciled. The final read-only closure review
 passed and the Architect/User authorized re-freeze. The repaired lesson is now
 `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ 4704cfc`; corrected publication is
 User-verified at the recorded commit and subject. V00_L08 remains protected and
-unactivated; no production or test implementation was changed by this
-documentation transition.
+unactivated; its existing candidate may proceed only through the authorized
+one-time preservation-based reconciliation. No production or test
+implementation was changed by this documentation transition.

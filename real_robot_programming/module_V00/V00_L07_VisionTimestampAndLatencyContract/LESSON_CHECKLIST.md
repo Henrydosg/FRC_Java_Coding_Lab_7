@@ -21,7 +21,7 @@ Controlled staging: PASS / unexpected staged 0
 Unexpected committed: 0
 Commit: HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / USER VERIFIED
 Push: HISTORICAL BASELINE PASS / CORRECTED REPAIR PASS / origin/main / USER VERIFIED
-HEAD == origin/main: PASS / 4704cfc0801910e30c8abb7cffcc467e4f4df016 / USER VERIFIED
+HEAD == origin/main at corrected repair publication: PASS / 4704cfc0801910e30c8abb7cffcc467e4f4df016 / USER VERIFIED
 
 ## Current Exceptional Reopen Checklist
 
@@ -47,11 +47,17 @@ HEAD == origin/main: PASS / 4704cfc0801910e30c8abb7cffcc467e4f4df016 / USER VERI
 - [x] Post-implementation architecture and Frozen Backbone review.
 - [x] Final read-only closure review.
 - [x] Explicit re-freeze approval.
-- [ ] Repair publication by User.
-- [ ] Fresh V00_L08 reconstruction from corrected published V00_L07.
+- [x] Corrected repair publication by User: `4704cfc0801910e30c8abb7cffcc467e4f4df016` / USER VERIFIED.
+- [ ] Authorized one-time preservation-based reconciliation of the existing V00_L08 candidate.
 
-The remaining unchecked lifecycle work is User-owned corrected repair
-publication followed by a separately governed fresh V00_L08 reconstruction.
+The remaining unchecked lifecycle work is the separately governed one-time
+preservation-based reconciliation of the existing V00_L08 candidate. The
+historical fresh-reconstruction item is SUPERSEDED PROSPECTIVELY for this exact
+candidate and is not marked complete. Driver Station / Glass has no separate
+post-repair evidence and is not promoted to PASS. The later User functional
+hardware evidence is accepted at exactly the recorded Teleop/Autonomous
+usability level. The BL quantitative anomaly is separate deferred maintenance
+and is not a quantitative drivetrain PASS. No historical evidence is erased.
 Driver Station / Glass has no separate post-repair evidence and is not promoted to PASS. The
 later User functional hardware evidence is accepted at exactly the recorded
 Teleop/Autonomous usability level. The BL quantitative anomaly is separate
