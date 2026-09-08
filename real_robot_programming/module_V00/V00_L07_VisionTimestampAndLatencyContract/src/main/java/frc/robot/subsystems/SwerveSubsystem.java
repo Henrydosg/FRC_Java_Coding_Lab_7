@@ -1158,7 +1158,9 @@ public class SwerveSubsystem extends SubsystemBase {
       if (firstFailure == null) {
         return failure;
       }
-      firstFailure.addSuppressed(failure);
+      if (failure != firstFailure) {
+        firstFailure.addSuppressed(failure);
+      }
     }
     return firstFailure;
   }

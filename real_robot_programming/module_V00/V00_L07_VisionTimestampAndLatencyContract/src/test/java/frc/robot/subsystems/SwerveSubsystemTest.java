@@ -196,6 +196,31 @@ class SwerveSubsystemTest {
   }
 
   @Test
+  void stopAvoidsSelfSuppressionWhenModulesThrowTheSameThrowableInstance() {
+    List<String> stopAttemptOrder = new ArrayList<>();
+    RecordingModuleIO[] modules = createModules();
+    SwerveSubsystem subsystem = createSubsystem(modules);
+    configureStopTracking(modules, subsystem, stopAttemptOrder);
+    RuntimeException sharedFailure = new RuntimeException("shared module stop failure");
+    RuntimeException laterDistinctFailure =
+        new IllegalStateException("later module stop failure");
+    modules[0].stopFailure = sharedFailure;
+    modules[1].stopFailure = sharedFailure;
+    modules[2].stopFailure = laterDistinctFailure;
+
+    RuntimeException actualFailure = assertThrows(RuntimeException.class, subsystem::stop);
+
+    assertSame(sharedFailure, actualFailure);
+    assertEquals(1, actualFailure.getSuppressed().length);
+    assertSame(laterDistinctFailure, actualFailure.getSuppressed()[0]);
+    assertIterableEquals(List.of("FL", "FR", "BL", "BR"), stopAttemptOrder);
+    assertEachModuleStoppedOnce(modules);
+    for (RecordingModuleIO module : modules) {
+      assertTrue(module.sawSafeStateBeforeStop);
+    }
+  }
+
+  @Test
   void periodicRefreshesObservationsAndDispatchesWhenEnabled() {
     RecordingModuleIO frontLeft = new RecordingModuleIO();
     RecordingModuleIO frontRight = new RecordingModuleIO();
