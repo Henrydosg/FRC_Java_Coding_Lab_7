@@ -111,7 +111,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D00/
     ├── module_D01/
     ├── module_S00/
-    └── module_V00/ (authorized; V00_L01-L07 complete/frozen; no active V00 lesson; V00_L08 is not started)
+    └── module_V00/ (authorized; V00_L01-L08 complete/frozen; no current active lesson; V00_L09 is not started)
         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -646,12 +646,13 @@ tuning/calibration, or issue resolution is claimed. Under the explicit
 Architect/User disposition it does not block the Vision curriculum closure
 sequence. The final read-only closure review passed and the Architect/User
 authorized re-freeze. V00_L07 is now `COMPLETE / FROZEN / READ-ONLY`; the
-corrected repair publication is now `PUBLISHED @ 4704cfc`; V00_L08 is the next roadmap
-lesson but remains `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED / NOT
-PUBLISHED / NON-AUTHORITATIVE / READ-ONLY`. Its existing candidate must remain
-preserved and may proceed only through the separately authorized, one-time
-preservation-based reconciliation defined by the V00_L07 reopen ADR. V00_L09
-remains not started.
+corrected repair publication is now `PUBLISHED @ 4704cfc`. The following L08
+state is the historical pre-activation record: V00_L08 was then the next
+roadmap lesson and remained `NOT STARTED / NOT ACTIVATED / NOT IMPLEMENTED /
+NOT PUBLISHED / NON-AUTHORITATIVE / READ-ONLY`; its candidate had to remain
+preserved until separately authorized reconciliation. The current L08 state is
+recorded in the controlled repair activation section below. V00_L09 remains
+not started.
 
 The authorized V00 lesson order is:
 
@@ -1393,6 +1394,74 @@ remains NOT YET IMPLEMENTED. Detailed evidence must later be captured in a
 dedicated L08 experiment/evidence document; unresolved physical measurements
 are not governance authority.
 
+### V00_L08 Controlled Repair Activation and Reconciliation — 2026-09-09
+
+This is a historical pre-closure lifecycle record.
+
+The User explicitly authorized the bounded V00_L08 repair based on the final
+Astra closure audit. At that historical stage, the preserved candidate was the
+sole current `IN_PROGRESS / EDITABLE` lesson. The authorized repair boundary is limited to
+the real Limelight adapter freshness/coherence policy, the observation-only
+periodic runtime owner, read-only diagnostic telemetry, the public Limelight
+constant boundary, the directly related focused tests, and L08 lesson/root
+documentation reconciliation. V00_L09, pose-estimator fusion,
+Swerve/drivetrain/IO/tuning/calibration, autonomous behavior, PathPlanner,
+vendor dependency/configuration changes, and H1 promotion remain excluded.
+
+This entry records the User-authorized activation and bounded repair scope only;
+it does not promote an implementation-selected freshness recipe to frozen
+governance, declare runtime readiness, or alter the frozen VisionIO contract.
+The repair remains subject to the normal implementation, official build, test,
+Simulation, physical-camera, documentation, and closure gates.
+
+Both `VisionIOLimelight` and `VisionIOSim` are wired through the same periodic
+observation-only runtime path. RobotContainer remains the composition root and
+does not acquire samples or perform business logic. Limelight topic names remain
+private to the real adapter, and no vendor type is exposed through public IO,
+Observation, or telemetry contracts.
+
+At this recorded stage, `compileJava` and the direct focused execution were
+historical evidence only; official `compileTestJava`, inherited regressions,
+the full suite, clean build, Simulation, Driver Station/Glass, and real-camera
+validation were not closure evidence. H1 remains provisional. The lesson
+remains `IN_PROGRESS / EDITABLE`; User Git ownership is unchanged and Codex did
+not run Git.
+
+### V00_L08 Bounded Repair Clarification — 2026-09-10
+
+The 2026-09-09 entry is a lifecycle and scope authorization only. It does not
+freeze a particular NetworkTables freshness algorithm, heartbeat threshold,
+recovery recipe, or read-coherence implementation as global governance policy.
+At that historical pre-closure stage, the repair had to remain fail-closed and
+was judged by the explicit L08 verification gates. Until official test/build,
+Simulation, Driver Station/Glass, and real-camera evidence were complete,
+V00_L08 remained `IN_PROGRESS / EDITABLE`; no runtime-ready,
+production-convention, or `COMPLETE / FROZEN` claim was authorized by that
+record.
+
+### V00_L08 Final Closure and Freeze — 2026-09-10
+
+The final read-only architecture and closure review returned
+`PASS_V00_L08_FINAL_CLOSURE_REVIEW`, and the Architect authorized the final
+documentation-only freeze. V00_L08 is now
+`COMPLETE / FROZEN / READ-ONLY`.
+
+The authoritative evidence remains PASS for governance, the Frozen Backbone,
+the Frozen Interface Contract, focused verification (`37/37`), the full
+regression (`642/642`), clean build, WPILib Simulation, Driver Station/Glass,
+and real-robot Limelight acquisition, target loss, and reacquisition. The
+transition guide and documentation reconciliation are final and PASS. No
+current technical blocker or unexpected architectural drift remains.
+
+H1 remains a **PROVISIONAL COMMISSIONING LOCK** and is not promoted to official
+or proven vendor semantics. NetworkTables behavior remains documented as
+bounded freshness/coherence/read-stability checking, not atomic multi-topic
+reads. V00_L08 contains no estimator fusion; V00_L09 remains future work.
+
+No V00 lesson is active and V00_L09 remains not started. Lesson content/state
+is complete and frozen, while Git publication remains `PENDING USER
+COMMIT/PUSH`; Codex performed no Git operation.
+
 ---
 
 ## 15. Final Report
@@ -1460,3 +1529,6 @@ Only report verified facts.
 | 1.33 | 2026-09-07 | FROZEN | APPROVED: record final V00_L07 closure review PASS and re-freeze the repaired lesson as `COMPLETE / FROZEN / READ-ONLY`; retain historical `d58bef0` as pre-repair provenance, keep corrected publication `PENDING USER PUBLICATION`, record no active V00 lesson, and leave stale unactivated V00_L08 untouched. |
 | 1.34 | 2026-09-07 | FROZEN | APPROVED: reconcile User-confirmed corrected V00_L07 publication at `4704cfc`; retain historical `d58bef0`, record `COMPLETE / FROZEN / READ-ONLY / PUBLISHED`, verify HEAD == origin/main, and leave V00_L08 untouched and unactivated. |
 | 1.35 | 2026-09-07 | FROZEN | APPROVED: supersede the prospective reconstruction-only procedure for the exact existing V00_L08 candidate with a one-time preservation-based reconciliation; preserve the exact seven-file donor boundary, mandatory checkpoint and fresh verification, and keep L08 unactivated/read-only until post-reconciliation review. |
+| 1.36 | 2026-09-09 | FROZEN | APPROVED: record the User-authorized V00_L08 activation and bounded repair scope, preserve the observation-only runtime boundary and private Limelight schema boundary, and keep V00_L09/fusion/drivetrain/autonomous/configuration changes excluded. This entry does not approve an implementation-selected freshness recipe or declare runtime readiness. |
+| 1.37 | 2026-09-10 | FROZEN | APPROVED: clarify that the bounded V00_L08 repair does not promote implementation-selected freshness, threshold, recovery, or coherence behavior into global governance and remains verification-gated. |
+| 1.38 | 2026-09-10 | FROZEN | APPROVED: record final V00_L08 architecture/closure PASS and freeze the lesson as `COMPLETE / FROZEN / READ-ONLY`; retain H1 and NetworkTables qualifications, keep V00_L09/fusion out of scope, and leave Git publication pending User commit/push. |

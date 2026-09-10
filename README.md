@@ -439,16 +439,68 @@ publication commit is
 `4704cfc0801910e30c8abb7cffcc467e4f4df016` with subject `Complete corrected
 V00_L07 Swerve integrity repair`. Historical `d58bef0` is not that corrected
 repair publication.
-V00_L08 is the next roadmap lesson but remains `NOT STARTED / NOT
-ACTIVATED / NOT IMPLEMENTED / NOT PUBLISHED / NON-AUTHORITATIVE / READ-ONLY`.
-The existing candidate must be preserved and may proceed only through the
-AUTHORIZED ONE-TIME preservation-based reconciliation defined by the V00_L07
-reopen ADR; the historical reconstruction-only procedure is SUPERSEDED
-PROSPECTIVELY for this candidate. V00_L09 is not started. A01_L10 remains
-prohibited.
+The preceding V00_L08 lifecycle statement is historical and is superseded for
+the existing candidate by the controlled repair activation below. V00_L09 is
+not started. A01_L10 remains prohibited.
 
-Publication identity: `6482160 Complete V00_L05 AprilTag robot pose
-estimation` (`648216094fbea7eb5ebf26252f1ea457b93fcce8`).
+## Current V00_L08 final closure and freeze state - 2026-09-10
+
+The User authorized the bounded V00_L08 repair based on the final Astra closure
+audit. V00_L08 is now `COMPLETE / FROZEN / READ-ONLY`, and no V00 lesson is
+active. The repair was
+limited to real-adapter freshness/coherence,
+the periodic observation-only runtime owner, read-only diagnostics, the private
+Limelight schema boundary, directly related tests, and L08/root documentation.
+V00_L09 fusion, Swerve/drivetrain/IO/tuning/calibration, autonomous behavior,
+PathPlanner, vendor dependency/configuration changes, and H1 promotion remain
+excluded.
+
+The adapter requires heartbeat progression and fresh target-pose evidence after
+both the prior target-refresh boundary and the prior heartbeat-change boundary
+before accepting a target. Stable current `tv` and `tid` values remain
+required structural fields; a changed heartbeat, tag id, or visibility field
+alone is insufficient. Target changes observed while the heartbeat is stalled
+are not recovery evidence. Missing, reset, reconnect, stale, partial,
+malformed, or unstable data fails closed.
+Independent NetworkTables topics are not atomic; two equal target snapshots
+plus heartbeat rechecks provide only a read-stability and bounded-coherence
+guard, not an atomic frame guarantee. `tv == 0` is an invalid acquisition
+sample. Both real and simulation VisionIO use the same path:
+
+```text
+VisionSubsystem / immutable VisionObservation
+        |
+        +----> read-only Vision telemetry
+        |
+        +----> future V00_L09 estimator-fusion boundary
+```
+
+RobotContainer remains the composition root.
+
+The bounded repair and its verification gates are PASS by User evidence:
+the focused adapter tests are 37/37 PASS, the full regression is 642/642 PASS,
+and the clean build is PASS under Java 17. The earlier 642-test result of
+637 passed and five isolated failures remains historical pre-repair evidence;
+those five defects are no longer a current automated hold.
+
+User-owned runtime evidence is also PASS. WPILib Simulation and Driver
+Station/Glass confirm the Java observation path and telemetry; the inherited
+default `VisionIOSim` state is `UNAVAILABLE` with no target, which is an
+acceptable deterministic simulation result. This does not claim that the real
+Limelight adapter or LimelightOS was simulated. On the real robot, Limelight 4
+target acquisition for AprilTag 32, target loss, and reacquisition were
+observed through Java telemetry with the expected `TARGETS_PRESENT` and
+`INVALID_SAMPLE` states. H1 remains the **PROVISIONAL COMMISSIONING LOCK** and
+is not promoted to official or proven vendor semantics. The final architecture
+and closure review returned `PASS_V00_L08_FINAL_CLOSURE_REVIEW`; transition
+documentation and the final documentation reconciliation are PASS. Codex did
+not run Git.
+
+The final lesson content/state is `COMPLETE / FROZEN / READ-ONLY`. V00_L09
+remains future work and no fusion implementation was added. The User still
+owns Git publication.
+
+Publication: PENDING USER GIT; no V00_L08 publication commit is claimed.
 
 Approved lesson sequence:
 
