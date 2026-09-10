@@ -36,8 +36,8 @@
   RECONCILED FOR FINAL CLOSURE
 - **Closure:** COMPLETE / FINAL READ-ONLY ARCHITECTURE AND CLOSURE REVIEW PASS;
   LESSON FROZEN
-- **Git Commit:** PENDING USER / CODEX DID NOT RUN GIT
-- **Git Push:** PENDING USER / CODEX DID NOT RUN GIT
+- **Git Commit:** PUBLISHED @ `f34b210` / USER VERIFIED; Codex did not run Git
+- **Git Push:** PASS / `origin/main` contains `f34b210`; Codex did not run Git
 - **Known Issues:** Rotation remains **PROVISIONAL COMMISSIONING LOCK** and is
   not promoted to official or proven vendor semantics. A historical Codex-local
   Windows/Javac classpath-resolution anomaly remains non-authoritative because
@@ -165,5 +165,6 @@ verification, Simulation, Driver Station/Glass, real-robot evidence, and
 transition documentation are reconciled and PASS. H1 remains the
 **PROVISIONAL COMMISSIONING LOCK**; the bounded NetworkTables checks are not an
 atomic multi-topic read claim; and V00_L09 estimator fusion remains out of
-scope. Git publication remains pending the User's commit/push workflow. No Git
-operation was run.
+scope. Git publication is recorded as `PUBLISHED @ f34b210 / USER VERIFIED`.
+The publication message is `Complete V00_L08 real vision adapter integration`;
+the User confirmed push PASS to `origin/main`. No Git operation was run.

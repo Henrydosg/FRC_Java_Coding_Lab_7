@@ -9,7 +9,9 @@
 - **Freeze state:** FROZEN
 - **Implementation result:** COMPLETE / VERIFIED / DOCUMENTATION COMPLETE /
   FINAL ARCHITECTURE AND CLOSURE REVIEW PASS
-- **Git:** User-owned; Codex did not run Git
+- **Git publication:** `PUBLISHED @ f34b210 / USER VERIFIED`; message
+  `Complete V00_L08 real vision adapter integration`; push PASS to
+  `origin/main`. Codex did not run Git.
 
 ## One-concept objective
 
@@ -108,5 +110,6 @@ operations.
    estimator, or vendor-boundary drift occurred.
 3. The transition guide, status, plan, checklist, and lesson README are final
    and record `COMPLETE / FROZEN / READ-ONLY`.
-4. The User performs the Git add/commit/push workflow separately. Git
-   publication remains User-owned and pending; no publication hash is claimed.
+4. The User performed the Git add/commit/push workflow separately. Publication
+   is recorded at `f34b210` with push PASS to `origin/main`; Codex did not run
+   Git.

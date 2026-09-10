@@ -7,7 +7,9 @@
 - **Predecessor:** V00_L07 - Vision Timestamp and Latency Contract @ `4704cfc`
 - **Implementation result:** COMPLETE / VERIFIED / DOCUMENTATION COMPLETE /
   FINAL ARCHITECTURE AND CLOSURE REVIEW PASS
-- **Git:** User-owned; Codex did not run Git
+- **Git publication:** `PUBLISHED @ f34b210 / USER VERIFIED`; message
+  `Complete V00_L08 real vision adapter integration`; push PASS to
+  `origin/main`. Codex did not run Git.
 
 This lesson-local record reflects the user-authorized V00_L08 repair and final
 closure review. V00_L08 is complete and frozen; V00_L09 and all fusion work
@@ -142,5 +144,6 @@ heartbeat checks are a coherence guard, not an atomic multi-topic read claim.
 The final read-only architecture and closure review returned
 `PASS_V00_L08_FINAL_CLOSURE_REVIEW`. The transition guide and documentation
 reconciliation are final and PASS. V00_L08 is now documented as
-`COMPLETE / FROZEN / READ-ONLY`. Git publication remains pending the User's
-commit/push; no publication commit hash is claimed.
+`COMPLETE / FROZEN / READ-ONLY`. Git publication is recorded as
+`PUBLISHED @ f34b210 / USER VERIFIED`, with push PASS to `origin/main`. No Git
+operation was run by Codex.

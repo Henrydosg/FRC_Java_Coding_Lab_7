@@ -1458,9 +1458,21 @@ or proven vendor semantics. NetworkTables behavior remains documented as
 bounded freshness/coherence/read-stability checking, not atomic multi-topic
 reads. V00_L08 contains no estimator fusion; V00_L09 remains future work.
 
-No V00 lesson is active and V00_L09 remains not started. Lesson content/state
-is complete and frozen, while Git publication remains `PENDING USER
-COMMIT/PUSH`; Codex performed no Git operation.
+No V00 lesson is active and V00_L09 remains not started. At the closure point
+before later publication, lesson content/state was complete and frozen while
+Git publication remained `PENDING USER COMMIT/PUSH`; Codex performed no Git
+operation.
+
+### V00_L08 User Git Publication Reconciliation — 2026-09-10
+
+The User subsequently confirmed the authorized publication of the frozen
+V00_L08 lesson. The authoritative publication commit is `f34b210` with
+message `Complete V00_L08 real vision adapter integration`. The User also
+confirmed push `PASS` and that `origin/main` contains `f34b210`.
+
+V00_L08 remains `COMPLETE / FROZEN / READ-ONLY`; no production or test source
+was changed by this metadata reconciliation, and V00_L09 remains not started.
+Codex performed no Git operation.
 
 ---
 
@@ -1532,3 +1544,4 @@ Only report verified facts.
 | 1.36 | 2026-09-09 | FROZEN | APPROVED: record the User-authorized V00_L08 activation and bounded repair scope, preserve the observation-only runtime boundary and private Limelight schema boundary, and keep V00_L09/fusion/drivetrain/autonomous/configuration changes excluded. This entry does not approve an implementation-selected freshness recipe or declare runtime readiness. |
 | 1.37 | 2026-09-10 | FROZEN | APPROVED: clarify that the bounded V00_L08 repair does not promote implementation-selected freshness, threshold, recovery, or coherence behavior into global governance and remains verification-gated. |
 | 1.38 | 2026-09-10 | FROZEN | APPROVED: record final V00_L08 architecture/closure PASS and freeze the lesson as `COMPLETE / FROZEN / READ-ONLY`; retain H1 and NetworkTables qualifications, keep V00_L09/fusion out of scope, and leave Git publication pending User commit/push. |
+| 1.39 | 2026-09-10 | FROZEN | APPROVED: reconcile User-confirmed V00_L08 publication at `f34b210`, record message `Complete V00_L08 real vision adapter integration` and push PASS to `origin/main`, while preserving the frozen lesson state and V00_L09 boundary. |

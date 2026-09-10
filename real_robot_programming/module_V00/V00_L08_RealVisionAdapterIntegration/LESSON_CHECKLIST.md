@@ -5,7 +5,7 @@ Freeze state: FROZEN
 Predecessor: V00_L07 @ 4704cfc - COMPLETE / FROZEN / READ-ONLY / PUBLISHED  
 Implementation result: COMPLETE / VERIFIED / DOCUMENTATION COMPLETE / FINAL
 ARCHITECTURE AND CLOSURE REVIEW PASS  
-Git commit/push: PENDING USER
+Git commit/push: PUBLISHED @ f34b210 / USER VERIFIED
 
 ## Governance and provenance
 
@@ -91,4 +91,5 @@ Git commit/push: PENDING USER
       `PASS_V00_L08_FINAL_CLOSURE_REVIEW`.
 - [x] Transition guide finalized and marked PASS.
 - [x] Lesson marked COMPLETE / FROZEN / READ-ONLY.
-- [ ] User commits and pushes the lesson.
+- [x] User commits and pushes the lesson; publication is verified at
+      `f34b210` on `origin/main`.

@@ -500,7 +500,8 @@ The final lesson content/state is `COMPLETE / FROZEN / READ-ONLY`. V00_L09
 remains future work and no fusion implementation was added. The User still
 owns Git publication.
 
-Publication: PENDING USER GIT; no V00_L08 publication commit is claimed.
+Publication: `PUBLISHED @ f34b210 / USER VERIFIED`; message `Complete V00_L08
+real vision adapter integration`; push PASS to `origin/main`.
 
 Approved lesson sequence:
 

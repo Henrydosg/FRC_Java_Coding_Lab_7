@@ -192,5 +192,7 @@ Driver Station/Glass, and real-robot PASS evidence. The final read-only
 architecture and closure review returned
 `PASS_V00_L08_FINAL_CLOSURE_REVIEW`, and the guide was finalized.
 
-**Expected Result** V00_L08 is `COMPLETE / FROZEN / READ-ONLY`. The User owns
-the separate Git publication workflow, which remains pending.
+**Expected Result** V00_L08 is `COMPLETE / FROZEN / READ-ONLY`. The User-owned
+publication is recorded at `f34b210` with message `Complete V00_L08 real vision
+adapter integration`; push PASS to `origin/main` was confirmed. Codex did not
+run Git.
