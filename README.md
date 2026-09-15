@@ -496,12 +496,92 @@ and closure review returned `PASS_V00_L08_FINAL_CLOSURE_REVIEW`; transition
 documentation and the final documentation reconciliation are PASS. Codex did
 not run Git.
 
-The final lesson content/state is `COMPLETE / FROZEN / READ-ONLY`. V00_L09
-remains future work and no fusion implementation was added. The User still
-owns Git publication.
+At the V00_L08 closure point, the final lesson content/state was
+`COMPLETE / FROZEN / READ-ONLY`. V00_L09 was still future work at that
+historical point and no fusion implementation was added. The later controlled
+V00_L09 activation is recorded below. The User still owns Git publication.
 
 Publication: `PUBLISHED @ f34b210 / USER VERIFIED`; message `Complete V00_L08
 real vision adapter integration`; push PASS to `origin/main`.
+
+## Current V00_L09 implementation, evidence, and documentation state - 2026-09-15
+
+V00_L08 remains `COMPLETE / FROZEN / READ-ONLY`. Its implementation
+publication is `f34b210` with message `Complete V00_L08 real vision adapter
+integration`. The User separately identifies `6415b17` as the later V00_L08
+publication-metadata reconciliation; that history remains distinct from the
+predecessor implementation publication, and no V00_L08 file is modified by
+this activation.
+
+The prepared ADR-locked
+`V00_L09_SwervePoseEstimatorVisionFusion` candidate became the sole active V00
+lesson during implementation and is now closed by explicit Architect freeze
+authorization:
+
+```text
+STATUS: COMPLETE
+ACTIVE STATE: COMPLETE / FROZEN / READ-ONLY
+FREEZE STATE: FROZEN / READ-ONLY
+ACTIVE LESSON COUNT: 0
+GIT COMMIT: PENDING USER COMMIT
+GIT PUSH: PENDING USER PUSH
+PUBLICATION: PENDING USER PUBLICATION
+```
+
+The User-supplied evidence records candidate preparation, generated-artifact
+cleanup, inherited baseline clean-build PASS, roadmap identity reconciliation,
+architecture audit PASS, timing-source investigation PASS, runtime
+orchestration micro-audit PASS, coordinator decision PASS, and the Architect
+gate `PASS_V00_L09_FINAL_DESIGN_LOCK`.
+
+The one locked L09 concept is:
+
+```text
+qualified timestamped AprilTag measurement
+    -> post-scheduler VisionFusionCoordinator requirement
+    -> guarded Swerve-owned admission
+    -> SwerveDrivePoseEstimator.addVisionMeasurement(...)
+```
+
+Swerve remains the sole owner of estimator state. Vision remains vendor-neutral
+above IO. RobotContainer remains the composition root. No MegaTag migration,
+dynamic quality covariance, Constants tuning, or unrelated architecture
+change is included.
+
+The locked implementation is complete. User-verified focused and inherited
+tests, direct A-G failure/admission evidence, `compileTestJava`, the full
+637/637 suite, and clean build are PASS; the preserved generated report records
+637 tests with zero failures, errors, and skipped tests. The narrow
+failure-boundary test repair changed only invalid test fixtures and reused the
+existing deterministic quality-valid VisionIOSimHarness Frame A/B path;
+production policy and behavior were not changed. Simulation Gate 1, estimator
+initialization, Simulation Gate 2, and Driver Station / Glass are PASS.
+
+Deployed V00_L09 Limelight flat-root `/limelight/json` parser, timing/result,
+Available/Connected/SampleValid, and AprilTag 32 acquisition verification are
+PASS. Real estimator initialization, stationary accepted fusion, positive
+accepted-fusion count, geometry consistency, controlled translation/rotation,
+target loss/reacquisition, and camera disconnect/recovery are PASS.
+
+The evidence classifications are `THEORY VERIFIED`, `SIMULATION VERIFIED`, and
+`REAL HARDWARE VERIFIED`. For bounded autonomous Gate 9, BLUE `ONE_METER_PATH`
+preparation and completion passed. Vision was intentionally invalid/suppressed
+because the physical Tag 32 placement was not asserted to match the official
+field coordinate. Gate 9 proves bounded autonomous lifecycle and estimator
+compatibility; it does not claim exact 1.000 m endpoint accuracy or physical
+absolute-pose calibration accuracy.
+
+The final independent architecture review passed with
+`PASS_V00_L09_FINAL_ARCHITECTURE_REVIEW_READY_FOR_DOCUMENTATION_CLOSURE`. Final
+documentation review passed with
+`PASS_V00_L09_FINAL_DOCUMENTATION_REVIEW_READY_FOR_FREEZE_AUTHORIZATION`, and
+the Architect issued `PASS_V00_L09_FINAL_FREEZE_AUTHORIZATION`. The
+documentation-only lifecycle transition is now recorded as
+`COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`.
+
+One historical Driver Station overrun warning remains non-proven; if it recurs,
+capture WPILib/Driver Station timing epochs before any performance repair. User
+Git commit, push, and publication remain pending and User-owned.
 
 Approved lesson sequence:
 
