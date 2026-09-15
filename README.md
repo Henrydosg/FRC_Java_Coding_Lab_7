@@ -627,14 +627,15 @@ No camera/vendor is selected in V00_L01 through V00_L07. V00_L08 may select one
 real implementation only after the ADR's hardware, WPILib 2026, vendor-version,
 timestamp, dependency, and applicable simulation compatibility gate passes.
 
-## M00 governance preparation state — 2026-09-15
+## M00_L01 final documentation-only freeze state — 2026-09-15
 
 The controlling successor record is
 `docs/architecture_decisions/ADR_M00_Competition_Mechanism_Foundations_Roadmap.md`.
-The M00 roadmap is `APPROVED / ROADMAP AUTHORIZED`; M00 preparation is
-`AUTHORIZED` by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`; M00 runtime and
-lesson activation remain `NOT ACTIVE`. No M00 directory or lesson has been
-created.
+The M00 roadmap is `APPROVED / ROADMAP AUTHORIZED`. Preparation was authorized
+by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`, published, completed by the
+User, and accepted through the inherited Java 17 baseline build and independent
+Architecture / Inheritance Audit. The Architect Design Lock is
+`PASS_M00_L01_FINAL_DESIGN_LOCK`.
 
 ```text
 Active Lesson Count: 0
@@ -643,8 +644,9 @@ Active Lesson Count: 0
 The locked roadmap contains exactly 16 lessons, `M00_L01` through `M00_L16`, in
 the ADR-defined order. The first lesson is exactly
 `M00_L01 - Mechanism Architecture Reuse`, with locked directory identity
-`M00_L01_MechanismArchitectureReuse`. It is `NOT ACTIVE / NOT YET CREATED`, is
-not `IN_PROGRESS`, and has no implementation authorization.
+`M00_L01_MechanismArchitectureReuse`. It is now `COMPLETE / FROZEN /
+READ-ONLY`, and no M00 lesson is active. Implementation authorization and
+production-code authorization remain `NONE`.
 
 Its exact predecessor is the complete frozen V00_L09 snapshot at repository
 state `5d36529`, with implementation/freeze commit `6548c98`:
@@ -659,20 +661,23 @@ D01 is not the predecessor. The exact future destination is:
 C:\Users\xps7350i7\Desktop\FRC_Java_Coding_Lab_7\real_robot_programming\module_M00\M00_L01_MechanismArchitectureReuse
 ```
 
-Only after this governance record is reviewed and User-published may the User
-start at the repository root, copy the complete frozen V00_L09 directory,
-create `module_M00` as part of that copy workflow, rename only the destination
-copy, remove only its `build\` and `.gradle\`, select WPILib 2026 Java 17, run
-the inherited baseline clean build, and report `BUILD SUCCESSFUL` plus Git
-status. The command recorded for execution inside the future destination is:
+The User completed the authorized preparation sequence: copy the complete
+frozen V00_L09 directory, create `module_M00` as part of that workflow, rename
+only the destination copy, remove only its copied `build\` and `.gradle\`, and
+run the inherited baseline clean build under WPILib 2026 Java 17. The accepted
+result is `BUILD SUCCESSFUL in 20s` with 7 actionable tasks executed. The
+recorded command was:
 
 ```powershell
 $env:JAVA_HOME = "C:\Users\Public\wpilib\2026\jdk"
 .\gradlew.bat clean build "-Dorg.gradle.java.home=C:\Users\Public\wpilib\2026\jdk"
 ```
 
-Architecture Audit, Design Lock, lifecycle activation, and implementation
-authorization remain later separate gates. M00 preserves the Frozen Backbone,
+The Architecture / Inheritance Audit passed with 601 comparable non-generated
+files on each side, zero missing or candidate-only files, and zero SHA-256
+differences. The Architect Design Lock then passed, and this documentation-only
+controlled activation reconciled M00_L01 to `IN_PROGRESS / EDITABLE` with
+active lesson count `1`. M00 preserves the Frozen Backbone,
 Frozen Interface Contract, Constants authority, frozen lesson protection, and
 one-lesson/one-new-concept rule. RobotContainer remains composition root only;
 vendor APIs remain inside concrete IO adapters; mechanism data follows
@@ -694,8 +699,48 @@ files with identical structure, course/chapter identity, meaning, evidence, and
 architecture rules. English is normative; Vietnamese is student-friendly but
 semantically equivalent. Evidence labels are limited to `THEORY VERIFIED`,
 `SIMULATION VERIFIED`, `REAL HARDWARE VERIFIED`, `REAL HARDWARE DEFERRED`, and
-`NOT APPLICABLE`. M00_L01 runtime applicability is not claimed; its future
-Design Lock decides it. No V00 rerun is required by this preparation record.
+`NOT APPLICABLE`. Under the approved Design Lock, M00_L01 is architecture-only:
+Simulation, Driver Station / Glass, and real hardware are `NOT APPLICABLE`.
+Focused new tests and test implementation are also `NOT APPLICABLE` / `NONE`.
+The paired English and Vietnamese student learning guides are complete and
+reviewed with identical 21-section structure and equivalent technical meaning.
+The initial independent review returned
+`HOLD_M00_L01_INDEPENDENT_DOCUMENTATION_REVIEW_MISSING_CONSTANTS_AUTHORITY`.
+The minimal repair added the missing `Constants.java` default-configuration-
+authority statement without defining mechanism configuration values and passed
+at `PASS_M00_L01_CONSTANTS_AUTHORITY_REPAIR_READY_FOR_INDEPENDENT_REREVIEW`; the
+independent rereview passed at
+`PASS_M00_L01_INDEPENDENT_DOCUMENTATION_REREVIEW_READY_FOR_FINAL_USER_BUILD`.
+The Architect documentation review then passed at
+`PASS_M00_L01_DOCUMENTATION_REVIEW_COMPLETE_READY_FOR_FINAL_BUILD`.
+
+The User-supplied final inherited clean build/regression is distinct from the
+20-second preparation baseline and passed with `BUILD SUCCESSFUL in 23s`; 7
+actionable tasks were executed. Its gate is
+`PASS_M00_L01_FINAL_INHERITED_CLEAN_BUILD_REGRESSION`. The final read-only
+closure review passed at
+`PASS_M00_L01_FINAL_CLOSURE_REVIEW_READY_FOR_DOCUMENTATION_RECONCILIATION` and
+was accepted through
+`PASS_M00_L01_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_DOCUMENTATION_RECONCILIATION`.
+Technical/content closure readiness is `PASS`.
+
+The controlled documentation reconciliation then passed at
+`PASS_M00_L01_DOCUMENTATION_RECONCILED_READY_FOR_FREEZE_AUTHORIZATION`, was
+accepted for independent review at
+`PASS_M00_L01_DOCUMENTATION_RECONCILIATION_ACCEPTED_READY_FOR_INDEPENDENT_REVIEW`,
+and passed independent review at
+`PASS_M00_L01_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION`.
+The Architect issued `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`.
+
+M00_L01 is now `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`,
+freeze state `FROZEN / READ-ONLY`, Design Lock
+`PASS_M00_L01_FINAL_DESIGN_LOCK`, and production-code authorization `NONE`.
+Technical/content work is complete; evidence remains `THEORY VERIFIED`, and
+runtime verification remains `NOT APPLICABLE`. Publication is `NOT YET
+PUBLISHED / PENDING USER GIT`; Git commit, Git push, and remote verification
+remain pending. M00_L02 is not active and is not created, and the M00 module is
+not declared complete. No V00 runtime evidence is reused as M00_L01
+verification.
 
 ---
 

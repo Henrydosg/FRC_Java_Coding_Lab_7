@@ -3,10 +3,17 @@
 - Status: APPROVED
 - Date: 2026-09-13
 - Roadmap State: APPROVED / ROADMAP AUTHORIZED
-- Preparation State: AUTHORIZED
+- Preparation State: COMPLETE / ACCEPTED
 - Preparation Authorization: PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED
-- Runtime / Lesson Activation: NOT ACTIVE
+- Runtime / Lesson Activation: M00_L01 COMPLETE / FROZEN / READ-ONLY
+- Controlled Activation: COMPLETE / CLOSED BY FINAL FREEZE
+- Freeze State: FROZEN / READ-ONLY
+- Design Lock: PASS_M00_L01_FINAL_DESIGN_LOCK
+- Implementation Authorization: NONE
 - Active Lesson Count: 0
+- Technical / Content Closure Readiness: PASS
+- Freeze Authorization: PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION
+- Git Publication: PENDING USER GIT
 - Scope: Future post-V00 mechanism curriculum roadmap
 - Authority: Approved successor ADR to
   `ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`. The
@@ -463,6 +470,101 @@ VERIFIED`, `REAL HARDWARE VERIFIED`, `REAL HARDWARE DEFERRED`, and `NOT
 APPLICABLE`. Runtime applicability is not claimed for M00_L01; its future
 Design Lock decides which runtime evidence applies. No V00 rerun is required.
 
+## M00_L01 Controlled Activation — 2026-09-15
+
+The User completed the authorized copy, rename, destination-only generated
+artifact cleanup, and WPILib Java 17 inherited baseline build. The accepted
+baseline result is `BUILD SUCCESSFUL in 20s` with seven actionable tasks
+executed. The independent read-only Architecture / Inheritance Audit passed
+with 601 comparable non-generated files in both the predecessor and candidate,
+zero missing files, zero candidate-only files, and zero SHA-256 differences.
+
+The Architect then issued `PASS_M00_L01_FINAL_DESIGN_LOCK`. The locked lesson
+is documentation-only and teaches Mechanism Architecture Reuse. Production
+Java, test code, configuration, vendordeps, deploy assets, new runtime behavior,
+and mechanism hardware APIs all have authorization `NONE`.
+
+This controlled activation records:
+
+```text
+M00 Roadmap: APPROVED / ROADMAP AUTHORIZED
+M00 Preparation: COMPLETE / ACCEPTED
+M00_L01 Status: IN_PROGRESS
+M00_L01 Active State: IN_PROGRESS / EDITABLE
+M00_L01 Freeze State: EDITABLE
+Active Lesson Count: 1
+Implementation Authorization: NONE
+Production Code Authorization: NONE
+```
+
+V00_L09 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`.
+At this controlled-activation point, M00_L01 evidence was `THEORY VERIFIED`.
+Focused new tests were `NOT APPLICABLE`; Simulation, Driver Station / Glass,
+and real hardware were `NOT APPLICABLE` because no executable or hardware
+behavior was introduced. The User-owned final inherited clean build/regression
+was still required before final lesson closure; its later result is recorded
+below.
+
+Any new student-facing M00 Markdown remains subject to the separate English and
+Vietnamese file rule with identical structure, identity, meaning, evidence, and
+architecture rules. No student learning guide was created by the activation
+itself.
+
+## M00_L01 Pre-Freeze Documentation and Closure Readiness — 2026-09-15
+
+The separately authorized paired English and Vietnamese learning guides were
+created with identical 21-section structure and equivalent technical meaning.
+The first independent documentation review returned
+`HOLD_M00_L01_INDEPENDENT_DOCUMENTATION_REVIEW_MISSING_CONSTANTS_AUTHORITY`
+because both guides omitted the rule that `Constants.java` remains the default
+configuration authority. The minimal two-guide repair added equivalent
+statements and defined no mechanism configuration value, producing
+`PASS_M00_L01_CONSTANTS_AUTHORITY_REPAIR_READY_FOR_INDEPENDENT_REREVIEW`. The independent
+rereview passed at
+`PASS_M00_L01_INDEPENDENT_DOCUMENTATION_REREVIEW_READY_FOR_FINAL_USER_BUILD`,
+and the Architect recorded
+`PASS_M00_L01_DOCUMENTATION_REVIEW_COMPLETE_READY_FOR_FINAL_BUILD`.
+
+The User then supplied the distinct final inherited clean build/regression:
+`BUILD SUCCESSFUL in 23s`, with 7 actionable tasks executed. The accepted gate
+is `PASS_M00_L01_FINAL_INHERITED_CLEAN_BUILD_REGRESSION`. The final read-only
+architecture/documentation closure review passed at
+`PASS_M00_L01_FINAL_CLOSURE_REVIEW_READY_FOR_DOCUMENTATION_RECONCILIATION`, and
+the Architect accepted that review through
+`PASS_M00_L01_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_DOCUMENTATION_RECONCILIATION`.
+Technical/content closure readiness is `PASS`.
+
+At that pre-freeze reconciliation point, M00_L01 remained the sole `IN_PROGRESS
+/ EDITABLE` lesson, freeze state `EDITABLE`, with active lesson count `1`, Design Lock
+`PASS_M00_L01_FINAL_DESIGN_LOCK`, and production-code authorization `NONE`.
+Evidence remains `THEORY VERIFIED`; focused new tests, Simulation, Driver
+Station / Glass, and real hardware are `NOT APPLICABLE`. No production Java,
+test code, configuration, vendordep, deploy asset, runtime behavior, mechanism
+hardware API, or mechanism implementation changed. Explicit Architect freeze
+authorization and User-owned Git publication remained pending.
+
+## M00_L01 Final Documentation-Only Freeze Closure — 2026-09-15
+
+The pre-freeze documentation reconciliation passed through
+`PASS_M00_L01_DOCUMENTATION_RECONCILED_READY_FOR_FREEZE_AUTHORIZATION`,
+`PASS_M00_L01_DOCUMENTATION_RECONCILIATION_ACCEPTED_READY_FOR_INDEPENDENT_REVIEW`,
+and
+`PASS_M00_L01_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION`.
+The Architect then issued `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`.
+
+M00_L01 is now `COMPLETE / FROZEN / READ-ONLY`, its freeze state is `FROZEN /
+READ-ONLY`, and active lesson count is `0`. Technical/content closure remains
+`PASS`, the Design Lock remains `PASS_M00_L01_FINAL_DESIGN_LOCK`, and
+production-code authorization remains `NONE`. Evidence remains `THEORY
+VERIFIED`; focused new tests, Simulation, Driver Station / Glass, and real
+hardware remain `NOT APPLICABLE`.
+
+Publication remains `NOT YET PUBLISHED / PENDING USER GIT`; Git commit is
+`PENDING USER COMMIT`, Git push is `PENDING USER PUSH`, and remote verification
+is `PENDING`. M00_L02 is not active, is not created, and receives no lifecycle
+change from this closure. The M00 module is not declared complete. The locked
+16-lesson roadmap is unchanged.
+
 ## Non-Goals and Exclusions
 
 This ADR does not authorize:
@@ -502,14 +604,19 @@ introduced by familiarity or copied historical constants.
 
 ## Review Result
 
-This ADR is the M00 roadmap authority. Its roadmap state is `APPROVED / ROADMAP
-AUTHORIZED`; its preparation state is `AUTHORIZED`; and its runtime/lesson
-activation state is `NOT ACTIVE`, with active lesson count `0`. Roadmap approval
-is recorded by `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED` on 2026-09-13.
-Preparation authorization is recorded by
-`PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED` on 2026-09-15. Preparation remains
-conditional on review and User publication of this record. Neither gate
-activates M00_L01 or authorizes implementation.
+This ADR is the M00 roadmap authority. Its roadmap remains `APPROVED / ROADMAP
+AUTHORIZED`. Preparation is `COMPLETE / ACCEPTED`, the Architect Design Lock is
+`PASS_M00_L01_FINAL_DESIGN_LOCK`, and M00_L01 is `COMPLETE / FROZEN /
+READ-ONLY` with active lesson count `0`. Implementation authorization and
+production-code authorization remain `NONE`. Documentation, independent
+rereview, final inherited regression, final closure review, reconciliation,
+and technical/content closure are `PASS`. Final freeze authorization is
+`PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`; User Git publication and remote
+verification remain pending. Roadmap approval remains recorded by
+`PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; preparation authorization remains
+recorded by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`. The documentation-only
+activation and reconciliation do not change the roadmap or authorize
+implementation.
 
 ## Revision History
 
@@ -518,3 +625,6 @@ activates M00_L01 or authorizes implementation.
 | 1.0 | 2026-09-13 | PROPOSED | Created from the Architect-accepted compact reuse roadmap; future authorization only. |
 | 1.1 | 2026-09-13 | APPROVED | Architect approval recorded at `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; roadmap authorized but not active. |
 | 1.2 | 2026-09-15 | APPROVED | Recorded V00 final closure at implementation `6548c98` and metadata publication `5d36529`; recorded `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`, exact M00_L01 identity, predecessor, future destination, User-owned baseline sequence, bilingual/evidence rules, and active lesson count `0`; M00 runtime remains `NOT ACTIVE`, M00_L01 remains `NOT YET CREATED`, and implementation is not authorized. |
+| 1.3 | 2026-09-15 | APPROVED | Consumed `PASS_M00_L01_FINAL_DESIGN_LOCK` and recorded the documentation-only controlled activation of M00_L01 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`; implementation and production-code authorization remain `NONE`. |
+| 1.4 | 2026-09-15 | APPROVED | Reconciled paired learning documentation, the preserved Constants-authority HOLD and repair, independent rereview PASS, User final inherited clean build/regression PASS, final closure review and Architect acceptance, and technical/content readiness PASS while retaining `IN_PROGRESS / EDITABLE`, active lesson count `1`, pending freeze authorization, and pending User Git publication. |
+| 1.5 | 2026-09-15 | APPROVED | Consumed `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`; recorded M00_L01 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, preserved the final technical boundary and locked 16-lesson roadmap, left M00_L02 inactive and uncreated, and retained User Git publication and remote verification as pending. |

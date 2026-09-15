@@ -111,8 +111,9 @@ FRC_Java_Coding_Lab_7/
     ├── module_D00/
     ├── module_D01/
     ├── module_S00/
-    └── module_V00/ (authorized; V00_L01-L08 complete/frozen; V00_L09 is the sole current IN_PROGRESS / EDITABLE lesson)
-        └── <LESSON_NAME>/
+    ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
+    └── module_M00/ (authorized; M00_L01 complete/frozen/read-only; no M00 lesson active)
+         └── <LESSON_NAME>/
             ├── docs/
             ├── src/
             ├── build.gradle
@@ -1766,6 +1767,119 @@ DEFERRED`, or `NOT APPLICABLE`. M00_L01 runtime applicability is not claimed;
 the future Design Lock decides it. No V00 rerun is required by this preparation
 authorization.
 
+### M00_L01 Controlled Activation — 2026-09-15
+
+The accepted preparation, inherited Java 17 baseline build, independent
+Architecture / Inheritance Audit, Frozen Backbone audit, M00-specific ownership
+audit, and one-new-concept audit are `PASS`. The Architect Design Lock is
+`PASS_M00_L01_FINAL_DESIGN_LOCK`.
+
+The canonical lesson is `M00_L01 - Mechanism Architecture Reuse`, with locked
+directory identity `M00_L01_MechanismArchitectureReuse`. Its predecessor is
+`V00_L09_SwervePoseEstimatorVisionFusion`, which remains `COMPLETE / FROZEN /
+READ-ONLY / PUBLISHED / VERIFIED` and is not modified by this activation.
+
+This documentation-only controlled activation makes M00_L01 the sole current
+`IN_PROGRESS / EDITABLE` lesson and reconciles the active lesson count to `1`.
+Implementation authorization and production-code authorization remain `NONE`.
+No Java, test, configuration, vendordep, deploy, mechanism, Simulation, Driver
+Station / Glass, or real-hardware change is authorized. M00_L01 evidence is
+currently `THEORY VERIFIED`; Simulation, Driver Station / Glass, and real
+hardware are `NOT APPLICABLE` because the lesson is architecture-only.
+
+At this controlled-activation point, the transition guide and student-facing
+learning documentation, their reviews, the final inherited clean
+build/regression, final architecture/documentation review, freeze, and User Git
+publication remained pending and separately controlled. The later current state
+is recorded below.
+
+### M00_L01 Pre-Freeze Documentation and Closure Readiness Reconciliation — 2026-09-15
+
+The paired English and Vietnamese student learning guides are `COMPLETE /
+REVIEWED` with identical 21-section structure and equivalent technical meaning.
+The initial independent review returned
+`HOLD_M00_L01_INDEPENDENT_DOCUMENTATION_REVIEW_MISSING_CONSTANTS_AUTHORITY`
+because both guides omitted the rule that `Constants.java` remains the default
+configuration authority. A minimal two-guide repair added that rule without
+defining mechanism configuration values and passed at
+`PASS_M00_L01_CONSTANTS_AUTHORITY_REPAIR_READY_FOR_INDEPENDENT_REREVIEW`; the
+independent rereview passed at
+`PASS_M00_L01_INDEPENDENT_DOCUMENTATION_REREVIEW_READY_FOR_FINAL_USER_BUILD`.
+The Architect accepted documentation review completion through
+`PASS_M00_L01_DOCUMENTATION_REVIEW_COMPLETE_READY_FOR_FINAL_BUILD`.
+
+The User then supplied the distinct final inherited clean build/regression:
+`BUILD SUCCESSFUL in 23s`, with 7 actionable tasks executed. Its accepted gate
+is `PASS_M00_L01_FINAL_INHERITED_CLEAN_BUILD_REGRESSION`. The final read-only
+architecture/documentation closure review passed at
+`PASS_M00_L01_FINAL_CLOSURE_REVIEW_READY_FOR_DOCUMENTATION_RECONCILIATION`, and
+the Architect accepted that result through
+`PASS_M00_L01_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_DOCUMENTATION_RECONCILIATION`.
+Technical/content closure readiness is `PASS`.
+
+```text
+M00_L01 Status: IN_PROGRESS
+M00_L01 Active State: IN_PROGRESS / EDITABLE
+M00_L01 Freeze State: EDITABLE
+Active Lesson Count: 1
+Design Lock: PASS_M00_L01_FINAL_DESIGN_LOCK
+Student Documentation: COMPLETE / REVIEWED
+Constants Repair: COMPLETE
+Independent Rereview: PASS
+Final Inherited Clean Build/Regression: PASS
+Final Closure Review: PASS
+Technical/Content Closure Readiness: PASS
+Production Code Authorization: NONE
+Freeze Authorization: PENDING
+Git Publication: PENDING USER GIT
+```
+
+No Java, test, configuration, vendordep, deploy, runtime, hardware API, or
+mechanism implementation changed. Evidence remains `THEORY VERIFIED`; focused
+new tests, Simulation, Driver Station / Glass, and real hardware remain `NOT
+APPLICABLE`. At that pre-freeze reconciliation point, M00_L01 was not yet
+`COMPLETE`, `FROZEN`, `READ-ONLY`, or `PUBLISHED`. Independent reconciliation
+review, explicit Architect freeze authorization, lifecycle transition, and
+User-owned publication remained pending.
+
+### M00_L01 Final Documentation-Only Freeze Closure — 2026-09-15
+
+The completed pre-freeze documentation reconciliation passed at
+`PASS_M00_L01_DOCUMENTATION_RECONCILED_READY_FOR_FREEZE_AUTHORIZATION`, the
+Architect accepted it for independent review at
+`PASS_M00_L01_DOCUMENTATION_RECONCILIATION_ACCEPTED_READY_FOR_INDEPENDENT_REVIEW`,
+and the independent read-only reconciliation review passed at
+`PASS_M00_L01_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION`.
+The Architect then explicitly issued `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`.
+
+That authorization closes the documentation-only lesson lifecycle as follows:
+
+```text
+M00_L01 Status: COMPLETE
+M00_L01 Active State: COMPLETE / FROZEN / READ-ONLY
+M00_L01 Freeze State: FROZEN / READ-ONLY
+Active Lesson Count: 0
+Design Lock: PASS_M00_L01_FINAL_DESIGN_LOCK
+Final Clean Build/Regression: PASS
+Final Documentation Review: PASS
+Final Reconciliation Review: PASS
+Technical/Content Closure: PASS
+Production Code Authorization: NONE
+Freeze Authorization: PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION
+Publication: NOT YET PUBLISHED / PENDING USER GIT
+Git Commit: PENDING USER COMMIT
+Git Push: PENDING USER PUSH
+Remote Verification: PENDING
+```
+
+Evidence remains `THEORY VERIFIED`; focused new tests, Simulation, Driver
+Station / Glass, and real hardware remain `NOT APPLICABLE`. No Java, test,
+configuration, vendordep, deploy, runtime, hardware API, mechanism
+implementation, EN/VI guide, or frozen V00_L09 content changed. M00_L02 is not
+active and is not created. The M00 module is not declared complete. User-owned
+Git staging, commit, push, remote verification, and any required publication
+metadata reconciliation remain pending.
+
 ---
 
 ## 15. Final Report
@@ -1842,3 +1956,6 @@ Only report verified facts.
 | 1.42 | 2026-09-15 | FROZEN | APPROVED: record final V00_L09 documentation review and explicit `PASS_V00_L09_FINAL_FREEZE_AUTHORIZATION`; transition L09 to `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, preserve V00_L08 frozen protection, and leave User Git commit, push, and publication pending. |
 | 1.43 | 2026-09-15 | FROZEN | APPROVED: reconcile User-verified V00_L09 implementation publication at `6548c98`, record `origin/main = 6548c98`, `origin/HEAD = 6548c98`, push `COMPLETE / VERIFIED`, and `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`; preserve the distinct metadata-reconciliation commit as `PENDING USER COMMIT`. |
 | 1.44 | 2026-09-15 | FROZEN | APPROVED: record V00 final closure through metadata reconciliation `5d36529` and `PASS_V00_MODULE_FINAL_CLOSURE_CONFIRMED`; register the locked 16-lesson M00 ADR and `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`, exact M00_L01 identity, predecessor, future destination, baseline command, bilingual/evidence rules, active lesson count `0`, and `NOT ACTIVE / NOT YET CREATED` with no implementation authorization. |
+| 1.45 | 2026-09-15 | FROZEN | APPROVED: consume `PASS_M00_L01_FINAL_DESIGN_LOCK` and record documentation-only controlled activation of M00_L01 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`; preserve V00_L09 frozen protection and retain implementation and production-code authorization as `NONE`. |
+| 1.46 | 2026-09-15 | FROZEN | APPROVED: reconcile completed bilingual documentation, the preserved Constants-authority HOLD and repair, independent rereview PASS, User final inherited clean build/regression PASS, final closure review PASS, and technical/content readiness PASS while retaining M00_L01 as `IN_PROGRESS / EDITABLE`, active lesson count `1`, freeze authorization pending, and User Git publication pending. |
+| 1.47 | 2026-09-15 | FROZEN | APPROVED: consume `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION` and record M00_L01 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`; preserve the documentation-only technical boundary, keep M00_L02 inactive and uncreated, and leave User Git publication and remote verification pending. |
