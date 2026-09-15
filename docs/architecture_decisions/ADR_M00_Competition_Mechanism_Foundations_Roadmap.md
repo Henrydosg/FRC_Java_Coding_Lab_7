@@ -5,7 +5,7 @@
 - Roadmap State: APPROVED / ROADMAP AUTHORIZED
 - Preparation State: COMPLETE / ACCEPTED
 - Preparation Authorization: PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED
-- Runtime / Lesson Activation: M00_L01 COMPLETE / FROZEN / READ-ONLY
+- Runtime / Lesson Activation: M00_L01 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
 - Controlled Activation: COMPLETE / CLOSED BY FINAL FREEZE
 - Freeze State: FROZEN / READ-ONLY
 - Design Lock: PASS_M00_L01_FINAL_DESIGN_LOCK
@@ -13,7 +13,9 @@
 - Active Lesson Count: 0
 - Technical / Content Closure Readiness: PASS
 - Freeze Authorization: PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION
-- Git Publication: PENDING USER GIT
+- Git Publication: PUBLISHED / VERIFIED @ 83907ab
+- Remote Publication Verification: PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED
+- Publication Metadata Reconciliation: PENDING USER COMMIT
 - Scope: Future post-V00 mechanism curriculum roadmap
 - Authority: Approved successor ADR to
   `ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`. The
@@ -552,18 +554,32 @@ and
 `PASS_M00_L01_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION`.
 The Architect then issued `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`.
 
-M00_L01 is now `COMPLETE / FROZEN / READ-ONLY`, its freeze state is `FROZEN /
+At the freeze-recording point, M00_L01 was `COMPLETE / FROZEN / READ-ONLY`, its freeze state was `FROZEN /
 READ-ONLY`, and active lesson count is `0`. Technical/content closure remains
 `PASS`, the Design Lock remains `PASS_M00_L01_FINAL_DESIGN_LOCK`, and
 production-code authorization remains `NONE`. Evidence remains `THEORY
 VERIFIED`; focused new tests, Simulation, Driver Station / Glass, and real
 hardware remain `NOT APPLICABLE`.
 
-Publication remains `NOT YET PUBLISHED / PENDING USER GIT`; Git commit is
-`PENDING USER COMMIT`, Git push is `PENDING USER PUSH`, and remote verification
-is `PENDING`. M00_L02 is not active, is not created, and receives no lifecycle
+Publication was `NOT YET PUBLISHED / PENDING USER GIT`; Git commit was
+`PENDING USER COMMIT`, Git push was `PENDING USER PUSH`, and remote verification
+was `PENDING`. M00_L02 was not active, was not created, and received no lifecycle
 change from this closure. The M00 module is not declared complete. The locked
 16-lesson roadmap is unchanged.
+
+## M00_L01 Lesson Publication Metadata — 2026-09-15
+
+The User published the frozen lesson at commit `83907ab` with subject `Complete
+M00_L01 mechanism architecture reuse`. User-supplied evidence records branch
+`main` with `HEAD = origin/main = origin/HEAD = 83907ab`; remote publication
+verification passed at `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`.
+
+M00_L01 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`, active
+lesson count remains `0`, and M00_L02 remains `NOT ACTIVE / NOT CREATED`.
+Publication-metadata reconciliation is a distinct later record and remains
+`PENDING USER COMMIT`; metadata push is `PENDING USER PUSH`, and final remote
+verification of that later commit is `PENDING`. This publication record does
+not complete the M00 module or alter the locked roadmap.
 
 ## Non-Goals and Exclusions
 
@@ -611,8 +627,10 @@ READ-ONLY` with active lesson count `0`. Implementation authorization and
 production-code authorization remain `NONE`. Documentation, independent
 rereview, final inherited regression, final closure review, reconciliation,
 and technical/content closure are `PASS`. Final freeze authorization is
-`PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`; User Git publication and remote
-verification remain pending. Roadmap approval remains recorded by
+`PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`. Lesson publication is `PUBLISHED /
+VERIFIED` at `83907ab`, with remote gate
+`PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`. The distinct publication-metadata
+commit, push, and final remote verification remain pending. Roadmap approval remains recorded by
 `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; preparation authorization remains
 recorded by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`. The documentation-only
 activation and reconciliation do not change the roadmap or authorize
@@ -628,3 +646,4 @@ implementation.
 | 1.3 | 2026-09-15 | APPROVED | Consumed `PASS_M00_L01_FINAL_DESIGN_LOCK` and recorded the documentation-only controlled activation of M00_L01 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`; implementation and production-code authorization remain `NONE`. |
 | 1.4 | 2026-09-15 | APPROVED | Reconciled paired learning documentation, the preserved Constants-authority HOLD and repair, independent rereview PASS, User final inherited clean build/regression PASS, final closure review and Architect acceptance, and technical/content readiness PASS while retaining `IN_PROGRESS / EDITABLE`, active lesson count `1`, pending freeze authorization, and pending User Git publication. |
 | 1.5 | 2026-09-15 | APPROVED | Consumed `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`; recorded M00_L01 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, preserved the final technical boundary and locked 16-lesson roadmap, left M00_L02 inactive and uncreated, and retained User Git publication and remote verification as pending. |
+| 1.6 | 2026-09-15 | APPROVED | Reconciled User-verified M00_L01 lesson publication at `83907ab` and `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`; recorded `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`, preserved active lesson count `0` and inactive/uncreated M00_L02, and left the distinct publication-metadata commit, push, and final remote verification pending. |

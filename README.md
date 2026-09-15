@@ -627,7 +627,7 @@ No camera/vendor is selected in V00_L01 through V00_L07. V00_L08 may select one
 real implementation only after the ADR's hardware, WPILib 2026, vendor-version,
 timestamp, dependency, and applicable simulation compatibility gate passes.
 
-## M00_L01 final documentation-only freeze state — 2026-09-15
+## M00_L01 final publication state — 2026-09-15
 
 The controlling successor record is
 `docs/architecture_decisions/ADR_M00_Competition_Mechanism_Foundations_Roadmap.md`.
@@ -645,8 +645,8 @@ The locked roadmap contains exactly 16 lessons, `M00_L01` through `M00_L16`, in
 the ADR-defined order. The first lesson is exactly
 `M00_L01 - Mechanism Architecture Reuse`, with locked directory identity
 `M00_L01_MechanismArchitectureReuse`. It is now `COMPLETE / FROZEN /
-READ-ONLY`, and no M00 lesson is active. Implementation authorization and
-production-code authorization remain `NONE`.
+READ-ONLY / PUBLISHED / VERIFIED`, and no M00 lesson is active. Implementation
+authorization and production-code authorization remain `NONE`.
 
 Its exact predecessor is the complete frozen V00_L09 snapshot at repository
 state `5d36529`, with implementation/freeze commit `6548c98`:
@@ -732,15 +732,24 @@ and passed independent review at
 `PASS_M00_L01_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION`.
 The Architect issued `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`.
 
-M00_L01 is now `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`,
-freeze state `FROZEN / READ-ONLY`, Design Lock
+At the freeze-recording point, M00_L01 was `COMPLETE / FROZEN / READ-ONLY`
+with active lesson count `0`, freeze state `FROZEN / READ-ONLY`, Design Lock
 `PASS_M00_L01_FINAL_DESIGN_LOCK`, and production-code authorization `NONE`.
 Technical/content work is complete; evidence remains `THEORY VERIFIED`, and
-runtime verification remains `NOT APPLICABLE`. Publication is `NOT YET
-PUBLISHED / PENDING USER GIT`; Git commit, Git push, and remote verification
-remain pending. M00_L02 is not active and is not created, and the M00 module is
-not declared complete. No V00 runtime evidence is reused as M00_L01
-verification.
+runtime verification remains `NOT APPLICABLE`. Publication, Git commit, Git
+push, and remote verification were then pending.
+
+The User subsequently published the frozen lesson at commit `83907ab` with
+subject `Complete M00_L01 mechanism architecture reuse`. User-supplied evidence
+records `HEAD = origin/main = origin/HEAD = 83907ab` on branch `main`; remote
+verification passed at `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`.
+
+M00_L01 is therefore `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`,
+with active lesson count `0`. M00_L02 is `NOT ACTIVE / NOT CREATED`, and the M00
+module is not declared complete. The distinct publication-metadata
+reconciliation remains `PENDING USER COMMIT`, its push remains `PENDING USER
+PUSH`, and final remote verification of that later metadata commit remains
+`PENDING`. No V00 runtime evidence is reused as M00_L01 verification.
 
 ---
 

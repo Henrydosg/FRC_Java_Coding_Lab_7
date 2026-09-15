@@ -6,8 +6,8 @@
 - **Current directory:** `M00_L01_MechanismArchitectureReuse`
 - **Previous lesson:** `V00_L09_SwervePoseEstimatorVisionFusion @ 5d36529`
 - **Previous lesson state:** `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`
-- **Guide status:** `FINAL / TECHNICAL AND LIFECYCLE CLOSURE RECORDED`
-- **Lesson status:** `COMPLETE / FROZEN / READ-ONLY`
+- **Guide status:** `FINAL / LESSON PUBLICATION RECORDED / METADATA COMMIT PENDING`
+- **Lesson status:** `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`
 - **Freeze state:** `FROZEN / READ-ONLY`
 - **Active lesson count:** `0`
 - **Design Lock:** `PASS_M00_L01_FINAL_DESIGN_LOCK`
@@ -15,7 +15,14 @@
 - **Technical / content closure readiness:** `PASS`
 - **Final reconciliation review:** `PASS_M00_L01_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION`
 - **Freeze authorization:** `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`
-- **Git publication:** `PENDING USER GIT`
+- **Lesson publication commit:** `83907ab`
+- **Lesson publication commit message:** `Complete M00_L01 mechanism architecture reuse`
+- **Remote publication verification:** `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`
+- **Published remote state:** `HEAD = origin/main = origin/HEAD = 83907ab`
+- **Git publication:** `PUBLISHED / VERIFIED`
+- **Publication metadata reconciliation:** `PENDING USER COMMIT`
+- **Metadata push:** `PENDING USER PUSH`
+- **Final metadata remote verification:** `PENDING`
 
 This engineering transition record is separate from the student-facing
 learning guides. The authorized English and Vietnamese guides now exist with
@@ -399,16 +406,82 @@ rules.
 - Evidence: `THEORY VERIFIED`.
 - Technical/content closure readiness: `PASS`.
 
-## Pending publication steps
+## Step 27 - Complete User-owned precise Git staging
 
-27. User-owned precise Git staging: `PENDING`.
-28. User Git commit: `PENDING USER COMMIT`.
-29. User Git push: `PENDING USER PUSH`.
-30. Remote publication verification: `PENDING`.
-31. Publication metadata reconciliation if required: `PENDING`.
+**Objective:** Stage only the approved M00_L01 lesson-publication content.
 
-This transition guide is final for M00_L01 technical and lifecycle closure.
-M00_L01 is `COMPLETE / FROZEN / READ-ONLY`, freeze state `FROZEN / READ-ONLY`,
-with active lesson count `0`. It is `NOT YET PUBLISHED / PENDING USER GIT`.
-M00_L02 is not active and is not created; the M00 module is not declared
-complete.
+**Why:** Precise staging protects unrelated repository work and preserves the authorized publication boundary.
+
+**Action:** The User staged the approved lesson-publication files for the primary M00_L01 publication.
+
+**Files Changed:** None by this documentation-only metadata reconciliation task.
+
+**Verification:** User-supplied publication evidence confirms the staged lesson content was committed as `83907ab`.
+
+**Expected Result:** The primary lesson publication contains the intended M00_L01 closure content.
+
+## Step 28 - Complete the User-owned lesson publication commit
+
+**Objective:** Record the immutable primary publication identity.
+
+**Why:** The frozen lesson requires an exact commit and subject for provenance.
+
+**Action:** The User committed the primary lesson publication as `83907ab` with subject `Complete M00_L01 mechanism architecture reuse`.
+
+**Files Changed:** None by this documentation-only metadata reconciliation task.
+
+**Verification:** The supplied commit identity and subject are accepted publication evidence.
+
+**Expected Result:** M00_L01 has an exact primary lesson publication commit.
+
+## Step 29 - Complete the User-owned Git push
+
+**Objective:** Publish the primary lesson commit to the authoritative remote branch.
+
+**Why:** A local commit alone does not establish verified repository publication.
+
+**Action:** The User pushed `83907ab` to `origin/main`.
+
+**Files Changed:** None by this documentation-only metadata reconciliation task.
+
+**Verification:** User-supplied remote evidence establishes `origin/main = 83907ab`.
+
+**Expected Result:** The primary M00_L01 lesson publication exists on the authoritative remote branch.
+
+## Step 30 - Verify the remote lesson publication
+
+**Objective:** Confirm local and remote publication identity after the push.
+
+**Why:** Publication is VERIFIED only when the authoritative refs agree with the intended commit.
+
+**Action:** Accept the User-supplied remote verification gate and ref equality.
+
+**Files Changed:** None.
+
+**Verification:** `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`; `HEAD = origin/main = origin/HEAD = 83907ab`. A later PowerShell `else` parser error occurred only in an interactive command after the successful verification and is not a repository, publication, or remote-verification defect.
+
+**Expected Result:** M00_L01 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`.
+
+## Step 31 - Reconcile publication metadata
+
+**State:** `CURRENT / PENDING USER COMMIT`
+
+**Objective:** Make all authorized lifecycle and publication records reflect the verified primary lesson publication.
+
+**Why:** Publication evidence must be recorded consistently without altering the already-published technical lesson snapshot.
+
+**Action:** Reconcile only `AGENTS.md`, root `README.md`, the M00 ADR, `LESSON_STATUS.md`, `LESSON_PLAN.md`, `LESSON_CHECKLIST.md`, lesson `README.md`, and this transition guide. Preserve source, tests, configuration, dependencies, deploy content, both student-facing guides, V00, and the locked 16-lesson roadmap.
+
+**Files Changed:** The eight authorized documentation and lifecycle records only.
+
+**Verification:** The records identify commit `83907ab`, subject `Complete M00_L01 mechanism architecture reuse`, gate `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`, published ref equality, active lesson count `0`, and no active or created M00_L02. The separate publication-metadata commit, metadata push, and final metadata remote verification remain User-owned and pending.
+
+**Expected Result:** The publication metadata is reconciled and ready for the User's separate metadata commit.
+
+This transition guide is final for M00_L01 technical closure, lifecycle closure,
+and primary lesson publication. M00_L01 is `COMPLETE / FROZEN / READ-ONLY /
+PUBLISHED / VERIFIED`, freeze state `FROZEN / READ-ONLY`, with active lesson
+count `0`. The publication metadata reconciliation commit is `PENDING USER
+COMMIT`, its push is `PENDING USER PUSH`, and final metadata remote verification
+is `PENDING`. M00_L02 is not active and is not created; the M00 module is not
+declared complete.

@@ -20,9 +20,15 @@
 - **Technical/content work:** `COMPLETE`
 - **Technical/content closure readiness:** `PASS`
 - **Freeze authorization:** `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`
-- **Publication:** `NOT YET PUBLISHED / PENDING USER GIT`
-- **Git commit:** `PENDING USER COMMIT`
-- **Git push:** `PENDING USER PUSH`
+- **Publication:** `PUBLISHED / VERIFIED`
+- **Publication commit:** `83907ab`
+- **Publication commit message:** `Complete M00_L01 mechanism architecture reuse`
+- **Git commit:** `83907ab / USER VERIFIED`
+- **Git push:** `COMPLETE / VERIFIED`
+- **Remote verification:** `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`
+- **Published remote state:** `HEAD = origin/main = origin/HEAD = 83907ab`
+- **Metadata reconciliation:** `PENDING USER COMMIT`
+- **Metadata push:** `PENDING USER PUSH`
 
 ## Learning objective
 
@@ -112,6 +118,7 @@ alliance-transform ownership remain unchanged.
 - `PASS_M00_L01_DOCUMENTATION_RECONCILIATION_ACCEPTED_READY_FOR_INDEPENDENT_REVIEW`
 - `PASS_M00_L01_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION`
 - `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`
+- `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`
 
 The inherited baseline build reported:
 
@@ -168,8 +175,13 @@ Technical/content work is complete, evidence remains `THEORY VERIFIED`, and
 runtime verification remains `NOT APPLICABLE`. Production implementation
 remains unauthorized. M00_L02 is not active and is not created.
 
-Only the User-owned publication lifecycle remains: precise Git staging, commit,
-push, remote verification, and publication metadata reconciliation if required.
-Publication is `NOT YET PUBLISHED / PENDING USER GIT`; Git commit is `PENDING
-USER COMMIT`, Git push is `PENDING USER PUSH`, and remote verification is
-`PENDING`.
+The User published the frozen lesson at commit `83907ab`, subject `Complete
+M00_L01 mechanism architecture reuse`. User evidence verifies `HEAD =
+origin/main = origin/HEAD = 83907ab`; the remote gate is
+`PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`. M00_L01 is therefore `COMPLETE /
+FROZEN / READ-ONLY / PUBLISHED / VERIFIED`.
+
+Only the distinct publication-metadata lifecycle remains: User metadata commit,
+metadata push, and final remote verification. Metadata reconciliation is
+`PENDING USER COMMIT`, metadata push is `PENDING USER PUSH`, and final metadata
+remote verification is `PENDING`.

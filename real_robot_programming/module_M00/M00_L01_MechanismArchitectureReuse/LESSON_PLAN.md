@@ -28,9 +28,16 @@
 - **Independent reconciliation review:** `PASS_M00_L01_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION`
 - **Technical / content closure readiness:** `PASS`
 - **Freeze authorization:** `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`
-- **Publication:** `NOT YET PUBLISHED / PENDING USER GIT`
-- **Git commit:** `PENDING USER COMMIT`
-- **Git push:** `PENDING USER PUSH`
+- **Publication:** `PUBLISHED / VERIFIED`
+- **Publication commit:** `83907ab`
+- **Publication commit message:** `Complete M00_L01 mechanism architecture reuse`
+- **Git commit:** `83907ab / USER VERIFIED`
+- **Git push:** `COMPLETE / VERIFIED`
+- **Remote verification:** `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`
+- **Published remote state:** `HEAD = origin/main = origin/HEAD = 83907ab`
+- **Publication metadata reconciliation:** `PENDING USER COMMIT`
+- **Metadata push:** `PENDING USER PUSH`
+- **Final metadata remote verification:** `PENDING`
 
 ## One-concept objective
 
@@ -152,8 +159,12 @@ No V00 runtime result is reused as M00_L01 runtime evidence.
 3. Independent reconciliation review: `COMPLETE` through `PASS_M00_L01_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION`.
 4. Explicit Architect freeze authorization: `COMPLETE` through `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`.
 5. Lifecycle transition to `COMPLETE / FROZEN / READ-ONLY`: `COMPLETE`; active lesson count is `0`.
-6. User-owned precise Git staging, commit, push, and remote verification: `PENDING`.
-7. Publication metadata reconciliation if required: `PENDING`.
+6. User-owned precise Git staging, lesson publication commit `83907ab`, push, and remote verification: `COMPLETE / VERIFIED` through `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`.
+7. Publication metadata reconciliation content: `CURRENT / RECORDED BY THIS DOCUMENTATION-ONLY TASK`.
+8. User publication-metadata commit: `PENDING USER COMMIT`.
+9. User publication-metadata push: `PENDING USER PUSH`.
+10. Final remote verification of the metadata commit: `PENDING`.
 
 No technical implementation work remains. M00_L02 is not active and is not
-created; remaining work is limited to the User-owned publication lifecycle.
+created; remaining work is limited to committing, pushing, and remotely
+verifying this publication-metadata reconciliation.

@@ -44,9 +44,17 @@
 - **Technical / Content Closure Readiness:** `PASS`
 - **Freeze Authorization:** `PASS / PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`
 - **Closure:** `PASS / COMPLETE / FROZEN / READ-ONLY`
-- **Git Commit:** `PENDING USER COMMIT`
-- **Git Push:** `PENDING USER PUSH`
-- **Publication:** `NOT YET PUBLISHED / PENDING USER PUBLICATION`
+- **Publication State:** `PUBLISHED / VERIFIED`
+- **Publication Commit:** `83907ab`
+- **Publication Commit Message:** `Complete M00_L01 mechanism architecture reuse`
+- **Git Commit:** `83907ab / USER VERIFIED`
+- **Git Push:** `COMPLETE / VERIFIED`
+- **Remote Verification:** `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`
+- **Remote Branch:** `origin/main`
+- **Published Repository State:** `83907ab`
+- **Publication Metadata Reconciliation:** `PENDING USER COMMIT`
+- **Metadata Push:** `PENDING USER PUSH`
+- **Final Metadata Remote Verification:** `PENDING`
 - **Known Issues:** `NONE IDENTIFIED BY THE ACCEPTED ARCHITECTURE / INHERITANCE AUDIT`
 
 ## Accepted governance and preparation gates
@@ -78,6 +86,8 @@
 | Independent reconciliation review | PASS | `PASS_M00_L01_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION`. |
 | Final freeze authorization | PASS | `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION`. |
 | Lifecycle transition | PASS | M00_L01 is `COMPLETE / FROZEN / READ-ONLY`; active lesson count is `0`. |
+| Lesson publication | PASS | Commit `83907ab`; subject `Complete M00_L01 mechanism architecture reuse`. |
+| Remote publication verification | PASS | `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`; User verified `HEAD = origin/main = origin/HEAD = 83907ab`. |
 
 ## Locked lesson boundary
 
@@ -125,18 +135,25 @@ tests, configuration, deploy assets, vendordeps, historical transition guides,
 and V00 learning documents remain unchanged as historical/inheritance evidence.
 The frozen predecessor itself remains read-only.
 
-## Final lifecycle state
+## Final published lifecycle state
 
 ```text
-COMPLETE / FROZEN / READ-ONLY
+COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
 FREEZE STATE: FROZEN / READ-ONLY
 ACTIVE LESSON COUNT: 0
 IMPLEMENTATION AUTHORIZATION: NONE
 PRODUCTION CODE AUTHORIZATION: NONE
 TECHNICAL / CONTENT CLOSURE READINESS: PASS
 FREEZE AUTHORIZATION: PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION
-GIT PUBLICATION: PENDING USER GIT
-GIT COMMIT: PENDING USER COMMIT
-GIT PUSH: PENDING USER PUSH
-REMOTE VERIFICATION: PENDING
+LESSON PUBLICATION COMMIT: 83907ab
+LESSON PUBLICATION COMMIT MESSAGE: Complete M00_L01 mechanism architecture reuse
+GIT PUBLICATION: PUBLISHED / VERIFIED
+GIT COMMIT: 83907ab / USER VERIFIED
+GIT PUSH: COMPLETE / VERIFIED
+REMOTE VERIFICATION: PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED
+REMOTE BRANCH: origin/main
+PUBLISHED REPOSITORY STATE: 83907ab
+PUBLICATION METADATA RECONCILIATION: PENDING USER COMMIT
+METADATA PUSH: PENDING USER PUSH
+FINAL METADATA REMOTE VERIFICATION: PENDING
 ```

@@ -9,8 +9,13 @@ Predecessor state: `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`
 Design Lock: `PASS_M00_L01_FINAL_DESIGN_LOCK`  
 Implementation Authorization: `NONE`  
 Production Code Authorization: `NONE`  
-Git Commit: `PENDING USER COMMIT`  
-Git Push: `PENDING USER PUSH`
+Publication: `PUBLISHED / VERIFIED`  
+Publication Commit: `83907ab`  
+Git Commit: `83907ab / USER VERIFIED`  
+Git Push: `COMPLETE / VERIFIED`  
+Remote Verification: `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`  
+Publication Metadata Reconciliation: `PENDING USER COMMIT`  
+Metadata Push: `PENDING USER PUSH`
 
 ## Governance and preparation
 
@@ -101,11 +106,14 @@ Git Push: `PENDING USER PUSH`
 - [x] Active state transitioned to `COMPLETE / FROZEN / READ-ONLY`.
 - [x] Freeze state transitioned to `FROZEN / READ-ONLY`.
 - [x] Active lesson count transitioned from `1` to `0`.
-- [ ] User Git staging completed.
-- [ ] User Git commit completed.
-- [ ] User Git push completed.
-- [ ] Remote publication verified.
-- [ ] Publication metadata reconciliation completed if applicable.
+- [x] User precise Git staging for the lesson publication completed.
+- [x] User lesson publication commit completed: `83907ab` / `Complete M00_L01 mechanism architecture reuse`.
+- [x] User Git push to `origin/main` completed.
+- [x] Remote lesson publication verified: `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`; `HEAD = origin/main = origin/HEAD = 83907ab`.
+- [x] Publication metadata reconciliation content recorded in the authorized documentation files.
+- [ ] User publication-metadata commit completed.
+- [ ] User publication-metadata push completed.
+- [ ] Final remote verification of the metadata commit completed.
 
 ## Current gate
 
@@ -116,11 +124,15 @@ ACTIVE LESSON COUNT: 0
 DESIGN LOCK: PASS_M00_L01_FINAL_DESIGN_LOCK
 IMPLEMENTATION AUTHORIZATION: NONE
 PRODUCTION CODE AUTHORIZATION: NONE
-TRANSITION GUIDE: FINAL / TECHNICAL AND LIFECYCLE CLOSURE RECORDED
+TRANSITION GUIDE: FINAL / LESSON PUBLICATION RECORDED / METADATA COMMIT PENDING
 TECHNICAL / CONTENT CLOSURE READINESS: PASS
 FREEZE AUTHORIZATION: PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION
-GIT PUBLICATION: PENDING USER GIT
-GIT COMMIT: PENDING USER COMMIT
-GIT PUSH: PENDING USER PUSH
-REMOTE VERIFICATION: PENDING
+LESSON PUBLICATION: PUBLISHED / VERIFIED
+LESSON PUBLICATION COMMIT: 83907ab
+GIT COMMIT: 83907ab / USER VERIFIED
+GIT PUSH: COMPLETE / VERIFIED
+REMOTE VERIFICATION: PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED
+PUBLICATION METADATA RECONCILIATION: PENDING USER COMMIT
+METADATA PUSH: PENDING USER PUSH
+FINAL METADATA REMOTE VERIFICATION: PENDING
 ```

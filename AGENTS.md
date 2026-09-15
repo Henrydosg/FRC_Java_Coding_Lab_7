@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01 complete/frozen/read-only; no M00 lesson active)
+    └── module_M00/ (authorized; M00_L01 complete/frozen/read-only/published/verified; no M00 lesson active)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -1876,9 +1876,39 @@ Evidence remains `THEORY VERIFIED`; focused new tests, Simulation, Driver
 Station / Glass, and real hardware remain `NOT APPLICABLE`. No Java, test,
 configuration, vendordep, deploy, runtime, hardware API, mechanism
 implementation, EN/VI guide, or frozen V00_L09 content changed. M00_L02 is not
-active and is not created. The M00 module is not declared complete. User-owned
-Git staging, commit, push, remote verification, and any required publication
-metadata reconciliation remain pending.
+active and is not created. The M00 module is not declared complete. At this
+freeze-recording point, User-owned Git staging, commit, push, remote
+verification, and any required publication metadata reconciliation remained
+pending.
+
+### M00_L01 Lesson Publication Metadata Reconciliation — 2026-09-15
+
+The User subsequently committed and pushed the frozen M00_L01 lesson. The
+accepted publication evidence is commit `83907ab` with subject `Complete
+M00_L01 mechanism architecture reuse`. The User verified `HEAD = origin/main =
+origin/HEAD = 83907ab` on branch `main`, and the remote publication gate is
+`PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`. The later isolated PowerShell
+`else` entry error is an interactive syntax issue after the PASS gate and does
+not invalidate publication evidence.
+
+```text
+M00_L01: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
+Lesson Publication Commit: 83907ab
+Lesson Publication Commit Message: Complete M00_L01 mechanism architecture reuse
+Published Branch: main
+Verified Remote: origin/main
+Published Repository State: 83907ab
+Remote Publication Verification: PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED
+Active Lesson Count: 0
+M00_L02: NOT ACTIVE / NOT CREATED
+Publication Metadata Reconciliation: PENDING USER COMMIT
+Publication Metadata Push: PENDING USER PUSH
+Final Metadata Remote Verification: PENDING
+```
+
+This metadata reconciliation does not alter technical closure, evidence,
+runtime applicability, the frozen roadmap, or the M00_L01 Design Lock. The M00
+module is not declared complete, and M00_L02 remains inactive and uncreated.
 
 ---
 
@@ -1959,3 +1989,4 @@ Only report verified facts.
 | 1.45 | 2026-09-15 | FROZEN | APPROVED: consume `PASS_M00_L01_FINAL_DESIGN_LOCK` and record documentation-only controlled activation of M00_L01 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`; preserve V00_L09 frozen protection and retain implementation and production-code authorization as `NONE`. |
 | 1.46 | 2026-09-15 | FROZEN | APPROVED: reconcile completed bilingual documentation, the preserved Constants-authority HOLD and repair, independent rereview PASS, User final inherited clean build/regression PASS, final closure review PASS, and technical/content readiness PASS while retaining M00_L01 as `IN_PROGRESS / EDITABLE`, active lesson count `1`, freeze authorization pending, and User Git publication pending. |
 | 1.47 | 2026-09-15 | FROZEN | APPROVED: consume `PASS_M00_L01_FINAL_FREEZE_AUTHORIZATION` and record M00_L01 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`; preserve the documentation-only technical boundary, keep M00_L02 inactive and uncreated, and leave User Git publication and remote verification pending. |
+| 1.48 | 2026-09-15 | FROZEN | APPROVED: reconcile User-verified M00_L01 lesson publication at `83907ab` with `PASS_M00_L01_REMOTE_PUBLICATION_VERIFIED`; record `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`, preserve active lesson count `0` and inactive/uncreated M00_L02, and leave the distinct publication-metadata commit, push, and final remote verification pending. |
