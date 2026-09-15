@@ -22,15 +22,35 @@
 - **Final documentation review:** `PASS / PASS_V00_L09_FINAL_DOCUMENTATION_REVIEW_READY_FOR_FREEZE_AUTHORIZATION`
 - **Final freeze authorization:** `PASS / PASS_V00_L09_FINAL_FREEZE_AUTHORIZATION`
 - **Documentation:** `PASS / FINAL DOCUMENTATION REVIEW AND LIFECYCLE RECORDING COMPLETE`
-- **Git commit:** `PENDING USER COMMIT`
-- **Git push:** `PENDING USER PUSH`
-- **Publication:** `PENDING USER PUBLICATION`
+- **Git commit:** `6548c98`
+- **Commit message:** `Complete V00_L09 Swerve pose estimator vision fusion`
+- **Git push:** `COMPLETE / VERIFIED`
+- **Remote:** `origin/main = 6548c98`
+- **Publication:** `PUBLISHED / VERIFIED`
+- **Final publication gate:** `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`
+- **Metadata reconciliation commit:** `PENDING USER COMMIT`
 
 V00_L08 remains frozen and unmodified. This lesson was the sole active V00
-lesson during implementation. Implementation, automated, Simulation/Glass, approved real-hardware,
-architecture-review, documentation-reconciliation, final documentation review,
-and freeze authorization are complete. L09 is now `COMPLETE / FROZEN /
-READ-ONLY`; User Git commit, push, and publication remain pending.
+lesson during implementation. Implementation, automated, Simulation/Glass,
+approved real-hardware, architecture-review, documentation-reconciliation,
+final documentation review, and freeze authorization are complete. L09 is now
+`COMPLETE / FROZEN / READ-ONLY`; implementation publication `6548c98` is
+`PUBLISHED / VERIFIED`. Only the distinct metadata-reconciliation commit
+remains User-owned and pending.
+
+## Publication metadata
+
+The User supplied and verified the final implementation publication record:
+
+- Git commit: `6548c98`;
+- Commit message: `Complete V00_L09 Swerve pose estimator vision fusion`;
+- Git push: `COMPLETE / VERIFIED`;
+- Remote: `origin/main = 6548c98` and `origin/HEAD = 6548c98`;
+- Publication: `PUBLISHED / VERIFIED`;
+- Final publication gate: `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`.
+
+The metadata-reconciliation commit is distinct from the implementation
+publication commit and remains `PENDING USER COMMIT`.
 
 ## Objective
 
@@ -110,7 +130,7 @@ read-only review found no proven structural runtime defect. If the warning
 recurs, capture WPILib/Driver Station timing epochs before any performance
 repair; no specific cause is claimed.
 
-## Remaining User-owned publication
+## Remaining User-owned publication action
 
-User Git commit, User Git push, and User publication metadata remain pending and
-are User-owned.
+Only the metadata-reconciliation commit remains User-owned and
+`PENDING USER COMMIT`.

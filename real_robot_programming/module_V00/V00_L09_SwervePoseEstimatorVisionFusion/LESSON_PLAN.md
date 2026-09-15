@@ -21,9 +21,13 @@
 - **Final documentation review:** `PASS / PASS_V00_L09_FINAL_DOCUMENTATION_REVIEW_READY_FOR_FREEZE_AUTHORIZATION`
 - **Final freeze authorization:** `PASS / PASS_V00_L09_FINAL_FREEZE_AUTHORIZATION`
 - **Documentation:** `PASS / FINAL DOCUMENTATION REVIEW AND LIFECYCLE RECORDING COMPLETE`
-- **Git commit:** `PENDING USER COMMIT`
-- **Git push:** `PENDING USER PUSH`
-- **Publication:** `PENDING USER PUBLICATION`
+- **Git commit:** `6548c98`
+- **Commit message:** `Complete V00_L09 Swerve pose estimator vision fusion`
+- **Git push:** `COMPLETE / VERIFIED`
+- **Remote:** `origin/main = 6548c98`
+- **Publication:** `PUBLISHED / VERIFIED`
+- **Final publication gate:** `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`
+- **Metadata reconciliation commit:** `PENDING USER COMMIT`
 
 ## One-concept objective
 
@@ -121,13 +125,19 @@ and Design Lock occurred; implementation subsequently occurred under the
 Architect-controlled workflow; and the later narrow test-evidence repair was
 explicitly authorized by `PASS_V00_L09_NARROW_TEST_EVIDENCE_AUTHORIZED`.
 
-## Remaining User-owned publication gates
+## Publication metadata reconciliation
 
-The following remain after final freeze recording:
+The User supplied and verified the implementation publication record:
 
-- User-owned Git commit;
-- User-owned Git push; and
-- User-owned publication metadata.
+- Git commit: `6548c98`;
+- Commit message: `Complete V00_L09 Swerve pose estimator vision fusion`;
+- Git push: `COMPLETE / VERIFIED`;
+- Remote: `origin/main = 6548c98` and `origin/HEAD = 6548c98`;
+- Publication: `PUBLISHED / VERIFIED`;
+- Final publication gate: `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`.
+
+The metadata-reconciliation commit is distinct from the implementation
+publication commit and remains User-owned as `PENDING USER COMMIT`.
 
 One historical Driver Station overrun warning was observed. Independent
 read-only review found no proven structural runtime defect, busy-wait,
@@ -136,6 +146,6 @@ full Limelight JSON parsing remain plausible but unproven timing contributors.
 If the warning recurs, capture WPILib/Driver Station timing epochs before any
 performance repair.
 
-L09 is now `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`. It has
-no L09 Git commit, push, or publication claim; those remain User-owned and
-pending.
+L09 is now `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`. Its
+implementation publication is `6548c98` and is `PUBLISHED / VERIFIED`; only the
+distinct metadata-reconciliation commit remains User-owned and pending.

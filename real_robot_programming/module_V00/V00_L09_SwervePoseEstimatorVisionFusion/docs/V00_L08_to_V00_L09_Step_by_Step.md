@@ -13,7 +13,8 @@ This guide records the completed transition through implementation, automated
 verification, Simulation, Driver Station / Glass, approved real-hardware
 verification, bounded autonomous verification, final architecture review,
 documentation reconciliation, final documentation review, and freeze
-authorization. Only User Git publication remains pending.
+authorization. The implementation publication is now verified; only the
+distinct metadata-reconciliation commit remains User-owned and pending.
 
 ## Step 1 - Preserve the frozen L08 predecessor
 
@@ -394,8 +395,8 @@ read-only review found no proven structural runtime defect. If it recurs,
 capture WPILib/Driver Station timing epochs before any performance repair; no
 specific cause is claimed.
 
-**Expected Result:** Maintain the following final lifecycle state. User-owned
-Git publication remains pending:
+**Expected Result:** The following freeze-time lifecycle state was recorded
+before the later User-verified implementation publication:
 
 ```text
 THEORY VERIFIED
@@ -408,3 +409,29 @@ GIT COMMIT: PENDING USER COMMIT
 GIT PUSH: PENDING USER PUSH
 PUBLICATION: PENDING USER PUBLICATION
 ```
+
+## Step 20 - Reconcile post-publication metadata
+
+**Objective:** Record the User-verified publication metadata for the frozen L09
+implementation without fabricating the later metadata-reconciliation commit.
+
+**Why:** The implementation publication commit and the documentation
+metadata-reconciliation commit are separate records and must not be conflated.
+
+**Action:** Record implementation commit `6548c98` with commit message `Complete V00_L09 Swerve pose estimator vision fusion`, Git push
+`COMPLETE / VERIFIED`, remote `origin/main = 6548c98` and
+`origin/HEAD = 6548c98`, publication `PUBLISHED / VERIFIED`, and final gate
+`PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`. Keep the distinct
+metadata-reconciliation commit as `PENDING USER COMMIT`.
+
+**Files Changed:** The authorized seven lifecycle/documentation records only;
+no production source, tests, deploy assets, vendordeps, configuration,
+tuning, or V00_L08 files.
+
+**Verification:** User-supplied publication evidence reports
+`HEAD -> main = 6548c98`, `origin/main = 6548c98`, `origin/HEAD = 6548c98`,
+and push result `Everything up-to-date`. No Git command was run by Codex.
+
+**Expected Result:** L09 remains `COMPLETE / FROZEN / READ-ONLY` with active
+lesson count `0`; implementation publication is `PUBLISHED / VERIFIED`, and
+only the User-owned metadata-reconciliation commit remains pending.

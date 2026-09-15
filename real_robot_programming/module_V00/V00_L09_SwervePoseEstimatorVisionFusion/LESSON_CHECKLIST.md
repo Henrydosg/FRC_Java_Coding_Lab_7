@@ -7,9 +7,13 @@ Active lesson count: `0`
 Predecessor: `V00_L08 @ f34b210 - COMPLETE / FROZEN / READ-ONLY / PUBLISHED`  
 Predecessor publication metadata history: `6415b17 / USER-REPORTED HISTORY`  
 Design Lock: `PASS_V00_L09_FINAL_DESIGN_LOCK`  
-Git Commit: `PENDING USER COMMIT`  
-Git Push: `PENDING USER PUSH`  
-Publication: `PENDING USER PUBLICATION`
+Git Commit: `6548c98`  
+Commit Message: `Complete V00_L09 Swerve pose estimator vision fusion`  
+Git Push: `COMPLETE / VERIFIED`  
+Remote: `origin/main = 6548c98`  
+Publication: `PUBLISHED / VERIFIED`  
+Final Publication Gate: `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`  
+Metadata Reconciliation Commit: `PENDING USER COMMIT`
 
 ## Governance and predecessor protection
 
@@ -101,11 +105,15 @@ Publication: `PENDING USER PUBLICATION`
 - [x] Architect freeze authorization `PASS_V00_L09_FINAL_FREEZE_AUTHORIZATION` recorded.
 - [x] L09 lifecycle transition recorded as `COMPLETE / FROZEN / READ-ONLY`.
 
-## Remaining User-owned publication
+## Publication metadata reconciliation
 
-- [ ] User Git commit.
-- [ ] User Git push.
-- [ ] User publication metadata.
+- [x] Implementation publication commit recorded as `6548c98`.
+- [x] Commit message recorded as `Complete V00_L09 Swerve pose estimator vision fusion`.
+- [x] Git push recorded `COMPLETE / VERIFIED`.
+- [x] Remote recorded as `origin/main = 6548c98` and `origin/HEAD = 6548c98`.
+- [x] Publication recorded as `PUBLISHED / VERIFIED`.
+- [x] Final publication gate recorded as `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`.
+- [ ] Metadata-reconciliation commit remains User-owned and `PENDING USER COMMIT`.
 
 ## Evidence classification
 
@@ -121,7 +129,9 @@ DOCUMENTATION: FINAL REVIEWED / LIFECYCLE RECORDED
 
 The prior V00_L08 implementation publication `f34b210` and the User-reported
 publication-metadata reconciliation `6415b17` remain predecessor history; they
-are not L09 publication claims.
+are not L09 publication claims. L09 implementation publication is recorded
+separately as `6548c98` with remote publication gate
+`PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`.
 
 Gate 9 vision qualification: vision was intentionally invalid/suppressed
 during the BLUE `ONE_METER_PATH` lab run because the physical Tag 32 placement

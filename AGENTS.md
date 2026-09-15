@@ -1638,8 +1638,42 @@ capture WPILib/Driver Station timing epochs before any performance repair. No
 specific cause or performance repair is claimed.
 
 V00_L08 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ f34b210` and
-unmodified. User-owned Git commit, push, and publication remain pending. No
-L09 commit hash, push result, or publication metadata is claimed.
+unmodified. At the time of this freeze record, User-owned L09 Git commit,
+push, and publication remained pending; no L09 publication metadata was
+claimed at that point.
+
+### V00_L09 Post-Publication Metadata Reconciliation — 2026-09-15
+
+The User supplied and verified the final Git publication state for the frozen
+L09 implementation. The implementation publication commit is `6548c98` with
+subject `Complete V00_L09 Swerve pose estimator vision fusion`. The User
+verified that `origin/main = 6548c98` and `origin/HEAD = 6548c98`; the recorded
+push result was `Everything up-to-date`.
+
+The accepted publication gate is
+`PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`. The reconciled publication record
+is:
+
+```text
+GIT COMMIT: 6548c98
+COMMIT MESSAGE: Complete V00_L09 Swerve pose estimator vision fusion
+GIT PUSH: COMPLETE / VERIFIED
+REMOTE: origin/main = 6548c98
+PUBLICATION: PUBLISHED / VERIFIED
+FINAL PUBLICATION GATE: PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED
+METADATA RECONCILIATION COMMIT: PENDING USER COMMIT
+```
+
+The metadata-reconciliation commit is distinct from the implementation
+publication commit and is not claimed to exist. This documentation-only
+reconciliation does not change the accepted THEORY VERIFIED, SIMULATION
+VERIFIED, or REAL HARDWARE VERIFIED evidence; it does not change Gate 9's
+bounded qualification or the historical overrun wording.
+
+V00_L09 remains `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`.
+V00_L08 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ f34b210` and
+unmodified. Codex performed no Git operation, and no source, test, deploy,
+vendordep, configuration, tuning, roadmap, or predecessor change is included.
 
 ---
 
@@ -1715,3 +1749,4 @@ Only report verified facts.
 | 1.40 | 2026-09-11 | FROZEN | APPROVED: perform the documentation-only controlled activation of the prepared ADR-locked V00_L09 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`; preserve V00_L08 frozen protection and keep implementation, verification, closure, and User Git publication pending. |
 | 1.41 | 2026-09-12 | FROZEN | APPROVED: reconcile completed V00_L09 implementation, User-verified automated and Simulation evidence, Driver Station / Glass PASS, and the narrow test-only failure-boundary fixture repair; retain L09 as the sole `IN_PROGRESS / EDITABLE` lesson pending real Limelight timing/result, real estimator-fusion, final architecture/documentation closure, freeze, and User publication gates. |
 | 1.42 | 2026-09-15 | FROZEN | APPROVED: record final V00_L09 documentation review and explicit `PASS_V00_L09_FINAL_FREEZE_AUTHORIZATION`; transition L09 to `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, preserve V00_L08 frozen protection, and leave User Git commit, push, and publication pending. |
+| 1.43 | 2026-09-15 | FROZEN | APPROVED: reconcile User-verified V00_L09 implementation publication at `6548c98`, record `origin/main = 6548c98`, `origin/HEAD = 6548c98`, push `COMPLETE / VERIFIED`, and `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`; preserve the distinct metadata-reconciliation commit as `PENDING USER COMMIT`. |

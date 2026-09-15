@@ -506,8 +506,8 @@ real vision adapter integration`; push PASS to `origin/main`.
 
 ## Current V00_L09 implementation, evidence, and documentation state - 2026-09-15
 
-V00_L08 remains `COMPLETE / FROZEN / READ-ONLY`. Its implementation
-publication is `f34b210` with message `Complete V00_L08 real vision adapter
+V00_L08 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ f34b210`. Its
+implementation publication is `f34b210` with message `Complete V00_L08 real vision adapter
 integration`. The User separately identifies `6415b17` as the later V00_L08
 publication-metadata reconciliation; that history remains distinct from the
 predecessor implementation publication, and no V00_L08 file is modified by
@@ -523,9 +523,14 @@ STATUS: COMPLETE
 ACTIVE STATE: COMPLETE / FROZEN / READ-ONLY
 FREEZE STATE: FROZEN / READ-ONLY
 ACTIVE LESSON COUNT: 0
-GIT COMMIT: PENDING USER COMMIT
-GIT PUSH: PENDING USER PUSH
-PUBLICATION: PENDING USER PUBLICATION
+GIT COMMIT: 6548c98
+COMMIT MESSAGE: Complete V00_L09 Swerve pose estimator vision fusion
+GIT PUSH: COMPLETE / VERIFIED
+REMOTE: origin/main = 6548c98
+ORIGIN/HEAD: origin/HEAD = 6548c98
+PUBLICATION: PUBLISHED / VERIFIED
+FINAL PUBLICATION GATE: PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED
+METADATA RECONCILIATION COMMIT: PENDING USER COMMIT
 ```
 
 The User-supplied evidence records candidate preparation, generated-artifact
@@ -581,7 +586,15 @@ documentation-only lifecycle transition is now recorded as
 
 One historical Driver Station overrun warning remains non-proven; if it recurs,
 capture WPILib/Driver Station timing epochs before any performance repair. User
-Git commit, push, and publication remain pending and User-owned.
+Git commit `6548c98` and remote publication are verified. The distinct
+metadata-reconciliation commit remains User-owned and pending.
+
+The User supplied the final publication evidence: `HEAD -> main = 6548c98`,
+`origin/main = 6548c98`, `origin/HEAD = 6548c98`, and push result
+`Everything up-to-date`. The final publication gate is
+`PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`. This reconciliation changes
+documentation metadata only and does not alter the accepted technical
+evidence, Gate 9 qualification, or historical overrun wording.
 
 Approved lesson sequence:
 

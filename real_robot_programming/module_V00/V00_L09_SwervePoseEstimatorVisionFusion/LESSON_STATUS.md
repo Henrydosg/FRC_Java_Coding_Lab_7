@@ -31,9 +31,13 @@
 - **Final Freeze Authorization:** `PASS / PASS_V00_L09_FINAL_FREEZE_AUTHORIZATION`
 - **Documentation:** `PASS / FINAL DOCUMENTATION REVIEW AND LIFECYCLE RECORDING COMPLETE`
 - **Closure:** `PASS / PASS_V00_L09_FINAL_FREEZE_AUTHORIZATION`
-- **Git Commit:** `PENDING USER COMMIT`
-- **Git Push:** `PENDING USER PUSH`
-- **Publication:** `PENDING USER PUBLICATION`
+- **Git Commit:** `6548c98`
+- **Commit Message:** `Complete V00_L09 Swerve pose estimator vision fusion`
+- **Git Push:** `COMPLETE / VERIFIED`
+- **Remote:** `origin/main = 6548c98`
+- **Publication:** `PUBLISHED / VERIFIED`
+- **Final Publication Gate:** `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`
+- **Metadata Reconciliation Commit:** `PENDING USER COMMIT`
 - **Known Issues:** `ONE HISTORICAL DRIVER STATION OVERRUN WARNING; NO PROVEN STRUCTURAL RUNTIME DEFECT; MEASURE WPILIB/DRIVER STATION TIMING EPOCHS IF IT RECURS; PHYSICAL ABSOLUTE-POSE CALIBRATION AND EXACT 1.000 M ENDPOINT ACCURACY ARE OUTSIDE THIS LESSON GATE`
 
 ## Governance and provenance gates
@@ -70,6 +74,9 @@
 | Documentation reconciliation | PASS | Required L09 documentation was reconciled and passed final documentation review. |
 | Final freeze authorization | PASS | Architect authorization `PASS_V00_L09_FINAL_FREEZE_AUTHORIZATION` was consumed for the documentation-only lifecycle transition. |
 | Lifecycle transition | PASS | L09 is now `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`. |
+| Implementation publication | PASS | User-verified implementation commit `6548c98`, subject `Complete V00_L09 Swerve pose estimator vision fusion`. |
+| Remote publication | PASS | User-verified `origin/main = 6548c98`, `origin/HEAD = 6548c98`, and push `Everything up-to-date`. |
+| Publication gate | PASS | `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`; publication is `PUBLISHED / VERIFIED`. |
 
 ## Architect-approved L09 boundary
 
@@ -87,11 +94,9 @@ vendor-neutral Vision contracts above IO, RobotContainer as composition root,
 and one concept per lesson. MegaTag migration, dynamic quality covariance,
 Constants tuning, and unrelated architecture changes are excluded.
 
-## Remaining User-owned publication gates
+## Remaining User-owned publication gate
 
-- User Git commit remains `PENDING USER COMMIT`.
-- User Git push remains `PENDING USER PUSH`.
-- User publication metadata remains `PENDING USER PUBLICATION`.
+- Metadata-reconciliation commit remains `PENDING USER COMMIT`.
 
 ## Current lifecycle state
 
@@ -101,9 +106,10 @@ COMPLETE / FROZEN / READ-ONLY
 
 Implementation, automated verification, Simulation, Driver Station / Glass,
 approved real-hardware verification, final architecture review, final
-documentation review, and freeze authorization are complete. Evidence remains
-classified as `THEORY VERIFIED`, `SIMULATION VERIFIED`, and
-`REAL HARDWARE VERIFIED`. Gate 9 proves bounded autonomous lifecycle and
-estimator compatibility; it does not prove exact 1.000 m endpoint accuracy or
-physical absolute-pose calibration. L09 is now `COMPLETE / FROZEN / READ-ONLY`;
-only User-owned Git commit, push, and publication remain pending.
+documentation review, freeze authorization, and remote publication are
+complete. Evidence remains classified as `THEORY VERIFIED`, `SIMULATION VERIFIED`,
+and `REAL HARDWARE VERIFIED`. Gate 9 proves bounded autonomous
+lifecycle and estimator compatibility; it does not prove exact 1.000 m endpoint
+accuracy or physical absolute-pose calibration. The implementation publication
+is `6548c98` and is `PUBLISHED / VERIFIED`; only the User-owned
+metadata-reconciliation commit remains pending.
