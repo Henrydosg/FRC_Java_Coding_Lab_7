@@ -1,0 +1,520 @@
+# ADR: M00 Competition Mechanism Foundations Roadmap
+
+- Status: APPROVED
+- Date: 2026-09-13
+- Roadmap State: APPROVED / ROADMAP AUTHORIZED
+- Preparation State: AUTHORIZED
+- Preparation Authorization: PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED
+- Runtime / Lesson Activation: NOT ACTIVE
+- Active Lesson Count: 0
+- Scope: Future post-V00 mechanism curriculum roadmap
+- Authority: Approved successor ADR to
+  `ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`. The
+  repository authority order remains unchanged.
+
+## Context
+
+`V00_L09_SwervePoseEstimatorVisionFusion` is `COMPLETE / FROZEN / READ-ONLY /
+PUBLISHED / VERIFIED`. Its implementation/freeze publication is `6548c98` with
+subject `Complete V00_L09 Swerve pose estimator vision fusion`. Its later
+metadata-reconciliation publication is `5d36529` with subject `Record V00_L09
+publication metadata`. The accepted repository state is `HEAD = origin/main =
+origin/HEAD = 5d36529`, ahead `0`, behind `0`, and the final V00 closure gate is
+`PASS_V00_MODULE_FINAL_CLOSURE_CONFIRMED`. No V00 lesson is active or reopened.
+
+The repository already teaches the Frozen Backbone, IO and IOInputs, real versus
+simulation replacement, subsystem ownership, safe stop, immutable Observations,
+read-only telemetry, RobotContainer composition, vendor isolation, command
+requirements, and dependency direction through the S00/A00/A01/V00 lineage.
+
+The D01 mechanism lessons are a separate historical/parallel Tank Drive
+practice line. They provide reference examples, but they are not the
+predecessor of the post-V00 main line.
+
+The accepted Architect roadmap gate is
+`PASS_M00_COMPACT_REUSE_ROADMAP_ARCHITECT_ACCEPTED`, following the independent
+review gate `PASS_M00_COMPACT_REUSE_ROADMAP_READY_FOR_ARCHITECT_LOCK`.
+
+## Decision
+
+Document the future successor module:
+
+`M00 - Competition Mechanism Foundations`
+
+Document its future repository location:
+
+`real_robot_programming/module_M00/`
+
+M00 shall inherit from the final frozen and User-published
+`V00_L09_SwervePoseEstimatorVisionFusion` main-line snapshot. M00 shall not
+inherit from D01.
+
+The original ADR approval authorized the future roadmap only. The separate
+2026-09-15 governance decision now authorizes preparation after this record is
+reviewed and User-published. It does not activate M00, make M00_L01
+`IN_PROGRESS`, create anything during this recording task, or authorize
+production Java, tests, configuration, dependencies, simulation, real-robot
+work, or implementation.
+
+## Rationale
+
+The new module provides a practical mechanism progression without redesigning
+the existing Swerve, autonomous, PathPlanner, Vision, estimator, or fusion
+architecture. The sequence reuses mastered architecture in complete mechanism
+Foundation lessons and isolates genuinely new control, readiness, safety, and
+coordination concepts.
+
+The module is a curriculum boundary, not a version-control boundary. Git branch
+selection remains User-owned and cannot substitute for an ADR or lesson
+inheritance boundary.
+
+## One-New-Concept Rule
+
+Every lesson introduces exactly one new architectural, control, safety, or
+coordination concept. One lesson is not required to equal one Java file, class,
+package, or architecture layer.
+
+Previously mastered architecture may be bundled as supporting implementation in
+one lesson when all changed files express that lesson's single new concept.
+New behavior such as feedback control, readiness, homing, travel-limit
+enforcement, coordination, or autonomous event integration remains isolated.
+
+## Prior-Knowledge Reuse Rule
+
+The following are prior knowledge and may be applied together in a Foundation
+lesson:
+
+- vendor-neutral IO and IOInputs;
+- deterministic Simulation/Noop and Real adapter replacement;
+- subsystem ownership and safe stop;
+- immutable mechanism Observations;
+- read-only telemetry facades and RobotTelemetry integration;
+- RobotContainer composition and implementation selection;
+- vendor isolation, Constants authority, command requirements, and testing.
+
+Reusing these patterns does not constitute multiple new concepts. A Foundation
+lesson must not add closed-loop velocity, ready-at-speed, active homing,
+travel-limit enforcement, cross-mechanism coordination, or autonomous event
+integration at the same time.
+
+## Foundation Reuse Policy
+
+Each mechanism Foundation may contain the complete known architecture slice:
+
+```text
+hardware candidate
+-> mechanism IO / IOInputs
+-> Simulation/Noop and, when justified, selected Real IO
+-> mechanism Subsystem and safe stop
+-> immutable Observation
+-> read-only TelemetryFacade
+-> RobotTelemetry / RobotContainer composition
+```
+
+The Foundation's sole new concept is the independently owned mechanism
+capability. A missing hardware adapter may remain `REAL HARDWARE DEFERRED`;
+Simulation/Noop is valid evidence for architecture learning.
+
+## Locked 16-Lesson Roadmap
+
+The following order is locked for this approved ADR. Each later lesson inherits
+only from the immediately preceding lesson after that predecessor is
+`COMPLETE / FROZEN / READ-ONLY`.
+
+### M00_L01 - Mechanism Architecture Reuse
+
+- One concept: apply the mastered Frozen mechanism architecture to future
+  non-drivetrain mechanism capabilities.
+- Student question: how does the mastered drivetrain, vision, and autonomous
+  architecture apply to non-drivetrain mechanisms?
+- Locked directory identity: `M00_L01_MechanismArchitectureReuse`.
+- Prerequisite: final frozen/published V00_L09.
+- Excludes mechanism implementation, hardware selection, and behavior.
+
+### M00_L02 - Mechanism Hardware Evidence Audit
+
+- One concept: classify mechanism facts as `VERIFIED`, `PROVISIONAL`,
+  `UNKNOWN`, or `NOT APPLICABLE`.
+- Prerequisite: M00_L01 ownership map.
+- Excludes guessed device values and mandatory final hardware selection.
+
+### M00_L03 - Intake Foundation
+
+- One concept: Intake is one independently owned robot mechanism capability.
+- Prerequisite: M00_L02 evidence method.
+- Excludes manual command ownership, automatic intake, coordination, and
+  autonomous events.
+
+### M00_L04 - Intake Command Ownership
+
+- One concept: scheduler-managed manual ownership of Intake.
+- Prerequisite: verified M00_L03 Intake capability.
+- Excludes automatic sensing, Feeder coordination, and autonomous use.
+
+### M00_L05 - Feeder Foundation
+
+- One concept: Feeder is one independently owned transport mechanism.
+- Prerequisite: M00_L04 and reused mechanism architecture.
+- Excludes manual transport ownership, shooting, transfer, and autonomous use.
+
+### M00_L06 - Feeder Command Ownership
+
+- One concept: scheduler-managed manual transport ownership of Feeder.
+- Prerequisite: verified M00_L05 Feeder capability.
+- Excludes shooting, automatic staging, Intake transfer, and autonomous use.
+
+### M00_L07 - Flywheel Foundation
+
+- One concept: Flywheel is one independently owned rotational-speed mechanism.
+- Prerequisite: M00_L06 and reused mechanism architecture.
+- Excludes velocity feedback, readiness, shooting, and autonomous behavior.
+
+### M00_L08 - Flywheel Closed-Loop Velocity
+
+- One concept: velocity-setpoint feedback control.
+- Prerequisite: verified M00_L07 Flywheel measurement and ownership.
+- Excludes ready-at-speed policy, Feeder action, and shooting coordination.
+
+### M00_L09 - Flywheel Ready-at-Speed
+
+- One concept: deterministic readiness classification separate from velocity
+  control.
+- Prerequisite: verified M00_L08 velocity control.
+- Excludes Feeder sequencing and autonomous behavior.
+
+### M00_L10 - Elevator Foundation and Position-Reference Semantics
+
+- One concept: Elevator is an independently owned position mechanism whose
+  reported position has explicit reference meaning.
+- Prerequisite: M00_L09 and the reused mechanism architecture.
+- May define units, positive direction, zero meaning, relative/absolute
+  semantics, and valid/unknown/unreferenced/disconnected states.
+- Excludes active homing, position feedback, and travel-limit enforcement.
+
+### M00_L11 - Elevator Closed-Loop Position
+
+- One concept: position-setpoint feedback control.
+- Prerequisite: verified M00_L10 position-reference semantics.
+- Excludes active homing, travel-limit policy, and coordination.
+
+### M00_L12 - Elevator Homing
+
+- One concept: safely establish a trusted Elevator position reference.
+- Prerequisite: verified M00_L11 position control and reference contract.
+- Excludes general travel-limit enforcement and scoring behavior.
+
+### M00_L13 - Elevator Travel-Limit Safety
+
+- One concept: prevent Elevator motion outside its valid travel envelope.
+- Prerequisite: verified M00_L12 homing/reference behavior.
+- Excludes homing redesign and cross-mechanism coordination.
+
+### M00_L14 - Shoot Coordination
+
+- One concept: one scheduler-managed command coordinates Flywheel readiness and
+  Feeder action.
+- Prerequisite: verified M00_L06 Feeder ownership and M00_L09 readiness.
+- Requires both `FlywheelSubsystem` and `FeederSubsystem`.
+- Excludes a ShooterSubsystem, ShooterIO, vision aiming, and autonomous events.
+
+### M00_L15 - Intake-to-Feeder Coordination
+
+- One concept: one scheduler-managed command coordinates Intake and Feeder
+  transfer.
+- Prerequisite: verified M00_L04 Intake and M00_L06 Feeder ownership.
+- Excludes shooting, new sensing, and autonomous integration.
+
+### M00_L16 - Mechanism Autonomous Event Integration
+
+- One concept: schedule exactly one already-verified mechanism command through
+  the existing autonomous event infrastructure.
+- Prerequisite: verified M00_L14 or M00_L15 command and the frozen A01 event
+  boundary.
+- Excludes new mechanism behavior, path redesign, PathPlanner redesign, Swerve,
+  Vision, pose-fusion, and multiple mechanism commands.
+
+## Hardware-Evidence Policy
+
+M00_L02 establishes an evidence method, not a requirement that every final
+mechanism be selected at module start.
+
+The following facts require explicit evidence and must use exactly one of the
+four classifications `VERIFIED`, `PROVISIONAL`, `UNKNOWN`, or
+`NOT APPLICABLE`:
+
+- mechanical purpose and operating direction;
+- motor/controller family, CAN bus, CAN ID, motor count, and follower layout;
+- sensor type and mounting;
+- gear ratio and mechanism conversion;
+- inversion and sensor phase;
+- neutral behavior;
+- voltage, supply-current, stator-current, ramp, and peak-output limits;
+- physical travel limits;
+- firmware and vendor-library compatibility;
+- configuration apply/readback behavior;
+- Simulation support and commissioning/emergency-stop procedure.
+
+Kraken X60 with Talon FX, Kraken X44 with Talon FX, and Minion with Talon FXS
+remain candidates until evidence selects them. No CAN ID, bus, ratio, sensor,
+limit, gain, speed, current, voltage, geometry, or calibration value may be
+invented.
+
+A Foundation may close with `REAL HARDWARE DEFERRED` when hardware evidence is
+unavailable. A later real adapter must preserve the subsystem, command,
+Observation, and telemetry contracts; a motor/controller swap should remain
+primarily an IO/hardware-layer concern.
+
+## Mechanism Ownership
+
+The independent mechanism owners are:
+
+- `IntakeSubsystem` with `IntakeIO`;
+- `FeederSubsystem` with `FeederIO`;
+- `FlywheelSubsystem` with `FlywheelIO`;
+- `ElevatorSubsystem` with `ElevatorIO`.
+
+Each IO interface owns its mechanism-specific Inputs snapshot. Each subsystem
+owns behavior, state, and safe stop. Vendor APIs remain inside concrete IO
+adapters. No mechanism is added merely because it appears in a command name.
+
+## Shooter Ownership Decision
+
+The initial shooting architecture is locked as:
+
+```text
+FlywheelSubsystem
++
+FeederSubsystem
++
+ShootCommand requiring both
+```
+
+No `ShooterSubsystem` or `ShooterIO` is authorized by this ADR. Shooting is
+initially command-level coordination of independently owned Flywheel and Feeder
+capabilities. A future hood, turret, pivot, or other independently owned
+actuator receives its own reviewed subsystem/IO boundary. An umbrella Shooter
+owner requires new ownership evidence and formal architecture review.
+
+## RobotContainer Policy
+
+`RobotContainer` remains the Composition Root only. It may construct objects,
+select Real/Simulation/Noop implementations, inject dependencies, configure
+bindings, construct telemetry facades, and connect dependencies.
+
+It shall not contain PID or control math, velocity or position control,
+readiness decisions, homing policy, travel-limit policy, sensor interpretation,
+motor safety logic, telemetry calculations, or vendor behavior.
+
+Simple private helpers such as `createIntakeIO()`, `createFeederIO()`,
+`createFlywheelIO()`, and `createElevatorIO()` are allowed only for direct
+implementation selection. Dependency-injection frameworks, service locators,
+reflection, arbitrary registries, and generic mechanism factories are excluded.
+
+## Observation and Telemetry Policy
+
+Every mechanism follows:
+
+```text
+hardware
+-> IOInputs
+-> subsystem / estimator
+-> immutable Observation
+-> read-only telemetry
+-> NT4 / Glass / log
+```
+
+IOInputs is mutable one-cycle transport only and must not be retained as public
+mechanism state. Subsystems create immutable, vendor-neutral Observations with
+explicit units, timing, and validity where applicable. Telemetry publishes
+Observations only and cannot control behavior, schedule commands, interpret
+hardware, or mutate state.
+
+Readiness, homing, travel-limit, and other policies remain in their approved
+subsystem/evaluator/command boundaries, not in telemetry.
+
+## Protected Existing Systems
+
+M00 shall preserve without redesign:
+
+- the Frozen Backbone and Frozen Interface Contract;
+- Swerve module architecture and `SwerveSubsystem` ownership;
+- odometry and estimated-pose semantics;
+- autonomous safety and centralized stop authority;
+- PathPlanner, AutoBuilder, and NamedCommands/event ownership;
+- VisionIO, Limelight adapter, VisionSubsystem, and VisionFusionCoordinator;
+- `SwerveDrivePoseEstimator` ownership and vision-fusion boundaries;
+- existing alliance-transform ownership and canonical field-frame rules.
+
+M00_L16 may consume the existing autonomous event boundary but may not redesign
+it.
+
+## Evidence and Verification Policy
+
+The course evidence vocabulary remains:
+
+- `THEORY VERIFIED`;
+- `SIMULATION VERIFIED`;
+- `REAL HARDWARE VERIFIED`;
+- `REAL HARDWARE DEFERRED`;
+- `NOT APPLICABLE`.
+
+Simulation cannot prove CAN identity, wiring, physical direction, gearing,
+sensor phase, current or thermal behavior, travel limits, loading, friction,
+shooter performance, or physical safety margins. Real-robot claims remain
+bounded to the exact tested scope.
+
+Each M00 lesson must pass the applicable architecture review, inherited
+baseline build, focused tests, inherited regression, clean build, Simulation,
+Driver Station/Glass, real-robot, documentation, and freeze gates. No lesson
+may be marked complete from a build result alone.
+
+## Activation Prerequisites
+
+M00 activation requires all of the following:
+
+1. V00_L09 is `COMPLETE`.
+2. V00_L09 is `FROZEN / READ-ONLY`.
+3. V00_L09 is User-published.
+4. Final predecessor and publication evidence is recorded.
+5. The normal copy/rename/generated-artifact-cleanup workflow is authorized.
+6. `module_M00` and its first lesson are separately created through the
+   approved lifecycle.
+7. The active lesson count is reconciled so only the intended lesson is
+   editable.
+
+ADR approval does not activate M00. No active lesson state changes because of
+this ADR.
+
+## Governance Preparation Authorization
+
+The Architect authorization
+`PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED` is recorded with these exact state
+distinctions:
+
+```text
+M00 Roadmap: APPROVED / ROADMAP AUTHORIZED
+M00 Preparation: AUTHORIZED
+M00 Runtime/Lesson Activation: NOT ACTIVE
+Active Lesson Count: 0
+M00_L01: NOT ACTIVE / NOT YET CREATED
+Implementation Authorization: NONE
+```
+
+Preparation may occur only after this governance record is reviewed and
+User-published. M00_L01 is not `IN_PROGRESS`, and neither `module_M00` nor its
+first lesson is created by this authorization-recording task.
+
+The locked first lesson identity is:
+
+```text
+Lesson: M00_L01 - Mechanism Architecture Reuse
+Directory: M00_L01_MechanismArchitectureReuse
+```
+
+The exact predecessor/source is the complete frozen V00_L09 snapshot at
+repository state `5d36529`, with implementation/freeze commit `6548c98`:
+
+```text
+C:\Users\xps7350i7\Desktop\FRC_Java_Coding_Lab_7\real_robot_programming\module_V00\V00_L09_SwervePoseEstimatorVisionFusion
+```
+
+D01 is not the predecessor. The exact future destination is:
+
+```text
+C:\Users\xps7350i7\Desktop\FRC_Java_Coding_Lab_7\real_robot_programming\module_M00\M00_L01_MechanismArchitectureReuse
+```
+
+The future preparation sequence is User-owned:
+
+1. Start at the repository root.
+2. Copy the complete frozen V00_L09 directory.
+3. Create `module_M00` only as part of the authorized copy workflow.
+4. Rename only the destination copy to `M00_L01_MechanismArchitectureReuse`.
+5. Remove only the destination `build\` and `.gradle\`.
+6. Select WPILib 2026 Java 17.
+7. Run the inherited baseline clean build.
+8. Report `BUILD SUCCESSFUL` and Git status.
+9. Only then proceed to Architecture Audit, Design Lock, lifecycle activation,
+   and separately granted implementation authorization.
+
+The following command is recorded but is not run by this governance task. The
+User runs it inside the future destination:
+
+```powershell
+$env:JAVA_HOME = "C:\Users\Public\wpilib\2026\jdk"
+.\gradlew.bat clean build "-Dorg.gradle.java.home=C:\Users\Public\wpilib\2026\jdk"
+```
+
+M00_L01's sole concept is Mechanism Architecture Reuse. It may teach reuse of
+subsystem ownership, IO, immutable Observations, read-only telemetry,
+composition-root assembly, safe stop, and architecture mapping. It must not
+implement Intake, Feeder, Flywheel, Elevator, closed-loop control, readiness,
+elevator position control, homing, travel-limit safety, coordination,
+autonomous events, or any new hardware API.
+
+Any future student-facing M00 Markdown must be two separate files, one English
+and one Vietnamese, with identical structure, course/chapter identity, meaning,
+evidence, and architecture rules. English is normative. Vietnamese must remain
+student-friendly while preserving the same meaning. No student-facing M00
+Markdown is created by this task.
+
+Evidence classifications are limited to `THEORY VERIFIED`, `SIMULATION
+VERIFIED`, `REAL HARDWARE VERIFIED`, `REAL HARDWARE DEFERRED`, and `NOT
+APPLICABLE`. Runtime applicability is not claimed for M00_L01; its future
+Design Lock decides which runtime evidence applies. No V00 rerun is required.
+
+## Non-Goals and Exclusions
+
+This ADR does not authorize:
+
+- M00 runtime/lifecycle activation or any lesson-directory creation during
+  this governance-recording task;
+- source, test, Gradle, vendordep, PathPlanner, or configuration changes;
+- changes to V00_L09 or any frozen predecessor;
+- redesign of Swerve, Vision, autonomous, estimator, or fusion ownership;
+- guessed hardware values or unsupported tuning claims;
+- a ShooterSubsystem or ShooterIO without new ownership evidence;
+- additional M00 lessons or a reordered/renamed/merged/split sequence;
+- competition strategy, final characterization, or readiness claims.
+
+## Consequences
+
+- M00 has a documented future boundary after final published V00_L09.
+- D01 remains useful as historical mechanism reference without becoming a
+  predecessor.
+- Mechanism architecture can be reused without repetitive layer-only lessons.
+- New feedback, readiness, homing, limit, coordination, and event concepts
+  remain independently teachable and verifiable.
+- Hardware uncertainty can be recorded honestly without inventing constants or
+  blocking architecture learning.
+- Existing Swerve, autonomous, Vision, and fusion capabilities remain protected.
+
+## Future-Change Policy
+
+Formal architecture review and an ADR amendment or successor ADR are required
+before changing the M00 module boundary, lesson identity/order, predecessor
+rule, mechanism ownership, shooter ownership, RobotContainer role, Observation
+flow, hardware-evidence policy, protected-system boundary, or activation gates.
+
+Any future real hardware selection must document the evidence, exact adapter,
+vendor/library compatibility, and bounded verification scope. It must not be
+introduced by familiarity or copied historical constants.
+
+## Review Result
+
+This ADR is the M00 roadmap authority. Its roadmap state is `APPROVED / ROADMAP
+AUTHORIZED`; its preparation state is `AUTHORIZED`; and its runtime/lesson
+activation state is `NOT ACTIVE`, with active lesson count `0`. Roadmap approval
+is recorded by `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED` on 2026-09-13.
+Preparation authorization is recorded by
+`PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED` on 2026-09-15. Preparation remains
+conditional on review and User publication of this record. Neither gate
+activates M00_L01 or authorizes implementation.
+
+## Revision History
+
+| Version | Date | Status | Notes |
+| --- | --- | --- | --- |
+| 1.0 | 2026-09-13 | PROPOSED | Created from the Architect-accepted compact reuse roadmap; future authorization only. |
+| 1.1 | 2026-09-13 | APPROVED | Architect approval recorded at `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; roadmap authorized but not active. |
+| 1.2 | 2026-09-15 | APPROVED | Recorded V00 final closure at implementation `6548c98` and metadata publication `5d36529`; recorded `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`, exact M00_L01 identity, predecessor, future destination, User-owned baseline sequence, bilingual/evidence rules, and active lesson count `0`; M00 runtime remains `NOT ACTIVE`, M00_L01 remains `NOT YET CREATED`, and implementation is not authorized. |

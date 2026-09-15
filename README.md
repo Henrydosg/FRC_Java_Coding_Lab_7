@@ -526,11 +526,15 @@ ACTIVE LESSON COUNT: 0
 GIT COMMIT: 6548c98
 COMMIT MESSAGE: Complete V00_L09 Swerve pose estimator vision fusion
 GIT PUSH: COMPLETE / VERIFIED
-REMOTE: origin/main = 6548c98
-ORIGIN/HEAD: origin/HEAD = 6548c98
+REMOTE: origin/main = 5d36529
+ORIGIN/HEAD: origin/HEAD = 5d36529
 PUBLICATION: PUBLISHED / VERIFIED
 FINAL PUBLICATION GATE: PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED
-METADATA RECONCILIATION COMMIT: PENDING USER COMMIT
+METADATA RECONCILIATION COMMIT: 5d36529
+METADATA COMMIT MESSAGE: Record V00_L09 publication metadata
+FINAL REPOSITORY STATE: HEAD = origin/main = origin/HEAD = 5d36529
+SYNC STATE: ahead = 0 / behind = 0
+V00 FINAL CLOSURE GATE: PASS_V00_MODULE_FINAL_CLOSURE_CONFIRMED
 ```
 
 The User-supplied evidence records candidate preparation, generated-artifact
@@ -587,14 +591,16 @@ documentation-only lifecycle transition is now recorded as
 One historical Driver Station overrun warning remains non-proven; if it recurs,
 capture WPILib/Driver Station timing epochs before any performance repair. User
 Git commit `6548c98` and remote publication are verified. The distinct
-metadata-reconciliation commit remains User-owned and pending.
+metadata-reconciliation commit is User-published at `5d36529` with subject
+`Record V00_L09 publication metadata`.
 
-The User supplied the final publication evidence: `HEAD -> main = 6548c98`,
-`origin/main = 6548c98`, `origin/HEAD = 6548c98`, and push result
-`Everything up-to-date`. The final publication gate is
-`PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`. This reconciliation changes
-documentation metadata only and does not alter the accepted technical
-evidence, Gate 9 qualification, or historical overrun wording.
+The User supplied the final repository evidence: `HEAD = origin/main =
+origin/HEAD = 5d36529`, ahead `0`, and behind `0`. The implementation/freeze
+publication remains `6548c98`; the later metadata reconciliation is `5d36529`.
+The final gates are `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED` and
+`PASS_V00_MODULE_FINAL_CLOSURE_CONFIRMED`. This reconciliation changes
+documentation metadata only and does not alter the accepted technical evidence,
+Gate 9 qualification, or historical overrun wording.
 
 Approved lesson sequence:
 
@@ -620,6 +626,76 @@ verification.
 No camera/vendor is selected in V00_L01 through V00_L07. V00_L08 may select one
 real implementation only after the ADR's hardware, WPILib 2026, vendor-version,
 timestamp, dependency, and applicable simulation compatibility gate passes.
+
+## M00 governance preparation state — 2026-09-15
+
+The controlling successor record is
+`docs/architecture_decisions/ADR_M00_Competition_Mechanism_Foundations_Roadmap.md`.
+The M00 roadmap is `APPROVED / ROADMAP AUTHORIZED`; M00 preparation is
+`AUTHORIZED` by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`; M00 runtime and
+lesson activation remain `NOT ACTIVE`. No M00 directory or lesson has been
+created.
+
+```text
+Active Lesson Count: 0
+```
+
+The locked roadmap contains exactly 16 lessons, `M00_L01` through `M00_L16`, in
+the ADR-defined order. The first lesson is exactly
+`M00_L01 - Mechanism Architecture Reuse`, with locked directory identity
+`M00_L01_MechanismArchitectureReuse`. It is `NOT ACTIVE / NOT YET CREATED`, is
+not `IN_PROGRESS`, and has no implementation authorization.
+
+Its exact predecessor is the complete frozen V00_L09 snapshot at repository
+state `5d36529`, with implementation/freeze commit `6548c98`:
+
+```text
+C:\Users\xps7350i7\Desktop\FRC_Java_Coding_Lab_7\real_robot_programming\module_V00\V00_L09_SwervePoseEstimatorVisionFusion
+```
+
+D01 is not the predecessor. The exact future destination is:
+
+```text
+C:\Users\xps7350i7\Desktop\FRC_Java_Coding_Lab_7\real_robot_programming\module_M00\M00_L01_MechanismArchitectureReuse
+```
+
+Only after this governance record is reviewed and User-published may the User
+start at the repository root, copy the complete frozen V00_L09 directory,
+create `module_M00` as part of that copy workflow, rename only the destination
+copy, remove only its `build\` and `.gradle\`, select WPILib 2026 Java 17, run
+the inherited baseline clean build, and report `BUILD SUCCESSFUL` plus Git
+status. The command recorded for execution inside the future destination is:
+
+```powershell
+$env:JAVA_HOME = "C:\Users\Public\wpilib\2026\jdk"
+.\gradlew.bat clean build "-Dorg.gradle.java.home=C:\Users\Public\wpilib\2026\jdk"
+```
+
+Architecture Audit, Design Lock, lifecycle activation, and implementation
+authorization remain later separate gates. M00 preserves the Frozen Backbone,
+Frozen Interface Contract, Constants authority, frozen lesson protection, and
+one-lesson/one-new-concept rule. RobotContainer remains composition root only;
+vendor APIs remain inside concrete IO adapters; mechanism data follows
+`hardware -> IOInputs -> subsystem/processing -> immutable Observation ->
+read-only telemetry`. Intake, Feeder, Flywheel, and Elevator retain independent
+ownership. Shooting remains `FlywheelSubsystem + FeederSubsystem +
+ShootCommand`; no `ShooterSubsystem` or `ShooterIO` is authorized absent a
+later formal change.
+
+M00_L01's sole concept is Mechanism Architecture Reuse: how mastered
+drivetrain, vision, and autonomous architecture applies to non-drivetrain
+mechanisms. It may teach ownership, IO, immutable Observations, read-only
+telemetry, composition-root assembly, safe stop, and architecture mapping. It
+must not implement mechanisms, control/readiness behavior, elevator behavior,
+homing, travel limits, coordination, autonomous events, or a new hardware API.
+
+Future student-facing M00 Markdown must use separate English and Vietnamese
+files with identical structure, course/chapter identity, meaning, evidence, and
+architecture rules. English is normative; Vietnamese is student-friendly but
+semantically equivalent. Evidence labels are limited to `THEORY VERIFIED`,
+`SIMULATION VERIFIED`, `REAL HARDWARE VERIFIED`, `REAL HARDWARE DEFERRED`, and
+`NOT APPLICABLE`. M00_L01 runtime applicability is not claimed; its future
+Design Lock decides it. No V00 rerun is required by this preparation record.
 
 ---
 

@@ -535,6 +535,8 @@ Lesson-specific decisions shall be recorded outside global governance and refere
   `docs/architecture_decisions/ADR_A01_Autonomous_Navigation_Path_Following_Roadmap.md`
 - Post-A01 V00 roadmap authorization:
   `docs/architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`
+- Post-V00 M00 roadmap and preparation authorization:
+  `docs/architecture_decisions/ADR_M00_Competition_Mechanism_Foundations_Roadmap.md`
 - A01_L08 exceptional autonomous safety/robustness reopen:
   `docs/architecture_decisions/ADR_A01_L08_Autonomous_Safety_Robustness_Reopen.md`
 - V00_L07 inherited Swerve architecture/robustness integrity reopen:
@@ -1675,6 +1677,95 @@ V00_L08 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED @ f34b210` and
 unmodified. Codex performed no Git operation, and no source, test, deploy,
 vendordep, configuration, tuning, roadmap, or predecessor change is included.
 
+### V00 Module Final Closure Confirmation — 2026-09-15
+
+The User subsequently published the documentation-only metadata reconciliation
+at `5d36529` with subject `Record V00_L09 publication metadata`. The accepted
+final repository state is `HEAD = origin/main = origin/HEAD = 5d36529`, with
+ahead `0` and behind `0`. The V00 final closure gate is
+`PASS_V00_MODULE_FINAL_CLOSURE_CONFIRMED`.
+
+`V00_L09_SwervePoseEstimatorVisionFusion` remains `COMPLETE / FROZEN /
+READ-ONLY / PUBLISHED / VERIFIED`. Its implementation/freeze publication is
+`6548c98` with subject `Complete V00_L09 Swerve pose estimator vision fusion`;
+`5d36529` is the later metadata-reconciliation publication. No V00 lesson is
+reopened, and the active lesson count remains `0`.
+
+### M00 Governance Preparation Authorization — 2026-09-15
+
+The controlling successor record is
+`docs/architecture_decisions/ADR_M00_Competition_Mechanism_Foundations_Roadmap.md`.
+The M00 roadmap is `APPROVED / ROADMAP AUTHORIZED`; governance preparation is
+`AUTHORIZED` by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`; M00 runtime and
+lesson activation remain `NOT ACTIVE`.
+
+```text
+Active Lesson Count: 0
+```
+
+The locked roadmap contains exactly 16 lessons, `M00_L01` through `M00_L16`,
+in the ADR-defined order. The first lesson is locked as
+`M00_L01 - Mechanism Architecture Reuse`, with directory identity
+`M00_L01_MechanismArchitectureReuse`. It is `NOT ACTIVE / NOT YET CREATED`, is
+not `IN_PROGRESS`, and has no implementation authorization.
+
+After this governance record is reviewed and User-published, the User may
+perform only the normal preparation workflow. The exact predecessor is the
+published V00_L09 snapshot at repository state `5d36529`, with implementation
+commit `6548c98`, at:
+
+```text
+C:\Users\xps7350i7\Desktop\FRC_Java_Coding_Lab_7\real_robot_programming\module_V00\V00_L09_SwervePoseEstimatorVisionFusion
+```
+
+The exact future destination is:
+
+```text
+C:\Users\xps7350i7\Desktop\FRC_Java_Coding_Lab_7\real_robot_programming\module_M00\M00_L01_MechanismArchitectureReuse
+```
+
+The future User-owned preparation sequence is: start at the repository root;
+copy the complete frozen V00_L09 directory; create `module_M00` only as part of
+that authorized copy workflow; rename only the destination copy to the locked
+directory identity; remove only the destination `build\` and `.gradle\`;
+select WPILib 2026 Java 17; run the inherited baseline clean build; and report
+`BUILD SUCCESSFUL` plus Git status. Only after that evidence may Architecture
+Audit, Design Lock, lifecycle activation, and implementation authorization be
+considered separately. The baseline command to be run inside the future
+destination is:
+
+```powershell
+$env:JAVA_HOME = "C:\Users\Public\wpilib\2026\jdk"
+.\gradlew.bat clean build "-Dorg.gradle.java.home=C:\Users\Public\wpilib\2026\jdk"
+```
+
+M00 preserves the Frozen Backbone, Frozen Interface Contract, Constants as the
+default configuration authority, frozen predecessor protection, and one lesson
+per new concept. RobotContainer remains composition root only. Vendor APIs
+remain confined to concrete IO adapters. Mechanism data continues to flow
+`hardware -> IOInputs -> subsystem/processing -> immutable Observation ->
+read-only telemetry`. Intake, Feeder, Flywheel, and Elevator retain independent
+ownership. Shooting composition remains `FlywheelSubsystem + FeederSubsystem +
+ShootCommand`; no `ShooterSubsystem` or `ShooterIO` is authorized absent a
+later formal architecture change.
+
+M00_L01's sole concept is Mechanism Architecture Reuse: how the mastered
+drivetrain, vision, and autonomous architecture applies to non-drivetrain
+mechanisms. It may teach subsystem ownership, IO, immutable Observations,
+read-only telemetry, composition-root assembly, safe stop, and architecture
+mapping. It must not implement Intake, Feeder, Flywheel, Elevator, closed-loop
+control, readiness, homing, travel limits, coordination, autonomous events, or
+a new hardware API.
+
+Any future student-facing M00 Markdown must be delivered as separate English
+and Vietnamese files with identical structure, course/chapter identity,
+meaning, evidence, and architecture rules. English is normative; Vietnamese is
+student-friendly but semantically equivalent. Evidence must use only `THEORY
+VERIFIED`, `SIMULATION VERIFIED`, `REAL HARDWARE VERIFIED`, `REAL HARDWARE
+DEFERRED`, or `NOT APPLICABLE`. M00_L01 runtime applicability is not claimed;
+the future Design Lock decides it. No V00 rerun is required by this preparation
+authorization.
+
 ---
 
 ## 15. Final Report
@@ -1750,3 +1841,4 @@ Only report verified facts.
 | 1.41 | 2026-09-12 | FROZEN | APPROVED: reconcile completed V00_L09 implementation, User-verified automated and Simulation evidence, Driver Station / Glass PASS, and the narrow test-only failure-boundary fixture repair; retain L09 as the sole `IN_PROGRESS / EDITABLE` lesson pending real Limelight timing/result, real estimator-fusion, final architecture/documentation closure, freeze, and User publication gates. |
 | 1.42 | 2026-09-15 | FROZEN | APPROVED: record final V00_L09 documentation review and explicit `PASS_V00_L09_FINAL_FREEZE_AUTHORIZATION`; transition L09 to `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, preserve V00_L08 frozen protection, and leave User Git commit, push, and publication pending. |
 | 1.43 | 2026-09-15 | FROZEN | APPROVED: reconcile User-verified V00_L09 implementation publication at `6548c98`, record `origin/main = 6548c98`, `origin/HEAD = 6548c98`, push `COMPLETE / VERIFIED`, and `PASS_V00_L09_REMOTE_PUBLICATION_VERIFIED`; preserve the distinct metadata-reconciliation commit as `PENDING USER COMMIT`. |
+| 1.44 | 2026-09-15 | FROZEN | APPROVED: record V00 final closure through metadata reconciliation `5d36529` and `PASS_V00_MODULE_FINAL_CLOSURE_CONFIRMED`; register the locked 16-lesson M00 ADR and `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`, exact M00_L01 identity, predecessor, future destination, baseline command, bilingual/evidence rules, active lesson count `0`, and `NOT ACTIVE / NOT YET CREATED` with no implementation authorization. |
