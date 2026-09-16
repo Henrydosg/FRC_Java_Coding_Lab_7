@@ -1993,6 +1993,33 @@ ACTIVE / NOT CREATED`. No further M00_L02 lesson edit is authorized except a
 later bounded publication-metadata reconciliation after User Git publication.
 Publication remains pending and is not claimed complete.
 
+### M00_L02 Post-Publication Metadata Reconciliation — 2026-09-16
+
+The User completed and pushed the primary frozen-lesson publication. Accepted
+evidence records full commit
+`65a92a4a5806fd5134e0114e851c4e4cc093c58e` with subject `Complete M00_L02
+mechanism hardware evidence audit`. After the push, `HEAD`, `origin/main`, and
+`origin/HEAD` were observed aligned at short commit `65a92a4`. The accepted
+gates are `PASS_M00_L02_PRIMARY_GIT_PUBLICATION` and
+`PASS_M00_L02_PRIMARY_GIT_PUBLICATION_ACCEPTED_READY_FOR_PUBLICATION_METADATA_RECONCILIATION`.
+
+```text
+M00_L02: COMPLETE / FROZEN / READ-ONLY
+Active Lesson Count: 0
+Primary Publication Commit: 65a92a4a5806fd5134e0114e851c4e4cc093c58e
+Primary Publication Push: PASS
+Publication Metadata Reconciliation: COMPLETE / RECORDED
+Metadata Commit: PENDING USER COMMIT
+Metadata Push: PENDING USER PUSH
+Final Remote Verification: PENDING
+Final Publication Completion: PENDING
+M00_L03: NOT ACTIVE / NOT CREATED
+```
+
+This bounded metadata exception does not reopen M00_L02 or authorize technical,
+student-guide, or roadmap changes. The future metadata commit does not yet
+exist and is not claimed.
+
 ---
 
 ## 15. Final Report
@@ -2076,3 +2103,4 @@ Only report verified facts.
 | 1.49 | 2026-09-16 | FROZEN | APPROVED: consume `PASS_M00_L02_FINAL_DESIGN_LOCK` and record the documentation-only controlled activation of M00_L02 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`; preserve M00_L01 frozen publication, keep all technical implementation unauthorized, and leave student documentation pending separate Architect authorization. |
 | 1.50 | 2026-09-16 | FROZEN | APPROVED: reconcile M00_L02 documentation authorization and implementation, preserve the initial documentation HOLD and bounded repair, record independent rereview PASS, User final build/regression PASS, final closure review PASS, and `PASS_M00_L02_DOCUMENTATION_RECONCILED_READY_FOR_INDEPENDENT_REVIEW`; retain `IN_PROGRESS / EDITABLE`, active lesson count `1`, pending independent reconciliation review and freeze authorization, no technical changes, and inactive/uncreated M00_L03. |
 | 1.51 | 2026-09-16 | FROZEN | APPROVED: consume `PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION` after independent reconciliation review PASS; record M00_L02 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, preserve the documentation-only technical boundary and M00_L01 frozen publication, leave M00_L03 inactive/uncreated, and retain User Git publication and publication metadata reconciliation as pending. |
+| 1.52 | 2026-09-16 | FROZEN | APPROVED: reconcile User-confirmed M00_L02 primary publication at `65a92a4a5806fd5134e0114e851c4e4cc093c58e` and primary push PASS; retain `COMPLETE / FROZEN / READ-ONLY`, record publication metadata reconciliation complete, and leave the separate metadata commit, metadata push, final remote verification, and final publication completion pending. |

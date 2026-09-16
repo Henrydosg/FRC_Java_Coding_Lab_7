@@ -12,10 +12,12 @@ Test Implementation Authorization: `NONE`
 Configuration Authorization: `NONE`  
 Runtime Behavior Authorization: `NONE`  
 Documentation Implementation Authorization: `PASS_M00_L02_DOCUMENTATION_IMPLEMENTATION_AUTHORIZED`  
-Publication: `PENDING USER GIT PUBLICATION`  
+Primary publication: `COMPLETE / PUSHED @ 65a92a4a5806fd5134e0114e851c4e4cc093c58e`  
+Publication metadata reconciliation: `COMPLETE / RECORDED`  
+Final publication: `PENDING METADATA COMMIT/PUSH/REMOTE VERIFICATION`  
 M00_L03: `NOT ACTIVE / NOT CREATED`  
-Git Commit: `PENDING USER COMMIT`  
-Git Push: `PENDING USER PUSH`
+Metadata Git Commit: `PENDING USER COMMIT`  
+Metadata Git Push: `PENDING USER PUSH`
 
 ## Governance, preparation, and activation
 
@@ -80,11 +82,15 @@ Git Push: `PENDING USER PUSH`
 - [x] Freeze state transitioned to `FROZEN / READ-ONLY`.
 - [x] Active state transitioned to `COMPLETE / FROZEN / READ-ONLY`.
 - [x] Active lesson count transitioned from `1` to `0`.
-- [ ] User precise Git staging completed.
-- [ ] User Git commit completed.
-- [ ] User Git push completed.
-- [ ] Remote publication verified.
-- [ ] Publication metadata reconciled and published.
+- [x] User precise Git staging completed for the primary publication.
+- [x] User primary publication commit completed: `65a92a4a5806fd5134e0114e851c4e4cc093c58e`.
+- [x] User primary push completed.
+- [x] Primary remote ref alignment observed: `HEAD`, `origin/main`, and `origin/HEAD` at `65a92a4`.
+- [x] Publication metadata reconciliation performed.
+- [ ] User metadata Git staging completed.
+- [ ] User metadata Git commit completed.
+- [ ] User metadata Git push completed.
+- [ ] Final remote verification after metadata push completed.
 - [ ] Final publication completion recorded.
 
 ## Current gate
@@ -110,6 +116,12 @@ FREEZE AUTHORIZATION: PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION
 COMPLETE: AUTHORIZED / RECORDED
 FROZEN: AUTHORIZED / RECORDED
 READ-ONLY: AUTHORIZED / RECORDED
-PUBLICATION: PENDING USER GIT PUBLICATION
+PRIMARY PUBLICATION COMMIT: 65a92a4a5806fd5134e0114e851c4e4cc093c58e
+PRIMARY PUBLICATION PUSH: PASS
+PUBLICATION METADATA RECONCILIATION: COMPLETE / RECORDED
+METADATA GIT COMMIT: PENDING USER COMMIT
+METADATA GIT PUSH: PENDING USER PUSH
+FINAL REMOTE VERIFICATION: PENDING
+FINAL PUBLICATION COMPLETION: PENDING
 M00_L03: NOT ACTIVE / NOT CREATED
 ```

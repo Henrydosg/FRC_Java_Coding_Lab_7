@@ -29,7 +29,12 @@
 - **Independent reconciliation review:** `PASS`
 - **Freeze authorization:** `PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION`
 - **COMPLETE / FROZEN / READ-ONLY:** `AUTHORIZED / RECORDED`
-- **Publication:** `PENDING USER GIT PUBLICATION`
+- **Primary Git publication:** `COMPLETE / PUSHED`
+- **Primary publication commit:** `65a92a4a5806fd5134e0114e851c4e4cc093c58e`
+- **Publication metadata reconciliation:** `COMPLETE`
+- **Metadata Git commit / push:** `PENDING USER COMMIT / PENDING USER PUSH`
+- **Final remote verification:** `PENDING`
+- **Final publication confirmation:** `PENDING`
 - **M00_L03:** `NOT ACTIVE / NOT CREATED`
 
 ## One-concept objective
@@ -141,7 +146,10 @@ Shooting remains `FlywheelSubsystem + FeederSubsystem + ShootCommand requiring b
 - Freeze authorization: `PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION`.
 - All authorized lesson work: `COMPLETE`.
 - No technical implementation was introduced.
-- Remaining work is publication only.
+- Primary Git publication: `COMPLETE` at `65a92a4a5806fd5134e0114e851c4e4cc093c58e`.
+- Publication metadata reconciliation: `COMPLETE`.
+- Remaining work is User metadata staging/commit/push, remote verification, and final publication confirmation only.
+- No technical work remains.
 
 ## Lifecycle sequence
 
@@ -160,4 +168,7 @@ Shooting remains `FlywheelSubsystem + FeederSubsystem + ShootCommand requiring b
 13. Architect freeze authorization: `PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION`.
 14. `COMPLETE / FROZEN / READ-ONLY`: `COMPLETE`.
 15. Active lesson count transition from `1` to `0`: `COMPLETE`.
-16. User Git publication and metadata reconciliation: `PENDING`.
+16. Primary User Git publication: `COMPLETE / PUSHED` at `65a92a4a5806fd5134e0114e851c4e4cc093c58e`.
+17. Publication metadata reconciliation: `COMPLETE`.
+18. User metadata commit and push: `PENDING`.
+19. Final remote verification and publication confirmation: `PENDING`.

@@ -21,7 +21,11 @@
 - Freeze Authorization: PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION
 - M00_L01 Publication: PUBLISHED / VERIFIED @ 83907ab
 - M00_L01 Metadata Publication: PUBLISHED / VERIFIED @ f523118
-- M00_L02 Git Publication: PENDING USER GIT PUBLICATION
+- M00_L02 Primary Publication Commit: 65a92a4a5806fd5134e0114e851c4e4cc093c58e
+- M00_L02 Primary Push: PASS
+- M00_L02 Publication Metadata Reconciliation: COMPLETE
+- M00_L02 Metadata Git Publication: PENDING
+- M00_L02 Final Publication Completion: PENDING
 - Scope: Future post-V00 mechanism curriculum roadmap
 - Authority: Approved successor ADR to
   `ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`. The
@@ -686,6 +690,21 @@ introduced. M00_L02 is `COMPLETE / FROZEN / READ-ONLY` but not yet published,
 and M00_L03 is `NOT ACTIVE / NOT CREATED`. The locked 16-lesson order and every
 lesson scope remain unchanged.
 
+## M00_L02 Primary Publication and Metadata Reconciliation — 2026-09-16
+
+The User completed the primary publication at full commit
+`65a92a4a5806fd5134e0114e851c4e4cc093c58e` with subject `Complete M00_L02
+mechanism hardware evidence audit`. The primary push is `PASS`; `HEAD`,
+`origin/main`, and `origin/HEAD` were observed aligned at short commit
+`65a92a4`. The primary publication gates are
+`PASS_M00_L02_PRIMARY_GIT_PUBLICATION` and
+`PASS_M00_L02_PRIMARY_GIT_PUBLICATION_ACCEPTED_READY_FOR_PUBLICATION_METADATA_RECONCILIATION`.
+
+M00_L02 remains `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`.
+Publication metadata reconciliation is `COMPLETE`, while metadata Git
+publication and final publication completion remain `PENDING`. M00_L03 remains
+`NOT ACTIVE / NOT CREATED`; all 16 lesson headings and scopes remain unchanged.
+
 ## Non-Goals and Exclusions
 
 This ADR does not authorize:
@@ -733,8 +752,10 @@ independent rereview PASS, final User build PASS, final closure review PASS,
 documentation reconciliation PASS, independent reconciliation PASS, and freeze
 authorization `PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION`. Production-code,
 test, configuration, vendordep, deploy, runtime-behavior, and mechanism-API
-authorization remain `NONE`. Publication remains `PENDING USER GIT
-PUBLICATION`; M00_L03 remains inactive and uncreated. Roadmap approval remains recorded by
+authorization remain `NONE`. The primary publication is complete at
+`65a92a4a5806fd5134e0114e851c4e4cc093c58e`, publication metadata reconciliation
+is complete, and the separate metadata Git publication and final publication
+completion remain pending. M00_L03 remains inactive and uncreated. Roadmap approval remains recorded by
 `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; preparation authorization remains
 recorded by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`. This reconciliation
 does not change the roadmap or authorize technical implementation.
@@ -753,3 +774,4 @@ does not change the roadmap or authorize technical implementation.
 | 1.7 | 2026-09-16 | APPROVED | Consumed `PASS_M00_L02_FINAL_DESIGN_LOCK`; recorded M00_L02 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`; preserved M00_L01 frozen publication and the locked 16-lesson roadmap; retained all technical implementation authorization as `NONE`; and left student documentation pending separate Architect authorization. |
 | 1.8 | 2026-09-16 | APPROVED | Reconciled documentation authorization and implementation, preserved the initial independent-review HOLD and bounded repair, recorded independent rereview PASS, User final build/regression PASS, final closure review PASS, and `PASS_M00_L02_DOCUMENTATION_RECONCILED_READY_FOR_INDEPENDENT_REVIEW`; retained M00_L02 as `IN_PROGRESS / EDITABLE` with active lesson count `1`, pending freeze authorization and publication, and left M00_L03 inactive/uncreated. |
 | 1.9 | 2026-09-16 | APPROVED | Consumed `PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION` after independent reconciliation PASS; recorded M00_L02 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, preserved all technical authorization as `NONE`, kept M00_L03 inactive/uncreated, and retained User Git publication and publication metadata reconciliation as pending. |
+| 1.10 | 2026-09-16 | APPROVED | Reconciled User-confirmed M00_L02 primary publication at `65a92a4a5806fd5134e0114e851c4e4cc093c58e` with primary push PASS; recorded publication metadata reconciliation complete while leaving the separate metadata Git publication and final publication completion pending; preserved the 16-lesson roadmap and inactive/uncreated M00_L03. |

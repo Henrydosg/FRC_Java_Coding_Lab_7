@@ -21,8 +21,11 @@
 - **Independent reconciliation review:** `PASS`
 - **Freeze authorization:** `PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION`
 - **COMPLETE / FROZEN / READ-ONLY:** `COMPLETE / RECORDED`
-- **Publication:** `PENDING USER GIT PUBLICATION`
-- **Guide status:** `PASS / FREEZE RECORDED / PUBLICATION STEPS PENDING`
+- **Primary publication commit:** `65a92a4a5806fd5134e0114e851c4e4cc093c58e`
+- **Primary publication push:** `PASS`
+- **Publication metadata reconciliation:** `COMPLETE / RECORDED`
+- **Metadata commit / push / final remote verification:** `PENDING`
+- **Guide status:** `PASS / PRIMARY PUBLICATION RECORDED / FINAL METADATA PUBLICATION PENDING`
 - **M00_L03:** `NOT ACTIVE / NOT CREATED`
 
 This guide preserves the preparation defect and controlled repair as part of the factual lesson history. It does not hide or rewrite that evidence.
@@ -481,7 +484,7 @@ This guide preserves the preparation defect and controlled repair as part of the
 
 ## Step 31 - Complete User Git staging
 
-**State:** `PENDING`
+**State:** `COMPLETE / PRIMARY PUBLICATION`
 
 **Objective:** Stage only the authorized closure files.
 
@@ -491,45 +494,45 @@ This guide preserves the preparation defect and controlled repair as part of the
 
 **Files Changed:** None by Codex.
 
-**Verification:** The User supplies staging evidence.
+**Verification:** User-supplied primary-publication evidence confirms the intended publication set was staged.
 
 **Expected Result:** The intended publication set is staged.
 
 ## Step 32 - Complete User Git commit
 
-**State:** `PENDING`
+**State:** `COMPLETE`
 
 **Objective:** Create the lesson publication commit.
 
 **Why:** A local frozen snapshot is not yet published.
 
-**Action:** The User commits the staged lesson closure.
+**Action:** The User committed the staged lesson closure as `65a92a4a5806fd5134e0114e851c4e4cc093c58e` with subject `Complete M00_L02 mechanism hardware evidence audit`.
 
 **Files Changed:** None by Codex.
 
-**Verification:** Exact commit and subject are supplied.
+**Verification:** Exact full commit and subject are supplied and accepted at `PASS_M00_L02_PRIMARY_GIT_PUBLICATION`.
 
 **Expected Result:** A publication commit exists.
 
 ## Step 33 - Complete User Git push
 
-**State:** `PENDING`
+**State:** `COMPLETE`
 
 **Objective:** Publish the commit to the remote repository.
 
 **Why:** A local commit alone does not establish remote publication.
 
-**Action:** The User pushes the publication commit.
+**Action:** The User pushed the primary publication commit.
 
 **Files Changed:** None by Codex.
 
-**Verification:** Push evidence is supplied.
+**Verification:** Primary push is `PASS`; `HEAD`, `origin/main`, and `origin/HEAD` were observed aligned at `65a92a4`.
 
 **Expected Result:** The publication commit reaches the remote.
 
-## Step 34 - Verify remote publication
+## Step 34 - Verify primary remote publication
 
-**State:** `PENDING`
+**State:** `COMPLETE / PRIMARY PUBLICATION`
 
 **Objective:** Confirm local and remote publication identity.
 
@@ -539,25 +542,25 @@ This guide preserves the preparation defect and controlled repair as part of the
 
 **Files Changed:** None.
 
-**Verification:** Exact remote publication gate is recorded.
+**Verification:** `PASS_M00_L02_PRIMARY_GIT_PUBLICATION` and Architect acceptance are recorded.
 
-**Expected Result:** Lesson publication is verified.
+**Expected Result:** Primary lesson publication is verified; the later metadata publication remains separate.
 
 ## Step 35 - Reconcile publication metadata
 
-**State:** `PENDING`
+**State:** `COMPLETE / RECORDED; METADATA GIT PUBLICATION PENDING`
 
 **Objective:** Record the verified publication identity separately.
 
 **Why:** Publication metadata must preserve exact provenance.
 
-**Action:** Perform a separately authorized metadata reconciliation and User publication.
+**Action:** Record the primary publication identity through this separately authorized metadata reconciliation.
 
 **Files Changed:** Future authorized metadata records only.
 
-**Verification:** Metadata commit, push, and remote verification pass.
+**Verification:** Reconciliation content is complete. Metadata staging, metadata commit, metadata push, and final remote verification remain `PENDING`.
 
-**Expected Result:** Publication metadata is synchronized.
+**Expected Result:** Publication metadata is synchronized locally and ready for the User-owned metadata Git publication.
 
 ## Step 36 - Record final publication completion
 

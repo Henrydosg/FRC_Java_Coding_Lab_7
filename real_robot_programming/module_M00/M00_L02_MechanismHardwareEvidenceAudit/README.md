@@ -28,7 +28,11 @@
 - **Independent reconciliation review:** `PASS`
 - **Freeze authorization:** `PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION`
 - **COMPLETE / FROZEN / READ-ONLY:** `AUTHORIZED / RECORDED`
-- **Publication:** `PENDING USER GIT PUBLICATION`
+- **Primary publication commit:** `65a92a4a5806fd5134e0114e851c4e4cc093c58e`
+- **Primary push:** `PASS`
+- **Publication metadata:** `RECONCILED / COMPLETE`
+- **Metadata commit / push / final remote verification:** `PENDING`
+- **Final publication completion:** `PENDING`
 - **M00_L03:** `NOT ACTIVE / NOT CREATED`
 
 ## Learning objective
@@ -109,11 +113,13 @@ Each guide contains 15 knowledge-check questions, 15 answers, and an 80-row matr
 
 The initial independent review recorded `HOLD_M00_L02_INDEPENDENT_DOCUMENTATION_REVIEW_MISSING_REQUIRED_OWNERSHIP_CONSTANTS_AND_KNOWLEDGE_CHECK_COVERAGE` for three bounded documentation defects: the explicit `Constants.java` authorization boundary, the complete M00 ownership/shooting lock, and required knowledge-check coverage. The authorized two-guide repair resolved them, and the independent rereview passed. The User final build/regression and the final closure review also passed. Documentation reconciliation is complete and recorded at `PASS_M00_L02_DOCUMENTATION_RECONCILED_READY_FOR_INDEPENDENT_REVIEW`.
 
-## Final pre-publication state
+## Post-primary-publication state
 
 M00_L02 is `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`. No
-further lesson edits are authorized except a later bounded publication metadata
-reconciliation after User Git publication. Evidence remains `THEORY VERIFIED`;
+further technical or student-guide edits are authorized. The primary publication
+is complete at `65a92a4a5806fd5134e0114e851c4e4cc093c58e`, and its push is
+`PASS`. Publication metadata is reconciled. Evidence remains `THEORY VERIFIED`;
 Simulation and Driver Station / Glass remain `NOT APPLICABLE`; real hardware
-remains `REAL HARDWARE DEFERRED`. Publication is `PENDING USER GIT PUBLICATION`,
-and M00_L03 remains `NOT ACTIVE / NOT CREATED`.
+remains `REAL HARDWARE DEFERRED`. The separate metadata commit, metadata push,
+final remote verification, and final publication completion remain pending.
+M00_L03 remains `NOT ACTIVE / NOT CREATED`.

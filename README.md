@@ -777,7 +777,10 @@ Theory: VERIFIED
 Simulation: NOT APPLICABLE
 Driver Station / Glass: NOT APPLICABLE
 Real Hardware: DEFERRED
-Publication: PENDING USER GIT PUBLICATION
+Primary Publication Commit: 65a92a4a5806fd5134e0114e851c4e4cc093c58e
+Primary Publication Push: PASS
+Publication Metadata Reconciliation: COMPLETE / RECORDED
+Final Publication: PENDING METADATA COMMIT/PUSH/REMOTE VERIFICATION
 M00_L03: NOT ACTIVE / NOT CREATED
 ```
 
@@ -810,10 +813,12 @@ recorded at `PASS_M00_L02_DOCUMENTATION_RECONCILED_READY_FOR_INDEPENDENT_REVIEW`
 The independent reconciliation review passed, and the Architect-authorized
 transition to `COMPLETE / FROZEN / READ-ONLY` is recorded with active lesson
 count `0`. Theory is `VERIFIED`; Simulation and Driver Station / Glass are `NOT
-APPLICABLE`; real hardware remains `DEFERRED`. User Git publication, remote
-verification, publication metadata reconciliation, and final publication
-completion remain pending. M00_L03 exists in the roadmap but remains `NOT
-ACTIVE / NOT CREATED`.
+APPLICABLE`; real hardware remains `DEFERRED`. The User completed the primary
+publication at full commit `65a92a4a5806fd5134e0114e851c4e4cc093c58e` with
+push `PASS`. Publication metadata reconciliation is now `COMPLETE / RECORDED`.
+The distinct metadata commit, metadata push, final remote verification, and
+final publication completion remain pending. M00_L03 exists in the roadmap but
+remains `NOT ACTIVE / NOT CREATED`.
 
 ---
 
