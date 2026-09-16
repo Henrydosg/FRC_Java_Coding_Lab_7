@@ -751,6 +751,70 @@ reconciliation remains `PENDING USER COMMIT`, its push remains `PENDING USER
 PUSH`, and final remote verification of that later metadata commit remains
 `PENDING`. No V00 runtime evidence is reused as M00_L01 verification.
 
+## M00_L02 final freeze and lifecycle closure — 2026-09-16
+
+M00_L01 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED` at
+primary publication `83907ab` and metadata publication `f523118`. The Architect
+issued `PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION`, and M00_L02 is now frozen:
+
+```text
+Lesson: M00_L02 - Mechanism Hardware Evidence Audit
+Filesystem: M00_L02_MechanismHardwareEvidenceAudit
+Status: COMPLETE
+Active State: COMPLETE / FROZEN / READ-ONLY
+Freeze State: FROZEN / READ-ONLY
+Active Lesson Count: 0
+Design Lock: PASS_M00_L02_FINAL_DESIGN_LOCK
+Technical Implementation: NONE AUTHORIZED
+Documentation Implementation: COMPLETE
+Independent Documentation Rereview: PASS
+Final User Build: PASS
+Final Closure Review: PASS
+Documentation Reconciliation: COMPLETE / RECORDED
+Independent Reconciliation Review: PASS
+Freeze Authorization: PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION
+Theory: VERIFIED
+Simulation: NOT APPLICABLE
+Driver Station / Glass: NOT APPLICABLE
+Real Hardware: DEFERRED
+Publication: PENDING USER GIT PUBLICATION
+M00_L03: NOT ACTIVE / NOT CREATED
+```
+
+The accepted inherited baseline is `BUILD SUCCESSFUL in 58s` with 637 tests,
+zero failures, zero errors, and zero skipped. Post-repair inheritance is
+604/604 comparable files and 173/173 protected files with zero missing, extra,
+or SHA-256-different files. The accidental nested M00_L01 project was removed
+through the controlled repair and verified absent.
+
+The sole concept is `MECHANISM HARDWARE EVIDENCE AUDIT`: distinguish facts that
+are `VERIFIED`, `PROVISIONAL`, `UNKNOWN`, or `NOT APPLICABLE`. Unsupported
+physical facts may not be promoted to `VERIFIED`, and no hardware value may be
+invented. Evidence is `THEORY VERIFIED` as a required lesson gate; focused new
+tests, Simulation, and Driver Station / Glass are `NOT APPLICABLE`; real
+hardware is `REAL HARDWARE DEFERRED`.
+
+Production Java, tests, configuration, vendordeps, deploy assets, runtime
+behavior, and mechanism APIs remain unauthorized. The paired English and
+Vietnamese learning guides were separately authorized and implemented with
+matching 25-section structure, 15 questions, 15 answers, and 80-row evidence
+matrices containing 8 `VERIFIED`, 0 `PROVISIONAL`, and 72 `UNKNOWN` rows.
+
+The initial independent documentation review found the bounded missing
+Constants authorization boundary, ownership/shooting lock, and knowledge-check
+coverage. The authorized minimal two-guide repair resolved those findings, and
+the independent rereview passed. The User-supplied final build/regression passed
+with `BUILD SUCCESSFUL in 33s` and all 7 actionable tasks executed. The final
+closure review passed, and documentation reconciliation is complete and
+recorded at `PASS_M00_L02_DOCUMENTATION_RECONCILED_READY_FOR_INDEPENDENT_REVIEW`.
+The independent reconciliation review passed, and the Architect-authorized
+transition to `COMPLETE / FROZEN / READ-ONLY` is recorded with active lesson
+count `0`. Theory is `VERIFIED`; Simulation and Driver Station / Glass are `NOT
+APPLICABLE`; real hardware remains `DEFERRED`. User Git publication, remote
+verification, publication metadata reconciliation, and final publication
+completion remain pending. M00_L03 exists in the roadmap but remains `NOT
+ACTIVE / NOT CREATED`.
+
 ---
 
 # Lesson Structure
