@@ -5,27 +5,43 @@
 - Roadmap State: APPROVED / ROADMAP AUTHORIZED
 - Preparation State: COMPLETE / ACCEPTED
 - Preparation Authorization: PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED
-- Runtime / Lesson Activation: M00_L02 COMPLETE / FROZEN / READ-ONLY
-- Controlled Activation: PASS_M00_L02_CONTROLLED_ACTIVATION_RECORDED
-- Freeze State: FROZEN / READ-ONLY
-- Design Lock: PASS_M00_L02_FINAL_DESIGN_LOCK
-- Implementation Authorization: NONE
+- Runtime / Lesson Activation: NO ACTIVE LESSON / M00_L03 COMPLETE / FROZEN / READ-ONLY
+- Controlled Activation: M00_L03 PASS / RECORDED
+- Freeze State: FROZEN
+- Design Lock: PASS_M00_L03_FINAL_DESIGN_LOCK
+- Implementation Authorization: PASS_M00_L03_PRODUCTION_TEST_IMPLEMENTATION_AUTHORIZED
 - Active Lesson Count: 0
-- Documentation Implementation Authorization: PASS_M00_L02_DOCUMENTATION_IMPLEMENTATION_AUTHORIZED
-- Documentation Implementation: COMPLETE
-- Independent Documentation Rereview: PASS
-- Final User Build: PASS
-- Final Closure Review: PASS
-- Documentation Reconciliation: PASS
-- Independent Reconciliation Review: PASS
-- Freeze Authorization: PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION
+- Documentation Implementation Authorization: PASS_M00_L03_DOCUMENTATION_IMPLEMENTATION_AND_LIFECYCLE_RECONCILIATION_AUTHORIZED
+- Documentation Implementation: COMPLETE / VERIFIED AFTER BOUNDED REPAIR AND REREVIEW
+- Initial Focused Test: HOLD / 16 TESTS / 15 PASS / 1 FAIL / TEST DEFECT
+- Minimal Test Repair: PASS / IntakeSubsystemTest.java ONLY / NO ASSERTIONS REMOVED
+- Focused Retest: PASS / VERIFIED
+- Full Regression: PASS / VERIFIED
+- Simulation: PASS / VERIFIED FOR BOUNDED SOFTWARE, NOOP, COMPOSITION, AND TELEMETRY EVIDENCE ONLY
+- Driver Station / Glass: NOT APPLICABLE AS M00_L03 COMPLETION GATES
+- Real Hardware: DEFERRED
+- Independent Implementation Review: PASS / ACCEPTED
+- Initial Independent Documentation Review: HOLD / STEP 16 MUTABLE IOINPUTS TERMINOLOGY DEFECT
+- Bounded Documentation Repair: PASS / ONE-LINE TRANSITION-GUIDE REPAIR
+- Independent Documentation Rereview: PASS / ACCEPTED
+- Final Closure Build: PASS / VERIFIED / BUILD SUCCESSFUL IN 42s / EXIT CODE 0
+- Final Closure Review: PASS / ACCEPTED
+- Lifecycle Reconciliation: COMPLETE / RECORDED
+- Independent Reconciliation Review: PASS / PASS_M00_L03_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION
+- Architect Freeze Authorization: PASS / PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION
+- M00_L03 Lifecycle: COMPLETE / FROZEN / READ-ONLY
+- M00_L03 Publication: PENDING USER GIT
 - M00_L01 Publication: PUBLISHED / VERIFIED @ 83907ab
 - M00_L01 Metadata Publication: PUBLISHED / VERIFIED @ f523118
 - M00_L02 Primary Publication Commit: 65a92a4a5806fd5134e0114e851c4e4cc093c58e
 - M00_L02 Primary Push: PASS
-- M00_L02 Publication Metadata Reconciliation: COMPLETE
-- M00_L02 Metadata Git Publication: PENDING
-- M00_L02 Final Publication Completion: PENDING
+- M00_L02 Publication Metadata: PUBLISHED / VERIFIED @ 84010ff5022a33a946888fafedbbca0d67439e0c
+- M00_L02 Final Publication Completion: PASS_M00_L02_FINAL_PUBLICATION_COMPLETE
+- M00_L03 Preparation: PASS
+- M00_L03 Baseline Build: PASS / EXIT CODE 0
+- M00_L03 Architecture / Inheritance Audit: PASS
+- M00_L03 Implementation: COMPLETE FOR AUTHORIZED M00_L03 SCOPE
+- M00_L04: NOT ACTIVE / NOT CREATED
 - Scope: Future post-V00 mechanism curriculum roadmap
 - Authority: Approved successor ADR to
   `ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`. The
@@ -705,6 +721,162 @@ Publication metadata reconciliation is `COMPLETE`, while metadata Git
 publication and final publication completion remain `PENDING`. M00_L03 remains
 `NOT ACTIVE / NOT CREATED`; all 16 lesson headings and scopes remain unchanged.
 
+## M00_L03 Controlled Documentation-Only Lifecycle Activation — 2026-09-16
+
+The prepared candidate identity is `M00_L03 - Intake Foundation`, filesystem
+`M00_L03_IntakeFoundation`, with M00_L02 as its final frozen and published
+predecessor. The candidate baseline build passed under Java 17.0.16 Temurin
+with exit code `0`. The earlier preparation-script requirement for a
+lesson-local `AGENTS.md` was defective; repository-root `AGENTS.md` is the
+authority, the candidate was unaffected, and no recopy was required.
+
+Inheritance passed at 607/607 comparable files and 173/173 protected files,
+with zero missing, extra, or SHA-256-different files. The audit gate is
+`PASS_M00_L03_ARCHITECTURE_INHERITANCE_AUDIT_READY_FOR_FINAL_DESIGN_LOCK`, and
+the Architect Design Lock is `PASS_M00_L03_FINAL_DESIGN_LOCK`.
+
+M00_L03 is now the sole `IN_PROGRESS / EDITABLE` lesson with active lesson
+count `1` and freeze state `EDITABLE`. Its sole concept is an independently
+owned, vendor-neutral Intake mechanism foundation. Production, test, and
+documentation implementation remain pending separate Architect authorization.
+No vendor adapter, Constants change, command, binding, default/manual command
+ownership, or physical hardware claim is authorized. M00_L04 remains `NOT
+ACTIVE / NOT CREATED`, and the locked 16-lesson roadmap is unchanged.
+
+## M00_L03 Implementation, Verification, and Documentation Reconciliation — 2026-09-16
+
+The activation paragraph above is preserved as historical state. Separate
+authorization later issued
+`PASS_M00_L03_PRODUCTION_TEST_IMPLEMENTATION_AUTHORIZED`, and the bounded
+M00_L03 Intake foundation was implemented. The authorized architecture contains
+vendor-neutral `IntakeIO` and its owned input snapshot, `IntakeIONoop`,
+`IntakeSubsystem`, semantic `requestIntake()`, centralized `stop()`, requested
+states `STOPPED` and `INTAKE_REQUESTED`, immutable `IntakeObservation`,
+read-only telemetry, RobotContainer composition, and focused tests.
+
+The initial focused run executed 16 tests: 15 passed and one failed in
+`IntakeSubsystemTest.periodicBuildsFreshImmutableSnapshotsFromCurrentInputsAndIntent`
+because an optional callback was dereferenced at line 69. This was classified
+as a test defect. The minimal repair guarded the optional callback in
+`IntakeSubsystemTest.java` and removed no assertions. The focused retest passed
+with `BUILD SUCCESSFUL in 4s` and exit code `0`. The full clean regression
+passed with `BUILD SUCCESSFUL in 20s`, exit code `0`, and 7 of 7 actionable
+tasks executed. The independent implementation review passed and was accepted.
+
+User-owned Simulation passed for startup, Noop composition, subsystem
+integration, and Intake NetworkTables/telemetry presence while Disabled. This
+is bounded software evidence only. It does not verify wiring, CAN identity,
+controller configuration, physical direction, motion, current, load, force, or
+physical stopping. Real-hardware verification remains deferred.
+
+Documentation authorization is recorded at
+`PASS_M00_L03_DOCUMENTATION_IMPLEMENTATION_AND_LIFECYCLE_RECONCILIATION_AUTHORIZED`.
+The matching English and Vietnamese 34-section learning guides, each with 15
+review questions and 15 answers, are implemented. Independent documentation
+review, the final User closure build, final closure review, final lifecycle
+reconciliation, freeze authorization, `COMPLETE / FROZEN / READ-ONLY`, and User
+publication remain pending.
+
+No Intake vendor adapter or `Constants.java` change was introduced. Unsupported
+physical hardware facts remain `UNKNOWN`. M00_L04 retains exclusive ownership
+of scheduler-managed Intake Commands, requirements, bindings, interruption
+behavior, and default/manual ownership. It remains inactive and uncreated.
+
+## M00_L03 Final Closure Review and Lifecycle Reconciliation — 2026-09-17
+
+The initial independent documentation review returned `HOLD` because Step 16
+of the transition guide incorrectly described `IntakeIOInputs` as an immutable
+input snapshot. The correct architecture is a mutable one-cycle IO transport
+snapshot feeding subsystem processing, followed by an immutable
+`IntakeObservation`. The authorized bounded repair changed only the Step 16
+phrase to `mutable one-cycle input snapshot` and passed at
+`PASS_M00_L03_TRANSITION_GUIDE_MUTABLE_IOINPUTS_ONE_LINE_REPAIR_READY_FOR_INDEPENDENT_REREVIEW`.
+The Architect accepted the repair at
+`PASS_M00_L03_TRANSITION_GUIDE_MUTABLE_IOINPUTS_REPAIR_ACCEPTED_READY_FOR_INDEPENDENT_DOCUMENTATION_REREVIEW`.
+
+The independent documentation rereview passed at
+`PASS_M00_L03_INDEPENDENT_DOCUMENTATION_REREVIEW_READY_FOR_FINAL_USER_CLOSURE_BUILD`
+and was accepted at
+`PASS_M00_L03_INDEPENDENT_DOCUMENTATION_REREVIEW_ACCEPTED_READY_FOR_FINAL_USER_CLOSURE_BUILD`.
+The User then supplied final closure-build evidence: `BUILD SUCCESSFUL in 42s`,
+7 actionable tasks executed, and exit code `0`. The accepted build gates are
+`PASS_M00_L03_FINAL_USER_CLOSURE_BUILD_REGRESSION` and
+`PASS_M00_L03_FINAL_USER_CLOSURE_BUILD_REGRESSION_ACCEPTED_READY_FOR_FINAL_CLOSURE_REVIEW`.
+
+The final read-only closure review passed at
+`PASS_M00_L03_FINAL_CLOSURE_REVIEW_READY_FOR_DOCUMENTATION_RECONCILIATION` and
+was accepted at
+`PASS_M00_L03_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_DOCUMENTATION_RECONCILIATION`.
+Technical defects remaining are `NONE`; substantive documentation defects
+remaining are `NONE`. This documentation/lifecycle reconciliation is complete.
+
+M00_L03 remains the sole `IN_PROGRESS / EDITABLE` lesson, freeze state
+`EDITABLE`, with active lesson count `1`. It is not yet `COMPLETE / FROZEN /
+READ-ONLY`. Focused tests, full regression, final closure build, bounded
+software/Noop/composition Simulation, student documentation, independent
+documentation rereview, and final closure review are verified or PASS as
+applicable. Driver Station / Glass remain `NOT APPLICABLE`; real hardware
+remains `REAL HARDWARE DEFERRED`. Independent reconciliation review, explicit
+Architect freeze authorization, freeze recording, and User-owned publication
+remain pending. M00_L04 remains `NOT ACTIVE / NOT CREATED`.
+
+## M00_L03 Final Lifecycle Freeze — 2026-09-17
+
+The preceding final-closure section is preserved as the historical pre-freeze
+state. Independent reconciliation review passed at
+`PASS_M00_L03_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION`.
+The Architect then explicitly authorized the documentation-only lifecycle
+transition through `PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION`.
+
+M00_L03 is now `COMPLETE / FROZEN / READ-ONLY`, with freeze state `FROZEN` and
+active lesson count `0`. Preparation, Architecture / Inheritance Audit, Final
+Design Lock, controlled activation, implementation, minimal test repair,
+focused retest, full regression, bounded Simulation, independent
+implementation review, student documentation, bounded documentation repair,
+independent documentation rereview, final closure build, final closure review,
+lifecycle reconciliation, independent reconciliation review, and Architect
+freeze authorization are PASS.
+
+```text
+Preparation: PASS
+Architecture / Inheritance Audit: PASS
+Final Design Lock: PASS
+Controlled Activation: PASS
+Implementation: PASS
+Focused Test Initial Run: HOLD — TEST DEFECT
+Minimal Test Repair: PASS
+Focused Retest: PASS / VERIFIED
+Full Regression: PASS / VERIFIED
+Bounded Simulation: PASS / VERIFIED — SOFTWARE/NOOP/COMPOSITION ONLY
+Independent Implementation Review: PASS
+Student Documentation: PASS / VERIFIED
+Independent Documentation Review: HOLD — STEP 16 TERMINOLOGY DEFECT
+Bounded Documentation Repair: PASS
+Independent Documentation Rereview: PASS
+Final Closure Build: PASS / VERIFIED
+Final Closure Review: PASS
+Lifecycle Reconciliation: PASS / COMPLETE
+Independent Reconciliation Review: PASS
+Architect Freeze Authorization: PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION
+Lifecycle: COMPLETE / FROZEN / READ-ONLY
+Freeze State: FROZEN
+Active Lesson Count: 0
+Publication: PENDING USER GIT
+M00_L04: NOT ACTIVE / NOT CREATED
+```
+
+The initial focused-test HOLD remains preserved as a test defect, and the
+initial independent documentation HOLD remains preserved as the Step 16
+mutable/immutable terminology defect. `IntakeIOInputs` remains a mutable
+one-cycle transport snapshot; `IntakeObservation` remains immutable. Real
+hardware remains `REAL HARDWARE DEFERRED`, and unsupported physical hardware
+facts remain `UNKNOWN`.
+
+Publication remains `PENDING USER GIT`. This freeze does not claim a commit,
+push, remote verification, or publication completion. M00_L04 remains `NOT
+ACTIVE / NOT CREATED`, and the locked M00_L01 through M00_L16 roadmap remains
+unchanged.
+
 ## Non-Goals and Exclusions
 
 This ADR does not authorize:
@@ -755,7 +927,15 @@ test, configuration, vendordep, deploy, runtime-behavior, and mechanism-API
 authorization remain `NONE`. The primary publication is complete at
 `65a92a4a5806fd5134e0114e851c4e4cc093c58e`, publication metadata reconciliation
 is complete, and the separate metadata Git publication and final publication
-completion remain pending. M00_L03 remains inactive and uncreated. Roadmap approval remains recorded by
+completion remain pending. M00_L03 is `COMPLETE / FROZEN / READ-ONLY` with
+freeze state `FROZEN` and active lesson count `0`. Its bounded implementation,
+focused retest, full clean regression, bounded Simulation, independent
+implementation review, bilingual student documentation, bounded Step 16
+terminology repair, independent documentation rereview, final User closure
+build, final closure review, documentation/lifecycle reconciliation, and
+independent reconciliation review are accepted. Architect freeze authorization
+is recorded at `PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION`. Publication
+remains pending, and M00_L04 is inactive/uncreated. Roadmap approval remains recorded by
 `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; preparation authorization remains
 recorded by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`. This reconciliation
 does not change the roadmap or authorize technical implementation.
@@ -775,3 +955,7 @@ does not change the roadmap or authorize technical implementation.
 | 1.8 | 2026-09-16 | APPROVED | Reconciled documentation authorization and implementation, preserved the initial independent-review HOLD and bounded repair, recorded independent rereview PASS, User final build/regression PASS, final closure review PASS, and `PASS_M00_L02_DOCUMENTATION_RECONCILED_READY_FOR_INDEPENDENT_REVIEW`; retained M00_L02 as `IN_PROGRESS / EDITABLE` with active lesson count `1`, pending freeze authorization and publication, and left M00_L03 inactive/uncreated. |
 | 1.9 | 2026-09-16 | APPROVED | Consumed `PASS_M00_L02_FINAL_FREEZE_AUTHORIZATION` after independent reconciliation PASS; recorded M00_L02 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, preserved all technical authorization as `NONE`, kept M00_L03 inactive/uncreated, and retained User Git publication and publication metadata reconciliation as pending. |
 | 1.10 | 2026-09-16 | APPROVED | Reconciled User-confirmed M00_L02 primary publication at `65a92a4a5806fd5134e0114e851c4e4cc093c58e` with primary push PASS; recorded publication metadata reconciliation complete while leaving the separate metadata Git publication and final publication completion pending; preserved the 16-lesson roadmap and inactive/uncreated M00_L03. |
+| 1.11 | 2026-09-16 | APPROVED | Consumed `PASS_M00_L03_FINAL_DESIGN_LOCK`; recorded the prepared M00_L03 candidate as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`, preserved the script-check-defect history and exact inheritance evidence, retained all implementation authorization as separately pending, and left M00_L04 inactive/uncreated. |
+| 1.12 | 2026-09-16 | APPROVED | Reconciled M00_L03 implementation authorization and completion, preserved the initial focused-test HOLD and minimal test-only repair, recorded focused retest PASS, full clean regression PASS, bounded Simulation PASS, independent implementation review PASS, and authorized bilingual student-documentation implementation; retained M00_L03 as `IN_PROGRESS / EDITABLE` with active lesson count `1`, independent documentation review and closure/freeze/publication pending, and M00_L04 inactive/uncreated. |
+| 1.13 | 2026-09-17 | APPROVED | Recorded the Step 16 mutable-IOInputs documentation HOLD and bounded one-line repair, independent documentation rereview PASS, final User closure build PASS, final closure review PASS, and completed lifecycle reconciliation; retained M00_L03 as `IN_PROGRESS / EDITABLE`, active lesson count `1`, freeze authorization and publication pending, and M00_L04 inactive/uncreated. |
+| 1.14 | 2026-09-17 | APPROVED | Consumed `PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION` after independent reconciliation review PASS; recorded M00_L03 as `COMPLETE / FROZEN / READ-ONLY` with freeze state `FROZEN` and active lesson count `0`; preserved accepted technical/documentation evidence, M00_L02 protection, the 16-lesson roadmap, and inactive/uncreated M00_L04; left User-owned publication pending. |
