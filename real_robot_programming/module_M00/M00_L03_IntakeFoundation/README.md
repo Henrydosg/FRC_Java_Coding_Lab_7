@@ -14,7 +14,12 @@
 - **Lifecycle reconciliation:** `COMPLETE`
 - **Independent reconciliation review:** `PASS`
 - **Architect freeze authorization:** `PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION`
-- **Publication:** `PENDING USER GIT`
+- **Primary publication:** `COMPLETE`
+- **Primary commit:** `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`
+- **Primary remote alignment:** `PASS`
+- **Publication metadata reconciliation:** `COMPLETE`
+- **Metadata Git publication:** `PENDING USER GIT`
+- **Final publication verification:** `PENDING`
 - **M00_L04:** `NOT ACTIVE / NOT CREATED`
 
 ## Sole new concept
@@ -29,8 +34,8 @@ requested states `STOPPED` and `INTAKE_REQUESTED`, immutable
 `IntakeObservation`, read-only telemetry, RobotContainer composition, and
 focused deterministic tests.
 
-This lesson is complete, frozen, read-only, and no longer editable. Remaining
-work is publication only.
+This lesson is complete, frozen, read-only, and no longer editable. Its primary
+publication is complete; metadata publication and final verification remain.
 
 The software flow is:
 
@@ -96,14 +101,17 @@ questions, and 15 answers. They are verified after the bounded transition-guide
 terminology repair and independent documentation rereview. The student guides
 were not modified by this reconciliation.
 
-## Final pre-publication lifecycle gate
+## Publication metadata gate
 
 M00_L03 is `COMPLETE / FROZEN / READ-ONLY`, with freeze state `FROZEN` and
 active lesson count `0`. Technical implementation, automated verification,
 full regression, final closure build, bounded Simulation, student
 documentation, final closure review, lifecycle reconciliation, independent
 reconciliation review, and Architect freeze authorization are complete or
-verified. Real hardware remains `REAL HARDWARE DEFERRED`. User Git
-publication, any required publication metadata reconciliation, and final
-publication verification remain pending. M00_L04 remains `NOT ACTIVE / NOT
-CREATED`.
+verified. Real hardware remains `REAL HARDWARE DEFERRED`. The User-owned
+primary publication is complete at
+`3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`; primary remote alignment is
+`PASS`, and publication metadata reconciliation is complete. Independent
+metadata review, User-owned metadata Git publication, metadata remote
+verification, and final publication completion remain pending. M00_L04 remains
+`NOT ACTIVE / NOT CREATED`.

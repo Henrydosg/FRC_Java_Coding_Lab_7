@@ -30,7 +30,13 @@
 - Independent Reconciliation Review: PASS / PASS_M00_L03_INDEPENDENT_RECONCILIATION_REVIEW_READY_FOR_ARCHITECT_FREEZE_AUTHORIZATION
 - Architect Freeze Authorization: PASS / PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION
 - M00_L03 Lifecycle: COMPLETE / FROZEN / READ-ONLY
-- M00_L03 Publication: PENDING USER GIT
+- M00_L03 Primary Git Publication: PASS
+- M00_L03 Primary Publication Commit: 3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3
+- M00_L03 Primary Push: PASS
+- M00_L03 Remote Alignment: PASS
+- M00_L03 Publication Metadata Reconciliation: COMPLETE
+- M00_L03 Metadata Git Publication: PENDING USER GIT
+- M00_L03 Final Publication Verification: PENDING
 - M00_L01 Publication: PUBLISHED / VERIFIED @ 83907ab
 - M00_L01 Metadata Publication: PUBLISHED / VERIFIED @ f523118
 - M00_L02 Primary Publication Commit: 65a92a4a5806fd5134e0114e851c4e4cc093c58e
@@ -877,6 +883,34 @@ push, remote verification, or publication completion. M00_L04 remains `NOT
 ACTIVE / NOT CREATED`, and the locked M00_L01 through M00_L16 roadmap remains
 unchanged.
 
+## M00_L03 Primary Publication and Metadata Reconciliation — 2026-09-17
+
+The accepted primary publication gate is
+`PASS_M00_L03_PRIMARY_GIT_PUBLICATION`, with Architect acceptance at
+`PASS_M00_L03_PRIMARY_GIT_PUBLICATION_ACCEPTED_READY_FOR_PUBLICATION_METADATA_RECONCILIATION`.
+The User-owned primary publication commit is
+`3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`; the primary push passed as
+`84010ff..3d94dc6  main -> main`. Post-push local `HEAD` and `origin/main`
+both matched the full primary commit, so remote alignment is `PASS`.
+
+```text
+Lifecycle: COMPLETE / FROZEN / READ-ONLY
+Freeze State: FROZEN
+Active Lesson Count: 0
+Primary Git Publication: PASS
+Primary Publication Commit: 3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3
+Remote Alignment: PASS
+Publication Metadata Reconciliation: COMPLETE
+Metadata Git Publication: PENDING USER GIT
+Final Publication Verification: PENDING
+M00_L04: NOT ACTIVE / NOT CREATED
+```
+
+The primary lesson snapshot is published, but the two-commit publication model
+is not yet complete. Independent metadata review, User-owned metadata Git
+publication, metadata remote verification, and final publication verification
+remain pending. The locked M00_L01 through M00_L16 roadmap is unchanged.
+
 ## Non-Goals and Exclusions
 
 This ADR does not authorize:
@@ -934,8 +968,11 @@ implementation review, bilingual student documentation, bounded Step 16
 terminology repair, independent documentation rereview, final User closure
 build, final closure review, documentation/lifecycle reconciliation, and
 independent reconciliation review are accepted. Architect freeze authorization
-is recorded at `PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION`. Publication
-remains pending, and M00_L04 is inactive/uncreated. Roadmap approval remains recorded by
+is recorded at `PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION`. Primary Git
+publication is complete at `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`,
+primary push and remote alignment are PASS, and publication metadata
+reconciliation is complete. Metadata Git publication and final publication
+verification remain pending, and M00_L04 is inactive/uncreated. Roadmap approval remains recorded by
 `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; preparation authorization remains
 recorded by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`. This reconciliation
 does not change the roadmap or authorize technical implementation.
@@ -959,3 +996,4 @@ does not change the roadmap or authorize technical implementation.
 | 1.12 | 2026-09-16 | APPROVED | Reconciled M00_L03 implementation authorization and completion, preserved the initial focused-test HOLD and minimal test-only repair, recorded focused retest PASS, full clean regression PASS, bounded Simulation PASS, independent implementation review PASS, and authorized bilingual student-documentation implementation; retained M00_L03 as `IN_PROGRESS / EDITABLE` with active lesson count `1`, independent documentation review and closure/freeze/publication pending, and M00_L04 inactive/uncreated. |
 | 1.13 | 2026-09-17 | APPROVED | Recorded the Step 16 mutable-IOInputs documentation HOLD and bounded one-line repair, independent documentation rereview PASS, final User closure build PASS, final closure review PASS, and completed lifecycle reconciliation; retained M00_L03 as `IN_PROGRESS / EDITABLE`, active lesson count `1`, freeze authorization and publication pending, and M00_L04 inactive/uncreated. |
 | 1.14 | 2026-09-17 | APPROVED | Consumed `PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION` after independent reconciliation review PASS; recorded M00_L03 as `COMPLETE / FROZEN / READ-ONLY` with freeze state `FROZEN` and active lesson count `0`; preserved accepted technical/documentation evidence, M00_L02 protection, the 16-lesson roadmap, and inactive/uncreated M00_L04; left User-owned publication pending. |
+| 1.15 | 2026-09-17 | APPROVED | Reconciled accepted M00_L03 primary publication at `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`, primary push PASS, and remote alignment PASS; recorded publication metadata reconciliation complete while leaving metadata Git publication and final publication verification pending; preserved frozen M00_L03, inactive/uncreated M00_L04, and the locked 16-lesson roadmap. |

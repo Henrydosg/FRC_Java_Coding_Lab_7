@@ -2199,6 +2199,36 @@ student guides, Constants, configuration, vendordeps, deploy assets, and
 frozen M00_L02 remain unchanged. The next lifecycle work is User-owned
 publication and any separately authorized publication-metadata reconciliation.
 
+### M00_L03 Primary Publication and Metadata Reconciliation — 2026-09-17
+
+The User completed the Architect-authorized explicit-allowlist primary Git
+publication. The accepted primary publication commit is
+`3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`; the accepted push result is
+`84010ff..3d94dc6  main -> main`. Post-push local `HEAD` and `origin/main`
+both resolved to `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`, so primary
+remote alignment is `PASS`. The accepted gates are
+`PASS_M00_L03_PRIMARY_GIT_PUBLICATION` and
+`PASS_M00_L03_PRIMARY_GIT_PUBLICATION_ACCEPTED_READY_FOR_PUBLICATION_METADATA_RECONCILIATION`.
+
+```text
+Lesson: M00_L03 - Intake Foundation
+Lifecycle: COMPLETE / FROZEN / READ-ONLY
+Freeze State: FROZEN
+Active Lesson Count: 0
+Primary Git Publication: PASS
+Primary Publication Commit: 3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3
+Primary Push: PASS
+Remote Alignment: PASS
+Publication Metadata Reconciliation: COMPLETE
+Metadata Publication: PENDING USER GIT
+Final Publication Verification: PENDING
+M00_L04: NOT ACTIVE / NOT CREATED
+```
+
+This reconciliation does not claim the metadata commit, metadata push, final
+remote verification, or final publication completion. M00_L03 remains frozen
+and read-only; M00_L04 remains inactive and uncreated.
+
 ---
 
 ## 15. Final Report
@@ -2287,3 +2317,4 @@ Only report verified facts.
 | 1.54 | 2026-09-16 | FROZEN | APPROVED: reconcile M00_L03 production/test authorization, completed bounded Intake implementation, preserved initial focused-test HOLD and minimal test-only repair, focused retest PASS, full clean regression PASS, bounded Simulation PASS, independent implementation review PASS, and authorized bilingual student-documentation implementation; retain M00_L03 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`, independent documentation review and all closure/freeze/publication gates pending, and M00_L04 inactive/uncreated. |
 | 1.55 | 2026-09-17 | FROZEN | APPROVED: record the M00_L03 transition-guide terminology HOLD and one-line repair, independent documentation rereview PASS, final User closure build PASS, final closure review PASS, and completed documentation/lifecycle reconciliation; retain M00_L03 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`, freeze authorization and publication pending, and M00_L04 inactive/uncreated. |
 | 1.56 | 2026-09-17 | FROZEN | APPROVED: consume `PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION` after independent reconciliation review PASS; record M00_L03 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, preserve all accepted evidence and protected technical content, keep M00_L04 inactive/uncreated, and leave User-owned publication pending. |
+| 1.57 | 2026-09-17 | FROZEN | APPROVED: reconcile accepted M00_L03 primary publication at `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`, primary push and remote alignment PASS; record publication metadata reconciliation complete while leaving metadata Git publication and final publication verification pending; preserve frozen M00_L03 and inactive/uncreated M00_L04. |

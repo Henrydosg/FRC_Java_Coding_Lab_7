@@ -70,12 +70,16 @@ M00_L04: `NOT ACTIVE / NOT CREATED`
 - [x] Status transitioned to `COMPLETE`.
 - [x] Freeze state transitioned to `FROZEN / READ-ONLY`.
 - [x] Active lesson count transitioned from `1` to `0`.
-- [ ] User primary Git staging completed.
-- [ ] User primary Git commit completed.
-- [ ] User primary Git push completed.
-- [ ] Remote alignment verification completed.
-- [ ] Publication metadata reconciled if governance requires it.
-- [ ] User metadata Git publication completed if required.
+- [x] User primary Git staging completed.
+- [x] User primary Git commit completed at `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`.
+- [x] User primary Git push completed: `84010ff..3d94dc6  main -> main`.
+- [x] Primary remote alignment verification completed: local `HEAD` and `origin/main` matched the primary commit.
+- [x] Publication metadata reconciliation completed.
+- [ ] Independent publication-metadata review completed.
+- [ ] User metadata Git staging completed.
+- [ ] User metadata Git commit completed.
+- [ ] User metadata Git push completed.
+- [ ] Metadata remote alignment verification completed.
 - [ ] Final publication verification completed.
 - [ ] Final publication completion verified.
 
@@ -101,6 +105,12 @@ INDEPENDENT RECONCILIATION REVIEW: PASS
 ARCHITECT FREEZE AUTHORIZATION: PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION
 COMPLETE / FROZEN / READ-ONLY: AUTHORIZED / RECORDED
 REAL HARDWARE: REAL HARDWARE DEFERRED
-PUBLICATION: PENDING USER GIT
+PRIMARY GIT PUBLICATION: PASS
+PRIMARY PUBLICATION COMMIT: 3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3
+PRIMARY PUSH: PASS
+PRIMARY REMOTE ALIGNMENT: PASS
+PUBLICATION METADATA RECONCILIATION: COMPLETE
+METADATA GIT PUBLICATION: PENDING USER GIT
+FINAL PUBLICATION VERIFICATION: PENDING
 M00_L04: NOT ACTIVE / NOT CREATED
 ```

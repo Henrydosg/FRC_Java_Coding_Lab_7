@@ -1,12 +1,15 @@
 # M00_L02 to M00_L03 Step-by-Step Transition Guide
 
-This guide records the controlled transition from published `M00_L02 - Mechanism Hardware Evidence Audit` to frozen `M00_L03 - Intake Foundation`. Steps 1-34 are complete through independent reconciliation review, Architect freeze authorization, and lifecycle freeze recording. Steps 35-37 remain pending for User-owned publication and final publication evidence. M00_L03 is `COMPLETE / FROZEN / READ-ONLY`; no pending publication step is claimed as complete.
+This guide records the controlled transition from published `M00_L02 - Mechanism Hardware Evidence Audit` to frozen `M00_L03 - Intake Foundation`. Steps 1-36 are complete through independent reconciliation review, Architect freeze authorization, lifecycle freeze recording, primary publication, and publication-metadata reconciliation. Step 37 remains pending for independent metadata review, User-owned metadata publication, final remote verification, and final publication completion. M00_L03 remains `COMPLETE / FROZEN / READ-ONLY`.
 
 Current state: freeze state `FROZEN`; active lesson count `0`; implementation,
 focused tests, full regression, final closure build, bounded Simulation, student
 documentation, final closure review, lifecycle reconciliation, independent
 reconciliation review, and Architect freeze authorization are PASS or VERIFIED
-as applicable. Publication remains `PENDING USER GIT`, and M00_L04 remains
+as applicable. Primary Git publication is complete at
+`3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`, primary remote alignment is
+`PASS`, and publication metadata reconciliation is complete. Metadata Git
+publication and final publication verification remain pending. M00_L04 remains
 `NOT ACTIVE / NOT CREATED`.
 
 ## Step 1 - Confirm final M00_L02 publication
@@ -319,25 +322,25 @@ as applicable. Publication remains `PENDING USER GIT`, and M00_L04 remains
 
 - **Objective:** Publish the frozen lesson snapshot.
 - **Why:** Git commit and push are exclusively User-owned.
-- **Action:** The User performs precise staging, commit, and push after freeze.
+- **Action:** The User completed the Architect-authorized explicit-allowlist staging, committed the frozen lesson snapshot at `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`, and pushed `84010ff..3d94dc6  main -> main`. Known unrelated working-tree items remained present and unstaged.
 - **Files Changed:** Git history only, by the User.
-- **Verification:** User-supplied commit and remote-ref evidence.
-- **Expected Result:** The primary M00_L03 publication is remotely available. **PENDING**
+- **Verification:** User-supplied evidence showed local `HEAD` and `origin/main` both at `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`; remote alignment `PASS`; `PASS_M00_L03_PRIMARY_GIT_PUBLICATION`; Architect acceptance `PASS_M00_L03_PRIMARY_GIT_PUBLICATION_ACCEPTED_READY_FOR_PUBLICATION_METADATA_RECONCILIATION`.
+- **Expected Result:** The primary M00_L03 publication is remotely available. **COMPLETE / PASS**
 
 ## Step 36 - Reconcile publication metadata
 
 - **Objective:** Record the exact primary publication identity.
 - **Why:** Frozen lifecycle records must point to the actual published snapshot.
-- **Action:** Perform a separately authorized metadata-only reconciliation after publication.
-- **Files Changed:** Only explicitly authorized publication-metadata records.
-- **Verification:** Commit hash, subject, and remote alignment review.
-- **Expected Result:** Publication metadata is complete and consistent. **PENDING**
+- **Action:** Reconciled the eight explicitly authorized lifecycle/history records with primary commit `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`, primary push PASS, and primary remote alignment PASS. Preserved `COMPLETE / FROZEN / READ-ONLY`, active lesson count `0`, and inactive/uncreated M00_L04. Recorded metadata Git publication and final publication verification as pending.
+- **Files Changed:** `AGENTS.md`, root `README.md`, the M00 ADR, M00_L03 `LESSON_STATUS.md`, `LESSON_PLAN.md`, `LESSON_CHECKLIST.md`, lesson `README.md`, and this transition guide only.
+- **Verification:** Cross-record metadata consistency, protected-content hash comparison, 37-step sequence check, and roadmap-integrity review. No Git, Gradle, or Simulation command was run by this task.
+- **Expected Result:** Primary publication metadata is complete and consistent without claiming the metadata commit or final publication completion. **COMPLETE / READY FOR INDEPENDENT PUBLICATION-METADATA REVIEW**
 
 ## Step 37 - Verify final publication completion
 
 - **Objective:** Close the M00_L03 lifecycle and publication sequence.
 - **Why:** Publication is not complete until final metadata and remote evidence are verified.
-- **Action:** Conduct the final read-only publication verification.
+- **Action:** After independent metadata review, the User performs metadata Git staging, commit, and push; then conduct metadata remote-alignment and final read-only publication verification.
 - **Files Changed:** None unless a separately authorized metadata correction is required.
 - **Verification:** Final publication completion gate.
 - **Expected Result:** M00_L03 is fully published and verified; M00_L04 remains inactive until separately prepared and activated. **PENDING**

@@ -15,7 +15,13 @@
 - **Lifecycle reconciliation:** `COMPLETE`
 - **Independent reconciliation review:** `PASS`
 - **Architect freeze authorization:** `PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION`
-- **Publication:** `PENDING USER GIT`
+- **Primary Git publication:** `COMPLETE / PASS_M00_L03_PRIMARY_GIT_PUBLICATION`
+- **Primary publication commit:** `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`
+- **Primary Git push:** `COMPLETE / PASS`
+- **Primary remote alignment:** `COMPLETE / PASS`
+- **Publication metadata reconciliation:** `COMPLETE`
+- **Metadata Git publication:** `PENDING USER GIT`
+- **Final publication verification:** `PENDING`
 - **M00_L04:** `NOT ACTIVE / NOT CREATED`
 
 ## Sole concept
@@ -103,16 +109,23 @@ physical stopping.
 - The lifecycle transition to `COMPLETE / FROZEN / READ-ONLY` is recorded,
   and the active lesson count is now `0`.
 
+## Completed primary publication sequence
+
+1. User-owned primary Git staging: `COMPLETE`.
+2. User-owned primary Git commit: `COMPLETE` at
+   `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`.
+3. User-owned primary Git push: `COMPLETE / PASS`.
+4. Primary remote alignment: `COMPLETE / PASS`.
+5. Publication metadata reconciliation: `COMPLETE` by this task.
+
 ## Remaining publication-only sequence
 
-1. User-owned primary Git staging.
-2. User-owned primary Git commit.
-3. User-owned primary Git push.
-4. Remote alignment verification.
-5. Publication metadata reconciliation if governance requires it.
-6. User-owned metadata Git commit and push if required.
-7. Final publication verification.
-8. Final publication completion.
+1. Independent publication-metadata review.
+2. User-owned metadata Git staging.
+3. User-owned metadata Git commit.
+4. User-owned metadata Git push.
+5. Metadata remote-alignment verification.
+6. Final publication verification and completion.
 
 No new technical feature is authorized by these remaining steps. M00_L03 is
 no longer editable. M00_L04 remains inactive and uncreated pending separate

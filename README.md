@@ -942,6 +942,30 @@ M00_L03 is no longer editable. Remaining work is publication only. This
 freeze does not claim a Git commit, push, remote verification, or completed
 publication, and it does not create or activate M00_L04.
 
+## M00_L03 primary publication and metadata reconciliation — 2026-09-17
+
+M00_L03 remains `COMPLETE / FROZEN / READ-ONLY`, with freeze state `FROZEN`
+and active lesson count `0`. The User completed the primary Git publication at
+full commit `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`. The primary push passed,
+and post-push local `HEAD` and `origin/main` both matched that commit; primary
+remote alignment is `PASS`.
+
+```text
+Primary Git Publication: COMPLETE
+Primary Commit: 3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3
+Primary Push: PASS
+Primary Remote Alignment: PASS
+Publication Metadata: RECONCILED
+Metadata Git Publication: PENDING USER GIT
+Final Publication Verification: PENDING
+M00_L04: NOT ACTIVE / NOT CREATED
+```
+
+This metadata reconciliation is complete, but final publication is not. The
+remaining sequence is independent metadata review, User-owned metadata Git
+publication, metadata remote-alignment verification, and final publication
+verification. M00_L04 remains inactive and uncreated.
+
 ---
 
 # Lesson Structure
