@@ -6,6 +6,7 @@
 - **Freeze state:** `FROZEN`
 - **Editable boundary:** `NONE`
 - **Active lesson:** `NO`
+- **Current active M00 lesson:** `NONE`
 - **Active lesson count:** `0`
 - **Predecessor:** `M00_L03 - Intake Foundation`
 - **Predecessor state:** `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`
@@ -24,7 +25,11 @@
 - **Final closure build:** `PASS / BUILD SUCCESSFUL IN 23s / 7 OF 7 TASKS EXECUTED / EXIT CODE 0`
 - **Final closure review:** `PASS`
 - **Lifecycle freeze:** `COMPLETE / FROZEN / READ-ONLY`
-- **Publication:** `PENDING USER ACTION / NOT YET PUBLISHED`
+- **Primary publication:** `COMPLETE / 5c86be3`
+- **Primary remote alignment:** `PASS`
+- **Publication metadata reconciliation:** `COMPLETE IN WORKING TREE`
+- **Metadata Git publication:** `PENDING USER ACTION`
+- **Final publication verification:** `PENDING`
 - **M00_L05:** `NOT ACTIVE / NOT CREATED`
 
 ## Sole new concept
@@ -119,8 +124,11 @@ transition reconciliation, independent confirmation, and resumed final
 closure review are complete. M00_L04 is `COMPLETE / FROZEN / READ-ONLY`, its
 editable boundary is `NONE`, and active lesson count is `0`.
 
-The lesson is not published. User-owned Git add, commit, push, and publication
-confirmation remain pending. M00_L05 remains `NOT ACTIVE / NOT CREATED`.
+Primary M00_L04 publication is complete at commit `5c86be3`, and primary
+remote alignment is `PASS`. This publication-metadata reconciliation is
+complete in the working tree, but the separate User-owned metadata commit,
+push, remote verification, and final publication verification remain pending.
+No metadata SHA is claimed. M00_L05 remains `NOT ACTIVE / NOT CREATED`.
 
 Student guides:
 

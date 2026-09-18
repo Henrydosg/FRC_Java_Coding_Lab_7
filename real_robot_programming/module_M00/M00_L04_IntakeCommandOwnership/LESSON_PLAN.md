@@ -9,13 +9,14 @@
 - **Freeze state:** `FROZEN`
 - **Editable boundary:** `NONE`
 - **Active lesson:** `NO`
+- **Current active M00 lesson:** `NONE`
 - **Active lesson count:** `0`
 - **Preparation:** `COMPLETE / PASS`
 - **Baseline build:** `PASS / BUILD SUCCESSFUL IN 48s / EXIT CODE 0`
 - **Architecture / inheritance audit:** `COMPLETE / PASS`
 - **Final Design Lock:** `COMPLETE / PASS_M00_L04_FINAL_DESIGN_LOCK`
 - **Controlled activation:** `COMPLETE`
-- **Implementation:** `COMPLETE`
+- **Implementation:** `COMPLETE / VERIFIED`
 - **Implementation authorization:** `CONSUMED`
 - **Focused tests:** `VERIFIED / 14 OF 14 PASS`
 - **Full regression:** `VERIFIED`
@@ -27,7 +28,11 @@
 - **Final closure build:** `PASS / BUILD SUCCESSFUL IN 23s / 7 OF 7 TASKS EXECUTED / EXIT CODE 0`
 - **Final closure review:** `PASS`
 - **Lifecycle closure / freeze:** `COMPLETE / FROZEN / READ-ONLY`
-- **Publication:** `PENDING USER ACTION / NOT YET PUBLISHED`
+- **Primary publication:** `COMPLETE / 5c86be3`
+- **Primary remote alignment:** `PASS`
+- **Publication metadata reconciliation:** `COMPLETE IN WORKING TREE`
+- **Metadata Git publication:** `PENDING USER ACTION`
+- **Final publication verification:** `PENDING`
 - **M00_L05:** `NOT ACTIVE / NOT CREATED`
 
 ## Sole new concept
@@ -98,7 +103,7 @@ No other production or test file is within the Design Lock.
 - Driver Station: `VERIFIED / BOUNDED` for the observed software sequence
   `STOPPED -> INTAKE_REQUESTED -> STOPPED`.
 - Glass: `NOT APPLICABLE` as a completion gate.
-- Real hardware: `REAL HARDWARE DEFERRED`.
+- Real Hardware: `REAL HARDWARE DEFERRED`.
 
 No software or Simulation result may be promoted to a physical motor, motion,
 current, acquisition, or stopping claim.
@@ -133,12 +138,10 @@ hardware behavior is claimed.
 
 ## Remaining governed sequence
 
-1. Publication review.
-2. User primary Git publication.
-3. Publication metadata reconciliation.
-4. Independent metadata review.
-5. User metadata Git publication.
-6. Final publication verification.
-7. Architect final publication completion.
+1. Independent metadata review.
+2. User metadata Git publication.
+3. Metadata remote-alignment verification.
+4. Final publication verification.
+5. Architect final publication completion.
 
 No hardware commissioning and no M00_L05 work are part of this plan.

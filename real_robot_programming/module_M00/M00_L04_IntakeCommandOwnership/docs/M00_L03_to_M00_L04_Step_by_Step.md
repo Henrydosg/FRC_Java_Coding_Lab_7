@@ -6,7 +6,9 @@ This guide records the controlled transition from final published
 work. Step 23 records the completed independent review HOLD, Step 24 records
 the completed bounded repair, Step 25 records the completed independent
 documentation rereview and final User closure build, and Step 26 records final
-closure and lifecycle freeze. User-owned publication remains pending.
+closure, lifecycle freeze, primary User publication, and metadata
+reconciliation. The separate metadata Git publication remains pending User
+action.
 
 Current implementation state: `COMPLETE`. Current lesson state:
 `COMPLETE / FROZEN / READ-ONLY`.
@@ -15,9 +17,18 @@ Current implementation state: `COMPLETE`. Current lesson state:
 Freeze State: FROZEN
 Editable Boundary: NONE
 Active Lesson: NO
+Current Active M00 Lesson: NONE
 Active Lesson Count: 0
-Git Publication: PENDING USER ACTION
-Publication State: NOT YET PUBLISHED
+Implementation: COMPLETE / VERIFIED
+Documentation: COMPLETE / VERIFIED
+Final Closure Review: PASS
+Real Hardware: REAL HARDWARE DEFERRED
+Primary Publication: COMPLETE
+Primary Publication Commit: 5c86be3
+Primary Remote Alignment: PASS
+Publication Metadata Reconciliation: COMPLETE IN WORKING TREE
+Metadata Git Publication: PENDING USER ACTION
+Final Publication Verification: PENDING
 M00_L05: NOT ACTIVE / NOT CREATED
 ```
 
@@ -268,21 +279,24 @@ M00_L05: NOT ACTIVE / NOT CREATED
   `PASS_M00_L04_FINAL_USER_CLOSURE_BUILD_REGRESSION_ACCEPTED_READY_FOR_FINAL_CLOSURE_REVIEW`.
 - **Expected Result:** Documentation rereview and the final User closure build are accepted in chronological order. **COMPLETE / PASS**
 
-## Step 26 - Complete final closure and lifecycle freeze; retain publication pending
+## Step 26 - Complete final closure, lifecycle freeze, primary publication, and metadata reconciliation
 
-- **Objective:** Complete final closure and lifecycle freeze without publishing or activating M00_L05.
-- **Why:** Accepted technical and pedagogical closure permits lifecycle freeze, while Git publication remains separately User-owned.
+- **Objective:** Complete final closure and lifecycle freeze, then record the later primary publication and metadata reconciliation without activating M00_L05.
+- **Why:** Accepted technical and pedagogical closure permits lifecycle freeze; the later User-owned primary publication must be distinguished from the still-pending metadata commit.
 - **Action:** Recorded the bounded transition-guide reconciliation and its
   independent confirmation, the resumed final closure review PASS and
   Architect acceptance, and the authorized lifecycle transition to `COMPLETE /
   FROZEN / READ-ONLY`. Active lesson count became `0`; editable boundary became
-  `NONE`. User-owned publication remains pending, and M00_L05 remains inactive
-  and uncreated.
+  `NONE`. The User later completed primary publication at `5c86be3`; accepted
+  post-push evidence records primary remote alignment `PASS`. Publication
+  metadata reconciliation is complete in the working tree, while the separate
+  metadata commit remains pending User action. M00_L05 remains inactive and
+  uncreated.
 - **Files Changed:** Eight authorized lifecycle/documentation records only.
 - **Verification:**
   `PASS_M00_L04_TRANSITION_GUIDE_RECONCILIATION_INDEPENDENT_CONFIRMATION_READY_TO_RESUME_FINAL_CLOSURE_REVIEW`;
   `PASS_M00_L04_TRANSITION_GUIDE_RECONCILIATION_INDEPENDENT_CONFIRMATION_ACCEPTED_READY_TO_RESUME_FINAL_CLOSURE_REVIEW`;
   `PASS_M00_L04_FINAL_CLOSURE_REVIEW_READY_FOR_LIFECYCLE_RECONCILIATION_AND_FREEZE_PREPARATION`;
   and
-  `PASS_M00_L04_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_FINAL_LIFECYCLE_RECONCILIATION_AND_FREEZE_PREPARATION`.
-- **Expected Result:** M00_L04 is `COMPLETE / FROZEN / READ-ONLY`; publication remains pending User action; M00_L05 remains inactive and uncreated. **COMPLETE / PASS**
+  `PASS_M00_L04_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_FINAL_LIFECYCLE_RECONCILIATION_AND_FREEZE_PREPARATION`; primary commit `5c86be3`; and accepted primary remote alignment `PASS`.
+- **Expected Result:** M00_L04 is `COMPLETE / FROZEN / READ-ONLY`; primary publication is complete at `5c86be3`; publication metadata is reconciled in the working tree with metadata Git publication pending User action; M00_L05 remains inactive and uncreated. **COMPLETE / PASS**

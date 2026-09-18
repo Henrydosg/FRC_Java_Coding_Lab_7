@@ -1079,6 +1079,35 @@ M00_L05: NOT ACTIVE / NOT CREATED
 No M00 lesson is active. This lifecycle reconciliation does not publish
 M00_L04, claim a commit or push, or activate M00_L05.
 
+## M00_L04 primary publication and metadata reconciliation — 2026-09-18
+
+The preceding lifecycle section is preserved as historical pre-publication
+state. Primary M00_L04 publication is complete at commit `5c86be3` with
+subject `Complete M00_L04 intake command ownership`. Accepted post-push
+evidence records `HEAD`, `origin/main`, and `origin/HEAD` at `5c86be3`, so
+primary remote alignment is `PASS`.
+
+```text
+M00_L04: COMPLETE / FROZEN / READ-ONLY
+Implementation: COMPLETE / VERIFIED
+Documentation: COMPLETE / VERIFIED
+Final Closure Review: PASS
+Primary Publication: COMPLETE
+Primary Publication Commit: 5c86be3
+Primary Remote Alignment: PASS
+Publication Metadata Reconciliation: COMPLETE IN WORKING TREE
+Metadata Git Publication: PENDING USER ACTION
+Final Publication Verification: PENDING
+Real Hardware: REAL HARDWARE DEFERRED
+Active Lesson Count: 0
+Current Active M00 Lesson: NONE
+M00_L05: NOT ACTIVE / NOT CREATED
+```
+
+The metadata reconciliation is prepared but has not been committed. Its
+User-owned metadata commit/push, remote verification, and final publication
+verification remain pending. No future metadata SHA is claimed.
+
 ---
 
 # Lesson Structure

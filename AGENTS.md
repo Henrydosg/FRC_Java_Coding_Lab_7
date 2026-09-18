@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01-L03 complete/frozen/read-only/published/verified; M00_L04 complete/frozen/read-only with User publication pending; no active M00 lesson; M00_L05 not created)
+    └── module_M00/ (authorized; M00_L01-L03 complete/frozen/read-only/published/verified; M00_L04 complete/frozen/read-only with primary publication complete at 5c86be3 and metadata Git publication pending User action; no active M00 lesson; M00_L05 not created)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -2382,6 +2382,36 @@ deterministic, vendor-neutral, unavailable, disconnected, and incapable of
 physical output. No M00 lesson is active. This reconciliation does not perform
 Git, claim publication, invent a commit, or activate M00_L05.
 
+### M00_L04 Primary Publication and Metadata Reconciliation — 2026-09-18
+
+The preceding lifecycle-freeze section is preserved as the historical
+pre-publication state. The User completed the primary M00_L04 publication at
+commit `5c86be3` with subject `Complete M00_L04 intake command ownership`.
+Accepted post-push evidence records `HEAD = origin/main = origin/HEAD =
+5c86be3`; primary remote alignment is `PASS`.
+
+```text
+M00_L04: COMPLETE / FROZEN / READ-ONLY
+Implementation: COMPLETE / VERIFIED
+Documentation: COMPLETE / VERIFIED
+Final Closure Review: PASS
+Primary Publication: COMPLETE
+Primary Publication Commit: 5c86be3
+Primary Remote Alignment: PASS
+Publication Metadata Reconciliation: COMPLETE IN WORKING TREE
+Metadata Git Publication: PENDING USER ACTION
+Final Publication Verification: PENDING
+Real Hardware: REAL HARDWARE DEFERRED
+Active Lesson Count: 0
+Current Active M00 Lesson: NONE
+M00_L05: NOT ACTIVE / NOT CREATED
+```
+
+Primary publication is complete; the separate metadata commit does not yet
+exist. Independent metadata review, User-owned metadata commit/push, metadata
+remote verification, and final publication verification remain pending. No
+M00 lesson is active, and M00_L05 is not created or activated.
+
 ---
 
 ## 15. Final Report
@@ -2474,3 +2504,4 @@ Only report verified facts.
 | 1.58 | 2026-09-18 | FROZEN | APPROVED: record M00_L03 final two-commit publication as `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`; consume `PASS_M00_L04_FINAL_DESIGN_LOCK` after preparation and architecture/inheritance PASS; activate M00_L04 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`, locked Right Bumper `whileTrue` command-ownership scope, implementation authorization pending, and M00_L05 inactive/uncreated. |
 | 1.59 | 2026-09-18 | FROZEN | APPROVED: reconcile the authorized M00_L04 command/binding implementation, 14/14 focused tests, full clean regression, bounded Simulation and Driver Station evidence, independent implementation review PASS, and paired student-guide creation; retain M00_L04 as the sole `IN_PROGRESS / EDITABLE` lesson pending independent documentation review and later closure/freeze/publication gates, with M00_L05 inactive/uncreated. |
 | 1.60 | 2026-09-18 | FROZEN | APPROVED: consume `PASS_M00_L04_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_FINAL_LIFECYCLE_RECONCILIATION_AND_FREEZE_PREPARATION`; preserve both resolved HOLD histories, record M00_L04 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, retain bounded software evidence and `REAL HARDWARE DEFERRED`, keep M00_L05 inactive/uncreated, and leave User-owned Git publication pending. |
+| 1.61 | 2026-09-18 | FROZEN | APPROVED: reconcile accepted M00_L04 primary publication at `5c86be3` with primary remote alignment PASS; record publication metadata reconciliation complete in the working tree while leaving the separate metadata commit/push and final publication verification pending; preserve active lesson count `0`, deferred real hardware, and inactive/uncreated M00_L05. |

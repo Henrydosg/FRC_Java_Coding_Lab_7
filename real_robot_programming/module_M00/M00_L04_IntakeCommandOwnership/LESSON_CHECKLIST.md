@@ -5,6 +5,7 @@ Active state: `COMPLETE / FROZEN / READ-ONLY`
 Freeze state: `FROZEN`  
 Editable boundary: `NONE`  
 Active lesson: `NO`  
+Current active M00 lesson: `NONE`  
 Active lesson count: `0`  
 Predecessor: `M00_L03 - Intake Foundation`  
 Predecessor state: `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`  
@@ -69,10 +70,13 @@ M00_L05: `NOT ACTIVE / NOT CREATED`
 - [x] Lesson marked `COMPLETE`.
 - [x] Lesson marked `FROZEN`.
 - [x] Lesson marked `READ-ONLY`.
-- [ ] User-owned publication completed and verified.
-- [ ] User Git add completed.
-- [ ] User Git commit completed.
-- [ ] User Git push completed.
+- [x] User-owned primary publication completed at `5c86be3`.
+- [x] Primary Git commit completed.
+- [x] Primary Git push completed.
+- [x] Primary remote alignment verified as `PASS`.
+- [x] Publication metadata reconciled in the working tree.
+- [ ] User metadata Git commit completed.
+- [ ] User metadata Git push completed.
 - [ ] Publication confirmation completed.
 
 ## Current gate
@@ -83,6 +87,7 @@ ACTIVE STATE: COMPLETE / FROZEN / READ-ONLY
 FREEZE STATE: FROZEN
 EDITABLE BOUNDARY: NONE
 ACTIVE LESSON: NO
+CURRENT ACTIVE M00 LESSON: NONE
 ACTIVE LESSON COUNT: 0
 PREPARATION: PASS
 BASELINE BUILD: PASS
@@ -91,7 +96,7 @@ FINAL DESIGN LOCK: PASS_M00_L04_FINAL_DESIGN_LOCK
 RIGHT BUMPER: LOCKED
 whileTrue: LOCKED
 SAFE STOP: LOCKED / end(...) ALWAYS DELEGATES TO IntakeSubsystem.stop()
-IMPLEMENTATION: COMPLETE
+IMPLEMENTATION: COMPLETE / VERIFIED
 IMPLEMENTATION AUTHORIZATION: CONSUMED
 FOCUSED TESTS: VERIFIED / 14 OF 14 PASS
 FULL REGRESSION: VERIFIED
@@ -106,7 +111,11 @@ FINAL CLOSURE BUILD: PASS / BUILD SUCCESSFUL IN 23s / 7 OF 7 TASKS EXECUTED / EX
 FINAL CLOSURE REVIEW: PASS
 LIFECYCLE RECONCILIATION: COMPLETE
 FREEZE: COMPLETE / FROZEN / READ-ONLY
-GIT PUBLICATION: PENDING USER ACTION
-PUBLICATION STATE: NOT YET PUBLISHED
+PRIMARY PUBLICATION: COMPLETE
+PRIMARY PUBLICATION COMMIT: 5c86be3
+PRIMARY REMOTE ALIGNMENT: PASS
+PUBLICATION METADATA RECONCILIATION: COMPLETE IN WORKING TREE
+METADATA GIT PUBLICATION: PENDING USER ACTION
+FINAL PUBLICATION VERIFICATION: PENDING
 M00_L05: NOT ACTIVE / NOT CREATED
 ```

@@ -32,7 +32,7 @@
 - M00_L04 Lifecycle: COMPLETE / FROZEN / READ-ONLY
 - M00_L04 One New Concept: SCHEDULER-MANAGED MANUAL OWNERSHIP OF EXISTING INTAKE
 - M00_L04 Locked Scope: RunIntakeCommand + RIGHT BUMPER whileTrue + FOCUSED LIFECYCLE/OWNERSHIP TESTS
-- M00_L04 Implementation: COMPLETE
+- M00_L04 Implementation: COMPLETE / VERIFIED
 - M00_L04 Focused Tests: VERIFIED / 14 OF 14 PASS
 - M00_L04 Full Regression: VERIFIED
 - M00_L04 Simulation: SIMULATION VERIFIED / BOUNDED
@@ -44,7 +44,13 @@
 - M00_L04 Final Closure Build: PASS / BUILD SUCCESSFUL IN 23s / 7 OF 7 TASKS EXECUTED / EXIT CODE 0
 - M00_L04 Final Closure Review: PASS
 - M00_L04 Freeze: COMPLETE / FROZEN / READ-ONLY
-- M00_L04 Publication: PENDING USER ACTION / NOT YET PUBLISHED
+- M00_L04 Primary Publication: COMPLETE
+- M00_L04 Primary Publication Commit: 5c86be3
+- M00_L04 Primary Remote Alignment: PASS
+- M00_L04 Publication Metadata Reconciliation: COMPLETE IN WORKING TREE
+- M00_L04 Metadata Git Publication: PENDING USER ACTION
+- M00_L04 Final Publication Verification: PENDING
+- Current Active M00 Lesson: NONE
 - M00_L05: NOT ACTIVE / NOT CREATED
 - Scope: Future post-V00 mechanism curriculum roadmap
 - Authority: Approved successor ADR to
@@ -967,6 +973,22 @@ lifecycle reconciliation, freeze authorization, freeze, and the two-commit
 publication workflow remain pending. M00_L04 is not complete, frozen, or
 published. M00_L05 remains inactive and uncreated.
 
+## M00_L04 Primary Publication and Metadata Reconciliation — 2026-09-18
+
+The preceding lifecycle history remains preserved. After final closure and
+freeze, the User completed the primary M00_L04 publication at commit
+`5c86be3`, subject `Complete M00_L04 intake command ownership`. Accepted
+post-push evidence records `HEAD = origin/main = origin/HEAD = 5c86be3`, so
+primary remote alignment is `PASS`.
+
+M00_L04 remains `COMPLETE / FROZEN / READ-ONLY`; implementation and
+documentation are `COMPLETE / VERIFIED`; final closure review is `PASS`; real
+hardware remains `REAL HARDWARE DEFERRED`; active lesson count is `0`; no M00
+lesson is active; and M00_L05 remains `NOT ACTIVE / NOT CREATED`. Publication
+metadata reconciliation is complete in the working tree, while the separate
+User-owned metadata commit and push remain pending. No metadata SHA or final
+publication completion is claimed.
+
 ## Non-Goals and Exclusions
 
 This ADR does not authorize:
@@ -1035,8 +1057,10 @@ Station verification, independent implementation review, bilingual
 documentation review and repair, final closure build, transition
 reconciliation, independent confirmation, and resumed final closure review
 are accepted. M00_L04 is now `COMPLETE / FROZEN / READ-ONLY`, with active
-lesson count `0`; User-owned publication remains pending and M00_L05 remains
-inactive and uncreated. Roadmap approval remains recorded by
+lesson count `0`. Its primary publication is complete at `5c86be3`, primary
+remote alignment is `PASS`, and publication metadata reconciliation is
+complete in the working tree; the separate metadata Git publication remains
+pending User action. M00_L05 remains inactive and uncreated. Roadmap approval remains recorded by
 `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; preparation authorization remains
 recorded by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`. This reconciliation
 does not change the roadmap, publish M00_L04, or activate M00_L05.
@@ -1064,3 +1088,4 @@ does not change the roadmap, publish M00_L04, or activate M00_L05.
 | 1.16 | 2026-09-18 | APPROVED | Recorded M00_L03 final publication at primary commit `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3` and metadata commit `b2464f66da42a6281acb7bfc709f2a3b83296505`; consumed `PASS_M00_L04_FINAL_DESIGN_LOCK`; activated M00_L04 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`, locked `RunIntakeCommand` plus Right Bumper `whileTrue` scope, implementation pending authorization, and M00_L05 inactive/uncreated. |
 | 1.17 | 2026-09-18 | APPROVED | Reconciled completed M00_L04 implementation, 14/14 focused tests, full clean regression, bounded Simulation and Driver Station verification, independent implementation review PASS, and paired student-guide creation; retained `IN_PROGRESS / EDITABLE`, active lesson count `1`, pending independent documentation review and all closure/freeze/publication gates, and inactive/uncreated M00_L05. |
 | 1.18 | 2026-09-18 | APPROVED | Consumed `PASS_M00_L04_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_FINAL_LIFECYCLE_RECONCILIATION_AND_FREEZE_PREPARATION`; preserved the resolved documentation and transition-history HOLDs, recorded M00_L04 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, retained bounded evidence and deferred real hardware, kept M00_L05 inactive/uncreated, and left User-owned Git publication pending. |
+| 1.19 | 2026-09-18 | APPROVED | Reconciled accepted M00_L04 primary publication at `5c86be3` and primary remote alignment PASS; recorded publication metadata reconciliation complete in the working tree while leaving metadata Git publication and final publication verification pending; preserved the locked 16-lesson roadmap and inactive/uncreated M00_L05. |
