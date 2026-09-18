@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01 and M00_L02 complete/frozen/read-only/published/verified; M00_L03 complete/frozen/read-only with publication pending; no active lesson)
+    └── module_M00/ (authorized; M00_L01-L03 complete/frozen/read-only/published/verified; M00_L04 complete/frozen/read-only with User publication pending; no active M00 lesson; M00_L05 not created)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -2229,6 +2229,159 @@ This reconciliation does not claim the metadata commit, metadata push, final
 remote verification, or final publication completion. M00_L03 remains frozen
 and read-only; M00_L04 remains inactive and uncreated.
 
+### M00_L03 Final Publication and M00_L04 Controlled Activation — 2026-09-18
+
+M00_L03 completed the two-commit publication workflow. Its primary publication
+is `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`, its metadata publication is
+`b2464f66da42a6281acb7bfc709f2a3b83296505`, metadata remote alignment is
+`PASS`, and final publication verification passed at
+`PASS_M00_L03_FINAL_PUBLICATION_VERIFICATION_READY_FOR_ARCHITECT_FINAL_PUBLICATION_COMPLETE`.
+M00_L03 is therefore `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`
+and remains untouched.
+
+The User-prepared `M00_L04_IntakeCommandOwnership` candidate passed its
+accepted baseline build (`BUILD SUCCESSFUL in 48s`, 7 actionable tasks: 6
+executed and 1 up-to-date, exit code `0`). Its Architecture / Inheritance Audit
+passed at `PASS_M00_L04_ARCHITECTURE_INHERITANCE_AUDIT_READY_FOR_FINAL_DESIGN_LOCK`:
+279 of 279 comparable inherited files matched M00_L03 with no governed delta.
+The Architect then issued `PASS_M00_L04_FINAL_DESIGN_LOCK`.
+
+```text
+Active Lesson: M00_L04 - Intake Command Ownership
+Filesystem: M00_L04_IntakeCommandOwnership
+Status: IN_PROGRESS
+Active State: IN_PROGRESS / EDITABLE
+Freeze State: EDITABLE
+Active Lesson Count: 1
+Predecessor: M00_L03 - Intake Foundation
+Predecessor State: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
+Preparation: PASS
+Baseline Build: PASS
+Architecture / Inheritance Audit: PASS
+Final Design Lock: PASS_M00_L04_FINAL_DESIGN_LOCK
+One New Concept: SCHEDULER-MANAGED MANUAL OWNERSHIP OF THE EXISTING INTAKE CAPABILITY
+Locked Command: RunIntakeCommand
+Locked Binding: Xbox Right Bumper / whileTrue
+Implementation: NOT STARTED
+Implementation Authorization: PENDING
+Focused Tests: NOT RUN
+Simulation: NOT RUN
+Driver Station: NOT RUN
+Glass: NOT APPLICABLE
+Real Hardware: REAL HARDWARE DEFERRED
+M00_L05: NOT ACTIVE / NOT CREATED
+```
+
+This controlled activation authorizes lifecycle documentation only. It does
+not authorize Java or test implementation. The locked future production scope
+is one `RunIntakeCommand` plus the bounded `RobotContainer` Right Bumper
+`whileTrue` binding; focused lifecycle and binding tests remain pending a
+separate implementation authorization. No Intake subsystem, IO, Observation,
+telemetry, Constants, vendor adapter, hardware configuration, or later-lesson
+work is authorized.
+
+### M00_L04 Post-Verification Documentation and Lifecycle Reconciliation — 2026-09-18
+
+The preceding controlled-activation section is preserved as the historical
+pre-implementation state. Separate Architect/User authorization subsequently
+issued
+`PASS_M00_L04_CONTROLLED_ACTIVATION_ACCEPTED_PRODUCTION_TEST_IMPLEMENTATION_AUTHORIZED`.
+The exact implementation created `RunIntakeCommand.java`, modified only the
+bounded `RobotContainer` controller composition, created the two authorized
+focused-test files, and narrowly updated `IntakeArchitectureBoundaryTest.java`.
+No other production or test Java changed.
+
+`RunIntakeCommand` requires exactly the existing `IntakeSubsystem`, requests
+Intake once in `initialize()`, performs no repeated request in `execute()`,
+never self-finishes, and delegates unconditionally to `IntakeSubsystem.stop()`
+from `end(...)`. RobotContainer binds the existing controller's semantic Right
+Bumper through `whileTrue` and preserves the Back/View Prepare Autonomous
+binding. No Intake default command, IO change, Observation change, telemetry
+change, Constants change, vendor adapter, or hardware selection was added.
+
+Authoritative User evidence records 14/14 focused tests PASS with `BUILD
+SUCCESSFUL in 28s`, four tasks executed, and exit code `0`; the full clean
+regression passed with `BUILD SUCCESSFUL in 47s`, seven tasks executed, and
+exit code `0`. Bounded WPILib Simulation is `SIMULATION VERIFIED / BOUNDED`.
+Bounded Driver Station verification is `VERIFIED / BOUNDED` and observed the
+software sequence `STOPPED -> INTAKE_REQUESTED -> STOPPED` across Right Bumper
+hold and release. `Available=false` and `Connected=false` are expected because
+the selected implementation remains `IntakeIONoop`. Glass is supporting
+read-only visualization only and `NOT APPLICABLE` as a distinct completion
+gate. Real hardware remains `REAL HARDWARE DEFERRED`.
+
+The independent implementation review passed at
+`PASS_M00_L04_INDEPENDENT_IMPLEMENTATION_REVIEW_READY_FOR_DOCUMENTATION_AUTHORIZATION`
+and was accepted at
+`PASS_M00_L04_INDEPENDENT_IMPLEMENTATION_REVIEW_ACCEPTED_READY_FOR_DOCUMENTATION_IMPLEMENTATION`.
+The paired English and Vietnamese student guides are now created with matching
+34-section and 15-question/15-answer structures. Documentation reconciliation
+is complete for this authorized task and remains pending independent
+documentation review.
+
+```text
+M00_L04 Status: IN_PROGRESS
+M00_L04 Active State: IN_PROGRESS / EDITABLE
+M00_L04 Freeze State: EDITABLE
+Active Lesson Count: 1
+Implementation: COMPLETE
+Focused Tests: VERIFIED / 14 OF 14 PASS
+Full Regression: VERIFIED
+Simulation: SIMULATION VERIFIED / BOUNDED
+Driver Station: VERIFIED / BOUNDED
+Glass: NOT APPLICABLE AS A DISTINCT COMPLETION GATE
+Real Hardware: REAL HARDWARE DEFERRED
+Independent Implementation Review: PASS
+Student Documentation: CREATED / PENDING INDEPENDENT DOCUMENTATION REVIEW
+Freeze Authorization: NOT YET AUTHORIZED
+Publication: NOT STARTED
+M00_L05: NOT ACTIVE / NOT CREATED
+```
+
+`IntakeIOInputs` remains a mutable one-cycle transport/input snapshot;
+`IntakeObservation` remains an immutable vendor-neutral observation/value
+snapshot. No physical motor, CAN, wiring, direction, speed, current, sensing,
+game-piece, or physical-stop claim is made. M00_L04 is not `COMPLETE`,
+`FROZEN`, `READ-ONLY`, or published.
+
+### M00_L04 Final Lifecycle Reconciliation and Freeze — 2026-09-18
+
+The preceding post-verification section is preserved as historical pre-closure
+state. The initial documentation HOLD was resolved by the authorized bounded
+guide repair and independent rereview. The initial final-closure HOLD was
+resolved by the authorized transition-guide reconciliation and independent
+confirmation. The resumed independent final closure review passed at
+`PASS_M00_L04_FINAL_CLOSURE_REVIEW_READY_FOR_LIFECYCLE_RECONCILIATION_AND_FREEZE_PREPARATION`,
+and the Architect accepted it at
+`PASS_M00_L04_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_FINAL_LIFECYCLE_RECONCILIATION_AND_FREEZE_PREPARATION`.
+
+```text
+M00_L03: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
+M00_L04: COMPLETE / FROZEN / READ-ONLY
+Freeze State: FROZEN
+Editable Boundary: NONE
+Active Lesson: NO
+Active Lesson Count: 0
+Implementation: COMPLETE / VERIFIED TO AUTHORIZED LESSON SCOPE
+Documentation: COMPLETE / VERIFIED
+Final Closure Build: PASS / BUILD SUCCESSFUL IN 23s / 7 OF 7 TASKS EXECUTED / EXIT CODE 0
+Final Closure Review: PASS
+Simulation: SIMULATION VERIFIED / BOUNDED
+Driver Station: VERIFIED / BOUNDED
+Glass: NOT APPLICABLE AS A DISTINCT COMPLETION GATE
+Real Hardware: REAL HARDWARE DEFERRED
+Git Publication: PENDING USER ACTION
+Publication State: NOT YET PUBLISHED
+M00_L05: NOT ACTIVE / NOT CREATED
+```
+
+The frozen lesson preserves scheduler-managed manual Intake ownership through
+the semantic Right Bumper `whileTrue` binding, one-shot initialization request,
+and unconditional subsystem-owned stop on command end. `IntakeIONoop` remains
+deterministic, vendor-neutral, unavailable, disconnected, and incapable of
+physical output. No M00 lesson is active. This reconciliation does not perform
+Git, claim publication, invent a commit, or activate M00_L05.
+
 ---
 
 ## 15. Final Report
@@ -2318,3 +2471,6 @@ Only report verified facts.
 | 1.55 | 2026-09-17 | FROZEN | APPROVED: record the M00_L03 transition-guide terminology HOLD and one-line repair, independent documentation rereview PASS, final User closure build PASS, final closure review PASS, and completed documentation/lifecycle reconciliation; retain M00_L03 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`, freeze authorization and publication pending, and M00_L04 inactive/uncreated. |
 | 1.56 | 2026-09-17 | FROZEN | APPROVED: consume `PASS_M00_L03_ARCHITECT_FREEZE_AUTHORIZATION` after independent reconciliation review PASS; record M00_L03 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, preserve all accepted evidence and protected technical content, keep M00_L04 inactive/uncreated, and leave User-owned publication pending. |
 | 1.57 | 2026-09-17 | FROZEN | APPROVED: reconcile accepted M00_L03 primary publication at `3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3`, primary push and remote alignment PASS; record publication metadata reconciliation complete while leaving metadata Git publication and final publication verification pending; preserve frozen M00_L03 and inactive/uncreated M00_L04. |
+| 1.58 | 2026-09-18 | FROZEN | APPROVED: record M00_L03 final two-commit publication as `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`; consume `PASS_M00_L04_FINAL_DESIGN_LOCK` after preparation and architecture/inheritance PASS; activate M00_L04 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`, locked Right Bumper `whileTrue` command-ownership scope, implementation authorization pending, and M00_L05 inactive/uncreated. |
+| 1.59 | 2026-09-18 | FROZEN | APPROVED: reconcile the authorized M00_L04 command/binding implementation, 14/14 focused tests, full clean regression, bounded Simulation and Driver Station evidence, independent implementation review PASS, and paired student-guide creation; retain M00_L04 as the sole `IN_PROGRESS / EDITABLE` lesson pending independent documentation review and later closure/freeze/publication gates, with M00_L05 inactive/uncreated. |
+| 1.60 | 2026-09-18 | FROZEN | APPROVED: consume `PASS_M00_L04_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_FINAL_LIFECYCLE_RECONCILIATION_AND_FREEZE_PREPARATION`; preserve both resolved HOLD histories, record M00_L04 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, retain bounded software evidence and `REAL HARDWARE DEFERRED`, keep M00_L05 inactive/uncreated, and leave User-owned Git publication pending. |

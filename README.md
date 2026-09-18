@@ -966,6 +966,119 @@ remaining sequence is independent metadata review, User-owned metadata Git
 publication, metadata remote-alignment verification, and final publication
 verification. M00_L04 remains inactive and uncreated.
 
+## M00_L03 final publication and M00_L04 controlled activation — 2026-09-18
+
+M00_L03 completed its two-commit publication sequence at primary commit
+`3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3` and metadata commit
+`b2464f66da42a6281acb7bfc709f2a3b83296505`. Metadata remote alignment and
+final publication verification passed. M00_L03 is now accepted as
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`.
+
+M00_L04 is the sole active lesson:
+
+```text
+Lesson: M00_L04 - Intake Command Ownership
+State: IN_PROGRESS / EDITABLE
+Freeze State: EDITABLE
+Active Lesson Count: 1
+Current Phase: CONTROLLED ACTIVATION COMPLETE
+Final Design Lock: PASS_M00_L04_FINAL_DESIGN_LOCK
+Implementation: NOT STARTED
+Implementation Authorization: PENDING
+One New Concept: SCHEDULER-MANAGED MANUAL INTAKE OWNERSHIP
+Controller Binding: RIGHT BUMPER / whileTrue / RunIntakeCommand
+Simulation: NOT RUN
+Driver Station: NOT RUN
+Glass: NOT APPLICABLE
+Real Hardware: REAL HARDWARE DEFERRED
+M00_L05: NOT ACTIVE / NOT CREATED
+```
+
+The locked future command will require the existing `IntakeSubsystem`, request
+Intake once during initialization, remain scheduled while held, and call the
+existing subsystem `stop()` unconditionally when ending. Observation,
+telemetry, IO, Constants, and hardware selection remain unchanged.
+
+## M00_L04 post-verification documentation state — 2026-09-18
+
+The preceding activation record is historical. The separately authorized
+implementation is complete within the exact production/test boundary. The
+implemented path is:
+
+```text
+Right Bumper
+-> whileTrue
+-> RunIntakeCommand
+-> IntakeSubsystem
+-> existing requestIntake() / stop()
+```
+
+`RunIntakeCommand` requires exactly `IntakeSubsystem`, requests Intake once in
+`initialize()`, performs no repeated request in `execute()`, returns `false`
+from `isFinished()`, and unconditionally calls `IntakeSubsystem.stop()` from
+`end(...)`. There is no Intake default command. The inherited Back/View
+Prepare Autonomous binding remains present.
+
+User evidence records 14/14 focused tests PASS (`BUILD SUCCESSFUL in 28s`,
+four tasks executed, exit code 0) and full clean regression PASS (`BUILD
+SUCCESSFUL in 47s`, seven tasks executed, exit code 0). Simulation is
+`SIMULATION VERIFIED / BOUNDED`. Driver Station verification is `VERIFIED /
+BOUNDED` and observed `STOPPED -> INTAKE_REQUESTED -> STOPPED` for Right Bumper
+hold and release. Glass is `NOT APPLICABLE` as a distinct completion gate.
+
+The selected implementation remains `IntakeIONoop`; therefore
+`Available=false` and `Connected=false` are expected while `RequestedState`
+records software intent. This evidence does not prove physical Intake motion
+or stopping. Real hardware remains `REAL HARDWARE DEFERRED`.
+
+The independent implementation review is PASS. The paired
+[English](real_robot_programming/module_M00/M00_L04_IntakeCommandOwnership/docs/M00_L04_Intake_Command_Ownership_Learning_Guide_EN.md)
+and
+[Vietnamese](real_robot_programming/module_M00/M00_L04_IntakeCommandOwnership/docs/M00_L04_Intake_Command_Ownership_Learning_Guide_VI.md)
+learning guides are created and await independent documentation review.
+M00_L04 remains the sole `IN_PROGRESS / EDITABLE` lesson with active lesson
+count `1`; freeze is not authorized, publication is not started, and M00_L05
+is `NOT ACTIVE / NOT CREATED`.
+
+## M00_L04 final lifecycle reconciliation and freeze — 2026-09-18
+
+The preceding section is preserved as historical pre-closure state. The
+documentation review/repair/rereview sequence, transition-history
+reconciliation and independent confirmation, final User closure build, and
+resumed independent final closure review are complete and accepted. The final
+closure build passed with `BUILD SUCCESSFUL in 23s`, 7/7 actionable tasks
+executed, and exit code `0`.
+
+M00_L04 established scheduler-managed manual Intake ownership through the
+semantic Right Bumper `whileTrue` binding. `RunIntakeCommand` requests Intake
+once during `initialize()`, retains scheduler ownership while held, and
+unconditionally delegates to `IntakeSubsystem.stop()` when ending. Focused
+tests passed 14/14, full regression passed, Simulation is `SIMULATION VERIFIED
+/ BOUNDED`, and Driver Station verification is `VERIFIED / BOUNDED` for
+`STOPPED -> INTAKE_REQUESTED -> STOPPED`.
+
+`IntakeIONoop` remains deterministic and vendor-neutral. It intentionally
+reports `Available=false` and `Connected=false`, produces no physical output,
+and supports bounded software verification only. Glass is `NOT APPLICABLE` as
+a distinct completion gate, and real hardware remains `REAL HARDWARE DEFERRED`.
+
+```text
+M00_L03: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
+M00_L04: COMPLETE / FROZEN / READ-ONLY
+Freeze State: FROZEN
+Editable Boundary: NONE
+Active Lesson: NO
+Active Lesson Count: 0
+Documentation: COMPLETE / VERIFIED
+Final Closure Review: PASS
+Git Publication: PENDING USER ACTION
+Publication State: NOT YET PUBLISHED
+M00_L05: NOT ACTIVE / NOT CREATED
+```
+
+No M00 lesson is active. This lifecycle reconciliation does not publish
+M00_L04, claim a commit or push, or activate M00_L05.
+
 ---
 
 # Lesson Structure
