@@ -68,9 +68,11 @@ M00_L06: `NOT ACTIVE / NOT CREATED`
 - [x] Final closure build passed: `BUILD SUCCESSFUL in 41s`; 7/7 tasks; exit code 0.
 - [x] Final closure review passed.
 - [x] Lifecycle reconciliation and freeze completed.
-- [ ] User-owned primary publication completed.
-- [ ] Publication metadata reconciliation completed.
+- [x] User-owned primary publication completed at `5709f1d74b3318303bcc56779315b243dd81770b`.
+- [x] Primary push and remote alignment accepted.
+- [x] Publication metadata reconciliation completed.
 - [ ] User-owned metadata publication completed.
+- [ ] Post-metadata remote alignment verified.
 - [ ] Final publication verification completed.
 
 ## Current gate
@@ -106,6 +108,10 @@ Constants.java: NO CHANGE AUTHORIZED
 M00_L06: NOT ACTIVE / NOT CREATED
 FINAL CLOSURE REVIEW: PASS
 FREEZE: COMPLETE / FROZEN / READ-ONLY
-PUBLICATION: PENDING / NOT YET PUBLISHED
-PUBLICATION VERIFICATION: PENDING
+PRIMARY PUBLICATION: COMPLETE / PUSHED / REMOTE-ALIGNED
+PRIMARY PUBLICATION COMMIT: 5709f1d74b3318303bcc56779315b243dd81770b
+PRIMARY COMMIT SUBJECT: Complete M00_L05 feeder foundation
+PUBLICATION METADATA RECONCILIATION: COMPLETE
+METADATA PUBLICATION: PENDING / NOT YET COMMITTED
+FINAL PUBLICATION VERIFICATION: PENDING
 ```

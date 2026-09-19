@@ -22,7 +22,12 @@
 - **Documentation:** `COMPLETE / INDEPENDENT DOCUMENTATION REREVIEW PASS`
 - **Final closure build:** `PASS / BUILD SUCCESSFUL IN 41s / 7 OF 7 TASKS EXECUTED / EXIT CODE 0`
 - **Final closure review:** `PASS`
-- **Publication:** `PENDING / NOT YET PUBLISHED`
+- **Primary publication:** `COMPLETE / PUSHED / REMOTE-ALIGNED`
+- **Primary commit:** `5709f1d74b3318303bcc56779315b243dd81770b`
+- **Primary commit subject:** `Complete M00_L05 feeder foundation`
+- **Publication metadata reconciliation:** `COMPLETE`
+- **Metadata publication:** `PENDING / NOT YET COMMITTED`
+- **Final publication verification:** `PENDING`
 - **Real hardware:** `REAL HARDWARE DEFERRED`
 - **M00_L06:** `NOT ACTIVE / NOT CREATED`
 
@@ -147,7 +152,9 @@ controller binding exists in M00_L05.
 Current lifecycle is `COMPLETE / FROZEN / READ-ONLY`; active lesson count is
 `0`, and no M00 lesson is active. Independent documentation rereview, final
 closure build, final closure review, and lifecycle freeze are complete. Primary
-Git publication, publication metadata reconciliation, metadata publication,
-and final publication verification remain pending and User-owned.
+Git publication is complete at `5709f1d74b3318303bcc56779315b243dd81770b`,
+and accepted evidence confirms primary remote alignment. Publication metadata
+reconciliation is complete. Metadata publication and final publication
+verification remain pending and User-owned; no metadata commit is claimed.
 
 See [M00_L04 to M00_L05 transition guide](docs/M00_L04_to_M00_L05_Step_by_Step.md).

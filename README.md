@@ -1202,6 +1202,20 @@ NOT CREATED`. Primary Git publication, publication metadata reconciliation,
 metadata publication, and final publication verification remain pending; no
 publication commit is claimed.
 
+## M00_L05 primary publication and metadata reconciliation — 2026-09-19
+
+The User completed primary publication at full commit
+`5709f1d74b3318303bcc56779315b243dd81770b` with subject `Complete M00_L05 feeder foundation`.
+Accepted evidence records push `24738e6..5709f1d main -> main` and primary remote alignment `HEAD == origin/main ==
+5709f1d74b3318303bcc56779315b243dd81770b`.
+
+M00_L05 remains `COMPLETE / FROZEN / READ-ONLY`, with active lesson count `0`
+and no active M00 lesson. Primary publication is complete and publication
+metadata reconciliation is complete. The separate metadata publication commit
+and push, post-metadata remote alignment, and final publication verification
+remain pending; no metadata commit hash is claimed. M00_L06 remains `NOT ACTIVE
+/ NOT CREATED`.
+
 ---
 
 # Lesson Structure

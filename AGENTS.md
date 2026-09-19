@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01-L04 complete/frozen/read-only/published/verified; M00_L05 complete/frozen/read-only with publication pending; active lesson count 0; M00_L06 not active/not created)
+    └── module_M00/ (authorized; M00_L01-L04 complete/frozen/read-only/published/verified; M00_L05 complete/frozen/read-only with primary publication remote-aligned at 5709f1d and metadata publication/final verification pending; active lesson count 0; M00_L06 not active/not created)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -2486,9 +2486,12 @@ guides, bounded documentation repair, independent documentation rereview,
 final closure build, and independent final closure review passed. The accepted
 gate `PASS_M00_L05_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_LIFECYCLE_RECONCILIATION_AND_FREEZE`
 authorized this documentation-only lifecycle freeze. M00_L05 is now
-`COMPLETE / FROZEN / READ-ONLY`, active lesson count is `0`, no M00 lesson is
-active, publication remains `PENDING / NOT YET PUBLISHED`, and M00_L06 remains
-`NOT ACTIVE / NOT CREATED`.
+`COMPLETE / FROZEN / READ-ONLY`, active lesson count is `0`, and no M00 lesson
+is active. User evidence records primary publication commit
+`5709f1d74b3318303bcc56779315b243dd81770b` (`Complete M00_L05 feeder
+foundation`) with `HEAD == origin/main`. Publication metadata reconciliation is
+complete; metadata publication and final publication verification remain
+pending. M00_L06 remains `NOT ACTIVE / NOT CREATED`.
 
 ---
 
@@ -2586,3 +2589,4 @@ Only report verified facts.
 | 1.62 | 2026-09-18 | FROZEN | APPROVED: record M00_L04 final two-commit publication at primary `5c86be3` and metadata `24738e6`; consume `PASS_M00_L05_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`; activate M00_L05 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`, FeederIONoop-only foundation scope, implementation authorization pending, deferred real hardware, and M00_L06 inactive/uncreated. |
 | 1.63 | 2026-09-19 | FROZEN | APPROVED: reconcile the authorized M00_L05 Feeder implementation, both bounded test-defect repairs, focused-test PASS, 682-test full clean regression PASS, bounded Simulation and HALSIM Driver Station evidence, independent implementation review PASS, and paired student-guide implementation; retain M00_L05 as the sole `IN_PROGRESS / EDITABLE` lesson pending independent documentation review and later closure/freeze/publication gates, with M00_L06 inactive/uncreated. |
 | 1.64 | 2026-09-19 | FROZEN | APPROVED: consume `PASS_M00_L05_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_LIFECYCLE_RECONCILIATION_AND_FREEZE`; preserve the resolved documentation HOLD and repair history, independent documentation rereview PASS, final closure build PASS, and final closure review PASS; record M00_L05 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, keep M00_L06 inactive/uncreated, and leave all User-owned publication stages pending. |
+| 1.65 | 2026-09-19 | FROZEN | APPROVED: reconcile User-owned M00_L05 primary publication at `5709f1d74b3318303bcc56779315b243dd81770b` with subject `Complete M00_L05 feeder foundation`, push and primary remote alignment PASS; record publication metadata reconciliation complete while leaving metadata publication and final publication verification pending; preserve active lesson count `0` and inactive/uncreated M00_L06. |

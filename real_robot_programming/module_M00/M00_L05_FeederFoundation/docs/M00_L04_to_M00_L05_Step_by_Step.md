@@ -3,8 +3,8 @@
 This guide records the completed preparation, implementation, verification,
 documentation review and repair, final closure, and lifecycle freeze of
 `M00_L05 - Feeder Foundation` from final published
-`M00_L04 - Intake Command Ownership`. Steps 1-30 are complete. Publication
-remains pending.
+`M00_L04 - Intake Command Ownership`. Steps 1-32 are complete. Metadata
+publication and final publication verification remain pending.
 
 ```text
 Status: COMPLETE
@@ -24,7 +24,12 @@ Independent Documentation Rereview: PASS
 Final Closure Build: PASS / BUILD SUCCESSFUL IN 41s / 7 OF 7 TASKS EXECUTED / EXIT CODE 0
 Final Closure Review: PASS
 Real Hardware: REAL HARDWARE DEFERRED
-Publication: PENDING / NOT YET PUBLISHED
+Primary Publication: COMPLETE / PUSHED / REMOTE-ALIGNED
+Primary Publication Commit: 5709f1d74b3318303bcc56779315b243dd81770b
+Primary Commit Subject: Complete M00_L05 feeder foundation
+Publication Metadata Reconciliation: COMPLETE
+Metadata Publication: PENDING / NOT YET COMMITTED
+Final Publication Verification: PENDING
 M00_L06: NOT ACTIVE / NOT CREATED
 ```
 
@@ -298,15 +303,38 @@ M00_L06: NOT ACTIVE / NOT CREATED
 - **Verification:** Post-edit cross-document consistency and scope review.
 - **Expected Result:** M00_L05 is frozen and ready for primary publication. **COMPLETE / PASS**
 
+## Step 31 - Complete primary Git publication
+
+- **Objective:** Publish the frozen M00_L05 lesson snapshot through the User-owned Git workflow.
+- **Why:** Primary publication establishes the immutable lesson commit before metadata reconciliation.
+- **Action:** The User committed and pushed the frozen lesson snapshot to `main`.
+- **Files Changed:** User-owned Git publication of the frozen snapshot.
+- **Verification:** Commit `5709f1d74b3318303bcc56779315b243dd81770b`, subject `Complete M00_L05 feeder foundation`; push `24738e6..5709f1d main -> main`; accepted alignment `HEAD == origin/main == 5709f1d74b3318303bcc56779315b243dd81770b`.
+- **Expected Result:** Primary publication is complete and remote-aligned. **COMPLETE / PASS**
+
+## Step 32 - Reconcile publication metadata
+
+- **Objective:** Record the authoritative primary publication identity without pre-claiming the later metadata publication.
+- **Why:** The two-commit publication workflow separates the frozen lesson publication from its metadata record.
+- **Action:** Reconciled the eight authorized lifecycle documents with the primary commit, subject, push, and accepted remote alignment.
+- **Files Changed:** The eight authorized documentation/metadata files only.
+- **Verification:** Cross-document consistency review confirms primary publication complete, publication metadata reconciliation complete, metadata publication pending, and final publication verification pending.
+- **Expected Result:** Metadata is ready for User-owned metadata publication. **COMPLETE / PASS**
+
 ## Future governed work - PENDING
 
-1. User-owned primary Git publication;
-2. publication metadata reconciliation;
-3. User-owned metadata publication; and
-4. final publication verification.
+### Step 33 - Metadata Git publication
 
-No pending publication step is complete. No dynamic Feeder simulation, real
+`PENDING / NOT YET COMMITTED OR PUSHED`
+
+### Step 34 - Final publication verification
+
+`PENDING`
+
+No pending publication stage is complete. No dynamic Feeder simulation, real
 adapter, vendor API, physical CAN assignment, `Constants.java` change, Feeder
 command, operator binding, Intake coordination, shooting behavior, or
-autonomous event is authorized. M00_L05 is `COMPLETE / FROZEN / READ-ONLY /
-NOT YET PUBLISHED`, and M00_L06 remains `NOT ACTIVE / NOT CREATED`.
+autonomous event is authorized. M00_L05 is `COMPLETE / FROZEN / READ-ONLY`
+with primary publication complete at `5709f1d74b3318303bcc56779315b243dd81770b`;
+metadata publication and final verification remain pending. M00_L06 remains
+`NOT ACTIVE / NOT CREATED`.

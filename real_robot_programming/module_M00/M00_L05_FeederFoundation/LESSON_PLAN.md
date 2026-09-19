@@ -23,7 +23,11 @@
 - **Documentation:** `COMPLETE / INDEPENDENT DOCUMENTATION REREVIEW PASS`
 - **Final closure build:** `PASS / BUILD SUCCESSFUL IN 41s / 7 OF 7 TASKS EXECUTED / EXIT CODE 0`
 - **Final closure review:** `PASS`
-- **Publication:** `PENDING / NOT YET PUBLISHED`
+- **Primary publication:** `COMPLETE / PUSHED / REMOTE-ALIGNED / 5709f1d74b3318303bcc56779315b243dd81770b`
+- **Primary commit subject:** `Complete M00_L05 feeder foundation`
+- **Publication metadata reconciliation:** `COMPLETE`
+- **Metadata publication:** `PENDING / NOT YET COMMITTED`
+- **Final publication verification:** `PENDING`
 - **Real hardware:** `REAL HARDWARE DEFERRED`
 - **M00_L06:** `NOT ACTIVE / NOT CREATED`
 
@@ -155,12 +159,13 @@ outside this exact boundary changed.
 19. The bounded documentation repair and independent rereview passed.
 20. The final closure build and independent final closure review passed.
 21. M00_L05 transitioned to `COMPLETE / FROZEN / READ-ONLY` with no active lesson.
+22. User-owned primary publication completed at `5709f1d74b3318303bcc56779315b243dd81770b` with primary remote alignment PASS.
+23. Publication metadata reconciliation completed without creating or claiming a metadata commit.
 
 ## Remaining governed sequence
 
-1. User-owned primary publication.
-2. Publication metadata reconciliation.
-3. User-owned metadata publication.
-4. Final publication verification.
+1. User-owned metadata publication.
+2. Post-metadata remote alignment verification.
+3. Final publication verification.
 
 No pending publication step is reported complete by this lifecycle freeze.

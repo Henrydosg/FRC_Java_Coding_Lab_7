@@ -1086,6 +1086,21 @@ metadata publication, and final publication verification remain pending and
 User-owned. This closure does not change the locked M00_L01 through M00_L16
 roadmap or activate M00_L06.
 
+## M00_L05 Primary Publication and Metadata Reconciliation — 2026-09-19
+
+The User completed the primary M00_L05 publication at full commit
+`5709f1d74b3318303bcc56779315b243dd81770b`, subject `Complete M00_L05 feeder foundation`.
+Accepted evidence records push `24738e6..5709f1d main -> main`
+and `HEAD == origin/main == 5709f1d74b3318303bcc56779315b243dd81770b`.
+
+M00_L05 remains `COMPLETE / FROZEN / READ-ONLY`; primary publication and
+primary remote alignment are complete, and publication metadata reconciliation
+is complete. Metadata publication and final publication verification remain
+pending, with no metadata commit hash claimed. Active lesson count remains `0`,
+no M00 lesson is active, and M00_L06 remains `NOT ACTIVE / NOT CREATED`. This
+metadata-only reconciliation preserves the locked M00_L01 through M00_L16
+roadmap and does not authorize M00_L06 preparation or activation.
+
 ## Non-Goals and Exclusions
 
 This ADR does not authorize:
@@ -1158,8 +1173,10 @@ VERIFIED`; its primary publication is `5c86be3`, metadata publication is
 `24738e6`, and final remote alignment and publication verification are `PASS`.
 M00_L05 is `COMPLETE / FROZEN / READ-ONLY` with implementation, verification,
 documentation, independent documentation rereview, final closure build, and
-final closure review complete. Active lesson count is `0`; publication remains
-pending, and M00_L06 remains inactive and uncreated. Roadmap approval remains recorded by
+final closure review complete. Primary publication is complete at `5709f1d` and
+publication metadata reconciliation is complete. Active lesson count is `0`;
+metadata publication and final verification remain pending, and M00_L06
+remains inactive and uncreated. Roadmap approval remains recorded by
 `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; preparation authorization remains
 recorded by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`. This reconciliation
 does not change the roadmap, alter M00_L04 publication, or activate M00_L06.
@@ -1191,3 +1208,4 @@ does not change the roadmap, alter M00_L04 publication, or activate M00_L06.
 | 1.20 | 2026-09-18 | APPROVED | Recorded M00_L04 final publication at primary `5c86be3` and metadata `24738e6`; consumed `PASS_M00_L05_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`; activated M00_L05 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`, FeederIONoop-only locked foundation scope, implementation authorization pending, real hardware deferred, and M00_L06 inactive/uncreated. |
 | 1.21 | 2026-09-19 | APPROVED | Reconciled the authorized M00_L05 implementation, both test-only repairs, focused tests PASS, 682-test full regression PASS, bounded Simulation and HALSIM Driver Station evidence, independent implementation review PASS, and paired student-guide implementation; retained M00_L05 as the sole `IN_PROGRESS / EDITABLE` lesson pending independent documentation review and later closure/freeze/publication, with M00_L06 inactive/uncreated. |
 | 1.22 | 2026-09-19 | APPROVED | Consumed the accepted M00_L05 final closure gate after bounded documentation repair, independent documentation rereview PASS, and final closure build PASS; recorded M00_L05 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, kept M00_L06 inactive/uncreated, preserved the locked M00_L01-L16 roadmap and deferred real hardware, and left every User-owned publication stage pending. |
+| 1.23 | 2026-09-19 | APPROVED | Reconciled User-owned M00_L05 primary publication at `5709f1d74b3318303bcc56779315b243dd81770b` with primary remote alignment PASS; recorded publication metadata reconciliation complete while leaving metadata publication and final publication verification pending; preserved the M00_L01-L16 roadmap, active lesson count `0`, and inactive/uncreated M00_L06. |
