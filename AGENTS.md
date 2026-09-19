@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01-L03 complete/frozen/read-only/published/verified; M00_L04 complete/frozen/read-only with primary publication complete at 5c86be3 and metadata Git publication pending User action; no active M00 lesson; M00_L05 not created)
+    └── module_M00/ (authorized; M00_L01-L04 complete/frozen/read-only/published/verified; M00_L05 complete/frozen/read-only with publication pending; active lesson count 0; M00_L06 not active/not created)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -2412,6 +2412,84 @@ exist. Independent metadata review, User-owned metadata commit/push, metadata
 remote verification, and final publication verification remain pending. No
 M00 lesson is active, and M00_L05 is not created or activated.
 
+### M00_L04 Final Publication and M00_L05 Controlled Activation — 2026-09-18
+
+The preceding section is preserved as historical pre-metadata state. The User
+completed M00_L04 metadata publication at commit `24738e6` with subject
+`Record M00_L04 publication metadata`. Accepted evidence records `HEAD =
+origin/main = origin/HEAD = 24738e6`, metadata remote alignment `PASS`, and
+final publication verification `PASS`. M00_L04 is `COMPLETE / FROZEN /
+READ-ONLY / PUBLISHED / VERIFIED` and remains untouched.
+
+The User then prepared `M00_L05_FeederFoundation` from final M00_L04 through
+copy, rename, candidate-only artifact cleanup, and a Java 17 baseline build.
+The accepted baseline is `BUILD SUCCESSFUL in 41s` with 7 actionable tasks, 6
+executed and 1 up-to-date. The independent inheritance audit found 285/285
+governed files byte-identical with zero unexpected delta and passed at
+`PASS_M00_L05_ARCHITECTURE_INHERITANCE_AUDIT_READY_FOR_FINAL_DESIGN_LOCK`.
+The Architect issued
+`PASS_M00_L05_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`.
+
+```text
+M00_L04: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
+M00_L04 Primary Commit: 5c86be3
+M00_L04 Metadata Commit: 24738e6
+M00_L05: IN_PROGRESS / EDITABLE WITHIN LOCKED DESIGN BOUNDARY
+Freeze State: NOT FROZEN / EDITABLE WITHIN LOCKED DESIGN BOUNDARY
+Active Lesson Count: 1
+Current Active M00 Lesson: M00_L05
+One New Concept: FEEDER AS ONE INDEPENDENTLY OWNED TRANSPORT MECHANISM CAPABILITY
+Runtime Strategy: FeederIONoop ONLY
+Dynamic Feeder Simulation: NOT AUTHORIZED
+Real Adapter: NOT AUTHORIZED
+Real Hardware: REAL HARDWARE DEFERRED
+Implementation Authorization: PENDING
+Constants.java Changes: NOT AUTHORIZED
+M00_L06: NOT ACTIVE / NOT CREATED
+```
+
+The locked future production boundary is exactly five new Feeder foundation
+types plus bounded modifications to `RobotContainer.java` and
+`RobotTelemetry.java`. The locked focused-test boundary is exactly the six
+named Feeder tests. This activation does not implement Feeder, authorize Java
+or test changes, configure CAN 45-49, or activate M00_L06.
+
+### M00_L05 Post-Verification Documentation Reconciliation — 2026-09-19
+
+The preceding activation record is historical. Separate authorization was
+consumed, and M00_L05 implementation is complete within the exact
+five-created/two-modified production boundary and six-test boundary.
+
+The initial focused run passed 18 of 19 tests. The single failure was a brittle
+architecture-test text match against the valid Javadoc phrase `current cycle`.
+`FeederArchitectureBoundaryTest` was repaired to inspect non-static,
+non-synthetic `FeederIOInputs` fields reflectively. All six focused test
+classes then passed with `BUILD SUCCESSFUL in 26s` and exit code `0`.
+
+The initial full clean regression passed 681 of 682 tests. The remaining
+failure was a test-isolation defect: `new FeederSubsystem(null)` registered a
+partially constructed `SubsystemBase` with the singleton `CommandScheduler`
+before null rejection. The one-file `FeederSubsystemTest` repair added
+`@AfterEach` cleanup through `unregisterAllSubsystems()` and preserved the
+null-rejection assertion. The final full clean regression passed all 682 tests
+with `BUILD SUCCESSFUL in 51s`, seven tasks executed, and exit code `0`.
+
+Bounded WPILib Simulation and HALSIM Robot State verification passed with
+`Available=false`, `Connected=false`, and `RequestedState=STOPPED` in both
+Disabled and Teleoperated Enabled states. These results verify composition,
+Noop runtime stability, observation flow, telemetry publication, and software
+state only. Real Feeder hardware remains `REAL HARDWARE DEFERRED`; physical
+hardware facts remain unknown, and CAN 45-49 remains a planning reservation.
+
+The independent implementation review, paired English and Vietnamese student
+guides, bounded documentation repair, independent documentation rereview,
+final closure build, and independent final closure review passed. The accepted
+gate `PASS_M00_L05_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_LIFECYCLE_RECONCILIATION_AND_FREEZE`
+authorized this documentation-only lifecycle freeze. M00_L05 is now
+`COMPLETE / FROZEN / READ-ONLY`, active lesson count is `0`, no M00 lesson is
+active, publication remains `PENDING / NOT YET PUBLISHED`, and M00_L06 remains
+`NOT ACTIVE / NOT CREATED`.
+
 ---
 
 ## 15. Final Report
@@ -2505,3 +2583,6 @@ Only report verified facts.
 | 1.59 | 2026-09-18 | FROZEN | APPROVED: reconcile the authorized M00_L04 command/binding implementation, 14/14 focused tests, full clean regression, bounded Simulation and Driver Station evidence, independent implementation review PASS, and paired student-guide creation; retain M00_L04 as the sole `IN_PROGRESS / EDITABLE` lesson pending independent documentation review and later closure/freeze/publication gates, with M00_L05 inactive/uncreated. |
 | 1.60 | 2026-09-18 | FROZEN | APPROVED: consume `PASS_M00_L04_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_FINAL_LIFECYCLE_RECONCILIATION_AND_FREEZE_PREPARATION`; preserve both resolved HOLD histories, record M00_L04 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, retain bounded software evidence and `REAL HARDWARE DEFERRED`, keep M00_L05 inactive/uncreated, and leave User-owned Git publication pending. |
 | 1.61 | 2026-09-18 | FROZEN | APPROVED: reconcile accepted M00_L04 primary publication at `5c86be3` with primary remote alignment PASS; record publication metadata reconciliation complete in the working tree while leaving the separate metadata commit/push and final publication verification pending; preserve active lesson count `0`, deferred real hardware, and inactive/uncreated M00_L05. |
+| 1.62 | 2026-09-18 | FROZEN | APPROVED: record M00_L04 final two-commit publication at primary `5c86be3` and metadata `24738e6`; consume `PASS_M00_L05_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`; activate M00_L05 as the sole `IN_PROGRESS / EDITABLE` lesson with active lesson count `1`, FeederIONoop-only foundation scope, implementation authorization pending, deferred real hardware, and M00_L06 inactive/uncreated. |
+| 1.63 | 2026-09-19 | FROZEN | APPROVED: reconcile the authorized M00_L05 Feeder implementation, both bounded test-defect repairs, focused-test PASS, 682-test full clean regression PASS, bounded Simulation and HALSIM Driver Station evidence, independent implementation review PASS, and paired student-guide implementation; retain M00_L05 as the sole `IN_PROGRESS / EDITABLE` lesson pending independent documentation review and later closure/freeze/publication gates, with M00_L06 inactive/uncreated. |
+| 1.64 | 2026-09-19 | FROZEN | APPROVED: consume `PASS_M00_L05_FINAL_CLOSURE_REVIEW_ACCEPTED_READY_FOR_LIFECYCLE_RECONCILIATION_AND_FREEZE`; preserve the resolved documentation HOLD and repair history, independent documentation rereview PASS, final closure build PASS, and final closure review PASS; record M00_L05 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, keep M00_L06 inactive/uncreated, and leave all User-owned publication stages pending. |
