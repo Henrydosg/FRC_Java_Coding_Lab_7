@@ -5,11 +5,11 @@
 - Roadmap State: APPROVED / ROADMAP AUTHORIZED
 - Preparation State: COMPLETE / ACCEPTED
 - Preparation Authorization: PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED
-- Runtime / Lesson Activation: M00_L05 SOLE ACTIVE LESSON
-- Controlled Activation: M00_L05 PASS / RECORDED
-- Freeze State: M00_L05 NOT FROZEN / EDITABLE WITHIN LOCKED DESIGN BOUNDARY
-- Design Lock: PASS_M00_L05_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION
-- Implementation Authorization: CONSUMED / AUTHORIZED BOUNDED M00_L05 SCOPE
+- Runtime / Lesson Activation: NONE
+- Controlled Activation: M00_L06 PASS / HISTORICAL / CONSUMED
+- Freeze State: M00_L06 COMPLETE / FROZEN / READ-ONLY
+- Design Lock: PASS_M00_L06_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION
+- Implementation Authorization: M00_L06 PASS / CONSUMED
 - M00_L05 Implementation: COMPLETE / VERIFIED
 - M00_L05 Focused Tests: PASS / VERIFIED
 - M00_L05 Full Regression: PASS / 682 TESTS
@@ -17,7 +17,7 @@
 - M00_L05 Simulated Driver Station: VERIFIED / BOUNDED
 - M00_L05 Independent Implementation Review: PASS
 - M00_L05 Documentation: IMPLEMENTED / READY FOR INDEPENDENT DOCUMENTATION REVIEW
-- Active Lesson Count: 1
+- Active Lesson Count: 0
 - M00_L03 Lifecycle: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
 - M00_L03 Primary Git Publication: PASS
 - M00_L03 Primary Publication Commit: 3d94dc6e8249135eaa37b71e9fa6e0a9f5cd6af3
@@ -63,11 +63,29 @@
 - M00_L05 Inheritance: PASS / 285 OF 285 GOVERNED FILES BYTE-IDENTICAL
 - M00_L05 Architecture Audit: PASS_M00_L05_ARCHITECTURE_INHERITANCE_AUDIT_READY_FOR_FINAL_DESIGN_LOCK
 - M00_L05 Design Lock: PASS_M00_L05_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION
-- M00_L05 Lifecycle: IN_PROGRESS / EDITABLE WITHIN LOCKED DESIGN BOUNDARY
+- M00_L05 Lifecycle: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
 - M00_L05 Runtime Strategy: FeederIONoop ONLY
 - M00_L05 Real Hardware: REAL HARDWARE DEFERRED
-- Current Active M00 Lesson: M00_L05
-- M00_L06: NOT ACTIVE / NOT CREATED
+- M00_L05 Primary Publication: 5709f1d74b3318303bcc56779315b243dd81770b
+- M00_L05 Metadata Publication: 1d6fadeec57fbfd3be245746b21d06e58b79518f
+- M00_L05 Final Publication: PASS_M00_L05_FINAL_PUBLICATION_COMPLETE
+- Current Active M00 Lesson: NONE
+- M00_L06: COMPLETE / FROZEN / READ-ONLY
+- M00_L06 Preparation: PASS / BUILD SUCCESSFUL IN 40s / EXIT CODE 0
+- M00_L06 Inheritance: PASS / 299 OF 299 GOVERNED FILES BYTE-IDENTICAL
+- M00_L06 Architecture Audit: PASS_M00_L06_ARCHITECTURE_INHERITANCE_AUDIT_READY_FOR_FINAL_DESIGN_LOCK
+- M00_L06 One New Concept: SCHEDULER-MANAGED COMMAND OWNERSHIP OF EXISTING FEEDER SEMANTIC API
+- M00_L06 Locked Scope: RunFeederCommand + LEFT BUMPER whileTrue + FOCUSED LIFECYCLE/OWNERSHIP TESTS
+- M00_L06 Implementation: COMPLETE / EXACT TWO-FILE PRODUCTION BOUNDARY
+- M00_L06 Focused Tests: PASS / FOUR AUTHORIZED CLASSES / BUILD SUCCESSFUL IN 7s / EXIT CODE 0
+- M00_L06 Full Regression: PASS / CLEAN BUILD / BUILD SUCCESSFUL IN 37s / EXIT CODE 0
+- M00_L06 Simulation: SIMULATION VERIFIED / BOUNDED / CHECKPOINTS A-G
+- M00_L06 Documentation: COMPLETE / VERIFIED
+- M00_L06 Independent Closure Review: PASS / PASS_M00_L06_INDEPENDENT_CLOSURE_REREVIEW_ACCEPTED
+- M00_L06 Freeze: COMPLETE / AUTHORIZED_FOR_FREEZE
+- M00_L06 Publication: PENDING / USER-OWNED
+- M00_L07: NOT ACTIVE / NOT CREATED
+- M00_L06 Real Hardware: REAL HARDWARE DEFERRED
 - Scope: Future post-V00 mechanism curriculum roadmap
 - Authority: Approved successor ADR to
   `ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md`. The
@@ -1101,11 +1119,103 @@ no M00 lesson is active, and M00_L06 remains `NOT ACTIVE / NOT CREATED`. This
 metadata-only reconciliation preserves the locked M00_L01 through M00_L16
 roadmap and does not authorize M00_L06 preparation or activation.
 
+## M00_L05 Final Publication and M00_L06 Controlled Activation — 2026-09-19
+
+The preceding primary-publication state is historical. User evidence records
+M00_L05 metadata publication at
+`1d6fadeec57fbfd3be245746b21d06e58b79518f`, subject `Record M00_L05
+publication metadata`, remote alignment PASS, and final publication gate
+`PASS_M00_L05_FINAL_PUBLICATION_COMPLETE`. M00_L05 is `COMPLETE / FROZEN /
+READ-ONLY / PUBLISHED / VERIFIED`.
+
+The prepared M00_L06 candidate passed its accepted baseline build (`BUILD
+SUCCESSFUL in 40s`, 7 actionable tasks, 6 executed, 1 up-to-date, exit code
+`0`) and independent architecture/inheritance audit (299 governed files, 299
+byte-identical, no missing, added, or changed files). The Architect accepted
+`PASS_M00_L06_ARCHITECTURE_INHERITANCE_AUDIT_READY_FOR_FINAL_DESIGN_LOCK` and
+issued `PASS_M00_L06_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`.
+
+M00_L06 is now the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN
+LOCK` lesson, with active lesson count `1`. Its one new concept is scheduler-
+managed command ownership of the existing Feeder semantic API. The future
+production boundary is exactly creation of `RunFeederCommand.java` and
+modification of `RobotContainer.java`. The focused-test boundary is exactly
+creation of `RunFeederCommandTest.java`,
+`RobotContainerFeederCommandBindingTest.java`, and
+`FeederCommandArchitectureBoundaryTest.java`.
+
+The locked command requires exactly `FeederSubsystem`, requests feed exactly
+once from `initialize()`, has intentionally empty `execute()`, never finishes
+on its own, and unconditionally stops through `FeederSubsystem.stop()` on
+normal or interrupted end. RobotContainer will bind it to
+`driverController.leftBumper().whileTrue(runFeederCommand)`. No default Feeder
+command is authorized. Implementation remains `NOT STARTED` and requires a
+separate authorization.
+
+This activation changes no Java, tests, Constants, CAN registry, vendordeps,
+Gradle, deploy assets, hardware maps, or frozen lessons. `FeederIONoop` remains
+the only runtime selection, real hardware remains deferred, CAN 45-49 remains
+a planning reservation, and the M00_L01 through M00_L16 roadmap is unchanged.
+
+## M00_L06 Implementation, Verification, and Bounded Documentation Repair — 2026-09-19
+
+The preceding controlled-activation section is retained as the historical
+activation-time record. Separate implementation authorization was subsequently
+accepted and consumed. M00_L06 implementation is complete within the exact
+production boundary: creation of `RunFeederCommand.java` and modification of
+`RobotContainer.java`. The three authorized focused tests were created, and
+the inherited `FeederArchitectureBoundaryTest.java` was reconciled as
+`EXPECTED INHERITED TEST CONTRACT EVOLUTION`, not a production defect.
+
+The Independent Static Rereview passed. The four authorized focused test
+classes passed with `BUILD SUCCESSFUL in 7s`, four actionable tasks up-to-date,
+and exit code `0`. The full `gradlew clean build` regression passed with
+`BUILD SUCCESSFUL in 37s`, seven actionable tasks executed, and exit code `0`.
+Bounded Simulation checkpoints A-G passed, including Left Bumper release stop
+and disable-while-held stop. The accepted evidence remains `THEORY VERIFIED`,
+`SIMULATION VERIFIED`, and `REAL HARDWARE DEFERRED`.
+
+The documentation phase completed, after which the Independent Closure Review
+returned `HOLD` for exactly three documentation/lifecycle inconsistencies. The
+authorized bounded repair reconciled the current repository lifecycle record,
+removed unsupported Intake observations at Simulation checkpoints A, B, C,
+and E from both student guides, and corrected the inherited-test path in the
+transition guide. Independent closure rereview remains pending.
+
+M00_L06 remains the sole `IN_PROGRESS / ACTIVE / EDITABLE` lesson with active
+lesson count `1`. It is not `COMPLETE`, `FROZEN`, or `PUBLISHED`. `FeederIONoop`
+remains the only Feeder runtime implementation, CAN 45-49 remains a planning
+reservation only, real hardware remains deferred, and the locked M00_L01
+through M00_L16 roadmap is unchanged. M00_L14, M00_L15, and M00_L16 remain
+protected future scope.
+
+## M00_L06 Final Lifecycle Freeze — 2026-09-20
+
+The preceding implementation and bounded-repair section is retained as the
+historical pre-freeze state. The later Independent Closure Rereview returned
+`HOLD` solely because the transition guide had not yet recorded the complete
+closure history. The authorized bounded transition-history repair resolved that
+last documentation gap. The final Independent Closure Rereview then passed with
+verdict `READY_FOR_FREEZE` and exact remaining findings `NONE`.
+
+The Architect accepted the final result through
+`PASS_M00_L06_INDEPENDENT_CLOSURE_REREVIEW_ACCEPTED` and authorized
+`AUTHORIZED_FOR_FREEZE`. M00_L06 is therefore `COMPLETE / FROZEN / READ-ONLY`.
+Active lesson count is `0`, no M00 lesson is active, and M00_L07 remains `NOT
+ACTIVE / NOT CREATED`. Implementation and accepted verification evidence remain
+unchanged. Evidence remains `THEORY VERIFIED / SIMULATION VERIFIED / REAL
+HARDWARE DEFERRED`; `FeederIONoop` remains the only runtime implementation and
+CAN 45-49 remains a planning reservation only.
+
+The locked M00_L01 through M00_L16 roadmap and protected M00_L14 through M00_L16
+scope remain unchanged. User-owned publication is pending; no Git commit, push,
+publication, or M00_L07 activation is claimed.
+
 ## Non-Goals and Exclusions
 
 This ADR does not authorize:
 
-- any additional M00 runtime/lifecycle activation or lesson-directory creation;
+- any M00 runtime/lifecycle activation beyond the recorded M00_L06 activation;
 - source, test, Gradle, vendordep, PathPlanner, or configuration changes;
 - changes to V00_L09 or any frozen predecessor;
 - redesign of Swerve, Vision, autonomous, estimator, or fusion ownership;
@@ -1171,15 +1281,17 @@ reconciliation, independent confirmation, and resumed final closure review
 are accepted. M00_L04 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED /
 VERIFIED`; its primary publication is `5c86be3`, metadata publication is
 `24738e6`, and final remote alignment and publication verification are `PASS`.
-M00_L05 is `COMPLETE / FROZEN / READ-ONLY` with implementation, verification,
+M00_L05 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED` with implementation, verification,
 documentation, independent documentation rereview, final closure build, and
-final closure review complete. Primary publication is complete at `5709f1d` and
-publication metadata reconciliation is complete. Active lesson count is `0`;
-metadata publication and final verification remain pending, and M00_L06
-remains inactive and uncreated. Roadmap approval remains recorded by
+final closure review complete. Primary publication is complete at `5709f1d`,
+metadata publication is complete at `1d6fade`, and final publication
+verification is PASS. M00_L06 is the sole `IN_PROGRESS / ACTIVE / EDITABLE
+WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, Final Design
+Lock `PASS_M00_L06_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`, and
+implementation `NOT STARTED`. Roadmap approval remains recorded by
 `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; preparation authorization remains
 recorded by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`. This reconciliation
-does not change the roadmap, alter M00_L04 publication, or activate M00_L06.
+does not change the roadmap or alter any frozen predecessor.
 
 ## Revision History
 
@@ -1209,3 +1321,6 @@ does not change the roadmap, alter M00_L04 publication, or activate M00_L06.
 | 1.21 | 2026-09-19 | APPROVED | Reconciled the authorized M00_L05 implementation, both test-only repairs, focused tests PASS, 682-test full regression PASS, bounded Simulation and HALSIM Driver Station evidence, independent implementation review PASS, and paired student-guide implementation; retained M00_L05 as the sole `IN_PROGRESS / EDITABLE` lesson pending independent documentation review and later closure/freeze/publication, with M00_L06 inactive/uncreated. |
 | 1.22 | 2026-09-19 | APPROVED | Consumed the accepted M00_L05 final closure gate after bounded documentation repair, independent documentation rereview PASS, and final closure build PASS; recorded M00_L05 as `COMPLETE / FROZEN / READ-ONLY` with active lesson count `0`, kept M00_L06 inactive/uncreated, preserved the locked M00_L01-L16 roadmap and deferred real hardware, and left every User-owned publication stage pending. |
 | 1.23 | 2026-09-19 | APPROVED | Reconciled User-owned M00_L05 primary publication at `5709f1d74b3318303bcc56779315b243dd81770b` with primary remote alignment PASS; recorded publication metadata reconciliation complete while leaving metadata publication and final publication verification pending; preserved the M00_L01-L16 roadmap, active lesson count `0`, and inactive/uncreated M00_L06. |
+| 1.24 | 2026-09-19 | APPROVED | Recorded final M00_L05 metadata publication at `1d6fadeec57fbfd3be245746b21d06e58b79518f` and `PASS_M00_L05_FINAL_PUBLICATION_COMPLETE`; consumed `PASS_M00_L06_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`; activated M00_L06 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, locked `RunFeederCommand` plus Left Bumper `whileTrue` scope, implementation pending separate authorization, `FeederIONoop` retained, real hardware deferred, and M00_L14-L16 protected. |
+| 1.25 | 2026-09-19 | APPROVED | Reconciled the separately authorized M00_L06 implementation, Independent Static Rereview PASS, focused tests PASS, full clean regression PASS, bounded Simulation PASS, completed documentation phase, Independent Closure Review HOLD, and the exact three-item bounded documentation/lifecycle repair; retained M00_L06 as the sole `IN_PROGRESS / ACTIVE / EDITABLE` lesson pending independent closure rereview, with freeze and publication unclaimed. |
+| 1.26 | 2026-09-20 | APPROVED | Preserved both M00_L06 closure-HOLD and bounded-repair histories; consumed `PASS_M00_L06_INDEPENDENT_CLOSURE_REREVIEW_ACCEPTED` and `AUTHORIZED_FOR_FREEZE` after final verdict `READY_FOR_FREEZE` with no remaining findings; recorded M00_L06 as `COMPLETE / FROZEN / READ-ONLY`, active lesson count `0`, no active M00 lesson, publication pending, and M00_L07 inactive/uncreated. |

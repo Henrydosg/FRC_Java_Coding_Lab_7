@@ -1216,6 +1216,71 @@ and push, post-metadata remote alignment, and final publication verification
 remain pending; no metadata commit hash is claimed. M00_L06 remains `NOT ACTIVE
 / NOT CREATED`.
 
+## M00_L05 final publication and M00_L06 controlled activation — 2026-09-19 (historical activation record)
+
+The preceding publication state is historical. M00_L05 completed metadata
+publication at `1d6fadeec57fbfd3be245746b21d06e58b79518f`, subject `Record
+M00_L05 publication metadata`, and passed final remote publication verification
+at `PASS_M00_L05_FINAL_PUBLICATION_COMPLETE`. M00_L05 remains `COMPLETE /
+FROZEN / READ-ONLY / PUBLISHED / VERIFIED`.
+
+The User prepared M00_L06 from that final predecessor and supplied the accepted
+baseline: `BUILD SUCCESSFUL in 40s`, 7 actionable tasks, 6 executed, 1
+up-to-date, exit code `0`. The independent inheritance audit found 299 of 299
+governed files byte-identical with no unexpected delta. After Architect
+acceptance, the Final Design Lock passed at
+`PASS_M00_L06_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`.
+
+M00_L06 is now the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN
+LOCK` lesson; active lesson count is `1`. The locked concept is scheduler-
+managed ownership of the existing Feeder semantic API through
+`RunFeederCommand` and Left Bumper `whileTrue`. Implementation is `NOT STARTED`.
+No Java or test work is claimed. `FeederIONoop` remains the only runtime,
+real hardware remains deferred, and CAN 45-49 remains a planning reservation.
+
+## M00_L06 implementation, verification, and bounded documentation repair — 2026-09-19
+
+The preceding activation section records the historical state before separate
+implementation authorization. That authorization was subsequently accepted and
+consumed. M00_L06 implementation is complete within the exact two-file
+production boundary: `RunFeederCommand.java` was created and
+`RobotContainer.java` was modified for Left Bumper `whileTrue` composition.
+Three focused tests were created, and the inherited
+`FeederArchitectureBoundaryTest.java` reconciliation is classified as
+`EXPECTED INHERITED TEST CONTRACT EVOLUTION`, not a production defect.
+
+The Independent Static Rereview passed. The four authorized focused test
+classes passed with `BUILD SUCCESSFUL in 7s`, four actionable tasks up-to-date,
+and exit code `0`. The full `gradlew clean build` regression passed with
+`BUILD SUCCESSFUL in 37s`, seven actionable tasks executed, and exit code `0`.
+Bounded Simulation checkpoints A-G passed, including Left Bumper release stop
+and disable-while-held stop. Evidence remains `THEORY VERIFIED`, `SIMULATION
+VERIFIED`, and `REAL HARDWARE DEFERRED`.
+
+The documentation phase completed. The first Independent Closure Review
+returned `HOLD` for three documentation/lifecycle inconsistencies, and the
+authorized bounded repair is now complete. Independent closure rereview remains
+pending. M00_L06 remains the sole `IN_PROGRESS / ACTIVE / EDITABLE` lesson with
+active lesson count `1`; it is not `COMPLETE`, `FROZEN`, or `PUBLISHED`.
+`FeederIONoop` remains the only runtime implementation, CAN 45-49 remains a
+planning reservation only, and M00_L14 through M00_L16 remain protected.
+
+## M00_L06 final lifecycle freeze — 2026-09-20
+
+The preceding implementation and repair section is preserved as historical.
+After the bounded transition-history repair, the final Independent Closure
+Rereview passed with verdict `READY_FOR_FREEZE` and no remaining findings. The
+Architect accepted the result through
+`PASS_M00_L06_INDEPENDENT_CLOSURE_REREVIEW_ACCEPTED` and authorized
+`AUTHORIZED_FOR_FREEZE`.
+
+M00_L06 is now `COMPLETE / FROZEN / READ-ONLY`. Active lesson count is `0`, no
+M00 lesson is active, and M00_L07 remains `NOT ACTIVE / NOT CREATED`. Accepted
+evidence remains `THEORY VERIFIED`, `SIMULATION VERIFIED`, and `REAL HARDWARE
+DEFERRED`; `FeederIONoop` remains the only runtime implementation and CAN 45-49
+remains planning-only. User-owned publication is pending, and no Git commit,
+push, or publication is claimed.
+
 ---
 
 # Lesson Structure
