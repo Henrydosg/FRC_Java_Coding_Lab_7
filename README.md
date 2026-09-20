@@ -1281,6 +1281,22 @@ DEFERRED`; `FeederIONoop` remains the only runtime implementation and CAN 45-49
 remains planning-only. User-owned publication is pending, and no Git commit,
 push, or publication is claimed.
 
+## M00_L06 primary publication and metadata reconciliation — 2026-09-20
+
+The preceding freeze section remains the historical pre-publication state.
+Accepted gate `PASS_M00_L06_PRIMARY_PUBLICATION` records primary commit
+`f102a5e662877f8cb49eb63f2cfd888ac356bea4` with subject `Complete M00_L06 Feeder command ownership`.
+The User-owned primary push passed, and accepted
+remote evidence records `HEAD = origin/main =
+f102a5e662877f8cb49eb63f2cfd888ac356bea4`; primary remote alignment is
+`PASS`.
+
+M00_L06 remains `COMPLETE / FROZEN / READ-ONLY`. Active lesson count remains
+`0`, no M00 lesson is active, and M00_L07 remains `NOT ACTIVE / NOT CREATED`.
+Publication metadata reconciliation is `COMPLETE / PREPARED FOR USER COMMIT`.
+The separate metadata Git publication and final publication verification remain
+`PENDING`, so final `PUBLISHED / VERIFIED` status is not yet claimed.
+
 ---
 
 # Lesson Structure

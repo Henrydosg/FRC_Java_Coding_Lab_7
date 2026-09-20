@@ -14,9 +14,14 @@
 - Architect acceptance: `PASS_M00_L06_INDEPENDENT_CLOSURE_REREVIEW_ACCEPTED`
 - Freeze authorization: `AUTHORIZED_FOR_FREEZE / CONSUMED`
 - Freeze: complete
-- Publication: pending / User-owned
+- Primary publication: `COMPLETE / PASS_M00_L06_PRIMARY_PUBLICATION`
+- Primary publication commit: `f102a5e662877f8cb49eb63f2cfd888ac356bea4`
+- Primary push and remote alignment: `PASS`
+- Publication metadata reconciliation: `COMPLETE / PREPARED FOR USER COMMIT`
+- Metadata Git publication: `PENDING / USER-OWNED`
+- Final publication verification: `PENDING`
 
-This guide records the controlled evolution from the frozen Feeder foundation through final closure and lifecycle freeze of driver-command ownership. It does not claim real-hardware verification or publication.
+This guide records the controlled evolution from the frozen Feeder foundation through final closure, lifecycle freeze, primary publication, and publication metadata reconciliation of driver-command ownership. It does not claim real-hardware verification, metadata Git publication, or final `PUBLISHED / VERIFIED` status.
 
 ## Step 1 — Confirm the predecessor boundary
 
@@ -372,9 +377,38 @@ This guide records the controlled evolution from the frozen Feeder foundation th
 
 **Expected Result:** M00_L06 is frozen and ready for the separate User-owned publication gate. **COMPLETE / PASS**
 
+## Step 26 — Complete the primary publication gate and User publication
+
+**Objective:** Publish the frozen lesson snapshot without conflating it with the later metadata commit.
+
+**Why:** The repository uses a two-commit publication model so the immutable lesson publication and its reconciled publication record remain distinct.
+
+**Action:** Accept `PASS_M00_L06_PRIMARY_PUBLICATION`; record User-owned commit `f102a5e662877f8cb49eb63f2cfd888ac356bea4` with subject `Complete M00_L06 Feeder command ownership`, primary push `PASS`, and accepted remote alignment evidence `HEAD = origin/main = f102a5e662877f8cb49eb63f2cfd888ac356bea4`.
+
+**Files Changed:** None by Codex; Git publication was User-owned.
+
+**Verification:** Primary commit identity, subject, push result, and remote alignment match the accepted evidence.
+
+**Expected Result:** Primary publication is complete while publication metadata still awaits reconciliation. **COMPLETE / PASS**
+
+## Step 27 — Reconcile publication metadata
+
+**Objective:** Record the accepted primary publication consistently across the eight authorized lifecycle documents.
+
+**Why:** Frozen lesson state must identify the actual primary commit while keeping metadata publication and final verification as later gates.
+
+**Action:** Record the primary commit, exact subject, push and remote-alignment PASS, retained frozen lifecycle, active lesson count `0`, no active M00 lesson, and inactive/uncreated M00_L07; mark publication metadata reconciliation complete and prepared for User commit.
+
+**Files Changed:** The eight authorized lifecycle/documentation files only; no production Java, tests, build files, configuration, assets, or M00_L07 files.
+
+**Verification:** Post-edit read-only consistency and scope audit; final `PUBLISHED / VERIFIED` status remains unclaimed.
+
+**Expected Result:** Publication metadata reconciliation is complete and ready for the separate User-owned metadata commit. **COMPLETE / PASS**
+
 ## Future governed work — PENDING
 
-Primary publication, publication metadata reconciliation, metadata publication,
-and final publication verification remain separate User-owned gates. M00_L07
-preparation or activation requires separate authorization. No publication, Git
-commit, Git push, or M00_L07 lifecycle event is claimed here.
+Metadata Git publication, post-metadata remote alignment, and final publication
+verification remain separate User-owned gates. M00_L07 preparation or
+activation requires separate authorization after final publication
+verification. No metadata commit, metadata push, final `PUBLISHED / VERIFIED`
+status, or M00_L07 lifecycle event is claimed here.

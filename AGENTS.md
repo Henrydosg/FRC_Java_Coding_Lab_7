@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01-L05 complete/frozen/read-only/published/verified; M00_L06 complete/frozen/read-only with publication pending; no M00 lesson is active; M00_L07 is not active/not created; active lesson count 0)
+    └── module_M00/ (authorized; M00_L01-L05 complete/frozen/read-only/published/verified; M00_L06 complete/frozen/read-only with primary publication complete and metadata publication pending; no M00 lesson is active; M00_L07 is not active/not created; active lesson count 0)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -2544,6 +2544,23 @@ User-owned publication is pending and no Git commit or push is claimed.
 M00_L07 remains `NOT ACTIVE / NOT CREATED`, and M00_L14 through M00_L16 remain
 protected future scope.
 
+### M00_L06 Primary Publication and Metadata Reconciliation — 2026-09-20
+
+The preceding lifecycle-freeze section is preserved as the historical
+pre-publication state. The accepted gate `PASS_M00_L06_PRIMARY_PUBLICATION`
+records the User-owned primary publication commit
+`f102a5e662877f8cb49eb63f2cfd888ac356bea4` with subject `Complete M00_L06
+Feeder command ownership`. Primary push is `PASS`, and accepted remote evidence
+records `HEAD = origin/main = f102a5e662877f8cb49eb63f2cfd888ac356bea4`;
+primary remote alignment is `PASS`.
+
+M00_L06 remains `COMPLETE / FROZEN / READ-ONLY`, active lesson count remains
+`0`, and no M00 lesson is active. Publication metadata reconciliation is
+`COMPLETE / PREPARED FOR USER COMMIT`. The separate metadata Git publication
+and final publication verification remain `PENDING`; M00_L06 is not yet
+recorded as final `PUBLISHED / VERIFIED`. M00_L07 remains `NOT ACTIVE / NOT
+CREATED`, and M00_L14 through M00_L16 remain protected future scope.
+
 ---
 
 ## 15. Final Report
@@ -2643,3 +2660,4 @@ Only report verified facts.
 | 1.65 | 2026-09-19 | FROZEN | APPROVED: reconcile User-owned M00_L05 primary publication at `5709f1d74b3318303bcc56779315b243dd81770b` with subject `Complete M00_L05 feeder foundation`, push and primary remote alignment PASS; record publication metadata reconciliation complete while leaving metadata publication and final publication verification pending; preserve active lesson count `0` and inactive/uncreated M00_L06. |
 | 1.66 | 2026-09-19 | FROZEN | APPROVED: record final M00_L05 metadata publication at `1d6fadeec57fbfd3be245746b21d06e58b79518f` and `PASS_M00_L05_FINAL_PUBLICATION_COMPLETE`; consume `PASS_M00_L06_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`; activate M00_L06 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, locked `RunFeederCommand` plus Left Bumper `whileTrue` scope, implementation pending separate authorization, deferred real hardware, and protected M00_L14-L16 scope. |
 | 1.67 | 2026-09-20 | FROZEN | APPROVED: consume `PASS_M00_L06_INDEPENDENT_CLOSURE_REREVIEW_ACCEPTED` and `AUTHORIZED_FOR_FREEZE` after final independent closure rereview `READY_FOR_FREEZE` with no remaining findings; record M00_L06 as `COMPLETE / FROZEN / READ-ONLY`, active lesson count `0`, no active M00 lesson, publication pending, deferred real hardware, and inactive/uncreated M00_L07. |
+| 1.68 | 2026-09-20 | FROZEN | APPROVED: reconcile accepted M00_L06 primary publication at `f102a5e662877f8cb49eb63f2cfd888ac356bea4` with subject `Complete M00_L06 Feeder command ownership`, primary push PASS, and remote alignment PASS; record publication metadata reconciliation complete/prepared for User commit while leaving metadata Git publication and final publication verification pending; preserve frozen M00_L06 and inactive/uncreated M00_L07. |

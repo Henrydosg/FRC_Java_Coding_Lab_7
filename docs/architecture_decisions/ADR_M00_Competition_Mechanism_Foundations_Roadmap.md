@@ -83,7 +83,12 @@
 - M00_L06 Documentation: COMPLETE / VERIFIED
 - M00_L06 Independent Closure Review: PASS / PASS_M00_L06_INDEPENDENT_CLOSURE_REREVIEW_ACCEPTED
 - M00_L06 Freeze: COMPLETE / AUTHORIZED_FOR_FREEZE
-- M00_L06 Publication: PENDING / USER-OWNED
+- M00_L06 Primary Publication: COMPLETE / PUSHED / REMOTE-ALIGNED
+- M00_L06 Primary Publication Commit: f102a5e662877f8cb49eb63f2cfd888ac356bea4
+- M00_L06 Primary Commit Subject: Complete M00_L06 Feeder command ownership
+- M00_L06 Publication Metadata Reconciliation: COMPLETE / PREPARED FOR USER COMMIT
+- M00_L06 Metadata Git Publication: PENDING / USER-OWNED
+- M00_L06 Final Publication Verification: PENDING
 - M00_L07: NOT ACTIVE / NOT CREATED
 - M00_L06 Real Hardware: REAL HARDWARE DEFERRED
 - Scope: Future post-V00 mechanism curriculum roadmap
@@ -1211,6 +1216,22 @@ The locked M00_L01 through M00_L16 roadmap and protected M00_L14 through M00_L16
 scope remain unchanged. User-owned publication is pending; no Git commit, push,
 publication, or M00_L07 activation is claimed.
 
+## M00_L06 Primary Publication and Metadata Reconciliation — 2026-09-20
+
+The preceding freeze section is preserved as the historical pre-publication
+state. Accepted gate `PASS_M00_L06_PRIMARY_PUBLICATION` records the User-owned
+primary publication commit `f102a5e662877f8cb49eb63f2cfd888ac356bea4` with
+subject `Complete M00_L06 Feeder command ownership`. Primary push is `PASS`.
+Accepted remote evidence records `HEAD = origin/main =
+f102a5e662877f8cb49eb63f2cfd888ac356bea4`, so primary remote alignment is
+`PASS`.
+
+M00_L06 remains `COMPLETE / FROZEN / READ-ONLY`; active lesson count remains
+`0`, and no M00 lesson is active. Publication metadata reconciliation is
+`COMPLETE / PREPARED FOR USER COMMIT`. The separate metadata Git publication
+and final publication verification remain `PENDING`; final `PUBLISHED /
+VERIFIED` status is not claimed. M00_L07 remains `NOT ACTIVE / NOT CREATED`.
+
 ## Non-Goals and Exclusions
 
 This ADR does not authorize:
@@ -1285,10 +1306,13 @@ M00_L05 is `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED` with implement
 documentation, independent documentation rereview, final closure build, and
 final closure review complete. Primary publication is complete at `5709f1d`,
 metadata publication is complete at `1d6fade`, and final publication
-verification is PASS. M00_L06 is the sole `IN_PROGRESS / ACTIVE / EDITABLE
-WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, Final Design
-Lock `PASS_M00_L06_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`, and
-implementation `NOT STARTED`. Roadmap approval remains recorded by
+verification is PASS. M00_L06 is `COMPLETE / FROZEN / READ-ONLY` with active
+lesson count `0` and no active M00 lesson. Its primary publication is complete
+at `f102a5e662877f8cb49eb63f2cfd888ac356bea4`, primary push and remote alignment
+are `PASS`, and publication metadata reconciliation is `COMPLETE / PREPARED FOR
+USER COMMIT`. The separate metadata Git publication and final publication
+verification remain `PENDING`; final `PUBLISHED / VERIFIED` status is not yet
+claimed, and M00_L07 remains inactive/uncreated. Roadmap approval remains recorded by
 `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; preparation authorization remains
 recorded by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`. This reconciliation
 does not change the roadmap or alter any frozen predecessor.
@@ -1324,3 +1348,4 @@ does not change the roadmap or alter any frozen predecessor.
 | 1.24 | 2026-09-19 | APPROVED | Recorded final M00_L05 metadata publication at `1d6fadeec57fbfd3be245746b21d06e58b79518f` and `PASS_M00_L05_FINAL_PUBLICATION_COMPLETE`; consumed `PASS_M00_L06_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`; activated M00_L06 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, locked `RunFeederCommand` plus Left Bumper `whileTrue` scope, implementation pending separate authorization, `FeederIONoop` retained, real hardware deferred, and M00_L14-L16 protected. |
 | 1.25 | 2026-09-19 | APPROVED | Reconciled the separately authorized M00_L06 implementation, Independent Static Rereview PASS, focused tests PASS, full clean regression PASS, bounded Simulation PASS, completed documentation phase, Independent Closure Review HOLD, and the exact three-item bounded documentation/lifecycle repair; retained M00_L06 as the sole `IN_PROGRESS / ACTIVE / EDITABLE` lesson pending independent closure rereview, with freeze and publication unclaimed. |
 | 1.26 | 2026-09-20 | APPROVED | Preserved both M00_L06 closure-HOLD and bounded-repair histories; consumed `PASS_M00_L06_INDEPENDENT_CLOSURE_REREVIEW_ACCEPTED` and `AUTHORIZED_FOR_FREEZE` after final verdict `READY_FOR_FREEZE` with no remaining findings; recorded M00_L06 as `COMPLETE / FROZEN / READ-ONLY`, active lesson count `0`, no active M00 lesson, publication pending, and M00_L07 inactive/uncreated. |
+| 1.27 | 2026-09-20 | APPROVED | Reconciled accepted M00_L06 primary publication at `f102a5e662877f8cb49eb63f2cfd888ac356bea4` with subject `Complete M00_L06 Feeder command ownership`, primary push PASS, and remote alignment PASS; recorded publication metadata reconciliation complete/prepared for User commit while leaving metadata Git publication and final publication verification pending; preserved the locked roadmap and inactive/uncreated M00_L07. |

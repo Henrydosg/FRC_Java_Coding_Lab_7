@@ -1,6 +1,6 @@
 # M00_L06 — Feeder Command Ownership
 
-M00_L06 adds exactly one architectural concept to frozen M00_L05: a command owns the driver's request to run the Feeder. The lesson is `COMPLETE / FROZEN / READ-ONLY`; implementation, accepted verification, documentation, final independent closure rereview, and lifecycle freeze are complete, while User-owned publication remains pending.
+M00_L06 adds exactly one architectural concept to frozen M00_L05: a command owns the driver's request to run the Feeder. The lesson is `COMPLETE / FROZEN / READ-ONLY`; implementation, accepted verification, documentation, final independent closure rereview, lifecycle freeze, primary publication, and publication metadata reconciliation are complete. The separate metadata Git publication and final publication verification remain pending.
 
 ## Learning objective
 
@@ -40,8 +40,23 @@ The final Independent Closure Rereview returned `READY_FOR_FREEZE` with no
 remaining findings. The Architect accepted
 `PASS_M00_L06_INDEPENDENT_CLOSURE_REREVIEW_ACCEPTED` and authorized
 `AUTHORIZED_FOR_FREEZE`. Active lesson count is `0`; no M00 lesson is active,
-and M00_L07 is not active or created. Publication and all Git operations remain
-pending and User-owned.
+and M00_L07 is not active or created. The later primary publication is recorded
+below; metadata Git publication and final verification remain pending and
+User-owned.
+
+## Publication state
+
+Accepted gate `PASS_M00_L06_PRIMARY_PUBLICATION` records User-owned primary
+publication commit `f102a5e662877f8cb49eb63f2cfd888ac356bea4` with subject
+`Complete M00_L06 Feeder command ownership`. Primary push is `PASS`, and
+accepted remote evidence records `HEAD = origin/main =
+f102a5e662877f8cb49eb63f2cfd888ac356bea4`; primary remote alignment is
+`PASS`.
+
+Publication metadata reconciliation is `COMPLETE / PREPARED FOR USER COMMIT`.
+The metadata Git commit/push and final publication verification remain
+`PENDING`. Final `PUBLISHED / VERIFIED` status is not yet claimed, and M00_L07
+remains `NOT ACTIVE / NOT CREATED`.
 
 ## Student documents
 

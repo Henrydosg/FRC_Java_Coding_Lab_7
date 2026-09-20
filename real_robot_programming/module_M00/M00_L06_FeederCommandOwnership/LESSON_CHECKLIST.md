@@ -8,7 +8,12 @@
 - [x] Architect freeze authorization was accepted.
 - [x] Lesson is `COMPLETE / FROZEN / READ-ONLY`.
 - [x] Active lesson count is `0`; no M00 lesson is active.
-- [ ] User-owned Git publication is complete.
+- [x] User-owned primary publication is complete at `f102a5e662877f8cb49eb63f2cfd888ac356bea4`.
+- [x] Primary push and remote alignment passed.
+- [x] Publication metadata reconciliation is complete and prepared for User commit.
+- [ ] User-owned metadata Git publication is complete.
+- [ ] Post-metadata remote alignment is verified.
+- [ ] Final publication verification is complete.
 
 ## Governance and design
 
@@ -60,4 +65,9 @@
 Final Independent Closure Rereview passed with verdict `READY_FOR_FREEZE`; the
 Architect accepted `PASS_M00_L06_INDEPENDENT_CLOSURE_REREVIEW_ACCEPTED` and
 authorized `AUTHORIZED_FOR_FREEZE`. M00_L06 is `COMPLETE / FROZEN / READ-ONLY`.
-User-owned publication remains pending and is not claimed by this checklist.
+Accepted gate `PASS_M00_L06_PRIMARY_PUBLICATION` records primary publication at
+`f102a5e662877f8cb49eb63f2cfd888ac356bea4`, with primary push and remote
+alignment `PASS`; the primary commit subject is `Complete M00_L06 Feeder command ownership`.
+Publication metadata reconciliation is complete and prepared
+for User commit. Metadata Git publication and final publication verification
+remain pending; final `PUBLISHED / VERIFIED` status is not claimed.

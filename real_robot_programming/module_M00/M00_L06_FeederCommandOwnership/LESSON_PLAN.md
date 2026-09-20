@@ -17,7 +17,13 @@
 - **Independent verdict:** `READY_FOR_FREEZE`
 - **Architect freeze authorization:** `AUTHORIZED_FOR_FREEZE`
 - **Freeze:** `COMPLETE / FROZEN / READ-ONLY`
-- **Publication:** `NOT STARTED`
+- **Primary publication:** `COMPLETE / PASS_M00_L06_PRIMARY_PUBLICATION`
+- **Primary publication commit:** `f102a5e662877f8cb49eb63f2cfd888ac356bea4`
+- **Primary commit subject:** `Complete M00_L06 Feeder command ownership`
+- **Primary push / remote alignment:** `PASS / HEAD == ORIGIN/MAIN == f102a5e662877f8cb49eb63f2cfd888ac356bea4`
+- **Publication metadata reconciliation:** `COMPLETE / PREPARED FOR USER COMMIT`
+- **Metadata Git publication:** `PENDING / USER-OWNED`
+- **Final publication verification:** `PENDING`
 
 ## Sole new concept
 
@@ -80,8 +86,17 @@ architecture test owns L06 command-layer constraints.
 
 ## Post-freeze governed work
 
-1. User-owned primary publication and remote verification.
-2. Publication metadata reconciliation and its separate User-owned publication gate.
-3. M00_L07 preparation or activation only through separate future authorization.
+Completed after freeze:
 
-No publication stage and no M00_L07 lifecycle event is reported complete.
+1. User-owned primary publication at `f102a5e662877f8cb49eb63f2cfd888ac356bea4`.
+2. Primary push and remote alignment verification.
+3. Publication metadata reconciliation, prepared for the separate User-owned metadata commit.
+
+Remaining governed work:
+
+1. User-owned metadata Git commit and push.
+2. Post-metadata remote alignment and final publication verification.
+3. M00_L07 preparation or activation only through separate future authorization after the final publication gate.
+
+Primary publication is complete. Metadata publication, final `PUBLISHED /
+VERIFIED` status, and every M00_L07 lifecycle event remain unclaimed.
