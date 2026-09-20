@@ -1443,3 +1443,220 @@ remains `INACTIVE / NOT CREATED`.
 | 1.29 | 2026-09-20 | APPROVED | Reconciled accepted M00_L07 governance adjudication and activation review, completed bounded implementation, preserved the initial static HOLD and two-stage test-only repair history, final static rereview PASS, User focused-test PASS, clean full-regression PASS, bounded Simulation PASS, and documentation completion; retained M00_L07 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson, classified evidence as `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`, set Independent Closure Review as the next gate, and left freeze, publication, and M00_L08 activation unclaimed. |
 | 1.30 | 2026-09-20 | APPROVED | Consumed `PASS_M00_L07_INDEPENDENT_CLOSURE_REVIEW` after `CLOSURE_REVIEW_PASS`, `READY_FOR_FREEZE_AUTHORIZATION`, and no remaining findings; completed the controlled transition to `COMPLETE / FROZEN / READ-ONLY`, set active lesson count to `0` with no active M00 lesson, preserved `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`, left publication pending/not yet published, and kept M00_L08 inactive/uncreated. |
 | 1.31 | 2026-09-20 | APPROVED | Reconciled accepted M00_L07 primary publication at `50e5f440bb0c9d96bdcd57eed533651d8d59ca93` with subject `Complete M00_L07 Flywheel foundation`, primary push PASS, and remote alignment PASS; recorded publication metadata reconciliation complete/prepared for User commit while leaving the metadata commit/push and final publication verification pending; preserved the frozen lesson-local snapshot, active lesson count `0`, no active M00 lesson, the locked M00_L01-L16 roadmap, and inactive/uncreated M00_L08. |
+---
+
+## M00_L08 Controlled Activation — 2026-09-20
+
+The accepted M00_L08 preparation baseline, Architecture / Inheritance Audit,
+and Final Design Lock are consumed. The User prepared the candidate from
+canonical M00_L07 through copy/rename and generated-artifact cleanup. The
+untouched-copy baseline passed; inheritance remains 103/103 production and
+96/96 test files byte-identical, with 711/711 overall non-generated files
+identical.
+
+M00_L08 is activated as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL
+DESIGN LOCK` lesson with active lesson count `1` and current active lesson
+`M00_L08`. The one new concept is vendor-neutral Flywheel closed-loop velocity
+control through one validated semantic RPM request while preserving
+measurement-only Observation and explicit safe stop.
+
+The accepted design supersedes `requestSpin()` with
+`void requestVelocity(double targetRpm)` in finite, nonnegative Flywheel
+mechanism RPM. Exactly zero is canonical safe stop; invalid values fail closed;
+requested states are `STOPPED` and `VELOCITY_REQUESTED`; Observation remains
+measurement-only; and runtime remains `FlywheelIONoop` only. No physical
+adapter, hardware configuration, gain, target RPM, or CAN assignment is
+authorized. M00_L09 Ready-at-Speed and later command, coordination, shooting,
+and autonomous mechanism scope remain protected.
+
+The Architect Simulation clarification is part of this activation: focused
+unit tests and test doubles are not runtime Simulation evidence. Future bounded
+runtime Simulation may claim only deterministic Noop composition,
+measurement/telemetry state, STOPPED idle behavior, no automatic Teleop
+request, and Disabled → Teleop → Disabled persistence. Physical regulation,
+convergence, tuning, sensor fidelity, CAN, RPM accuracy, and physical stop
+behavior remain unverified; real hardware remains deferred.
+
+Implementation is `PENDING SEPARATE AUTHORIZATION`; verification, closure,
+freeze, and publication are pending. This activation changes lifecycle and
+documentation only and claims no production code, tests, Simulation results,
+Git hashes, closure, freeze, or publication. M00_L07 remains
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`; M00_L09 remains
+`INACTIVE / NOT CREATED`.
+
+## M00_L08 Controlled Activation Documentation Repair — 2026-09-20
+
+The Independent Activation Review HOLD identified documentation completeness
+only. This repair does not authorize implementation or verification.
+
+The future FlywheelIO contract is exactly:
+
+- `FlywheelIOInputs`: `boolean available`, `boolean connected`,
+  `boolean velocityValid`, `double velocityRpm`;
+- `void updateInputs(FlywheelIOInputs inputs)`;
+- `void requestVelocity(double targetRpm)`; and
+- `void stop()`.
+
+`requestSpin()` is `REMOVED / SUPERSEDED`. Vendor types, vendor control
+objects, gain parameters, and hardware-configuration parameters are excluded.
+
+Positive valid-request ordering is validate, record target, set
+`VELOCITY_REQUESTED`, replace immutable Observation, and forward exactly one
+IO request. Forwarding exceptions preserve target/state/Observation, propagate,
+do not roll back, and are not retried by `periodic()`. Zero records zero and
+`STOPPED`, replaces Observation, and forwards exactly one stop. Invalid NaN,
+positive infinity, negative infinity, and negative finite values record zero/
+`STOPPED`, replace Observation, attempt stop, and throw
+`IllegalArgumentException`; stop failure is suppressed and no invalid value is
+forwarded. Explicit stop is unconditional and preserves zero/STOPPED/Observation
+if IO throws, with no rollback, automatic restart, or periodic reissue.
+
+`FlywheelIONoop` deterministically writes `available=false`, `connected=false`,
+`velocityValid=false`, and `velocityRpm=0.0`; request and stop are safe no-ops,
+with no convergence or physical model. Zero RPM while invalid is not measured
+physical zero RPM. `RobotContainer` remains unchanged and composes exactly
+`new FlywheelSubsystem(new FlywheelIONoop())`; no Flywheel command, binding,
+default command, direct request/stop, autonomous registration, NamedCommands,
+event markers, Feeder/Flywheel coordination, hardware selection, or
+Flywheel-specific `RobotBase.isReal()` branch is permitted.
+
+Future test reconciliation is limited to the six existing files named in the
+M00_L08 lesson records; no new or unrelated test file is authorized.
+
+## M00_L08 Post-Verification Documentation Reconciliation — 2026-09-20
+
+This reconciliation consumes the accepted implementation, final static
+review, focused-test, clean-regression, and bounded-Simulation gates. It is a
+documentation record only. It does not consume Independent Closure Review,
+freeze, publication, or M00_L09 activation authority.
+
+### Final contract and implementation boundary
+
+M00_L08 implements exactly one new concept: vendor-neutral Flywheel
+closed-loop velocity control through one validated semantic mechanism-RPM
+request while preserving measurement-only Observation and explicit safe stop.
+The final method is `void requestVelocity(double targetRpm)`;
+`requestSpin()` is `REMOVED / SUPERSEDED`; requested states are exactly
+`STOPPED` and `VELOCITY_REQUESTED`.
+
+`FlywheelIOInputs` contains exactly `boolean available`, `boolean connected`,
+`boolean velocityValid`, and `double velocityRpm`. The exact methods are
+`updateInputs(FlywheelIOInputs)`, `requestVelocity(double)`, and `stop()`.
+There are no vendor types, gains, vendor control object, or hardware-specific
+configuration parameters. Finite nonnegative mechanism RPM is valid. A
+positive finite request records target, enters `VELOCITY_REQUESTED`, updates
+immutable Observation, and forwards one IO request. `+0.0` and `-0.0` are
+canonical safe stop. NaN, positive infinity, negative infinity, and negative
+finite values record zero/`STOPPED`, update Observation, attempt stop, throw
+`IllegalArgumentException`, suppress stop failure on that primary exception,
+and never forward an invalid target. Explicit stop records zero/`STOPPED` and
+updated Observation before unconditional IO stop; IO failure preserves those
+software facts and propagates without rollback or restart. `periodic()` only
+updates inputs and rebuilds Observation. Target RPM remains subsystem intent,
+not Observation or telemetry. `FlywheelIONoop` reports
+false/false/false/0.0 and has deterministic no-op request/stop behavior.
+CAN 50–54 is planning reservation only; real hardware is deferred.
+
+### Provenance and verification evidence
+
+Compared with frozen M00_L07, production is `103 / 99 / 4 / 0 / 0` for
+Compared / Byte-identical / Changed / Missing / Added. The four changed files
+are `src/main/java/frc/robot/io/flywheel/FlywheelIO.java`,
+`src/main/java/frc/robot/io/flywheel/FlywheelIONoop.java`,
+`src/main/java/frc/robot/observation/flywheel/FlywheelObservation.java`, and
+`src/main/java/frc/robot/subsystems/FlywheelSubsystem.java`. Tests are
+`96 / 90 / 6 / 0 / 0` with changed files exactly
+`src/test/java/frc/robot/FlywheelArchitectureBoundaryTest.java`,
+`src/test/java/frc/robot/io/flywheel/FlywheelIONoopTest.java`,
+`src/test/java/frc/robot/observation/flywheel/FlywheelObservationTest.java`,
+`src/test/java/frc/robot/subsystems/FlywheelSubsystemTest.java`,
+`src/test/java/frc/robot/telemetry/flywheel/FlywheelTelemetryFacadeTest.java`,
+and `src/test/java/frc/robot/RobotContainerFlywheelCompositionTest.java`.
+No production or test file was added. Constants, RobotContainer, telemetry,
+Gradle, vendordeps, deploy, and frozen M00_L07 remain unchanged.
+
+The initial Independent Static Review was `HOLD` for stale stop target state,
+insufficient Noop post-request assertions, missing explicit negative-zero
+coverage, and brittle regex comment stripping. The bounded repair is
+`COMPLETE`; the final Independent Static Re-review is `PASS` under
+`PASS_M00_L08_FINAL_INDEPENDENT_STATIC_REREVIEW`.
+
+User focused-test evidence is `BUILD SUCCESSFUL in 16s`, `4 actionable tasks:
+3 executed, 1 up-to-date`, `FOCUSED TESTS: PASS` under
+`PASS_M00_L08_USER_FOCUSED_TESTS`. Clean regression evidence is
+`BUILD SUCCESSFUL in 26s`, `7 actionable tasks: 7 executed`,
+`CLEAN REGRESSION: PASS` under `PASS_M00_L08_CLEAN_FULL_REGRESSION`.
+
+Bounded WPILib Simulation is accepted under `PASS_M00_L08_BOUNDED_SIMULATION`:
+
+1. Disabled: Available=false, Connected=false, RequestedState=STOPPED,
+   VelocityRpm=0.0, VelocityValid=false
+   (`PASS_M00_L08_SIMULATION_CHECKPOINT_1_DISABLED`).
+2. Teleoperated enabled with no driver action: Robot Enabled=Yes and the same
+   Flywheel values (`PASS_M00_L08_SIMULATION_CHECKPOINT_2_TELEOP_IDLE`).
+3. Return Disabled: FMS Robot Enabled=No and the same Flywheel values
+   (`PASS_M00_L08_SIMULATION_CHECKPOINT_3_DISABLED`).
+
+`VelocityRpm=0.0` while `VelocityValid=false` is canonical invalid-Noop state,
+not measured physical zero RPM. Simulation verifies only Noop composition,
+telemetry/state presence, deterministic unavailable/disconnected/invalid
+measurement, STOPPED idle behavior, no automatic Teleop request, and mode
+persistence. It does not verify physical control, convergence, PID/PIDF,
+feedforward, sensor fidelity, RPM accuracy, direction, CAN, physical stop, or
+runtime exercise of `requestVelocity()`; **requestVelocity runtime exercise
+was NOT claimed**. Request semantics were verified by focused/unit tests.
+The exact documentation statement is: `requestVelocity runtime exercise was NOT claimed`.
+
+Evidence classification is exactly `THEORY VERIFIED`, `SIMULATION VERIFIED`,
+and `REAL HARDWARE DEFERRED`.
+
+### Lifecycle decision after reconciliation
+
+M00_L08 remains `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK`,
+with active lesson count `1` and current active M00 lesson `M00_L08`.
+Implementation, final static re-review, focused tests, clean regression, and
+bounded Simulation are `COMPLETE/PASS` as recorded above. Independent Closure
+Review is `PENDING`; Freeze and Publication are `NOT AUTHORIZED`.
+M00_L09 Flywheel Ready-at-Speed remains `INACTIVE / NOT CREATED`, and no
+readiness policy, command ownership, shooting, feeder coordination, automatic
+firing, event-marker, or autonomous mechanism integration is included.
+
+## M00_L08 Controlled Freeze Transition — 2026-09-20
+
+The accepted documentation reconciliation, `PASS_M00_L08_INDEPENDENT_CLOSURE_REVIEW`
+with verdict `READY_FOR_FREEZE_AUTHORIZATION`, and Architect decision
+`FREEZE AUTHORIZED` are consumed. This is a controlled lifecycle transition
+only. No production source, tests, configuration, dependencies, deployment
+content, or verification evidence changed.
+
+M00_L08 is transitioned to:
+
+```text
+STATUS: COMPLETE
+ACTIVE STATE: COMPLETE / FROZEN / READ-ONLY
+ACTIVE LESSON COUNT: 0
+CURRENT ACTIVE M00 LESSON: NONE
+INDEPENDENT CLOSURE REVIEW: PASS
+FREEZE: COMPLETE / FROZEN / READ-ONLY
+PUBLICATION: PENDING / NOT YET PUBLISHED
+FINAL PUBLICATION VERIFICATION: NOT YET PERFORMED
+M00_L09: INACTIVE / NOT CREATED
+```
+
+All accepted technical evidence remains preserved: the final single Flywheel
+closed-loop velocity concept, exact vendor-neutral IO contract, validation and
+safe-stop semantics, immutable Observation, output-free `periodic()`,
+`FlywheelIONoop`-only runtime, read-only telemetry, unchanged RobotContainer,
+production integrity `103 / 99 / 4 / 0 / 0`, test integrity `96 / 90 / 6 / 0 /
+0`, final static re-review PASS, focused tests PASS, clean regression PASS,
+and bounded Simulation PASS. Evidence classification remains exactly
+`THEORY VERIFIED`, `SIMULATION VERIFIED`, and `REAL HARDWARE DEFERRED`.
+Simulation remains bounded Noop/lifecycle evidence and does not claim runtime
+`requestVelocity` exercise or physical Flywheel behavior.
+
+M00_L07 remains the frozen published predecessor with accepted primary
+publication `50e5f440bb0c9d96bdcd57eed533651d8d59ca93`, metadata publication
+`62199c3ecd1ac7940e188dbef3d28de784c8da2c`, and final
+`PUBLICATION_VERIFIED`. This transition does not modify M00_L07, publish
+M00_L08, perform final publication verification, or activate M00_L09. The
+locked M00_L01–M00_L16 roadmap remains unchanged and contains no M00_L17.
