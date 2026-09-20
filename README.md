@@ -1380,6 +1380,23 @@ NOT CREATED`. The locked M00_L08 closed-loop velocity, M00_L09 ready-at-speed,
 and later command, coordination, and autonomous-integration scopes remain
 protected.
 
+## M00_L07 primary publication and metadata reconciliation — 2026-09-20
+
+The preceding controlled-freeze state is preserved as historical. Accepted
+gate `PASS_M00_L07_PRIMARY_PUBLICATION_EVIDENCE` records the User-owned primary
+publication commit `50e5f440bb0c9d96bdcd57eed533651d8d59ca93` with subject
+`Complete M00_L07 Flywheel foundation`. Primary push is `PASS`, and accepted
+remote evidence records `HEAD = origin/main =
+50e5f440bb0c9d96bdcd57eed533651d8d59ca93`; primary remote alignment is
+`PASS`.
+
+M00_L07 remains `COMPLETE / FROZEN / READ-ONLY`, active lesson count remains
+`0`, and the current active M00 lesson remains `NONE`. Publication metadata
+reconciliation is complete and prepared for User commit. The metadata commit
+and metadata push remain `PENDING USER ACTION`, and final publication
+verification remains `PENDING`; final `PUBLISHED / VERIFIED` status is not yet
+claimed. M00_L08 remains `INACTIVE / NOT CREATED`.
+
 ---
 
 # Lesson Structure

@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01-L06 complete/frozen/read-only/published/verified; M00_L07 complete/frozen/read-only with publication pending; no active M00 lesson; M00_L08 inactive/not created; active lesson count 0)
+    └── module_M00/ (authorized; M00_L01-L06 complete/frozen/read-only/published/verified; M00_L07 complete/frozen/read-only with primary publication complete and metadata/final verification pending; no active M00 lesson; M00_L08 inactive/not created; active lesson count 0)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -2651,6 +2651,24 @@ alignment, or publication verification is claimed. M00_L08 remains `INACTIVE /
 NOT CREATED`, and all M00_L08, M00_L09, coordination, command-ownership, and
 autonomous-integration boundaries remain protected.
 
+### M00_L07 Primary Publication and Metadata Reconciliation — 2026-09-20
+
+The preceding controlled-freeze section is preserved as the historical
+pre-publication state. Accepted gate
+`PASS_M00_L07_PRIMARY_PUBLICATION_EVIDENCE` records the User-owned primary
+publication commit `50e5f440bb0c9d96bdcd57eed533651d8d59ca93` with subject
+`Complete M00_L07 Flywheel foundation`. Primary push is `PASS`, and accepted
+remote evidence records `HEAD = origin/main =
+50e5f440bb0c9d96bdcd57eed533651d8d59ca93`; primary remote alignment is
+`PASS`.
+
+M00_L07 remains `COMPLETE / FROZEN / READ-ONLY`. Active lesson count remains
+`0`, and the current active M00 lesson remains `NONE`. Publication metadata
+reconciliation is `COMPLETE / PREPARED FOR USER COMMIT`. The metadata commit
+and push remain `PENDING USER ACTION`, and final publication verification
+remains `PENDING`; final `PUBLISHED / VERIFIED` status is not yet claimed.
+M00_L08 remains `INACTIVE / NOT CREATED`.
+
 ---
 
 ## 15. Final Report
@@ -2754,3 +2772,4 @@ Only report verified facts.
 | 1.69 | 2026-09-20 | FROZEN | APPROVED: consume `PASS_M00_L07_FINAL_DESIGN_LOCK` after accepted M00_L06 final publication, M00_L07 preparation, 306-of-306 byte-identical inheritance audit, and inherited baseline PASS; activate M00_L07 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, implementation pending separate authorization, `FlywheelIONoop`-only future runtime, CAN 50-54 planning-only, deferred real hardware, and inactive/uncreated M00_L08. |
 | 1.70 | 2026-09-20 | FROZEN | APPROVED: reconcile accepted M00_L07 governance adjudication, activation rereview, bounded implementation, preserved static-review HOLD and two-stage test-only repair history, final static rereview PASS, User focused-test PASS, clean full-regression PASS, bounded Simulation PASS, and documentation completion; retain M00_L07 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, evidence `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`, Independent Closure Review next, freeze/publication unclaimed, and M00_L08 inactive/uncreated. |
 | 1.71 | 2026-09-20 | FROZEN | APPROVED: consume `PASS_M00_L07_INDEPENDENT_CLOSURE_REVIEW` after `CLOSURE_REVIEW_PASS`, `READY_FOR_FREEZE_AUTHORIZATION`, and no remaining findings; record M00_L07 as `COMPLETE / FROZEN / READ-ONLY`, active lesson count `0`, no active M00 lesson, preserved theory/Simulation/deferred-hardware evidence, publication pending/not yet published, and M00_L08 inactive/uncreated. |
+| 1.72 | 2026-09-20 | FROZEN | APPROVED: reconcile accepted M00_L07 primary publication at `50e5f440bb0c9d96bdcd57eed533651d8d59ca93` with subject `Complete M00_L07 Flywheel foundation`, primary push PASS, and remote alignment PASS; record publication metadata reconciliation complete/prepared for User commit while leaving the metadata commit/push and final publication verification pending; preserve frozen M00_L07, active lesson count `0`, no active M00 lesson, and inactive/uncreated M00_L08. |

@@ -7,7 +7,7 @@
 - Preparation Authorization: PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED
 - Runtime / Lesson Activation: NONE / ACTIVE LESSON COUNT 0
 - Controlled Activation: PASS_M00_L07_CONTROLLED_ACTIVATION
-- Freeze State: M00_L07 COMPLETE / FROZEN / READ-ONLY / PUBLICATION PENDING
+- Freeze State: M00_L07 COMPLETE / FROZEN / READ-ONLY
 - Design Lock: PASS_M00_L07_FINAL_DESIGN_LOCK
 - Implementation Authorization: M00_L07 AUTHORIZED / CONSUMED
 - M00_L07 Implementation: COMPLETE / PASS_M00_L07_IMPLEMENTATION_REPORT_ACCEPTED
@@ -19,7 +19,13 @@
 - M00_L07 Documentation: COMPLETE / READY FOR INDEPENDENT CLOSURE REVIEW
 - M00_L07 Independent Closure Review: PASS_M00_L07_INDEPENDENT_CLOSURE_REVIEW / CLOSURE_REVIEW_PASS
 - M00_L07 Freeze: COMPLETE / FROZEN / READ-ONLY
-- M00_L07 Publication: PENDING / NOT YET PUBLISHED
+- M00_L07 Primary Publication: COMPLETE / PUSHED / REMOTE-ALIGNED
+- M00_L07 Primary Publication Commit: 50e5f440bb0c9d96bdcd57eed533651d8d59ca93
+- M00_L07 Primary Commit Subject: Complete M00_L07 Flywheel foundation
+- M00_L07 Publication Metadata Reconciliation: COMPLETE / PREPARED FOR USER COMMIT
+- M00_L07 Metadata Commit / Push: PENDING USER ACTION
+- M00_L07 Final Publication Verification: PENDING
+- M00_L07 Final Publication State: NOT YET PUBLISHED / VERIFIED
 - M00_L05 Implementation: COMPLETE / VERIFIED
 - M00_L05 Focused Tests: PASS / VERIFIED
 - M00_L05 Full Regression: PASS / 682 TESTS
@@ -112,7 +118,13 @@
 - M00_L07 Bounded Simulation: PASS
 - M00_L07 Independent Closure Review: PASS / READY_FOR_FREEZE_AUTHORIZATION
 - M00_L07 Freeze Transition: COMPLETE
-- M00_L07 Publication: PENDING / NOT YET PUBLISHED
+- M00_L07 Primary Publication: COMPLETE / PUSHED / REMOTE-ALIGNED
+- M00_L07 Primary Publication Commit: 50e5f440bb0c9d96bdcd57eed533651d8d59ca93
+- M00_L07 Primary Commit Subject: Complete M00_L07 Flywheel foundation
+- M00_L07 Publication Metadata Reconciliation: COMPLETE / PREPARED FOR USER COMMIT
+- M00_L07 Metadata Commit / Push: PENDING USER ACTION
+- M00_L07 Final Publication Verification: PENDING
+- M00_L07 Final Publication State: NOT YET PUBLISHED / VERIFIED
 - M00_L07 Real Hardware: REAL HARDWARE DEFERRED
 - M00_L08: INACTIVE / NOT CREATED
 - M00_L06 Real Hardware: REAL HARDWARE DEFERRED
@@ -1367,12 +1379,33 @@ VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`. The invalid Noop
 `velocityRpm = 0.0` observation is not physical zero-speed evidence. Independent
 The Independent Closure Review passed at
 `PASS_M00_L07_INDEPENDENT_CLOSURE_REVIEW` with no remaining findings, and the
-authorized controlled freeze transition is complete. Publication remains
-`PENDING / NOT YET PUBLISHED`; no commit, push, remote alignment, or
-publication verification is claimed. M00_L08 remains inactive/uncreated. Roadmap approval remains recorded by
+authorized controlled freeze transition is complete. Accepted primary
+publication is complete at `50e5f440bb0c9d96bdcd57eed533651d8d59ca93`,
+primary push and remote alignment are `PASS`, and publication metadata
+reconciliation is complete/prepared for User commit. The metadata commit and
+push remain pending User action, and final publication verification remains
+pending; final `PUBLISHED / VERIFIED` status is not claimed. M00_L08 remains
+inactive/uncreated. Roadmap approval remains recorded by
 `PASS_M00_ROADMAP_ADR_ARCHITECT_APPROVED`; preparation authorization remains
 recorded by `PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED`. This reconciliation
 does not change the roadmap or alter any frozen predecessor.
+
+## M00_L07 Primary Publication and Metadata Reconciliation — 2026-09-20
+
+The frozen M00_L07 lesson-local snapshot remains unchanged under the resolved
+historical-snapshot publication model. Accepted gate
+`PASS_M00_L07_PRIMARY_PUBLICATION_EVIDENCE` records the User-owned primary
+publication commit `50e5f440bb0c9d96bdcd57eed533651d8d59ca93`, subject
+`Complete M00_L07 Flywheel foundation`, primary push `PASS`, and primary remote
+alignment `PASS` with `HEAD = origin/main =
+50e5f440bb0c9d96bdcd57eed533651d8d59ca93`.
+
+M00_L07 remains `COMPLETE / FROZEN / READ-ONLY`. Publication metadata
+reconciliation is complete/prepared for User commit. The metadata commit and
+push remain `PENDING USER ACTION`; final publication verification remains
+`PENDING`; final `PUBLISHED / VERIFIED` status is not claimed. Active lesson
+count remains `0`, the current active M00 lesson remains `NONE`, and M00_L08
+remains `INACTIVE / NOT CREATED`.
 
 ## Revision History
 
@@ -1409,3 +1442,4 @@ does not change the roadmap or alter any frozen predecessor.
 | 1.28 | 2026-09-20 | APPROVED | Consumed `PASS_M00_L07_FINAL_DESIGN_LOCK` after accepted M00_L06 final publication, M00_L07 preparation, 306-of-306 byte-identical inheritance PASS, and inherited baseline build PASS; activated M00_L07 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, implementation pending separate authorization, `FlywheelIONoop`-only future runtime, CAN 50-54 planning-only, deferred real hardware, and inactive/uncreated M00_L08. |
 | 1.29 | 2026-09-20 | APPROVED | Reconciled accepted M00_L07 governance adjudication and activation review, completed bounded implementation, preserved the initial static HOLD and two-stage test-only repair history, final static rereview PASS, User focused-test PASS, clean full-regression PASS, bounded Simulation PASS, and documentation completion; retained M00_L07 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson, classified evidence as `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`, set Independent Closure Review as the next gate, and left freeze, publication, and M00_L08 activation unclaimed. |
 | 1.30 | 2026-09-20 | APPROVED | Consumed `PASS_M00_L07_INDEPENDENT_CLOSURE_REVIEW` after `CLOSURE_REVIEW_PASS`, `READY_FOR_FREEZE_AUTHORIZATION`, and no remaining findings; completed the controlled transition to `COMPLETE / FROZEN / READ-ONLY`, set active lesson count to `0` with no active M00 lesson, preserved `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`, left publication pending/not yet published, and kept M00_L08 inactive/uncreated. |
+| 1.31 | 2026-09-20 | APPROVED | Reconciled accepted M00_L07 primary publication at `50e5f440bb0c9d96bdcd57eed533651d8d59ca93` with subject `Complete M00_L07 Flywheel foundation`, primary push PASS, and remote alignment PASS; recorded publication metadata reconciliation complete/prepared for User commit while leaving the metadata commit/push and final publication verification pending; preserved the frozen lesson-local snapshot, active lesson count `0`, no active M00 lesson, the locked M00_L01-L16 roadmap, and inactive/uncreated M00_L08. |
