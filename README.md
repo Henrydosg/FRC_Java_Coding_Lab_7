@@ -1699,3 +1699,25 @@ Added. M00_L07 remains the accepted published and verified predecessor at
 primary `50e5f440bb0c9d96bdcd57eed533651d8d59ca93` and metadata
 `62199c3ecd1ac7940e188dbef3d28de784c8da2c`; no publication claim is made for
 M00_L08.
+
+## M00_L08 primary publication and metadata reconciliation — 2026-09-20
+
+The accepted gate `PASS_M00_L08_PRIMARY_PUBLICATION` records the User-owned
+primary publication of the frozen M00_L08 snapshot. M00_L08 remains
+`COMPLETE / FROZEN / READ-ONLY`. Primary publication is complete at
+`5daecd970ff95fb906d6de9d5bc22a5cb094877d` with subject
+`Complete M00_L08 Flywheel closed-loop velocity`. Primary push is `PASS`, and
+local HEAD and `origin/main` both equal that SHA; primary remote alignment is
+`PASS`.
+
+Publication metadata is `PENDING METADATA COMMIT`; no metadata commit SHA,
+metadata push, or final `PUBLICATION_VERIFIED` state is claimed. Final
+independent publication verification remains `PENDING / NOT YET PERFORMED`.
+Active lesson count remains `0`, the current active M00 lesson remains `NONE`,
+and M00_L09 remains `INACTIVE / NOT CREATED`.
+
+The frozen lesson-local snapshot is intentionally unchanged under the
+Historical Snapshot Model; its historical pending-publication wording is not a
+defect and does not require a third publication commit. Evidence remains
+`THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`, and
+`requestVelocity` runtime Simulation exercise was NOT claimed.

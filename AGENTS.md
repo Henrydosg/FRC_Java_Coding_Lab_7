@@ -3030,3 +3030,27 @@ the accepted primary publication `50e5f440bb0c9d96bdcd57eed533651d8d59ca93`,
 metadata publication `62199c3ecd1ac7940e188dbef3d28de784c8da2c`, and final
 `PUBLICATION_VERIFIED` evidence. M00_L07 is not modified. M00_L09 remains
 inactive and uncreated; no later lesson or mechanism scope is activated.
+
+### M00_L08 Primary Publication and Metadata Reconciliation — 2026-09-20
+
+The accepted gate `PASS_M00_L08_PRIMARY_PUBLICATION` records the User-owned
+primary publication of the frozen lesson. M00_L08 remains exactly
+`COMPLETE / FROZEN / READ-ONLY`. The primary publication commit is
+`5daecd970ff95fb906d6de9d5bc22a5cb094877d` with subject
+`Complete M00_L08 Flywheel closed-loop velocity`. Primary push is `PASS`, and
+local HEAD and `origin/main` both align to that same SHA; primary remote
+alignment is `PASS`.
+
+The publication metadata reconciliation is now the next bounded publication
+stage and remains `PENDING METADATA COMMIT`. No metadata commit SHA, metadata
+push, or final `PUBLICATION_VERIFIED` verdict is claimed. Final independent
+publication verification remains `PENDING / NOT YET PERFORMED`. Active lesson
+count remains `0`, the current active M00 lesson remains `NONE`, and M00_L09
+remains `INACTIVE / NOT CREATED`.
+
+This record follows the resolved Historical Snapshot Model: the frozen
+lesson-local snapshot is preserved unchanged, including historical pending
+publication wording; no third publication commit is required merely to record
+later independent verification. Evidence remains exactly `THEORY VERIFIED`,
+`SIMULATION VERIFIED`, and `REAL HARDWARE DEFERRED`. The bounded Simulation did
+not claim runtime `requestVelocity` exercise or physical Flywheel behavior.

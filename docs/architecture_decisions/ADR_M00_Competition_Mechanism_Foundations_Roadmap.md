@@ -1660,3 +1660,28 @@ publication `50e5f440bb0c9d96bdcd57eed533651d8d59ca93`, metadata publication
 `PUBLICATION_VERIFIED`. This transition does not modify M00_L07, publish
 M00_L08, perform final publication verification, or activate M00_L09. The
 locked M00_L01–M00_L16 roadmap remains unchanged and contains no M00_L17.
+
+## M00_L08 Primary Publication and Metadata Reconciliation — 2026-09-20
+
+The accepted gate `PASS_M00_L08_PRIMARY_PUBLICATION` records the User-owned
+primary publication after the completed freeze transition. M00_L08 remains
+`COMPLETE / FROZEN / READ-ONLY`. The primary publication commit is
+`5daecd970ff95fb906d6de9d5bc22a5cb094877d` with subject
+`Complete M00_L08 Flywheel closed-loop velocity`; primary push is `PASS`, and
+local HEAD and `origin/main` both equal that SHA, giving primary remote
+alignment `PASS`.
+
+Publication metadata reconciliation is the current bounded stage and remains
+`PENDING METADATA COMMIT`. No metadata commit SHA, metadata push, or final
+`PUBLICATION_VERIFIED` verdict is recorded. Final independent publication
+verification remains `PENDING / NOT YET PERFORMED`. Active lesson count remains
+`0`, current active M00 lesson remains `NONE`, and M00_L09 remains
+`INACTIVE / NOT CREATED`.
+
+The frozen lesson-local snapshot and technical contracts remain unchanged. This
+follows the Historical Snapshot Model used by M00_L05, M00_L06, and M00_L07:
+the frozen snapshot, metadata reconciliation commit, and later independent
+verification are distinct stages, with no third commit required merely to
+record final verification. Evidence remains exactly `THEORY VERIFIED`,
+`SIMULATION VERIFIED`, and `REAL HARDWARE DEFERRED`; runtime
+`requestVelocity` Simulation exercise was NOT claimed.
