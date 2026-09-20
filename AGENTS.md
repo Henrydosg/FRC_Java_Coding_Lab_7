@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01-L05 complete/frozen/read-only/published/verified; M00_L06 complete/frozen/read-only with primary publication complete and metadata publication pending; no M00 lesson is active; M00_L07 is not active/not created; active lesson count 0)
+    └── module_M00/ (authorized; M00_L01-L06 complete/frozen/read-only/published/verified; M00_L07 complete/frozen/read-only with publication pending; no active M00 lesson; M00_L08 inactive/not created; active lesson count 0)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -2561,6 +2561,96 @@ and final publication verification remain `PENDING`; M00_L06 is not yet
 recorded as final `PUBLISHED / VERIFIED`. M00_L07 remains `NOT ACTIVE / NOT
 CREATED`, and M00_L14 through M00_L16 remain protected future scope.
 
+### M00_L07 Controlled Activation — 2026-09-20
+
+The preceding M00_L06 publication-metadata section is preserved as historical.
+The accepted activation prerequisite now records M00_L06 as `COMPLETE / FROZEN
+/ READ-ONLY / PUBLISHED / VERIFIED`. The User prepared
+`M00_L07_FlywheelFoundation` from that predecessor, removed candidate generated
+artifacts, and supplied a passing untouched-inheritance baseline: `BUILD
+SUCCESSFUL in 38s`, 6 actionable tasks, all 6 executed. The accepted
+architecture/inheritance audit found 306 of 306 governed files byte-identical,
+with zero missing, added, or changed files. The Architect accepted
+`PASS_M00_L07_FINAL_DESIGN_LOCK`.
+
+M00_L07 is now the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN
+LOCK` lesson; active lesson count is `1`, and the current active M00 lesson is
+`M00_L07`. Its one new concept is: Flywheel is one independently owned
+rotational-speed mechanism. Controlled Activation changes lifecycle and
+documentation identity only. Implementation remains `PENDING SEPARATE
+AUTHORIZATION`; no production Java, test Java, command, controller binding,
+Constants entry, hardware adapter, or autonomous integration is authorized or
+implemented by activation.
+
+The locked future runtime is `FlywheelIONoop` only. CAN 50-54 remains a planning
+reservation only, physical Flywheel hardware remains unknown, and real hardware
+remains deferred. M00_L08 is `INACTIVE / NOT CREATED`; M00_L08 closed-loop
+velocity, M00_L09 ready-at-speed, M00_L14 Shoot Coordination, and M00_L16
+autonomous event integration remain protected future scope.
+
+### M00_L07 implementation, verification, and documentation reconciliation — 2026-09-20
+
+The preceding Controlled Activation section is preserved as historical
+pre-implementation state. After
+`PASS_M00_L07_GOVERNANCE_ADJUDICATION` and
+`PASS_M00_L07_INDEPENDENT_ACTIVATION_REVIEW_AFTER_ADJUDICATION`, the exact
+bounded implementation was authorized and accepted at
+`PASS_M00_L07_IMPLEMENTATION_REPORT_ACCEPTED`. It created the vendor-neutral
+Flywheel IO/IOInputs, `FlywheelIONoop`, immutable Observation, subsystem, and
+read-only telemetry foundation and integrated it through `RobotContainer` and
+`RobotTelemetry`. Six focused test classes were created; no inherited test was
+modified.
+
+The initial Independent Static Review accepted production and returned `HOLD`
+for four focused-test quality findings. The first bounded test-only repair
+closed the request-ordering, negative-infinity, and RobotContainer absence
+boundary findings, but static rereview retained one `HOLD` for
+comment-sensitive raw-source checks in
+`FlywheelArchitectureBoundaryTest.java`. A final single-file repair replaced
+those checks with semantic type inspection and comment-free import parsing.
+The final review passed at
+`PASS_M00_L07_FINAL_INDEPENDENT_STATIC_REREVIEW`.
+
+User evidence records all six focused test classes as `BUILD SUCCESSFUL` and
+`FOCUSED TESTS: PASS`. The clean full regression passed at `BUILD SUCCESSFUL
+in 36s`, with 7 actionable tasks and all 7 executed. Bounded WPILib Simulation
+passed at `PASS_M00_L07_BOUNDED_SIMULATION` for Disabled initial, Teleop
+Enabled idle with no Flywheel action, and return to Disabled. Each checkpoint
+reported unavailable, disconnected, velocity invalid, `velocityRpm = 0.0`,
+and `STOPPED`. Because velocity is invalid, `0.0` is the canonical Noop
+invalid representation, not a verified physical zero-speed measurement.
+
+Evidence is `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`.
+M00_L07 remains the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN
+LOCK` lesson with active lesson count `1`; it is not complete, frozen,
+read-only, or published. Independent Closure Review is the next gate. M00_L08
+remains inactive/uncreated; closed-loop velocity, ready-at-speed, Flywheel
+command ownership, shooting coordination, Feeder/Flywheel orchestration,
+NamedCommands, and autonomous mechanism integration remain protected future
+scope.
+
+### M00_L07 controlled freeze transition — 2026-09-20
+
+The preceding implementation and documentation-reconciliation section remains
+the historical pre-freeze state. The Independent Closure Review passed at
+`PASS_M00_L07_INDEPENDENT_CLOSURE_REVIEW` with verdict
+`CLOSURE_REVIEW_PASS`, recommendation `READY_FOR_FREEZE_AUTHORIZATION`, and
+exact remaining findings `NONE`. The Architect accepted the result and
+authorized the controlled freeze transition.
+
+M00_L07 is now `COMPLETE / FROZEN / READ-ONLY`. Active lesson count is `0`,
+and no M00 lesson is active. Implementation, final static review, focused
+tests, clean full regression, bounded Simulation, documentation reconciliation,
+and Independent Closure Review remain accepted. Evidence remains `THEORY
+VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`; invalid Noop
+`velocityRpm = 0.0` remains non-physical evidence. `FlywheelIONoop` remains
+the only Flywheel runtime adapter, and CAN 50-54 remains planning-only.
+
+Publication is `PENDING / NOT YET PUBLISHED`. No commit, push, remote
+alignment, or publication verification is claimed. M00_L08 remains `INACTIVE /
+NOT CREATED`, and all M00_L08, M00_L09, coordination, command-ownership, and
+autonomous-integration boundaries remain protected.
+
 ---
 
 ## 15. Final Report
@@ -2661,3 +2751,6 @@ Only report verified facts.
 | 1.66 | 2026-09-19 | FROZEN | APPROVED: record final M00_L05 metadata publication at `1d6fadeec57fbfd3be245746b21d06e58b79518f` and `PASS_M00_L05_FINAL_PUBLICATION_COMPLETE`; consume `PASS_M00_L06_FINAL_DESIGN_LOCK_READY_FOR_CONTROLLED_ACTIVATION`; activate M00_L06 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, locked `RunFeederCommand` plus Left Bumper `whileTrue` scope, implementation pending separate authorization, deferred real hardware, and protected M00_L14-L16 scope. |
 | 1.67 | 2026-09-20 | FROZEN | APPROVED: consume `PASS_M00_L06_INDEPENDENT_CLOSURE_REREVIEW_ACCEPTED` and `AUTHORIZED_FOR_FREEZE` after final independent closure rereview `READY_FOR_FREEZE` with no remaining findings; record M00_L06 as `COMPLETE / FROZEN / READ-ONLY`, active lesson count `0`, no active M00 lesson, publication pending, deferred real hardware, and inactive/uncreated M00_L07. |
 | 1.68 | 2026-09-20 | FROZEN | APPROVED: reconcile accepted M00_L06 primary publication at `f102a5e662877f8cb49eb63f2cfd888ac356bea4` with subject `Complete M00_L06 Feeder command ownership`, primary push PASS, and remote alignment PASS; record publication metadata reconciliation complete/prepared for User commit while leaving metadata Git publication and final publication verification pending; preserve frozen M00_L06 and inactive/uncreated M00_L07. |
+| 1.69 | 2026-09-20 | FROZEN | APPROVED: consume `PASS_M00_L07_FINAL_DESIGN_LOCK` after accepted M00_L06 final publication, M00_L07 preparation, 306-of-306 byte-identical inheritance audit, and inherited baseline PASS; activate M00_L07 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, implementation pending separate authorization, `FlywheelIONoop`-only future runtime, CAN 50-54 planning-only, deferred real hardware, and inactive/uncreated M00_L08. |
+| 1.70 | 2026-09-20 | FROZEN | APPROVED: reconcile accepted M00_L07 governance adjudication, activation rereview, bounded implementation, preserved static-review HOLD and two-stage test-only repair history, final static rereview PASS, User focused-test PASS, clean full-regression PASS, bounded Simulation PASS, and documentation completion; retain M00_L07 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, evidence `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`, Independent Closure Review next, freeze/publication unclaimed, and M00_L08 inactive/uncreated. |
+| 1.71 | 2026-09-20 | FROZEN | APPROVED: consume `PASS_M00_L07_INDEPENDENT_CLOSURE_REVIEW` after `CLOSURE_REVIEW_PASS`, `READY_FOR_FREEZE_AUTHORIZATION`, and no remaining findings; record M00_L07 as `COMPLETE / FROZEN / READ-ONLY`, active lesson count `0`, no active M00 lesson, preserved theory/Simulation/deferred-hardware evidence, publication pending/not yet published, and M00_L08 inactive/uncreated. |
