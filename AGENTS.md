@@ -3215,3 +3215,35 @@ PUBLISHED`; no publication SHA or Git event is claimed. Active Lesson Count is
 `0`, Current Active M00 Lesson is `NONE`, and M00_L10 remains
 `INACTIVE / NOT CREATED`. The freeze chronology stops before Independent Freeze
 Review, publication, and successor activation.
+
+### M00_L09 Primary Publication and Metadata Reconciliation — 2026-09-21
+
+The accepted Independent Freeze Review gate is
+`PASS_M00_L09_INDEPENDENT_FREEZE_REVIEW`. M00_L09 remains exactly
+`COMPLETE / FROZEN / READ-ONLY`; its frozen lesson-local tree is unchanged.
+The accepted primary snapshot gate is
+`PASS_M00_L09_PRIMARY_FROZEN_SNAPSHOT_COMMIT`.
+
+Primary publication identity:
+
+- SHA: `3c822a1e3956850c9d0ba9954c5b163d83b801b9`
+- Subject: `Complete M00_L09 Flywheel ready-at-speed`
+
+The primary frozen snapshot commit exists locally. It has not been pushed, so
+no primary remote alignment, origin state, or remote publication verification
+is claimed. The canonical publication phase is `PENDING METADATA COMMIT`.
+No metadata commit SHA is available, no metadata push has occurred, and no
+`PUBLICATION_VERIFIED` verdict is claimed.
+
+This follows the established two-commit Historical Snapshot model: frozen
+lesson snapshot primary commit, repository-level metadata commit, and later
+external final publication verification. No third commit is required merely to
+record final verification. Frozen lesson-local pending wording remains
+historical and was not rewritten.
+
+Evidence remains exactly `THEORY VERIFIED`, `SIMULATION VERIFIED`, and `REAL
+HARDWARE DEFERRED`. Production integrity is `103 / 99 / 4 / 0 / 0`, test
+integrity is `96 / 92 / 4 / 0 / 0`, and full deploy/config/support integrity is
+`24 / 24 / 0 / 0 / 0`. Active Lesson Count remains `0`, the current active M00
+lesson remains `NONE`, and M00_L10 remains `INACTIVE / NOT CREATED`. The
+M00_L01–M00_L16 roadmap is unchanged.
