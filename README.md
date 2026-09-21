@@ -1721,3 +1721,106 @@ Historical Snapshot Model; its historical pending-publication wording is not a
 defect and does not require a third publication commit. Evidence remains
 `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`, and
 `requestVelocity` runtime Simulation exercise was NOT claimed.
+
+## M00_L09 Controlled Activation — 2026-09-21
+
+M00_L09 — Flywheel Ready-at-Speed is now the sole active M00 lesson after the
+accepted preparation baseline, architecture/inheritance audit, and Final
+Design Lock (`READY_FOR_CONTROLLED_ACTIVATION`). Controlled Activation is
+documentation-only: M00_L09 is `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL
+DESIGN LOCK`, Active Lesson Count `1`, Current Active M00 Lesson `M00_L09`,
+implementation `NOT STARTED`, and Independent Activation Review `PENDING`.
+
+The one locked concept is instantaneous vendor-neutral readiness owned by
+`FlywheelSubsystem`, with immutable Observation field `readyAtSpeed` and
+telemetry field `ReadyAtSpeed`. The exact inclusive symmetric tolerance is
+`Constants.FlywheelConstants.kReadyAtSpeedToleranceRpm = 50.0` mechanism RPM,
+classified as provisional software policy only, not hardware-tuned or
+real-robot validated. IO, Noop, RobotTelemetry, RobotContainer, commands,
+coordination, autonomous, and hardware remain unchanged; no dwell, debounce,
+hysteresis, history, state machine, or automatic action is authorized.
+
+M00_L08 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED` and
+M00_L10 is `INACTIVE / NOT CREATED`. No source/test implementation, build,
+test, Simulation, closure, freeze, publication, or Git evidence is claimed.
+
+## M00_L09 activation documentation repair — 2026-09-21
+
+The Architect acceptance gate is `PASS_M00_L09_CONTROLLED_ACTIVATION`. The
+bounded engineer task verdict is
+`CONTROLLED_ACTIVATION_COMPLETE_READY_FOR_INDEPENDENT_ACTIVATION_REVIEW`;
+these are compatible but distinct. Independent Activation Review remains
+`HOLD_M00_L09_INDEPENDENT_ACTIVATION_REVIEW` pending re-review.
+
+Canonical external predecessor provenance is
+`M00_L08 = COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`, primary
+`5daecd970ff95fb906d6de9d5bc22a5cb094877d`, metadata
+`a76dc33c2b485b4988e7058cbfed0fa3362cc560` (parent = primary), final
+remote-aligned HEAD = metadata SHA, and final verdict `PUBLICATION_VERIFIED`.
+No third publication commit was required. Historical frozen snapshots may
+retain pending wording under the passing two-commit Historical Snapshot Model;
+that wording is historical, not contradictory, and frozen M00_L08 was not
+modified.
+
+The locked readiness formula, 50.0 RPM provisional software-policy tolerance,
+observation-only boundary, telemetry read-only rule, forwarding-exception
+semantics, automatic-action prohibition, truth-table boundaries, floating-point
+comparison policy, focused-test matrix, evidence plan, and complete deferred
+hardware list are maintained in the current M00_L09 records. No source, test,
+configuration, build, Simulation, freeze, publication, Git, or M00_L10 change
+is claimed.
+
+## M00_L09 implementation, verification, and documentation reconciliation — 2026-09-21
+
+M00_L09 remains the sole active lesson and now records the completed locked
+implementation of exactly one concept: instantaneous vendor-neutral Flywheel
+Ready-at-Speed classification. The accepted implementation gate is
+`PASS_M00_L09_IMPLEMENTATION_REPORT_ACCEPTED`. Production integrity is
+`103 / 99 / 4 / 0 / 0` (compared, byte-identical, changed, missing, added),
+test integrity is `96 / 92 / 4 / 0 / 0`, and deploy/configuration integrity is
+`4 / 4 / 0 / 0 / 0`; no new files or unrelated boundaries changed.
+
+The static-review chronology is preserved as initial `HOLD`, bounded repair
+`PASS`, and final independent static re-review `PASS`. User evidence accepts
+`PASS_M00_L09_USER_FOCUSED_TESTS` (`BUILD SUCCESSFUL in 22s`; four actionable
+tasks, three executed and one up-to-date) and
+`PASS_M00_L09_CLEAN_FULL_REGRESSION` (`BUILD SUCCESSFUL`; seven actionable
+tasks, all seven executed).
+
+The accepted Simulation gates are
+`PASS_M00_L09_SIMULATION_CHECKPOINT_1_DISABLED`,
+`PASS_M00_L09_SIMULATION_CHECKPOINT_2_TELEOP_IDLE`,
+`PASS_M00_L09_SIMULATION_CHECKPOINT_3_DISABLED`, and
+`PASS_M00_L09_BOUNDED_SIMULATION`. Disabled, Teleop idle, and Disabled again
+all retained `Available=false`, `Connected=false`, `ReadyAtSpeed=false`,
+`RequestedState=STOPPED`, `VelocityRpm=0.0`, and `VelocityValid=false`.
+This proves only bounded Noop/lifecycle and read-only telemetry behavior; it
+does not claim runtime 50-RPM boundaries, physical convergence, sensor
+fidelity, CAN, or hardware readiness. Evidence classification is exactly
+`THEORY VERIFIED`, `SIMULATION VERIFIED`, `REAL HARDWARE DEFERRED`.
+
+Documentation Reconciliation is `COMPLETE`. Independent Closure Review is
+`PENDING`; Freeze and Publication are `NOT AUTHORIZED`. Active Lesson Count is
+`1`, current active M00 lesson is M00_L09, and M00_L10 remains
+`INACTIVE / NOT CREATED`. M00_L08 remains frozen and unchanged.
+
+## M00_L09 controlled freeze transition — 2026-09-21
+
+The final independent closure re-review passed with
+`PASS_M00_L09_FINAL_INDEPENDENT_CLOSURE_REVIEW`, and Architect freeze
+authorization was accepted. M00_L09 is now `COMPLETE / FROZEN / READ-ONLY`.
+No source, test, deploy/configuration, support, or frozen M00_L08 content was
+changed by the freeze transition.
+
+The final technical contract remains frozen: one vendor-neutral instantaneous
+Ready-at-Speed concept, the exact immutable Observation and read-only telemetry
+boundary, inclusive symmetric 50.0 RPM provisional software-policy tolerance,
+and no automatic action. Production, test, and full deploy/config/support
+integrity remain `103 / 99 / 4 / 0 / 0`, `96 / 92 / 4 / 0 / 0`, and
+`24 / 24 / 0 / 0 / 0` respectively.
+
+Evidence remains exactly `THEORY VERIFIED`, `SIMULATION VERIFIED`, and `REAL
+HARDWARE DEFERRED`. Independent Freeze Review is `PENDING`; Publication is
+`PENDING / NOT YET PUBLISHED`; no publication SHA or Git event is claimed.
+Active Lesson Count is `0`, Current Active M00 Lesson is `NONE`, and M00_L10
+remains `INACTIVE / NOT CREATED`.

@@ -1685,3 +1685,129 @@ verification are distinct stages, with no third commit required merely to
 record final verification. Evidence remains exactly `THEORY VERIFIED`,
 `SIMULATION VERIFIED`, and `REAL HARDWARE DEFERRED`; runtime
 `requestVelocity` Simulation exercise was NOT claimed.
+
+## M00_L09 Controlled Activation — 2026-09-21
+
+The canonical M00_L08 predecessor is consumed as
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`. M00_L09 preparation
+passed `PASS_M00_L09_PREPARATION_BASELINE` with `BUILD SUCCESSFUL in 34s` and
+six actionable tasks, all six executed. The architecture/inheritance gate
+`PASS_M00_L09_ARCHITECTURE_INHERITANCE_AUDIT` and Final Design Lock
+`PASS_M00_L09_FINAL_DESIGN_LOCK` are accepted with verdict
+`READY_FOR_CONTROLLED_ACTIVATION`.
+
+This decision authorizes documentation-only Controlled Activation of M00_L09
+as the sole active editable lesson. Its exact one concept is vendor-neutral
+instantaneous Flywheel Ready-at-Speed classification, owned by
+`FlywheelSubsystem` through one private deterministic side-effect-free helper.
+The immutable Observation adds exactly `readyAtSpeed`; telemetry adds exactly
+`ReadyAtSpeed`. The predicate requires positive finite velocity intent,
+available/connected/velocity-valid input, finite measured velocity, and
+inclusive symmetric error within
+`Constants.FlywheelConstants.kReadyAtSpeedToleranceRpm = 50.0` mechanism RPM.
+That value is a provisional software-policy acceptance tolerance, not
+hardware-tuned and not real-robot validated. Dwell, debounce, hysteresis,
+history, readiness state machines, commands, coordination, autonomous action,
+and physical implementation are excluded.
+
+The activation write boundary is limited to the root governance records, the
+four M00_L09 lesson records, and the new
+`M00_L08_to_M00_L09_Step_by_Step.md` transition guide. No production source,
+test source, Constants implementation, IO/Noop, RobotTelemetry,
+RobotContainer, configuration, deployment, dependency, or frozen M00_L08 file
+may change. M00_L09 is `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN
+LOCK`, Active Lesson Count is `1`, Current Active M00 Lesson is `M00_L09`,
+implementation is `NOT STARTED`, and Independent Activation Review is
+`PENDING`. M00_L10 is `INACTIVE / NOT CREATED`. Freeze and publication are not
+claimed.
+
+## M00_L09 activation documentation repair — 2026-09-21
+
+This bounded repair reconciles lifecycle documentation only. The Architect
+acceptance gate is `PASS_M00_L09_CONTROLLED_ACTIVATION`; the engineer-owned
+Controlled Activation verdict is
+`CONTROLLED_ACTIVATION_COMPLETE_READY_FOR_INDEPENDENT_ACTIVATION_REVIEW`.
+The current independent review remains
+`HOLD_M00_L09_INDEPENDENT_ACTIVATION_REVIEW`.
+
+The canonical external M00_L08 state is
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`, primary
+`5daecd970ff95fb906d6de9d5bc22a5cb094877d`, metadata
+`a76dc33c2b485b4988e7058cbfed0fa3362cc560` with parent equal to the primary,
+final remote-aligned HEAD equal to the metadata SHA, and verdict
+`PUBLICATION_VERIFIED`. No third publication commit was required. Historical
+M00_L08 snapshots may retain publication-pending wording under the passing
+two-commit Historical Snapshot Model; no frozen M00_L08 record is changed.
+
+The M00_L09 Final Design Lock is unchanged: one deterministic instantaneous
+Ready-at-Speed concept, the inclusive symmetric comparison and provisional
+50.0 RPM policy tolerance, immutable Observation and read-only telemetry only,
+no automatic action, and no expansion of the production/test boundaries or
+roadmap. The future evidence plan is `THEORY VERIFIED`, `SIMULATION VERIFIED`,
+`REAL HARDWARE DEFERRED`; current verification is PENDING. M00_L09 remains the
+sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson with
+implementation `NOT STARTED`, and M00_L10 remains inactive/not created.
+
+## M00_L09 Implementation, Verification, and Documentation Reconciliation — 2026-09-21
+
+This governance record reconciles the later implementation and user-supplied
+verification evidence without changing the M00 roadmap or the M00_L09 Design
+Lock. Exactly one concept was implemented: instantaneous vendor-neutral
+Flywheel Ready-at-Speed classification using the positive finite requested
+target, valid connected finite measurement, and inclusive symmetric tolerance
+comparison. The 50 RPM tolerance remains provisional software policy only.
+
+`PASS_M00_L09_IMPLEMENTATION_REPORT_ACCEPTED` is accepted. The initial
+Independent Static Review `HOLD` is retained as chronology; its bounded repair
+passed and the final independent static re-review passed. Production integrity
+is `103 / 99 / 4 / 0 / 0`; test integrity is `96 / 92 / 4 / 0 / 0`; and
+deploy/configuration integrity is `4 / 4 / 0 / 0 / 0`. The exact authorized
+production/test boundaries were respected, with no new files, unrelated
+runtime changes, or frozen M00_L08 modifications.
+
+User evidence accepts `PASS_M00_L09_USER_FOCUSED_TESTS` (`BUILD SUCCESSFUL in
+22s`; four actionable tasks, three executed and one up-to-date) and
+`PASS_M00_L09_CLEAN_FULL_REGRESSION` (`BUILD SUCCESSFUL`; seven actionable
+tasks, all seven executed). User Simulation evidence accepts
+`PASS_M00_L09_SIMULATION_CHECKPOINT_1_DISABLED`,
+`PASS_M00_L09_SIMULATION_CHECKPOINT_2_TELEOP_IDLE`,
+`PASS_M00_L09_SIMULATION_CHECKPOINT_3_DISABLED`, and
+`PASS_M00_L09_BOUNDED_SIMULATION`. Each checkpoint retained
+`Available=false`, `Connected=false`, `ReadyAtSpeed=false`,
+`RequestedState=STOPPED`, `VelocityRpm=0.0`, and `VelocityValid=false`.
+The bounded interpretation covers Noop composition, read-only telemetry,
+fail-safe idle, no automatic request, no readiness-triggered actuation, and
+Disabled→Teleop→Disabled persistence only. It does not claim runtime
+50-RPM boundaries, physical convergence, sensor fidelity, CAN, or hardware.
+
+Evidence classification is exactly `THEORY VERIFIED`, `SIMULATION VERIFIED`,
+`REAL HARDWARE DEFERRED`. Hardware readiness and CAN 50–54 remain unknown or
+deferred; CAN 50–54 is planning only. M00_L09 remains
+`IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK`; implementation,
+static review, focused tests, clean regression, bounded Simulation, and
+Documentation Reconciliation are complete. Independent Closure Review remains
+pending, Freeze and Publication are not authorized, Active Lesson Count is
+`1`, current active lesson is M00_L09, and M00_L10 remains inactive/not
+created.
+
+## M00_L09 Controlled Freeze Transition — 2026-09-21
+
+The final independent closure re-review returned
+`READY_FOR_FREEZE_AUTHORIZATION` under
+`PASS_M00_L09_FINAL_INDEPENDENT_CLOSURE_REVIEW`; Architect freeze authorization
+is recorded as accepted. M00_L09 transitions to `COMPLETE / FROZEN /
+READ-ONLY` without changing the Final Design Lock, Frozen Backbone, or roadmap.
+
+The exact technical contract remains frozen: vendor-neutral instantaneous
+Ready-at-Speed classification, subsystem-owned immutable Observation semantics,
+inclusive symmetric 50.0 RPM provisional software-policy tolerance, unchanged
+IO/Noop/RobotTelemetry/RobotContainer boundaries, and no automatic mechanism
+action. Integrity remains production `103 / 99 / 4 / 0 / 0`, tests
+`96 / 92 / 4 / 0 / 0`, and full deploy/config/support `24 / 24 / 0 / 0 / 0`.
+
+Evidence remains `THEORY VERIFIED`, `SIMULATION VERIFIED`, and
+`REAL HARDWARE DEFERRED`. Independent Freeze Review is `PENDING`; Publication
+is `PENDING / NOT YET PUBLISHED`; no publication SHA or Git event is claimed.
+Active Lesson Count is `0`, Current Active M00 Lesson is `NONE`, and M00_L10
+remains `INACTIVE / NOT CREATED`. The controlled freeze record stops before
+Independent Freeze Review, publication, and successor activation.
