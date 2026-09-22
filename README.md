@@ -1903,3 +1903,118 @@ travel-limit enforcement remains M00_L13 scope. Evidence remains exactly
 Active Lesson Count remains `0`, Current Active M00 Lesson remains `NONE`,
 M00_L11 remains `INACTIVE / NOT CREATED`, and the locked M00_L01–M00_L16
 roadmap remains unchanged with no M00_L17.
+
+## M00_L11 controlled activation — 2026-09-22
+
+M00_L10 is accepted as `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`
+with primary SHA `531bceabddf53f194b1edaabbd972ee6865e9ff0`, metadata SHA
+`cb8c125da0bbc7e2bf0aeebe40163c1a72909445`, and final gate
+`PASS_M00_L10_FINAL_PUBLICATION_VERIFICATION`.
+
+M00_L11 consumed `PASS_M00_L11_PREPARATION_BASELINE`,
+`PASS_M00_L11_ARCHITECTURE_INHERITANCE_AUDIT`,
+`READY_FOR_M00_L11_FINAL_DESIGN_LOCK`, and
+`PASS_M00_L11_FINAL_DESIGN_LOCK`. Inheritance is exact: production
+`108 / 108 / 0 / 0 / 0`, tests `102 / 102 / 0 / 0 / 0`, deploy/config/support
+`24 / 24 / 0 / 0 / 0`, and lesson-local documentation `98 / 98 / 0 / 0 / 0`;
+unexpected substantive drift is `NONE`.
+
+M00_L11 is the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK`
+lesson, with Active Lesson Count `1`, Current Active M00 Lesson `M00_L11`,
+implementation `NOT STARTED`, and Independent Activation Review `PENDING`.
+M00_L12 remains `INACTIVE / NOT CREATED`.
+
+The one locked concept is vendor-neutral Elevator closed-loop position request
+semantics in meters. The future IO request is `requestPositionMeters(double)`;
+requested states are exactly `STOPPED` and `POSITION_REQUESTED`; the future
+observation adds requested state, target, and derived error to the inherited
+five fields. Requests require finite target, valid position, and trusted
+reference; finite negative targets remain valid and no physical travel clamp is
+introduced. Noop remains safe and deterministic. RobotContainer,
+RobotTelemetry, Constants, commands, bindings, autonomous integration, real
+adapters, and ElevatorIOSim remain unchanged. M00_L12 owns homing/reference
+establishment and M00_L13 owns travel-limit safety.
+
+The activation chronology is recorded in
+`real_robot_programming/module_M00/M00_L11_ElevatorClosedLoopPosition/docs/M00_L10_to_M00_L11_Step_by_Step.md`.
+No implementation, verification, closure, freeze, publication, or Git result
+is claimed.
+
+## M00_L11 implementation, verification, and documentation reconciliation — 2026-09-22
+
+The preceding M00_L11 activation record is historical. The current accepted
+state is `IN_PROGRESS / ACTIVE / IMPLEMENTATION COMPLETE`, with focused tests,
+clean regression, bounded Simulation, and documentation reconciliation passed.
+Independent Closure Review remains `PENDING`; Freeze and Publication are not
+authorized. M00_L12 homing/reference establishment, M00_L13 travel-limit
+safety, and real hardware remain protected/deferred.
+
+The accepted focused-test gates include the compile-helper failure forensics,
+package-private visibility repair and re-review, the later observation-fixture
+failure forensics, the `positionMeters 1.25 -> 1.50` fixture repair and
+re-review, and `PASS_M00_L11_USER_FOCUSED_TESTS`. The forced fresh run passed
+with `BUILD SUCCESSFUL in 18s` and four executed actionable tasks. Clean
+regression passed with `BUILD SUCCESSFUL in 37s` and seven executed actionable
+tasks. Both earlier failures remain preserved as test defects; neither was a
+production failure.
+
+User Simulation evidence is limited to Noop runtime composition, exact eight
+telemetry values, disabled idle, Teleop enabled persistence, and return to
+Disabled persistence. The final evidence classification is
+`THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`.
+
+## M00_L11 controlled freeze — 2026-09-22
+
+The preceding implementation and documentation reconciliation section is historical. The accepted closure gate is `PASS_M00_L11_INDEPENDENT_CLOSURE_REVIEW` with verdict `CLOSURE_REVIEW_PASS_READY_FOR_FREEZE`. The reconciled implementation, forced focused tests, clean regression, and bounded Simulation evidence remain unchanged.
+
+The authoritative M00_L11 state is:
+
+```text
+STATUS: COMPLETE
+LIFECYCLE: COMPLETE / FROZEN / READ-ONLY / READY FOR INDEPENDENT FREEZE REVIEW / NOT YET PUBLISHED
+ACTIVE LESSON COUNT: 0
+CURRENT ACTIVE M00 LESSON: NONE
+IMPLEMENTATION: COMPLETE
+STATIC REVIEW: PASS
+FOCUSED TESTS: PASS_M00_L11_USER_FOCUSED_TESTS
+CLEAN REGRESSION: PASS_M00_L11_USER_CLEAN_REGRESSION
+SIMULATION: PASS_M00_L11_BOUNDED_SIMULATION_VERIFICATION
+DOCUMENTATION RECONCILIATION: COMPLETE
+EVIDENCE: THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED
+INDEPENDENT FREEZE REVIEW: PENDING
+PUBLICATION: NOT YET PUBLISHED / USER-OWNED
+M00_L12: INACTIVE / NOT CREATED
+M00_L13: FUTURE SCOPE / NOT ACTIVATED
+```
+
+The exact one-concept Design Lock, M00_L10 predecessor integrity, focused-test history, clean-regression evidence, bounded Simulation boundaries, and real-hardware deferral are preserved. No M00_L12 creation or activation, roadmap movement, publication, remote verification, or hardware verification is claimed. Earlier active-state text remains historical chronology.
+
+## M00_L11 Publication Phase 1 Primary Frozen Snapshot — 2026-09-22
+
+The User-accepted gate is `PASS_M00_L11_PUBLICATION_PHASE_1_PRIMARY_FROZEN_SNAPSHOT`.
+The authoritative primary frozen lesson snapshot is:
+
+```text
+SHA: 385bf1d4ff6550dafb3e15de06ceaa9f1e9edc03
+COMMIT SUBJECT: Complete M00_L11 Elevator closed-loop position
+BRANCH: main
+```
+
+User evidence confirms that this primary commit contains only M00_L11 lesson files and that the Git index was empty after the primary commit. The primary frozen snapshot is committed locally; it has not yet been pushed as part of the final publication workflow. No metadata publication commit SHA exists yet.
+
+The current publication metadata state is:
+
+```text
+M00_L11: COMPLETE / FROZEN / READ-ONLY
+PRIMARY FROZEN SNAPSHOT: 385bf1d4ff6550dafb3e15de06ceaa9f1e9edc03 / COMMITTED LOCALLY
+EVIDENCE: THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED
+ACTIVE LESSON COUNT: 0
+CURRENT ACTIVE M00 LESSON: NONE
+NEXT ROADMAP LESSON: M00_L12 - Elevator Homing
+M00_L12: INACTIVE / NOT CREATED
+M00_L13: FUTURE ELEVATOR TRAVEL-LIMIT SAFETY
+METADATA PUBLICATION COMMIT: NOT YET CREATED / USER-OWNED
+FINAL REMOTE PUBLICATION VERIFICATION: PENDING / EXTERNAL FUTURE GATE
+```
+
+This record follows the Historical Snapshot publication model. It does not claim `REMOTE VERIFIED`, `FINAL PUBLICATION VERIFIED`, `origin/main` alignment, remote-main alignment, or a metadata commit SHA. The M00_L11 frozen lesson and its technical Design Lock remain unchanged.
