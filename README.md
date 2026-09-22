@@ -1855,3 +1855,51 @@ HARDWARE DEFERRED`. Integrity remains production `103 / 99 / 4 / 0 / 0`, tests
 `96 / 92 / 4 / 0 / 0`, and full deploy/config/support `24 / 24 / 0 / 0 / 0`.
 Active Lesson Count remains `0`, the current active M00 lesson remains `NONE`,
 and M00_L10 remains `INACTIVE / NOT CREATED`. The M00 roadmap is unchanged.
+
+## M00_L10 controlled activation — 2026-09-21
+
+M00_L09 is the accepted frozen predecessor and its publication is reconciled
+as primary SHA `3c822a1e3956850c9d0ba9954c5b163d83b801b9`, metadata SHA
+`249100db23262430ce2557eaa5e67d70b7b0a79c`, final verdict
+`PUBLICATION_VERIFIED`. M00_L10 is the sole active lesson with state
+`IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK`; implementation is
+`NOT STARTED`, Independent Activation Review is `PENDING`, Freeze and
+Publication are `NOT AUTHORIZED`, and M00_L11 is inactive/not created.
+
+This record is documentation/lifecycle activation only. The exact one-concept
+Elevator position/reference contract, normalization, future file boundaries,
+test matrix, and evidence limits are in the M00_L09→M00_L10 transition guide.
+No source, test, build, Simulation, Git, frozen predecessor, or roadmap change
+is claimed.
+
+## M00_L10 primary publication and metadata reconciliation — 2026-09-22
+
+The accepted Independent Freeze Review gate is
+`PASS_M00_L10_INDEPENDENT_FREEZE_REVIEW`. M00_L10 remains
+`COMPLETE / FROZEN / READ-ONLY`, and its frozen lesson-local tree was not
+modified. The accepted primary snapshot gate is
+`PASS_M00_L10_PRIMARY_PUBLICATION_SNAPSHOT`.
+
+Primary publication identity:
+
+- SHA: `531bceabddf53f194b1edaabbd972ee6865e9ff0`
+
+The User independently verified that the primary snapshot contains only files
+inside the frozen M00_L10 lesson folder. The canonical publication phase is
+`PENDING METADATA COMMIT`. No metadata commit SHA is available, no metadata
+push has occurred, and no `PUBLICATION_VERIFIED` verdict is claimed.
+
+This preserves the two-commit Historical Snapshot model: frozen lesson
+snapshot primary commit, repository-level metadata commit, and later external
+final publication verification. No third commit is required merely to record
+final verification. Frozen M00_L10 lesson-local pending wording remains
+unchanged.
+
+M00_L10 introduced exactly one concept: vendor-neutral Elevator position
+observation and reference semantics. Position control remains M00_L11 scope,
+homing and trusted-reference establishment remain M00_L12 scope, and
+travel-limit enforcement remains M00_L13 scope. Evidence remains exactly
+`THEORY VERIFIED`, `SIMULATION VERIFIED`, and `REAL HARDWARE DEFERRED`.
+Active Lesson Count remains `0`, Current Active M00 Lesson remains `NONE`,
+M00_L11 remains `INACTIVE / NOT CREATED`, and the locked M00_L01–M00_L16
+roadmap remains unchanged with no M00_L17.

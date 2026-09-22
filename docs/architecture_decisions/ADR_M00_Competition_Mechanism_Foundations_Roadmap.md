@@ -1843,3 +1843,60 @@ Integrity remains production `103 / 99 / 4 / 0 / 0`, tests `96 / 92 / 4 / 0 / 0`
 and full deploy/config/support `24 / 24 / 0 / 0 / 0`. Active Lesson Count is
 `0`, Current Active M00 Lesson is `NONE`, and M00_L10 is
 `INACTIVE / NOT CREATED`. The locked M00_L01–M00_L16 roadmap is unchanged.
+
+## M00_L10 Controlled Activation — 2026-09-21
+
+M00_L09 is the accepted predecessor in state
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`. Its accepted primary
+publication SHA is `3c822a1e3956850c9d0ba9954c5b163d83b801b9`, its metadata SHA
+is `249100db23262430ce2557eaa5e67d70b7b0a79c`, and its final verdict is
+`PUBLICATION_VERIFIED`.
+
+M00_L10 is activated as the sole active lesson:
+`IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK`, implementation
+`NOT STARTED`, Independent Activation Review `PENDING`, Active Lesson Count
+`1`, Current Active M00 Lesson `M00_L10`, Freeze and Publication not authorized,
+and M00_L11 inactive/not created. The accepted preparation baseline,
+architecture/inheritance audit, and final design lock report zero non-generated
+drift from M00_L09.
+
+The locked concept is an independently owned, vendor-neutral Elevator position
+observation with explicit validity and reference-trust semantics in meters. It
+does not own position control, homing, or travel-limit enforcement. The exact
+normalization, IO/Observation/subsystem/telemetry contracts, composition,
+future tests, simulation boundary, and evidence plan are recorded in the
+lesson-local `M00_L09_to_M00_L10_Step_by_Step.md` guide. This activation changes
+documentation/lifecycle identity only and leaves the Frozen Backbone, M00
+roadmap, M00_L09 snapshot, source, tests, build, Simulation, and Git state
+unchanged.
+
+## M00_L10 Primary Publication and Metadata Reconciliation — 2026-09-22
+
+The accepted Independent Freeze Review gate is
+`PASS_M00_L10_INDEPENDENT_FREEZE_REVIEW`. M00_L10 remains
+`COMPLETE / FROZEN / READ-ONLY`, and the frozen lesson-local snapshot is
+unchanged. The accepted primary snapshot gate is
+`PASS_M00_L10_PRIMARY_PUBLICATION_SNAPSHOT`.
+
+Primary publication identity:
+
+- SHA: `531bceabddf53f194b1edaabbd972ee6865e9ff0`
+
+The User independently verified that the primary snapshot contains only files
+inside the frozen M00_L10 lesson folder. The canonical publication phase remains
+`PENDING METADATA COMMIT`. No metadata commit SHA is available, no metadata
+push has occurred, and no `PUBLICATION_VERIFIED` verdict is recorded.
+
+This preserves the two-commit Historical Snapshot model: frozen lesson snapshot
+primary commit, repository-level metadata commit, and later external final
+publication verification. No third commit is required merely to record final
+verification. Frozen lesson-local historical pending wording remains unchanged.
+
+The final lifecycle is `COMPLETE / FROZEN / READ-ONLY`. M00_L10 contains only
+the vendor-neutral Elevator position-observation and reference contract.
+Position control remains M00_L11 scope, homing and trusted-reference
+establishment remain M00_L12 scope, and travel-limit enforcement remains
+M00_L13 scope. Evidence remains exactly `THEORY VERIFIED`, `SIMULATION
+VERIFIED`, and `REAL HARDWARE DEFERRED`. Active Lesson Count is `0`, Current
+Active M00 Lesson is `NONE`, M00_L11 is `INACTIVE / NOT CREATED`, and the
+locked M00_L01–M00_L16 roadmap is unchanged with no M00_L17.
