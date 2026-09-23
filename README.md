@@ -2018,3 +2018,53 @@ FINAL REMOTE PUBLICATION VERIFICATION: PENDING / EXTERNAL FUTURE GATE
 ```
 
 This record follows the Historical Snapshot publication model. It does not claim `REMOTE VERIFIED`, `FINAL PUBLICATION VERIFIED`, `origin/main` alignment, remote-main alignment, or a metadata commit SHA. The M00_L11 frozen lesson and its technical Design Lock remain unchanged.
+
+## M00_L12 Controlled Freeze — 2026-09-23
+
+The current authoritative M00_L12 lifecycle follows accepted closure gate `PASS_M00_L12_INDEPENDENT_CLOSURE_REVIEW`, verdict `CLOSURE_REVIEW_PASS_READY_FOR_FREEZE`, with no remaining legitimate closure findings. Earlier preparation, activation, implementation, verification, and documentation-reconciliation records remain historical chronology.
+
+The lesson is now `COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED`. Its single concept remains a bounded, scheduler-managed Elevator homing lifecycle using vendor-neutral `requestHoming()` and normalized IO-reported `positionReferenced` as the sole trusted-reference authority. Zero position alone does not establish home. The accepted evidence remains `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`; Simulation proves bounded software/runtime and truthful Noop behavior only. Physical homing, movement, sensor activation, calibration, reference accuracy, and hardware convergence remain unverified.
+
+The accepted implementation deltas remain production `109 / 105 / 4 / 0 / 1`, tests `102 / 98 / 4 / 0 / 1`, and deploy/config/support `24 / 24 / 0 / 0 / 0` (compared / identical / changed / missing / added). Focused tests remain `PASS_M00_L12_USER_FOCUSED_TESTS` (`--rerun-tasks`, `BUILD SUCCESSFUL in 35s`, four tasks executed); clean regression remains `PASS_M00_L12_USER_CLEAN_REGRESSION` (`BUILD SUCCESSFUL in 24s`, five tasks executed); bounded Simulation remains `PASS_M00_L12_BOUNDED_SIMULATION_VERIFICATION`.
+
+```text
+ACTIVE LESSON COUNT: 0
+CURRENT ACTIVE M00 LESSON: NONE
+M00_L12: COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED
+EVIDENCE: THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED
+INDEPENDENT CLOSURE REVIEW: PASS_M00_L12_INDEPENDENT_CLOSURE_REVIEW / CLOSURE_REVIEW_PASS_READY_FOR_FREEZE
+FREEZE RECONCILIATION: COMPLETE
+INDEPENDENT FREEZE REVIEW: PENDING / NEXT GATE
+PUBLICATION: NOT PUBLISHED / PENDING / USER-OWNED
+PUBLICATION SHA: NONE / NOT YET ESTABLISHED
+REAL HARDWARE: DEFERRED
+M00_L13: INACTIVE / NOT CREATED
+```
+
+M00_L11 remains `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`. M00_L13 remains inactive and not created. Publication, publication SHAs, and remote verification remain pending User-owned Git gates. See the [M00_L11 to M00_L12 transition guide](real_robot_programming/module_M00/M00_L12_ElevatorHoming/docs/M00_L11_to_M00_L12_Step_by_Step.md) for the complete chronology.
+
+## M00_L12 Metadata Publication Reconciliation — 2026-09-23
+
+The accepted independent freeze-review gate is `PASS_M00_L12_FINAL_INDEPENDENT_FREEZE_REVIEW`, with verdict `FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION`. M00_L12 remains `COMPLETE / FROZEN / READ-ONLY`. The User-verified primary frozen snapshot gate is `PASS_M00_L12_PRIMARY_FROZEN_SNAPSHOT_COMMIT`:
+
+```text
+PRIMARY SHA: 5cc4c2c1bc6b4108f2c710c3ca0b0cdbdc26ba49
+PRIMARY COMMIT SUBJECT: Complete M00_L12 Elevator homing
+PRIMARY FROZEN SNAPSHOT: COMMITTED AND VERIFIED
+USER EVIDENCE: HEAD contains only M00_L12 lesson files
+```
+
+The publication progression remains `PRIMARY FROZEN SNAPSHOT COMMITTED` → `METADATA PUBLICATION COMMIT PENDING` → `REMOTE PUSH PENDING` → `FINAL PUBLICATION VERIFICATION PENDING`.
+
+```text
+METADATA PUBLICATION COMMIT: PENDING
+METADATA PUBLICATION SHA: NONE / NOT YET ESTABLISHED
+REMOTE PUSH: PENDING
+REMOTE PUBLICATION SHA: NONE / NOT YET VERIFIED
+FINAL PUBLICATION VERIFICATION: PENDING
+FULLY PUBLISHED: NO
+```
+
+M00_L12 is not marked fully published or remote verified.
+
+The evidence classification remains `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`. Simulation evidence is bounded runtime and `ElevatorIONoop` verification only; physical homing is not established. Active Lesson Count remains `0`, Current Active M00 Lesson remains `NONE`, and M00_L13 Elevator Travel-Limit Safety remains `INACTIVE / NOT CREATED`. The frozen M00_L12 lesson files remain unchanged.

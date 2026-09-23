@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01-L06 complete/frozen/read-only/published/verified; M00_L07 complete/frozen/read-only with primary publication complete and metadata/final verification pending; no active M00 lesson; M00_L08 inactive/not created; active lesson count 0)
+    └── module_M00/ (authorized; M00_L01-L12 complete/frozen/read-only; M00_L11 published/verified; M00_L12 primary frozen snapshot committed and verified, metadata publication pending; active lesson count 0; no active M00 lesson; M00_L13 inactive/not created)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -3429,3 +3429,60 @@ FINAL REMOTE PUBLICATION VERIFICATION: PENDING / EXTERNAL FUTURE GATE
 ```
 
 This record follows the Historical Snapshot publication model. It does not claim `REMOTE VERIFIED`, `FINAL PUBLICATION VERIFIED`, `origin/main` alignment, remote-main alignment, or a metadata commit SHA. The M00_L11 frozen lesson and its technical Design Lock remain unchanged.
+
+## M00_L12 Controlled Freeze — 2026-09-23
+
+The current authoritative M00_L12 lifecycle record follows the accepted Independent Closure Review: `PASS_M00_L12_INDEPENDENT_CLOSURE_REVIEW`, verdict `CLOSURE_REVIEW_PASS_READY_FOR_FREEZE`, with remaining legitimate closure findings `NONE`. Earlier activation, implementation, verification, and documentation-reconciliation records remain historical chronology.
+
+Accepted implementation and verification gates remain `PASS_M00_L12_FINAL_INDEPENDENT_STATIC_REREVIEW`, `PASS_M00_L12_USER_FOCUSED_TESTS`, `PASS_M00_L12_USER_CLEAN_REGRESSION`, and `PASS_M00_L12_BOUNDED_SIMULATION_VERIFICATION`. The test-only architecture repair chronology and exact production, test, and deploy/config/support deltas remain recorded in the transition guide. The accepted closure review did not modify files or run Git, Gradle, tests, build, or Simulation.
+
+M00_L12 preserves one concept: a bounded, scheduler-managed Elevator homing lifecycle that requests vendor-neutral reference acquisition and recognizes success only from normalized IO-reported `positionReferenced`. Zero position alone does not establish home. The evidence remains `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`; Simulation is bounded software/runtime and truthful Noop evidence only. Physical homing, motion, sensor activation, calibration, reference accuracy, and hardware convergence are not established.
+
+The transition to `COMPLETE / FROZEN / READ-ONLY` is documentation/lifecycle reconciliation only. Publication has not occurred; no M00_L12 publication SHA or remote verification is recorded. M00_L13 remains inactive and not created. The canonical chronology is `real_robot_programming/module_M00/M00_L12_ElevatorHoming/docs/M00_L11_to_M00_L12_Step_by_Step.md`.
+
+```text
+ACTIVE LESSON COUNT: 0
+CURRENT ACTIVE M00 LESSON: NONE
+M00_L12: COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED
+IMPLEMENTATION: COMPLETE
+STATIC REVIEW: PASS_M00_L12_FINAL_INDEPENDENT_STATIC_REREVIEW
+FOCUSED TESTS: PASS_M00_L12_USER_FOCUSED_TESTS
+CLEAN REGRESSION: PASS_M00_L12_USER_CLEAN_REGRESSION
+SIMULATION: PASS_M00_L12_BOUNDED_SIMULATION_VERIFICATION / BOUNDED SOFTWARE-NOOP EVIDENCE
+EVIDENCE: THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED
+INDEPENDENT CLOSURE REVIEW: PASS_M00_L12_INDEPENDENT_CLOSURE_REVIEW / CLOSURE_REVIEW_PASS_READY_FOR_FREEZE
+FREEZE RECONCILIATION: COMPLETE
+INDEPENDENT FREEZE REVIEW: PENDING / NEXT GATE
+PUBLICATION: NOT PUBLISHED / PENDING / USER-OWNED
+PUBLICATION SHA: NONE / NOT YET ESTABLISHED
+REAL HARDWARE: DEFERRED
+M00_L13: INACTIVE / NOT CREATED
+```
+
+Earlier M00_L12 active-state text in this file remains historical chronology. The lesson remains in its normal repository location; no filesystem permissions were changed.
+
+### M00_L12 Metadata Publication Reconciliation — 2026-09-23
+
+The accepted independent freeze-review gate is `PASS_M00_L12_FINAL_INDEPENDENT_FREEZE_REVIEW`, with verdict `FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION`. M00_L12 remains `COMPLETE / FROZEN / READ-ONLY`. The User-verified primary frozen snapshot gate is `PASS_M00_L12_PRIMARY_FROZEN_SNAPSHOT_COMMIT`:
+
+```text
+PRIMARY SHA: 5cc4c2c1bc6b4108f2c710c3ca0b0cdbdc26ba49
+PRIMARY COMMIT SUBJECT: Complete M00_L12 Elevator homing
+PRIMARY FROZEN SNAPSHOT: COMMITTED AND VERIFIED
+USER EVIDENCE: HEAD contains only M00_L12 lesson files
+```
+
+The publication progression remains `PRIMARY FROZEN SNAPSHOT COMMITTED` → `METADATA PUBLICATION COMMIT PENDING` → `REMOTE PUSH PENDING` → `FINAL PUBLICATION VERIFICATION PENDING`.
+
+```text
+METADATA PUBLICATION COMMIT: PENDING
+METADATA PUBLICATION SHA: NONE / NOT YET ESTABLISHED
+REMOTE PUSH: PENDING
+REMOTE PUBLICATION SHA: NONE / NOT YET VERIFIED
+FINAL PUBLICATION VERIFICATION: PENDING
+FULLY PUBLISHED: NO
+```
+
+M00_L12 is not marked fully published or remote verified.
+
+The evidence classification remains `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`. Simulation evidence is bounded runtime and `ElevatorIONoop` verification only; physical homing is not established. Active Lesson Count remains `0`, Current Active M00 Lesson remains `NONE`, and M00_L13 Elevator Travel-Limit Safety remains `INACTIVE / NOT CREATED`. The frozen M00_L12 lesson files remain unchanged.
