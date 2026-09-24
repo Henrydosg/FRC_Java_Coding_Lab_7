@@ -1,6 +1,6 @@
 # M00_L13 — Elevator Travel-Limit Safety
 
-## Current frozen lifecycle and verification — 2026-09-24
+## Current frozen lifecycle and verification — 2026-09-25
 
 - M00_L12 predecessor: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; primary SHA 5cc4c2c1bc6b4108f2c710c3ca0b0cdbdc26ba49; metadata SHA c1e90fad04469e5162b5c1814566dd534c6a0a6c; final gate PASS_M00_L12_FINAL_PUBLICATION_VERIFICATION.
 - Preparation: PASS_M00_L13_UNTOUCHED_COPY_BASELINE_BUILD; User evidence BUILD SUCCESSFUL in 35s, 6 actionable tasks, 6 executed.
@@ -12,10 +12,16 @@
 - Clean regression: PASS_M00_L13_USER_CLEAN_REGRESSION; BUILD SUCCESSFUL in 25s; 5 actionable tasks, 5 executed; GRADLE_EXIT_CODE=0.
 - Bounded Simulation: PASS_M00_L13_BOUNDED_SIMULATION_VERIFICATION; Disabled, Teleop Enabled, return-to-Disabled.
 - Initial Closure Review HOLD_M00_L13_CLOSURE_REVIEW_STALE_AGENTS_IMPLEMENTATION_STATUS was repaired by PASS_M00_L13_CLOSURE_DOCUMENTATION_REPAIR and resolved by PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW / CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE.
-- Freeze Reconciliation: COMPLETE. Independent Freeze Review: PENDING / NEXT GATE.
-- Status: COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED / NOT YET PUBLICATION-VERIFIED.
+- Freeze Reconciliation: COMPLETE.
+- Independent Freeze Review: PASS_M00_L13_INDEPENDENT_FREEZE_REVIEW / FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION.
+- Primary Frozen Snapshot Publication: PASS_M00_L13_PRIMARY_FROZEN_SNAPSHOT_PUBLICATION_COMMIT / COMPLETED.
+- Primary publication SHA: 5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704; subject: `Complete M00_L13 Elevator travel-limit safety`.
+- Canonical metadata publication: ESTABLISHED BY COMMIT 2 OF THE TWO-COMMIT HISTORICAL SNAPSHOT MODEL; Metadata Commit and matching remote-main identities are external publication evidence and are not self-embedded.
+- Status: COMPLETE / FROZEN / READ-ONLY / PUBLISHED.
 - Active Lesson Count: 0; Current Active M00 Lesson: NONE.
-- Publication: PENDING / USER-OWNED; no M00_L13 publication SHA is established.
+- Remote-main identity: EXTERNALLY VERIFIED AGAINST THE CANONICAL METADATA COMMIT.
+- Final Publication Verification: PENDING / EXTERNAL.
+- Prior final publication reviews: HOLD_M00_L13_FINAL_PUBLICATION_VERIFICATION_STALE_CURRENT_PUBLICATION_STATE and HOLD_M00_L13_FINAL_PUBLICATION_REREVIEW_STALE_POST_AMEND_CHRONOLOGY; both were publication metadata/documentation findings, with the latter addressed by this chronology repair.
 
 ## Sole concept and implemented request-admission contract
 
@@ -49,9 +55,9 @@ Simulation uses the unchanged truthful Noop composition and no configured travel
 
 Evidence classification: THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED. Simulation verifies bounded startup, truthful Noop telemetry, safe enable/disable, and no uncommanded action. It does not verify UI rejection through a configured envelope, physical travel bounds/overtravel, limit switches, vendor soft limits, real motor behavior, or homing. Real minimum/maximum, stroke, switches, hard stop, spool, ratio, motor/controller, CAN ID, vendor limits, homing parameters, current threshold, and calibration remain UNKNOWN / DEFERRED. Software test values are not robot dimensions.
 
-## Lifecycle and roadmap boundary
+## Roadmap and hardware boundary
 
-M00_L13 is COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED / NOT YET PUBLICATION-VERIFIED. Active Lesson Count is 0 and Current Active M00 Lesson is NONE. M00_L14 Shoot Coordination is INACTIVE / NOT CREATED. M00_L15 Intake-to-Feeder Coordination and M00_L16 Mechanism Autonomous Event Integration remain future scope; no mechanism NamedCommands or PathPlanner events are introduced. Independent Freeze Review is PENDING. Primary frozen snapshot publication, metadata publication, User push, and Final Publication Verification remain pending / User-owned; no M00_L13 publication SHA is established.
+The current publication lifecycle and next verification gate are recorded in the current frozen lifecycle section above. M00_L14 Shoot Coordination is INACTIVE / NOT CREATED. M00_L15 Intake-to-Feeder Coordination and M00_L16 Mechanism Autonomous Event Integration remain future scope; no mechanism NamedCommands or PathPlanner events are introduced.
 
 ## Historical controlled activation snapshot — 2026-09-23
 
@@ -118,7 +124,7 @@ The inherited current README block follows verbatim as historical provenance, no
 
 # M00_L12 — Elevator Homing
 
-## Current frozen lesson record — 2026-09-23
+## Historical copied M00_L12 frozen lesson record — 2026-09-23
 
 - **Previous lesson:** `M00_L11 - Elevator Closed-Loop Position`
 - **Previous lesson state:** `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`
@@ -172,7 +178,7 @@ RobotContainer remains unchanged and composes `new ElevatorSubsystem(new Elevato
 
 The architecture test preserves the approved HOMING/request names, detects compound home/homing identifiers in the protected semantic layers, guards `com.ctre.` and `com.revrobotics.` imports and fully qualified references outside concrete ElevatorIO implementations, and checks command, composition, and exact contract boundaries. These are prohibited-dependency guards; they do not claim production violations occurred.
 
-## Current records
+## Lesson record links
 
 - [M00_L11 to M00_L12 transition guide](docs/M00_L11_to_M00_L12_Step_by_Step.md)
 - [Lesson status](LESSON_STATUS.md)
@@ -188,7 +194,7 @@ M00_L10 is `COMPLETE / FROZEN / READ-ONLY`.
 It introduces exactly one concept: a vendor-neutral Elevator position
 observation and reference contract.
 
-## Current lifecycle
+## Historical inherited M00_L09 lifecycle
 
 - **Previous lesson:** `M00_L09 - Flywheel Ready-at-Speed`
 - **Previous lesson state:** `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`

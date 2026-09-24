@@ -2094,7 +2094,7 @@ Implementation and test changes remain planned, not implemented or authorized. C
 
 M00_L13 tests and Simulation were NOT RUN / NOT VERIFIED at activation. Activation did not claim theory, Simulation, hardware, freeze, or publication gates as achieved. M00_L14 remained inactive/not created; M00_L15/L16 remained future scope. Earlier M00_L12 status snapshots and copied M00_L13 records are historical.
 
-## M00_L13 Freeze Reconciliation — 2026-09-24
+## Historical M00_L13 Freeze Reconciliation — 2026-09-24
 
 Accepted current gates include implementation authorization and handoff, final independent static re-review, User focused tests, clean regression, bounded Simulation, and completed Documentation Reconciliation. The initial Closure Review returned HOLD_M00_L13_CLOSURE_REVIEW_STALE_AGENTS_IMPLEMENTATION_STATUS; PASS_M00_L13_CLOSURE_DOCUMENTATION_REPAIR reconciled the stale current AGENTS.md lifecycle sentence, and PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW returned CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE. Freeze Reconciliation is complete; Independent Freeze Review is next.
 
@@ -2105,3 +2105,21 @@ The implemented single concept is a vendor-neutral software request-admission tr
 The initial static-review HOLD was limited to test/architecture-guard defects; no production defect or Final Design Lock change occurred. The bounded repair changed only the two named test files, and final independent static re-review passed. Focused tests passed: PASS_M00_L13_USER_FOCUSED_TESTS, BUILD SUCCESSFUL in 42s, 4 actionable tasks executed. Clean regression passed: PASS_M00_L13_USER_CLEAN_REGRESSION, BUILD SUCCESSFUL in 25s, 5 actionable tasks executed, GRADLE_EXIT_CODE=0. The PowerShell NativeCommandError caused by a WPILib joystick stderr warning was an evidence-capture issue, not a Java/test failure.
 
 Bounded Simulation passed as PASS_M00_L13_BOUNDED_SIMULATION_VERIFICATION for Disabled -> Teleop Enabled -> Disabled using the unchanged truthful Noop composition. This does not verify a configured envelope or physical travel-limit behavior. Evidence is THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED. Physical travel and hardware facts remain UNKNOWN / DEFERRED. Independent Freeze Review is PENDING. Primary frozen snapshot publication, metadata publication, User push, and Final Publication Verification remain pending / User-owned. No M00_L13 publication SHA is established; M00_L15/L16 remain future scope.
+
+## Historical M00_L13 Metadata Publication Reconciliation before Commit 2 — 2026-09-24
+
+Accepted gates: PASS_M00_L13_INDEPENDENT_FREEZE_REVIEW / FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION; PASS_M00_L13_PRIMARY_FROZEN_SNAPSHOT_PUBLICATION_COMMIT; and PASS_M00_L13_METADATA_PUBLICATION_RECONCILIATION. The User-owned primary frozen snapshot commit completed with SHA `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704`, subject `Complete M00_L13 Elevator travel-limit safety`.
+
+Two safe primary-publication staging attempts were held: HOLD_M00_L13_PRIMARY_PUBLICATION_SCRIPT_BOUNDARY_MISMATCH and HOLD_M00_L13_PRIMARY_PUBLICATION_GIT_ADD_PATHSPEC_DEFECT. Both are classified as publication-script defects, not lesson, source, test, or freeze defects. The corrected User-owned staging flow created the primary commit. Accepted User evidence says no M00_L13 authored path remained dirty afterward; previously identified unrelated working-tree paths remain protected.
+
+At the time this record was written, M00_L13 was COMPLETE / FROZEN / READ-ONLY, its primary snapshot was committed, and the metadata publication commit, push, and external Final Publication Verification had not yet occurred. That pending state is historical and is superseded below.
+
+Active Lesson Count was 0; Current Active M00 Lesson was NONE. M00_L14 was INACTIVE / NOT CREATED; M00_L15/L16 remained future scope. Technical contracts and evidence were unchanged: THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED. Physical travel and hardware facts remained UNKNOWN / DEFERRED.
+
+## Current M00_L13 Publication State — 2026-09-25
+
+M00_L13 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED. The Primary Frozen Snapshot Commit completed at `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704`, subject `Complete M00_L13 Elevator travel-limit safety`. The canonical metadata publication is established by Commit 2 of the two-commit Historical Snapshot model. The Metadata Commit identity and matching remote-main identity are external publication evidence and are not self-embedded. Final Publication Verification remains PENDING / EXTERNAL.
+
+Active Lesson Count is 0; Current Active M00 Lesson is NONE. M00_L14 is INACTIVE / NOT CREATED; M00_L15/L16 remain future scope. The publication model remains exactly two commits; no third verification-only commit is required.
+
+The independent final publication reviews recorded `HOLD_M00_L13_FINAL_PUBLICATION_VERIFICATION_STALE_CURRENT_PUBLICATION_STATE` and `HOLD_M00_L13_FINAL_PUBLICATION_REREVIEW_STALE_POST_AMEND_CHRONOLOGY`. Both are historical publication metadata/documentation findings; the latter is addressed by this chronology repair. Classification: `PUBLICATION_METADATA_CHRONOLOGY_DEFECT`; `NO_LESSON_DEFECT`; `NO_PRODUCTION_DEFECT`; `NO_TEST_DEFECT`; `NO_ARCHITECTURE_DEFECT`; `NO_SIMULATION_DEFECT`; `NO_FREEZE_DEFECT`; `NO_PUBLICATION_IDENTITY_DEFECT`; `NO_TWO_COMMIT_MODEL_CHANGE`. Technical, test, Simulation, and hardware-evidence classifications remain unchanged.

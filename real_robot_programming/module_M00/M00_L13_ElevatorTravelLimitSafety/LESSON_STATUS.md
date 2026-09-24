@@ -1,6 +1,6 @@
 # LESSON_STATUS — M00_L13 Elevator Travel-Limit Safety
 
-## Current identity and freeze lifecycle — 2026-09-24
+## Current identity and publication lifecycle — 2026-09-25
 
 - Module: M00 — Competition Mechanism Foundations
 - Lesson/directory: M00_L13 — Elevator Travel-Limit Safety / M00_L13_ElevatorTravelLimitSafety
@@ -13,7 +13,7 @@
 - Build: PASS via accepted User clean regression; BUILD SUCCESSFUL in 25s; 5 actionable tasks, 5 executed; GRADLE_EXIT_CODE=0.
 - Status: COMPLETE
 - Active State: FROZEN / READ-ONLY
-- Lifecycle: COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED / NOT YET PUBLICATION-VERIFIED
+- Lifecycle: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / FINAL PUBLICATION VERIFICATION PENDING
 - Active Lesson Count: 0
 - Current Active M00 Lesson: NONE
 - Architecture / Inheritance Audit: PASS_M00_L13_ARCHITECTURE_INHERITANCE_AUDIT
@@ -31,12 +31,18 @@
 - Initial Closure Review: HOLD_M00_L13_CLOSURE_REVIEW_STALE_AGENTS_IMPLEMENTATION_STATUS; resolved by PASS_M00_L13_CLOSURE_DOCUMENTATION_REPAIR
 - Independent Closure Re-review: PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW / CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE
 - Freeze Reconciliation: COMPLETE
-- Independent Freeze Review: PENDING / NEXT GATE
-- Publication / Final Publication Verification: PENDING / USER-OWNED; no M00_L13 publication SHA established
+- Independent Freeze Review: PASS_M00_L13_INDEPENDENT_FREEZE_REVIEW / FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION
+- Primary Frozen Snapshot Publication: PASS_M00_L13_PRIMARY_FROZEN_SNAPSHOT_PUBLICATION_COMMIT / COMPLETED
+- Primary publication SHA: 5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704; subject: `Complete M00_L13 Elevator travel-limit safety`
+- Canonical metadata publication: ESTABLISHED BY COMMIT 2 OF THE TWO-COMMIT HISTORICAL SNAPSHOT MODEL; Metadata Commit and matching remote-main identities are external publication evidence and are not self-embedded
+- Remote-main identity: EXTERNALLY VERIFIED AGAINST THE CANONICAL METADATA COMMIT
+- Final Publication Verification: PENDING / EXTERNAL
+- Prior independent final publication reviews: HOLD_M00_L13_FINAL_PUBLICATION_VERIFICATION_STALE_CURRENT_PUBLICATION_STATE and HOLD_M00_L13_FINAL_PUBLICATION_REREVIEW_STALE_POST_AMEND_CHRONOLOGY; both were publication metadata/documentation findings, with the latter addressed by this chronology repair
 - Driver Station / Glass: Driver Station status recorded in bounded Simulation; no separate real-hardware or Glass verification is claimed
 - Real Robot: DEFERRED
-- Transition Guide: M00_L12_to_M00_L13_Step_by_Step.md; reconciled through Freeze Reconciliation
-- Git Commit / Push: PENDING / USER-OWNED
+- Transition Guide: M00_L12_to_M00_L13_Step_by_Step.md; reconciled through Final Publication Metadata Repair
+- Git Commit: Primary snapshot completed; canonical metadata publication established as Commit 2 of the two-commit Historical Snapshot model; its own identity is external evidence and is not self-embedded
+- Git Push: Remote-main identity is externally verified against the canonical Metadata Commit
 - Known Issues: Physical Elevator travel facts and hardware configuration remain UNKNOWN / DEFERRED.
 
 ## Implemented one-concept contract
@@ -79,7 +85,7 @@ Overall PASS_M00_L13_BOUNDED_SIMULATION_VERIFICATION covers Disabled -> Teleop E
 
 Evidence classification is THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED. Physical minimum/maximum, stroke, switches, hard stop, spool, ratio, motor/controller, CAN ID, vendor soft limits, homing voltage/speed/direction, current threshold, and physical calibration are UNKNOWN / DEFERRED. Software fixture values are not robot dimensions.
 
-M00_L13 is COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED / NOT YET PUBLICATION-VERIFIED. M00_L12 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED and protected. M00_L14 is INACTIVE / NOT CREATED; M00_L15 and M00_L16 remain future scope. Active Lesson Count is 0 and Current Active M00 Lesson is NONE. Independent Freeze Review is PENDING. Primary frozen snapshot publication, metadata publication, User push, and Final Publication Verification remain pending / User-owned. No M00_L13 publication SHA or Git action is claimed.
+The current M00_L13 publication lifecycle and final verification gate are recorded in the current identity and publication lifecycle section above. M00_L12 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED and protected. M00_L14 is INACTIVE / NOT CREATED; M00_L15 and M00_L16 remain future scope. Physical Elevator limits and hardware configuration remain UNKNOWN / DEFERRED.
 
 ## Historical controlled activation snapshot — 2026-09-23
 
@@ -147,7 +153,7 @@ The following inherited current status block is preserved verbatim as historical
 
 # LESSON_STATUS — M00_L12 Elevator Homing
 
-## Current identity and lifecycle
+## Historical copied M00_L12 identity and lifecycle
 
 - **Module:** `M00 - Competition Mechanism Foundations`
 - **Lesson:** `M00_L12 - Elevator Homing`
@@ -176,7 +182,7 @@ The following inherited current status block is preserved verbatim as historical
 - **Git Push:** `PENDING / USER-OWNED`
 - **Known Issues:** `HOMING HARDWARE MECHANISM, SENSOR, DIRECTION, SPEED, TIMEOUT, CALIBRATION, AND CAN DETAILS UNKNOWN / DEFERRED`
 
-## Accepted gates and current evidence
+## Accepted gates and historical M00_L12 evidence
 
 - **Final Design Lock:** `PASS_M00_L12_FINAL_DESIGN_LOCK`
 - **Controlled Activation:** `CONTROLLED_ACTIVATION_COMPLETE_READY_FOR_INDEPENDENT_ACTIVATION_REVIEW`
@@ -293,7 +299,7 @@ The four authorized focused test files are
 `FlywheelIONoopTest.java` and `RobotContainerFlywheelCompositionTest.java`
 remain unchanged.
 
-## Current gate
+## Historical inherited M00_L09 gate
 
 ```text
 LESSON: M00_L10 - Elevator Foundation and Position-Reference Semantics
@@ -784,7 +790,7 @@ implementation, build/test, and Simulation evidence, with real hardware
 DEFERRED` classification is retained as a planned closure target. Independent
 Activation Review remains `PENDING`.
 
-## Current M00_L11 status after implementation and verification — 2026-09-22
+## Historical M00_L11 status after implementation and verification — 2026-09-22
 
 This append-only section is authoritative for the current M00_L11 lifecycle;
 earlier copied M00_L10 and activation snapshots remain historical.

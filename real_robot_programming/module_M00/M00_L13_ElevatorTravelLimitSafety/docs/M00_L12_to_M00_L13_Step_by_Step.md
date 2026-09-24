@@ -234,7 +234,7 @@
 **Verification:** Accepted read-only Independent Closure Re-review.  
 **Expected Result:** Ready for Freeze Reconciliation; freeze and publication remain pending.
 
-## Step 27 — Freeze Reconciliation
+## Step 27 — Freeze Reconciliation (historical pre-publication checkpoint)
 
 **Objective:** Reconcile current lesson and repository lifecycle records to the accepted freeze state.  
 **Why:** The accepted closure re-review permits the lesson to transition to COMPLETE / FROZEN / READ-ONLY while remaining unpublished.  
@@ -243,16 +243,79 @@
 **Verification:** Read-only post-edit review and governance mirror validation PASS. No Git, Gradle, tests, build, or Simulation were run.  
 **Expected Result:** FREEZE_RECONCILIATION_COMPLETE_READY_FOR_INDEPENDENT_FREEZE_REVIEW. Independent Freeze Review and all publication steps remain pending.
 
-## Remaining gates — pending
+## Step 28 — Independent Freeze Review and Primary Snapshot Publication (historical sequence)
 
-1. Independent Freeze Review — PENDING / NEXT.
-2. Primary Frozen Snapshot Publication Commit — PENDING / USER-OWNED.
-3. Metadata Publication Reconciliation and Metadata Publication Commit — PENDING / USER-OWNED.
-4. User Push — PENDING / USER-OWNED.
-5. Final Publication Verification — PENDING / USER-OWNED.
+**Objective:** Record the accepted freeze review and User-owned primary frozen snapshot commit.  
+**Why:** The canonical publication process records the frozen lesson snapshot first and reconciles publication metadata in a later User-owned commit.  
+**Action:** PASS_M00_L13_INDEPENDENT_FREEZE_REVIEW / FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION. Two staging attempts stopped safely with HOLD_M00_L13_PRIMARY_PUBLICATION_SCRIPT_BOUNDARY_MISMATCH (the script misclassified inherited files in the new lesson directory) and HOLD_M00_L13_PRIMARY_PUBLICATION_GIT_ADD_PATHSPEC_DEFECT (ignored-path exclusions made git add return nonzero). Both were PUBLICATION_SCRIPT_DEFECT only, with no lesson, source, test, or freeze defect. The corrected User-owned flow completed PASS_M00_L13_PRIMARY_FROZEN_SNAPSHOT_PUBLICATION_COMMIT at SHA `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704`, subject `Complete M00_L13 Elevator travel-limit safety`. The primary commit contained the complete frozen lesson snapshot, excluding ignored/generated/runtime state. Accepted User evidence says no M00_L13 authored path remained dirty afterward.  
+**Files Changed:** Complete M00_L13 frozen snapshot in the User-owned primary commit; no changes by Luna in this step.  
+**Verification:** Accepted User publication evidence and the prior Independent Freeze Review PASS. No Git command was run by Luna.  
+ **Expected Result (historical, immediately after Commit 1):** Primary snapshot committed at the exact SHA; metadata commit, publication push, and final publication verification had not yet occurred.
+
+## Step 29 — Initial Metadata Publication Reconciliation and Commit 2 (historical)
+
+**Objective:** Record the metadata publication that follows the primary frozen snapshot.  
+**Why:** The canonical Historical Snapshot model has exactly two commits.  
+**Action:** PASS_M00_L13_METADATA_PUBLICATION_RECONCILIATION. The User completed and pushed the initial Metadata Publication Commit, Commit 2, at historical SHA `df0ea6fc4072055d0bf43cf4f6c65834d7308bff`. Accepted identity evidence confirmed its parent was the Primary SHA `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704` and remote main matched that metadata commit. This initial Commit 2 identity was later superseded by the controlled metadata amendment recorded in Step 32.  
+**Files Changed:** The eight M00_L13 lifecycle/documentation files listed in the metadata reconciliation record. Production, tests, deploy/config/support, generated/runtime state, and frozen M00_L12 were not modified.  
+**Verification:** Accepted User publication identity evidence. No Git, Gradle, tests, build, or Simulation were run by Luna.  
+**Expected Result (historical, after initial Commit 2):** M00_L13 was COMPLETE / FROZEN / READ-ONLY / PUBLISHED under the two-commit model; the initial metadata identity and push were established, while independent final publication verification remained pending.
+
+## Step 30 — Independent Final Publication Verification HOLD
+
+**Objective:** Reconcile the supplied publication evidence against current repository lifecycle wording.  
+**Why:** Current documentation must agree with the accepted publication state.  
+**Action:** HOLD_M00_L13_FINAL_PUBLICATION_VERIFICATION_STALE_CURRENT_PUBLICATION_STATE. Publication identity, primary SHA, metadata parent, remote main, technical lesson state, tests, Simulation, and freeze state were accepted. The sole finding was that current authoritative records still described the completed metadata commit and push as pending and listed completed actions as remaining gates.  
+**Classification:** PUBLICATION_METADATA_DOCUMENTATION_DEFECT; NO_LESSON_DEFECT; NO_PRODUCTION_DEFECT; NO_TEST_DEFECT; NO_ARCHITECTURE_DEFECT; NO_SIMULATION_DEFECT; NO_FREEZE_DEFECT; NO_PRIMARY_SNAPSHOT_DEFECT; NO_TWO_COMMIT_MODEL_CHANGE.  
+**Files Changed:** None during the independent review.  
+**Verification:** Read-only final publication review. No Git, Gradle, tests, build, or Simulation were run.  
+**Expected Result (historical):** Bounded documentation repair, controlled amendment of canonical Commit 2, then independent final publication review; these later events are recorded below.
+
+## Step 31 — Bounded Final-Publication Metadata Repair (historical pre-amend record)
+
+**Objective:** Correct only current M00_L13 publication-state documentation while preserving historical chronology.  
+**Why:** Current blocks must say COMPLETE / FROZEN / READ-ONLY / PUBLISHED while Final Publication Verification remains pending.  
+**Action:** Record canonical metadata Commit 2 as completed by this metadata snapshot; record the accepted publication push as completed; keep the amended metadata SHA external and do not invent it. Preserve the prior Final Publication HOLD and its exact classification.  
+**Files Changed:** AGENTS.md, repository README.md, M00 roadmap ADR, M00_L13 README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, and this transition guide only.  
+**Verification:** Read-only post-edit inspection and canonical non-Git governance validation. No Git, Gradle, tests, build, or Simulation were run.  
+**Expected Result (historical):** The metadata documentation repair was ready to be incorporated into the existing Commit 2 without creating a third publication commit.
+
+## Step 32 — First Controlled Metadata Amend and Remote Update (historical)
+
+**Objective:** Record the User-owned amendment and controlled remote update that followed the first metadata documentation repair.  
+**Why:** Commit 2 was amended in place to include that repair while preserving the two-commit model.  
+**Action:** PASS_M00_L13_CONTROLLED_METADATA_AMEND_AND_REMOTE_UPDATE. The amended Commit 2 had SHA `c682ffc8e8235a9355863b5e9b8dbfc185239599`, parent `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704`, and matched remote main. This identity is historical for the subsequent chronology repair and is not embedded as the final metadata SHA.  
+**Files Changed:** The previously authorized publication metadata files only.  
+**Verification:** Accepted User-supplied commit, parent, and remote identity evidence. No Git, Gradle, tests, build, or Simulation were run by Luna.  
+**Expected Result (historical):** The first amended Commit 2 was remotely aligned; independent final publication re-review remained pending.
+
+## Step 33 — Second Independent Final Publication Re-review HOLD (historical)
+
+**Objective:** Review the amended publication identity and current lifecycle chronology.  
+**Why:** External identity had been established, while repository current-state wording still needed to describe the completed chronology accurately.  
+**Action:** HOLD_M00_L13_FINAL_PUBLICATION_REREVIEW_STALE_POST_AMEND_CHRONOLOGY. Publication identity, parent, remote-main equality, two-commit model, lesson lifecycle, technical contracts, test evidence, Simulation evidence, and freeze state passed. The sole finding was stale current wording that presented completed amendment, remote-update, and identity-capture steps as future actions.  
+**Classification:** PUBLICATION_METADATA_CHRONOLOGY_DEFECT; NO_LESSON_DEFECT; NO_PRODUCTION_DEFECT; NO_TEST_DEFECT; NO_ARCHITECTURE_DEFECT; NO_SIMULATION_DEFECT; NO_FREEZE_DEFECT; NO_PUBLICATION_IDENTITY_DEFECT; NO_TWO_COMMIT_MODEL_CHANGE.  
+**Files Changed:** None during the independent review.  
+**Verification:** Accepted read-only Final Publication Re-review. No Git, Gradle, tests, build, or Simulation were run.  
+**Expected Result (historical):** Bounded current-chronology repair, then another independent Final Publication Re-review.
+
+## Step 34 — Final Publication Chronology Repair
+
+**Objective:** Make the current publication wording stable across the canonical metadata snapshot and its externally established identity.  
+**Why:** Current authority must not describe completed publication actions as future steps.  
+**Action:** Reconciled the current lifecycle blocks to COMPLETE / FROZEN / READ-ONLY / PUBLISHED, the two-commit model, the recorded Primary SHA, external metadata and matching remote-main identities, and Final Publication Verification PENDING / EXTERNAL. Preserved both publication review HOLDs and their chronology. No final verification PASS is claimed.  
+**Files Changed:** AGENTS.md, repository README.md, M00 roadmap ADR, M00_L13 README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, and this transition guide only.  
+**Verification:** Read-only post-edit inspection and canonical non-Git governance validation. No Git, Gradle, tests, build, or Simulation were run.  
+**Expected Result:** FINAL_PUBLICATION_CHRONOLOGY_REPAIR_COMPLETE_READY_FOR_CANONICAL_COMMIT2_REFRESH.
+
+## Current publication state and verification gate
+
+M00_L13 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED. The Primary Frozen Snapshot is complete at SHA `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704`. The canonical metadata publication is Commit 2 of the two-commit Historical Snapshot model. Its identity and matching remote-main identity are established by external publication evidence; the Metadata Commit's own final SHA is not self-embedded. Final Publication Verification is PENDING / EXTERNAL. Active Lesson Count is 0; Current Active M00 Lesson is NONE; M00_L14 is INACTIVE / NOT CREATED. No third verification-only commit is part of the model.
+
+The two historical publication review HOLDs are `HOLD_M00_L13_FINAL_PUBLICATION_VERIFICATION_STALE_CURRENT_PUBLICATION_STATE` and `HOLD_M00_L13_FINAL_PUBLICATION_REREVIEW_STALE_POST_AMEND_CHRONOLOGY`. Both concerned publication metadata/documentation chronology; this repair addresses the latter. The initial Commit 2 identity and the first amended Commit 2 identity are historical records above.
 
 ## Current concept and evidence boundary
 
-The implemented concept is a vendor-neutral software operational travel envelope for Elevator closed-loop position requests in inherited logical meters, enforced before ElevatorIO. It is request-admission safety only; it does not claim physical hard-limit, continuous overtravel, overshoot, or controller soft-limit protection. No physical travel values or hardware assumptions are invented.
+The implemented concept remains a vendor-neutral software operational travel envelope for Elevator closed-loop position requests in inherited logical meters, enforced before ElevatorIO. It is request-admission safety only; it does not claim physical hard-limit, continuous overtravel, overshoot, or controller soft-limit protection. No physical travel values or hardware assumptions are invented.
 
-Evidence is THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED. Simulation is bounded to the truthful Noop runtime. M00_L13 is COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED / NOT YET PUBLICATION-VERIFIED; Active Lesson Count is 0 and Current Active M00 Lesson is NONE. Independent Freeze Review is pending, publication has not occurred, and no publication SHA is established. M00_L14 remains INACTIVE / NOT CREATED; M00_L15 Intake-to-Feeder Coordination and M00_L16 Mechanism Autonomous Event Integration remain future scope.
+Evidence remains THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED. Simulation is bounded to the truthful Noop runtime. The primary snapshot remains committed at `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704`. Canonical metadata Commit 2 and its matching remote-main identity are established by external publication evidence; its own final SHA is not self-embedded. Final Publication Verification remains PENDING / EXTERNAL. M00_L14 remains INACTIVE / NOT CREATED; M00_L15 Intake-to-Feeder Coordination and M00_L16 Mechanism Autonomous Event Integration remain future scope.

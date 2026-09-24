@@ -1,6 +1,6 @@
 # M00_L13 — Elevator Travel-Limit Safety Lesson Plan
 
-## Current frozen lifecycle, verification, and next gates — 2026-09-24
+## Current frozen lifecycle and publication gate — 2026-09-25
 
 - M00_L12 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; publication gate PASS_M00_L12_FINAL_PUBLICATION_VERIFICATION.
 - Preparation, Architecture / Inheritance Audit, Final Design Lock, Controlled Activation, activation documentation reconciliation, and Independent Activation Re-review are accepted.
@@ -11,8 +11,15 @@
 - Clean regression: PASS_M00_L13_USER_CLEAN_REGRESSION; BUILD SUCCESSFUL in 25s; 5 actionable tasks, 5 executed; GRADLE_EXIT_CODE=0.
 - Bounded Simulation: PASS_M00_L13_BOUNDED_SIMULATION_VERIFICATION; Disabled -> Teleop Enabled -> Disabled, truthful Noop runtime only.
 - Initial Closure Review HOLD_M00_L13_CLOSURE_REVIEW_STALE_AGENTS_IMPLEMENTATION_STATUS was resolved by PASS_M00_L13_CLOSURE_DOCUMENTATION_REPAIR and PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW / CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE.
-- Current lifecycle: COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED / NOT YET PUBLICATION-VERIFIED; Active Lesson Count 0; Current Active M00 Lesson NONE.
-- Freeze Reconciliation is COMPLETE. Independent Freeze Review is NEXT / PENDING. Primary frozen snapshot publication, metadata publication, User push, and Final Publication Verification remain PENDING / USER-OWNED; no publication SHA is established.
+- Current lifecycle: COMPLETE / FROZEN / READ-ONLY / PUBLISHED; Active Lesson Count 0; Current Active M00 Lesson NONE.
+- Independent Freeze Review: PASS_M00_L13_INDEPENDENT_FREEZE_REVIEW / FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION.
+- Primary Frozen Snapshot Publication: PASS_M00_L13_PRIMARY_FROZEN_SNAPSHOT_PUBLICATION_COMMIT / COMPLETED; primary SHA `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704`; subject `Complete M00_L13 Elevator travel-limit safety`.
+- Canonical metadata publication: ESTABLISHED BY COMMIT 2 OF THE TWO-COMMIT HISTORICAL SNAPSHOT MODEL; Metadata Commit and matching remote-main identities are external publication evidence and are not self-embedded.
+- Remote-main identity: EXTERNALLY VERIFIED AGAINST THE CANONICAL METADATA COMMIT.
+- Final Publication Verification: PENDING / EXTERNAL.
+- Prior independent final publication reviews: HOLD_M00_L13_FINAL_PUBLICATION_VERIFICATION_STALE_CURRENT_PUBLICATION_STATE and HOLD_M00_L13_FINAL_PUBLICATION_REREVIEW_STALE_POST_AMEND_CHRONOLOGY; both were publication metadata/documentation findings, with the latter addressed by this chronology repair.
+
+The canonical publication model remains exactly two commits. Final Publication Verification is pending external independent review; no third verification-only commit is required.
 
 ## Sole concept — implemented request-admission envelope
 
@@ -105,7 +112,7 @@ The inherited current M00_L12 lesson plan follows verbatim as historical provena
 
 # M00_L12 — Elevator Homing Lesson Plan
 
-## Current state
+## Historical copied M00_L12 current state
 
 - **Lesson:** `M00_L12 - Elevator Homing`
 - **Predecessor:** `M00_L11 - Elevator Closed-Loop Position`
@@ -151,7 +158,7 @@ The test delta is `102 / 98 / 4 / 0 / 1` (compared / identical / changed / missi
 
 M00_L12 does not own upper/lower travel limits, clamps, workspace envelopes, general motion inhibition, post-home bounds, PID/feedforward/Motion Magic, autonomous integration, coordination, physical homing performance, calibration, or hardware configuration. M00_L13 owns general travel-limit safety.
 
-## Current gate sequence
+## Historical copied M00_L12 gate sequence
 
 1. Untouched-copy preparation and baseline build — accepted.
 2. Architecture / Inheritance Audit and Final Design Lock — accepted.
@@ -173,7 +180,7 @@ M00_L12 does not own upper/lower travel limits, clamps, workspace envelopes, gen
 The inherited documentation snapshot follows below for provenance only. Its old lesson identity and lifecycle are historical and are not the current M00_L12 plan above.
 # M00_L10 Lesson Plan and Lifecycle Record
 
-## Current state
+## Historical inherited earlier lesson state
 
 - **Lesson:** `M00_L10 - Elevator Foundation and Position-Reference Semantics`
 - **Predecessor:** `M00_L09 - Flywheel Ready-at-Speed`
@@ -277,7 +284,7 @@ implementation and User-owned verification are recorded in the append-only
 reconciliation below; closure, freeze, publication, and successor activation
 remain separate gates.
 
-## Current controlled activation record — 2026-09-21
+## Historical controlled activation record — 2026-09-21
 
 Historical M00_L08 reconciliation text below this point is retained only as
 inherited snapshot history. The current record is M00_L09

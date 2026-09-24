@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01-L13 complete/frozen/read-only; M00_L12 published/verified; M00_L13 not published; Active Lesson Count 0; Current Active M00 Lesson NONE; M00_L14 inactive/not created)
+    └── module_M00/ (authorized; M00_L01-L13 complete/frozen/read-only; M00_L12 published/verified; M00_L13 COMPLETE / FROZEN / READ-ONLY / PUBLISHED; primary frozen snapshot SHA 5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704; canonical metadata publication is Commit 2 in the two-commit Historical Snapshot model; metadata and matching remote-main identities are external publication evidence and are not self-embedded; Final Publication Verification pending / external; Active Lesson Count 0; Current Active M00 Lesson NONE; M00_L14 inactive/not created)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -2776,6 +2776,8 @@ Only report verified facts.
 | 1.73 | 2026-09-23 | FROZEN | Record documentation-only M00_L13 Controlled Activation after accepted Architecture / Inheritance Audit and Final Design Lock; preserve M00_L12 publication and freeze, make M00_L13 the sole active lesson, keep implementation unauthorized, and leave M00_L14 inactive/uncreated. |
 | 1.74 | 2026-09-24 | FROZEN | Reconcile accepted M00_L13 implementation, repaired test guards, final static review, User focused and clean-regression PASS, and bounded Simulation PASS; retain M00_L13 as the sole IN_PROGRESS lesson with THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED, Independent Closure Review next, freeze/publication pending, and M00_L14 inactive/uncreated. |
 | 1.75 | 2026-09-24 | FROZEN | Reconcile accepted PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW and complete Freeze Reconciliation; preserve the stale-status Closure Review HOLD and documentation repair history; record M00_L13 as COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED, Active Lesson Count 0, no current active M00 lesson, Independent Freeze Review pending, publication User-owned/pending, and M00_L14 inactive/uncreated. |
+| 1.76 | 2026-09-24 | FROZEN | Reconcile the accepted M00_L13 Independent Freeze Review and User-owned primary frozen snapshot commit `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704`; preserve both safe publication-script HOLDs as script defects; prepare metadata publication for User commit while leaving its SHA, push, and final publication verification pending; keep M00_L13 frozen, Active Lesson Count 0, no active M00 lesson, and M00_L14 inactive/uncreated. |
+| 1.77 | 2026-09-25 | FROZEN | Reconcile the bounded M00_L13 final-publication metadata documentation repair after `HOLD_M00_L13_FINAL_PUBLICATION_VERIFICATION_STALE_CURRENT_PUBLICATION_STATE`; record COMPLETE / FROZEN / READ-ONLY / PUBLISHED with external final verification pending, keep the metadata SHA external and the two-commit model unchanged, and preserve active lesson count 0 and inactive/uncreated M00_L14. |
 ---
 
 ### M00_L08 Controlled Activation — 2026-09-20
@@ -3515,7 +3517,7 @@ Implementation and test changes remain planned, not implemented or authorized. C
 
 M00_L13 tests and Simulation were NOT RUN / NOT VERIFIED at activation. Activation did not claim theory, Simulation, hardware, freeze, or publication gates as achieved. M00_L14 remained inactive/not created; M00_L15/L16 remained future scope. Earlier M00_L12 status snapshots and copied M00_L13 records are historical.
 
-## M00_L13 Freeze Reconciliation — 2026-09-24
+## Historical M00_L13 Freeze and Metadata Publication Records — through 2026-09-24
 
 Accepted gates include PASS_M00_L13_IMPLEMENTATION_AUTHORIZATION; PASS_M00_L13_IMPLEMENTATION_HANDOFF_TO_STATIC_REVIEW; PASS_M00_L13_FINAL_INDEPENDENT_STATIC_REREVIEW; PASS_M00_L13_USER_FOCUSED_TESTS; PASS_M00_L13_USER_CLEAN_REGRESSION; PASS_M00_L13_BOUNDED_SIMULATION_VERIFICATION; PASS_M00_L13_DOCUMENTATION_RECONCILIATION; PASS_M00_L13_CLOSURE_DOCUMENTATION_REPAIR; and PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW with verdict CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE. The earlier Closure Review HOLD_M00_L13_CLOSURE_REVIEW_STALE_AGENTS_IMPLEMENTATION_STATUS was limited to the stale current authorization sentence and is preserved as resolved history. Freeze Reconciliation is complete; Independent Freeze Review is next.
 
@@ -3524,3 +3526,27 @@ Production delta versus frozen M00_L12 is common 110 / identical 109 / changed 1
 Focused tests passed with BUILD SUCCESSFUL in 42s and 4 actionable tasks executed. Clean regression passed with BUILD SUCCESSFUL in 25s, 5 actionable tasks executed, and GRADLE_EXIT_CODE=0. The earlier PowerShell NativeCommandError caused by the WPILib joystick stderr warning was an evidence-capture issue, not a test failure. Bounded Simulation passed for Disabled -> Teleop Enabled -> Disabled using the unchanged truthful Noop composition; it does not establish configured or physical travel-limit behavior. Evidence is THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED.
 
 M00_L13 is COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED / NOT YET PUBLICATION-VERIFIED. Active Lesson Count is 0; Current Active M00 Lesson is NONE. M00_L12 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED. M00_L14 remains INACTIVE / NOT CREATED; M00_L15/L16 remain future scope. Independent Freeze Review is PENDING. Primary frozen snapshot publication, metadata publication, User push, and final publication verification remain PENDING / USER-OWNED; no M00_L13 publication SHA is established. Physical travel and hardware facts remain UNKNOWN / DEFERRED.
+
+The metadata reconciliation record below was written before the User completed and pushed canonical Commit 2. Its then-pending statements are historical and superseded by the current publication state that follows.
+
+## Historical M00_L13 Metadata Publication Reconciliation — 2026-09-24
+
+Accepted gates: PASS_M00_L13_INDEPENDENT_FREEZE_REVIEW with verdict FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION; PASS_M00_L13_PRIMARY_FROZEN_SNAPSHOT_PUBLICATION_COMMIT; and PASS_M00_L13_METADATA_PUBLICATION_RECONCILIATION. The User-owned primary frozen snapshot commit is complete with SHA `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704` and subject `Complete M00_L13 Elevator travel-limit safety`.
+
+Two earlier primary-publication staging attempts stopped safely: HOLD_M00_L13_PRIMARY_PUBLICATION_SCRIPT_BOUNDARY_MISMATCH and HOLD_M00_L13_PRIMARY_PUBLICATION_GIT_ADD_PATHSPEC_DEFECT. Both were PUBLICATION_SCRIPT_DEFECT findings, with NO_LESSON_DEFECT, NO_SOURCE_DEFECT, NO_TEST_DEFECT, and NO_FREEZE_DEFECT. The corrected User-owned staging flow produced the accepted primary commit. User evidence states that after that commit no M00_L13 authored path remained dirty; only previously identified unrelated working-tree paths remained and are protected.
+
+M00_L13 was COMPLETE / FROZEN / READ-ONLY with its primary snapshot committed. Metadata publication reconciliation was prepared, while the User-owned metadata commit, push, and final verification had not yet occurred. This was the state at that time.
+
+Active Lesson Count was 0; Current Active M00 Lesson was NONE. M00_L14 was INACTIVE / NOT CREATED; M00_L15/L16 remained future scope. Technical contracts, source/test deltas, executable evidence, Simulation evidence, and THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED classification were unchanged. Frozen M00_L12 and generated/runtime classifications remained protected.
+
+## Current M00_L13 Publication State — 2026-09-25
+
+M00_L13: COMPLETE / FROZEN / READ-ONLY / PUBLISHED
+
+Primary Frozen Snapshot Commit: COMPLETED; SHA `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704`; subject `Complete M00_L13 Elevator travel-limit safety`.
+
+Metadata Publication: ESTABLISHED BY COMMIT 2 OF THE TWO-COMMIT HISTORICAL SNAPSHOT MODEL. Its own SHA and matching remote-main identity are established by external publication evidence and are not self-embedded. Final Publication Verification remains PENDING / EXTERNAL.
+
+Active Lesson Count is 0; Current Active M00 Lesson is NONE. M00_L14 is INACTIVE / NOT CREATED; M00_L15/L16 remain future scope. The canonical publication remains exactly two commits; amending the existing metadata commit does not create a third verification-only commit.
+
+The prior independent final publication reviews recorded `HOLD_M00_L13_FINAL_PUBLICATION_VERIFICATION_STALE_CURRENT_PUBLICATION_STATE` and `HOLD_M00_L13_FINAL_PUBLICATION_REREVIEW_STALE_POST_AMEND_CHRONOLOGY`. Both are historical publication metadata/documentation findings. The latter is addressed by this chronology repair. Classification: `PUBLICATION_METADATA_CHRONOLOGY_DEFECT`; `NO_LESSON_DEFECT`; `NO_PRODUCTION_DEFECT`; `NO_TEST_DEFECT`; `NO_ARCHITECTURE_DEFECT`; `NO_SIMULATION_DEFECT`; `NO_FREEZE_DEFECT`; `NO_PUBLICATION_IDENTITY_DEFECT`; `NO_TWO_COMMIT_MODEL_CHANGE`. Technical contracts and verification evidence remain unchanged.

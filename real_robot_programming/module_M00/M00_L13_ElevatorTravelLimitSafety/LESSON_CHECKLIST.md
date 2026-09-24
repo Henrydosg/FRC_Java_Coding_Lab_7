@@ -1,12 +1,12 @@
 # M00_L13 — Elevator Travel-Limit Safety Checklist
 
-## Current implementation, verification, and frozen lifecycle — 2026-09-24
+## Current implementation, verification, and publication lifecycle — 2026-09-25
 
 - [x] M00_L12 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED.
 - [x] Untouched-copy baseline, Architecture / Inheritance Audit, Final Design Lock, Controlled Activation, activation documentation reconciliation, and Independent Activation Re-review accepted.
 - [x] Implementation Authorization and implementation handoff to static review accepted.
 - [x] Closure Review HOLD_M00_L13_CLOSURE_REVIEW_STALE_AGENTS_IMPLEMENTATION_STATUS was resolved by PASS_M00_L13_CLOSURE_DOCUMENTATION_REPAIR and PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW / CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE.
-- [x] Freeze Reconciliation is COMPLETE; M00_L13 is COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED / NOT YET PUBLICATION-VERIFIED; Active Lesson Count 0; Current Active M00 Lesson NONE.
+- [x] Freeze Reconciliation is COMPLETE; M00_L13 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED; Active Lesson Count 0; Current Active M00 Lesson NONE.
 - [x] Sole concept: vendor-neutral logical-meter request-admission travel-limit safety.
 - [x] ElevatorTravelLimits implemented as immutable, finite, ordered logical-meter bounds; negative and zero-crossing bounds valid; invalid construction rejects.
 - [x] Inclusive endpoints; below/above targets reject; no epsilon, tolerance, clamp, or target rewrite.
@@ -47,11 +47,12 @@
 - [x] Documentation Reconciliation: COMPLETE / READY FOR INDEPENDENT CLOSURE REVIEW.
 - [x] Independent Closure Re-review: PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW / CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE.
 - [x] Freeze Reconciliation: COMPLETE; M00_L13 is frozen and read-only.
-- [ ] Independent Freeze Review — NEXT / PENDING.
-- [ ] Primary frozen snapshot publication commit — User-owned.
-- [ ] Metadata Publication Reconciliation and metadata publication commit — User-owned.
-- [ ] User push and Final Publication Verification — User-owned / PENDING.
-- [x] M00_L13 is NOT PUBLISHED / NOT YET PUBLICATION-VERIFIED; no publication SHA is established.
+- [x] Independent Freeze Review: PASS_M00_L13_INDEPENDENT_FREEZE_REVIEW / FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION.
+- [x] Primary Frozen Snapshot Commit completed at `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704`.
+- [x] Canonical metadata publication is established by Commit 2 of the two-commit Historical Snapshot model; Metadata Commit and matching remote-main identities are external publication evidence and are not self-embedded.
+- [x] Remote-main identity is externally verified against the canonical Metadata Commit.
+- [ ] Final Publication Verification remains PENDING / EXTERNAL.
+- [x] Prior independent final publication reviews HOLD_M00_L13_FINAL_PUBLICATION_VERIFICATION_STALE_CURRENT_PUBLICATION_STATE and HOLD_M00_L13_FINAL_PUBLICATION_REREVIEW_STALE_POST_AMEND_CHRONOLOGY are preserved as publication metadata/documentation findings; the latter is addressed by this chronology repair.
 
 ## Historical controlled activation snapshot — 2026-09-23
 
@@ -102,7 +103,7 @@ The inherited current M00_L12 checklist follows verbatim as historical provenanc
 
 # M00_L12 — Elevator Homing Checklist
 
-## Current lifecycle
+## Historical copied M00_L12 lifecycle
 
 - [x] M00_L12 is `COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED` after accepted Independent Closure Review and Freeze Reconciliation.
 - [x] Frozen M00_L11 predecessor accepted as `COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`.
@@ -212,7 +213,7 @@ The inherited documentation snapshot follows below for provenance only. Its old 
 - [x] Future bounded Simulation claims are limited to Noop composition, deterministic measurements and telemetry, STOPPED idle behavior, no automatic Teleop request, and mode-transition persistence.
 - [x] Physical velocity control, convergence, tuning, CAN, sensor fidelity, RPM accuracy, and physical stop behavior remain unverified.
 
-## Current gate
+## Historical inherited M00_L09 gate
 
 `CONTROLLED_FREEZE_COMPLETE_READY_FOR_INDEPENDENT_FREEZE_REVIEW`
 
