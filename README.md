@@ -2068,3 +2068,40 @@ FULLY PUBLISHED: NO
 M00_L12 is not marked fully published or remote verified.
 
 The evidence classification remains `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`. Simulation evidence is bounded runtime and `ElevatorIONoop` verification only; physical homing is not established. Active Lesson Count remains `0`, Current Active M00 Lesson remains `NONE`, and M00_L13 Elevator Travel-Limit Safety remains `INACTIVE / NOT CREATED`. The frozen M00_L12 lesson files remain unchanged.
+
+## Historical M00_L13 Controlled Activation Snapshot — 2026-09-23
+
+The following records the lifecycle and evidence as they stood at activation. Pending implementation and verification statements in that snapshot are historical and are superseded by the current reconciliation below.
+
+The accepted predecessor M00_L12 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED. Accepted primary SHA: 5cc4c2c1bc6b4108f2c710c3ca0b0cdbdc26ba49. Accepted metadata SHA: c1e90fad04469e5162b5c1814566dd534c6a0a6c. Final gate: PASS_M00_L12_FINAL_PUBLICATION_VERIFICATION. Its evidence remains THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED. Earlier repository M00_L12 pending-publication blocks remain historical snapshots; accepted later User evidence establishes publication. Frozen M00_L12 lesson files are unchanged.
+
+M00_L13 accepted preparation: PASS_M00_L13_UNTOUCHED_COPY_BASELINE_BUILD; User-supplied BUILD SUCCESSFUL in 35s, 6 actionable tasks, 6 executed. Accepted gates: PASS_M00_L13_ARCHITECTURE_INHERITANCE_AUDIT and PASS_M00_L13_FINAL_DESIGN_LOCK. The initial lifecycle and test-plan HOLDs were resolved by targeted re-reviews.
+
+Current M00 lifecycle:
+
+M00_L12: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
+M00_L13: ACTIVE / IN_PROGRESS / EDITABLE WITHIN FINAL DESIGN LOCK
+         NOT COMPLETE / NOT FROZEN / NOT PUBLISHED
+ACTIVE LESSON COUNT: 1
+CURRENT ACTIVE M00 LESSON: M00_L13 — Elevator Travel-Limit Safety
+IMPLEMENTATION AUTHORIZATION: NOT YET AUTHORIZED
+NEXT GATE: INDEPENDENT ACTIVATION REVIEW
+M00_L14: INACTIVE / NOT CREATED
+
+The one locked concept is a vendor-neutral software operational travel envelope for Elevator closed-loop position requests in inherited logical meters, enforced before ElevatorIO. It is request-admission safety only; it does not claim physical hard-limit, continuous overtravel, overshoot, switch, motor-controller soft-limit, homing-redesign, commissioning, or coordination behavior. No physical travel minimum or maximum is established; hardware remains UNKNOWN / DEFERRED and real hardware remains deferred.
+
+Implementation and test changes remain planned, not implemented or authorized. Constants.java, RobotContainer.java, IO contracts, observation, state, telemetry, homing command, and adapters remain unchanged. The subsystem is the planned sole enforcement owner. The accepted test plan includes outside-current/in-range-target admission and same-Observation identity on rejected below-min, above-max, and unconfigured requests.
+
+M00_L13 tests and Simulation were NOT RUN / NOT VERIFIED at activation. Activation did not claim theory, Simulation, hardware, freeze, or publication gates as achieved. M00_L14 remained inactive/not created; M00_L15/L16 remained future scope. Earlier M00_L12 status snapshots and copied M00_L13 records are historical.
+
+## M00_L13 Freeze Reconciliation — 2026-09-24
+
+Accepted current gates include implementation authorization and handoff, final independent static re-review, User focused tests, clean regression, bounded Simulation, and completed Documentation Reconciliation. The initial Closure Review returned HOLD_M00_L13_CLOSURE_REVIEW_STALE_AGENTS_IMPLEMENTATION_STATUS; PASS_M00_L13_CLOSURE_DOCUMENTATION_REPAIR reconciled the stale current AGENTS.md lifecycle sentence, and PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW returned CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE. Freeze Reconciliation is complete; Independent Freeze Review is next.
+
+M00_L13 is COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED / NOT YET PUBLICATION-VERIFIED. Active Lesson Count is 0; Current Active M00 Lesson is NONE. M00_L12 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED. M00_L14 remains INACTIVE / NOT CREATED.
+
+The implemented single concept is a vendor-neutral software request-admission travel envelope in inherited logical meters, enforced before ElevatorIO. Production delta versus M00_L12: common 110, identical 109, changed 1, missing 0, added 1; ElevatorSubsystem.java changed and ElevatorTravelLimits.java added. Test delta: common 103, identical 101, changed 2, missing 0, added 1; ElevatorSubsystemTest.java and ElevatorArchitectureBoundaryTest.java changed, and ElevatorTravelLimitsTest.java added. Constants.java, RobotContainer.java, IO contracts, Observation/state, telemetry, homing command, and adapters remain unchanged.
+
+The initial static-review HOLD was limited to test/architecture-guard defects; no production defect or Final Design Lock change occurred. The bounded repair changed only the two named test files, and final independent static re-review passed. Focused tests passed: PASS_M00_L13_USER_FOCUSED_TESTS, BUILD SUCCESSFUL in 42s, 4 actionable tasks executed. Clean regression passed: PASS_M00_L13_USER_CLEAN_REGRESSION, BUILD SUCCESSFUL in 25s, 5 actionable tasks executed, GRADLE_EXIT_CODE=0. The PowerShell NativeCommandError caused by a WPILib joystick stderr warning was an evidence-capture issue, not a Java/test failure.
+
+Bounded Simulation passed as PASS_M00_L13_BOUNDED_SIMULATION_VERIFICATION for Disabled -> Teleop Enabled -> Disabled using the unchanged truthful Noop composition. This does not verify a configured envelope or physical travel-limit behavior. Evidence is THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED. Physical travel and hardware facts remain UNKNOWN / DEFERRED. Independent Freeze Review is PENDING. Primary frozen snapshot publication, metadata publication, User push, and Final Publication Verification remain pending / User-owned. No M00_L13 publication SHA is established; M00_L15/L16 remain future scope.

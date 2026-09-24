@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01-L12 complete/frozen/read-only; M00_L11 published/verified; M00_L12 primary frozen snapshot committed and verified, metadata publication pending; active lesson count 0; no active M00 lesson; M00_L13 inactive/not created)
+    └── module_M00/ (authorized; M00_L01-L13 complete/frozen/read-only; M00_L12 published/verified; M00_L13 not published; Active Lesson Count 0; Current Active M00 Lesson NONE; M00_L14 inactive/not created)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -2773,6 +2773,9 @@ Only report verified facts.
 | 1.70 | 2026-09-20 | FROZEN | APPROVED: reconcile accepted M00_L07 governance adjudication, activation rereview, bounded implementation, preserved static-review HOLD and two-stage test-only repair history, final static rereview PASS, User focused-test PASS, clean full-regression PASS, bounded Simulation PASS, and documentation completion; retain M00_L07 as the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson with active lesson count `1`, evidence `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`, Independent Closure Review next, freeze/publication unclaimed, and M00_L08 inactive/uncreated. |
 | 1.71 | 2026-09-20 | FROZEN | APPROVED: consume `PASS_M00_L07_INDEPENDENT_CLOSURE_REVIEW` after `CLOSURE_REVIEW_PASS`, `READY_FOR_FREEZE_AUTHORIZATION`, and no remaining findings; record M00_L07 as `COMPLETE / FROZEN / READ-ONLY`, active lesson count `0`, no active M00 lesson, preserved theory/Simulation/deferred-hardware evidence, publication pending/not yet published, and M00_L08 inactive/uncreated. |
 | 1.72 | 2026-09-20 | FROZEN | APPROVED: reconcile accepted M00_L07 primary publication at `50e5f440bb0c9d96bdcd57eed533651d8d59ca93` with subject `Complete M00_L07 Flywheel foundation`, primary push PASS, and remote alignment PASS; record publication metadata reconciliation complete/prepared for User commit while leaving the metadata commit/push and final publication verification pending; preserve frozen M00_L07, active lesson count `0`, no active M00 lesson, and inactive/uncreated M00_L08. |
+| 1.73 | 2026-09-23 | FROZEN | Record documentation-only M00_L13 Controlled Activation after accepted Architecture / Inheritance Audit and Final Design Lock; preserve M00_L12 publication and freeze, make M00_L13 the sole active lesson, keep implementation unauthorized, and leave M00_L14 inactive/uncreated. |
+| 1.74 | 2026-09-24 | FROZEN | Reconcile accepted M00_L13 implementation, repaired test guards, final static review, User focused and clean-regression PASS, and bounded Simulation PASS; retain M00_L13 as the sole IN_PROGRESS lesson with THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED, Independent Closure Review next, freeze/publication pending, and M00_L14 inactive/uncreated. |
+| 1.75 | 2026-09-24 | FROZEN | Reconcile accepted PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW and complete Freeze Reconciliation; preserve the stale-status Closure Review HOLD and documentation repair history; record M00_L13 as COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED, Active Lesson Count 0, no current active M00 lesson, Independent Freeze Review pending, publication User-owned/pending, and M00_L14 inactive/uncreated. |
 ---
 
 ### M00_L08 Controlled Activation — 2026-09-20
@@ -3486,3 +3489,38 @@ FULLY PUBLISHED: NO
 M00_L12 is not marked fully published or remote verified.
 
 The evidence classification remains `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`. Simulation evidence is bounded runtime and `ElevatorIONoop` verification only; physical homing is not established. Active Lesson Count remains `0`, Current Active M00 Lesson remains `NONE`, and M00_L13 Elevator Travel-Limit Safety remains `INACTIVE / NOT CREATED`. The frozen M00_L12 lesson files remain unchanged.
+
+## Historical M00_L13 Controlled Activation Snapshot — 2026-09-23
+
+The following block records activation-point state only. Its implementation and verification pending statements describe that historical date and are superseded by the current reconciliation below.
+
+The accepted predecessor M00_L12 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED. Accepted primary SHA: 5cc4c2c1bc6b4108f2c710c3ca0b0cdbdc26ba49. Accepted metadata SHA: c1e90fad04469e5162b5c1814566dd534c6a0a6c. Final gate: PASS_M00_L12_FINAL_PUBLICATION_VERIFICATION. Its evidence remains THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED. Earlier repository M00_L12 pending-publication blocks remain historical snapshots; accepted later User evidence establishes publication. Frozen M00_L12 lesson files are unchanged.
+
+M00_L13 accepted preparation: PASS_M00_L13_UNTOUCHED_COPY_BASELINE_BUILD; User-supplied BUILD SUCCESSFUL in 35s, 6 actionable tasks, 6 executed. Accepted gates: PASS_M00_L13_ARCHITECTURE_INHERITANCE_AUDIT and PASS_M00_L13_FINAL_DESIGN_LOCK. The initial lifecycle and test-plan HOLDs were resolved by targeted re-reviews.
+
+Current M00 lifecycle:
+
+M00_L12: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
+M00_L13: ACTIVE / IN_PROGRESS / EDITABLE WITHIN FINAL DESIGN LOCK
+         NOT COMPLETE / NOT FROZEN / NOT PUBLISHED
+ACTIVE LESSON COUNT: 1
+CURRENT ACTIVE M00 LESSON: M00_L13 — Elevator Travel-Limit Safety
+IMPLEMENTATION AUTHORIZATION: NOT YET AUTHORIZED
+NEXT GATE: INDEPENDENT ACTIVATION REVIEW
+M00_L14: INACTIVE / NOT CREATED
+
+The one locked concept is a vendor-neutral software operational travel envelope for Elevator closed-loop position requests in inherited logical meters, enforced before ElevatorIO. It is request-admission safety only; it does not claim physical hard-limit, continuous overtravel, overshoot, switch, motor-controller soft-limit, homing-redesign, commissioning, or coordination behavior. No physical travel minimum or maximum is established; hardware remains UNKNOWN / DEFERRED and real hardware remains deferred.
+
+Implementation and test changes remain planned, not implemented or authorized. Constants.java, RobotContainer.java, IO contracts, observation, state, telemetry, homing command, and adapters remain unchanged. The subsystem is the planned sole enforcement owner. The accepted test plan includes outside-current/in-range-target admission and same-Observation identity on rejected below-min, above-max, and unconfigured requests.
+
+M00_L13 tests and Simulation were NOT RUN / NOT VERIFIED at activation. Activation did not claim theory, Simulation, hardware, freeze, or publication gates as achieved. M00_L14 remained inactive/not created; M00_L15/L16 remained future scope. Earlier M00_L12 status snapshots and copied M00_L13 records are historical.
+
+## M00_L13 Freeze Reconciliation — 2026-09-24
+
+Accepted gates include PASS_M00_L13_IMPLEMENTATION_AUTHORIZATION; PASS_M00_L13_IMPLEMENTATION_HANDOFF_TO_STATIC_REVIEW; PASS_M00_L13_FINAL_INDEPENDENT_STATIC_REREVIEW; PASS_M00_L13_USER_FOCUSED_TESTS; PASS_M00_L13_USER_CLEAN_REGRESSION; PASS_M00_L13_BOUNDED_SIMULATION_VERIFICATION; PASS_M00_L13_DOCUMENTATION_RECONCILIATION; PASS_M00_L13_CLOSURE_DOCUMENTATION_REPAIR; and PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW with verdict CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE. The earlier Closure Review HOLD_M00_L13_CLOSURE_REVIEW_STALE_AGENTS_IMPLEMENTATION_STATUS was limited to the stale current authorization sentence and is preserved as resolved history. Freeze Reconciliation is complete; Independent Freeze Review is next.
+
+Production delta versus frozen M00_L12 is common 110 / identical 109 / changed 1 / missing 0 / added 1: ElevatorSubsystem.java changed and ElevatorTravelLimits.java added. Test delta is common 103 / identical 101 / changed 2 / missing 0 / added 1: ElevatorSubsystemTest.java and ElevatorArchitectureBoundaryTest.java changed; ElevatorTravelLimitsTest.java added. The initial static-review HOLD was limited to test/architecture guards; the accepted repair changed only those two test files, no production defect or Design Lock change occurred, and final static re-review passed.
+
+Focused tests passed with BUILD SUCCESSFUL in 42s and 4 actionable tasks executed. Clean regression passed with BUILD SUCCESSFUL in 25s, 5 actionable tasks executed, and GRADLE_EXIT_CODE=0. The earlier PowerShell NativeCommandError caused by the WPILib joystick stderr warning was an evidence-capture issue, not a test failure. Bounded Simulation passed for Disabled -> Teleop Enabled -> Disabled using the unchanged truthful Noop composition; it does not establish configured or physical travel-limit behavior. Evidence is THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED.
+
+M00_L13 is COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED / NOT YET PUBLICATION-VERIFIED. Active Lesson Count is 0; Current Active M00 Lesson is NONE. M00_L12 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED. M00_L14 remains INACTIVE / NOT CREATED; M00_L15/L16 remain future scope. Independent Freeze Review is PENDING. Primary frozen snapshot publication, metadata publication, User push, and final publication verification remain PENDING / USER-OWNED; no M00_L13 publication SHA is established. Physical travel and hardware facts remain UNKNOWN / DEFERRED.
