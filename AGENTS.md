@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01-L13 complete/frozen/read-only; M00_L12 published/verified; M00_L13 COMPLETE / FROZEN / READ-ONLY / PUBLISHED; primary frozen snapshot SHA 5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704; canonical metadata publication is Commit 2 in the two-commit Historical Snapshot model; metadata and matching remote-main identities are external publication evidence and are not self-embedded; Final Publication Verification pending / external; Active Lesson Count 0; Current Active M00 Lesson NONE; M00_L14 inactive/not created)
+    └── module_M00/ (authorized; M00_L01-L14 complete/frozen/read-only; M00_L13 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; primary SHA 5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704; metadata SHA 658d1e44c417763df3689b9b52e409161446c593; Active Lesson Count 0; Current Active M00 Lesson NONE; M00_L14 COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED; Independent Freeze Review pending; M00_L15/L16 future, inactive, not created)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -2778,6 +2778,9 @@ Only report verified facts.
 | 1.75 | 2026-09-24 | FROZEN | Reconcile accepted PASS_M00_L13_INDEPENDENT_CLOSURE_REREVIEW and complete Freeze Reconciliation; preserve the stale-status Closure Review HOLD and documentation repair history; record M00_L13 as COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED, Active Lesson Count 0, no current active M00 lesson, Independent Freeze Review pending, publication User-owned/pending, and M00_L14 inactive/uncreated. |
 | 1.76 | 2026-09-24 | FROZEN | Reconcile the accepted M00_L13 Independent Freeze Review and User-owned primary frozen snapshot commit `5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704`; preserve both safe publication-script HOLDs as script defects; prepare metadata publication for User commit while leaving its SHA, push, and final publication verification pending; keep M00_L13 frozen, Active Lesson Count 0, no active M00 lesson, and M00_L14 inactive/uncreated. |
 | 1.77 | 2026-09-25 | FROZEN | Reconcile the bounded M00_L13 final-publication metadata documentation repair after `HOLD_M00_L13_FINAL_PUBLICATION_VERIFICATION_STALE_CURRENT_PUBLICATION_STATE`; record COMPLETE / FROZEN / READ-ONLY / PUBLISHED with external final verification pending, keep the metadata SHA external and the two-commit model unchanged, and preserve active lesson count 0 and inactive/uncreated M00_L14. |
+| 1.78 | 2026-09-25 | FROZEN | Record documentation-only M00_L14 Controlled Activation after accepted untouched-copy baseline, Architecture / Inheritance Audit, and Final Design Lock; preserve verified frozen M00_L13, make M00_L14 the sole ACTIVE / IN_PROGRESS lesson with active count 1, encode ShootCommand coordination and its exception-safe cleanup contract, and leave implementation authorization pending with M00_L15/L16 protected. |
+| 1.79 | 2026-09-25 | FROZEN | Reconcile accepted M00_L14 implementation, final independent static review, User focused tests, clean regression, and bounded Simulation; preserve the five test-only architecture-guard HOLD/repair cycles without attributing a production defect, retain ACTIVE / IN_PROGRESS with THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED, and set Independent Closure Review as next gate while freeze/publication remain pending. |
+| 1.80 | 2026-09-26 | FROZEN | Reconcile `PASS_M00_L14_INDEPENDENT_CLOSURE_REREVIEW` after the documentation-only Closure Review HOLD and bounded repair; record M00_L14 as COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED, Active Lesson Count 0, Current Active M00 Lesson NONE, unchanged theory/Simulation/deferred-hardware evidence, Independent Freeze Review pending, and M00_L15/L16 inactive. |
 ---
 
 ### M00_L08 Controlled Activation — 2026-09-20
@@ -3539,7 +3542,10 @@ M00_L13 was COMPLETE / FROZEN / READ-ONLY with its primary snapshot committed. M
 
 Active Lesson Count was 0; Current Active M00 Lesson was NONE. M00_L14 was INACTIVE / NOT CREATED; M00_L15/L16 remained future scope. Technical contracts, source/test deltas, executable evidence, Simulation evidence, and THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED classification were unchanged. Frozen M00_L12 and generated/runtime classifications remained protected.
 
-## Current M00_L13 Publication State — 2026-09-25
+## Historical M00_L13 Publication State before M00_L14 Activation — 2026-09-25
+
+This is an earlier publication-state snapshot. Its then-pending final verification statements are historical and are superseded by the accepted external M00_L13 verification recorded in the current M00_L14 activation state below.
+
 
 M00_L13: COMPLETE / FROZEN / READ-ONLY / PUBLISHED
 
@@ -3550,3 +3556,137 @@ Metadata Publication: ESTABLISHED BY COMMIT 2 OF THE TWO-COMMIT HISTORICAL SNAPS
 Active Lesson Count is 0; Current Active M00 Lesson is NONE. M00_L14 is INACTIVE / NOT CREATED; M00_L15/L16 remain future scope. The canonical publication remains exactly two commits; amending the existing metadata commit does not create a third verification-only commit.
 
 The prior independent final publication reviews recorded `HOLD_M00_L13_FINAL_PUBLICATION_VERIFICATION_STALE_CURRENT_PUBLICATION_STATE` and `HOLD_M00_L13_FINAL_PUBLICATION_REREVIEW_STALE_POST_AMEND_CHRONOLOGY`. Both are historical publication metadata/documentation findings. The latter is addressed by this chronology repair. Classification: `PUBLICATION_METADATA_CHRONOLOGY_DEFECT`; `NO_LESSON_DEFECT`; `NO_PRODUCTION_DEFECT`; `NO_TEST_DEFECT`; `NO_ARCHITECTURE_DEFECT`; `NO_SIMULATION_DEFECT`; `NO_FREEZE_DEFECT`; `NO_PUBLICATION_IDENTITY_DEFECT`; `NO_TWO_COMMIT_MODEL_CHANGE`. Technical contracts and verification evidence remain unchanged.
+
+
+## Historical M00_L14 Controlled Activation Snapshot — 2026-09-25
+
+This records the activation-time state. The accepted post-implementation
+reconciliation below supersedes its pending implementation and verification
+statements.
+
+Accepted predecessor: M00_L13 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED /
+VERIFIED. Primary frozen snapshot SHA: 5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704.
+Canonical metadata SHA: 658d1e44c417763df3689b9b52e409161446c593. Evidence:
+THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED.
+
+Accepted M00_L14 preparation and design gates:
+PASS_M00_L14_UNTOUCHED_COPY_BASELINE_BUILD (6 actionable tasks, 6 executed,
+BASELINE_BUILD_EXIT_CODE=0); PASS_M00_L14_ARCHITECTURE_INHERITANCE_AUDIT; and
+PASS_M00_L14_FINAL_DESIGN_LOCK. The independent audit found 339/339 authored
+files identical to M00_L13 before activation. Controlled Activation is
+documentation-only.
+
+Current M00 lifecycle:
+
+M00_L13: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
+M00_L14: ACTIVE / IN_PROGRESS / NOT COMPLETE / NOT FROZEN / NOT PUBLISHED
+ACTIVE LESSON COUNT: 1
+CURRENT ACTIVE M00 LESSON: M00_L14 — Shoot Coordination
+INDEPENDENT ACTIVATION REVIEW: PENDING
+IMPLEMENTATION AUTHORIZATION: NOT AUTHORIZED / PENDING
+M00_L15: FUTURE / INACTIVE / NOT CREATED
+M00_L16: FUTURE / INACTIVE / NOT CREATED
+
+The sole locked concept is one scheduler-managed
+frc.robot.commands.ShootCommand coordinating existing
+FlywheelObservation.readyAtSpeed() semantics with Feeder request semantics. It
+requires exactly FlywheelSubsystem and FeederSubsystem. Feed admission requires
+ready-at-speed and Feeder available and connected. Feeder requestedState() is
+software request state only, not physical game-piece transport evidence. No
+command-local feedingRequested state is permitted.
+
+The constructor accepts non-null Flywheel and Feeder subsystems and a finite,
+strictly positive caller-supplied targetVelocityRpm. The target is semantic
+configuration, not an authoritative hardware shooting RPM. Constants,
+RobotContainer, IO, Observation, telemetry, vendor adapters, and deploy files
+remain unchanged. Expected future production delta is one added
+ShootCommand.java; no source, tests, or implementation have been authorized.
+Invalid numeric targets throw IllegalArgumentException, and construction
+performs no output or subsystem mutation. There is no L14 driver binding; the
+inherited Left Bumper manual Feeder command remains, with scheduler requirements
+providing Feeder mutual exclusion.
+
+Normal initialization stops Feeder once, then requests Flywheel velocity once.
+Normal execute uses Feeder Observation state for transition-only feed/stop
+requests and never reissues the Flywheel velocity request. The command is
+hold-style (isFinished() == false). Every terminal
+end() attempts Feeder stop then Flywheel stop, attempting both even if the
+first throws; if both terminal stops throw, Feeder remains primary and the
+Flywheel exception is suppressed. If the initial Feeder stop throws during
+initialize(), Flywheel velocity is not requested; Flywheel stop is attempted
+once and any cleanup failure is suppressed on the original Feeder exception.
+If the Flywheel velocity request throws, the completed Feeder baseline stop is
+not repeated; Flywheel stop is attempted once and any cleanup failure is
+suppressed on the original request exception. If requestFeed() throws during
+execute(), Feeder stop and Flywheel stop are both attempted once, including the
+Flywheel stop if Feeder cleanup throws; cleanup failures are suppressed on the
+original request exception. If Feeder stop throws during readiness/admission
+loss in execute(), Feeder stop is not retried in that failing call and Flywheel
+stop is attempted once. In every path, the original RuntimeException remains
+primary and is rethrown; there is no retry loop, silent recovery, clamp,
+rewrite, fallback, or routine java.lang.Error recovery.
+No timeout, shot completion, Elevator/Intake coordination, vision aiming, or
+autonomous mechanism integration is included.
+
+Evidence at activation was THEORY VERIFICATION IN PROGRESS /
+SIMULATION NOT TESTED / REAL HARDWARE DEFERRED. Runtime Flywheel and Feeder
+adapters are Noop; no physical shot is claimed. M00_L15 owns Intake-to-Feeder
+Coordination; M00_L16 owns Mechanism Autonomous Event Integration.
+
+## Historical M00_L14 Post-Verification Reconciliation — 2026-09-25
+
+M00_L13 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED. M00_L14
+is the sole ACTIVE / IN_PROGRESS lesson, NOT COMPLETE / NOT FROZEN / NOT
+PUBLISHED; Active Lesson Count is 1. M00_L15 and M00_L16 remain FUTURE /
+INACTIVE / NOT CREATED. Independent Closure Review is the next gate.
+
+Accepted M00_L14 gates are PASS_M00_L14_IMPLEMENTATION_AUTHORIZATION,
+PASS_M00_L14_IMPLEMENTATION_HANDOFF_TO_STATIC_REVIEW,
+PASS_M00_L14_FINAL_INDEPENDENT_STATIC_REVIEW,
+PASS_M00_L14_USER_FOCUSED_TESTS,
+PASS_M00_L14_USER_CLEAN_REGRESSION, and
+PASS_M00_L14_USER_BOUNDED_SIMULATION. The focused test command completed with
+BUILD SUCCESSFUL in 10s (4 actionable tasks: 3 executed, 1 up-to-date;
+FOCUSED_TEST_EXIT_CODE=0). The clean regression completed with BUILD SUCCESSFUL
+in 30s (5 actionable tasks, 5 executed; CLEAN_REGRESSION_EXIT_CODE=0).
+
+The bounded Simulation verified Disabled startup, Teleoperated enable, return
+to Disabled with mechanism requested states STOPPED, and clean shutdown
+(LAST_NATIVE_EXIT_CODE=0). RobotContainer remains unchanged and has no
+ShootCommand binding, so Simulation verified startup, mode transitions,
+scheduler stability, safe semantic state, and clean exit; it did not execute
+ShootCommand through a RobotContainer binding or demonstrate physical shooting.
+The accepted evidence classification is THEORY VERIFIED / SIMULATION VERIFIED
+/ REAL HARDWARE DEFERRED.
+
+Five rounds of independent static HOLD and bounded repair addressed test-only
+architecture-guard defects. They did not identify a production defect. The
+final static review passed. Flywheel and Feeder adapters remain Noop for this
+lesson's runtime composition; hardware shooting values and behavior remain
+unverified. Documentation reconciliation is current; closure review, freeze,
+and publication remain pending and User-owned where applicable.
+
+## Current M00_L14 Freeze Reconciliation — 2026-09-26
+
+The initial Independent Closure Review returned
+`HOLD_M00_L14_INDEPENDENT_CLOSURE_REVIEW_DOCUMENTATION_PROOF_RECONCILIATION_REQUIRED`
+for documentation and evidence wording only. No production, architecture,
+runtime, test, or Simulation defect was found. The bounded repair passed as
+`PASS_M00_L14_DOCUMENTATION_PROOF_RECONCILIATION`. Independent Closure Rereview
+passed as `PASS_M00_L14_INDEPENDENT_CLOSURE_REREVIEW` with verdict
+`INDEPENDENT_CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE_RECONCILIATION`.
+Freeze Reconciliation is complete.
+
+M00_L13 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED. M00_L14
+is COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED. Active Lesson Count is 0;
+Current Active M00 Lesson is NONE. M00_L15 and M00_L16 remain FUTURE /
+INACTIVE / NOT CREATED. The evidence remains THEORY VERIFIED / SIMULATION
+VERIFIED / REAL HARDWARE DEFERRED. The accepted focused tests, clean regression,
+and bounded Simulation results remain unchanged.
+
+RobotContainer has no ShootCommand binding, and Simulation did not directly
+schedule this command or demonstrate physical shooting. Direct unit-test
+invocation of `end(true)` covers interrupted-end cleanup semantics; actual
+CommandScheduler cancellation integration was not tested. Independent Freeze
+Review is PENDING. User-owned publication is NOT PUBLISHED / PENDING, and Final
+Publication Verification is PENDING.
