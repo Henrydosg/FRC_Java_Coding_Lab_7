@@ -1,9 +1,13 @@
 # M00_L14 — Shoot Coordination Lesson Plan
 
-## Current frozen lifecycle — 2026-09-26
+## Current frozen lifecycle and publication state — 2026-09-26
 
-M00_L14 is COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED. Active Lesson Count
-is 0 and Current Active M00 Lesson is NONE. M00_L13 remains COMPLETE /
+M00_L14 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED / NOT ACTIVE. The User
+completed Metadata Publication Commit 2 and its amendment according to
+accepted external evidence; its canonical identity is not embedded. Active
+Lesson Count is 0 and Current Active M00 Lesson is NONE. Remote push remains
+pending.
+M00_L13 remains COMPLETE /
 FROZEN / READ-ONLY / PUBLISHED / VERIFIED. M00_L15 and M00_L16 remain FUTURE /
 INACTIVE / NOT CREATED.
 Independent Activation Review returned
@@ -14,9 +18,15 @@ Independent Static Review, User focused tests, clean regression, and bounded
 Simulation passed. Evidence is THEORY VERIFIED / SIMULATION VERIFIED / REAL
 HARDWARE DEFERRED. The initial Independent Closure Review HOLD was repaired by
 PASS_M00_L14_DOCUMENTATION_PROOF_RECONCILIATION. Independent Closure Rereview
-passed as PASS_M00_L14_INDEPENDENT_CLOSURE_REREVIEW; Freeze Reconciliation is
-complete. Independent Freeze Review is pending. Publication and Final
-Publication Verification remain pending.
+passed as PASS_M00_L14_INDEPENDENT_CLOSURE_REREVIEW;
+PASS_M00_L14_FREEZE_RECONCILIATION is complete. Independent Freeze Review passed as
+PASS_M00_L14_INDEPENDENT_FREEZE_REVIEW. The User completed the Primary Frozen
+Snapshot as PASS_M00_L14_PRIMARY_FROZEN_SNAPSHOT_COMMIT at SHA
+fa34556a3f1b7ef52b2c678a39c1083392d7c8d3. The accepted
+HOLD_M00_L14_METADATA_PUBLICATION_RECONCILIATION_NO_METADATA_DELTA is resolved
+by this actual documentation delta, which applies the M00_L13 Commit-2
+publication semantics. The exact documentation reconciliation gate is
+PASS_M00_L14_DOCUMENTATION_RECONCILIATION.
 
 Accepted gates:
 - PASS_M00_L14_UNTOUCHED_COPY_BASELINE_BUILD — 6 actionable tasks, 6 executed, BASELINE_BUILD_EXIT_CODE=0.
@@ -31,8 +41,28 @@ Accepted gates:
 - PASS_M00_L14_USER_BOUNDED_SIMULATION; Disabled -> Teleoperated enabled -> Disabled; LAST_NATIVE_EXIT_CODE=0.
 - HOLD_M00_L14_INDEPENDENT_CLOSURE_REVIEW_DOCUMENTATION_PROOF_RECONCILIATION_REQUIRED — documentation/evidence wording only; no production, architecture, runtime, test, or Simulation defect.
 - PASS_M00_L14_DOCUMENTATION_PROOF_RECONCILIATION — bounded repair of LESSON_STATUS.md, LESSON_PLAN.md, and LESSON_CHECKLIST.md.
+- PASS_M00_L14_DOCUMENTATION_RECONCILIATION — accepted documentation reconciliation.
 - PASS_M00_L14_INDEPENDENT_CLOSURE_REREVIEW — INDEPENDENT_CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE_RECONCILIATION.
-- Freeze Reconciliation — COMPLETE; Independent Freeze Review PENDING.
+- PASS_M00_L14_FREEZE_RECONCILIATION — completed Freeze Reconciliation.
+- PASS_M00_L14_INDEPENDENT_FREEZE_REVIEW — INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION.
+- PASS_M00_L14_PRIMARY_FROZEN_SNAPSHOT_COMMIT — primary SHA fa34556a3f1b7ef52b2c678a39c1083392d7c8d3.
+- PASS_M00_L14_METADATA_PUBLICATION_RECONCILIATION.
+- PASS_M00_L14_METADATA_PUBLICATION_COMMIT — completed by accepted User evidence; metadata commit identity remains external.
+- PASS_M00_L14_METADATA_COMMIT_AMENDMENT_PREPARATION and PASS_M00_L14_METADATA_PUBLICATION_COMMIT_AMEND — amendment completed by accepted User evidence; canonical identity remains external.
+
+The two-commit Historical Snapshot model records the frozen lesson in a
+Primary Frozen Snapshot commit and establishes publication with User-owned
+metadata Commit 2.
+Commit 2 is the publication point and records PUBLISHED. Accepted User
+evidence establishes that Commit 2 and its amendment are completed; its
+canonical identity remains external and is not embedded. Remote push remains
+PENDING / USER-OWNED. The earlier
+`HOLD_M00_L14_FINAL_PUBLICATION_VERIFICATION_METADATA_COMMIT_STATE_RECONCILIATION_REQUIRED`
+was resolved by the accepted User amendment. The subsequent
+`HOLD_M00_L14_FINAL_PUBLICATION_REVERIFICATION_POST_AMEND_STATE_RECONCILIATION_REQUIRED`
+identified stale current-state chronology and is addressed by this
+documentation reconciliation. Final Publication Verification remains PENDING / EXTERNAL.
+No third commit is created merely for that verification.
 
 ## Locked design — coordination logic only
 
@@ -98,10 +128,10 @@ Integration.
 
 ## Remaining workflow gates
 
-The implementation, accepted verification, closure rereview, and Freeze
-Reconciliation are complete. Independent Freeze Review is next. User-owned
-publication and Final Publication Verification remain pending. Real hardware
-remains deferred.
+The implementation, accepted verification, closure rereview, Freeze
+Reconciliation, Independent Freeze Review, User-owned Primary Frozen Snapshot,
+and User-owned Metadata Publication Commit 2 are complete. Remote push and
+Final Publication Verification remain pending. Real hardware remains deferred.
 
 ## Accepted focused-test proof plan — 18 @Test methods
 

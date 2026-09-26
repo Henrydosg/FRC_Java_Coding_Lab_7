@@ -2226,7 +2226,7 @@ shooting values and behavior remain unverified. Documentation reconciliation
 is current. Independent Closure Review is pending; freeze and publication are
 not claimed.
 
-## Current M00_L14 Freeze Reconciliation — 2026-09-26
+## Historical M00_L14 Freeze Reconciliation — 2026-09-26
 
 The initial Independent Closure Review returned
 `HOLD_M00_L14_INDEPENDENT_CLOSURE_REVIEW_DOCUMENTATION_PROOF_RECONCILIATION_REQUIRED`
@@ -2250,3 +2250,85 @@ Direct unit-test invocation of `end(true)` covers interrupted-end cleanup, but
 actual scheduler-driven cancellation was not tested. Independent Freeze Review
 is PENDING. Publication is NOT PUBLISHED / PENDING, and Final Publication
 Verification is PENDING.
+
+## Historical M00_L14 Metadata Publication Preparation — 2026-09-26
+
+The Independent Freeze Review passed as
+`PASS_M00_L14_INDEPENDENT_FREEZE_REVIEW` /
+`INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION`. The User completed
+`PASS_M00_L14_PRIMARY_FROZEN_SNAPSHOT_COMMIT` at primary SHA
+`fa34556a3f1b7ef52b2c678a39c1083392d7c8d3`. This is the Primary Frozen
+Snapshot, Commit 1 of the two-commit Historical Snapshot model.
+
+M00_L13 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED. M00_L14
+remains COMPLETE / FROZEN / READ-ONLY and NOT ACTIVE. Active Lesson Count is
+0; Current Active M00 Lesson is NONE. M00_L15 and M00_L16 remain FUTURE /
+INACTIVE / NOT CREATED. Evidence remains THEORY VERIFIED / SIMULATION VERIFIED
+/ REAL HARDWARE DEFERRED.
+
+This earlier record prepared metadata for Commit 2. It is superseded by the
+current reconciliation below.
+
+The accepted tests and bounded Simulation evidence are unchanged.
+RobotContainer has no ShootCommand binding; Simulation did not schedule the
+command or establish physical shooting. Direct unit invocation of `end(true)`
+proves cleanup method semantics, not scheduler-driven cancellation.
+
+## Historical M00_L14 Metadata Publication Reconciliation Repair — pre-Commit-2 state
+
+This is the accepted preparation snapshot before the User created Metadata
+Publication Commit 2. Its pending-commit statements are historical and are
+superseded by the current post-amend publication record below.
+
+The accepted HOLD `HOLD_M00_L14_METADATA_PUBLICATION_RECONCILIATION_NO_METADATA_DELTA`
+identified the absence of a real publication-metadata delta after Commit 1.
+This repair supplied that delta and prepared the M00_L13 Commit-2 publication
+semantics: Commit 2 records M00_L14 as `COMPLETE / FROZEN / READ-ONLY /
+PUBLISHED`. At this earlier preparation point, the pre-commit worktree did
+not claim that Commit 2 or its push had occurred.
+
+The Primary Frozen Snapshot was Commit 1 at
+`fa34556a3f1b7ef52b2c678a39c1083392d7c8d3`. The metadata commit's own SHA and
+remote identity were external and were not self-embedded. Final Publication
+Verification was PENDING / EXTERNAL, with no third verification-only
+commit. M00_L14 was not active; Active Lesson Count was 0 and Current Active
+M00 Lesson was NONE. M00_L15/L16 remain FUTURE / INACTIVE / NOT CREATED.
+Evidence remains THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED.
+
+RobotContainer had no ShootCommand binding, so bounded Simulation did not
+schedule the command or prove physical shooting. Direct unit invocation of
+`end(true)` established cleanup method semantics, not scheduler-driven cancellation.
+No production or test content changed in this metadata repair.
+
+## Current M00_L14 Post-Amend Publication State — 2026-09-26
+
+Accepted User evidence establishes that Primary Frozen Snapshot Commit 1
+`fa34556a3f1b7ef52b2c678a39c1083392d7c8d3` is followed by a completed User-owned
+Metadata Publication Commit 2. M00_L14 is COMPLETE / FROZEN / READ-ONLY /
+PUBLISHED / NOT ACTIVE. Active Lesson Count is 0 and Current Active M00 Lesson
+is NONE. M00_L15 and M00_L16 remain FUTURE / INACTIVE / NOT CREATED. The
+Metadata Publication Commit amendment is COMPLETED by accepted User evidence;
+its canonical identity remains external and is not embedded in these records.
+
+The exact accepted chronology includes
+`PASS_M00_L14_DOCUMENTATION_RECONCILIATION`,
+`PASS_M00_L14_FREEZE_RECONCILIATION`,
+`PASS_M00_L14_METADATA_PUBLICATION_RECONCILIATION`,
+`PASS_M00_L14_METADATA_PUBLICATION_COMMIT`,
+`PASS_M00_L14_METADATA_COMMIT_AMENDMENT_PREPARATION`, and
+`PASS_M00_L14_METADATA_PUBLICATION_COMMIT_AMEND`. The amendment preserves
+exactly two publication commits; no canonical Metadata Commit hash is
+self-embedded.
+
+Remote push remains PENDING / USER-OWNED because no push evidence is supplied.
+The prior `HOLD_M00_L14_FINAL_PUBLICATION_VERIFICATION_METADATA_COMMIT_STATE_RECONCILIATION_REQUIRED`
+was resolved by the accepted User amendment. The subsequent
+`HOLD_M00_L14_FINAL_PUBLICATION_REVERIFICATION_POST_AMEND_STATE_RECONCILIATION_REQUIRED`
+identified stale current-state chronology and is addressed by this
+documentation reconciliation. Final Publication Verification remains PENDING / EXTERNAL.
+No final-verification PASS or third verification-only
+commit is claimed. Evidence remains THEORY VERIFIED / SIMULATION VERIFIED /
+REAL HARDWARE DEFERRED. The bounded Simulation limitation and the distinction
+between direct `end(true)` unit invocation and scheduler-driven cancellation
+remain as recorded in the lesson documents. This update changes publication
+metadata only.

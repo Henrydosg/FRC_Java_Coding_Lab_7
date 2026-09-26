@@ -1,9 +1,9 @@
 # M00_L14 — Shoot Coordination Checklist
 
-## Current frozen lifecycle — 2026-09-26
+## Current frozen lifecycle and publication state — 2026-09-26
 
 - [x] M00_L13 predecessor is COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED.
-- [x] M00_L14 is COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED.
+- [x] M00_L14 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED / NOT ACTIVE; accepted User evidence confirms Metadata Publication Commit 2 is complete.
 - [x] Active Lesson Count is 0; Current Active M00 Lesson is NONE.
 - [x] M00_L15 and M00_L16 remain FUTURE / INACTIVE / NOT CREATED.
 - [x] Untouched-copy baseline, Architecture / Inheritance Audit, and Final Design Lock passed.
@@ -15,10 +15,16 @@
 - [x] Initial Independent Closure Review HOLD_M00_L14_INDEPENDENT_CLOSURE_REVIEW_DOCUMENTATION_PROOF_RECONCILIATION_REQUIRED is preserved as a documentation/evidence-language finding only.
 - [x] Bounded repair PASS_M00_L14_DOCUMENTATION_PROOF_RECONCILIATION is accepted.
 - [x] Independent Closure Rereview PASS_M00_L14_INDEPENDENT_CLOSURE_REREVIEW returned INDEPENDENT_CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE_RECONCILIATION.
-- [x] Documentation and Freeze Reconciliation are complete; the transition guide is finalized.
-- [ ] Independent Freeze Review.
-- [ ] User-owned publication.
-- [ ] Final Publication Verification.
+- [x] PASS_M00_L14_DOCUMENTATION_RECONCILIATION and PASS_M00_L14_FREEZE_RECONCILIATION are accepted; the transition guide is finalized.
+- [x] Independent Freeze Review passed: PASS_M00_L14_INDEPENDENT_FREEZE_REVIEW / INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION.
+- [x] User-owned Primary Frozen Snapshot committed: PASS_M00_L14_PRIMARY_FROZEN_SNAPSHOT_COMMIT at fa34556a3f1b7ef52b2c678a39c1083392d7c8d3.
+- [x] PASS_M00_L14_METADATA_PUBLICATION_RECONCILIATION prepared Commit 2 metadata under the two-commit Historical Snapshot model.
+- [x] Resolved HOLD_M00_L14_METADATA_PUBLICATION_RECONCILIATION_NO_METADATA_DELTA by adding the required publication-metadata documentation delta.
+- [x] PASS_M00_L14_METADATA_PUBLICATION_COMMIT; Metadata Publication Commit 2 is complete by accepted User evidence, with its current identity external and not self-embedded.
+- [x] PASS_M00_L14_METADATA_COMMIT_AMENDMENT_PREPARATION and PASS_M00_L14_METADATA_PUBLICATION_COMMIT_AMEND; the amendment is complete by accepted User evidence, with canonical identity external and not self-embedded.
+- [x] HOLD_M00_L14_FINAL_PUBLICATION_REVERIFICATION_POST_AMEND_STATE_RECONCILIATION_REQUIRED is preserved as a documentation chronology finding and addressed by this reconciliation; external Final Publication Verification remains pending.
+- [ ] Remote push remains PENDING / USER-OWNED; no push evidence is supplied.
+- [ ] Final Publication Verification remains PENDING. The metadata-state HOLD was resolved by the accepted amendment; the post-amend chronology HOLD is addressed by this documentation reconciliation.
 
 ## Locked design and architecture
 
@@ -69,10 +75,17 @@
 - [x] Simulation supports startup, mode transitions, scheduler/integration stability, safe semantic mechanism state, and clean shutdown only; no physical shot or hardware performance is claimed.
 - [x] Runtime Flywheel and Feeder adapters are Noop; real hardware remains DEFERRED.
 
-## Remaining lifecycle gates
+## Lifecycle gates for Metadata Publication Commit 2
 
 - [x] Independent Closure Rereview passed after the documented HOLD and repair.
-- [x] M00_L14 became COMPLETE / FROZEN / READ-ONLY through Freeze Reconciliation.
-- [ ] Independent Freeze Review remains PENDING.
-- [ ] User-owned publication remains NOT PUBLISHED / PENDING.
-- [ ] Final Publication Verification remains PENDING.
+- [x] M00_L14 became COMPLETE / FROZEN / READ-ONLY through PASS_M00_L14_FREEZE_RECONCILIATION.
+- [x] Independent Freeze Review passed; Primary Frozen Snapshot Commit 1 completed at the accepted SHA.
+- [x] User-owned Metadata Publication Commit 2 completed; it records M00_L14 as COMPLETE / FROZEN / READ-ONLY / PUBLISHED.
+- [x] Metadata Publication Commit 2 amendment completed by accepted User evidence; canonical identity remains external and is not self-embedded.
+- [ ] Remote push remains PENDING / USER-OWNED.
+- [ ] Final Publication Verification remains PENDING / EXTERNAL; publication chronology reconciliation is complete, and independent final verification remains pending.
+
+The metadata commit's own final SHA cannot be self-embedded; external
+publication evidence must establish it. Commit 2 is the publication point,
+and no third verification-only commit is part of the model. Evidence remains
+THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED.

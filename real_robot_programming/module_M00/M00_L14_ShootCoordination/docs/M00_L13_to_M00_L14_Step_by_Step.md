@@ -1,11 +1,16 @@
 # M00_L13 to M00_L14 — Shoot Coordination Step by Step
 
 This guide records M00_L14 preparation through accepted implementation,
-verification, closure rereview, and Freeze Reconciliation. Steps 1-12 preserve
-the state at their respective gates. M00_L14 is now COMPLETE / FROZEN /
-READ-ONLY / NOT PUBLISHED. Active Lesson Count is 0 and Current Active M00
-Lesson is NONE. Independent Freeze Review is next; publication and Final
-Publication Verification remain pending.
+verification, closure rereview, Freeze Reconciliation, Independent Freeze
+Review, the User-owned Primary Frozen Snapshot, metadata preparation, and the
+bounded repairs of the accepted metadata no-delta and post-amend chronology
+HOLDs. Steps 1-20 preserve the state at their respective historical gates.
+The current state is M00_L14 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / NOT
+ACTIVE; accepted User evidence confirms Metadata Publication Commit 2 and its
+amendment are complete. Its canonical identity remains external and is not
+embedded. Active Lesson Count is 0 and
+Current Active M00 Lesson is NONE. Remote push remains pending; Final
+Publication Verification remains pending after the accepted HOLD.
 
 ## Step 1 — Accept the frozen predecessor and prepare the candidate
 
@@ -177,7 +182,8 @@ and keep M00_L14 ACTIVE / IN_PROGRESS.
 **Files Changed:** AGENTS.md; repository README.md; M00 roadmap ADR; M00_L14
 README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, and this guide.
 No production, test, deploy, configuration, or support files changed.  
-**Verification:** Canonical governance mirror validation PASS.  
+**Verification:** PASS_M00_L14_DOCUMENTATION_RECONCILIATION; canonical
+governance mirror validation PASS.  
 **Expected Result:** Documentation reconciliation complete; Independent
 Closure Review pending. M00_L14 remains NOT COMPLETE / NOT FROZEN / NOT
 PUBLISHED. Freeze and User-owned publication remain pending.
@@ -237,17 +243,142 @@ hardware evidence, and finalize this guide.
 README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, and this
 transition guide. No production, test, deploy, configuration, or support file
 changed.  
-**Verification:** Freeze Reconciliation COMPLETE; canonical governance mirror
+**Verification:** PASS_M00_L14_FREEZE_RECONCILIATION; canonical governance mirror
 validation PASS with 12 VERIFIED mirrors, 12 matching PDF hashes, 12 matching
 Markdown hashes, and zero deterministic findings. No Gradle, test, build,
 Simulation, or Git action was performed in this step.  
 **Expected Result:** M00_L14 is COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED.
-Independent Freeze Review remains PENDING; User-owned publication and Final
-Publication Verification remain PENDING.
+At this historical gate, Independent Freeze Review remained PENDING;
+User-owned publication and Final Publication Verification remained PENDING.
 
-## Remaining gates
+## Step 17 — Independent Freeze Review and Primary Frozen Snapshot
 
-- Independent Freeze Review: PENDING.
-- User-owned publication: NOT PUBLISHED / PENDING.
-- Final Publication Verification: PENDING.
+**Objective:** Accept the frozen lesson and record User-owned Commit 1.  
+**Why:** Metadata publication follows the independently reviewed frozen
+snapshot.  
+**Action:** Independent Freeze Review passed as
+PASS_M00_L14_INDEPENDENT_FREEZE_REVIEW with verdict
+INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION. The User completed
+PASS_M00_L14_PRIMARY_FROZEN_SNAPSHOT_COMMIT at SHA
+`fa34556a3f1b7ef52b2c678a39c1083392d7c8d3`.  
+**Files Changed:** None by the review; the User-owned primary commit records
+the frozen M00_L14 snapshot.  
+**Verification:** Accepted Independent Freeze Review and User-supplied primary
+commit evidence. Luna did not run Git.  
+**Expected Result at that gate:** Commit 1 is established; Metadata
+Publication Commit 2, its push, and Final Publication Verification had not
+yet occurred.
+
+## Step 18 — Metadata Publication Reconciliation
+
+**Objective:** Prepare bounded publication metadata for User-owned Commit 2.  
+**Why:** The two-commit Historical Snapshot model keeps the frozen lesson and
+its publication metadata in separate commits.  
+**Action:** Record the exact primary SHA and accepted freeze gate; keep
+M00_L14 COMPLETE / FROZEN / READ-ONLY and NOT ACTIVE. Before Commit 2, it is
+NOT PUBLISHED. Commit 2 establishes PUBLISHED when created, and its own SHA
+must be established externally rather than self-embedded. Keep Final
+Publication Verification PENDING / EXTERNAL and M00_L15/L16 inactive.  
+**Files Changed:** AGENTS.md, repository README.md, M00 roadmap ADR, M00_L14
+README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, and this
+guide. No production, test, deploy, configuration, or support file changed.  
+**Verification:** PASS_M00_L14_METADATA_PUBLICATION_RECONCILIATION;
+documentation-only metadata preparation; canonical governance mirror
+validation PASS with 12 VERIFIED mirrors, 12 matching PDF hashes, 12 matching
+Markdown hashes, and zero deterministic findings. No Git, Gradle, test, build,
+Simulation, or hardware action was performed by Luna.  
+**Expected Result at that gate:** The initial metadata-preparation record is
+preserved as chronology; it did not establish a Commit 2 identity or final
+verification.
+
+## Step 19 — Repair the metadata publication delta
+
+**Objective:** Resolve the accepted no-delta HOLD and prepare the correct
+publication state for User-owned Commit 2.  
+**Why:** The two-commit Historical Snapshot model requires a real metadata
+delta after the Primary Frozen Snapshot, and M00_L13 establishes PUBLISHED in
+Commit 2.  
+**Action:** Preserve the accepted gate
+`HOLD_M00_L14_METADATA_PUBLICATION_RECONCILIATION_NO_METADATA_DELTA` and record
+its resolution through this bounded documentation repair. Set the Commit 2
+target lifecycle to COMPLETE / FROZEN / READ-ONLY / PUBLISHED. Retain primary
+SHA `fa34556a3f1b7ef52b2c678a39c1083392d7c8d3`; do not predict Commit 2's own
+SHA. Keep its identity external, Final Publication Verification PENDING /
+EXTERNAL, and M00_L15/L16 FUTURE / INACTIVE / NOT CREATED. Preserve theory and
+Simulation evidence and the real-hardware deferral.  
+**Files Changed:** AGENTS.md, repository README.md, M00 roadmap ADR, M00_L14
+README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, and this
+guide. Production, test, deploy, configuration, and support files were not
+changed. M00_L13 was not modified.  
+**Verification:** PASS_M00_L14_METADATA_PUBLICATION_RECONCILIATION; read-only
+documentation inspection confirmed the actual metadata delta, exact primary
+SHA, Commit 2 target state, external self-identity, pending final verification,
+unchanged scope and evidence, and preserved two-commit model. Canonical
+governance mirror validation passed. No Git,
+Gradle, tests, build, Simulation, Driver Station, Glass, or hardware action was
+performed.  
+**Expected Result at that gate:** A real documentation delta was ready for
+User Commit 2; that commit established PUBLISHED, while its own identity
+remained external and final publication verification remained pending.
+
+## Step 20 — Historical preparation to amend Metadata Publication Commit 2
+
+**Objective:** Record the preparation state before the User amended the
+completed Metadata Publication Commit 2.  
+**Why:** The external final publication review returned
+`HOLD_M00_L14_FINAL_PUBLICATION_VERIFICATION_METADATA_COMMIT_STATE_RECONCILIATION_REQUIRED`
+because Commit 2 contained stale pre-Commit-2 wording.  
+**Action at that gate:** The documentation recorded the completed Metadata
+Publication Commit 2 as the publication point and distinguished its completion
+from remote push. It preserved
+the exact two-commit Historical Snapshot model, the Primary Frozen Snapshot
+SHA, and the historical pre-Commit-2 language only within Steps 17-19. The
+commit identity was kept external pending the then-planned amendment. Remote
+push remained PENDING / USER-OWNED and Final Publication
+Verification PENDING / EXTERNAL. No final-verification PASS was claimed, and
+no third verification-only commit was created.  
+**Files Changed:** AGENTS.md, repository README.md, M00 roadmap ADR, M00_L14
+README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, and this
+guide. No production, test, deploy, configuration, or support file changed;
+M00_L13 remains untouched.  
+**Verification at the preparation gate:** Accepted User evidence established
+`PASS_M00_L14_METADATA_PUBLICATION_COMMIT`, after
+`PASS_M00_L14_METADATA_PUBLICATION_RECONCILIATION`. The chronology retains
+`PASS_M00_L14_DOCUMENTATION_RECONCILIATION` and
+`PASS_M00_L14_FREEZE_RECONCILIATION`. M00_L14 is COMPLETE / FROZEN /
+READ-ONLY / PUBLISHED / NOT ACTIVE; Active Lesson Count is 0 and Current Active
+M00 Lesson is NONE. M00_L15/L16 remain FUTURE / INACTIVE / NOT CREATED.
+Evidence remains THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE
+DEFERRED. No Git, Gradle, tests, build, Simulation, Driver Station, Glass, or
+hardware action was performed in this step.  
+**Expected Result at that gate:** Documentation was ready for the User to
+amend existing Commit 2. The User subsequently completed the amendment under
+`PASS_M00_L14_METADATA_COMMIT_AMENDMENT_PREPARATION` and
+`PASS_M00_L14_METADATA_PUBLICATION_COMMIT_AMEND`; the canonical identity
+remains external. Push and Final Publication Verification remain pending.
+
+## Current post-amend publication state
+
+Accepted User evidence establishes the two-commit chain: Primary Frozen
+Snapshot Commit 1 is `fa34556a3f1b7ef52b2c678a39c1083392d7c8d3`, and Metadata
+Publication Commit 2 and its amendment are COMPLETED. The metadata identity is
+external and is not embedded. M00_L14 remains COMPLETE / FROZEN / READ-ONLY /
+PUBLISHED / NOT ACTIVE; Active Lesson Count is 0 and Current Active M00 Lesson
+is NONE. M00_L15/L16 remain FUTURE / INACTIVE / NOT CREATED. Remote push is
+PENDING / USER-OWNED and Final Publication Verification is PENDING / EXTERNAL.
+Evidence remains THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE
+DEFERRED. The publication remains exactly two commits, with no third
+verification-only commit. This reconciliation addresses the accepted
+`HOLD_M00_L14_FINAL_PUBLICATION_REVERIFICATION_POST_AMEND_STATE_RECONCILIATION_REQUIRED`
+as a documentation chronology finding; no final-verification PASS is claimed.
+
+## Remaining publication gates
+
+- User-owned Metadata Publication Commit 2 and its amendment: COMPLETED by
+  accepted User evidence; canonical identity remains external and is not
+  embedded.
+- Remote push: PENDING / USER-OWNED; no push evidence is supplied.
+- M00_L14: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / NOT ACTIVE.
+- Final Publication Verification: PENDING / EXTERNAL; no third
+  verification-only commit is required.
 - Real hardware: DEFERRED.

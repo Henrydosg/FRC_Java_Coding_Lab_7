@@ -1,6 +1,6 @@
 # M00_L14 — Shoot Coordination
 
-## Current frozen lifecycle — 2026-09-26
+## Current frozen lifecycle and publication state — 2026-09-26
 
 - Lesson: M00_L14 — Shoot Coordination
 - Previous Lesson: M00_L13 — Elevator Travel-Limit Safety
@@ -8,7 +8,7 @@
 - Previous primary SHA: 5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704
 - Previous metadata SHA: 658d1e44c417763df3689b9b52e409161446c593
 - Status: COMPLETE / FROZEN / READ-ONLY
-- Lifecycle: COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED
+- Lifecycle: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / NOT ACTIVE
 - Active Lesson Count: 0
 - Current Active M00 Lesson: NONE
 - Accepted preparation: PASS_M00_L14_UNTOUCHED_COPY_BASELINE_BUILD; 6 actionable tasks, 6 executed; BASELINE_BUILD_EXIT_CODE=0
@@ -28,10 +28,33 @@
 - Initial Independent Closure Review: HOLD_M00_L14_INDEPENDENT_CLOSURE_REVIEW_DOCUMENTATION_PROOF_RECONCILIATION_REQUIRED
 - Documentation Proof Reconciliation: PASS_M00_L14_DOCUMENTATION_PROOF_RECONCILIATION
 - Independent Closure Rereview: PASS_M00_L14_INDEPENDENT_CLOSURE_REREVIEW / INDEPENDENT_CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE_RECONCILIATION
-- Freeze Reconciliation: COMPLETE
-- Independent Freeze Review: PENDING; next gate
-- Publication: NOT PUBLISHED / PENDING / USER-OWNED
-- Final Publication Verification: PENDING
+- Documentation Reconciliation: PASS_M00_L14_DOCUMENTATION_RECONCILIATION
+- Freeze Reconciliation: PASS_M00_L14_FREEZE_RECONCILIATION
+- Independent Freeze Review: PASS_M00_L14_INDEPENDENT_FREEZE_REVIEW / INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION
+- Primary Frozen Snapshot: PASS_M00_L14_PRIMARY_FROZEN_SNAPSHOT_COMMIT; SHA fa34556a3f1b7ef52b2c678a39c1083392d7c8d3
+- Metadata Publication Reconciliation: PASS_M00_L14_METADATA_PUBLICATION_RECONCILIATION
+- Metadata Publication Commit: COMPLETED / PASS_M00_L14_METADATA_PUBLICATION_COMMIT; identity external and not self-embedded
+- Metadata Publication Commit Amendment: COMPLETED / PASS_M00_L14_METADATA_COMMIT_AMENDMENT_PREPARATION / PASS_M00_L14_METADATA_PUBLICATION_COMMIT_AMEND; canonical identity external and not self-embedded
+- Remote Push: PENDING / USER-OWNED
+- Final Publication Verification: PENDING / EXTERNAL
+
+## Historical pre-Commit-2 metadata publication preparation — bounded repair
+
+This section records the accepted state before the User created Metadata
+Publication Commit 2. Its pending-commit language is historical and is
+superseded by the current lifecycle at the top of this README.
+
+The accepted `HOLD_M00_L14_METADATA_PUBLICATION_RECONCILIATION_NO_METADATA_DELTA`
+found that the prior preparation had no real metadata delta after Commit 1.
+This bounded documentation repair supplied that delta. Following M00_L13, the
+metadata state intended for User-owned Commit 2 recorded M00_L14 as
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED`. At that historical point, the
+pre-commit worktree awaited the User's Commit 2; no Commit 2 identity was
+claimed. Its own final SHA was external publication evidence and could not be
+self-embedded. Final Publication Verification was PENDING / EXTERNAL, and no
+third verification-only commit was part of the model. M00_L14 was NOT ACTIVE;
+Active Lesson Count was 0 and Current Active M00 Lesson was NONE. M00_L15
+and M00_L16 remain FUTURE / INACTIVE / NOT CREATED.
 
 ## Closure and freeze chronology
 
@@ -135,7 +158,13 @@ architecture-guard defects. No production defect was found; the final
 independent static review passed. The HOLD/repair chronology and classifications
 are recorded in LESSON_STATUS.md and the transition guide.
 
-The transition guide is finalized through Freeze Reconciliation. Independent
-Freeze Review remains pending. M00_L14 is complete, frozen, read-only, and not
-published; Final Publication Verification remains pending. Real hardware
-remains deferred.
+The transition guide records the accepted Independent Freeze Review and
+primary snapshot, followed by metadata reconciliation, Commit 2 completion,
+and its completed amendment. The canonical identity remains external rather
+than self-embedded.
+The earlier HOLD_M00_L14_FINAL_PUBLICATION_VERIFICATION_METADATA_COMMIT_STATE_RECONCILIATION_REQUIRED
+was resolved by the accepted User amendment. The subsequent
+HOLD_M00_L14_FINAL_PUBLICATION_REVERIFICATION_POST_AMEND_STATE_RECONCILIATION_REQUIRED
+identified stale current-state chronology and is addressed by this documentation
+reconciliation. Final Publication Verification remains pending, remote push is
+pending User-owned verification, and real hardware remains deferred.
