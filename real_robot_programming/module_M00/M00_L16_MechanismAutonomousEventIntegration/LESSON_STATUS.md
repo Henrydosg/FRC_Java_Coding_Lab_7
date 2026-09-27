@@ -1,6 +1,39 @@
 # LESSON_STATUS — M00_L16 Mechanism Autonomous Event Integration
 
-## Current M00_L16 Freeze Reconciliation — 2026-09-27
+## Current M00_L16 Publication Metadata Reconciliation — 2026-09-27
+
+- Lesson: M00_L16 — Mechanism Autonomous Event Integration
+- Previous Lesson: M00_L15 — Intake-to-Feeder Coordination; COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
+- Status: COMPLETE
+- Active State: FROZEN / READ-ONLY
+- Active M00 Lesson Count: 0
+- Current Active M00 Lesson: NONE
+- Evidence: THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED
+- Focused Tests / Clean Regression / Bounded Simulation: COMPLETE / PASS under accepted User evidence
+- Initial Independent Closure Review: `HOLD_M00_L16_INDEPENDENT_CLOSURE_REVIEW`; bounded README repair `PASS_M00_L16_CLOSURE_DOCUMENTATION_REPAIR`
+- Independent Closure Review: COMPLETE / `PASS_M00_L16_INDEPENDENT_CLOSURE_REVIEW`
+- Freeze Reconciliation: COMPLETE / `PASS_M00_L16_FREEZE_RECONCILIATION`
+- Independent Freeze Review: COMPLETE / `PASS_M00_L16_INDEPENDENT_FREEZE_REVIEW`; `M00_L16_INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW`
+- Primary Frozen Snapshot Commit 1: CREATED / USER-OWNED
+- Primary Snapshot SHA: `ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`
+- Publication Metadata Reconciliation: COMPLETE / `PASS_M00_L16_PUBLICATION_METADATA_RECONCILIATION`; prepared for User-owned Metadata Publication Commit 2
+- Metadata Publication Commit 2: PENDING / USER-OWNED; hash PENDING
+- Publication Push: PENDING / USER-OWNED
+- Final External Publication Verification: PENDING
+- Git Commit: Primary Snapshot Commit 1 CREATED at the accepted SHA above; Metadata Publication Commit 2 PENDING / USER-OWNED
+- Git Push: PENDING / USER-OWNED
+- Publication: PENDING / NOT PUBLISHED
+- Real Robot: DEFERRED / NOT TESTED
+- Transition Guide: `docs/M00_L15_to_M00_L16_Step_by_Step.md`; FINAL / PASS through Publication Metadata Reconciliation
+- Known Issues: Runtime Intake and Feeder adapters are Noop; physical transfer, motor performance, sensor behavior, timing, and electrical behavior remain unverified. Blank AutonomousEvent NT fields are expected without an emitted observation.
+
+The two-commit Historical Snapshot model requires no third verification-only
+commit. No metadata commit hash or remote publication identity is claimed.
+The initial closure HOLD, bounded README repair, and fresh closure rereview
+remain preserved in the historical record below. M00_L16 is the final M00
+lesson; no M00_L17 is authorized.
+
+## Historical M00_L16 Freeze Reconciliation — 2026-09-27
 
 - Lesson: M00_L16 — Mechanism Autonomous Event Integration
 - Previous Lesson: M00_L15 — Intake-to-Feeder Coordination; COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED

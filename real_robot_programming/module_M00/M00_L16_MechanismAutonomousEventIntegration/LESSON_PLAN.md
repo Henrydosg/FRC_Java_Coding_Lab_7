@@ -1,6 +1,23 @@
 # M00_L16 — Mechanism Autonomous Event Integration Lesson Plan
 
-## Current freeze reconciliation — 2026-09-27
+## Current publication metadata reconciliation — 2026-09-27
+
+M00_L16 remains COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED; Active M00
+Lesson Count is 0 and Current Active M00 Lesson is NONE. Independent Freeze
+Review passed as `PASS_M00_L16_INDEPENDENT_FREEZE_REVIEW` with verdict
+`M00_L16_INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW`.
+The User created Primary Frozen Snapshot Commit 1 at
+`ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`. Publication metadata
+reconciliation is COMPLETE / `PASS_M00_L16_PUBLICATION_METADATA_RECONCILIATION`,
+prepared for User-owned Metadata Publication Commit 2. Commit 2 and its hash,
+publication push, and final external publication verification remain PENDING.
+Evidence stays THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED.
+The accepted closure HOLD, bounded README repair, closure rereview PASS, and
+Freeze Reconciliation PASS remain in the historical record below. The
+two-commit Historical Snapshot model has no third verification-only commit.
+M00_L16 remains the final M00 lesson; no M00_L17 is authorized.
+
+## Historical freeze reconciliation — 2026-09-27
 
 The locked one concept is implemented: `LEARNING_EVENT` dispatches a fresh
 `IntakeToFeederCommand` through the inherited deferred registration with

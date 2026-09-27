@@ -51,7 +51,10 @@
 - M00_L15 Publication Push: COMPLETE / ACCEPTED EXTERNAL EVIDENCE
 - M00_L15 Publication: COMPLETE / PUBLISHED / VERIFIED
 - M00_L15 Final Publication Verification: PASS_M00_L15_FINAL_PUBLICATION_VERIFICATION
-- M00_L16: COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED; implementation, focused tests, clean regression, bounded Simulation, documentation reconciliation, independent closure review, and Freeze Reconciliation COMPLETE; Independent Freeze Review and User-owned publication PENDING
+- M00_L16: COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED; implementation, focused tests, clean regression, bounded Simulation, documentation reconciliation, independent closure review, and Freeze Reconciliation COMPLETE; Independent Freeze Review PASS_M00_L16_INDEPENDENT_FREEZE_REVIEW
+- M00_L16 Primary Frozen Snapshot Commit 1: CREATED / USER-OWNED / SHA ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11
+- M00_L16 Publication Metadata Reconciliation: COMPLETE / PASS_M00_L16_PUBLICATION_METADATA_RECONCILIATION / AWAITING USER METADATA COMMIT 2
+- M00_L16 Metadata Commit 2 / Push / Final Publication Verification: PENDING / USER-OWNED OR EXTERNAL AS APPLICABLE
 - Preparation State: COMPLETE / ACCEPTED
 - Preparation Authorization: PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED
 - Runtime / Lesson Lifecycle: M00_L13 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; M00_L14 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; M00_L15 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; M00_L16 COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED; ACTIVE LESSON COUNT 0; CURRENT ACTIVE M00 LESSON NONE
@@ -2618,7 +2621,7 @@ review, freeze reconciliation, independent freeze review, and User-owned
 publication were pending at that historical gate. M00_L16 is the final M00
 lesson; no M00_L17 is authorized.
 
-## Current M00_L16 Freeze Reconciliation — 2026-09-27
+## Historical M00_L16 Freeze Reconciliation — 2026-09-27
 
 The accepted Independent Closure Review is
 `PASS_M00_L16_INDEPENDENT_CLOSURE_REVIEW`, with final verdict
@@ -2651,3 +2654,21 @@ Independent Freeze Review is PENDING. Publication is PENDING / NOT PUBLISHED
 and remains subject to the independent freeze review and User-owned publication
 workflow. M00_L16 remains the final M00 lesson; no M00_L17 is introduced or
 authorized.
+
+## Current M00_L16 Publication Metadata Reconciliation — 2026-09-27
+
+The preceding freeze-reconciliation section records its historical gate.
+Independent Freeze Review passed as `PASS_M00_L16_INDEPENDENT_FREEZE_REVIEW`
+with verdict `M00_L16_INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW`.
+The User created the Primary Frozen Snapshot Commit 1 at
+`ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`. Publication metadata
+reconciliation is COMPLETE / `PASS_M00_L16_PUBLICATION_METADATA_RECONCILIATION`
+and prepared for the separate User-owned Metadata Publication Commit 2.
+Commit 2 has no established hash and remains PENDING; push and final external
+publication verification also remain PENDING. M00_L16 remains COMPLETE /
+FROZEN / READ-ONLY / NOT PUBLISHED, with Active Lesson Count 0 and Current
+Active M00 Lesson NONE. Evidence remains THEORY VERIFIED / SIMULATION VERIFIED /
+REAL HARDWARE DEFERRED. The initial closure HOLD, bounded README repair, and
+fresh closure rereview PASS remain part of the accepted chronology. The
+two-commit Historical Snapshot model requires no third verification-only
+commit. M00_L16 remains the final M00 lesson; no M00_L17 is authorized.

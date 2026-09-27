@@ -1,7 +1,7 @@
 # FRC Java Coding Lab 7.0
 ## Real Robot Programming
 
-## Current M00 lifecycle — M00_L16 freeze reconciliation, 2026-09-27
+## Current M00 lifecycle — M00_L16 publication metadata reconciliation, 2026-09-27
 
 M00_L15 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED under accepted
 User-owned primary snapshot `15467d1ff3d7b3f65c8855d4a6c3a642d04a74fa`,
@@ -27,8 +27,14 @@ REAL HARDWARE DEFERRED. Focused Tests, Clean Regression, Bounded Simulation,
 Documentation Reconciliation, and Independent Closure Review are COMPLETE /
 PASS. The initial closure HOLD and bounded README repair are preserved in the
 lesson chronology. Freeze Reconciliation is COMPLETE / PASS_M00_L16_FREEZE_RECONCILIATION;
-Independent Freeze Review is PENDING. User-owned publication is PENDING / NOT
-PUBLISHED. M00_L16 is the final M00 lesson; no M00_L17 is authorized.
+Independent Freeze Review passed as `PASS_M00_L16_INDEPENDENT_FREEZE_REVIEW`
+with verdict `M00_L16_INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW`.
+The User created Primary Frozen Snapshot Commit 1 at
+`ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`. Publication metadata
+reconciliation is COMPLETE / `PASS_M00_L16_PUBLICATION_METADATA_RECONCILIATION`,
+awaiting User-owned Metadata Commit 2. The metadata commit, push, and final
+external publication verification remain PENDING; M00_L16 is NOT PUBLISHED.
+M00_L16 is the final M00 lesson; no M00_L17 is authorized.
 
 Older dated lifecycle records in this README are historical snapshots.
 

@@ -1,6 +1,24 @@
 # M00_L16 — Mechanism Autonomous Event Integration
 
-## Current lifecycle — Freeze Reconciliation, 2026-09-27
+## Current lifecycle — Publication metadata reconciliation, 2026-09-27
+
+M00_L16 remains COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED. Active M00
+lesson count is 0; Current Active M00 Lesson is NONE. Independent Freeze Review
+passed as `PASS_M00_L16_INDEPENDENT_FREEZE_REVIEW` with verdict
+`M00_L16_INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW`.
+The User created Primary Frozen Snapshot Commit 1 at
+`ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`. Publication metadata
+reconciliation is COMPLETE / `PASS_M00_L16_PUBLICATION_METADATA_RECONCILIATION`,
+awaiting the separate User-owned Metadata Publication Commit 2. Commit 2, its
+hash, publication push, and final external publication verification remain
+PENDING; no remote publication is claimed. Evidence remains THEORY VERIFIED /
+SIMULATION VERIFIED / REAL HARDWARE DEFERRED. The initial closure HOLD,
+bounded README repair, fresh closure rereview PASS, and Freeze Reconciliation
+PASS remain recorded below. The two-commit Historical Snapshot model requires
+no third verification-only commit. M00_L16 is the final M00 lesson; no
+M00_L17 is authorized.
+
+## Historical lifecycle — Freeze Reconciliation, 2026-09-27
 
 M00_L16 is `COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED`. Active M00 lesson
 count is 0; Current Active M00 Lesson is NONE. M00_L15 remains COMPLETE /

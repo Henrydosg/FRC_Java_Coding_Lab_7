@@ -1,6 +1,22 @@
 # M00_L16 — Mechanism Autonomous Event Integration Checklist
 
-## Current M00_L16 freeze reconciliation — 2026-09-27
+## Current M00_L16 publication metadata reconciliation — 2026-09-27
+
+- [x] M00_L16 remains COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED; Active M00 Lesson Count is 0 and Current Active M00 Lesson is NONE.
+- [x] Evidence remains THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED; real hardware remains deferred.
+- [x] The initial closure HOLD, bounded README repair, fresh independent closure rereview PASS, and Freeze Reconciliation PASS remain recorded below.
+- [x] Independent Freeze Review passed: `PASS_M00_L16_INDEPENDENT_FREEZE_REVIEW` / `M00_L16_INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW`.
+- [x] User-owned Primary Frozen Snapshot Commit 1 was created at `ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`.
+- [x] Publication metadata reconciliation is COMPLETE / `PASS_M00_L16_PUBLICATION_METADATA_RECONCILIATION`; prepared for Metadata Publication Commit 2.
+- [x] M00_L16 is the final M00 lesson; no M00_L17 is authorized.
+- [ ] User-owned Metadata Publication Commit 2 and its hash remain PENDING.
+- [ ] Publication push remains PENDING / USER-OWNED.
+- [ ] Final external publication verification remains PENDING; M00_L16 is NOT PUBLISHED.
+
+No third verification-only commit is part of the two-commit Historical
+Snapshot model.
+
+## Historical M00_L16 freeze reconciliation — 2026-09-27
 
 - [x] M00_L15 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED.
 - [x] Baseline, inheritance audit, Final Design Lock, controlled activation, independent activation review, and implementation authorization passed.

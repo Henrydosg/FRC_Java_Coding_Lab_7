@@ -1,6 +1,6 @@
 # M00_L15 to M00_L16 — Step by Step Transition Guide
 
-Status: FINAL / PASS FOR FREEZE RECONCILIATION / READY FOR INDEPENDENT FREEZE REVIEW  
+Status: FINAL / PASS THROUGH PUBLICATION METADATA RECONCILIATION / READY FOR USER METADATA COMMIT 2  
 Current lesson: M00_L16 — Mechanism Autonomous Event Integration  
 Current lifecycle: COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED  
 Previous lesson: M00_L15 — COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED  
@@ -15,7 +15,11 @@ boundary. Implementation, focused tests, clean regression, bounded
 Simulation, documentation reconciliation, independent closure review, and
 freeze reconciliation are complete under accepted evidence. Each numbered
 step records one change or gate and its reviewable result. Independent Freeze
-Review and publication remain pending.
+Review passed, and the User created Primary Frozen Snapshot Commit 1 at
+`ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`. Publication metadata
+reconciliation is complete. Metadata Commit 2, publication push, and final
+external publication verification remain pending; M00_L16 is NOT PUBLISHED.
+Evidence remains THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED.
 
 ## Step 1 — Verify M00_L15 final publication
 
@@ -226,16 +230,52 @@ made from Noop adapters.
 
 - **Objective:** Verify the proposed frozen snapshot.
 - **Why:** Publication follows reviewed freeze.
-- **Action:** PENDING; independent reviewer examines the reconciled frozen snapshot.
+- **Action:** Independent reviewer examined the reconciled frozen snapshot.
 - **Files Changed:** None by review.
-- **Verification:** PENDING.
-- **Expected Result:** Independent freeze verdict.
+- **Verification:** `PASS_M00_L16_INDEPENDENT_FREEZE_REVIEW`; verdict `M00_L16_INDEPENDENT_FREEZE_REVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW`.
+- **Expected Result:** Freeze review PASS; M00_L16 remains COMPLETE / FROZEN / READ-ONLY.
 
-## Step 23 — User-owned publication
+## Step 23 — Record User-owned primary frozen snapshot commit
 
-- **Objective:** Publish the final M00 lesson.
-- **Why:** Git commit and push are User-owned.
-- **Action:** PENDING; publication remains pending until Independent Freeze Review passes and the User-owned publication workflow is explicitly authorized and performed.
-- **Files Changed:** PENDING; publication metadata only if separately authorized.
-- **Verification:** PENDING / external User evidence.
-- **Expected Result:** Publication claimed only after accepted commit, push, and final verification.
+- **Objective:** Record Commit 1 of the two-commit Historical Snapshot model.
+- **Why:** The frozen lesson snapshot precedes the separate metadata commit.
+- **Action:** Accept the User-provided canonical primary snapshot hash `ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`.
+- **Files Changed:** None in this metadata reconciliation step.
+- **Verification:** User-created Primary Frozen Snapshot Commit 1; canonical SHA `ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`.
+- **Expected Result:** Local primary snapshot recorded without claiming metadata commit, push, or remote publication.
+
+## Step 24 — Reconcile publication metadata
+
+- **Objective:** Prepare the accurate current record for User-owned Metadata Publication Commit 2.
+- **Why:** The successful freeze review and primary snapshot require publication metadata before Commit 2.
+- **Action:** Reconcile only the current lifecycle and publication fields, preserving historical HOLD, repair, rereview, technical evidence, and frozen source.
+- **Files Changed:** `AGENTS.md`; repository `README.md`; M00 roadmap ADR; L16 `README.md`, `LESSON_STATUS.md`, `LESSON_PLAN.md`, `LESSON_CHECKLIST.md`, and this guide. No source, test, deploy, build, or configuration file changed.
+- **Verification:** `PASS_M00_L16_PUBLICATION_METADATA_RECONCILIATION`; governance validation PASS with 12 VERIFIED mirrors, 12 matching PDF hashes, 12 matching Markdown hashes, and zero deterministic findings.
+- **Expected Result:** Metadata is prepared for Commit 2; M00_L16 remains COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED.
+
+## Step 25 — User-owned metadata commit pending
+
+- **Objective:** Preserve Metadata Publication Commit 2 as a separate User-owned gate.
+- **Why:** Commit 2 follows the completed primary snapshot and metadata reconciliation.
+- **Action:** PENDING; await the User-owned metadata-only commit.
+- **Files Changed:** None by this reconciliation step.
+- **Verification:** Metadata Commit 2 and its SHA PENDING.
+- **Expected Result:** The two-commit Historical Snapshot model remains intact; no third verification-only commit.
+
+## Step 26 — Publication push pending
+
+- **Objective:** Preserve push as a separate User-owned gate.
+- **Why:** Remote publication follows Metadata Commit 2.
+- **Action:** PENDING; await the User-owned publication push.
+- **Files Changed:** None by this reconciliation step.
+- **Verification:** Push PENDING; no remote identity claimed.
+- **Expected Result:** M00_L16 remains NOT PUBLISHED until accepted publication evidence.
+
+## Step 27 — Final external publication verification pending
+
+- **Objective:** Preserve final publication verification as its own external gate.
+- **Why:** Verification follows Commit 2 and push.
+- **Action:** PENDING; await external evidence.
+- **Files Changed:** None by this reconciliation step.
+- **Verification:** Final External Publication Verification PENDING.
+- **Expected Result:** No PUBLISHED / VERIFIED claim before accepted external evidence; no third verification-only commit.
