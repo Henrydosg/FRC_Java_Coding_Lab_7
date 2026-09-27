@@ -35,7 +35,7 @@
 - M00_L14 Metadata SHA: 1a85c0827ee91ba7f70a595d94c49ad16a6df9cb
 - M00_L14 Remote Push: PASS_M00_L14_PUBLICATION_PUSH
 - M00_L14 Final Publication Verification: PASS_M00_L14_FINAL_PUBLICATION_VERIFICATION
-- M00_L15 Lifecycle: COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED
+- M00_L15 Lifecycle: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED
 - M00_L15 Independent Activation Review: PASS_M00_L15_INDEPENDENT_ACTIVATION_REREVIEW
 - M00_L15 Implementation / Final Static Review: COMPLETE / PASS_M00_L15_FINAL_INDEPENDENT_STATIC_REVIEW
 - M00_L15 Focused Tests: PASS_M00_L15_USER_FOCUSED_TESTS / 22 OF 22
@@ -46,15 +46,15 @@
 - M00_L15 Freeze Reconciliation: COMPLETE / PASS_M00_L15_FREEZE_RECONCILIATION
 - M00_L15 Independent Freeze Rereview: PASS_M00_L15_INDEPENDENT_FREEZE_REREVIEW / M00_L15_INDEPENDENT_FREEZE_REREVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW
 - M00_L15 Primary Frozen Snapshot: PASS_M00_L15_PRIMARY_SNAPSHOT_COMMIT / SHA 15467d1ff3d7b3f65c8855d4a6c3a642d04a74fa
-- M00_L15 Publication Metadata Reconciliation: COMPLETE / PREPARED FOR USER METADATA COMMIT 2
-- M00_L15 Metadata Publication Commit: PENDING / USER-OWNED
-- M00_L15 Publication Push: PENDING / USER-OWNED
-- M00_L15 Publication: PENDING / NOT PUBLISHED
-- M00_L15 Final Publication Verification: PENDING
-- M00_L16: FUTURE / INACTIVE / NOT CREATED
+- M00_L15 Publication Metadata Reconciliation: COMPLETE / CONSUMED BY USER METADATA COMMIT 2
+- M00_L15 Metadata Publication Commit: COMPLETE / USER-OWNED / SHA 0d3685ce67a0b985459392621e003611eaa6dc35
+- M00_L15 Publication Push: COMPLETE / ACCEPTED EXTERNAL EVIDENCE
+- M00_L15 Publication: COMPLETE / PUBLISHED / VERIFIED
+- M00_L15 Final Publication Verification: PASS_M00_L15_FINAL_PUBLICATION_VERIFICATION
+- M00_L16: COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED; implementation, focused tests, clean regression, bounded Simulation, documentation reconciliation, independent closure review, and Freeze Reconciliation COMPLETE; Independent Freeze Review and User-owned publication PENDING
 - Preparation State: COMPLETE / ACCEPTED
 - Preparation Authorization: PASS_M00_GOVERNANCE_PREPARATION_AUTHORIZED
-- Runtime / Lesson Lifecycle: M00_L13 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; M00_L14 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; M00_L15 COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED; ACTIVE LESSON COUNT 0; CURRENT ACTIVE M00 LESSON NONE; M00_L16 FUTURE / INACTIVE / NOT CREATED
+- Runtime / Lesson Lifecycle: M00_L13 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; M00_L14 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; M00_L15 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; M00_L16 COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED; ACTIVE LESSON COUNT 0; CURRENT ACTIVE M00 LESSON NONE
 - M00_L07 Controlled Activation: PASS_M00_L07_CONTROLLED_ACTIVATION
 - M00_L07 Freeze State: COMPLETE / FROZEN / READ-ONLY
 - M00_L07 Design Lock: PASS_M00_L07_FINAL_DESIGN_LOCK
@@ -2483,7 +2483,7 @@ superseded by the current metadata reconciliation below. Active Lesson Count
 was 0; Current Active M00 Lesson was NONE; M00_L16 was FUTURE / INACTIVE / NOT
 CREATED. No M00_L17 is authorized.
 
-### Current M00_L15 Publication Metadata Reconciliation — 2026-09-27
+### Historical M00_L15 Publication Metadata Reconciliation — 2026-09-27
 
 The accepted independent freeze rereview gate is
 `PASS_M00_L15_INDEPENDENT_FREEZE_REREVIEW`, with verdict
@@ -2498,3 +2498,156 @@ external Final Publication Verification: PENDING. M00_L15 remains
 `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`. Active Lesson
 Count is `0`, Current Active M00 Lesson is `NONE`, and M00_L16 remains
 `FUTURE / INACTIVE / NOT CREATED`.
+
+### Historical M00_L16 Controlled Activation — 2026-09-27
+
+Accepted User-owned M00_L15 publication evidence establishes primary snapshot
+`15467d1ff3d7b3f65c8855d4a6c3a642d04a74fa`, metadata publication
+`0d3685ce67a0b985459392621e003611eaa6dc35`, and
+`PASS_M00_L15_FINAL_PUBLICATION_VERIFICATION`. M00_L15 remains
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED` and is not modified.
+The copied M00_L16 candidate passed
+`PASS_M00_L16_UNTOUCHED_COPY_BASELINE_BUILD` (User-reported BUILD SUCCESSFUL,
+exit code 0), `PASS_M00_L16_ARCHITECTURE_INHERITANCE_AUDIT` (345/345 authored
+files, including 113/113 production Java and 106/106 test Java, inherited
+identically), and `PASS_M00_L16_FINAL_DESIGN_LOCK`. The accepted final verdict
+is `M00_L16_FINAL_DESIGN_LOCK_PASS_READY_FOR_CONTROLLED_ACTIVATION`.
+
+Controlled activation is APPROVED and documentation-only. M00_L16 is now the
+sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` M00 lesson;
+Active Lesson Count is 1. Independent Activation Review and separate
+Implementation Authorization are PENDING. No production implementation,
+focused test, clean regression, or bounded Simulation result is claimed for
+L16. Real hardware remains DEFERRED. M00_L16 is the final M00 lesson; the
+approved roadmap and lesson order do not change.
+
+The one new concept is scheduler-managed dispatch of one already-verified
+mechanism command through the existing PathPlanner named-event boundary.
+The selected command is `IntakeToFeederCommand` from M00_L15, which already
+owns Intake and Feeder requirements and verified startup/interruption/cleanup
+semantics without a new caller numeric setpoint. `ShootCommand` is excluded
+because RPM configuration would add another design question. Reuse
+`LEARNING_EVENT`, its existing marker and path geometry, and the existing
+`ONE_METER_WITH_EVENT` chooser option. `ONE_METER_PATH` remains the event-free
+control; `SAFE_STOP` remains. No new event ID, path, timing policy, mechanism
+algorithm, subsystem, IO contract, or autonomous framework is approved.
+
+The future production change budget is exactly one modified file:
+`src/main/java/frc/robot/RobotContainer.java`. Its eventual binding must
+construct a fresh `IntakeToFeederCommand` per dispatch with exact
+`IntakeSubsystem` and `FeederSubsystem` requirements. Existing
+`Supplier<Command>` and `Commands.defer(...)` registration remain. WPILib
+scheduler requirements arbitrate external mechanism contention; the inherited
+PathPlanner EventScheduler manages event-child lifecycle. Teleop Right Bumper
+`RunIntakeCommand` and Left Bumper `RunFeederCommand` remain unchanged.
+The event helpers, selected command, mechanism subsystems, IO, Observations,
+telemetry, AutoBuilder, path factories, Swerve, Vision, pose estimation,
+deploy assets, vendordeps, and Gradle/config remain unchanged.
+
+`IntakeToFeederCommand.isFinished()` is false. The verified normal
+termination chain is PathPlanner `FollowPathCommand.end(...)` to inherited
+`EventScheduler.end()`, active event `end(true)`, wrapped registered event,
+WPILib `DeferredCommand.end(true)`, then `IntakeToFeederCommand.end(...)`,
+which calls `feeder.stop()` and then `intake.stop()`. This supports normal
+path completion and interruption; it does not guarantee cleanup after an
+arbitrary uncaught library exception. No added timer, timeout, WaitCommand,
+race/deadline group, wrapper, or state machine is authorized. A supplier
+`RuntimeException` retains the inherited `FACTORY_FAILURE` observation and
+safe no-op path without mechanism actuation.
+
+Later test scope adds only
+`src/test/java/frc/robot/RobotContainerMechanismAutonomousEventIntegrationTest.java`
+with exactly eight `@Test` methods, and updates only the now-stale
+`src/test/java/frc/robot/IntakeArchitectureBoundaryTest.java` expectation
+that forbids any RobotContainer mention of the command. Teleop, default
+command, and direct subsystem access guards remain. The eight obligations
+are exact requirements, fresh child per dispatch, real scheduler startup,
+no repeated initialization during one lifecycle, interruption cleanup,
+Intake contention, Feeder contention, and nonempty-requirement supplier
+failure safe no-op.
+
+Future bounded Simulation must exercise `ONE_METER_WITH_EVENT`: startup and
+Driver Station attachment; both mechanisms STOPPED before Autonomous;
+semantic Intake and Feeder requests at the marker; scheduler-safe completion
+or interruption returning Feeder and Intake to STOPPED; Disabled remaining
+STOPPED; no fatal scheduler error; successful exit. `ONE_METER_PATH` must not
+dispatch the mechanism event. Noop adapters and RequestedState observations
+cannot establish physical acquisition, transfer, motor performance, timing,
+sensor correctness, or real-hardware behavior. Intended eventual evidence
+is THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED, but L16
+has not yet earned that classification.
+
+### Historical M00_L16 Documentation Reconciliation — pre-closure state, 2026-09-27
+
+The preceding controlled-activation section is a historical gate record.
+M00_L16 remains the sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN
+LOCK` M00 lesson. M00_L15 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED /
+VERIFIED. Independent activation review and separate implementation
+authorization passed. Implementation completed the locked one concept:
+`RobotContainer.java` binds `LEARNING_EVENT` to a fresh
+`IntakeToFeederCommand` with exact Intake and Feeder requirements. The source
+delta comprises that one production modification, one bounded modification
+to `IntakeArchitectureBoundaryTest.java`, and one new eight-test integration
+file; 221 other source files remain unchanged. The marker, control path,
+chooser, teleop bindings, event helpers, and mechanism code remain unchanged.
+
+The initial independent static review HOLD concerned the architecture guard.
+The bounded repair and fresh independent static rereview passed. User focused
+tests passed for the architecture guard and all 8 integration tests (BUILD
+SUCCESSFUL, exit 0). User clean regression passed with BUILD SUCCESSFUL and
+no regression blocker; no numeric test count or exit code was supplied.
+Accepted `PASS_M00_L16_BOUNDED_SIMULATION` verified Driver Station
+attachment, `ONE_METER_WITH_EVENT` Autonomous RUNNING with Intake
+`INTAKE_REQUESTED` and Feeder `FEED_REQUESTED` at `LEARNING_EVENT`,
+Flywheel/Elevator STOPPED, and Intake/Feeder STOPPED on Disable or
+interruption. `ONE_METER_PATH` ran without an event and kept Intake/Feeder
+STOPPED. No fatal scheduler/runtime exception was observed in the supplied
+run; Simulation returned normally to the PowerShell prompt. The final Gradle
+output showed five actionable tasks, three executed and two up-to-date.
+No Simulation exit code was supplied.
+
+Blank AutonomousEvent NT fields are expected: the facade publishes only
+when an observation exists, RobotContainer begins with `Optional.empty`,
+the new command emits no lifecycle observation, and registration emits only
+`FACTORY_FAILURE`. No `LastEvent=LEARNING_EVENT` or dispatch-count claim is
+made. No telemetry expansion or production repair is authorized. Evidence
+is THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED; physical
+transfer, motor performance, sensors, timing, and electrical behavior remain
+unverified. Documentation reconciliation is complete. Independent closure
+review, freeze reconciliation, independent freeze review, and User-owned
+publication were pending at that historical gate. M00_L16 is the final M00
+lesson; no M00_L17 is authorized.
+
+## Current M00_L16 Freeze Reconciliation — 2026-09-27
+
+The accepted Independent Closure Review is
+`PASS_M00_L16_INDEPENDENT_CLOSURE_REVIEW`, with final verdict
+`M00_L16_INDEPENDENT_CLOSURE_REVIEW_PASS_READY_FOR_FREEZE_RECONCILIATION` and
+no remaining findings. The initial closure HOLD identified the README's
+historical/current hierarchy contradiction; the bounded repair changed only
+the M00_L16 README and labeled the old plan headings historical and
+superseded. The fresh independent rereview closed that finding.
+
+M00_L16 is `COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED`. Active Lesson Count
+is `0`; Current Active M00 Lesson is `NONE`. The one concept remains
+scheduler-managed dispatch of the already-verified `IntakeToFeederCommand`
+through the existing PathPlanner `LEARNING_EVENT` boundary. The accepted
+production delta remains the single `RobotContainer.java` modification; the
+test delta remains the one bounded architecture-guard modification and one
+eight-test integration file. No implementation scope changed during freeze
+reconciliation.
+
+Focused Tests, Clean Regression, Bounded Simulation, Documentation
+Reconciliation, and Independent Closure Review are COMPLETE / PASS. Evidence
+remains `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`.
+Simulation establishes the bounded software/runtime integration only; it
+does not verify physical game-piece transfer, mechanism motor performance,
+physical timing, real sensor behavior, electrical behavior, or real-robot
+mechanism behavior. Blank AutonomousEvent telemetry remains expected under the
+existing observation-publication contract.
+
+Freeze Reconciliation is COMPLETE / `PASS_M00_L16_FREEZE_RECONCILIATION`.
+Independent Freeze Review is PENDING. Publication is PENDING / NOT PUBLISHED
+and remains subject to the independent freeze review and User-owned publication
+workflow. M00_L16 remains the final M00 lesson; no M00_L17 is introduced or
+authorized.

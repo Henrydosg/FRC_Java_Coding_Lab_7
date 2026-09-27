@@ -1,6 +1,37 @@
 # FRC Java Coding Lab 7.0
 ## Real Robot Programming
 
+## Current M00 lifecycle — M00_L16 freeze reconciliation, 2026-09-27
+
+M00_L15 is COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED under accepted
+User-owned primary snapshot `15467d1ff3d7b3f65c8855d4a6c3a642d04a74fa`,
+metadata publication `0d3685ce67a0b985459392621e003611eaa6dc35`,
+and `PASS_M00_L15_FINAL_PUBLICATION_VERIFICATION`. M00_L16 is
+`COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED`; active lesson count is 0 and
+the current active M00 lesson is NONE. Baseline, inheritance, Final Design Lock, controlled activation,
+independent activation review, implementation authorization, implementation,
+bounded architecture-test repair, and independent static rereview passed.
+
+M00_L16's one concept is scheduler-managed dispatch of the existing
+`IntakeToFeederCommand` through the inherited `LEARNING_EVENT` named-event
+boundary. Implementation modified only `RobotContainer.java` in production,
+with exact IntakeSubsystem and FeederSubsystem requirements, modified the
+inherited architecture guard, and added the eight-test integration file.
+The path, chooser, teleop controls, event helpers, and mechanism code remain
+unchanged. User focused tests passed (8/8 integration tests), clean regression
+passed with BUILD SUCCESSFUL, and accepted bounded Simulation passed for the
+event path and event-free control. No clean-regression count or exit code was
+supplied. AutonomousEvent NT fields may remain blank under the existing
+publication contract. Evidence is THEORY VERIFIED / SIMULATION VERIFIED /
+REAL HARDWARE DEFERRED. Focused Tests, Clean Regression, Bounded Simulation,
+Documentation Reconciliation, and Independent Closure Review are COMPLETE /
+PASS. The initial closure HOLD and bounded README repair are preserved in the
+lesson chronology. Freeze Reconciliation is COMPLETE / PASS_M00_L16_FREEZE_RECONCILIATION;
+Independent Freeze Review is PENDING. User-owned publication is PENDING / NOT
+PUBLISHED. M00_L16 is the final M00 lesson; no M00_L17 is authorized.
+
+Older dated lifecycle records in this README are historical snapshots.
+
 > Learn professional FRC robot software engineering through incremental inheritance development.
 
 > Học lập trình robot FRC theo phương pháp phát triển kế thừa (Inheritance Development) với các dự án robot thật.
@@ -2440,7 +2471,7 @@ Lesson Count was `0`, Current Active M00 Lesson was `NONE`, and M00_L16 was
 `FUTURE / INACTIVE / NOT CREATED`. The L01–L16 roadmap and lesson order are
 unchanged; no M00_L17 scope is introduced.
 
-## Current M00_L15 Publication Metadata Reconciliation — 2026-09-27
+## Historical M00_L15 Publication Metadata Reconciliation — 2026-09-27
 
 The accepted independent freeze rereview gate is
 `PASS_M00_L15_INDEPENDENT_FREEZE_REREVIEW`, with verdict

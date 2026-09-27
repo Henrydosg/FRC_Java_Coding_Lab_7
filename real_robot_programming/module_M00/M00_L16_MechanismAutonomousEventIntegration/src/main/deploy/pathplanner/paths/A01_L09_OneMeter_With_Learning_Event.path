@@ -1,0 +1,59 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 0.3333333333333333,
+        "y": 0.0
+      }
+    },
+    {
+      "anchor": {
+        "x": 1.0,
+        "y": 0.0
+      },
+      "prevControl": {
+        "x": 0.6666666666666666,
+        "y": 0.0
+      },
+      "nextControl": null
+    }
+  ],
+  "rotationTargets": [],
+  "pointTowardsZones": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "LEARNING_EVENT",
+      "waypointRelativePos": 0.5,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "LEARNING_EVENT"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 0.5,
+    "maxAcceleration": 1.0,
+    "maxAngularVelocity": 42.97183463481174,
+    "maxAngularAcceleration": 85.94366926962348,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0.0,
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "idealStartingState": {
+    "velocity": 0.0,
+    "rotation": 0.0
+  }
+}
