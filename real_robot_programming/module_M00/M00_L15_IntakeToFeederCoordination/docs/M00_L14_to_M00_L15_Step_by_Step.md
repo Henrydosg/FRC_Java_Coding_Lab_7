@@ -5,10 +5,11 @@ inheritance and Final Design Lock reviews, Controlled Activation, authorized
 implementation, tests, test-only architecture repairs, clean regression,
 bounded Simulation / Driver Station verification, documentation reconciliation,
 the subsequent closure-review documentation HOLD and chronology repair, the
-accepted closure rereview, and freeze reconciliation. M00_L15 is now COMPLETE /
-FROZEN / READ-ONLY. Independent Freeze Review, publication, and final
-publication verification remain pending. Evidence remains THEORY VERIFIED /
-SIMULATION VERIFIED / REAL HARDWARE DEFERRED.
+accepted closure rereview, freeze reconciliation, independent freeze rereview,
+primary snapshot commit, and publication metadata reconciliation. M00_L15 is
+COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED. Metadata Publication Commit 2,
+publication push, and final publication verification remain pending. Evidence
+remains THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED.
 
 ## Step 1 — Accept the frozen and published predecessor
 
@@ -503,7 +504,11 @@ rereview PASS and Freeze Reconciliation now have separate steps.
 **Expected Result:** The guide is ready for independent freeze rereview;
 M00_L15 remains COMPLETE / FROZEN / READ-ONLY.
 
-## Step 33 — Independent freeze rereview pending
+The pending states recorded in Steps 33–35 below describe the historical point
+before the accepted Independent Freeze Rereview and Primary Snapshot Commit.
+Steps 36–41 record the later, separate publication gates and current state.
+
+## Step 33 — Earlier status: Independent freeze rereview pending
 
 **Objective:** Preserve the next independent lifecycle gate after the repair.  
 **Why:** The repair engineer cannot approve their own freeze-chronology
@@ -514,7 +519,7 @@ correction.
 **Expected Result:** No freeze-rereview PASS is claimed; M00_L15 remains
 COMPLETE / FROZEN / READ-ONLY.
 
-## Step 34 — Publication pending
+## Step 34 — Earlier status: Publication pending
 
 **Objective:** Keep User-owned two-commit publication as a separate future
 gate.  
@@ -527,7 +532,7 @@ or remote identity is claimed.
 **Expected Result:** The canonical two-commit Historical Snapshot model remains
 available for later publication; no third verification-only commit is added.
 
-## Step 35 — Final publication verification pending
+## Step 35 — Earlier status: Final publication verification pending
 
 **Objective:** Preserve external final publication verification as a separate
 gate after publication.  
@@ -538,3 +543,80 @@ publication workflow is complete.
 **Verification:** Final Publication Verification is PENDING.  
 **Expected Result:** M00_L15 remains NOT PUBLISHED / NOT PUBLICATION-VERIFIED
 until separate accepted evidence establishes those states.
+
+## Step 36 — Independent freeze rereview passed
+
+**Objective:** Record the accepted independent freeze rereview as its own gate.  
+**Why:** This review authorizes entry into the publication workflow without
+changing the frozen lesson lifecycle.  
+**Action:** Accept the independent freeze rereview gate and its verdict.  
+**Files Changed:** None in this rereview step.  
+**Verification:** `PASS_M00_L15_INDEPENDENT_FREEZE_REREVIEW`; verdict
+`M00_L15_INDEPENDENT_FREEZE_REREVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW`.  
+**Expected Result:** Independent freeze rereview is PASS; M00_L15 remains
+COMPLETE / FROZEN / READ-ONLY.
+
+## Step 37 — Primary snapshot commit completed
+
+**Objective:** Record the User-owned Commit 1 primary frozen snapshot.  
+**Why:** The primary lesson snapshot is a separate commit before metadata
+publication under the two-commit Historical Snapshot model.  
+**Action:** Record the accepted primary snapshot gate and SHA.  
+**Files Changed:** None in this metadata reconciliation step.  
+**Verification:** `PASS_M00_L15_PRIMARY_SNAPSHOT_COMMIT`; SHA
+`15467d1ff3d7b3f65c8855d4a6c3a642d04a74fa`.  
+**Expected Result:** Primary Snapshot Commit 1 is recorded as COMMITTED; no
+Metadata Commit 2, push, or final verification is implied.
+
+## Step 38 — Publication metadata reconciliation complete
+
+**Objective:** Prepare the bounded metadata state for the separate User-owned
+Metadata Publication Commit 2.  
+**Why:** The primary snapshot and successful rereview need accurate current
+publication metadata before Commit 2.  
+**Action:** Reconcile only authorized documentation metadata, preserve the
+frozen lesson and technical evidence, and leave later gates pending.  
+**Files Changed:** `AGENTS.md`, root `README.md`, the M00 roadmap ADR, M00_L15
+`README.md`, `LESSON_STATUS.md`, `LESSON_PLAN.md`, `LESSON_CHECKLIST.md`, and
+this guide. No source, test, build, deploy, or configuration file changed.  
+**Verification:** Governance / mirror validation PASS; 12 VERIFIED mirrors,
+12 matching PDF hashes, 12 matching Markdown hashes, zero deterministic
+findings; bounded metadata self-review.  
+**Publication Metadata Reconciliation:** COMPLETE.  
+**Expected Result:** Metadata is prepared for Commit 2; M00_L15 remains
+COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED.
+
+## Step 39 — Metadata Publication Commit 2 pending
+
+**Objective:** Preserve the User-owned metadata commit as a separate gate.  
+**Why:** Metadata Commit 2 follows the completed primary snapshot and metadata
+reconciliation.  
+**Action:** Await the User-owned Metadata Publication Commit 2.  
+**Files Changed:** None in this pending commit step.  
+**Verification:** Metadata Publication Commit 2 is PENDING; no metadata SHA is
+established or embedded.  
+**Expected Result:** The two-commit model remains intact; no third commit is
+introduced.
+
+## Step 40 — Publication push pending
+
+**Objective:** Keep the publication push as a separate User-owned gate.  
+**Why:** Push follows accepted Metadata Commit 2.  
+**Action:** Await the User-owned publication push.  
+**Files Changed:** None in this pending push step.  
+**Verification:** Publication push is PENDING; no remote identity is claimed.  
+**Expected Result:** No PUBLISHED or push PASS claim is made before supplied
+external evidence.
+
+## Step 41 — External final publication verification pending
+
+**Objective:** Preserve final publication verification as its own external
+gate.  
+**Why:** Final verification follows the User-owned Commit 2 and publication
+push.  
+**Action:** Await external final publication verification.  
+**Files Changed:** None in this pending verification step.  
+**Verification:** Final Publication Verification is PENDING.  
+**Expected Result:** No PUBLISHED / VERIFIED state is claimed until accepted
+external evidence establishes it; no third verification-only commit is
+required.

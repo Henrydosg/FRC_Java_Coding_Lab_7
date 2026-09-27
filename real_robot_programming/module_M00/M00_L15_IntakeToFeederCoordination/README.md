@@ -1,21 +1,27 @@
 # M00_L15 — Intake-to-Feeder Coordination
 
-## Current lifecycle — Freeze reconciliation, 2026-09-27
+## Current lifecycle — Publication metadata reconciliation, 2026-09-27
 
 - Lifecycle: COMPLETE / FROZEN / READ-ONLY
 - Active M00 lesson count: 0; current active lesson: NONE
 - Independent Closure Rereview: PASS_M00_L15_INDEPENDENT_CLOSURE_REREVIEW; M00_L15_INDEPENDENT_CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE_RECONCILIATION
 - Freeze Reconciliation: COMPLETE / PASS_M00_L15_FREEZE_RECONCILIATION
-- Independent Freeze Review: PENDING
+- Independent Freeze Rereview: PASS_M00_L15_INDEPENDENT_FREEZE_REREVIEW; M00_L15_INDEPENDENT_FREEZE_REREVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW
+- Primary Snapshot Commit: `15467d1ff3d7b3f65c8855d4a6c3a642d04a74fa`
+- Primary Snapshot Gate: PASS_M00_L15_PRIMARY_SNAPSHOT_COMMIT
+- Publication Metadata Reconciliation: COMPLETE / PREPARED FOR USER METADATA COMMIT 2
+- Metadata Publication Commit: PENDING / USER-OWNED
+- Publication Push: PENDING / USER-OWNED
 - Publication: PENDING / NOT PUBLISHED
 - Final Publication Verification: PENDING
 - Evidence: THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED
 - M00_L16: FUTURE / INACTIVE / NOT CREATED
 
 The implementation and verification record below remains unchanged. Freeze
-reconciliation did not modify source or tests. It preserves the focused 22 / 22
-PASS result, the 830 / 830 PASS clean regression, and bounded Simulation / DS
-PASS. Simulation did not schedule `IntakeToFeederCommand`; scheduler behavior is
+reconciliation did not modify source or tests, and the current metadata
+reconciliation is documentation-only. It preserves the focused 22 / 22 PASS
+result, the 830 / 830 PASS clean regression, and bounded Simulation / DS PASS.
+Simulation did not schedule `IntakeToFeederCommand`; scheduler behavior is
 verified by the focused tests. Real hardware remains deferred.
 
 ## Historical lifecycle — Implementation and verification reconciliation, 2026-09-27

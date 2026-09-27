@@ -1,6 +1,6 @@
 # M00_L15 — Intake-to-Feeder Coordination Lesson Plan
 
-## Current freeze state and accepted evidence — 2026-09-27
+## Current publication state and accepted evidence — 2026-09-27
 
 M00_L15 is COMPLETE / FROZEN / READ-ONLY. Active M00 lesson count is 0; the
 current active lesson is NONE. M00_L14 is COMPLETE / FROZEN / READ-ONLY /
@@ -16,9 +16,14 @@ the active lesson's architecture tests. The final clean regression passed all
 limits recorded below. Independent Closure Rereview passed as
 `PASS_M00_L15_INDEPENDENT_CLOSURE_REREVIEW`, with verdict
 `M00_L15_INDEPENDENT_CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE_RECONCILIATION`
-and no findings. Freeze Reconciliation is complete. Independent Freeze Review,
-publication, and final publication verification remain pending. Evidence
-remains `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`.
+and no findings. Freeze Reconciliation is complete. Independent Freeze
+Rereview passed as `PASS_M00_L15_INDEPENDENT_FREEZE_REREVIEW`, with verdict
+`M00_L15_INDEPENDENT_FREEZE_REREVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW`.
+The primary snapshot is committed under `PASS_M00_L15_PRIMARY_SNAPSHOT_COMMIT`
+at SHA `15467d1ff3d7b3f65c8855d4a6c3a642d04a74fa`. Publication Metadata
+Reconciliation is COMPLETE; Metadata Publication Commit 2, push, and final
+publication verification remain pending. Evidence remains
+`THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`.
 
 ## One new concept
 
@@ -172,8 +177,10 @@ IntakeToFeederCommand.java, ShootCommand.java}`.
 
 The final User clean regression passed: BUILD SUCCESSFUL, 830 tests, 830 PASS,
 0 failures, 0 errors, 0 skipped, BUILD_EXIT_CODE=0. The accepted closure
-rereview and Freeze Reconciliation are complete. M00_L15 is COMPLETE / FROZEN /
-READ-ONLY. Independent Freeze Review is pending; publication and final
+rereview, Freeze Reconciliation, and Independent Freeze Rereview are complete.
+The primary snapshot is committed at the accepted SHA recorded above, and
+Publication Metadata Reconciliation is complete. M00_L15 is COMPLETE / FROZEN /
+READ-ONLY / NOT PUBLISHED. Metadata Publication Commit 2, push, and final
 publication verification remain pending. Active M00 lesson count is 0, the
 current active lesson is NONE, M00_L16 remains FUTURE / INACTIVE / NOT CREATED,
 and no M00_L17 is authorized.

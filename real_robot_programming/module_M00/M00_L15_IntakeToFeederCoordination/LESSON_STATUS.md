@@ -1,6 +1,6 @@
 # LESSON_STATUS — M00_L15 Intake-to-Feeder Coordination
 
-## Current M00_L15 Freeze Reconciliation — 2026-09-27
+## Current M00_L15 Publication Metadata Reconciliation — 2026-09-27
 
 - Lesson: M00_L15 — Intake-to-Feeder Coordination
 - Previous Lesson: M00_L14 — Shoot Coordination
@@ -34,11 +34,16 @@
 - Documentation Reconciliation: COMPLETE
 - Independent Closure Rereview: PASS_M00_L15_INDEPENDENT_CLOSURE_REREVIEW / M00_L15_INDEPENDENT_CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE_RECONCILIATION; no findings
 - Freeze Reconciliation: COMPLETE / PASS_M00_L15_FREEZE_RECONCILIATION
-- Independent Freeze Review: PENDING
+- Independent Freeze Rereview: PASS_M00_L15_INDEPENDENT_FREEZE_REREVIEW / M00_L15_INDEPENDENT_FREEZE_REREVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW
 - Freeze: COMPLETE / FROZEN / READ-ONLY
+- Primary Snapshot Commit: `15467d1ff3d7b3f65c8855d4a6c3a642d04a74fa`
+- Primary Snapshot Gate: PASS_M00_L15_PRIMARY_SNAPSHOT_COMMIT
+- Publication Metadata Reconciliation: COMPLETE / PREPARED FOR USER METADATA COMMIT 2
+- Metadata Publication Commit: PENDING / USER-OWNED
+- Publication Push: PENDING / USER-OWNED
 - Publication: PENDING / NOT PUBLISHED
 - Final Publication Verification: PENDING
-- Git Commit: PENDING / USER-OWNED
+- Git Commit: Primary Snapshot COMMITTED at the accepted SHA above; Metadata Publication Commit 2 PENDING / USER-OWNED
 - Git Push: PENDING / USER-OWNED
 - Known Issues: Runtime Intake and Feeder adapters are Noop. RobotContainer has no IntakeToFeederCommand binding, so Simulation did not schedule that command. No physical transfer, game-piece presence, mechanism timing, sensor, or hardware behavior is established.
 

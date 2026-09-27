@@ -20,10 +20,13 @@
 - [x] Documentation reconciliation is complete and the transition guide records the accepted chronology.
 - [x] Independent Closure Rereview PASS_M00_L15_INDEPENDENT_CLOSURE_REREVIEW returned M00_L15_INDEPENDENT_CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE_RECONCILIATION with no findings.
 - [x] Freeze Reconciliation is COMPLETE; M00_L15 is COMPLETE / FROZEN / READ-ONLY.
+- [x] Independent Freeze Rereview passed: PASS_M00_L15_INDEPENDENT_FREEZE_REREVIEW / M00_L15_INDEPENDENT_FREEZE_REREVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW.
+- [x] Primary Snapshot Commit 1 is committed under PASS_M00_L15_PRIMARY_SNAPSHOT_COMMIT at 15467d1ff3d7b3f65c8855d4a6c3a642d04a74fa.
+- [x] Publication Metadata Reconciliation is COMPLETE and prepared for User-owned Metadata Publication Commit 2.
 - [x] Active M00 Lesson Count is 0; Current Active M00 Lesson is NONE; M00_L16 remains FUTURE / INACTIVE / NOT CREATED.
-- [ ] Independent Freeze Review is pending.
-- [ ] Publication and final publication verification remain pending; M00_L15 is NOT PUBLISHED.
-- [ ] Git commit and push remain USER-OWNED.
+- [ ] Metadata Publication Commit 2 remains PENDING / USER-OWNED; M00_L15 is NOT PUBLISHED.
+- [ ] Publication push remains PENDING / USER-OWNED.
+- [ ] External Final Publication Verification remains PENDING.
 
 ## Inherited M00_L14 checklist (historical copy)
 

@@ -112,7 +112,7 @@ FRC_Java_Coding_Lab_7/
     ├── module_D01/
     ├── module_S00/
     ├── module_V00/ (authorized; V00_L01-L09 complete/frozen/read-only)
-    └── module_M00/ (authorized; M00_L01-L14 complete/frozen/read-only; M00_L13 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; primary SHA 5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704; metadata SHA 658d1e44c417763df3689b9b52e409161446c593; Active Lesson Count 0; Current Active M00 Lesson NONE; M00_L14 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / NOT ACTIVE; primary SHA fa34556a3f1b7ef52b2c678a39c1083392d7c8d3; Metadata Publication Commit and its amendment COMPLETED by accepted User evidence; canonical identity external and not self-embedded; remote push pending; Final Publication Verification pending; M00_L15/L16 future, inactive, not created)
+    └── module_M00/ (authorized; M00_L01-L14 complete/frozen/read-only; M00_L13 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED; primary SHA 5e89225fba85f0a6b0dbb5c4a58ee6ac710a1704; metadata SHA 658d1e44c417763df3689b9b52e409161446c593; M00_L14 COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED / NOT ACTIVE; primary SHA fa34556a3f1b7ef52b2c678a39c1083392d7c8d3; metadata SHA 1a85c0827ee91ba7f70a595d94c49ad16a6df9cb; M00_L15 COMPLETE / FROZEN / READ-ONLY / PRIMARY SNAPSHOT COMMITTED / PUBLICATION METADATA PREPARED / NOT PUBLISHED; primary SHA 15467d1ff3d7b3f65c8855d4a6c3a642d04a74fa; primary gate PASS_M00_L15_PRIMARY_SNAPSHOT_COMMIT; metadata reconciliation COMPLETE; metadata commit PENDING; push PENDING; final publication verification PENDING; Active Lesson Count 0; Current Active M00 Lesson NONE; implementation and static review COMPLETE; focused tests 22/22 PASS; clean regression 830/830 PASS; bounded Simulation PASS; Independent Closure Rereview PASS; Freeze Reconciliation COMPLETE; Independent Freeze Rereview PASS_M00_L15_INDEPENDENT_FREEZE_REREVIEW; M00_L16 FUTURE / INACTIVE / NOT CREATED)
          └── <LESSON_NAME>/
             ├── docs/
             ├── src/
@@ -2783,6 +2783,9 @@ Only report verified facts.
 | 1.80 | 2026-09-26 | FROZEN | Reconcile `PASS_M00_L14_INDEPENDENT_CLOSURE_REREVIEW` after the documentation-only Closure Review HOLD and bounded repair; record M00_L14 as COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED, Active Lesson Count 0, Current Active M00 Lesson NONE, unchanged theory/Simulation/deferred-hardware evidence, Independent Freeze Review pending, and M00_L15/L16 inactive. |
 | 1.81 | 2026-09-26 | FROZEN | Record `PASS_M00_L14_INDEPENDENT_FREEZE_REVIEW` and User-owned primary frozen snapshot commit `fa34556a3f1b7ef52b2c678a39c1083392d7c8d3`; prepare bounded metadata publication for User Commit 2 without claiming it exists, keep its SHA external, Final Publication Verification pending, Active Lesson Count 0, and M00_L15/L16 inactive. |
 | 1.82 | 2026-09-26 | FROZEN | Resolve `HOLD_M00_L14_METADATA_PUBLICATION_RECONCILIATION_NO_METADATA_DELTA` with the required documentation delta; prepare the M00_L13 Commit-2 publication state `COMPLETE / FROZEN / READ-ONLY / PUBLISHED`, keep the metadata commit identity external, Final Publication Verification pending, Active Lesson Count 0, and M00_L15/L16 inactive. |
+| 1.83 | 2026-09-26 | FROZEN | Record documentation-only Controlled Activation of prepared M00_L15 after accepted baseline, inheritance audit, and Final Design Lock; preserve verified published M00_L14, set M00_L15 as sole `IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson, record the scheduler tests #19-22, keep implementation not started and unauthorized pending Independent Activation Review, and retain M00_L16 inactive/uncreated. |
+| 1.84 | 2026-09-27 | FROZEN | Reconcile M00_L15 after accepted independent closure rereview; record `COMPLETE / FROZEN / READ-ONLY`, Active Lesson Count 0 and no active M00 lesson, preserve `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`, and leave independent freeze review, publication, and final publication verification pending with M00_L16 future/inactive/uncreated. |
+| 1.85 | 2026-09-27 | FROZEN | Reconcile M00_L15 publication metadata after accepted independent freeze rereview and primary snapshot commit; record the accepted primary gate and SHA, mark metadata reconciliation complete, and leave Metadata Commit 2, push, and external final publication verification pending under the two-commit Historical Snapshot model. Keep M00_L15 COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED, Active Lesson Count 0, no active M00 lesson, unchanged evidence, and M00_L16 future/inactive/uncreated. |
 ---
 
 ### M00_L08 Controlled Activation — 2026-09-20
@@ -3744,7 +3747,7 @@ shooting. Direct `end(true)` unit invocation proves cleanup method semantics,
 not scheduler-driven cancellation. No production or test change is part of
 this metadata repair.
 
-## Current M00_L14 Post-Amend Publication State — 2026-09-26
+## Historical M00_L14 Post-Amend Publication State — 2026-09-26 (before M00_L15 activation)
 
 Accepted User evidence establishes the two-commit Historical Snapshot chain:
 Primary Frozen Snapshot Commit 1 is
@@ -3773,9 +3776,144 @@ was resolved by the accepted User amendment. The subsequent
 `HOLD_M00_L14_FINAL_PUBLICATION_REVERIFICATION_POST_AMEND_STATE_RECONCILIATION_REQUIRED`
 identified stale current-state chronology and is addressed by this
 documentation reconciliation. Final Publication Verification remains PENDING /
-EXTERNAL; no final-verification PASS is claimed, and no third
-verification-only commit is part of the model. Technical scope, accepted
-build/test/Simulation evidence, Simulation limitations, and the direct
-`end(true)` versus scheduler-cancellation distinction remain unchanged. This
-is documentation-only post-amend publication state reconciliation; no
-production, test, deploy, or configuration content is changed.
+EXTERNAL; no final-verification PASS was claimed in this historical state, and
+no third verification-only commit was part of the model. Technical scope,
+accepted build/test/Simulation evidence, Simulation limitations, and the
+direct `end(true)` versus scheduler-cancellation distinction remain unchanged.
+This is documentation-only post-amend publication state reconciliation; no
+production, test, deploy, or configuration content was changed.
+
+## Historical M00_L15 Controlled Activation — 2026-09-26
+
+Accepted User evidence and independent review gates establish M00_L14 as
+COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED. Its Primary Frozen
+Snapshot SHA is `fa34556a3f1b7ef52b2c678a39c1083392d7c8d3`; its canonical
+Metadata Publication Commit SHA is `1a85c0827ee91ba7f70a595d94c49ad16a6df9cb`.
+Accepted final publication and push gates are
+`PASS_M00_L14_FINAL_PUBLICATION_VERIFICATION` and
+`PASS_M00_L14_PUBLICATION_PUSH`.
+
+M00_L15 preparation gates are `PASS_M00_L15_UNTOUCHED_COPY_BASELINE_BUILD`
+(BUILD SUCCESSFUL in 53s; 6 actionable tasks, all executed; exit code 0),
+`PASS_M00_L15_ARCHITECTURE_INHERITANCE_AUDIT` (341/341 authored files
+identical to M00_L14; no unexpected authored differences), and
+`PASS_M00_L15_FINAL_DESIGN_LOCK`. The initial Final Design Lock HOLD,
+`HOLD_M00_L15_FINAL_DESIGN_LOCK_SCHEDULER_TEST_COVERAGE_REQUIRED`, was
+resolved by the accepted re-review requiring four actual CommandScheduler
+tests in addition to the 18 direct-contract cases.
+
+M00_L15 — Intake-to-Feeder Coordination is the sole
+`IN_PROGRESS / ACTIVE / EDITABLE WITHIN FINAL DESIGN LOCK` lesson. Active M00
+lesson count is 1 and the current active lesson is M00_L15. Its one concept is
+scheduler-managed coordination of existing Intake and Feeder semantic
+behaviors under one command lifecycle. The locked command is
+`frc.robot.commands.IntakeToFeederCommand`, requiring exactly
+`IntakeSubsystem` and `FeederSubsystem`. The test plan contains 18 direct
+contract cases and four scheduler cases: startup, cancellation, Intake
+contention, and Feeder contention. RobotContainer receives no new binding;
+M00_L16 retains Mechanism Autonomous Event Integration.
+
+Controlled Activation updates documentation only. Production and test
+implementation are NOT STARTED and NOT AUTHORIZED. Independent Activation
+Review is PENDING. Freeze and publication are NOT AUTHORIZED. Simulation and
+real hardware verification for M00_L15 have not been run; real hardware remains
+DEFERRED. M00_L14 and earlier frozen lessons remained read-only; M00_L16
+remained FUTURE / INACTIVE / NOT CREATED. No L17 was authorized.
+
+## Historical M00_L15 Implementation and Verification Reconciliation — 2026-09-27 (pre-freeze state)
+
+At that pre-freeze point, this record superseded the preceding Controlled
+Activation snapshot. Its accepted lifecycle was IN_PROGRESS / ACTIVE / EDITABLE
+WITHIN FINAL DESIGN LOCK. M00_L14 was COMPLETE / FROZEN / READ-ONLY / PUBLISHED
+/ VERIFIED; Active M00 Lesson Count was 1. Independent Closure Review was
+pending. The current freeze state is recorded in the following section.
+
+Accepted gates include `PASS_M00_L15_UNTOUCHED_COPY_BASELINE_BUILD`,
+`PASS_M00_L15_ARCHITECTURE_INHERITANCE_AUDIT`,
+`PASS_M00_L15_FINAL_DESIGN_LOCK`,
+`PASS_M00_L15_CONTROLLED_ACTIVATION`,
+`PASS_M00_L15_INDEPENDENT_ACTIVATION_REREVIEW`,
+`PASS_M00_L15_IMPLEMENTATION_AUTHORIZATION`,
+`PASS_M00_L15_IMPLEMENTATION_HANDOFF_TO_STATIC_REVIEW`, and
+`PASS_M00_L15_FINAL_INDEPENDENT_STATIC_REVIEW`. The one concept remains
+scheduler-managed coordination of existing Intake and Feeder semantic
+behaviors under one command lifecycle.
+
+The sole production addition relative to M00_L14 is
+`src/main/java/frc/robot/commands/IntakeToFeederCommand.java`; 112 shared
+production Java files are identical. RobotContainer, RunIntakeCommand,
+RunFeederCommand, ShootCommand, IntakeSubsystem, and FeederSubsystem remain
+unchanged. The command requires exactly IntakeSubsystem and FeederSubsystem.
+RobotContainer retains Right Bumper to RunIntakeCommand and Left Bumper to
+RunFeederCommand and has no IntakeToFeederCommand binding.
+
+`PASS_M00_L15_USER_FOCUSED_TESTS` passed all 22 tests with zero failures,
+errors, or skips. The initial 830-test clean regression had two failures;
+`PASS_M00_L15_CLEAN_REGRESSION_FAILURE_DIAGNOSIS` classified both as
+`EXPECTED_INHERITED_TEST_CONTRACT_EVOLUTION`, not production defects.
+`PASS_M00_L15_INHERITED_ARCHITECTURE_TEST_RECONCILIATION` reconciled only the
+current lesson's inherited test copies. The Intake and Feeder filename guards
+use normalized relative paths and closed sets. The Feeder owner guard uses the
+JDK Java parser / syntax tree. Architecture scan robustness repair, parser
+repair, and independent parser review passed without production changes.
+
+`PASS_M00_L15_USER_CLEAN_REGRESSION` passed: BUILD SUCCESSFUL, 830 tests, 830
+PASS, zero failures, errors, or skips, `BUILD_EXIT_CODE=0`.
+`PASS_M00_L15_BOUNDED_SIMULATION_DS_VERIFICATION` passed for Simulation
+startup and Driver Station attachment. Disabled had Robot Enabled=No and Intake,
+Feeder, and Flywheel RequestedState=STOPPED. Teleoperated had Robot Enabled=Yes,
+DS Attached=Yes, and Intake and Feeder STOPPED. On return to Disabled, Robot
+Enabled=No and Intake and Feeder remained STOPPED, with no unexpected mechanism
+state. No fatal runtime or scheduler error occurred; termination was BUILD
+SUCCESSFUL with `SIMULATION_EXIT_CODE=0`. The unavailable Joystick Button 6
+warning on port 0 was EXPECTED / NON-BLOCKING because the controller was
+unassigned or unplugged.
+Simulation did not schedule IntakeToFeederCommand because RobotContainer has no
+binding; direct scheduler evidence comes from the focused tests.
+
+Evidence is `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`.
+No physical Intake or Feeder behavior, game-piece transfer, mechanism timing,
+sensor behavior, or shooting is claimed. Documentation Reconciliation was
+complete at this pre-freeze point, and Independent Closure Review was then the
+next gate. This paragraph records the state at that time.
+
+## Historical M00_L15 Freeze Reconciliation — 2026-09-27
+
+The accepted independent closure rereview gate is
+`PASS_M00_L15_INDEPENDENT_CLOSURE_REREVIEW`, with verdict
+`M00_L15_INDEPENDENT_CLOSURE_REREVIEW_PASS_READY_FOR_FREEZE_RECONCILIATION`.
+The rereview reported no findings. Freeze reconciliation is complete, and
+M00_L15 is now `COMPLETE / FROZEN / READ-ONLY`.
+
+M00_L15 evidence remains exactly `THEORY VERIFIED / SIMULATION VERIFIED / REAL
+HARDWARE DEFERRED`. Focused tests remain 22 / 22 PASS; the final clean
+regression remains 830 / 830 PASS with zero failures, errors, or skips and
+`BUILD_EXIT_CODE=0`; bounded Simulation / Driver Station remains PASS with
+`SIMULATION_EXIT_CODE=0`. Simulation did not schedule
+`IntakeToFeederCommand`; its scheduler behavior is established by focused
+tests. The sole production addition remains
+`IntakeToFeederCommand.java`, with 112 shared production Java files identical
+to M00_L14. No production or test file changed during freeze reconciliation.
+
+At this freeze-reconciliation point, M00_L14 remained
+`COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED`; M00_L15 publication,
+final publication verification, and Independent Freeze Review were pending.
+That state is superseded by the current metadata reconciliation below. Active
+Lesson Count was `0`, Current Active M00 Lesson was `NONE`, and M00_L16 was
+`FUTURE / INACTIVE / NOT CREATED`. No M00_L17 is authorized.
+
+### Current M00_L15 Publication Metadata Reconciliation — 2026-09-27
+
+The accepted independent freeze rereview gate is
+`PASS_M00_L15_INDEPENDENT_FREEZE_REREVIEW`, with verdict
+`M00_L15_INDEPENDENT_FREEZE_REREVIEW_PASS_READY_FOR_PUBLICATION_WORKFLOW`.
+The primary frozen snapshot is committed under
+`PASS_M00_L15_PRIMARY_SNAPSHOT_COMMIT` at SHA
+`15467d1ff3d7b3f65c8855d4a6c3a642d04a74fa`. Publication metadata
+reconciliation is COMPLETE and prepared for the User-owned Metadata Publication
+Commit 2. Metadata Publication Commit: PENDING; publication push: PENDING;
+external Final Publication Verification: PENDING. M00_L15 remains
+`COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED`; evidence remains
+`THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`. Active Lesson
+Count is `0`, Current Active M00 Lesson is `NONE`, and M00_L16 remains
+`FUTURE / INACTIVE / NOT CREATED`.
