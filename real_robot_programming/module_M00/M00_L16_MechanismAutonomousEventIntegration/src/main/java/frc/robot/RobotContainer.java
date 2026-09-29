@@ -142,8 +142,11 @@ public class RobotContainer {
             visionIO,
             fieldLayout,
             Constants.VisionConstants.kRobotToCamera,
-            new Policy(1.0, 2.0, 3.0),
-            0.250,
+            new Policy(
+                Constants.VisionConstants.kLowUncertaintyMaxDistanceMeters,
+                Constants.VisionConstants.kMediumUncertaintyMaxDistanceMeters,
+                Constants.VisionConstants.kMaximumAcceptedDistanceMeters),
+            Constants.VisionConstants.kMaximumFreshAgeSeconds,
             Timer::getFPGATimestamp);
     intakeSubsystem = new IntakeSubsystem(new IntakeIONoop());
     feederSubsystem = new FeederSubsystem(new FeederIONoop());

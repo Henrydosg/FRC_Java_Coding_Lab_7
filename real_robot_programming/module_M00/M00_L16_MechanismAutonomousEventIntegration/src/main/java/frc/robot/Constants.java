@@ -91,8 +91,11 @@ public final class Constants {
     private FieldTransformConstants() {}
   }
 
-  /** Stores the vendor-neutral V00 robot-to-camera calibration values. */
+  /** Stores configured real-camera identity, robot-to-camera calibration, and vision defaults. */
   public static final class VisionConstants {
+    /** NetworkTables table name for the configured real Limelight camera. */
+    public static final String kLimelightTableName = "limelight";
+
     /** Locked robot-to-camera X translation, in meters. */
     public static final double kRobotToCameraXMeters = -0.038;
 
@@ -121,6 +124,18 @@ public final class Constants {
                 kRobotToCameraRollRadians,
                 kRobotToCameraPitchRadians,
                 kRobotToCameraYawRadians));
+
+    /** Inclusive LOW uncertainty maximum camera-to-target distance, in meters. */
+    public static final double kLowUncertaintyMaxDistanceMeters = 1.0;
+
+    /** Inclusive MEDIUM uncertainty maximum camera-to-target distance, in meters. */
+    public static final double kMediumUncertaintyMaxDistanceMeters = 2.0;
+
+    /** Inclusive maximum accepted camera-to-target distance, in meters. */
+    public static final double kMaximumAcceptedDistanceMeters = 3.0;
+
+    /** Inclusive maximum fresh measurement age, in seconds. */
+    public static final double kMaximumFreshAgeSeconds = 0.250;
 
     private VisionConstants() {}
   }

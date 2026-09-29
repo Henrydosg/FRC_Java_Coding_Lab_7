@@ -20,6 +20,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import frc.robot.Constants;
 import frc.robot.io.vision.VisionIO.VisionIOInputs;
 import frc.robot.io.vision.VisionIO.VisionTargetInputs;
 import java.util.List;
@@ -37,7 +38,6 @@ import org.json.simple.parser.ParseException;
  * transform before leaving the IO boundary.
  */
 public final class VisionIOLimelight implements VisionIO {
-  private static final String kLimelightTableName = "limelight";
   private static final String kJsonTopicName = "json";
   private static final String kValidFieldName = "v";
   private static final String kTimestampNtFieldName = "ts_nt";
@@ -57,7 +57,7 @@ public final class VisionIOLimelight implements VisionIO {
 
   /** Creates an adapter for the default {@code /limelight/json} NetworkTables entry. */
   public VisionIOLimelight() {
-    this(NetworkTableInstance.getDefault().getTable(kLimelightTableName));
+    this(NetworkTableInstance.getDefault().getTable(Constants.VisionConstants.kLimelightTableName));
   }
 
   /**

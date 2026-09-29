@@ -1,6 +1,419 @@
 # M00_L16 — Mechanism Autonomous Event Integration Lesson Plan
 
-## Current publication metadata reconciliation — 2026-09-27
+## Current M00_L16 exceptional-repair closure and authorized re-freeze — 2026-09-29
+
+This record controls current M00_L16 lifecycle and repair status. The Architect/User
+explicitly authorized this documentation transition after the accepted final
+independent closure review:
+`PASS_M00_L16_EXCEPTIONAL_REPAIR_CLOSED_READY_FOR_REFREEZE_AUTHORIZATION`.
+Earlier dated M00_L16 registration, reconciliation, activation, verification and
+publication records below are preserved historical chronology. Their former
+CURRENT, REOPENED, IN_PROGRESS, EDITABLE and PENDING wording describes those
+earlier stages; it does not describe this repaired frozen candidate. Standing
+governance and protected historical lesson scope remain in force.
+
+- Status: COMPLETE.
+- Active State: COMPLETE / FROZEN / READ-ONLY.
+- Repository Active Lesson Count: 0; Active M00 Lesson Count: 0.
+- Current Active M00 Lesson: NONE; editable lessons: NONE.
+- Exceptional repair: CLOSED.
+- Technical closure: CLOSED; verification closure: CLOSED.
+- Documentation closure: CLOSED; architecture closure: CLOSED.
+- Remaining repair requirements: NONE.
+- P3-H01: IMPLEMENTED / VERIFIED / INDEPENDENTLY REVIEWED / PRESERVED / CLOSED.
+- CFG-H01: IMPLEMENTED / VERIFIED / REMOVED / INDEPENDENTLY REVIEWED / CLOSED.
+- Re-freeze authorization: APPROVED / CONSUMED by this documentation transition.
+- Final repair Transition Guide: accepted through the final independent closure
+  review; historical steps/appendices preserved and final re-freeze record appended.
+- Independent re-freeze / frozen-candidate review: PENDING.
+- Repaired publication: PENDING; no repaired Git snapshot or repaired publication
+  identity exists yet.
+- Exact next gate: INDEPENDENT RE-FREEZE / FROZEN-CANDIDATE REVIEW.
+- Governing repair record: [P3-H01 configuration-authority repair](../../../docs/architecture_decisions/ADR_M00_L16_P3_H01_Configuration_Authority_Repair.md); original registration and reconciliation
+  stages remain historical; final closure/re-freeze is recorded in Section 18.
+
+### Preserved implementation, verification and applicability
+
+P3-H01 preserves Constants.VisionConstants ownership of
+`kLowUncertaintyMaxDistanceMeters = 1.0`,
+`kMediumUncertaintyMaxDistanceMeters = 2.0`,
+`kMaximumAcceptedDistanceMeters = 3.0` and
+`kMaximumFreshAgeSeconds = 0.250`. RobotContainer consumes/injects these defaults.
+Inclusive comparisons and runtime semantics remain unchanged. Accepted fresh
+User focused tests, full suite, clean build and bounded Simulation PASS remain
+preserved with the independent architecture review.
+
+Localization/heading initialization precedes expected accepted Vision estimator
+fusion. Successful `LEARNING_EVENT` behavior is observed through
+`/Intake/RequestedState` and `/Feeder/RequestedState`, rather than successful
+AutonomousEvent lifecycle telemetry. The detailed accepted Simulation sequence
+remains in the preserved evidence reconciliation below.
+
+CFG-H01 preserves `public static final String kLimelightTableName = "limelight";`
+in Constants.VisionConstants; VisionIOLimelight consumes that authority. The
+effective endpoint remains `/limelight/json`. Both constructors and existing
+adapter/IO/protocol/Observation behavior remain unchanged. The accepted User
+VisionConfigurationAuthorityTest, unchanged VisionIOLimelightTest, Vision
+regression suite, full suite and clean build all PASS; independent exact-delta
+and static-removal review PASS remains preserved.
+
+Final supplied CFG-H01 User output remains:
+
+```text
+BUILD SUCCESSFUL in 32s
+7 actionable tasks: 7 executed
+```
+
+No numeric test count or exit code is inferred. These are accepted User results.
+
+| Applicability | P3-H01 | CFG-H01 |
+| --- | --- | --- |
+| Simulation | COMPLETED — accepted fresh bounded PASS | NOT_REQUIRED_FOR_REPAIR_CLOSURE |
+| Glass | NOT_REQUIRED_FOR_REPAIR_CLOSURE | NOT_APPLICABLE |
+| Driver Station | COMPLETED | NOT_APPLICABLE |
+| Real hardware | NOT_REQUIRED_FOR_REPAIR_CLOSURE | NOT_REQUIRED_FOR_REPAIR_CLOSURE |
+
+These are separately accepted repair dispositions. THEORY VERIFIED / SIMULATION
+VERIFIED / REAL HARDWARE DEFERRED distinctions remain preserved where applicable.
+No fresh real Limelight/mechanism hardware validation, drivetrain calibration,
+H1 convention promotion or BL quantitative maintenance completion is claimed.
+
+### Publication, audit and protection boundary
+
+Original historical publication remains primary
+`ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`, metadata
+`3667290180fe1a9fd96265383e7412c142c18129`, original verification gate
+`PASS_M00_L16_FINAL_PUBLICATION_VERIFICATION`. Original identities and history
+remain unchanged; they are not repaired-publication identities.
+
+Phase 2 remains
+`PASS_REPOSITORY_WIDE_AUDIT_PHASE_2_PHYSICAL_LINEAGE_WITH_RECORDED_LIMITS`.
+Phase 3 remains HOLD / `HOLD_REPOSITORY_WIDE_AUDIT_PHASE_3_ARCHITECTURE`:
+independent frozen-candidate review, separately authorized User Git snapshot/
+publication workflow, push and external final publication verification must
+precede consideration of separately authorized audit resumption.
+Phase 4 remains NOT STARTED / FORBIDDEN. D2A/H01, historical R1, A01_L07 and
+historical-byte qualifications remain preserved. No M00_L17.
+
+This authorization covers lifecycle/documentation changes in the same nine
+existing records only. Source/tests, other lessons, dependencies and assets remain
+protected. The unrelated A01_L06_OneMeter_Forward.path state remains untouched.
+No new files/ADRs, Git, project execution, publication or audit resumption.
+github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED.
+
+### Current completed repair plan and next lifecycle gate
+
+1. COMPLETE — P3-H01 bounded implementation, fresh verification and independent
+   review preserved; correction CLOSED.
+2. COMPLETE — CFG-H01 design/registration and separate exact-file implementation
+   authorization, implementation, five User automated gates and independent
+   exact-delta/static-removal review; finding REMOVED / CLOSED.
+3. COMPLETE — Authorized documentation/evidence reconciliation and final repair
+   Transition Guide accepted by independent final architecture/closure review.
+4. COMPLETE — Technical, verification, documentation and architecture closure;
+   remaining repair requirements NONE.
+5. COMPLETE — Explicit Architect/User re-freeze authorization consumed;
+   M00_L16 COMPLETE / FROZEN / READ-ONLY; active lesson counts 0.
+6. NEXT / PENDING — INDEPENDENT RE-FREEZE / FROZEN-CANDIDATE REVIEW.
+7. PENDING / USER-OWNED / SEPARATE AUTHORIZATION — Repaired snapshot/publication
+   workflow, push and external repaired-publication verification.
+8. HOLD — Phase-3 resumption consideration requires all preceding gates and
+   separate audit authorization. Phase 4 remains NOT STARTED / FORBIDDEN.
+
+No further repair implementation or verification requirement remains.
+Applicability and physical-evidence limits are preserved in the current table.
+The original sixteen-lesson M00 curriculum remains closed; no M00_L17.
+
+## Historical P3-H01 + CFG-H01 documentation/evidence reconciliation — 2026-09-29 (before final closure/re-freeze)
+
+This dated record controls current repair status and evidence. The original
+2026-09-28 P3-H01 registration, the 2026-09-29 CFG-H01 registration-stage
+planning in ADR Section 16, and earlier lifecycle/transition records remain
+historical stage evidence. Their former NOT STARTED/PENDING entries are not
+current implementation or verification results. Standing governance, approved
+scope and separate closure requirements remain in force.
+
+- Status: IN_PROGRESS.
+- Active State: REOPENED / IN_PROGRESS / EDITABLE.
+- Repository Active Lesson Count: 1; Active M00 Lesson Count: 1.
+- Current Active M00 Lesson: M00_L16.
+- Sole editable lesson: M00_L16_MechanismAutonomousEventIntegration.
+- Stage 1 — P3-H01: IMPLEMENTED / FRESHLY VERIFIED / INDEPENDENTLY REVIEWED /
+  PRESERVED / NOT REOPENED.
+- Stage 2 — CFG-H01: GOVERNANCE REGISTERED / DESIGN APPROVED / IMPLEMENTED /
+  USER AUTOMATED VERIFICATION PASS / INDEPENDENT REVIEW PASS / REMOVED / VERIFIED.
+- CFG-H01 exact-file implementation authorization: APPROVED and executed in
+  the prior bounded implementation stage; no source/test work is authorized now.
+- Documentation/evidence: RECONCILED.
+- Next gate: INDEPENDENT FINAL ARCHITECTURE / CLOSURE REVIEW — PENDING.
+- Accepted CFG-H01 design:
+  `PASS_CFG_H01_BOUNDED_REPAIR_DESIGN_READY_FOR_AUTHORIZATION`.
+- Accepted independent review:
+  `PASS_CFG_H01_IMPLEMENTATION_VERIFIED_READY_FOR_DOCUMENTATION_RECONCILIATION`.
+- Architect/User authorization for this reconciliation: only the nine existing
+  governance/lesson documents; no Java, tests, Git, project execution, re-freeze,
+  publication or Phase-3 resumption.
+- Governing amendment: [existing exceptional-repair ADR](../../../docs/architecture_decisions/ADR_M00_L16_P3_H01_Configuration_Authority_Repair.md); preserved registration in Section 16 and
+  current reconciliation/chronology in Section 17.
+
+### Preserved P3-H01 correction and fresh evidence
+
+Constants.VisionConstants owns the exact public static final double defaults:
+`kLowUncertaintyMaxDistanceMeters = 1.0`,
+`kMediumUncertaintyMaxDistanceMeters = 2.0`,
+`kMaximumAcceptedDistanceMeters = 3.0`, and
+`kMaximumFreshAgeSeconds = 0.250`.
+RobotContainer constructs/injects the existing Policy and freshness using those
+named defaults. Inclusive comparisons and runtime semantics remain unchanged.
+
+Accepted fresh User evidence: focused VisionConfigurationAuthorityTest PASS,
+full test suite PASS, clean build PASS, and fresh bounded Simulation PASS.
+The accepted Simulation observations include clean startup, Disabled baseline,
+gyro health, autonomous preparation, heading-reference initialization,
+Pose / EstimatedPose initialization, Vision UNAVAILABLE baseline,
+VALID_FRAME_A qualification and accepted fusion, unchanged-frame duplicate/stale
+hold, VALID_FRAME_B fresh recovery, return to UNAVAILABLE,
+ONE_METER_WITH_EVENT preparation and event-enabled autonomous execution,
+LEARNING_EVENT Intake/Feeder semantic behavior, mechanism cleanup,
+autonomous completion, consumed-readiness fail-closed behavior and normal exit.
+
+Localization/heading initialization must precede expected accepted Vision
+estimator fusion. Successful LEARNING_EVENT behavior is verified through
+`/Intake/RequestedState` and `/Feeder/RequestedState`, not successful
+AutonomousEvent lifecycle telemetry. This is preserved P3-H01 evidence, not
+post-CFG-H01 Simulation or physical-hardware evidence. P3-H01 is not reopened.
+
+### CFG-H01 completed exact boundary and independent review
+
+The original finding was ONE inherited MISPLACED_CONFIGURATION:
+VisionIOLimelight privately owned `kLimelightTableName = "limelight"`.
+The earliest surviving occurrence is V00_L08, propagated through V00_L09 and
+M00_L01-M00_L16 (18 lessons, one finding). Historical source remains unchanged.
+
+All implementation paths below are relative to existing M00_L16:
+
+| Existing file | Completed CFG-H01 change |
+| --- | --- |
+| `src/main/java/frc/robot/Constants.java` | Existing VisionConstants now owns `public static final String kLimelightTableName = "limelight";` before calibration fields; narrow JavaDoc clarification; prior declarations/values preserved. |
+| `src/main/java/frc/robot/io/vision/VisionIOLimelight.java` | Imports Constants, removes the private endpoint default, and uses `Constants.VisionConstants.kLimelightTableName` in the public default constructor. |
+| `src/test/java/frc/robot/VisionConfigurationAuthorityTest.java` | Existing guard extended with independent declaration/value, executable AST origin/removal, and actual default `/limelight/json` endpoint assertions. |
+
+Exactly two existing production files and one existing test were changed for
+CFG-H01; zero new source/test files. RobotContainer, VisionIO and
+VisionIOLimelightTest remain unchanged for CFG-H01. Both original constructors,
+adapter protocol/parsing/validation/timing/session/frame/geometry/Observation
+behavior, and prior P3-H01 test bodies/helpers are preserved. No getter,
+factory, configuration object, test seam or dependency was added.
+NetworkTables/vendor/protocol ownership stays inside the concrete IO adapter.
+
+The independent review found no implementation defect or scope violation.
+Constants uniquely owns the configured identity; endpoint remains exactly
+`"limelight"` and `/limelight/json`. Tests use independent literal oracles;
+comments cannot satisfy the executable AST source-origin guard.
+No behavior change was intended or established. CFG-H01 is REMOVED / VERIFIED
+in current M00_L16; historical predecessor findings are not erased.
+
+### Accepted CFG-H01 User verification and applicability
+
+| Gate | Accepted evidence / approved disposition |
+| --- | --- |
+| Focused VisionConfigurationAuthorityTest | PASS — fresh User execution |
+| Unchanged VisionIOLimelightTest | PASS — fresh User execution |
+| Relevant inherited Vision regression suite | PASS — fresh User execution |
+| Full test suite | PASS — fresh User execution |
+| Clean build | PASS — fresh User execution |
+| Independent exact-delta/static review | PASS — accepted independent Sol review |
+| Fresh Simulation | NOT REQUIRED FOR CFG-H01: Simulation selects VisionIOSim rather than the real Limelight adapter. |
+| Glass | NOT APPLICABLE |
+| Driver Station | NOT APPLICABLE |
+| Real hardware | NOT REQUIRED FOR CFG-H01 REPAIR CLOSURE: endpoint remains exactly `"limelight"`; configuration authority changed without deployed endpoint behavior change. |
+
+Final supplied User output:
+
+```text
+BUILD SUCCESSFUL in 32s
+7 actionable tasks: 7 executed
+CFG-H01 AUTOMATED USER VERIFICATION COMPLETE
+```
+
+These are User-supplied execution results, not Codex execution. Seven actionable
+tasks are not a numeric test count. No test count or exit code is invented.
+CFG-H01 applicability applies only to CFG-H01; it does not substitute for
+P3-H01 Simulation evidence or silently resolve separate earlier
+applicability/closure requirements. Original REAL HARDWARE DEFERRED and
+physical-evidence limits remain preserved.
+
+### Lifecycle, publication and remaining gates
+
+Documentation/evidence and the bounded repair chronology are RECONCILED.
+The repair evidence appendix is ready for independent final review; no final
+closure or final repair Transition Guide acceptance is claimed by this turn.
+Next: INDEPENDENT FINAL ARCHITECTURE / CLOSURE REVIEW, including explicit
+disposition of any separate outstanding earlier applicability/closure gate.
+Explicit Architect/User re-freeze, independent freeze review, User-owned new
+repaired primary/metadata commits and push, and external repaired-publication
+verification remain PENDING. M00_L16 remains IN_PROGRESS, not COMPLETE/FROZEN.
+
+Original publication remains historical truth:
+primary `ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`,
+metadata `3667290180fe1a9fd96265383e7412c142c18129`,
+gate `PASS_M00_L16_FINAL_PUBLICATION_VERIFICATION`.
+No original identity/history is rewritten, no old PASS becomes fresh repair
+evidence, and the repaired working state has not been republished.
+
+Phase 2 remains
+`PASS_REPOSITORY_WIDE_AUDIT_PHASE_2_PHYSICAL_LINEAGE_WITH_RECORDED_LIMITS`.
+Phase 3 remains `HOLD_REPOSITORY_WIDE_AUDIT_PHASE_3_ARCHITECTURE`.
+Phase 4 remains NOT STARTED / FORBIDDEN. Audit resumption requires separate
+authorization; reviewed removal and documentation reconciliation do not resume it.
+D2A/H01, historical R1, A01_L07 and historical-byte limits remain qualified.
+M00's original sixteen-lesson curriculum remains closed; no M00_L17.
+
+All other lessons/source/tests/assets/dependencies remain protected.
+The pre-existing A01_L06_OneMeter_Forward.path difference is unrelated and
+untouched. No normalization, restoration, cleanup or staging is authorized.
+github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED.
+
+STOP/HOLD on unauthorized drift, failed/missing evidence required for a claimed
+gate, changed endpoint/numerical behavior, architecture expansion or another
+lesson. No automatic rollback or scope expansion.
+
+### Historical bounded repair plan and completed chronology — before final closure/re-freeze
+
+1. COMPLETE — Govern P3-H01, authorize bounded implementation, implement,
+   freshly verify and independently review; preserve its correction and evidence.
+2. COMPLETE — Discover CFG-H01, review the bounded design and register the amendment.
+3. COMPLETE — Obtain separate exact-file implementation authorization and relocate
+   the endpoint identity within Constants.java, VisionIOLimelight.java and the
+   existing VisionConfigurationAuthorityTest.java only.
+4. PASS — User runs the five required CFG-H01 automated gates; accept the supplied
+   focused/adapter/Vision/full-suite/clean-build evidence.
+5. PASS — Independent post-implementation exact-delta/static review confirms
+   removed finding, endpoint/API/behavior preservation and protected-file isolation.
+6. RECONCILED — Authorized documentation/evidence and appended repair chronology
+   updated in the nine existing documents; historical records remain preserved.
+7. NEXT / PENDING — Independent final architecture/closure review; explicitly
+   resolve any separate earlier outstanding applicability/closure requirement.
+8. PENDING — Explicit Architect/User re-freeze approval and independent freeze review.
+9. PENDING / USER-OWNED — New repaired primary/metadata commits, push and external
+   repaired-publication verification under separately authorized scope.
+
+Approved CFG-H01 applicability remains Simulation NOT REQUIRED, Glass/Driver
+Station NOT APPLICABLE, and hardware NOT REQUIRED FOR CFG-H01 REPAIR CLOSURE.
+M00_L16 remains REOPENED / IN_PROGRESS / EDITABLE; no repeat P3-H01 implementation,
+new simulation fixture, new lesson or Phase-3 resumption is planned by this turn.
+
+
+## Historical P3-H01 exceptional-repair governance registration — 2026-09-28
+
+- Status: IN_PROGRESS.
+- Active State: REOPENED / IN_PROGRESS / EDITABLE.
+- Reopen reason: P3-H01 post-freeze architecture/configuration-authority defect.
+- Repository Active Lesson Count: 1.
+- Active M00 Lesson Count: 1.
+- Current Active M00 Lesson: M00_L16.
+- Sole editable lesson: M00_L16_MechanismAutonomousEventIntegration.
+- Architect and User authorization: APPROVED for governance/documentation and
+  exceptional bounded repair workflow only, by the supplied registration request.
+- Accepted design: `PASS_P3_H01_M00_L16_EXCEPTIONAL_REPAIR_DESIGN_READY_FOR_AUTHORIZATION`.
+- Implementation Authorization: PENDING / NOT AUTHORIZED.
+- P3-H01 Implementation: NOT STARTED.
+- Fresh repair baseline, static review, focused tests, full inherited suite,
+  clean build, Simulation, Driver Station, closure, re-freeze, and repaired
+  publication: PENDING; no fresh execution PASS is claimed.
+- Glass and real-hardware applicability decisions: PENDING.
+- Governing repair ADR: [P3-H01 configuration-authority repair](../../../docs/architecture_decisions/ADR_M00_L16_P3_H01_Configuration_Authority_Repair.md).
+
+This is the narrow exception under AGENTS Sections 8 and 14. REOPENED is a
+provenance qualifier for IN_PROGRESS, not a new generic status. Editability
+does not authorize Java/test changes. All other lessons remain read-only.
+M00's original sixteen-lesson curriculum is closed; this repair adds no concept
+or lesson and does not authorize M00_L17.
+
+### Original published snapshot — preserved historical evidence
+
+- Original lifecycle: COMPLETE / FROZEN / READ-ONLY / PUBLISHED / VERIFIED.
+- Original primary snapshot: `ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`.
+- Original publication metadata: `3667290180fe1a9fd96265383e7412c142c18129`.
+- Original final gate: `PASS_M00_L16_FINAL_PUBLICATION_VERIFICATION`.
+- Original evidence: THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED.
+
+These identities and the accepted external publication verification are historical
+truth. Earlier pending-publication passages below describe the pre-Commit-2
+record; they do not revoke the accepted original publication. Original steps,
+closure HOLD/repair/rereview, freeze evidence, and publication history remain
+preserved. No original commit is rewritten and no old PASS becomes fresh repair
+evidence. The repair working state has no repaired publication identity.
+
+### Registered future boundary and audit state
+
+The future production boundary is exactly L16 `src/main/java/frc/robot/Constants.java`
+and `src/main/java/frc/robot/RobotContainer.java`. Only one new test is proposed:
+`src/test/java/frc/robot/VisionConfigurationAuthorityTest.java`; zero existing
+test edits. No Java/test implementation is authorized by this registration.
+
+Constants.VisionConstants will own primitive double defaults:
+`kLowUncertaintyMaxDistanceMeters = 1.0`,
+`kMediumUncertaintyMaxDistanceMeters = 2.0`,
+`kMaximumAcceptedDistanceMeters = 3.0`, and
+`kMaximumFreshAgeSeconds = 0.250`. RobotContainer will continue constructing
+and injecting the existing Policy. Inclusive comparisons and runtime semantics
+remain unchanged. VisionSubsystem and both evaluator production files remain
+protected. V00_L09 and M00_L01-L15 retain their historical P3-H01 finding and
+unchanged files. Estimator/fusion, telemetry, PathPlanner/events, mechanisms,
+controllers, CAN/hardware configuration, dependencies, and assets are excluded.
+
+Phase 2 remains `PASS_REPOSITORY_WIDE_AUDIT_PHASE_2_PHYSICAL_LINEAGE_WITH_RECORDED_LIMITS`.
+Phase 3 remains `HOLD_REPOSITORY_WIDE_AUDIT_PHASE_3_ARCHITECTURE`.
+Phase 4 is NOT STARTED / FORBIDDEN. Governance registration cannot resume the
+audit: a reviewed implementation/static-removal gate and separate authorization
+are required. D2A, H01, historical R1, A01_L07, and historical-byte limits remain
+qualified as previously accepted.
+
+STOP/HOLD if a third production file, an existing test edit, numerical behavior
+change, architecture expansion, or another lesson is required. Return for
+governance review; do not silently expand scope. Required gates remain pending
+until fresh evidence is accepted.
+
+### Bounded future repair plan
+
+1. User supplies fresh Java 17 baseline, original-source provenance, inherited
+   focused/full-suite and clean-build evidence. Review scope and protected files.
+2. Confirm the accepted ownership design and receive separate Architect/User
+   implementation authorization naming exactly the two production files and
+   one new test file. Baseline/review failure blocks implementation.
+3. In Constants only, add the four public static final double defaults to existing
+   VisionConstants and narrowly clarify its JavaDoc; preserve all calibration.
+4. In RobotContainer only, replace the existing three Policy literals and one
+   freshness literal with the named constants. Keep Policy composition here and
+   retain the constructor, argument order, timestamp supplier, and event bindings.
+5. Add only VisionConfigurationAuthorityTest.java. Prove independent exact values,
+   production constructor references, actual injected configuration using existing
+   test-only fixture/reflection conventions, inclusive boundary behavior, and pure
+   evaluator dependencies. Source-origin checks complement runtime value equality.
+6. Independently review the exact delta and static removal of P3-H01. User then
+   supplies fresh focused/guard, inherited/full-suite, clean-build, Simulation,
+   and Driver Station evidence. Existing tests remain unchanged.
+7. Resolve Glass and real-hardware applicability explicitly. Reconcile evidence,
+   complete final architecture/closure review and repair appendix, then seek
+   explicit Architect/User re-freeze and independent freeze review.
+8. User publishes a new repaired primary snapshot and separate metadata identity;
+   preserve both original identities and obtain external publication verification.
+   Phase-3 resumption remains a separate authorization after reviewed static
+   removal, with accurate lifecycle/publication qualifications.
+
+Boundary proof covers 1.0/2.0/3.0 m and below/equal/above 0.250 s, including
+inclusive limits. Keep independent literal test oracles and arbitrary test policies.
+Rerun existing quality, timing, VisionSubsystem, VisionIOSimHarness, fusion,
+mechanism, scheduler, autonomous, and eight-event integration tests unchanged.
+Simulation will exercise existing valid-frame qualification/fusion and
+unavailable/stale handling, event and event-free controls, Disabled cleanup,
+no observed fatal runtime exception, and normal exit. Tests cannot substitute
+for User runtime Simulation. No physical calibration is required by relocation
+alone; applicable hardware verification still needs an explicit decision.
+Every future implementation/verification/publication step remains PENDING.
+
+## Historical pre-Commit-2 publication metadata reconciliation — 2026-09-27
 
 M00_L16 remains COMPLETE / FROZEN / READ-ONLY / NOT PUBLISHED; Active M00
 Lesson Count is 0 and Current Active M00 Lesson is NONE. Independent Freeze
