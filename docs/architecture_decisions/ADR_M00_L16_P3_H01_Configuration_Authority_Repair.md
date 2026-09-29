@@ -1,11 +1,15 @@
 # ADR — M00_L16 P3-H01 Configuration Authority Exceptional Repair
 
-## Current M00_L16 exceptional-repair closure and authorized re-freeze — 2026-09-29
+## Current M00_L16 frozen repair and publication metadata — 2026-09-29
 
-This record controls current M00_L16 lifecycle and repair status. The Architect/User
-explicitly authorized this documentation transition after the accepted final
+This record controls current M00_L16 lifecycle, repair closure and publication
+metadata. The Architect/User explicitly authorized the prior re-freeze
+documentation transition after the accepted final
 independent closure review:
 `PASS_M00_L16_EXCEPTIONAL_REPAIR_CLOSED_READY_FOR_REFREEZE_AUTHORIZATION`.
+The Architect/User now authorizes only post-freeze publication metadata
+reconciliation for the User-created repaired primary snapshot. This is the
+established frozen-lesson metadata exception; M00_L16 is not reopened.
 Earlier dated M00_L16 registration, reconciliation, activation, verification and
 publication records below are preserved historical chronology. Their former
 CURRENT, REOPENED, IN_PROGRESS, EDITABLE and PENDING wording describes those
@@ -22,15 +26,24 @@ governance and protected historical lesson scope remain in force.
 - Remaining repair requirements: NONE.
 - P3-H01: IMPLEMENTED / VERIFIED / INDEPENDENTLY REVIEWED / PRESERVED / CLOSED.
 - CFG-H01: IMPLEMENTED / VERIFIED / REMOVED / INDEPENDENTLY REVIEWED / CLOSED.
-- Re-freeze authorization: APPROVED / CONSUMED by this documentation transition.
+- Re-freeze authorization: APPROVED / CONSUMED by the prior documentation transition.
 - Final repair Transition Guide: accepted through the final independent closure
   review; historical steps/appendices preserved and final re-freeze record appended.
-- Independent re-freeze / frozen-candidate review: PENDING.
-- Repaired publication: PENDING; no repaired Git snapshot or repaired publication
-  identity exists yet.
-- Exact next gate: INDEPENDENT RE-FREEZE / FROZEN-CANDIDATE REVIEW.
+- Independent re-freeze / frozen-candidate review: PASS —
+  `PASS_M00_L16_FROZEN_CANDIDATE_READY_FOR_USER_PRIMARY_SNAPSHOT`.
+- Repaired frozen PRIMARY SNAPSHOT / COMMIT 1: CREATED by the User —
+  `015b8ca27d466a5a2fce2660a902bb58a4b62003`.
+- Publication metadata reconciliation: COMPLETED / METADATA RECONCILED /
+  READY FOR USER METADATA COMMIT.
+- Repaired metadata commit / COMMIT 2: PENDING USER ACTION; DOES NOT EXIST YET.
+- User push: PENDING / NOT PERFORMED YET.
+- External final repaired-publication verification: PENDING / NOT PERFORMED YET.
+- Repaired publication: NOT YET PUBLISHED; only the repaired primary snapshot
+  has been created. No metadata commit identity is invented.
+- Exact next gate: USER METADATA COMMIT — COMMIT 2.
 - Governing repair record: the existing exceptional-repair ADR; original registration and reconciliation
-  stages remain historical; final closure/re-freeze is recorded in Section 18.
+  stages remain historical; final closure/re-freeze is recorded in Section 18
+  and repaired-primary publication metadata in Section 19.
 
 ### Preserved implementation, verification and applicability
 
@@ -89,16 +102,19 @@ remain unchanged; they are not repaired-publication identities.
 Phase 2 remains
 `PASS_REPOSITORY_WIDE_AUDIT_PHASE_2_PHYSICAL_LINEAGE_WITH_RECORDED_LIMITS`.
 Phase 3 remains HOLD / `HOLD_REPOSITORY_WIDE_AUDIT_PHASE_3_ARCHITECTURE`:
-independent frozen-candidate review, separately authorized User Git snapshot/
-publication workflow, push and external final publication verification must
-precede consideration of separately authorized audit resumption.
+independent frozen-candidate review and User primary snapshot creation are complete;
+User metadata Commit 2, push and external final repaired-publication verification
+remain pending before separately authorized audit resumption can be considered.
 Phase 4 remains NOT STARTED / FORBIDDEN. D2A/H01, historical R1, A01_L07 and
 historical-byte qualifications remain preserved. No M00_L17.
 
-This authorization covers lifecycle/documentation changes in the same nine
-existing records only. Source/tests, other lessons, dependencies and assets remain
-protected. The unrelated A01_L06_OneMeter_Forward.path state remains untouched.
-No new files/ADRs, Git, project execution, publication or audit resumption.
+This post-freeze authorization covers publication metadata only in the existing
+records requiring reconciliation. Source/tests, other lessons, dependencies and
+assets remain protected. The unrelated A01_L06_OneMeter_Forward.path state remains
+untouched. The canonical workflow remains User primary Commit 1, metadata
+reconciliation, User metadata Commit 2, User push, then external final verification;
+no third verification-only commit. No new files/ADRs, Git or project execution
+occurs in this reconciliation; publication and audit resumption remain pending.
 github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED.
 
 ## Historical P3-H01 + CFG-H01 documentation/evidence reconciliation — 2026-09-29 (before final closure/re-freeze)
@@ -851,6 +867,10 @@ github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED.
 
 ## 18. Final independent closure and authorized re-freeze — 2026-09-29
 
+Historical closure/re-freeze-stage record: its pending primary-snapshot and
+freeze-review entries describe that earlier stage. Section 19 and the current
+publication record above control repaired-primary metadata status.
+
 The accepted final review is
 `PASS_M00_L16_EXCEPTIONAL_REPAIR_CLOSED_READY_FOR_REFREEZE_AUTHORIZATION`.
 Technical, verification, documentation and architecture closure are CLOSED;
@@ -881,4 +901,34 @@ publication workflow, push and external final publication verification precede
 consideration of separately authorized audit resumption. Phase 4 remains
 NOT STARTED / FORBIDDEN. No M00_L17. No Git, project execution or publication
 occurs in this transition; the unrelated A01_L06 path state remains untouched.
+github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED.
+
+## 19. Repaired primary snapshot publication metadata — 2026-09-29
+
+Independent frozen-candidate review PASS:
+`PASS_M00_L16_FROZEN_CANDIDATE_READY_FOR_USER_PRIMARY_SNAPSHOT`.
+
+The User successfully created repaired frozen PRIMARY SNAPSHOT / COMMIT 1:
+`015b8ca27d466a5a2fce2660a902bb58a4b62003`.
+This exact identity is accepted User-supplied evidence. The Architect/User
+authorized only the bounded post-freeze metadata reconciliation now completed.
+M00_L16 remains COMPLETE / FROZEN / READ-ONLY; active counts 0; current active
+M00 lesson NONE. P3-H01, CFG-H01 and exceptional repair remain CLOSED;
+remaining repair requirements NONE. No reopening or source/test change.
+
+Publication metadata: RECONCILED / READY FOR USER METADATA COMMIT.
+Exact next gate: USER METADATA COMMIT — COMMIT 2.
+Metadata Commit 2: PENDING USER ACTION / DOES NOT EXIST YET.
+User push: PENDING / NOT PERFORMED YET.
+External final repaired-publication verification: PENDING / NOT PERFORMED YET.
+The repaired candidate is NOT YET PUBLISHED; no metadata commit hash is invented.
+Original historical primary/metadata identities and original verification gate
+remain preserved separately in the current record and original publication history.
+
+Canonical sequence: repaired primary Commit 1 -> metadata reconciliation ->
+User metadata Commit 2 -> User push -> external final publication verification.
+No third verification-only commit and no implementation file in Commit 2.
+Phase 3 remains HOLD pending publication gates and separate audit authorization;
+Phase 4 remains NOT STARTED / FORBIDDEN. Protected unrelated state is untouched.
+No Git or project execution by this reconciliation.
 github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED.

@@ -918,3 +918,26 @@ github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED.
 - No Git or project execution. Source/tests, historical lessons and unrelated
   A01_L06 path state remain unchanged. No new files/ADRs.
   github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED.
+
+## Repaired primary snapshot metadata reconciliation — 2026-09-29
+
+- Independent frozen-candidate review: PASS —
+  `PASS_M00_L16_FROZEN_CANDIDATE_READY_FOR_USER_PRIMARY_SNAPSHOT`.
+- User-created repaired PRIMARY SNAPSHOT / COMMIT 1: CREATED —
+  `015b8ca27d466a5a2fce2660a902bb58a4b62003`.
+- Explicit Architect/User post-freeze metadata authorization consumed:
+  METADATA RECONCILED / READY FOR USER METADATA COMMIT.
+- Exact next gate: USER METADATA COMMIT — COMMIT 2.
+- Metadata Commit 2: PENDING USER ACTION / DOES NOT EXIST YET.
+- User push: PENDING / NOT PERFORMED YET.
+- External final repaired-publication verification: PENDING / NOT PERFORMED YET.
+- Repaired publication: NOT YET PUBLISHED; no metadata hash is invented.
+- M00_L16 remains COMPLETE / FROZEN / READ-ONLY; active counts 0; current active
+  M00 lesson NONE; P3-H01 / CFG-H01 / exceptional repair CLOSED.
+- Earlier transition steps and closure/re-freeze appendices retain their historical
+  stage meaning and remain byte-preserved. Original publication identities remain
+  historical and distinct from the repaired primary.
+- Canonical sequence: Commit 1 -> metadata reconciliation -> User Commit 2 ->
+  User push -> external final verification; no third verification-only commit.
+- Phase 3: HOLD pending publication gates and separate audit authorization.
+  Phase 4: NOT STARTED / FORBIDDEN. No Git or project execution in this step.
