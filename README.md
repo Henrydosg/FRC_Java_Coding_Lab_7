@@ -1,4 +1,18 @@
 # FRC Java Coding Lab 7.0
+<!-- ACM-05 DOMAIN CLOSURE CURRENT BEGIN -->
+## Current ACM-05 formal domain closure — 2026-10-01
+
+The Architect explicitly authorized formal closure of ACM-05 — Observation / IOInputs Data Flow — after Sol's independent read-only audit. Sol's accepted token is `PASS_ACM_05_INITIAL_AUDIT_READY_FOR_ARCHITECT_DOMAIN_REVIEW`; the Architect owns the closure decision. **ACM-05: FORMALLY CLOSED / FORMALLY RECORDED.** All thirty-one audit dimensions are CLOSED. **ACM-05-F01: NOT ESTABLISHED.** No current data-flow defect or repair exists.
+
+Earlier ACM-01–ACM-04 blocks below preserve their closure-stage evidence; their former next-domain cursor wording predates this ACM-05 closure and does not control the current cursor.
+
+Static governance preflight PASS: 12 authoritative source PDFs, 12 matching source hashes, zero deterministic findings. This does not certify semantic fidelity. Current M00_L16 preserves IO / hardware / simulation → subsystem-owned mutable IOInputs → subsystem interpretation → immutable project observations → project consumers. The seven IO families are SwerveModuleIO, GyroIO, VisionIO, IntakeIO, FeederIO, FlywheelIO, and ElevatorIO. Each subsystem owns its transport instance(s); refresh precedes periodic observation construction. No mutable Inputs escape, alias, shared owner, alternate hardware read route, or static/global mutable transport was established.
+
+Fourteen current top-level records comprise the observation/read-model inventory: SwerveObservation, VisionObservation, QualifiedVisionMeasurement, VisionTiming, VisionMeasurementQuality, VisionFusionObservation, IntakeObservation, FeederObservation, FlywheelObservation, ElevatorObservation, DriverInputObservation, DriveThreeMeterValidationObservation, AutonomousEventObservation, and AutonomousPreparationObservation. VisionObservation copies its target list and independently owns target values. Commands and telemetry receive observations or semantic project values. Noop and Swerve/Gyro/Vision simulation paths preserve the same transport boundary. The corrected Feeder path is FeederIO → FeederIOInputs → FeederSubsystem → FeederObservation; escape NONE ESTABLISHED; status CORRECT. Full closure evidence and the IO inventory are recorded in [AGENTS.md](AGENTS.md).
+
+ACM-01 through ACM-04 remain FORMALLY CLOSED / CHECKPOINTED / PUSHED / TAGGED; no regression was established. ACM-06 is NEXT PROSPECTIVE / NOT STARTED / NOT ACTIVATED; ACM-07 through ACM-12 remain NOT STARTED. Phase 3 remains IN PROGRESS; Phase 4 remains NOT STARTED / FORBIDDEN. M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED; no M00_L17. This documentation-only record is ready for the later User-owned Git checkpoint workflow; no ACM-05 commit or tag identity exists. No Git write or project execution occurred. `github-recovery-codes.txt`: NOT ACCESSED / NOT MODIFIED.
+
+<!-- ACM-05 DOMAIN CLOSURE CURRENT END -->
 <!-- ACM-04 DOMAIN CLOSURE CURRENT BEGIN -->
 ## Current ACM-04 formal domain closure — 2026-10-01
 

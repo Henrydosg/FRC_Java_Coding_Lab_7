@@ -1,4 +1,18 @@
 # ADR: M00 Competition Mechanism Foundations Roadmap
+<!-- ACM-05 DOMAIN CLOSURE CURRENT BEGIN -->
+## Current ACM-05 formal domain closure — 2026-10-01
+
+The Architect explicitly authorized formal closure of ACM-05 — Observation / IOInputs Data Flow — following Sol's independent read-only audit token `PASS_ACM_05_INITIAL_AUDIT_READY_FOR_ARCHITECT_DOMAIN_REVIEW`. The Architect owns the decision; Sol supplied evidence. **ACM-05: FORMALLY CLOSED / FORMALLY RECORDED.** All thirty-one audit dimensions are CLOSED. **ACM-05-F01: NOT ESTABLISHED;** no current defect or repair exists.
+
+Earlier ACM-01–ACM-04 blocks below preserve their closure-stage evidence; their former next-domain cursor wording predates this ACM-05 closure and does not control the current cursor.
+
+Governance preflight PASS: 12 source PDFs, 12 matching hashes, zero deterministic findings; semantic fidelity certification was not performed. Current M00_L16 preserves IO / hardware / simulation → subsystem-owned mutable IOInputs → subsystem interpretation → immutable project read models → consumers. The seven IO families are SwerveModuleIO, GyroIO, VisionIO, IntakeIO, FeederIO, FlywheelIO, and ElevatorIO. Their subsystem-owned Inputs refresh before periodic observation creation. No mutable transport escape, alias, shared owner, or alternate hardware-derived public read path was established.
+
+The fourteen top-level read models are SwerveObservation, VisionObservation, QualifiedVisionMeasurement, VisionTiming, VisionMeasurementQuality, VisionFusionObservation, IntakeObservation, FeederObservation, FlywheelObservation, ElevatorObservation, DriverInputObservation, DriveThreeMeterValidationObservation, AutonomousEventObservation, and AutonomousPreparationObservation. Vision defensively copies the target list and values. Telemetry uses subsystem observations; reviewed commands use observations or semantic APIs. Noop and Swerve/Gyro/Vision simulation implementations preserve the same data boundary. FeederIO → FeederIOInputs → FeederSubsystem → FeederObservation is CORRECT; mutable transport escape NONE ESTABLISHED. Full inventory and evidence are recorded in [AGENTS.md](../../AGENTS.md).
+
+ACM-01 through ACM-04 remain FORMALLY CLOSED / CHECKPOINTED / PUSHED / TAGGED; no regression was established. ACM-06 is NEXT PROSPECTIVE / NOT STARTED / NOT ACTIVATED. ACM-07 through ACM-12 remain NOT STARTED. Phase 3 remains IN PROGRESS; Phase 4 remains NOT STARTED / FORBIDDEN. M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED; no M00_L17. ACM-05 has reached a checkpoint suitable for the later User-owned Git workflow; no ACM-05 commit or tag identity exists. Documentation-only recording; no Git write or project execution occurred. `github-recovery-codes.txt`: NOT ACCESSED / NOT MODIFIED.
+
+<!-- ACM-05 DOMAIN CLOSURE CURRENT END -->
 <!-- ACM-04 DOMAIN CLOSURE CURRENT BEGIN -->
 ## Current ACM-04 formal domain closure — 2026-10-01
 

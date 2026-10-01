@@ -1,4 +1,16 @@
 # LESSON_STATUS — M00_L16 Mechanism Autonomous Event Integration
+<!-- ACM-05 DOMAIN CLOSURE CURRENT BEGIN -->
+## Current ACM-05 formal domain closure — 2026-10-01
+
+ACM-05 — Observation / IOInputs Data Flow — is **FORMALLY CLOSED / FORMALLY RECORDED** by explicit Architect authorization following Sol's independent audit `PASS_ACM_05_INITIAL_AUDIT_READY_FOR_ARCHITECT_DOMAIN_REVIEW`. All thirty-one audit dimensions are CLOSED; ACM-05-F01 is NOT ESTABLISHED. Governance preflight: PASS, 12/12 source hashes, zero deterministic findings; semantic fidelity certification was not performed.
+
+The ACM-04 closure block below preserves its earlier stage record; its ACM-05 next-domain wording predates this closure and does not control the current cursor.
+
+Current M00_L16 retains the one-way IO → subsystem-owned IOInputs → immutable observation → project consumer flow. The seven IO families and fourteen top-level read models were inventoried. No public or cross-layer Inputs exposure, alias, shared ownership, or alternate hardware-data bypass was established. Vision snapshots its target list and target values. Telemetry and commands use observations or semantic project values. FeederIO → FeederIOInputs → FeederSubsystem → FeederObservation is CORRECT with no mutable escape. Full evidence is in [AGENTS.md](../../../AGENTS.md).
+
+ACM-01 through ACM-04 remain FORMALLY CLOSED / CHECKPOINTED / PUSHED / TAGGED. ACM-06 is NEXT PROSPECTIVE / NOT STARTED / NOT ACTIVATED; ACM-07 through ACM-12 remain NOT STARTED. Phase 3 remains IN PROGRESS; Phase 4 remains NOT STARTED / FORBIDDEN. M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED; no M00_L17. Checkpoint is ready for later User-owned Git workflow; no ACM-05 commit/tag exists. Documentation-only; no Git write or project execution. `github-recovery-codes.txt`: NOT ACCESSED / NOT MODIFIED.
+
+<!-- ACM-05 DOMAIN CLOSURE CURRENT END -->
 <!-- ACM-04 DOMAIN CLOSURE CURRENT BEGIN -->
 ## Current ACM-04 formal domain closure — 2026-10-01
 

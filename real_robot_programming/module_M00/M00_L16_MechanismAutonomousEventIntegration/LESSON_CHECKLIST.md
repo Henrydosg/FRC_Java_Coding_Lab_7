@@ -1,4 +1,16 @@
 # M00_L16 — Mechanism Autonomous Event Integration Checklist
+<!-- ACM-05 DOMAIN CLOSURE CURRENT BEGIN -->
+## Current ACM-05 formal domain closure — 2026-10-01
+
+ACM-05 — Observation / IOInputs Data Flow — is FORMALLY CLOSED / FORMALLY RECORDED by the Architect after independent Sol audit `PASS_ACM_05_INITIAL_AUDIT_READY_FOR_ARCHITECT_DOMAIN_REVIEW`. All thirty-one audit dimensions are CLOSED; ACM-05-F01 is NOT ESTABLISHED. Static governance preflight passed: 12 source PDFs, 12 matching hashes, zero deterministic findings. Semantic fidelity certification was not performed.
+
+The ACM-04 closure block below preserves its earlier stage record; its ACM-05 next-domain wording predates this closure and does not control the current cursor.
+
+Current lesson preserves IO / hardware / simulation → subsystem-owned IOInputs → immutable observation/read model → project consumers. Seven IO families were inventoried; no mutable Inputs escape, alias, shared ownership, or alternate data bypass was found. The fourteen observation types and their nested Swerve/Vision values remain immutable project read models. Vision snapshots its target list and values. Telemetry and commands consume observations or semantic values. Noop and Swerve/Gyro/Vision simulation use the same boundary. FeederIO → FeederIOInputs → FeederSubsystem → FeederObservation is CORRECT; no transport escape. Full record: [AGENTS.md](../../../AGENTS.md).
+
+ACM-01 through ACM-04 remain FORMALLY CLOSED / CHECKPOINTED / PUSHED / TAGGED. ACM-06 remains NEXT PROSPECTIVE / NOT STARTED / NOT ACTIVATED; ACM-07 through ACM-12 remain NOT STARTED. Phase 3 remains IN PROGRESS; Phase 4 remains NOT STARTED / FORBIDDEN. M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED; no M00_L17. No ACM-05 commit/tag exists; checkpoint awaits later User-owned Git workflow. Documentation-only; no Git write or project execution. `github-recovery-codes.txt`: NOT ACCESSED / NOT MODIFIED.
+
+<!-- ACM-05 DOMAIN CLOSURE CURRENT END -->
 <!-- ACM-04 DOMAIN CLOSURE CURRENT BEGIN -->
 ## Current ACM-04 formal domain closure — 2026-10-01
 

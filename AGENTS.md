@@ -1,4 +1,48 @@
 # AGENTS.md
+<!-- ACM-05 DOMAIN CLOSURE CURRENT BEGIN -->
+## Current ACM-05 formal domain closure — 2026-10-01
+
+The Architect explicitly authorized formal closure of ACM-05 — Observation / IOInputs Data Flow — following Sol's independent read-only audit. Sol's accepted audit token is:
+`PASS_ACM_05_INITIAL_AUDIT_READY_FOR_ARCHITECT_DOMAIN_REVIEW`
+The Architect owns the closure decision; Sol supplied independent evidence.
+
+**ACM-05: FORMALLY CLOSED / FORMALLY RECORDED.** All thirty-one audit dimensions are CLOSED. **ACM-05-F01: NOT ESTABLISHED.** No current IOInputs/observation data-flow defect was established, no repair is required, and no repair ADR was created.
+
+Earlier ACM-01–ACM-04 blocks below preserve their closure-stage evidence; their former next-domain cursor wording predates this ACM-05 closure and does not control the current cursor.
+
+Static governance preflight PASS: 12 authoritative source PDFs, 12 matching source hashes, and zero deterministic findings. This deterministic result does not certify semantic fidelity. Documents A/B/C and their applicable VERIFIED mirrors establish the intended one-way path: IO / hardware / simulation → mutable IOInputs transport → subsystem ownership and interpretation → immutable project observation/read model → project consumers.
+
+The seven current production IO families and transport ownership are:
+
+| IO contract | Transport payload | Subsystem-owned instance(s) and consumer | Contract writes | Result |
+| --- | --- | --- | --- | --- |
+| `SwerveModuleIO` | Drive/steer output, position, velocity, electrical/temperature measurements, encoder measurements, connection and configuration-health flags | Four `SwerveModuleIOInputs` in `SwerveSubsystem` | Drive/steer output and velocity, steer angle, characterization completion, stop | `SwerveObservation.ModuleObservation`; CORRECT |
+| `GyroIO` | Yaw/pitch/roll, three angular rates, connection and configuration-health flags | One `GyroIOInputs` in `SwerveSubsystem` | None | `SwerveObservation.GyroObservation`; CORRECT |
+| `VisionIO` | Availability, connection, sample/timing validity, receive timestamp, latency, ordered target values | One `VisionIOInputs` in `VisionSubsystem` | None | `VisionObservation` and optional `QualifiedVisionMeasurement`; CORRECT |
+| `IntakeIO` | Availability and connection | One `IntakeIOInputs` in `IntakeSubsystem` | Intake request, stop | `IntakeObservation`; CORRECT |
+| `FeederIO` | Availability and connection | One `FeederIOInputs` in `FeederSubsystem` | Feed request, stop | `FeederObservation`; CORRECT |
+| `FlywheelIO` | Availability, connection, velocity validity and RPM | One `FlywheelIOInputs` in `FlywheelSubsystem` | Velocity request, stop | `FlywheelObservation`; CORRECT |
+| `ElevatorIO` | Availability, connection, position validity/reference and position in meters | One `ElevatorIOInputs` in `ElevatorSubsystem` | Position request, homing request, stop | `ElevatorObservation`; CORRECT |
+
+Each subsystem creates and retains its Inputs instance(s). Concrete IO implementations receive these mutable objects only as `updateInputs` targets. No adapter retention/re-export, second architectural owner, or cross-subsystem shared mutable Inputs was established. Each subsystem periodic path refreshes before constructing its current public observation. Mechanism request/stop methods may rebuild an observation from new software intent and the most recently sampled sensor state; this is expected retained state, not a periodic-order defect.
+
+The fourteen current top-level observation/read-model records are `SwerveObservation`, `VisionObservation`, `QualifiedVisionMeasurement`, `VisionTiming`, `VisionMeasurementQuality`, `VisionFusionObservation`, `IntakeObservation`, `FeederObservation`, `FlywheelObservation`, `ElevatorObservation`, `DriverInputObservation`, `DriveThreeMeterValidationObservation`, `AutonomousEventObservation`, and `AutonomousPreparationObservation`. Their nested Swerve module/gyro/pose records and Vision `TargetObservation` remain with their parent. `ElevatorRequestedState` and `VisionMeasurementQualityEvaluator.Policy` are not observations.
+
+SwerveModuleIOCTRE / SwerveModuleIOSim / SwerveModuleIONoop → private module Inputs → `SwerveSubsystem` → copied module values in `SwerveObservation`. GyroIOPigeon2 / GyroIOSim / GyroIONoop → private gyro Inputs → `SwerveSubsystem` → `SwerveObservation.GyroObservation`. A separate front-left refresh during Test-mode steer commissioning is consumed inside `SwerveSubsystem` to calculate a steer request; it does not expose Inputs, and the public Swerve observation remains the complete periodic snapshot.
+
+VisionIOLimelight / VisionIOSim → private `VisionIOInputs` → `VisionSubsystem` → `VisionObservation` / optional `QualifiedVisionMeasurement` → project consumers. Vision targets are converted into new target observations; the observation owns an independent copied list and independently constructed target values. Timing and validity remain project-facing; Limelight frame-index behavior stays in the adapter. Raw vendor frame objects do not escape.
+
+IntakeIO → IntakeIOInputs → IntakeSubsystem → IntakeObservation; FeederIO → FeederIOInputs → FeederSubsystem → FeederObservation; FlywheelIO → FlywheelIOInputs → FlywheelSubsystem → FlywheelObservation; ElevatorIO → ElevatorIOInputs → ElevatorSubsystem → ElevatorObservation. Current Noop adapters use the same transport boundary. Swerve, gyro, and vision simulation implementations use `updateInputs` and the same subsystem observation paths. The absence of real mechanism adapters is not an ACM-05 defect; simulation fidelity is outside this closure.
+
+Production IOInputs references are confined to IO contracts, concrete IO update implementations, and owning subsystems. No public getter, observation field, command constructor, telemetry API, RobotContainer plumbing, callback, supplier, collection, generic helper, or static/global state exposes mutable IOInputs. Telemetry obtains subsystem observations, including immutable autonomous diagnostic observations. Reviewed commands use observations or semantic project/subsystem values. No alternate hardware-derived route around IOInputs, mutable transport alias, static/global transport registry, or mutable observation registry was established. RobotContainer's autonomous-event reference contains an immutable observation value. Tests cover subsystem refresh/order, observation behavior, Vision collection/transform copying, and Vision transport overwrite/timing; test-fixture IOInputs access is test-only and was not treated as production leakage. Tests were not run.
+
+ACM-01 remains FORMALLY CLOSED / CHECKPOINTED / PUSHED / TAGGED at `88b36ad22560e5bf08f1dc1365bed86efaaa68b8` (`audit-acm-01-closed`). ACM-02 remains FORMALLY CLOSED / CHECKPOINTED / PUSHED / TAGGED at `25b01017f2a854b1370c192729cc3c63beaab930` (`audit-acm-02-closed`). ACM-03 remains FORMALLY CLOSED / CHECKPOINTED / PUSHED / TAGGED at `849dc94061e29b80cf75e199bfc231659e2551c5`. ACM-04 remains FORMALLY CLOSED / CHECKPOINTED / PUSHED / TAGGED at `1a165797cfe7a094c6df2ec0bb4bc7bec37a2255`. No regression was established in ACM-01 through ACM-04; ACM-03-F01 and ACM-04-F01 remain NOT ESTABLISHED.
+
+Historical S00/A01/V00/M00 predecessor lessons remain historical and untouched. ACM-06 is the next prospective domain: NOT STARTED / NOT ACTIVATED. ACM-07 through ACM-12 remain NOT STARTED. Phase 3 remains IN PROGRESS; Phase 4 remains NOT STARTED / FORBIDDEN. M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED. No M00_L17. This closure makes no claim for ACM-06 through ACM-12 and does not authorize re-freeze, publication, Constants.java cleanup/refactor, or Phase 4.
+
+ACM-05 has reached a domain-closure checkpoint suitable for the later User-owned Git checkpoint workflow. No ACM-05 commit or tag identity exists. This is a documentation-only lifecycle record: no Java, tests, authoritative A/B/C sources, governance manifest/mirrors, historical lesson source, dependencies, deployment assets, or protected/unrelated files were changed. No Git write, Gradle, tests, build, Simulation, Glass, Driver Station, or hardware execution occurred. `github-recovery-codes.txt`: NOT ACCESSED / NOT MODIFIED.
+
+<!-- ACM-05 DOMAIN CLOSURE CURRENT END -->
 <!-- ACM-04 DOMAIN CLOSURE CURRENT BEGIN -->
 ## Current ACM-04 formal domain closure — 2026-10-01
 
