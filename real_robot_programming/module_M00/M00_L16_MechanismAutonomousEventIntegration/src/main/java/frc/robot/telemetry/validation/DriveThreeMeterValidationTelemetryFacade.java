@@ -13,7 +13,7 @@ import edu.wpi.first.networktables.BooleanPublisher;
 import edu.wpi.first.networktables.DoublePublisher;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.StringPublisher;
-import frc.robot.observation.DriveThreeMeterValidationObservation;
+import frc.robot.observation.swerve.DriveThreeMeterValidationObservation;
 import java.util.Objects;
 
 /** Publishes the L23 three-meter validation observation for Glass/NT4. */

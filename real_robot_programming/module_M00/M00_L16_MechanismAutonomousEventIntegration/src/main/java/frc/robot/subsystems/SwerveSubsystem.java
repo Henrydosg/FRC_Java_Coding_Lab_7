@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.io.gyro.GyroIO;
 import frc.robot.io.swerve.SwerveModuleIO;
-import frc.robot.observation.SwerveObservation;
+import frc.robot.observation.swerve.SwerveObservation;
 import frc.robot.observation.vision.QualifiedVisionMeasurement;
 import frc.robot.observation.vision.VisionFusionObservation;
 import frc.robot.observation.vision.VisionMeasurementQuality.Acceptance;

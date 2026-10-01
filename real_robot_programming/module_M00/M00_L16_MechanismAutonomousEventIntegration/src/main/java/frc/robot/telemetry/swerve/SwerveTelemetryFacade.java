@@ -16,7 +16,7 @@ import edu.wpi.first.networktables.DoublePublisher;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.observation.SwerveObservation;
+import frc.robot.observation.swerve.SwerveObservation;
 import frc.robot.observation.vision.VisionFusionObservation;
 import java.util.Objects;
 import java.util.Optional;

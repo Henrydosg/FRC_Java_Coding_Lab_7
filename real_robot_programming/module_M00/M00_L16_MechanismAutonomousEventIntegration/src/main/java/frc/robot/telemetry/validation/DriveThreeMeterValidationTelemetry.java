@@ -9,7 +9,7 @@
 
 package frc.robot.telemetry.validation;
 
-import frc.robot.observation.DriveThreeMeterValidationObservation;
+import frc.robot.observation.swerve.DriveThreeMeterValidationObservation;
 
 /** Consumes immutable three-meter validation observations. */
 public interface DriveThreeMeterValidationTelemetry {

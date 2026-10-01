@@ -26,7 +26,7 @@ import frc.robot.io.gyro.GyroIO;
 import frc.robot.io.gyro.GyroIONoop;
 import frc.robot.io.swerve.SwerveModuleIO;
 import frc.robot.io.swerve.SwerveModuleIOSim;
-import frc.robot.observation.DriveThreeMeterValidationObservation;
+import frc.robot.observation.swerve.DriveThreeMeterValidationObservation;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.telemetry.validation.DriveThreeMeterValidationTelemetry;
 import java.util.function.DoubleSupplier;
