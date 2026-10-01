@@ -1299,7 +1299,28 @@ public class SwerveModuleIOCTRE implements SwerveModuleIO {
   }
 
   static void stopModuleMotors(Runnable driveStopAction, Runnable steerStopAction) {
-    Objects.requireNonNull(driveStopAction, "driveStopAction").run();
-    Objects.requireNonNull(steerStopAction, "steerStopAction").run();
+    Throwable firstFailure = null;
+    try {
+      Objects.requireNonNull(driveStopAction, "driveStopAction").run();
+    } catch (RuntimeException | Error failure) {
+      firstFailure = failure;
+    }
+
+    try {
+      Objects.requireNonNull(steerStopAction, "steerStopAction").run();
+    } catch (RuntimeException | Error failure) {
+      if (firstFailure == null) {
+        firstFailure = failure;
+      } else if (failure != firstFailure) {
+        firstFailure.addSuppressed(failure);
+      }
+    }
+
+    if (firstFailure instanceof RuntimeException failure) {
+      throw failure;
+    }
+    if (firstFailure instanceof Error failure) {
+      throw failure;
+    }
   }
 }
