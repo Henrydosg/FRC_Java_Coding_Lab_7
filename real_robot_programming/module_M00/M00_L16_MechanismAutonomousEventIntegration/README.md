@@ -1,3 +1,15 @@
+<!-- ACM-11 DOMAIN CLOSURE CURRENT BEGIN -->
+## Current ACM-11 formal domain closure — 2026-10-02
+
+The Architect authorized ACM-11 FORMAL DOMAIN CLOSURE after Sol's independent Configuration Authority audit. Accepted token: `PASS_ACM_11_INITIAL_AUDIT_READY_FOR_ARCHITECT_DOMAIN_REVIEW`. **ACM-11 is FORMALLY CLOSED / FORMALLY RECORDED: 55 / 55 dimensions CLOSED; 0 BLOCKED. ACM-11-F01: NOT ESTABLISHED. NO ADDITIONAL ACM-11 FINDING ESTABLISHED.** The full configuration record and closure matrix are in [AGENTS.md](../../../AGENTS.md).
+
+`Constants.java` is the default authority for stable robot-specific and lesson-approved values; implementation details, runtime state, and simulation/test fixtures retain their proper owners. Current Swerve uses CAN IDs Pigeon 20 and modules 21–32, 6.75:1 drive / 15.42857142857143:1 steer ratios, 0.1016 m diameter / 0.0508 m radius, 0.5461 m wheelbase and track width, 70 A drive supply and 60 A steer stator limits. CANcoder offsets are FL +0.068603515625, FR +0.014404296875, BL +0.46240234375, BR -0.057373046875 rotations; the newer tracked user-authoritative recalibration supersedes earlier values. Drive gains remain provisional. Driver port/deadband are 0/0.10. PathPlanner physical model remains provisional. Vision uses the `limelight` table, current robot-to-camera calibration and 1/2/3 m plus 0.250 s qualification policy; estimator covariance uses WPILib defaults because no project-specific value is configured. Flywheel readiness 50 RPM is provisional.
+
+No contradictory production authority, mutable hidden configuration store, or additional finding was established. Wheel radius and diameter are separately declared but consistent; this is a maintenance consideration, not a current defect. Static governance validator PASS (12 source PDFs, hashes and trust checks; zero deterministic findings); semantic-fidelity certification was NOT PERFORMED.
+
+ACM-01–ACM-10 remain formally closed, checkpointed, pushed, and annotated tagged; latest checkpoint is `d6bdc6f1fef24239d7b5c0802f29453d9ce1a24f` (`audit-acm-10-closed`). ACM-12 is NEXT PROSPECTIVE / NOT STARTED / NOT ACTIVATED. Phase 3 remains IN_PROGRESS; Phase 4 remains NOT STARTED / FORBIDDEN. M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED; no M00_L17. This recording changes only the eight authorized lifecycle documents; no Java, tests, configuration values, Git, or project execution changed. `github-recovery-codes.txt`: NOT ACCESSED / NOT MODIFIED. Next gate: User-owned ACM-11 Git checkpoint.
+<!-- ACM-11 DOMAIN CLOSURE CURRENT END -->
+
 <!-- ACM-10 DOMAIN CLOSURE CURRENT BEGIN -->
 ## Current ACM-10 formal domain closure — 2026-10-02
 

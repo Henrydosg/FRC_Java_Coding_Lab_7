@@ -1,3 +1,13 @@
+<!-- ACM-11 DOMAIN CLOSURE CURRENT BEGIN -->
+## Current ACM-11 formal domain closure — 2026-10-02
+
+The Architect authorized formal closure following Sol's independent audit token `PASS_ACM_11_INITIAL_AUDIT_READY_FOR_ARCHITECT_DOMAIN_REVIEW`. **ACM-11: FORMALLY CLOSED / FORMALLY RECORDED; 55 / 55 dimensions CLOSED; 0 BLOCKED. ACM-11-F01: NOT ESTABLISHED. NO ADDITIONAL ACM-11 FINDING ESTABLISHED.** The full configuration summary and dimension matrix are recorded in [AGENTS.md](../../AGENTS.md).
+
+The accepted model makes `Constants.java` the default owner of stable robot-specific and lesson-approved configuration, while implementation details, runtime state, and simulation/test fixtures remain with their respective owners. Current CANcoder offsets are FL +0.068603515625, FR +0.014404296875, BL +0.46240234375, BR -0.057373046875 rotations; a later tracked user-authoritative recalibration supersedes older activation-brief values. Drive gains and PathPlanner physical model values remain provisional. Vision qualification policy is separate from estimator covariance; project-specific covariance is not configured and WPILib defaults apply. No contradictory current production configuration authority was established.
+
+ACM-01 through ACM-10 remain FORMALLY CLOSED / CHECKPOINTED / PUSHED / ANNOTATED TAGGED; latest checkpoint `d6bdc6f1fef24239d7b5c0802f29453d9ce1a24f`, tag `audit-acm-10-closed`. ACM-12 is NEXT PROSPECTIVE / NOT STARTED / NOT ACTIVATED. Phase 3 remains IN_PROGRESS; Phase 4 remains NOT STARTED / FORBIDDEN; M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED; no M00_L17. Static governance validator PASS; semantic-fidelity certification was NOT PERFORMED. Documentation-only recording; no Git writes or project execution. `github-recovery-codes.txt`: NOT ACCESSED / NOT MODIFIED. Next gate: User-owned ACM-11 Git checkpoint.
+<!-- ACM-11 DOMAIN CLOSURE CURRENT END -->
+
 <!-- ACM-10 DOMAIN CLOSURE CURRENT BEGIN -->
 ## Current ACM-10 formal domain closure — 2026-10-02
 
