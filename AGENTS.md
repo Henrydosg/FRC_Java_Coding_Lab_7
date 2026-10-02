@@ -1,3 +1,79 @@
+<!-- ACM-10 DOMAIN CLOSURE CURRENT BEGIN -->
+## Current ACM-10 formal domain closure — 2026-10-02
+
+The Architect reviewed Sol's independent initial audit and explicitly authorized **ACM-10 FORMAL DOMAIN CLOSURE**. Accepted audit token: PASS_ACM_10_INITIAL_AUDIT_READY_FOR_ARCHITECT_DOMAIN_REVIEW. **ACM-10 is FORMALLY CLOSED / FORMALLY RECORDED: 50 / 50 dimensions CLOSED; 0 BLOCKED. ACM-10-F01: NOT ESTABLISHED. NO ADDITIONAL ACM-10 FINDING ESTABLISHED.** The dimension-by-dimension record is included in this ACM-10 closure block.
+
+The static governance validator passed: 12 authoritative English source PDFs, 12 matching hashes, 12 trust checks, zero deterministic findings. Semantic-fidelity certification was NOT PERFORMED.
+
+RobotContainer is the production composition root and Real/Simulation selection authority; WPILib RobotBase is the runtime environment signal. RobotBase.isReal() governs RobotContainer's Vision and Swerve construction: Real selects four SwerveModuleIOCTRE adapters, GyroIOPigeon2, and VisionIOLimelight; otherwise it selects four SwerveModuleIOSim adapters with shared SwerveSimulationState and GyroIOSim, plus VisionIOSim and its simulation-only VisionIOSimHarness/fixture chooser. Both modes inject the same project IO contracts into the same subsystems. The fixture changes simulated Vision input only; it neither swaps adapters nor writes estimator state. No hidden production mode-selection branch or hardware adapter reachable from the selected Simulation graph was established.
+
+IntakeIONoop, FeederIONoop, FlywheelIONoop, and ElevatorIONoop are used in both modes. These are unavailable, non-actuating implementations; no current mechanism hardware or mechanism physics simulation is claimed. Real and Simulation paths retain the same command, observation, telemetry, localization, driver-input, autonomous, and named-event architecture. SwerveSubsystem remains the localization owner. No numerical or physical Simulation fidelity is claimed for battery, current, thermal, traction, or controller dynamics.
+
+Static test review identified RobotSimulationHarnessCompositionTest, VisionIOSimHarnessTest, Swerve/Gyro simulation tests, and mechanism Noop tests. No tests were executed during the ACM-10 audit. There is no paired Real-mode RobotContainer test; its absence was not established as a defect.
+
+RobotContainer selects concrete adapters once at construction, creates one subsystem graph, and keeps adapter identity fixed for that graph's lifetime. Robot owns lifecycle and does not select IO. Subsystems consume the shared project IO contracts, while commands use subsystem semantic APIs; both are mode-agnostic. Hardware adapters are confined to the Real-selected graph, and simulation adapters and the harness to the Simulation-selected graph.
+
+RobotContainer.runSimulationHarness() applies the selected Vision fixture only when RobotBase.isSimulation(); that gate does not choose adapters. VisionIOSim flows through VisionSubsystem qualification and the existing fusion handoff to SwerveSubsystem's estimator, while simulated modules and gyro feed that same localization owner. Telemetry reads shared project observations, and driver input, autonomous, and named events retain their existing shared controller, scheduler, and command paths. Intake and Feeder Noop IOs do not model physical mechanism movement.
+
+ACM-01 through ACM-09 remain FORMALLY CLOSED / CHECKPOINTED / PUSHED / ANNOTATED TAGGED. The latest published checkpoint is c4824c255eae5835ebf6c51505a95899f95d0b35, parent a932931ae674817b4fb994cba8cfe2ef2591db98, annotated tag audit-acm-09-closed. The User reports origin/main and the remote peeled tag target verified at that commit; the local HEAD and origin/main refs also resolve there. **ACM-11 is NEXT PROSPECTIVE / NOT STARTED / NOT ACTIVATED**; ACM-12 remains NOT STARTED. Phase 3 remains IN_PROGRESS; Phase 4 remains NOT STARTED / FORBIDDEN. M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED; no M00_L17. This closure does not authorize an ACM-10 checkpoint, tag, push, ACM-11 activation, Constants.java cleanup/refactor, re-freeze, publication, or Phase 4.
+
+This formal closure recording changes only the eight authorized lifecycle documents. No Java source, tests, or other protected content was changed. No Git write or project execution occurred; the index remains empty. Existing protected/unrelated worktree state was left untouched. github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED. The next gate is the User-owned ACM-10 Git checkpoint.
+### ACM-10 formal domain closure matrix — 50/50 CLOSED
+
+| # | Dimension | Status |
+| ---: | --- | --- |
+| 1 | Governance authority | CLOSED |
+| 2 | Real/Sim selection inventory | CLOSED |
+| 3 | Environment-detection authority | CLOSED |
+| 4 | Composition-root selection authority | CLOSED |
+| 5 | RobotBase.isReal boundary | CLOSED |
+| 6 | Swerve mode selection | CLOSED |
+| 7 | Swerve hardware isolation | CLOSED |
+| 8 | Swerve simulation isolation | CLOSED |
+| 9 | Vision mode selection | CLOSED |
+| 10 | Vision hardware isolation | CLOSED |
+| 11 | Vision simulation isolation | CLOSED |
+| 12 | Intake mode selection | CLOSED |
+| 13 | Feeder mode selection | CLOSED |
+| 14 | Flywheel mode selection | CLOSED |
+| 15 | Elevator mode selection | CLOSED |
+| 16 | Same IO contract across modes | CLOSED |
+| 17 | Subsystem mode ignorance | CLOSED |
+| 18 | Command mode ignorance | CLOSED |
+| 19 | Robot role | CLOSED |
+| 20 | RobotContainer role | CLOSED |
+| 21 | simulationPeriodic ownership | CLOSED |
+| 22 | Simulation state ownership | CLOSED |
+| 23 | Simulation fixture chooser boundary | CLOSED |
+| 24 | Dashboard simulation-input boundary | CLOSED |
+| 25 | Real hardware construction | CLOSED |
+| 26 | Simulation adapter construction | CLOSED |
+| 27 | Noop/fallback adapter ownership | CLOSED |
+| 28 | Mode-selection lifetime | CLOSED |
+| 29 | Duplicate-composition avoidance | CLOSED |
+| 30 | Real/Sim API parity | CLOSED |
+| 31 | Safe simulation writes | CLOSED |
+| 32 | Safe real writes | CLOSED |
+| 33 | Sensor-input parity | CLOSED |
+| 34 | Vision simulation path parity | CLOSED |
+| 35 | Localization simulation path parity | CLOSED |
+| 36 | Simulation telemetry boundary | CLOSED |
+| 37 | Driver-input simulation path | CLOSED |
+| 38 | Autonomous simulation path | CLOSED |
+| 39 | Named-event simulation path | CLOSED |
+| 40 | Hardware-only API sweep | CLOSED |
+| 41 | Simulation-only API sweep | CLOSED |
+| 42 | Static mode-branch sweep | CLOSED |
+| 43 | Startup failure semantics | CLOSED |
+| 44 | Test evidence | CLOSED |
+| 45 | Current/historical distinction | CLOSED |
+| 46 | ACM-01–ACM-09 preservation | CLOSED |
+| 47 | ACM-11 deferral | CLOSED |
+| 48 | ACM-12 deferral | CLOSED |
+| 49 | Frozen Backbone sanity | CLOSED |
+| 50 | Remaining ACM-10 work | CLOSED |
+<!-- ACM-10 DOMAIN CLOSURE CURRENT END -->
+
 <!-- ACM-09 DOMAIN CLOSURE CURRENT BEGIN -->
 ## Current ACM-09 formal domain closure — 2026-10-02
 
