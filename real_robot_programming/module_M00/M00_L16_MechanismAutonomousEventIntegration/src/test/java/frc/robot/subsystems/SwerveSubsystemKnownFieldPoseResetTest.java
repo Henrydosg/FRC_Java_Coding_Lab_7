@@ -155,6 +155,168 @@ class SwerveSubsystemKnownFieldPoseResetTest {
   }
 
   @Test
+  void headingRecapturePreservesInitializedOdometryAndEstimatedPose() {
+    Rig rig = initializedRig();
+    rig.gyro.yawDegrees = 80.0;
+    rig.periodic();
+
+    Pose2d odometryPoseBeforeCapture = rig.subsystem.getCurrentPose().orElseThrow();
+    Pose2d estimatedPoseBeforeCapture = rig.subsystem.getEstimatedPose().orElseThrow();
+    assertEquals(80.0, odometryPoseBeforeCapture.getRotation().getDegrees(), kTolerance);
+    assertEquals(80.0, estimatedPoseBeforeCapture.getRotation().getDegrees(), kTolerance);
+
+    assertTrue(rig.subsystem.captureFieldHeadingReference());
+
+    assertPoseEquals(odometryPoseBeforeCapture, rig.subsystem.getCurrentPose());
+    assertPoseEquals(estimatedPoseBeforeCapture, rig.subsystem.getEstimatedPose());
+    SwerveObservation synchronizedObservation = rig.subsystem.getObservation().orElseThrow();
+    assertTrue(synchronizedObservation.currentPose().orElseThrow().measurementSampleValid());
+    assertTrue(synchronizedObservation.estimatedPose().orElseThrow().measurementSampleValid());
+    assertEquals(
+        odometryPoseBeforeCapture.getRotation().getRadians(),
+        synchronizedObservation.currentPose().orElseThrow().headingRadians(),
+        kTolerance);
+    assertEquals(
+        estimatedPoseBeforeCapture.getRotation().getRadians(),
+        synchronizedObservation.estimatedPose().orElseThrow().headingRadians(),
+        kTolerance);
+
+    DriverStationSim.setEnabled(true);
+    DriverStationSim.notifyNewData();
+    rig.subsystem.acceptFieldRelativeChassisSpeeds(new ChassisSpeeds(1.0, 0.0, 0.0));
+    assertEquals(0.0, rig.subsystem.getFinalModuleStates()[0].angle.getDegrees(), kTolerance);
+  }
+
+  @Test
+  void captureBeforeLocalizationInitializationUsesNewReferenceWithoutCreatingTrackers() {
+    Rig rig = new Rig();
+    rig.gyro.yawDegrees = 30.0;
+    rig.periodic();
+
+    assertTrue(rig.subsystem.getCurrentPose().isEmpty());
+    assertTrue(rig.subsystem.getEstimatedPose().isEmpty());
+    assertTrue(rig.subsystem.captureFieldHeadingReference());
+    assertTrue(rig.subsystem.getCurrentPose().isEmpty());
+    assertTrue(rig.subsystem.getEstimatedPose().isEmpty());
+
+    rig.gyro.yawDegrees = 75.0;
+    rig.periodic();
+
+    Pose2d initializedPose = rig.subsystem.getEstimatedPose().orElseThrow();
+    assertEquals(45.0, initializedPose.getRotation().getDegrees(), kTolerance);
+    assertPoseEquals(initializedPose, rig.subsystem.getCurrentPose());
+  }
+
+  @Test
+  void headingRecapturePreservesDistinctOdometryAndEstimatedPosesIndependently() {
+    Rig rig = initializedRig();
+    Pose2d requestedOdometryPose =
+        new Pose2d(2.0, -1.0, Rotation2d.fromDegrees(20.0));
+    assertTrue(rig.subsystem.resetKnownFieldPose(requestedOdometryPose));
+
+    Timer.delay(0.010);
+    double visionTimestampSeconds = Timer.getFPGATimestamp();
+    Timer.delay(0.010);
+    rig.periodic();
+    assertTrue(
+        rig.subsystem.admitVisionMeasurement(acceptedMeasurement(visionTimestampSeconds, 8.0)));
+
+    Pose2d odometryPose = rig.subsystem.getCurrentPose().orElseThrow();
+    Pose2d estimatedPose = rig.subsystem.getEstimatedPose().orElseThrow();
+    assertTrue(
+        odometryPose.getTranslation().getDistance(estimatedPose.getTranslation()) > 1.0e-6);
+
+    rig.gyro.yawDegrees = 45.0;
+    rig.periodic();
+    odometryPose = rig.subsystem.getCurrentPose().orElseThrow();
+    estimatedPose = rig.subsystem.getEstimatedPose().orElseThrow();
+
+    assertTrue(rig.subsystem.captureFieldHeadingReference());
+
+    assertPoseEquals(odometryPose, rig.subsystem.getCurrentPose());
+    assertPoseEquals(estimatedPose, rig.subsystem.getEstimatedPose());
+    assertTrue(
+        rig.subsystem
+                .getCurrentPose()
+                .orElseThrow()
+                .getTranslation()
+                .getDistance(rig.subsystem.getEstimatedPose().orElseThrow().getTranslation())
+            > 1.0e-6);
+  }
+
+  @Test
+  void headingRecaptureThenRejectedKnownPoseResetLeavesLocalizationCoherent() {
+    Rig rig = initializedRig();
+    rig.gyro.yawDegrees = 60.0;
+    rig.periodic();
+    Pose2d odometryPose = rig.subsystem.getCurrentPose().orElseThrow();
+    Pose2d estimatedPose = rig.subsystem.getEstimatedPose().orElseThrow();
+
+    assertTrue(rig.subsystem.captureFieldHeadingReference());
+
+    DriverStationSim.setEnabled(true);
+    DriverStationSim.notifyNewData();
+    assertFalse(
+        rig.subsystem.resetKnownFieldPose(
+            new Pose2d(5.0, 6.0, Rotation2d.fromDegrees(90.0))));
+    assertPoseEquals(odometryPose, rig.subsystem.getCurrentPose());
+    assertPoseEquals(estimatedPose, rig.subsystem.getEstimatedPose());
+
+    rig.periodic();
+    assertPoseEquals(odometryPose, rig.subsystem.getCurrentPose());
+    assertPoseEquals(estimatedPose, rig.subsystem.getEstimatedPose());
+    SwerveObservation observation = rig.subsystem.getObservation().orElseThrow();
+    assertTrue(observation.currentPose().orElseThrow().measurementSampleValid());
+    assertTrue(observation.estimatedPose().orElseThrow().measurementSampleValid());
+  }
+
+  @Test
+  void invalidModuleSnapshotRejectsHeadingCaptureWithoutChangingReferenceOrPoses() {
+    Rig rig = initializedRig();
+    Pose2d previousOdometryPose = rig.subsystem.getCurrentPose().orElseThrow();
+    Pose2d previousEstimatedPose = rig.subsystem.getEstimatedPose().orElseThrow();
+
+    rig.frontLeft.encoderConfigurationHealthy = false;
+    rig.gyro.yawDegrees = 30.0;
+    rig.periodic();
+    assertFalse(rig.subsystem.captureFieldHeadingReference());
+    assertPoseEquals(previousOdometryPose, rig.subsystem.getCurrentPose());
+    assertPoseEquals(previousEstimatedPose, rig.subsystem.getEstimatedPose());
+
+    rig.frontLeft.encoderConfigurationHealthy = true;
+    rig.gyro.yawDegrees = 70.0;
+    rig.periodic();
+    DriverStationSim.setEnabled(true);
+    DriverStationSim.notifyNewData();
+    rig.subsystem.acceptFieldRelativeChassisSpeeds(new ChassisSpeeds(1.0, 0.0, 0.0));
+    assertEquals(-70.0, rig.subsystem.getFinalModuleStates()[0].angle.getDegrees(), kTolerance);
+  }
+
+  @Test
+  void headingRecaptureRejectsPreTransitionVisionAndAllowsNewerMeasurement() {
+    Rig rig = initializedRig();
+    Timer.delay(0.010);
+    double preCaptureTimestampSeconds = Timer.getFPGATimestamp();
+    Timer.delay(0.010);
+    rig.periodic();
+    rig.gyro.yawDegrees = 25.0;
+    rig.periodic();
+
+    assertTrue(rig.subsystem.captureFieldHeadingReference());
+    assertFalse(
+        rig.subsystem.admitVisionMeasurement(
+            acceptedMeasurement(preCaptureTimestampSeconds, 4.0)));
+
+    Timer.delay(0.010);
+    double postCaptureTimestampSeconds = Timer.getFPGATimestamp();
+    Timer.delay(0.010);
+    rig.periodic();
+    assertTrue(
+        rig.subsystem.admitVisionMeasurement(
+            acceptedMeasurement(postCaptureTimestampSeconds, 4.0)));
+  }
+
+  @Test
   void continuesTranslationFromTheResetSensorBaseline() {
     Rig rig = initializedRig();
     rig.setAllModulePositions(0.5, 0.0);

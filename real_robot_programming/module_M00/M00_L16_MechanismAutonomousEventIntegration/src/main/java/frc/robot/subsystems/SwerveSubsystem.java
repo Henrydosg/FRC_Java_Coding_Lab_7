@@ -404,8 +404,11 @@ public class SwerveSubsystem extends SubsystemBase {
    * Captures the latest valid raw gyro yaw as the field-heading zero reference.
    *
    * <p>The capture is accepted only while Disabled and after at least one complete gyro input
-   * refresh. A valid capture disarms any existing production intent and leaves the robot stopped;
-   * the next field-relative request must be new.
+   * refresh. If localization is initialized, it also requires a complete healthy module snapshot
+   * and re-anchors both trackers at their independently preserved poses before accepting the new
+   * reference. Before localization initializes, the new reference is used by its eventual
+   * initialization. A valid capture disarms any existing production intent and leaves the robot
+   * stopped; the next field-relative request must be new.
    *
    * @return true when a new reference was captured; false when the mode, snapshot, or gyro validity
    *     contract rejected the capture
@@ -419,8 +422,101 @@ public class SwerveSubsystem extends SubsystemBase {
       return false;
     }
 
+    boolean odometryInitialized = odometry != null;
+    boolean estimatorInitialized = poseEstimator != null;
+    if (odometryInitialized != estimatorInitialized) {
+      stop();
+      return false;
+    }
+
+    SwerveDriveOdometry synchronizedOdometry = null;
+    SwerveDrivePoseEstimator synchronizedEstimator = null;
+    Pose2d preservedCurrentPose = null;
+    Pose2d preservedEstimatedPose = null;
+    double synchronizationTimestampSeconds = Double.NaN;
+    if (odometryInitialized) {
+      if (!odometryContinuityValid
+          || !estimatorContinuityValid
+          || currentPose.isEmpty()
+          || estimatedPose.isEmpty()
+          || !Double.isFinite(latestEstimatorUpdateTimestampSeconds)
+          || latestObservation.isEmpty()) {
+        stop();
+        return false;
+      }
+
+      SwerveObservation observation = latestObservation.orElseThrow();
+      if (observation.currentPose().isEmpty()
+          || !observation.currentPose().orElseThrow().measurementSampleValid()
+          || observation.estimatedPose().isEmpty()
+          || !observation.estimatedPose().orElseThrow().measurementSampleValid()) {
+        stop();
+        return false;
+      }
+
+      SwerveModulePosition[] modulePositions =
+          toMeasuredModulePositions(
+              observation.frontLeft(),
+              observation.frontRight(),
+              observation.backLeft(),
+              observation.backRight());
+      if (!odometryMeasurementsValid(
+          observation.frontLeft(),
+          observation.frontRight(),
+          observation.backLeft(),
+          observation.backRight(),
+          modulePositions)) {
+        stop();
+        return false;
+      }
+
+      preservedCurrentPose = copyPose(currentPose.orElseThrow());
+      preservedEstimatedPose = copyPose(estimatedPose.orElseThrow());
+      if (!isFinitePose(preservedCurrentPose) || !isFinitePose(preservedEstimatedPose)) {
+        stop();
+        return false;
+      }
+      synchronizationTimestampSeconds = Timer.getFPGATimestamp();
+      if (!Double.isFinite(synchronizationTimestampSeconds)) {
+        stop();
+        return false;
+      }
+
+      // Construct replacement trackers before publishing the new reference. If either
+      // constructor rejects the snapshot, the existing reference and trackers remain intact.
+      Rotation2d newFieldHeading = Rotation2d.kZero;
+      try {
+        synchronizedOdometry =
+            new SwerveDriveOdometry(
+                odometryKinematics,
+                newFieldHeading,
+                modulePositions,
+                preservedCurrentPose);
+        synchronizedEstimator =
+            new SwerveDrivePoseEstimator(
+                odometryKinematics,
+                newFieldHeading,
+                modulePositions,
+                preservedEstimatedPose);
+      } catch (RuntimeException failure) {
+        stop();
+        return false;
+      }
+    }
+
     capturedRawYawDegrees = gyroInputs.yawDegrees;
     fieldHeadingReferenceValid = true;
+    if (odometryInitialized) {
+      odometry = synchronizedOdometry;
+      poseEstimator = synchronizedEstimator;
+      currentPose = Optional.of(preservedCurrentPose);
+      estimatedPose = Optional.of(preservedEstimatedPose);
+      odometryContinuityValid = true;
+      estimatorContinuityValid = true;
+      latestEstimatorUpdateTimestampSeconds = synchronizationTimestampSeconds;
+      establishVisionResetBarrier(synchronizationTimestampSeconds);
+      refreshLatestLocalizationObservation(true);
+    }
     stop();
     return true;
   }
@@ -885,13 +981,30 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   private void establishVisionResetBarrier() {
-    double barrierTimestampSeconds = Timer.getFPGATimestamp();
+    establishVisionResetBarrier(Timer.getFPGATimestamp());
+  }
+
+  private void establishVisionResetBarrier(double barrierTimestampSeconds) {
     if (Double.isFinite(barrierTimestampSeconds)) {
       visionResetBarrierTimestampSeconds =
           Math.max(visionResetBarrierTimestampSeconds, barrierTimestampSeconds);
       lastAcceptedVisionTimestampSeconds =
           Math.max(lastAcceptedVisionTimestampSeconds, visionResetBarrierTimestampSeconds);
     }
+  }
+
+  private void refreshLatestLocalizationObservation(boolean measurementSampleValid) {
+    latestObservation =
+        latestObservation.map(
+            observation ->
+                new SwerveObservation(
+                    observation.frontLeft(),
+                    observation.frontRight(),
+                    observation.backLeft(),
+                    observation.backRight(),
+                    observation.gyro(),
+                    toPoseObservation(measurementSampleValid),
+                    toEstimatedPoseObservation(measurementSampleValid)));
   }
 
   private static boolean odometryMeasurementsValid(
