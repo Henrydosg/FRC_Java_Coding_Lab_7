@@ -23,8 +23,10 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.WrapperCommand;
 import frc.robot.Constants;
 import frc.robot.autonomous.AutonomousEventId;
+import frc.robot.observation.swerve.SwerveObservation;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.commands.AutonomousStartContext;
 import java.util.Objects;
@@ -117,6 +119,8 @@ public final class AutoBuilderContractAdapter {
   private volatile boolean faulted;
   private volatile String firstFaultReason = "";
   private volatile ExecutionOutcome executionOutcome = ExecutionOutcome.NONE;
+  /** Input failure remains latched until a fresh scheduler-owned path begins. */
+  private volatile boolean executionInputUnavailable;
 
   /** Creates the AutoBuilder integration boundary. */
   public AutoBuilderContractAdapter(
@@ -294,7 +298,6 @@ public final class AutoBuilderContractAdapter {
             "AutoBuilder command did not require SwerveSubsystem");
       }
       double timeoutSeconds = pathTimeoutSeconds(executionPath);
-      executionOutcome = ExecutionOutcome.NONE;
       return new CommandCreationResult(
           CommandCreationStatus.CREATED,
           Optional.of(
@@ -370,8 +373,7 @@ public final class AutoBuilderContractAdapter {
   private Pose2d supplyPose() {
     Optional<Pose2d> pose = readPoseForValidation();
     if (pose.isEmpty() && !faulted) {
-      executionOutcome = ExecutionOutcome.INPUT_UNAVAILABLE;
-      safeStop();
+      stopForUnavailableInput();
     }
     return pose.orElse(fallbackPose);
   }
@@ -391,6 +393,13 @@ public final class AutoBuilderContractAdapter {
         latchFault("estimated pose was nonfinite");
         return Optional.empty();
       }
+      Optional<SwerveObservation> observation =
+          Objects.requireNonNull(swerveSubsystem.getObservation(), "swerve observation result");
+      if (observation.isEmpty()
+          || observation.orElseThrow().estimatedPose().isEmpty()
+          || !observation.orElseThrow().estimatedPose().orElseThrow().measurementSampleValid()) {
+        return Optional.empty();
+      }
       return Optional.of(copyPose(pose.orElseThrow()));
     } catch (RuntimeException failure) {
       latchFault("estimated pose callback failed", failure);
@@ -408,14 +417,13 @@ public final class AutoBuilderContractAdapter {
       return;
     }
     if (DriverStation.isEnabled()) {
-      executionOutcome = ExecutionOutcome.MODE_LOSS;
+      recordExecutionOutcome(ExecutionOutcome.MODE_LOSS);
       safeStop();
       return;
     }
     try {
       if (!swerveSubsystem.resetKnownFieldPose(copyPose(requestedPose))) {
-        executionOutcome = ExecutionOutcome.INPUT_UNAVAILABLE;
-        safeStop();
+        stopForUnavailableInput();
       }
     } catch (RuntimeException failure) {
       latchFault("AutoBuilder reset callback failed", failure);
@@ -425,8 +433,7 @@ public final class AutoBuilderContractAdapter {
   private ChassisSpeeds supplyMeasuredRobotRelativeSpeeds() {
     Optional<ChassisSpeeds> speeds = readMeasuredSpeedsForValidation();
     if (speeds.isEmpty() && !faulted) {
-      executionOutcome = ExecutionOutcome.INPUT_UNAVAILABLE;
-      safeStop();
+      stopForUnavailableInput();
     }
     return speeds.orElse(fallbackSpeeds);
   }
@@ -460,12 +467,16 @@ public final class AutoBuilderContractAdapter {
       return;
     }
     if (!DriverStation.isAutonomousEnabled()) {
-      executionOutcome = ExecutionOutcome.MODE_LOSS;
+      recordExecutionOutcome(ExecutionOutcome.MODE_LOSS);
       safeStop();
       return;
     }
     if (!isFiniteChassisSpeeds(output)) {
       latchFault("AutoBuilder produced nonfinite output");
+      return;
+    }
+    if (executionInputUnavailable) {
+      safeStop();
       return;
     }
     try {
@@ -553,6 +564,27 @@ public final class AutoBuilderContractAdapter {
     }
   }
 
+  private void stopForUnavailableInput() {
+    executionInputUnavailable = true;
+    if (!faulted) {
+      executionOutcome = ExecutionOutcome.INPUT_UNAVAILABLE;
+    }
+    safeStop();
+  }
+
+  private void recordExecutionOutcome(ExecutionOutcome outcome) {
+    if (!faulted && !executionInputUnavailable) {
+      executionOutcome = outcome;
+    }
+  }
+
+  private void beginSchedulerOwnedExecution() {
+    if (!faulted) {
+      executionInputUnavailable = false;
+      executionOutcome = ExecutionOutcome.NONE;
+    }
+  }
+
   private static boolean isFinitePose(Pose2d pose) {
     return pose != null
         && Double.isFinite(pose.getX())
@@ -592,12 +624,22 @@ public final class AutoBuilderContractAdapter {
     Command timeout =
         Commands.sequence(
             Commands.waitSeconds(timeoutSeconds),
-            Commands.runOnce(() -> executionOutcome = ExecutionOutcome.TIMEOUT));
+            Commands.runOnce(() -> recordExecutionOutcome(ExecutionOutcome.TIMEOUT)));
     Command modeLoss =
         Commands.sequence(
             Commands.waitUntil(() -> !DriverStation.isAutonomousEnabled()),
-            Commands.runOnce(() -> executionOutcome = ExecutionOutcome.MODE_LOSS));
-    return Commands.race(Objects.requireNonNull(followPath, "followPath"), timeout, modeLoss)
+            Commands.runOnce(() -> recordExecutionOutcome(ExecutionOutcome.MODE_LOSS)));
+    Command inputUnavailable = Commands.waitUntil(() -> executionInputUnavailable);
+    Command execution =
+        Commands.race(
+            Objects.requireNonNull(followPath, "followPath"), timeout, modeLoss, inputUnavailable);
+    return new WrapperCommand(execution) {
+      @Override
+      public void initialize() {
+        beginSchedulerOwnedExecution();
+        super.initialize();
+      }
+    }
         .finallyDo(this::finishSchedulerOwnedExecution)
         .withInterruptBehavior(Command.InterruptionBehavior.kCancelIncoming);
   }
@@ -605,10 +647,10 @@ public final class AutoBuilderContractAdapter {
   private void finishSchedulerOwnedExecution(boolean interrupted) {
     if (faulted || executionOutcome == ExecutionOutcome.FAULTED) {
       executionOutcome = ExecutionOutcome.FAULTED;
+    } else if (executionInputUnavailable) {
+      executionOutcome = ExecutionOutcome.INPUT_UNAVAILABLE;
     } else if (executionOutcome == ExecutionOutcome.NONE) {
       executionOutcome = interrupted ? ExecutionOutcome.INTERRUPTED : ExecutionOutcome.COMPLETE;
-    } else if (executionOutcome == ExecutionOutcome.INPUT_UNAVAILABLE) {
-      // The output boundary already stopped the drivetrain and classified this outcome.
     }
     safeStop();
   }

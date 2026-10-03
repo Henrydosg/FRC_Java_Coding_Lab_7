@@ -34,6 +34,8 @@ import frc.robot.commands.auto.AutonomousRoutineFactory;
 import frc.robot.commands.auto.AutonomousSafetyHoldCommand;
 import frc.robot.commands.auto.PathPlannerTrajectoryAdapter;
 import frc.robot.commands.auto.PrepareAutonomousCommand;
+import frc.robot.observation.autonomous.AutonomousPreparationObservation.Reason;
+import frc.robot.observation.autonomous.AutonomousPreparationObservation.State;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.util.FieldAllianceTransform;
 import java.io.IOException;
@@ -300,7 +302,12 @@ class RobotContainerPathPlannerIntegrationTest {
     selectOneMeterPath();
     scheduler.schedule(prepareCommand);
     scheduler.run();
+    assertTrue(prepareCommand.isScheduled());
+    assertEquals(State.VALIDATING, preparationCoordinator.getObservation().state());
+    assertEquals(Reason.PREPARATION_REQUESTED, preparationCoordinator.getObservation().reason());
+    scheduler.run();
     assertFalse(prepareCommand.isScheduled());
+    assertTrue(preparationCoordinator.getObservation().ready());
     assertPoseEquals(
         Constants.PathPlannerLearningConstants.kCanonicalPathStartingPose,
         swerveSubsystem.getEstimatedPose().orElseThrow());
@@ -311,6 +318,12 @@ class RobotContainerPathPlannerIntegrationTest {
     selectOneMeterPath();
     scheduler.schedule(prepareCommand);
     scheduler.run();
+    if (prepareCommand.isScheduled()) {
+      assertEquals(State.VALIDATING, preparationCoordinator.getObservation().state());
+      assertEquals(
+          Reason.PREPARATION_REQUESTED, preparationCoordinator.getObservation().reason());
+      scheduler.run();
+    }
     assertFalse(prepareCommand.isScheduled());
     Optional<DriverStation.Alliance> alliance = DriverStation.getAlliance();
     return preparationCoordinator

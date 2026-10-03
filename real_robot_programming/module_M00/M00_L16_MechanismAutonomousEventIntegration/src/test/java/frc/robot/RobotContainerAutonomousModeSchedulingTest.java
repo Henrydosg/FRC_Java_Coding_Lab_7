@@ -12,6 +12,7 @@ package frc.robot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,11 +20,13 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.AllianceStationID;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.simulation.DriverStationSim;
+import edu.wpi.first.wpilibj.simulation.XboxControllerSim;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -39,6 +42,10 @@ import frc.robot.io.gyro.GyroIO;
 import frc.robot.io.swerve.SwerveModuleIO;
 import frc.robot.commands.auto.PrepareAutonomousCommand;
 import frc.robot.commands.auto.PoseTargetedAutonomousMotionCommand;
+import frc.robot.observation.autonomous.AutonomousPreparationObservation.Reason;
+import frc.robot.observation.autonomous.AutonomousPreparationObservation.Routine;
+import frc.robot.observation.autonomous.AutonomousPreparationObservation.State;
+import frc.robot.observation.swerve.SwerveObservation;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.lang.reflect.Field;
 import java.util.Optional;
@@ -56,12 +63,17 @@ class RobotContainerAutonomousModeSchedulingTest {
   private static Command autonomousCommand;
   private static SwerveSubsystem swerveSubsystem;
   private static PrepareAutonomousCommand prepareAutonomousCommand;
+  private static XboxControllerSim operatorControllerSim;
 
   @BeforeAll
   static void initializeHalAndCompositionRoot() {
     HAL.initialize(500, 0);
     NamedCommands.clearAll();
     AutoBuilder.resetForTesting();
+    operatorControllerSim =
+        new XboxControllerSim(Constants.DriverInputConstants.kXboxControllerPort);
+    operatorControllerSim.setBackButton(false);
+    operatorControllerSim.notifyNewData();
     robotContainer = new RobotContainer();
     autonomousCommand = robotContainer.getAutonomousCommand();
     swerveSubsystem =
@@ -82,6 +94,11 @@ class RobotContainerAutonomousModeSchedulingTest {
     selectOneMeterPath();
     scheduler.schedule(prepareAutonomousCommand);
     scheduler.run();
+    assertTrue(prepareAutonomousCommand.isScheduled());
+    assertEquals(State.VALIDATING, preparationCoordinator().getObservation().state());
+    assertFalse(preparationCoordinator().getObservation().ready());
+
+    scheduler.run();
     assertFalse(prepareAutonomousCommand.isScheduled());
     assertTrue(
         preparationCoordinator().getObservation().ready(),
@@ -92,6 +109,8 @@ class RobotContainerAutonomousModeSchedulingTest {
 
   @AfterEach
   void clearSchedulerAndDisable() {
+    operatorControllerSim.setBackButton(false);
+    operatorControllerSim.notifyNewData();
     CommandScheduler scheduler = CommandScheduler.getInstance();
     scheduler.cancelAll();
     setDisabledMode();
@@ -153,6 +172,127 @@ class RobotContainerAutonomousModeSchedulingTest {
   }
 
   @Test
+  void oneBackPressPreparesColdStartAfterSchedulerRefresh() {
+    CommandScheduler scheduler = prepareColdStartComposition();
+    SwerveObservation initialObservation = swerveSubsystem.getObservation().orElseThrow();
+    assertHealthyModuleObservation(initialObservation.frontLeft());
+    assertHealthyModuleObservation(initialObservation.frontRight());
+    assertHealthyModuleObservation(initialObservation.backLeft());
+    assertHealthyModuleObservation(initialObservation.backRight());
+    assertTrue(initialObservation.gyro().connected());
+    assertTrue(initialObservation.gyro().configurationHealthy());
+    assertTrue(swerveSubsystem.getCurrentPose().isEmpty());
+    assertTrue(swerveSubsystem.getEstimatedPose().isEmpty());
+    assertEquals(State.UNPREPARED, preparationCoordinator().getObservation().state());
+
+    operatorControllerSim.setBackButton(true);
+    operatorControllerSim.notifyNewData();
+
+    scheduler.run();
+
+    assertTrue(prepareAutonomousCommand.isScheduled());
+    assertEquals(State.VALIDATING, preparationCoordinator().getObservation().state());
+    assertEquals(Reason.PREPARATION_REQUESTED, preparationCoordinator().getObservation().reason());
+    assertEquals(Routine.ONE_METER_PATH, preparationCoordinator().getObservation().routine());
+    assertEquals("BLUE", preparationCoordinator().getObservation().alliance().name());
+    assertFalse(preparationCoordinator().getObservation().ready());
+    assertTrue(preparationCoordinator().getObservation().headingReferenceValid());
+    long attemptId = preparationCoordinator().getObservation().attemptId();
+    assertTrue(attemptId > 0L);
+    assertTrue(swerveSubsystem.getCurrentPose().isEmpty());
+    assertTrue(swerveSubsystem.getEstimatedPose().isEmpty());
+    assertZeroFinalModuleStates(swerveSubsystem);
+
+    // Keep the same Back press held while the next normal run refreshes Swerve before execute.
+    scheduler.run();
+
+    assertFalse(prepareAutonomousCommand.isScheduled());
+    assertEquals(State.READY, preparationCoordinator().getObservation().state());
+    assertTrue(preparationCoordinator().getObservation().ready());
+    assertEquals(Reason.NONE, preparationCoordinator().getObservation().reason());
+    assertEquals(attemptId, preparationCoordinator().getObservation().attemptId());
+    assertPoseEquals(
+        Constants.PathPlannerLearningConstants.kCanonicalPathStartingPose,
+        swerveSubsystem.getCurrentPose().orElseThrow());
+    assertPoseEquals(
+        Constants.PathPlannerLearningConstants.kCanonicalPathStartingPose,
+        swerveSubsystem.getEstimatedPose().orElseThrow());
+    assertZeroFinalModuleStates(swerveSubsystem);
+  }
+
+  @Test
+  void schedulingImmediatelyBeforeRunStillWaitsForTheNormalRefresh() {
+    CommandScheduler scheduler = prepareColdStartComposition();
+    assertTrue(swerveSubsystem.getCurrentPose().isEmpty());
+    assertTrue(swerveSubsystem.getEstimatedPose().isEmpty());
+    selectOneMeterPath();
+
+    scheduler.schedule(prepareAutonomousCommand);
+    long attemptId = preparationCoordinator().getObservation().attemptId();
+    scheduler.run();
+
+    assertTrue(prepareAutonomousCommand.isScheduled());
+    assertEquals(State.VALIDATING, preparationCoordinator().getObservation().state());
+    assertEquals(Routine.ONE_METER_PATH, preparationCoordinator().getObservation().routine());
+    assertEquals("BLUE", preparationCoordinator().getObservation().alliance().name());
+    assertEquals(attemptId, preparationCoordinator().getObservation().attemptId());
+    assertFalse(preparationCoordinator().getObservation().ready());
+
+    scheduler.run();
+
+    assertFalse(prepareAutonomousCommand.isScheduled());
+    assertEquals(State.READY, preparationCoordinator().getObservation().state());
+    assertTrue(preparationCoordinator().getObservation().ready());
+    assertEquals(attemptId, preparationCoordinator().getObservation().attemptId());
+    assertPoseEquals(
+        Constants.PathPlannerLearningConstants.kCanonicalPathStartingPose,
+        swerveSubsystem.getCurrentPose().orElseThrow());
+    assertPoseEquals(
+        Constants.PathPlannerLearningConstants.kCanonicalPathStartingPose,
+        swerveSubsystem.getEstimatedPose().orElseThrow());
+  }
+
+  private static CommandScheduler prepareColdStartComposition() {
+    CommandScheduler scheduler = CommandScheduler.getInstance();
+    scheduler.cancelAll();
+    scheduler.unregisterAllSubsystems();
+    scheduler.getDefaultButtonLoop().clear();
+    NamedCommands.clearAll();
+    AutoBuilder.resetForTesting();
+    DriverStationSim.resetData();
+    setDisabledMode();
+    operatorControllerSim =
+        new XboxControllerSim(Constants.DriverInputConstants.kXboxControllerPort);
+    operatorControllerSim.setBackButton(false);
+    operatorControllerSim.notifyNewData();
+
+    robotContainer = new RobotContainer();
+    autonomousCommand = robotContainer.getAutonomousCommand();
+    swerveSubsystem =
+        (SwerveSubsystem)
+            autonomousCommand.getRequirements().stream().findFirst().orElseThrow();
+    prepareAutonomousCommand =
+        assertInstanceOf(
+            PrepareAutonomousCommand.class,
+            SmartDashboard.getData("Prepare Autonomous"));
+    selectOneMeterPath();
+
+    // Establish the trigger's released baseline and sample healthy IO without initializing pose.
+    scheduler.run();
+    return scheduler;
+  }
+
+  private static void assertHealthyModuleObservation(
+      SwerveObservation.ModuleObservation moduleObservation) {
+    assertTrue(moduleObservation.driveConnected());
+    assertTrue(moduleObservation.steerConnected());
+    assertTrue(moduleObservation.encoderConnected());
+    assertTrue(moduleObservation.driveConfigurationHealthy());
+    assertTrue(moduleObservation.steerConfigurationHealthy());
+    assertTrue(moduleObservation.encoderConfigurationHealthy());
+  }
+
+  @Test
   void consumedReadinessRejectsASecondAutonomousSchedulingAttempt() {
     CommandScheduler scheduler = CommandScheduler.getInstance();
     Command selectedCommand = requestOneMeterPathCommand();
@@ -191,7 +331,15 @@ class RobotContainerAutonomousModeSchedulingTest {
 
     scheduler.schedule(prepareAutonomousCommand);
     scheduler.run();
+    assertTrue(prepareAutonomousCommand.isScheduled());
+    assertEquals(State.VALIDATING, preparationCoordinator().getObservation().state());
+    assertFalse(preparationCoordinator().getObservation().ready());
+
+    scheduler.run();
     assertFalse(prepareAutonomousCommand.isScheduled());
+    assertTrue(
+        preparationCoordinator().getObservation().ready(),
+        preparationCoordinator().getObservation().toString());
 
     setAutonomousMode();
     Command secondCommand = requestOneMeterPathCommand();
@@ -484,6 +632,16 @@ class RobotContainerAutonomousModeSchedulingTest {
       assertEquals(0.0, state.speedMetersPerSecond, kTolerance);
       assertEquals(0.0, state.angle.getRadians(), kTolerance);
     }
+  }
+
+  private static void assertPoseEquals(Pose2d expected, Pose2d actual) {
+    assertNotNull(actual);
+    assertEquals(expected.getX(), actual.getX(), kTolerance);
+    assertEquals(expected.getY(), actual.getY(), kTolerance);
+    assertEquals(
+        0.0,
+        MathUtil.angleModulus(expected.getRotation().getRadians() - actual.getRotation().getRadians()),
+        kTolerance);
   }
 
   private static Command requestOneMeterPathCommand() {

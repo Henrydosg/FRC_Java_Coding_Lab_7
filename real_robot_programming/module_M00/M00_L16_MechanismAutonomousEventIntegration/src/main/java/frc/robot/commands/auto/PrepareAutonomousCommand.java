@@ -19,10 +19,16 @@ import java.util.function.Supplier;
 
 /** Runs one explicit, scheduler-owned Disabled autonomous preparation attempt. */
 public final class PrepareAutonomousCommand extends Command {
+  private enum Phase {
+    WAITING_FOR_REFRESH,
+    COMPLETE_ON_NEXT_EXECUTE,
+    FINISHED
+  }
+
   private final AutonomousPreparationCoordinator coordinator;
   private final Supplier<AutonomousRoutineFactory.AutonomousRoutineId> routineSupplier;
   private final Supplier<Optional<Alliance>> allianceSupplier;
-  private boolean finished;
+  private Phase phase = Phase.FINISHED;
 
   /** Creates the single production autonomous preparation action. */
   public PrepareAutonomousCommand(
@@ -38,7 +44,7 @@ public final class PrepareAutonomousCommand extends Command {
 
   @Override
   public void initialize() {
-    finished = false;
+    phase = Phase.FINISHED;
     AutonomousRoutineFactory.AutonomousRoutineId routine = null;
     Optional<Alliance> alliance = Optional.empty();
     try {
@@ -47,22 +53,31 @@ public final class PrepareAutonomousCommand extends Command {
     } catch (RuntimeException ignored) {
       // Null/failed selection remains an explicit NOT_READY preparation result.
     }
-    finished =
-        coordinator.beginPreparation(routine, alliance).state()
-            != State.VALIDATING;
-  }
-
-  @Override
-  public void execute() {
-    if (!finished) {
-      coordinator.completePreparation();
-      finished = true;
+    if (coordinator.beginPreparation(routine, alliance).state() == State.VALIDATING) {
+      phase = Phase.WAITING_FOR_REFRESH;
     }
   }
 
   @Override
+  public void execute() {
+    if (phase == Phase.WAITING_FOR_REFRESH) {
+      // Button polling can initialize us after this cycle's subsystem refresh. Consecutive
+      // scheduler executes have a normal subsystem refresh between them, so skip the first.
+      phase = Phase.COMPLETE_ON_NEXT_EXECUTE;
+    } else if (phase == Phase.COMPLETE_ON_NEXT_EXECUTE) {
+      phase = Phase.FINISHED;
+      coordinator.completePreparation();
+    }
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    phase = Phase.FINISHED;
+  }
+
+  @Override
   public boolean isFinished() {
-    return finished;
+    return phase == Phase.FINISHED;
   }
 
   @Override

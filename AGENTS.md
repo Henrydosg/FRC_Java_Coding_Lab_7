@@ -1,3 +1,433 @@
+<!-- M00-L16 FINAL REFREEZE CURRENT BEGIN -->
+## Current M00_L16 final re-freeze adjudication — 2026-10-03
+
+The Architect accepted the independent freeze review, **`PASS_M00_L16_INDEPENDENT_FREEZE_REVIEW_READY_FOR_ARCHITECT_FINAL_REFREEZE`**, and formally adjudicated **`PASS_M00_L16_FINAL_REFREEZE_ADJUDICATION`**. **M00_L16 = COMPLETE / FROZEN / READ-ONLY / NOT YET REPUBLISHED.** The previously granted authorization, `PASS_M00_L16_ARCHITECT_REFREEZE_AUTHORIZATION`, has now been consumed by this governed final re-freeze transition.
+
+This is the current superseding lifecycle record. Earlier IN_PROGRESS, HOLD, reopening, repair, authorization, independent-review and publication states remain unchanged historical truth. The preceding authorization record's NOT YET ADJUDICATED state and independent-review next gate describe the stage before the accepted review and final Architect decision. Earlier COMPLETE/FROZEN/PUBLISHED states were followed by governed architecture-repair reopening; the current repaired snapshot has now been formally RE-FROZEN, but has NOT YET BEEN REPUBLISHED. Old publication commits do not represent this new repaired frozen snapshot.
+
+### Preserved closure, lesson scope and verification
+
+Phase 2 remains COMPLETE WITH RECORDED LIMITS. Phase 3 remains FORMALLY CLOSED under `PASS_REPOSITORY_WIDE_AUDIT_PHASE_3_FORMAL_CLOSURE`, recorded by `PASS_PHASE_3_CLOSURE_LIFECYCLE_RECORDING_READY_FOR_NEXT_GOVERNANCE_GATE`. ACM-01 through ACM-12 remain FORMALLY CLOSED; final ACM-12 remains **60 CLOSED / 0 BLOCKED**. ACM-12-F01, ACM-12-F02 and ACM-12-F03 remain FORMALLY CLOSED. No new current finding or repair is asserted.
+
+M00_L16 retains one authorized teaching concept: **MECHANISM AUTONOMOUS EVENT INTEGRATION**, inherited from M00_L15: LEARNING_EVENT → governed PathPlanner Named Event registration → fresh IntakeToFeederCommand → existing Intake + Feeder semantic APIs. F01/F02/F03 remain governed inherited-architecture repairs, not additional lesson concepts. The accepted independent freeze review confirmed Frozen Backbone preservation, intact repairs, consistent documentation and technical snapshot, and deterministically separable worktree scope with no current freeze blocker established. This recording does not perform a new architecture or freeze review.
+
+| Accepted User-owned verification / existing artifacts | Preserved result |
+| --- | --- |
+| Focused F03 reverification | 38 / 38 PASS; 4 actionable tasks, 4 executed |
+| Broader M00_L16 regression | PASS; 4 actionable tasks, 4 executed |
+| Full M00_L16 build | BUILD SUCCESSFUL; 6 actionable tasks, 6 executed |
+| Existing test XML | 878 tests; 0 failures; 0 errors; 0 skipped |
+
+The focused total remains Prepare 9 + autonomous scheduling 20 + PathPlanner integration 9 = 38. These are accepted User execution results and existing artifacts; none was rerun in this turn. Historical baseline-build evidence and all prior verification chronology remain preserved.
+
+**THEORY VERIFIED**, supported by static architecture review and accepted User-owned software test/build evidence. **SIMULATION VERIFIED only within the accepted historical/applicability scope**; no fresh post-ACM-12 Simulation, Glass or Driver Station PASS is asserted. **REAL HARDWARE DEFERRED**: no fresh post-ACM-12 real-hardware verification; physical mechanism game-piece transfer is not verified; Noop mechanism IO remains where applicable; physical response after device/vendor failure is not established; provisional tuning/configuration remains provisional. Phase-2 physical-lineage qualifications remain preserved. These recorded limits do not negate the now-adjudicated freeze under the declared lesson scope, and do not authorize physical commissioning.
+
+### Current lifecycle and next governance gate
+
+| Item | Current state |
+| --- | --- |
+| Architect final re-freeze | ADJUDICATED — PASS_M00_L16_FINAL_REFREEZE_ADJUDICATION |
+| Independent freeze review | PASS_M00_L16_INDEPENDENT_FREEZE_REVIEW_READY_FOR_ARCHITECT_FINAL_REFREEZE |
+| M00_L16 | COMPLETE / FROZEN / READ-ONLY / NOT YET REPUBLISHED |
+| Phase 2 | COMPLETE WITH RECORDED LIMITS |
+| Phase 3 | FORMALLY CLOSED |
+| ACM-01 through ACM-12 | FORMALLY CLOSED |
+| Final ACM-12 matrix | 60 CLOSED / 0 BLOCKED |
+| ACM-12-F01 / ACM-12-F02 / ACM-12-F03 | FORMALLY CLOSED |
+| Current repaired-snapshot republication | NOT PERFORMED |
+| Phase 4 | NOT STARTED / FORBIDDEN |
+| M00_L17 | NOT STARTED / NOT AUTHORIZED |
+
+**Exact next gate: M00_L16 GOVERNED REPUBLICATION / USER-OWNED GIT PREPARATION REVIEW.** That gate must bound the repaired frozen lesson snapshot and repository-level lifecycle metadata, preserve unrelated/protected state, and prepare the governed primary-snapshot and subsequent metadata publication workflow for User-owned Git execution and external verification. It is identified, not executed here. No new current repaired-snapshot primary publication commit, metadata commit, checkpoint, tag or push exists or is asserted. Existing repair and lifecycle diffs remain uncommitted. Latest recorded published ACM checkpoint remains `e5a416eda8a0bace0774eeb20ecb2989d336263d`, annotated tag `audit-acm-11-closed`; it is historical checkpoint evidence, not the current repaired frozen publication. No Phase-4 activation, M00_L17 or Constants cleanup/refactor is authorized.
+
+### Bounded documentation-only recording
+
+The authorized scope is exactly eight established lifecycle documents: AGENTS.md, repository root README.md, the M00 roadmap ADR, and M00_L16 README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md and docs/M00_L15_to_M00_L16_Step_by_Step.md. This identical current record is added without deleting or rewriting any previously existing document bytes. No new document or ADR is created.
+
+Previously read applicable VERIFIED Documents A/B/C mirrors remain unchanged and integrity-verified under the activated governance-reading policy. English PDFs remain authoritative; mirrors have no independent authority. The poster is used only for explicit textual relationships, without spatial/layout inference. Static governance validation PASS: 12 source PDFs, 12 matching source hashes, 12 trust checks, zero deterministic findings; applicable VERIFIED mirror hashes match the manifest. **New semantic-fidelity certification: NOT PERFORMED.**
+
+Production/test Java, Gradle files, vendordeps, PathPlanner assets, hardware configuration, authoritative governance PDFs, VERIFIED mirrors, other ADRs and protected/unrelated content remain unchanged. No Gradle/test/build/Simulation/Glass/Driver Station/hardware execution or Git write occurs; the index remains empty. Only authorized lifecycle-document edits, static inspection, governance validation and read-only Git inspection are performed.
+
+The earlier protected hardware-registry search-scope incident remains preserved: an incorrect exclusion glob included the registry in initial search scope; no matching contents were emitted or used as architecture evidence, and the registry was not modified. That history is not rewritten as "never accessed." The registry is NOT ACCESSED / NOT MODIFIED in this turn. Protected/unrelated state is not restored, deleted, cleaned, moved, staged or reclassified.
+
+github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED
+
+Recording gate: `PASS_M00_L16_FINAL_REFREEZE_LIFECYCLE_RECORDING_READY_FOR_REPUBLICATION_GATE`.
+<!-- M00-L16 FINAL REFREEZE CURRENT END -->
+
+<!-- M00-L16 REFREEZE AUTHORIZATION CURRENT BEGIN -->
+## Current M00_L16 Architect re-freeze authorization — 2026-10-03
+
+The Architect accepted the independent readiness conclusion, **READY FOR ARCHITECT RE-FREEZE AUTHORIZATION**, with no current blocker or additional repair requirement established, and explicitly authorized the governed re-freeze workflow with **`PASS_M00_L16_ARCHITECT_REFREEZE_AUTHORIZATION`**.
+
+**RE-FREEZE AUTHORIZATION = GRANTED. M00_L16 FINAL RE-FREEZE = NOT YET ADJUDICATED.** This is authorization to proceed toward re-freeze, not the final re-freeze decision. **M00_L16 remains IN_PROGRESS / NOT YET RE-FROZEN / NOT REPUBLISHED.** No current COMPLETE, FROZEN, READ-ONLY, independent freeze-review PASS, or repaired-publication state is established by this recording.
+
+This is the current superseding lifecycle cursor. The preceding Phase-3 record's readiness/authorization-review cursor describes the gate that has now been completed. Phase-3 and ACM closure decisions remain intact. Earlier M00_L16 freeze/publication states, the subsequent governed reopening, repair/audit chronology, failed attempts, applicability decisions, and consumed historical freeze approvals remain unchanged stage truth. M00_L16 was neither continuously IN_PROGRESS nor continuously FROZEN; earlier approvals do not freeze the current post-audit working state.
+
+### Preserved readiness and verification basis
+
+Phase 2 remains COMPLETE WITH RECORDED LIMITS. Phase 3 remains FORMALLY CLOSED under `PASS_REPOSITORY_WIDE_AUDIT_PHASE_3_FORMAL_CLOSURE`, with lifecycle recording `PASS_PHASE_3_CLOSURE_LIFECYCLE_RECORDING_READY_FOR_NEXT_GOVERNANCE_GATE`. ACM-01 through ACM-12 remain FORMALLY CLOSED. Final ACM-12 remains **60 CLOSED / 0 BLOCKED**; ACM-12-F01, ACM-12-F02, and ACM-12-F03 remain FORMALLY CLOSED. No new current finding or repair is asserted.
+
+The accepted technical snapshot remains consistent with the accepted ACM-12 state. The readiness review confirmed the unchanged 235-file technical snapshot and preserved the existing Named Event integration, Frozen Backbone, and M00_L16's one teaching concept inherited from M00_L15. This lifecycle recording does not perform a new technical or independent freeze review.
+
+| Accepted User verification / existing evidence | Preserved result |
+| --- | --- |
+| Focused F03 reverification | 38 / 38 PASS; 4 actionable tasks, 4 executed |
+| Broader M00_L16 regression | PASS; 4 actionable tasks, 4 executed |
+| Full M00_L16 build | BUILD SUCCESSFUL; 6 actionable tasks, 6 executed |
+| Existing XML evidence inspected during readiness review | 878 tests; 0 failures; 0 errors; 0 skipped |
+
+The focused total remains Prepare 9 + autonomous scheduling 20 + PathPlanner integration 9 = 38. These are accepted User execution and existing artifact results, not executions performed by this recording. Historical baseline-build evidence remains preserved; no new baseline build is claimed.
+
+Evidence remains THEORY / STATIC ARCHITECTURE VERIFIED and SOFTWARE TEST / BUILD VERIFIED through supplied User execution. Historical bounded Simulation and Driver Station evidence and approved applicability dispositions remain scoped to their recorded stages. No fresh post-ACM-12 Simulation, Glass, Driver Station, or real-hardware PASS is invented. Applicable **REAL HARDWARE DEFERRED**, Phase-2 recorded limits, provisional configuration, Noop mechanism hardware, lack of physical game-piece-transfer verification, and lack of fresh post-ACM-12 real-hardware verification remain preserved. Software disarm/stop attempts do not establish physical hardware response after a vendor failure.
+
+### Current lifecycle state and exact next gate
+
+| Item | Current state |
+| --- | --- |
+| Architect re-freeze authorization | GRANTED — PASS_M00_L16_ARCHITECT_REFREEZE_AUTHORIZATION |
+| M00_L16 final re-freeze | NOT YET ADJUDICATED |
+| M00_L16 | IN_PROGRESS / NOT YET RE-FROZEN / NOT REPUBLISHED |
+| Phase 2 | COMPLETE WITH RECORDED LIMITS |
+| Phase 3 | FORMALLY CLOSED |
+| ACM-01 through ACM-12 | FORMALLY CLOSED |
+| Final ACM-12 matrix | 60 CLOSED / 0 BLOCKED |
+| ACM-12-F01 / ACM-12-F02 / ACM-12-F03 | FORMALLY CLOSED |
+| Independent M00_L16 re-freeze / freeze review | REQUIRED / NEXT / NOT PERFORMED |
+| Phase 4 | NOT STARTED / FORBIDDEN |
+| M00_L17 | NOT STARTED / NOT AUTHORIZED |
+
+**Exact next gate: INDEPENDENT M00_L16 RE-FREEZE / FREEZE REVIEW.** That future review must independently determine whether the current lesson may be restored to COMPLETE / FROZEN / READ-ONLY. This recording does not execute that gate or make that transition. Any later final re-freeze adjudication/recording and User-owned checkpoint/publication workflow remain separate governed actions. No new primary or metadata publication commit, checkpoint, tag, push, republication, Phase-4 activation, M00_L17, or Constants cleanup/refactor is authorized or asserted here. Latest recorded published ACM checkpoint remains `e5a416eda8a0bace0774eeb20ecb2989d336263d`, annotated tag `audit-acm-11-closed`.
+
+### Documentation-only recording boundary
+
+The confirmed scope is exactly the established eight lifecycle documents: AGENTS.md, repository root README.md, the M00 roadmap ADR, and M00_L16 README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, and docs/M00_L15_to_M00_L16_Step_by_Step.md. This authorized record is added without deleting or rewriting any previously existing document bytes. No new document or ADR is created.
+
+Documents A, B, and C were read through their applicable VERIFIED mirrors under the activated governance-reading policy; their current integrity remains verified. English PDFs remain authoritative; mirrors have no independent authority. Static governance validator PASS: 12 source PDFs, 12 matching source hashes, 12 trust checks, zero deterministic findings; all 12 VERIFIED mirror hashes match the manifest. **New semantic-fidelity certification: NOT PERFORMED.**
+
+Production/test Java, Gradle files, vendordeps, PathPlanner assets, robot hardware configuration, authoritative governance PDFs, VERIFIED mirrors, other ADRs, and protected/unrelated content remain unchanged. Existing repair diffs remain uncommitted. No Gradle/test/build/Simulation/Glass/Driver Station/hardware execution or Git write occurs; the index remains empty. Only permitted static inspection, read-only Git inspection, and governance validation are performed.
+
+The earlier protected hardware-registry search-scope incident remains truthfully recorded in the preserved history: the registry was included by an incorrect exclusion glob, no matching contents were emitted or used as architecture evidence, and it was not modified. That history is not rewritten as "never accessed." The registry is not opened or inspected during this recording. Protected/unrelated state is not restored, deleted, cleaned, moved, staged, or reclassified.
+
+github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED
+
+Recording gate: `PASS_M00_L16_REFREEZE_AUTHORIZATION_LIFECYCLE_RECORDING_READY_FOR_INDEPENDENT_FREEZE_REVIEW`.
+<!-- M00-L16 REFREEZE AUTHORIZATION CURRENT END -->
+
+<!-- PHASE-3 FORMAL CLOSURE CURRENT BEGIN -->
+## Current repository-wide audit Phase-3 formal closure — 2026-10-03
+
+The Architect accepted the completed ACM-12 domain-closure lifecycle recording and formally adjudicated **`PASS_REPOSITORY_WIDE_AUDIT_PHASE_3_FORMAL_CLOSURE`**. **Phase 2 = COMPLETE WITH RECORDED LIMITS. Phase 3 = FORMALLY CLOSED / FORMALLY RECORDED. ACM-01 through ACM-12 remain FORMALLY CLOSED. ACM-12-F01, ACM-12-F02, and ACM-12-F03 remain FORMALLY CLOSED. Final ACM-12 result remains 60 CLOSED / 0 BLOCKED. Remaining current ACM-12 finding: NONE.**
+
+**M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED. Phase 4 remains NOT STARTED / FORBIDDEN. M00_L17 remains NOT STARTED / NOT AUTHORIZED.** Phase-3 architecture closure does not freeze or publish the active lesson.
+
+This is the current superseding lifecycle record. Earlier Phase-3 HOLD/IN_PROGRESS states, findings, failed verification attempts, repair steps, domain-closure stages, and prior freeze/publication records remain unchanged historical truth. In particular, the preceding ACM-12 domain-closure block's Phase-3 IN_PROGRESS state and Phase-3-closure-review cursor describe the stage before this Architect decision. Their accepted evidence and full 60-dimension matrix remain preserved.
+
+### Accepted Phase-3 closure chain
+
+1. Phase 2 physical-lineage audit completed with recorded limits: `PASS_REPOSITORY_WIDE_AUDIT_PHASE_2_PHYSICAL_LINEAGE_WITH_RECORDED_LIMITS`. The accepted historical-byte, D2A/H01, historical R1, A01_L07, and other recorded qualifications remain preserved.
+2. Phase 3 architecture audit evaluated ACM-01 through ACM-12 under the Frozen Backbone and governed domain workflows.
+3. ACM-01 through ACM-11 were formally closed through their respective governed review, repair where applicable, closure, and historical checkpoint workflows.
+4. Initial ACM-12 review established F01 and F02; its 50 CLOSED / 10 BLOCKED result remains historical audit evidence.
+5. F01 and F02 were repaired, User verified, independently reviewed, and formally closed as repair findings.
+6. Full ACM-12 rereview after F01/F02 closure established F03; that earlier 50 CLOSED / 10 BLOCKED result remains historical.
+7. The Architect accepted ACM-12-F03 as P2 and authorized its bounded repair.
+8. F03 scheduler-native repair implemented `WAITING_FOR_REFRESH → COMPLETE_ON_NEXT_EXECUTE → FINISHED`, preserving the normal subsystem-refresh boundary, exact Swerve requirement, coordinator authority, and localization/reset guards.
+9. User verification exposed two bounded test-side defects: missing `assertPoseEquals(Pose2d, Pose2d)` helper references and a stale shared fixture timing assumption after the two-cycle production repair.
+10. Those defects were repaired within the authorized four-file F03 scope. The shared fixture's former one-execution assumption was replaced at its two accepted-driving preparation sites by two normal scheduler executions; assertions and immediate rejection semantics were preserved. The 20 shared-setup failures were not 20 production repair failures.
+11. User fresh focused F03 reverification passed **38/38; 4 actionable tasks, 4 executed**, token `PASS_ACM_12_F03_FOCUSED_USER_REVERIFICATION`.
+12. User fresh broader M00_L16 regression passed, **4 actionable tasks, 4 executed**, token `PASS_ACM_12_F03_BROADER_REGRESSION`.
+13. User fresh full M00_L16 build returned **BUILD SUCCESSFUL; 6 actionable tasks, 6 executed**, token `PASS_ACM_12_F03_FULL_M00_L16_BUILD`.
+14. Independent F03 repair review passed: `PASS_ACM_12_F03_INDEPENDENT_REPAIR_REVIEW_READY_FOR_ARCHITECT_CLOSURE`.
+15. The Architect formally closed F03: `PASS_ACM_12_F03_FORMAL_REPAIR_CLOSURE`; F03 lifecycle recording subsequently passed.
+16. Fresh full ACM-12 post-F03 rereview established **60 CLOSED / 0 BLOCKED; no new current finding**, token `PASS_ACM_12_POST_F03_FULL_REREVIEW_60_CLOSED_0_BLOCKED_READY_FOR_ARCHITECT_DOMAIN_CLOSURE`.
+17. The Architect formally closed ACM-12: `PASS_ACM_12_FORMAL_DOMAIN_CLOSURE`.
+18. ACM-12 domain closure was reconciled across the eight current lifecycle records: `PASS_ACM_12_DOMAIN_CLOSURE_LIFECYCLE_RECORDING_READY_FOR_PHASE_3_CLOSURE_REVIEW`.
+19. The Architect then formally closed Phase 3: **`PASS_REPOSITORY_WIDE_AUDIT_PHASE_3_FORMAL_CLOSURE`**.
+
+The preserved focused total is Prepare 9 + autonomous scheduling 20 + PathPlanner integration 9 = 38. The helper/fixture repairs were test-side corrections within existing authorization; they did not weaken production reset semantics or conceal a new production finding.
+
+### Architecture and verification disposition
+
+Frozen Backbone integrated compliance remains preserved, with no current violating regression consequence established against ACM-01 through ACM-11. Composition-root ownership, concrete hardware-adapter confinement, subsystem IO contracts, immutable observations, read-only telemetry, scheduler requirement contention, explicit fail-safe behavior, single drivetrain/localization ownership, Real/Simulation selection, configuration authority, and the existing mechanism Named Event integration remain supported by the accepted domain reviews.
+
+F01's execution-scoped unavailable-input barrier, F02's finite E plus existing `measurementSampleValid` qualification, and F03's scheduler-native refresh sequencing remain formally closed repairs. Historical original findings remain established historical facts; no current unresolved ACM-12 finding or new repair is asserted.
+
+Evidence remains **THEORY / STATIC ARCHITECTURE VERIFIED** and **SOFTWARE TEST / BUILD VERIFIED through supplied User execution**, with accepted historical applicability and **REAL HARDWARE DEFERRED** limits preserved. No new Simulation, Glass, Driver Station, or real-hardware verification is asserted. Phase-2 closure retains its recorded physical-lineage limits; this documentation turn does not perform a new physical-lineage audit, semantic-fidelity certification, or technical architecture rereview.
+
+### Protected-registry procedural history
+
+The final read-only ACM-12 rereview disclosed that an initial filename/text search used an incorrect exclusion glob and included the protected hardware registry in its search scope. No matching registry contents were emitted or used as architecture evidence. The registry was not modified. That history is not rewritten as "never accessed" and is not promoted into an architecture defect. This Phase-3 lifecycle-recording turn does not reopen or inspect the registry.
+
+### Current lifecycle cursor
+
+| Current item | State |
+| --- | --- |
+| Phase 2 | COMPLETE WITH RECORDED LIMITS |
+| Phase 3 | FORMALLY CLOSED |
+| ACM-01 through ACM-12 | FORMALLY CLOSED |
+| ACM-12-F01 | FORMALLY CLOSED |
+| ACM-12-F02 | FORMALLY CLOSED |
+| ACM-12-F03 | FORMALLY CLOSED |
+| Final ACM-12 matrix | 60 CLOSED / 0 BLOCKED |
+| M00_L16 | IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED |
+| Phase 4 | NOT STARTED / FORBIDDEN |
+| M00_L17 | NOT STARTED / NOT AUTHORIZED |
+
+Latest recorded published ACM checkpoint remains `e5a416eda8a0bace0774eeb20ecb2989d336263d`, annotated tag `audit-acm-11-closed`. No new M00_L16 publication commit, ACM-12 checkpoint commit, `audit-acm-12-closed` tag, or push is created or asserted by this recording. Historical commit identities remain applicable only to their recorded stages.
+
+### Recording boundary and next governance gate
+
+This documentation-only action adds the current Phase-3 closure block to exactly the eight established lifecycle documents. All previously existing document bytes remain unchanged. Production/test Java, Gradle, vendordeps, PathPlanner assets, hardware configuration, authoritative governance PDFs, VERIFIED mirrors, other ADRs, and protected/unrelated content remain unchanged. Existing technical repair diffs stay uncommitted for the User-owned Git workflow.
+
+Static governance validator **PASS**: 12 authoritative English source PDFs, 12 matching source hashes, 12 trust checks, zero deterministic findings; all 12 VERIFIED mirror hashes match the manifest. **New semantic-fidelity certification: NOT PERFORMED.** English PDFs retain authority; the already read VERIFIED A/B/C mirrors retain their verified integrity and no independent authority.
+
+No Gradle/test/build/Simulation/Glass/Driver Station/hardware execution or Git write occurs. The index remains empty. Only permitted static inspection and governance validation are performed.
+
+github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED
+
+**Exact next governance gate: ARCHITECT M00_L16 RE-FREEZE READINESS / AUTHORIZATION REVIEW.** This gate is identified, not executed; no current re-freeze authorization is granted or consumed here. Historical consumed freeze approvals describe their earlier repaired states and do not make the current post-audit working state frozen. Any subsequent re-freeze transition, independent freeze review, User-owned checkpoint/publication workflow, and Phase-4 activation require their separate governed authorization and evidence. No M00_L17 or Constants cleanup/refactor is authorized.
+
+Recording gate: `PASS_PHASE_3_CLOSURE_LIFECYCLE_RECORDING_READY_FOR_NEXT_GOVERNANCE_GATE`.
+<!-- PHASE-3 FORMAL CLOSURE CURRENT END -->
+
+<!-- ACM-12 DOMAIN CLOSURE CURRENT BEGIN -->
+## Current ACM-12 formal domain closure — 2026-10-03
+
+The Architect accepted the fresh full post-F03 rereview, `PASS_ACM_12_POST_F03_FULL_REREVIEW_60_CLOSED_0_BLOCKED_READY_FOR_ARCHITECT_DOMAIN_CLOSURE`, and formally adjudicated **`PASS_ACM_12_FORMAL_DOMAIN_CLOSURE`**. **ACM-12 = FORMALLY CLOSED / FORMALLY RECORDED: 60 CLOSED / 0 BLOCKED. ACM-01 through ACM-12 are FORMALLY CLOSED. ACM-12-F01, ACM-12-F02, and ACM-12-F03 remain FORMALLY CLOSED. NO NEW CURRENT ACM-12 FINDING ESTABLISHED.**
+
+This records ACM-12 domain closure only. **Phase 3 remains IN_PROGRESS. M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED. Phase 4 remains NOT STARTED / FORBIDDEN. M00_L17 remains NOT STARTED / NOT AUTHORIZED.** Domain closure does not close the phase or lesson.
+
+This current block supersedes earlier ACM-12 HOLD, pending-rereview, prospective-domain, and next-gate wording below where it describes the current lifecycle. All earlier audit, finding, repair, verification, freeze, and publication records remain unchanged historical stage evidence. The original 50 CLOSED / 10 BLOCKED results are not the final closure result.
+
+### Accepted full-domain closure basis
+
+The final review freshly evaluated all 60 established ACM-12 dimensions against current integration; it did not close dimensions merely because a prior ACM domain was historically closed. **Frozen Backbone integrated compliance is preserved. No current violating regression consequence was established against ACM-01 through ACM-11.**
+
+- F01 remains closed: execution-scoped `INPUT_UNAVAILABLE` safe-stops and blocks same-cycle and later output callbacks from the failed path. Governed termination, fresh nonfatal execution recovery, and cleanup precedence remain intact; permanent `FAULTED` is not cleared.
+- F02 remains closed: usable AutoBuilder pose requires finite estimated E and the existing Swerve `measurementSampleValid`. Invalid held E cannot become path-control authority; no second localization-validity owner exists.
+- F03 remains closed: `WAITING_FOR_REFRESH → COMPLETE_ON_NEXT_EXECUTE → FINISHED` permits a normal scheduler/subsystem refresh between heading capture and guarded reset/preflight. One healthy Disabled Back/View action completes the same attempt; SAFE_STOP, interruption, mode-loss/fatal rejection, fresh attempts, exact Swerve requirements, coordinator authority, and reset guards remain preserved.
+- RobotContainer remains the composition root; hardware vendor APIs remain in concrete IO adapters; subsystems consume IO contracts. IOInputs flow into immutable observations and read-only telemetry. Swerve remains the sole drivetrain/localization owner, with distinct O/E meaning, coherent heading reanchoring, guarded resets, and qualified vision admission.
+- WPILib requirements retain contention ownership. PathPlanner event requirements belong to the parent path command, with vendor-managed event children inside that lifecycle. No manual command-owner arbitration or scheduler polling was established. Real/Simulation selection, governed configuration, explicit safe stop, and existing Intake/Feeder Named Event integration remain preserved.
+- ONE LESSON = ONE NEW CONCEPT and governed exceptional-repair boundaries remain preserved. Current source facts, accepted historical User execution, and pinned-library integration inferences were distinguished in the accepted review; no new physical-hardware result was inferred.
+
+Accepted chronology: original ACM-12 audit and F01/F02 findings → bounded repairs, User verification, independent review, and formal repair closure → full domain rereview and F03 finding → bounded F03 production/test and fixture corrections → fresh User verification → independent F03 review and formal repair closure → F03 lifecycle recording → fresh full 60-dimension rereview PASS → Architect formal ACM-12 domain closure.
+
+### Accepted ACM-12 post-F03 domain closure matrix — 60 CLOSED / 0 BLOCKED
+
+The established IDs and dimension names are preserved. As disclosed by the accepted reviewer, the full template was recovered from the supplied original ACM-12 activation and prior full-rereview briefs; the inspected repository records then preserved counts and provenance rather than the complete template. Both supplied templates matched. This matrix records those accepted dimensions without renaming them.
+
+| # | Established dimension | Status | # | Established dimension | Status |
+| ---: | --- | --- | ---: | --- | --- |
+| 1 | Governance authority | CLOSED | 2 | Prior ACM closure integrity | CLOSED |
+| 3 | Frozen Backbone end-to-end map | CLOSED | 4 | Composition → subsystem seam | CLOSED |
+| 5 | Subsystem → IO seam | CLOSED | 6 | IOInputs → observation seam | CLOSED |
+| 7 | Observation → telemetry seam | CLOSED | 8 | Command → subsystem seam | CLOSED |
+| 9 | Default-command seam | CLOSED | 10 | Driver-input end-to-end | CLOSED |
+| 11 | Swerve output end-to-end | CLOSED | 12 | Swerve sensor end-to-end | CLOSED |
+| 13 | Localization ownership integration | CLOSED | 14 | Vision acquisition → qualification | CLOSED |
+| 15 | Vision → fusion | CLOSED | 16 | Heading-reference integration | CLOSED |
+| 17 | Known-field-pose reset integration | CLOSED | 18 | Autonomous chooser → scheduler | CLOSED |
+| 19 | AutoBuilder / PathPlanner seam | CLOSED | 20 | PathPlanner configuration seam | CLOSED |
+| 21 | Path asset → runtime contract | CLOSED | 22 | Named-event end-to-end | CLOSED |
+| 23 | Named-event scheduler ownership | CLOSED | 24 | Mechanism command end-to-end | CLOSED |
+| 25 | Stop / interruption integration | CLOSED | 26 | CTRE module-stop repair integration | CLOSED |
+| 27 | Real/Simulation graph parity | CLOSED | 28 | Simulation harness integration | CLOSED |
+| 29 | Configuration → IO seam | CLOSED | 30 | Configuration → algorithm seam | CLOSED |
+| 31 | Current CANcoder recalibration integration | CLOSED | 32 | Provisional-configuration integration | CLOSED |
+| 33 | Robot lifecycle ordering | CLOSED | 34 | Periodic-data freshness | CLOSED |
+| 35 | Autonomous / teleop transition | CLOSED | 36 | Disabled/preparation safety gates | CLOSED |
+| 37 | Command requirement graph | CLOSED | 38 | Mechanism contention boundary | CLOSED |
+| 39 | Autonomous/mechanism coexistence | CLOSED | 40 | Telemetry/control separation | CLOSED |
+| 41 | NetworkTables role separation | CLOSED | 42 | Failure propagation | CLOSED |
+| 43 | Invalid-data propagation | CLOSED | 44 | Cross-boundary immutability | CLOSED |
+| 45 | Single authoritative pose | CLOSED | 46 | Field2d/visualization role | CLOSED |
+| 47 | Configuration/telemetry separation | CLOSED | 48 | Main/Robot/RobotContainer ownership | CLOSED |
+| 49 | Import/dependency direction | CLOSED | 50 | Static-global-state boundary | CLOSED |
+| 51 | Multiple-instance risk | CLOSED | 52 | Startup/construction order | CLOSED |
+| 53 | Shutdown/end-state safety | CLOSED | 54 | Integration test evidence | CLOSED |
+| 55 | Current/historical distinction | CLOSED | 56 | Documentation/source consistency | CLOSED |
+| 57 | ACM closure-record consistency | CLOSED | 58 | Cross-domain cycle sweep | CLOSED |
+| 59 | Hidden-authority sweep | CLOSED | 60 | Remaining ACM-12 technical work / Phase-3 technical readiness | CLOSED |
+
+### Preserved User verification evidence
+
+| Supplied User execution gate | Accepted result | Accepted User token |
+| --- | --- | --- |
+| F03 focused reverification, fresh | **38/38 PASS; 4 actionable tasks, 4 executed** | `PASS_ACM_12_F03_FOCUSED_USER_REVERIFICATION` |
+| Broader M00_L16 regression, fresh | **PASS; 4 actionable tasks, 4 executed** | `PASS_ACM_12_F03_BROADER_REGRESSION` |
+| Full M00_L16 build, fresh | **BUILD SUCCESSFUL; 6 actionable tasks, 6 executed** | `PASS_ACM_12_F03_FULL_M00_L16_BUILD` |
+
+The focused total remains Prepare 9 + autonomous scheduling 20 + PathPlanner integration 9 = 38. Earlier F01/F02 verification and all accepted repair chronology remain preserved in the prior-stage records. Independent F03 review, `PASS_ACM_12_F03_INDEPENDENT_REPAIR_REVIEW_READY_FOR_ARCHITECT_CLOSURE`, Architect repair closure, `PASS_ACM_12_F03_FORMAL_REPAIR_CLOSURE`, and lifecycle recording, `PASS_ACM_12_F03_LIFECYCLE_RECORDING_READY_FOR_POST_REPAIR_DOMAIN_REREVIEW`, remain accepted.
+
+Evidence classification remains **THEORY / STATIC ARCHITECTURE VERIFIED** and **SOFTWARE TEST / BUILD VERIFIED through supplied User execution**. No new Simulation, Glass, Driver Station, or real-hardware PASS is asserted. Historical evidence and applicable **REAL HARDWARE DEFERRED** classifications remain preserved. Software disarm/stop-attempt evidence does not establish physical hardware response after a vendor failure.
+
+### Disclosed final-rereview procedural note
+
+During the preceding read-only full ACM-12 rereview, an initial filename/text search used an incorrect exclusion glob and included the protected hardware registry in its search scope. No matching registry contents were emitted or used as architecture evidence. The registry was not modified. The reviewer disclosed the error and corrected the exclusion; this is not rewritten as "never accessed." No architecture defect was established from that procedural note. This lifecycle-recording turn does not reopen or inspect the registry.
+
+### Current lifecycle cursor and recording boundary
+
+| Current item | State |
+| --- | --- |
+| ACM-01 through ACM-12 | FORMALLY CLOSED |
+| ACM-12-F01 | FORMALLY CLOSED |
+| ACM-12-F02 | FORMALLY CLOSED |
+| ACM-12-F03 | FORMALLY CLOSED |
+| Phase 3 | IN_PROGRESS |
+| M00_L16 | IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED |
+| Phase 4 | NOT STARTED / FORBIDDEN |
+| M00_L17 | NOT STARTED / NOT AUTHORIZED |
+
+ACM-01 through ACM-11 retain their historical checkpoint/push/annotated-tag evidence. Latest recorded published checkpoint remains `e5a416eda8a0bace0774eeb20ecb2989d336263d`, annotated tag `audit-acm-11-closed`. No ACM-12 checkpoint commit, annotated tag, or push is created or asserted by this recording. User-owned Git publication remains separate from Architect domain closure.
+
+Static governance validator **PASS**: 12 authoritative English source PDFs, 12 matching source hashes, 12 trust checks, zero deterministic findings; all 12 VERIFIED mirror hashes match the manifest. **Semantic-fidelity certification: NOT PERFORMED.** English PDFs remain authoritative; VERIFIED mirrors have no independent authority.
+
+This documentation-only recording adds the current domain-closure block to exactly the eight established lifecycle documents. All previously existing document bytes remain unchanged. Current production/test source and the six existing ACM-12 repair-file diffs remain byte-for-byte unchanged and uncommitted for the User-owned Git workflow. No Gradle, PathPlanner asset, hardware configuration, governance source PDF, VERIFIED mirror, or protected/unrelated content is changed. No Gradle/test/build/Simulation/Glass/Driver Station/hardware execution or Git write occurs; the index remains empty. Only permitted static inspection and governance validation are performed.
+
+github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED
+
+**Exact next Architect gate: PHASE-3 CLOSURE REVIEW / ADJUDICATION.** Phase-3 closure, M00_L16 re-freeze/republication, an ACM-12 checkpoint/tag/push, Phase 4, M00_L17, and Constants cleanup/refactor are not authorized by this recording.
+
+Recording gate: `PASS_ACM_12_DOMAIN_CLOSURE_LIFECYCLE_RECORDING_READY_FOR_PHASE_3_CLOSURE_REVIEW`.
+<!-- ACM-12 DOMAIN CLOSURE CURRENT END -->
+
+<!-- ACM-12-F03 REPAIR-CLOSURE CURRENT BEGIN -->
+## Current ACM-12-F03 formal repair closure — 2026-10-03
+
+The Architect accepted Sol's independent post-repair review, `PASS_ACM_12_F03_INDEPENDENT_REPAIR_REVIEW_READY_FOR_ARCHITECT_CLOSURE`, and formally adjudicated **`PASS_ACM_12_F03_FORMAL_REPAIR_CLOSURE`**. **ACM-12-F03 = FORMALLY CLOSED AFTER BOUNDED REPAIR. ACM-12-F01 and ACM-12-F02 remain FORMALLY CLOSED.** F03 is ACCEPTED / REPAIRED / USER VERIFIED / INDEPENDENTLY REVIEWED / ARCHITECT FORMAL REPAIR CLOSURE AUTHORIZED / FORMALLY RECORDED. **Remaining current F03 repair defect: NONE ESTABLISHED.**
+
+This closes F03 as a repair finding only. **ACM-12 remains IN_PROGRESS / HOLD PENDING FULL 60-DIMENSION POST-F03 DOMAIN REREVIEW; ACM-12 is NOT FORMALLY CLOSED.** Phase 3 remains IN_PROGRESS. M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED. This current block supersedes earlier lifecycle and next-gate wording where necessary; all earlier audit, repair, verification, and publication records remain unchanged prior-stage evidence.
+
+### Original defect and accepted final repair
+
+At button-triggered cold startup, scheduler iteration N ran `Swerve.periodic()` before trigger polling. Prepare initialization then captured heading, and the old first execution attempted completion/reset in that same iteration. No Swerve periodic refresh had occurred after capture, so localization trackers were not initialized. `resetKnownFieldPose()` correctly rejected the reset: the first healthy Prepare action failed, while a second explicit action could subsequently succeed.
+
+The final command-local lifecycle is **`WAITING_FOR_REFRESH → COMPLETE_ON_NEXT_EXECUTE → FINISHED`**:
+
+| Normal scheduler iteration | Preparation sequence |
+| --- | --- |
+| N | Swerve periodic → trigger polling → Prepare initialize / heading capture → first execute waits |
+| N+1 | Swerve periodic refresh / localization initialization → second execute → guarded reset / preflight → READY |
+
+One Back/View action is sufficient under healthy preparation conditions. The repaired Prepare command invokes no manual Swerve periodic or scheduler run and uses no timer, sleep, busy wait, or scheduler polling. SAFE_STOP retains immediate behavior without localization reset. Interruption cannot complete the abandoned command attempt; the coordinator may remain VALIDATING / not ready until a fresh attempt, without claiming successful preparation. Disabled loss and fatal state remain fail-closed. Fresh nonfatal attempts start a new lifecycle; permanent fatal faults are not cleared. The exact Swerve requirement, scheduler-owned contention, coordinator preparation/provenance authority, Swerve localization ownership, and existing known-pose-reset guards remain intact. No second localization-validity authority was introduced.
+
+### Accepted F03 chronology
+
+1. A full ACM-12 domain rereview established the cold-start preparation-sequencing finding ACM-12-F03.
+2. The Architect accepted F03 as P2 and authorized the bounded repair.
+3. The initial scheduler-native production repair and supporting tests were implemented within the four authorized F03 files.
+4. User verification exposed unresolved `assertPoseEquals(Pose2d, Pose2d)` references in `RobotContainerAutonomousModeSchedulingTest`, blocking test compilation.
+5. That bounded test compile defect was repaired by supplying the helper within the same authorized test file.
+6. Fresh focused verification then compiled successfully but completed 38 tests with 20 failures. All 20 scheduling-suite failures stopped in shared `@BeforeEach` setup at the former line 97 before individual test bodies, including both cold-start tests.
+7. Independent Sol root-cause review classified **SHARED_TEST_FIXTURE_DEFECT**, token `PASS_ACM_12_F03_SHARED_FIXTURE_ROOT_CAUSE_IDENTIFIED_READY_FOR_ARCHITECT_REPAIR_AUTHORIZATION`. The fixture retained the pre-F03 one-execution completion assumption; the same stale assumption at the later accepted-reset site was also identified.
+8. The Architect authorized a one-file fixture timing repair at those two accepted-driving preparation sites.
+9. The fixture timing repair was completed in `RobotContainerAutonomousModeSchedulingTest.java` only, token `PASS_ACM_12_F03_SHARED_FIXTURE_TIMING_REPAIR_READY_FOR_USER_REVERIFICATION`. Both sites assert scheduled / VALIDATING / not ready after execution one, then advance a second normal scheduler cycle and retain completion/readiness assertions. Immediate rejection paths were not converted to two-cycle behavior; no production change was required by this fixture correction.
+10. User fresh focused re-verification passed **38/38**, with **4 actionable tasks / 4 executed**.
+11. User fresh broader M00_L16 regression passed, with **4 actionable tasks / 4 executed**.
+12. User fresh full M00_L16 build returned **BUILD SUCCESSFUL**, with **6 actionable tasks / 6 executed**.
+13. Independent Sol review accepted the complete current repair: `PASS_ACM_12_F03_INDEPENDENT_REPAIR_REVIEW_READY_FOR_ARCHITECT_CLOSURE`.
+14. The Architect formally closed the repair finding: **`PASS_ACM_12_F03_FORMAL_REPAIR_CLOSURE`**.
+
+The compile blocker and the 20 shared-fixture failures were test-side defects, not evidence of 20 production repair failures. Their repairs stayed within the previously authorized F03 scope, preserved meaningful assertions, and left immediate rejection semantics intact.
+
+### User verification and independent review evidence
+
+| Supplied User execution gate | Recorded result | Accepted User token |
+| --- | --- | --- |
+| Focused F03 suites, fresh `--rerun-tasks` | **38/38 PASS; BUILD SUCCESSFUL; 4 actionable tasks, 4 executed** | `PASS_ACM_12_F03_FOCUSED_USER_REVERIFICATION` |
+| Entire M00_L16 test suite, fresh `--rerun-tasks` | **PASS; BUILD SUCCESSFUL; 4 actionable tasks, 4 executed** | `PASS_ACM_12_F03_BROADER_REGRESSION` |
+| Full M00_L16 build, fresh `--rerun-tasks` | **BUILD SUCCESSFUL; 6 actionable tasks, 6 executed** | `PASS_ACM_12_F03_FULL_M00_L16_BUILD` |
+
+The focused suites are `PrepareAutonomousCommandTest` (9 tests), `RobotContainerAutonomousModeSchedulingTest` (20 tests), and `RobotContainerPathPlannerIntegrationTest` (9 tests). Direct F03 cases `oneBackPressPreparesColdStartAfterSchedulerRefresh()` and `schedulingImmediatelyBeforeRunStillWaitsForTheNormalRefresh()` both PASSED. The first uses the actual RobotContainer Back/View binding and keeps the same press held across normal scheduler cycles; both establish the intended cold-start progression without synthetic subsystem refresh.
+
+Independent repair review found no remaining current F03 repair defect and accepted the production phase model, SAFE_STOP, interruption, mode-loss/fatal handling, fresh attempts, exact requirements, localization/reset ownership, both fixture timing corrections, PathPlanner integration, F01/F02 compatibility, and Frozen Backbone preservation. These are bounded F03 repair conclusions, not a full post-F03 ACM-12 closure matrix.
+
+Evidence classification: **THEORY / STATIC ARCHITECTURE VERIFIED** and **SOFTWARE TEST / BUILD VERIFIED through supplied User execution**. No new WPILib Simulation, Glass, Driver Station, or real-hardware PASS is asserted. Existing historical evidence and applicable REAL HARDWARE DEFERRED classifications remain preserved.
+
+### Current lifecycle cursor and recording boundary
+
+| Current item | State |
+| --- | --- |
+| ACM-12-F01 | FORMALLY CLOSED |
+| ACM-12-F02 | FORMALLY CLOSED |
+| ACM-12-F03 | FORMALLY CLOSED |
+| ACM-12 | IN_PROGRESS / HOLD PENDING FULL 60-DIMENSION POST-F03 DOMAIN REREVIEW |
+| Phase 3 | IN_PROGRESS |
+| M00_L16 | IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED |
+| Phase 4 | NOT STARTED / FORBIDDEN |
+| M00_L17 | NOT STARTED / NOT AUTHORIZED |
+
+ACM-01 through ACM-11 remain historically FORMALLY CLOSED / CHECKPOINTED / PUSHED / ANNOTATED TAGGED. Latest recorded published checkpoint remains `e5a416eda8a0bace0774eeb20ecb2989d336263d`, annotated tag `audit-acm-11-closed`. This reconciliation creates no ACM-12 checkpoint, tag, or push and does not authorize domain closure, Phase-3 closure, re-freeze, republication, Phase 4, M00_L17, or Constants cleanup/refactor.
+
+Static governance validator **PASS**: 12 authoritative English source PDFs, 12 matching source hashes, 12 trust checks, zero deterministic findings; all 12 VERIFIED mirror hashes match the manifest. **Semantic-fidelity certification: NOT PERFORMED.** English PDFs remain authoritative.
+
+This documentation-only recording changes exactly the eight established F01/F02 lifecycle files by adding this current F03 block. All previously existing document bytes remain unchanged. The four current F03 Java/test files and the existing F01/F02 repair files remain byte-for-byte unchanged during this recording, with their existing diffs uncommitted for the User-owned Git workflow. No production/test source, Gradle, PathPlanner asset, hardware configuration, governance source PDF, VERIFIED mirror, or protected/unrelated content was changed. No Gradle/test/build/Simulation/Glass/Driver Station/hardware execution or Git write occurred. The index remains empty. Only permitted static inspection and governance validation were performed.
+
+github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED
+
+**Exact next gate: FULL ACM-12 60-DIMENSION POST-F03 REREVIEW.** That rereview was not performed during this recording. Only if the future rereview establishes **60 CLOSED / 0 BLOCKED** may the Architect consider formal ACM-12 domain closure. No such post-F03 result is asserted now.
+<!-- ACM-12-F03 REPAIR-CLOSURE CURRENT END -->
+
+<!-- ACM-12-F01-F02 REPAIR-CLOSURE CURRENT BEGIN -->
+## Current ACM-12-F01/F02 formal repair closure — 2026-10-02
+
+The Architect accepted Sol's independent post-repair review and explicitly authorized formal repair closure. **ACM-12-F01 = FORMALLY CLOSED AFTER BOUNDED REPAIR. ACM-12-F02 = FORMALLY CLOSED AFTER BOUNDED REPAIR.** Both findings are REPAIRED / USER VERIFIED / INDEPENDENTLY REVIEWED / ARCHITECT REPAIR CLOSURE AUTHORIZED. **Additional repair finding: NONE ESTABLISHED.** This closes the two repair findings only. **ACM-12 remains IN_PROGRESS / HOLD PENDING FULL POST-REPAIR DOMAIN REREVIEW; the domain is NOT FORMALLY CLOSED.**
+
+### Original findings and accepted repair
+
+The original ACM-12 cross-domain audit returned **50 CLOSED / 10 BLOCKED** out of 60 dimensions, token `HOLD_ACM_12_PRIOR_DOMAIN_REGRESSION_READY_FOR_ARCHITECT_REVIEW`. F01 established that detected unavailable speed feedback could be followed by a PathPlanner output callback that re-armed Swerve after `safeStop()`. F02 established that a finite but invalid held estimated pose E could be accepted as live path feedback. These are the original domain-audit results, not a post-repair domain-closure matrix.
+
+F01: required AutoBuilder feedback loss now latches path-execution-scoped `INPUT_UNAVAILABLE`. Same-cycle and later PathPlanner output callbacks belonging to the failed execution cannot undo `safeStop()` or restore drivetrain intent. The active path exits through governed failure/termination behavior. Preparation and command construction do not clear the failed execution's barrier; a fresh scheduler-owned execution may recover when feedback is valid. `INPUT_UNAVAILABLE` remains distinct from permanent `FATAL_FAULT` (adapter outcome `FAULTED`); new execution does not clear fatal faults, and cleanup preserves outcome precedence.
+
+F02: AutoBuilder pose feedback requires finite estimated pose E **and** the existing Swerve estimated-pose observation's `measurementSampleValid`. Finite held E with invalid current localization is rejected as path-control feedback, establishing `INPUT_UNAVAILABLE`, safe stop, and guarded output. Callback fallback pose cannot become control authority. No second localization-validity authority was introduced.
+
+**CURRENT ACM-07 REGRESSION CONSEQUENCE = REPAIRED IN CURRENT SOURCE.** Current counterevidence was found during ACM-12; current integrated fail-safe behavior was repaired. The historical ACM-07 checkpoint remains intact historical audit evidence. No claim is made that this defect was introduced after ACM-07 or that its historical checkpoint was invalid. The earlier CTRE stop repair remains intact.
+
+### Accepted chronology and verification
+
+Architect finding acceptance → bounded repair → initial User focused run exposed a fixture-only setup blocker → fixture corrected without weakening production semantics → fresh focused suite 12/12 PASS → fresh autonomous/PathPlanner regression PASS → fresh Swerve feedback/localization regression PASS → full fresh M00_L16 build PASS → independent Sol repair review 48/48 CLOSED → Architect formal repair-closure authorization.
+
+The initial focused run completed 12 tests with 8 failures. All eight failed in shared `prepareKnownPose()` setup at `assertTrue(swerve.resetKnownFieldPose(pose));`, before the intended F01/F02 assertions. A valid periodic update was missing after heading-reference capture and before known-pose reset. The correction uses `periodic → capture → periodic → resetKnownFieldPose`, following the existing successful Swerve known-pose-reset test pattern. Production reset semantics were not weakened, and production code was unchanged during the fixture correction. These were eight setup failures, not eight production repair failures.
+
+| Supplied User execution evidence | Recorded result |
+| --- | --- |
+| `AutoBuilderContractAdapterRecoveryTest`, fresh `--rerun-tasks` | **12 / 12 PASS**: eight new regressions plus all four original tests |
+| Autonomous / PathPlanner regression suites, fresh | **PASS** |
+| Swerve feedback / localization regression suites, fresh | **PASS** |
+| Full M00_L16 build, `--rerun-tasks` | **BUILD SUCCESSFUL; 6 actionable tasks, 6 executed** |
+
+Independent Sol post-repair review: **PASS; 48 CLOSED / 0 BLOCKED**, token `PASS_ACM_12_F01_F02_INDEPENDENT_REPAIR_REVIEW_READY_FOR_ARCHITECT_CLOSURE`. No additional repair defect was established. These 48 dimensions assess the bounded repair; they do not replace the full ACM-12 domain rereview.
+
+Evidence classification: **THEORY / STATIC ARCHITECTURE VERIFIED** and **SOFTWARE TEST / BUILD VERIFIED** through the supplied User execution. No new Simulation, Glass, Driver Station, or real-hardware PASS is asserted for this repair. Existing historical evidence and applicable **REAL HARDWARE DEFERRED** classifications remain preserved. Software disarm/stop-attempt evidence does not establish physical hardware response after a vendor failure.
+
+Sol's accepted review preserves Swerve drive/localization ownership, known-pose reset and the ACM-09 heading-reference repair, WPILib scheduler ownership, unchanged PathPlanner vendor source, Real/Simulation architecture, configuration authority, read-only telemetry, and the existing Named Event / Intake + Feeder integration. All eight new regressions were reviewed as meaningful; all four original tests remain intact.
+
+### Current lifecycle cursor and recording boundary
+
+ACM-01 through ACM-11 remain historically FORMALLY CLOSED / CHECKPOINTED / PUSHED / ANNOTATED TAGGED. Latest published checkpoint: `e5a416eda8a0bace0774eeb20ecb2989d336263d`, annotated tag `audit-acm-11-closed`. This current block supersedes earlier prospective/not-started ACM-12 wording and earlier next-gate cursors below; their stage evidence remains historical.
+
+| Current item | State |
+| --- | --- |
+| ACM-12-F01 | FORMALLY CLOSED |
+| ACM-12-F02 | FORMALLY CLOSED |
+| ACM-12 | IN_PROGRESS / HOLD PENDING FULL POST-REPAIR DOMAIN REREVIEW |
+| Phase 3 | IN_PROGRESS |
+| M00_L16 | IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED |
+| Phase 4 | NOT STARTED / FORBIDDEN |
+| M00_L17 | NOT STARTED / NOT AUTHORIZED |
+
+Static governance validator **PASS**: 12 authoritative English source PDFs, 12 matching source hashes, 12 trust checks, zero deterministic findings; all 12 VERIFIED mirror hashes match the manifest. **Semantic-fidelity certification: NOT PERFORMED.**
+
+This documentation-only recording changes exactly the eight authorized lifecycle files. Current M00_L16 `AutoBuilderContractAdapter.java` and `AutoBuilderContractAdapterRecoveryTest.java`, including their existing repair diffs, remain byte-for-byte unchanged during this turn and uncommitted for the User-owned Git workflow. No Java, test, configuration, PathPlanner asset, dependency, Gradle, governance source/mirror, or protected/unrelated content was changed. Protected/unrelated state was left untouched and excluded from semantic analysis. No Git write or project execution occurred; the index remains empty. Only the permitted static governance validator was executed. `github-recovery-codes.txt`: **NOT ACCESSED / NOT MODIFIED**.
+
+**Exact next gate: FULL ACM-12 POST-REPAIR DOMAIN REREVIEW.** ACM-12 closure, Phase-3 closure, re-freeze, republication, an ACM-12 checkpoint/tag/push, Phase 4, M00_L17, and Constants cleanup/refactor are not authorized by this recording.
+### Focused regression traceability
+
+The eight new PASS tests are `unavailableSpeedsBlockSameCycleOutputAndTerminateThePath`, `laterCallbacksCannotResumeTheFailedExecutionWhenSpeedsRecover`, `invalidHeldEstimatedPoseBlocksOutputWithOtherwiseUsableSpeeds`, `healthyFeedbackAcceptsOrdinaryFiniteOutput`, `freshExecutionRecoversAfterValidDisabledPreparation`, `inputUnavailableOutcomeSurvivesModeLossDuringCleanup`, `nonfiniteOutputStillLatchesFatalFaultAndFreshExecutionCannotClearIt`, and `callbackExceptionRetainsThePermanentFatalFaultDistinction`. The four original pose-validation tests remain intact. The new tests exercise production callbacks and command composition with a fixture path; they do not independently execute the complete vendor/scheduler pipeline. Pinned-library static inspection and the supplied broader regression evidence support that boundary.
+
+<!-- ACM-12-F01-F02 REPAIR-CLOSURE CURRENT END -->
+
 <!-- ACM-11 DOMAIN CLOSURE CURRENT BEGIN -->
 ## Current ACM-11 formal domain closure — 2026-10-02
 
