@@ -1,3 +1,61 @@
+<!-- M00-L16 POST-ACM-12 PUBLICATION METADATA CURRENT BEGIN -->
+## Current M00_L16 post-ACM-12 primary snapshot / publication metadata — 2026-10-03
+
+The Architect accepts User verification `PASS_M00_L16_PRIMARY_FROZEN_SNAPSHOT_COMMIT_CREATED_AND_VERIFIED` as **`PASS_M00_L16_PRIMARY_FROZEN_SNAPSHOT_COMMIT_VERIFIED`**. Read-only Git inspection confirms the primary identity, direct parent, subject, branch, exact 14-path scope and empty index. The current local frozen snapshot is the **POST-ACM-12 REPAIRED / RE-FROZEN M00_L16 PRIMARY FROZEN SNAPSHOT — CREATED / VERIFIED**.
+
+| Primary identity | Verified value |
+| --- | --- |
+| Primary SHA / Commit 1 | bef0d3875b40b86501efb8aee4d1e0fae38fbf7b |
+| Direct parent | e5a416eda8a0bace0774eeb20ecb2989d336263d |
+| Exact subject | M00_L16: publish post-ACM-12 repaired frozen snapshot |
+| Actual Git committer date/time | 2026-10-03T11:51:49+07:00 |
+| Branch | main |
+| Committed scope | Exactly six technical repair files plus eight established lifecycle documents; no protected/unrelated path |
+
+**M00_L16 remains COMPLETE / FROZEN / READ-ONLY / NOT YET REPUBLISHED.** Publication metadata reconciliation is **COMPLETE / READY FOR USER METADATA COMMIT**. **Metadata Commit 2 = NOT YET CREATED; remote push = NOT YET PERFORMED / PENDING; final external publication verification = NOT YET PERFORMED / PENDING.** No metadata SHA is known, invented or self-referenced. No remote alignment or final republication PASS is asserted.
+
+This new superseding record advances only publication metadata. The preceding final re-freeze record's prospective primary-commit wording describes the earlier stage. Final re-freeze remains `PASS_M00_L16_FINAL_REFREEZE_ADJUDICATION`, independently reviewed under `PASS_M00_L16_INDEPENDENT_FREEZE_REVIEW_READY_FOR_ARCHITECT_FINAL_REFREEZE`, and lifecycle-recorded under `PASS_M00_L16_FINAL_REFREEZE_LIFECYCLE_RECORDING_READY_FOR_REPUBLICATION_GATE`.
+
+### Historical identity, closure and verification preservation
+
+Commit 1 supersedes prior publication snapshots only as the current local repaired frozen snapshot. Historical publication identities remain unchanged historical evidence: original primary `ff4de5abf8b1ed3554c9fd68becdfedfbd6aed11`, original metadata `3667290180fe1a9fd96265383e7412c142c18129`, earlier repaired primary `015b8ca27d466a5a2fce2660a902bb58a4b62003`, and earlier repaired metadata `8f78de936c76bbf3888430de80b984851202457d`. None is represented as the current primary. Earlier publication, reopening, repair, failed verification, authorization and freeze states retain their historical truth.
+
+Phase 2 remains COMPLETE WITH RECORDED LIMITS. Phase 3 remains FORMALLY CLOSED. ACM-01 through ACM-12 remain FORMALLY CLOSED; final ACM-12 remains **60 CLOSED / 0 BLOCKED**; ACM-12-F01/F02/F03 remain FORMALLY CLOSED. No current finding or repair is introduced. Phase 4 remains NOT STARTED / FORBIDDEN; M00_L17 remains NOT STARTED / NOT AUTHORIZED.
+
+M00_L16 retains its single concept, MECHANISM AUTONOMOUS EVENT INTEGRATION: LEARNING_EVENT → governed PathPlanner Named Event registration → fresh IntakeToFeederCommand → existing Intake + Feeder semantic APIs. F01/F02/F03 remain governed inherited-architecture repairs.
+
+| Accepted User verification / existing artifacts | Preserved result |
+| --- | --- |
+| F03 focused reverification | 38 / 38 PASS; 4 actionable tasks, 4 executed |
+| Broader M00_L16 regression | PASS; 4 actionable tasks, 4 executed |
+| Full M00_L16 build | BUILD SUCCESSFUL; 6 actionable tasks, 6 executed |
+| Existing test XML | 878 tests; 0 failures; 0 errors; 0 skipped |
+
+These results were not rerun after Commit 1 or during this reconciliation. The primary contains the already accepted technical snapshot; all six technical repair files remain byte-for-byte identical to Commit 1.
+
+Evidence remains **THEORY VERIFIED / SIMULATION VERIFIED within accepted historical/applicability scope / REAL HARDWARE DEFERRED**. Physical game-piece transfer is not verified; applicable Noop mechanism IO remains; no fresh post-ACM-12 hardware verification or physical device/vendor failure response is established; tuning/configuration remains provisional. No new Simulation, Glass, Driver Station or hardware PASS is claimed. Accepted Phase-2 lineage limits remain preserved.
+
+### Two-commit workflow and next gate
+
+The canonical sequence remains verified primary Commit 1 → bounded metadata reconciliation → independent metadata review / User metadata commit authorization → User metadata Commit 2 → User push → external final publication verification. **NO THIRD VERIFICATION-ONLY COMMIT.** Any exception requires separate Architect authorization. No new tag/checkpoint is authorized, created, named or represented as existing for this publication. Existing historical checkpoint/tag records and prospective ACM-12 context remain historical.
+
+**Exact next gate: INDEPENDENT PUBLICATION METADATA REVIEW / USER METADATA COMMIT AUTHORIZATION.** That gate is identified, not performed here. The User retains all Git-write and execution ownership. Before metadata commit/push, verify exact documentation-only scope, parent chain and unchanged technical tree; external final verification remains separate. No metadata commit, push, tag, Phase-4 activation or M00_L17 is performed by this reconciliation.
+
+### Bounded metadata-only reconciliation
+
+Exactly eight authorized lifecycle documents receive this identical superseding record: AGENTS.md, root README.md, the M00 roadmap ADR, and M00_L16 README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md and docs/M00_L15_to_M00_L16_Step_by_Step.md. All previously existing document bytes remain unchanged; no ninth file or new ADR is added.
+
+Applicable Documents A/B/C were previously read through unchanged VERIFIED mirrors under repository policy and their current integrity confirmed. English PDFs remain authoritative; mirrors have no independent authority. Poster use is limited to explicit textual relationships. Current deterministic governance validation PASS: 12 source PDFs, 12 matching source hashes, 12 trust checks, zero findings. **New semantic-fidelity certification: NOT PERFORMED.**
+
+No production/test/configuration/Gradle/vendordep/PathPlanner asset, authoritative PDF, VERIFIED mirror, other ADR or protected/unrelated content is modified. No Gradle/test/build/Simulation/Glass/Driver Station/hardware execution or Git write occurs; the index remains empty.
+
+The unrelated A01_L06 path modification and existing untracked practice/curriculum/registry/cache/org/sensitive items remain excluded and untouched. No restore, delete, clean, move, stage or reclassification occurs. The prior hardware-registry search-scope incident remains preserved truthfully; this turn does not access or modify the registry.
+
+github-recovery-codes.txt: NOT ACCESSED / NOT MODIFIED
+
+Reconciliation gate: `PASS_M00_L16_METADATA_RECONCILIATION_READY_FOR_INDEPENDENT_METADATA_REVIEW`.
+<!-- M00-L16 POST-ACM-12 PUBLICATION METADATA CURRENT END -->
+
 <!-- M00-L16 FINAL REFREEZE CURRENT BEGIN -->
 ## Current M00_L16 final re-freeze adjudication — 2026-10-03
 
