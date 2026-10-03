@@ -1,5 +1,35 @@
 # D01_L11 Intake Feeder Coordination
 
+## Current historical-evidence qualification — LF-02 repair, 2026-10-03
+
+Architect adjudication: `PASS_D01_LEARNING_RECORD_ADJUDICATION`.
+The accepted lesson concept remains Intake Feeder Coordination, with predecessor `D01_L10_Basic_Integrated_Robot`.
+
+**The historical COMPLETE / FROZEN declaration is preserved. Final clean-build verification is not established by the retained record.**
+
+```text
+FINAL CLEAN BUILD: NOT ESTABLISHED IN RETAINED EVIDENCE
+```
+
+| Retained evidence | Interpretation |
+| --- | --- |
+| Historical lesson declaration | COMPLETE / FROZEN; preserved, not a new lifecycle transition. |
+| Earlier/baseline clean build | Recorded `BUILD SUCCESSFUL in 1m 41s`; baseline evidence only. |
+| Historical generic Build row | `PASS` remains preserved below; it does not establish accepted final clean-build verification. |
+| Later recorded final clean-build result | `PENDING FINAL CLEAN BUILD`; preserved without conversion to PASS. |
+| Simulation, Driver Station / Glass, and real robot | NOT TESTED in the retained record; unchanged. |
+
+No accepted final clean-build PASS is newly asserted. This qualification does not run a build, change the historical COMPLETE / FROZEN declaration, or assert new test/runtime/hardware verification.
+
+## Preserved historical lesson record
+
+All original content below remains unchanged, including the baseline build result, generic Build PASS row, later PENDING FINAL CLEAN BUILD result, and COMPLETE / FROZEN declarations. This qualification governs their interpretation without rewriting their chronology.
+
+---
+
+<!-- LF-02 PRESERVED HISTORICAL CONTENT BEGIN -->
+# D01_L11 Intake Feeder Coordination
+
 ## Lesson Information
 
 | Item | Value |

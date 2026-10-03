@@ -1,3 +1,37 @@
+# D01_L05 Intake Foundation
+
+## Current learning record — LF-01 repair, 2026-10-03
+
+Architect adjudication: `PASS_D01_LEARNING_RECORD_ADJUDICATION`.
+This record corrects the retained README identity, objective, and predecessor for D01_L05.
+
+## Lesson identity / Danh tính bài học
+
+- Lesson: `D01_L05_Intake_Foundation` — Intake Foundation.
+- Predecessor: `D01_L04_Robot_Telemetry_Runtime_Integration` — Robot Telemetry Runtime Integration.
+- The existing lesson status records D01_L04 as COMPLETE / FROZEN and D01_L05 as COMPLETE / FROZEN.
+
+**Tiếng Việt:** D01_L05 là bài Intake Foundation, kế thừa D01_L04 — Robot Telemetry Runtime Integration.
+
+## Lesson objective / Mục tiêu bài học
+
+**English:** Introduce one independently owned manual Intake feature while preserving the inherited drivetrain and frozen architecture. The feature uses `IntakeInputProcessor`, `ManualIntakeCommand`, `IntakeSubsystem`, and `IntakeIO`, with existing Real/Simulation adapters, immutable Intake observations, and read-only telemetry.
+
+**Tiếng Việt:** Bổ sung một tính năng Intake điều khiển thủ công, có subsystem sở hữu riêng, đồng thời giữ nguyên hệ truyền động và kiến trúc đã kế thừa. Bài áp dụng các ranh giới controls, command, subsystem, IO, observation bất biến và telemetry chỉ đọc đã học.
+
+D01_L04 supplies the inherited runtime telemetry integration. D01_L05 adds the Intake feature; it does not repeat D01_L04 as its new lesson concept. `RobotContainer` remains the composition root.
+
+## Verification evidence / Bằng chứng xác minh
+
+The existing D01_L05 verification history and results remain in [LESSON_STATUS.md](LESSON_STATUS.md). This documentation repair adds no new build, test, Simulation, Glass, Driver Station, or real-hardware verification and upgrades no verification result.
+
+## Preserved inherited README snapshot — historical, superseded for D01_L05
+
+The unchanged text below was retained from D01_L04. Its D01_L04 identity, D01_L03 predecessor, telemetry objective, and verification/publication statements describe that copied historical record; they are not the current D01_L05 learning identity or verification record. The current D01_L05 identity, objective, and predecessor are stated above. The original text is preserved for provenance.
+
+---
+
+<!-- LF-01 PRESERVED HISTORICAL CONTENT BEGIN -->
 # D01_L04 Robot Telemetry Runtime Integration
 
 ## Lesson Objective / Mục tiêu bài học
