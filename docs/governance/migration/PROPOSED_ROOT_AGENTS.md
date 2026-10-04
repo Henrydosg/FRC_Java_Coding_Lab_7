@@ -1,6 +1,16 @@
-# FRC Java Coding Lab 7.0 — Governance 2.0 Root AGENTS
+> NON-AUTHORITATIVE GOVERNANCE 2.0 MIGRATION CANDIDATE
+>
+> DO NOT USE AS CURRENT GOVERNANCE AUTHORITY BEFORE GOV2-G7 CUTOVER
 
-This is the active governance constitution and operating entrypoint. Read [CURRENT_STATE](docs/governance/CURRENT_STATE.md) for the single accepted state/action cursor. Root controls delegated-rule conflicts pending HOLD and Architect reconciliation. The reviewed pre-cutover candidate and exact old-root archive remain preserved as migration/history evidence; neither grants fresh permission.
+# FRC Java Coding Lab 7.0 — Proposed Root AGENTS
+
+This document is a proposed future replacement for root AGENTS.md and exists only for GOV2-G6 independent review. The existing root AGENTS.md remains
+authoritative. This file does not replace it, execute G6, authorize G7, activate CURRENT_STATE or rules, authorize a lesson, or establish publication.
+
+The proposed operating clauses below become operative only after independent review and explicit Architect GOV2-G7 cutover approval applying the reviewed
+root and its exact incorporations. Until then every clause here is NON-AUTHORITATIVE candidate text. The registered GOV2 migration ADR governs the
+preparation process. Repository-relative paths identify the intended future root's targets; preview links resolve from this candidate's migration
+directory. Applying the approved root must preserve those target identities when adjusting link bases.
 
 ## 1. Project identity, purpose and normative language
 
@@ -30,8 +40,8 @@ Source examples and derived knowledge do not amend higher authority. Document A 
 workflow/coding; C governs the permanent observation package without changing control flow or Document A/B precedence.
 
 Registered roadmap and architecture ADRs retain their existing scope and applicability. The GOV2 migration ADR governs migration, delegation, reading,
-preservation and cutover; its registration is not repository policy activation. Only the seven exact paths and delegated scopes in §14
-are binding extensions of this root through the authorized Governance 2.0 cutover. Root controls an inconsistency with an incorporated rule pending Architect reconciliation; STOP/HOLD before action.
+preservation and cutover; its registration is not repository policy activation. After approved G7, only the seven exact paths and delegated scopes in §14
+become binding extensions of this root. Root controls an inconsistency with an incorporated rule pending Architect reconciliation; STOP/HOLD before action.
 Detailed rules may not contradict authoritative Documents A/B/C. Existence, linking, indexing, manifest inclusion, tool discovery or a candidate filename
 creates no authority. No other document is implicitly incorporated.
 
@@ -44,7 +54,7 @@ files/evidence on HOLD. A build PASS or old approval is no cure. History/current
 
 ## 5. Mandatory reading before dependent work
 
-ALWAYS READ root AGENTS.md and `docs/governance/CURRENT_STATE.md` at startup. Then sufficiently read every task-relevant,
+After approved cutover ALWAYS READ root AGENTS.md and `docs/governance/CURRENT_STATE.md` at startup. Then sufficiently read every task-relevant,
 potentially governing source before analysis, design, implementation, documentation or review depends on it. Use the following matrix and expand reading
 when another source may govern. Task-scoped loading never excuses skipping applicable technical governance, an exception or evidence qualification.
 
@@ -76,15 +86,15 @@ semantic authority or an automatic trust-state transition mechanism.
 
 ## 6. One current-state cursor and current-versus-history precedence
 
-`docs/governance/CURRENT_STATE.md` is the sole operational repository current-state cursor. It projects accepted current
+After approved G7, `docs/governance/CURRENT_STATE.md` is the sole operational repository current-state cursor. It projects accepted current
 truth/authorization with references to governing decisions and evidence. Root and root README point to it instead of maintaining competing tables. This
-active root incorporates that contract; CURRENT_STATE remains a non-self-authorizing projection. CURRENT_STATE cannot create roadmap authority, implementation permission, repair permission or publication
+candidate does not activate that contract. CURRENT_STATE cannot create roadmap authority, implementation permission, repair permission or publication
 permission, and cannot self-authorize its own modification. Accepted adjudication or an already-authorized gate, exact recording scope, semantic
 consistency review and User-owned publication are required for an authorized state update.
 
 Archive prior state with provenance/supersession under the update contract; CURRENT_STATE retains the operational cursor and relevant limits, not history.
 Accepted decisions and explicit supersession control precedence, never a “Current” heading, source position, SHA recency or old token. Distinguish primary,
-metadata and repository checkpoints. State recording is not publication; never claim its future commit or push already occurred.
+metadata and repository checkpoints. Candidate recording is not publication; never claim its future commit or push already occurred.
 
 ## 7. Frozen Backbone and architecture invariants
 
@@ -244,10 +254,11 @@ conflict, failed build or failed verification. Do not advance dependent gates wh
 reverify. Self-review scope, lineage, Backbone, RobotContainer, all changed paths, applicable evidence, documentation and claims. Reserved “Start next
 lesson”, “Finish lesson” and “Publish lesson” names are not active automation or execution permission.
 
-## 14. Exact detailed-rule incorporations
+## 14. Exact future detailed-rule incorporations
 
-The following seven exact paths are binding root extensions ONLY within these delegated scopes, through the explicit GOV2-G7 cutover authorization.
-Root remains controlling; historical population-stage wording is provenance, not additional permission. No other file is implicitly incorporated.
+Only AFTER approved GOV2-G7 cutover do the following exact paths become binding root extensions within these scopes. Before G7 they remain
+NON-AUTHORITATIVE candidates. Their original population-stage status wording is provenance, not present operating permission; incorporation needs reviewed
+consistency and explicit cutover, never assumed activation.
 
 | Exact repository-relative path | Delegated scope |
 | --- | --- |
@@ -265,25 +276,25 @@ detail cannot erase a directly stated root protection.
 
 ## 15. Governance and registered roadmap navigation
 
-| Repository-relative target | Purpose / navigation |
+| Repository-relative target | Purpose / candidate preview |
 | --- | --- |
-| `docs/governance/CURRENT_STATE.md` | Sole operational projection; [current state](docs/governance/CURRENT_STATE.md). |
-| `docs/governance/LEARNING_FLOW_MAP.md` | Derived curriculum knowledge, not permission; [learning map](docs/governance/LEARNING_FLOW_MAP.md). |
-| `docs/governance/README.md` | Detailed governance navigation, not competing state authority; [governance navigation](docs/governance/README.md). |
-| `docs/GOVERNANCE_DOCUMENT_MANIFEST.md` | Controlled source PDF/VERIFIED mirror identity and trust checks; [manifest](docs/GOVERNANCE_DOCUMENT_MANIFEST.md). |
-| `docs/architecture_decisions/` | Registered roadmaps, contracts and scoped exceptions; [location](docs/architecture_decisions/). |
-| `docs/governance/migration/DECISIONS.md` | Accepted migration decision/evidence/authorization provenance; [ledger](docs/governance/migration/DECISIONS.md). |
-| `docs/governance/migration/SOURCE_MAP.md`, `RULE_COVERAGE.md` | Source preservation and operative coverage; [source map](docs/governance/migration/SOURCE_MAP.md), [coverage](docs/governance/migration/RULE_COVERAGE.md). |
-| `docs/governance/history/README.md` | Exact archive, verbatim events and indexes; historical evidence, not permission; [store](docs/governance/history/README.md). |
+| `docs/governance/CURRENT_STATE.md` | Sole post-cutover operational projection; [preview](../CURRENT_STATE.md). |
+| `docs/governance/LEARNING_FLOW_MAP.md` | Derived curriculum knowledge, not permission; [preview](../LEARNING_FLOW_MAP.md). |
+| `docs/governance/README.md` | Detailed governance navigation, not competing state authority; [preview](../README.md). |
+| `docs/GOVERNANCE_DOCUMENT_MANIFEST.md` | Controlled source PDF/VERIFIED mirror identity and trust checks; [manifest](../../GOVERNANCE_DOCUMENT_MANIFEST.md). |
+| `docs/architecture_decisions/` | Registered roadmaps, contracts and scoped exceptions; [location](../../architecture_decisions/). |
+| `docs/governance/migration/DECISIONS.md` | Accepted migration decision/evidence/authorization provenance; [ledger](DECISIONS.md). |
+| `docs/governance/migration/SOURCE_MAP.md`, `RULE_COVERAGE.md` | Source preservation and operative coverage; [source map](SOURCE_MAP.md), [coverage](RULE_COVERAGE.md). |
+| `docs/governance/history/README.md` | Exact archive, verbatim events and indexes; historical evidence, not permission; [store](../history/README.md). |
 
 Registered roadmap pointers remain at their existing locations; consult the applicable actual decision and its scope: [S00_L19/L20 driver-input
-ownership](docs/architecture_decisions/ADR_S00_L19_L20_Driver_Input_Ownership.md),
-[A00](docs/architecture_decisions/ADR_A00_Autonomous_Command_Foundation_Roadmap.md),
-[A01](docs/architecture_decisions/ADR_A01_Autonomous_Navigation_Path_Following_Roadmap.md),
-[V00](docs/architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md),
-[M00](docs/architecture_decisions/ADR_M00_Competition_Mechanism_Foundations_Roadmap.md), [PDF/mirror
-policy](docs/architecture_decisions/ADR_Governance_PDF_Verified_Markdown_Mirrors.md) and [GOV2
-migration](docs/architecture_decisions/ADR_GOV2_Governance_2_0_Agent_Instructions_State_and_History_Migration.md).
+ownership](../../architecture_decisions/ADR_S00_L19_L20_Driver_Input_Ownership.md),
+[A00](../../architecture_decisions/ADR_A00_Autonomous_Command_Foundation_Roadmap.md),
+[A01](../../architecture_decisions/ADR_A01_Autonomous_Navigation_Path_Following_Roadmap.md),
+[V00](../../architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md),
+[M00](../../architecture_decisions/ADR_M00_Competition_Mechanism_Foundations_Roadmap.md), [PDF/mirror
+policy](../../architecture_decisions/ADR_Governance_PDF_Verified_Markdown_Mirrors.md) and [GOV2
+migration](../../architecture_decisions/ADR_GOV2_Governance_2_0_Agent_Instructions_State_and_History_Migration.md).
 
 Read applicable reopen, configuration and package-repair ADRs through registered navigation before dependent work; their historical scopes are not renewed.
 Read task-relevant lesson lifecycle documents and source/evidence from the accepted target directory. Do not open parked candidate ADRs as substitutes for
@@ -304,5 +315,4 @@ implementation, repair, freeze, publication or successor permission. Consumed ap
 remain historical, including original failures. Parked artifacts, candidate rules, candidate roadmaps and migration review files are not current authority.
 Preserve original archive bytes, event bodies, provenance, chronology and supersession links; annotations stay outside verbatim bodies. Summaries, indexes
 and recovered bytes cannot replace operative semantic coverage or accepted decisions. No permission follows merely from a file existing, a historical PASS,
-a closed gate or review itself.
-
+a closed gate or this proposed root being reviewed.

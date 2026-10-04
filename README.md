@@ -1,3 +1,32 @@
+# FRC Java Coding Lab 7.0
+
+This repository teaches real robot programming with Java and WPILib through independent lesson projects, inherited frozen architecture, one new concept per lesson, and explicit verification and documentation gates.
+
+Repository này hướng dẫn lập trình robot FRC bằng Java và WPILib: kế thừa kiến trúc đã đóng băng, mỗi bài là một project độc lập với một khái niệm mới, và giữ các gate kiểm chứng/tài liệu riêng biệt.
+
+## Governance and student navigation
+
+[AGENTS.md](AGENTS.md) is the active governance constitution and entrypoint. Read [CURRENT_STATE](docs/governance/CURRENT_STATE.md) for the single accepted state/action cursor; this README is project/navigation documentation and maintains no competing current-state table.
+
+- [Learning flow map](docs/governance/LEARNING_FLOW_MAP.md): derived, non-authorizing navigation across the accepted main and historical/parallel lineages, with lesson-level evidence limits.
+- [Governance navigation](docs/governance/README.md): exact delegated rule paths and scopes, reading, lifecycle, workflow, evidence and protected-path contracts.
+- [Detailed rules](docs/governance/rules/): binding only through exact root incorporation; root controls conflicts pending HOLD and Architect reconciliation.
+- [History and indexes](docs/governance/history/README.md): preserved chronology, findings, repairs, closures and publications; historical evidence grants no fresh permission.
+- [Exact pre-GOV2 root archive](docs/governance/history/originals/AGENTS.pre-governance-2.0.md): original root closure matrices and detailed source records preserved unchanged.
+- [Migration decision ledger](docs/governance/migration/DECISIONS.md): accepted decisions/authorizations and implementation provenance; not current-state ownership.
+- [PDF / VERIFIED mirror manifest](docs/GOVERNANCE_DOCUMENT_MANIFEST.md): controlled source/mirror integrity relationship; English Documents A/B/C retain authority.
+
+Students should follow the registered roadmap and lesson lifecycle/transition documents linked from the learning map. A map entry, directory, historical milestone or consumed approval does not activate a lesson. Build and Simulation results retain their accepted applicability; they do not establish real-hardware performance.
+
+## Preserved pre-cutover README — historical stage evidence
+
+The entire preceding README is retained below with chronology, milestones, failures, evidence and publication identities intact. Every “Current”, status table, publication-pending statement, repair action and “next gate” inside this preserved section refers to its original recorded stage. Accepted later decisions and CURRENT_STATE supersede those operational cursors; these records are not today's state or permission.
+
+References inside the preserved text to closure/history matrices “in AGENTS.md” refer to the exact pre-GOV2 root archive linked above, not the new concise root. Direct historical AGENTS links below now target that archive. The old structure/navigation illustrations describe their source stage; active split-governance navigation is above and in the governance README. Source-stage policies retain their registered applicability, interpreted through active root governance.
+
+<details>
+<summary>Preserved README source-stage records and project documentation — historical evidence</summary>
+
 <!-- M00-L16 POST-ACM-12 PUBLICATION METADATA CURRENT BEGIN -->
 ## Current M00_L16 post-ACM-12 primary snapshot / publication metadata — 2026-10-03
 
@@ -485,7 +514,7 @@ This documentation-only recording changes exactly the eight authorized lifecycle
 <!-- ACM-11 DOMAIN CLOSURE CURRENT BEGIN -->
 ## Current ACM-11 formal domain closure — 2026-10-02
 
-The Architect explicitly authorized ACM-11 FORMAL DOMAIN CLOSURE after Sol's independent Configuration Authority audit. Accepted audit token: `PASS_ACM_11_INITIAL_AUDIT_READY_FOR_ARCHITECT_DOMAIN_REVIEW`. **ACM-11 is FORMALLY CLOSED / FORMALLY RECORDED: 55 / 55 dimensions CLOSED; 0 BLOCKED. ACM-11-F01: NOT ESTABLISHED. NO ADDITIONAL ACM-11 FINDING ESTABLISHED.** The detailed configuration summary and complete dimension matrix are in [AGENTS.md](AGENTS.md).
+The Architect explicitly authorized ACM-11 FORMAL DOMAIN CLOSURE after Sol's independent Configuration Authority audit. Accepted audit token: `PASS_ACM_11_INITIAL_AUDIT_READY_FOR_ARCHITECT_DOMAIN_REVIEW`. **ACM-11 is FORMALLY CLOSED / FORMALLY RECORDED: 55 / 55 dimensions CLOSED; 0 BLOCKED. ACM-11-F01: NOT ESTABLISHED. NO ADDITIONAL ACM-11 FINDING ESTABLISHED.** The detailed configuration summary and complete dimension matrix are in [AGENTS.md](docs/governance/history/originals/AGENTS.pre-governance-2.0.md).
 
 `Constants.java` is the default authority for stable robot-specific and lesson-approved values, not every constant in the project. Implementation details, runtime state, and simulation/test fixtures remain with their proper owners. Current Swerve configuration uses Pigeon CAN 20; module CAN IDs 21–32; drive inversion FL/BL false and FR/BR true; steer inversion true on all; CounterClockwise_Positive CANcoder direction; drive-position signs +1; 4-inch diameter / 2-inch radius; drive ratio 6.75:1; steer ratio 15.42857142857143:1; wheelbase and track width 0.5461 m; drive supply limit 70 A enabled; steer stator limit 60 A enabled. Current CANcoder offsets are FL +0.068603515625, FR +0.014404296875, BL +0.46240234375, BR -0.057373046875 rotations. A later tracked user-authoritative recalibration supersedes the activation brief's older offsets; the difference is not a defect. Drive Slot 0 gains remain provisional; steer gains are `100/0/0.5`.
 
@@ -616,7 +645,7 @@ Earlier ACM-01–ACM-04 blocks below preserve their closure-stage evidence; thei
 
 Static governance preflight PASS: 12 authoritative source PDFs, 12 matching source hashes, zero deterministic findings. This does not certify semantic fidelity. Current M00_L16 preserves IO / hardware / simulation → subsystem-owned mutable IOInputs → subsystem interpretation → immutable project observations → project consumers. The seven IO families are SwerveModuleIO, GyroIO, VisionIO, IntakeIO, FeederIO, FlywheelIO, and ElevatorIO. Each subsystem owns its transport instance(s); refresh precedes periodic observation construction. No mutable Inputs escape, alias, shared owner, alternate hardware read route, or static/global mutable transport was established.
 
-Fourteen current top-level records comprise the observation/read-model inventory: SwerveObservation, VisionObservation, QualifiedVisionMeasurement, VisionTiming, VisionMeasurementQuality, VisionFusionObservation, IntakeObservation, FeederObservation, FlywheelObservation, ElevatorObservation, DriverInputObservation, DriveThreeMeterValidationObservation, AutonomousEventObservation, and AutonomousPreparationObservation. VisionObservation copies its target list and independently owns target values. Commands and telemetry receive observations or semantic project values. Noop and Swerve/Gyro/Vision simulation paths preserve the same transport boundary. The corrected Feeder path is FeederIO → FeederIOInputs → FeederSubsystem → FeederObservation; escape NONE ESTABLISHED; status CORRECT. Full closure evidence and the IO inventory are recorded in [AGENTS.md](AGENTS.md).
+Fourteen current top-level records comprise the observation/read-model inventory: SwerveObservation, VisionObservation, QualifiedVisionMeasurement, VisionTiming, VisionMeasurementQuality, VisionFusionObservation, IntakeObservation, FeederObservation, FlywheelObservation, ElevatorObservation, DriverInputObservation, DriveThreeMeterValidationObservation, AutonomousEventObservation, and AutonomousPreparationObservation. VisionObservation copies its target list and independently owns target values. Commands and telemetry receive observations or semantic project values. Noop and Swerve/Gyro/Vision simulation paths preserve the same transport boundary. The corrected Feeder path is FeederIO → FeederIOInputs → FeederSubsystem → FeederObservation; escape NONE ESTABLISHED; status CORRECT. Full closure evidence and the IO inventory are recorded in [AGENTS.md](docs/governance/history/originals/AGENTS.pre-governance-2.0.md).
 
 ACM-01 through ACM-04 remain FORMALLY CLOSED / CHECKPOINTED / PUSHED / TAGGED; no regression was established. At the ACM-05 checkpoint, ACM-06 was NEXT PROSPECTIVE / NOT STARTED / NOT ACTIVATED; that cursor was superseded by the formal ACM-06 closure recorded above. ACM-07 through ACM-12 remain NOT STARTED. Phase 3 remains IN PROGRESS; Phase 4 remains NOT STARTED / FORBIDDEN. M00_L16 remains IN_PROGRESS / NOT RE-FROZEN / NOT REPUBLISHED; no M00_L17. The User checkpointed and pushed ACM-05 at `6c125c2490c50b9f2c0151379307ac72d10c0b22` with annotated tag `audit-acm-05-closed`; its remote target was verified by the User. No Git write or project execution occurred. `github-recovery-codes.txt`: NOT ACCESSED / NOT MODIFIED.
 
@@ -3923,3 +3952,6 @@ external Final Publication Verification: PENDING. M00_L15 remains
 `THEORY VERIFIED / SIMULATION VERIFIED / REAL HARDWARE DEFERRED`. Active Lesson
 Count is `0`, Current Active M00 Lesson is `NONE`, and M00_L16 remains
 `FUTURE / INACTIVE / NOT CREATED`.
+
+
+</details>
