@@ -4,9 +4,9 @@
 >
 > CURRENT_STATE does NOT self-authorize. Its authority derives from [root AGENTS](../../AGENTS.md), applicable registered decisions and explicitly authorized state recording.
 
-This is the single operational repository state/action projection. The User-supplied Architect brief **0628bd70-e0a1-447d-804a-a5210f72d7c7** approves the revised M01 roadmap and authorizes its bounded registration recording. Approval/registration is recorded **subject to successful Architect review of this recording**; no preparation or implementation permission follows.
+This is the single operational repository state/action projection. The User-supplied Architect brief **8c0a9298-41ed-4db4-9e08-8e5abaafe6b3** separately authorizes the User to prepare exactly `M01_L01_MechanismHardwareReadinessAndIOContract` by the standard lesson-start workflow after this authorization recording receives Architect review and User-owned publication. The authorization is recorded here; the lesson is **NOT PREPARED / NOT CREATED**, implementation remains unauthorized, and no lesson action is performed by this recording.
 
-The [M01 roadmap ADR](../architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) contains the approved curriculum boundary. The [prior cursor and supersession provenance](history/events/M01_ROADMAP_REGISTRATION_2026-10-04.md) preserve the preceding state verbatim under root §6 and the registered [GOV2 ADR §8](../architecture_decisions/ADR_GOV2_Governance_2_0_Agent_Instructions_State_and_History_Migration.md#8-current_state-authority-and-update-contract). This update is working-tree registration metadata; **its commit/push has not been performed by this recording**. User-owned publication remains separate.
+The registered [M01 roadmap ADR](../architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) defines the approved curriculum boundary. The [prior cursor and supersession provenance](history/events/M01_L01_PREPARATION_AUTHORIZATION_2026-10-04.md) preserve the preceding state verbatim under root §6 and registered [GOV2 ADR §8](../architecture_decisions/ADR_GOV2_Governance_2_0_Agent_Instructions_State_and_History_Migration.md#8-current_state-authority-and-update-contract). The [earlier roadmap registration event](history/events/M01_ROADMAP_REGISTRATION_2026-10-04.md) remains distinct history. This authorization recording is a working-tree candidate; Architect review and User-owned publication remain pending. No future commit or push identity is claimed.
 
 ## Accepted operational cursor
 
@@ -19,35 +19,37 @@ The [M01 roadmap ADR](../architecture_decisions/ADR_M01_Real_Mechanism_Hardware_
 | M00 | COMPLETE through L16; accepted SOFTWARE / ARCHITECTURE mechanism foundation, physical mechanisms deferred |
 | Active editable lesson | NONE |
 | Governance 2.0 | COMPLETE / FORMALLY CLOSED / REMOTE VERIFIED; no open migration gate, G10 finding or active repair; no GOV2-G11 |
-| Governance 2.0 final closure commit | d2b241aba86307a9909bf64f6bc74ce781373e06 — accepted final closure/publication identity supplied by the current Architect brief, not this registration's future commit |
-| Governance closure provenance | [DECISIONS](migration/DECISIONS.md#accepted-f03-repair-publication-and-gov2-g10-final-closure), prior cursor event and current Architect brief; original G9/F03 publication and repair history remain preserved |
+| Governance 2.0 final closure commit | d2b241aba86307a9909bf64f6bc74ce781373e06 — accepted final closure/publication identity supplied by the Architect; not this authorization recording's future commit |
 | Constants/configuration authority review | CLOSED — CFG-A01 DEFER; CFG-A02 DO NOT CHANGE; CFG-A03 DEFER; proposed cleanup change set NONE |
 | M01 module identity | M01 — Real Mechanism Hardware Integration |
-| M01 roadmap | APPROVED / REGISTERED — 18 lessons; subject to successful Architect review of this recording |
-| M01 roadmap authority | [Registered M01 ADR](../architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md); registration brief 0628bd70-e0a1-447d-804a-a5210f72d7c7; approved revised proposal following brief 05d64653-7d92-43fd-80cd-b4c35e40177d |
-| M01 approved mechanism order / exit | Intake → Feeder → Flywheel → Elevator; all four individually qualified Real capabilities and appropriate manual operation at completion; no final all-mechanism coordination lesson |
-| M01 module preparation | NOT AUTHORIZED / NOT PREPARED; module_M01 not created by this recording |
+| M01 roadmap | APPROVED / REGISTERED / PUBLISHED / REMOTE VERIFIED — status and publication evidence supplied in the current Architect brief |
+| M01 roadmap publication identity | b551fb4b1335acdbc553ab0861c5873a7a107893 — User-supplied published identity; this turn locally corroborated HEAD, origin/main and origin/HEAD at this SHA, without repeating live remote verification |
+| M01 roadmap authority | [Registered M01 ADR](../architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md); roadmap registration brief 0628bd70-e0a1-447d-804a-a5210f72d7c7 and its accepted revision provenance |
+| M01 module preparation | AUTHORIZED only for User-owned preparation of M01_L01 under the approved donor/target workflow; module_M01 does not exist |
 | M01_L01 identity / title | M01_L01_MechanismHardwareReadinessAndIOContract — Mechanism Hardware Readiness and IO Contract |
-| M01_L01 approved donor | real_robot_programming/module_M00/M00_L16_MechanismAutonomousEventIntegration/ — COMPLETE / FROZEN / READ-ONLY |
-| M01_L01 preparation | NOT AUTHORIZED / NOT PREPARED / NOT CREATED |
-| M01 implementation | NOT AUTHORIZED |
-| M01 registration recording | Bounded documentation recording performed; Architect review PENDING; no lesson execution or activation |
-| Registration recording paths | M01 roadmap ADR; root AGENTS and README navigation pointers; CURRENT_STATE; required prior-state event M01_ROADMAP_REGISTRATION_2026-10-04.md |
-| Git publication of this registration | NOT PERFORMED BY THIS RECORDING; no future commit/push SHA claimed; User owns ALL Git writes |
+| M01_L01 approved donor | `real_robot_programming/module_M00/M00_L16_MechanismAutonomousEventIntegration/` — COMPLETE / FROZEN / READ-ONLY |
+| M01_L01 approved target | `real_robot_programming/module_M01/M01_L01_MechanismHardwareReadinessAndIOContract/` |
+| M01_L01 preparation | AUTHORIZED for the User's later standard preparation workflow, after this recording's Architect review and User-owned publication; NOT PREPARED / NOT CREATED |
+| M01 inherited baseline | NOT RUN; no baseline BUILD PASS is claimed |
+| M01 implementation | NOT AUTHORIZED; Design Lock and a separate implementation authorization remain required |
+| M01 authorization recording | Bounded current-state/history recording only; Architect review PENDING; User publication PENDING |
+| Git publication of this authorization recording | NOT PERFORMED BY THIS RECORDING; no future commit/push SHA claimed; User owns ALL Git writes |
 | T00 | PARKED / NOT REGISTERED / NOT ACTIVATED; protected candidate contents excluded |
 | Phase 2 | COMPLETE WITH RECORDED LIMITS |
 | Phase 3 / ACM-01–12 | FORMALLY CLOSED; ACM-12 60 CLOSED / 0 BLOCKED; F01/F02/F03 CLOSED |
 | Phase 4 / M00_L17 | NOT STARTED / FORBIDDEN; M00_L17 NOT AUTHORIZED |
-| Next boundary | Architect review of the registration evidence before any M01_L01 preparation authorization |
+| Next boundary | Await Architect review and User-owned publication of this preparation authorization before the User copies M00_L16 to M01_L01. |
 
 ## Authority, evidence and preservation limits
 
-The accepted M01 roadmap is not module preparation, lesson creation, an IN_PROGRESS transition, Design Lock or implementation permission. M01's 18 future lessons do not increase the existing 79 represented-project count. The frozen M00_L16 donor is not copied or changed by this recording.
+The separate preparation authorization does not amend the roadmap ADR's curriculum content or authorize Sol/Codex to prepare the lesson. After this recording is reviewed and User-published, the User owns copying the exact frozen M00_L16 donor to the approved M01_L01 target, cleaning only authorized generated artifacts in that copy, running the inherited baseline and reporting Git status plus BUILD SUCCESSFUL. An accepted baseline PASS precedes inheritance/architecture audit; Design Lock precedes separate implementation authorization. No such step is performed here.
 
-Root AGENTS is the constitution/entrypoint; the seven exact delegated rules retain their existing scopes. English Documents A/B/C remain authoritative. The [manifest](../GOVERNANCE_DOCUMENT_MANIFEST.md) indexes controlled PDF/mirror integrity, not general ADR registration. [LEARNING_FLOW_MAP](LEARNING_FLOW_MAP.md) remains derived/non-authorizing and is not amended by registration. Historical/candidate records and consumed approvals grant no fresh permission.
+The authorization does not authorize Java, tests, Constants changes, Real IO, hardware configuration/activation, tuning, Simulation, Glass, Driver Station, SysId, or any other M01 lesson. Preparation authorization is not lesson creation by Sol, implementation authorization, verification, closure, freeze, or publication. M00_L17 remains unauthorized. Constants remains closed with its stated CFG decisions.
 
-Relevant limits remain: Phase-2 physical-lineage qualifications, M00 Noop/physical deferral, provisional configuration and historical Simulation/hardware applicability are preserved. D01_L11 final clean build remains NOT ESTABLISHED IN RETAINED EVIDENCE. Camera/localization/tuning qualifications retain their accepted scope. M01 registration creates no new build/test, Simulation, Glass/Driver Station, physical mechanism, homing, travel-protection, regulation or competition-readiness PASS.
+Root AGENTS is the constitution/entrypoint; the seven exact delegated rules retain their existing scopes. English Documents A/B/C remain authoritative. The [manifest](../GOVERNANCE_DOCUMENT_MANIFEST.md) indexes controlled PDF/mirror integrity, not general ADR registration. [LEARNING_FLOW_MAP](LEARNING_FLOW_MAP.md) remains derived/non-authorizing and is not amended. Historical/candidate records and consumed approvals grant no fresh permission.
 
-Accepted GOV2 remote verification is supplied by the Architect brief. Read-only inspection corroborates local HEAD and local origin/main at the final closure identity; it does not repeat live remote verification. Primary lesson snapshots, lesson metadata, repository checkpoints and this uncommitted registration remain distinct. Unrelated dirty/untracked state and the previously disclosed hardware-registry search-scope incident remain preserved; protected registry, T00 candidate and recovery-code contents are not accessed by this recording.
+Relevant limits remain: Phase-2 physical-lineage qualifications, M00 Noop/physical deferral, provisional configuration and historical Simulation/hardware applicability are preserved. D01_L11 final clean build remains NOT ESTABLISHED IN RETAINED EVIDENCE. Camera/localization/tuning qualifications retain their accepted scope. This recording creates no build/test, Simulation, Glass/Driver Station, physical mechanism, homing, travel-protection, regulation or competition-readiness PASS. No baseline build has been run for M01_L01.
 
-Any later update requires accepted adjudication/already-authorized gate, exact recording scope, prior-state preservation, semantic consistency review and User-owned publication. This cursor cannot authorize its own modification or a future lesson action.
+The M01 publication/remote-verification state above comes from the supplied Architect/User evidence; this turn only corroborated the reported SHA against local HEAD and refs and did not repeat a live remote check. Primary lesson snapshots, lesson metadata, repository checkpoints, the earlier roadmap registration and this uncommitted authorization recording remain distinct facts. Unrelated dirty/untracked state and the previously disclosed hardware-registry search-scope incident remain preserved. Protected registry, T00 candidate and recovery-code contents were not accessed by this recording.
+
+Any later state update requires accepted adjudication or an already-authorized gate, exact recording scope, prior-state preservation, semantic consistency review and User-owned publication. This cursor cannot authorize its own modification or a future lesson action.
