@@ -15,6 +15,7 @@ Repository này hướng dẫn lập trình robot FRC bằng Java và WPILib: k�
 - [Exact pre-GOV2 root archive](docs/governance/history/originals/AGENTS.pre-governance-2.0.md): original root closure matrices and detailed source records preserved unchanged.
 - [Migration decision ledger](docs/governance/migration/DECISIONS.md): accepted decisions/authorizations and implementation provenance; not current-state ownership.
 - [PDF / VERIFIED mirror manifest](docs/GOVERNANCE_DOCUMENT_MANIFEST.md): controlled source/mirror integrity relationship; English Documents A/B/C retain authority.
+- [Registered M01 roadmap](docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md): approved curriculum scope for real Intake, Feeder, Flywheel and Elevator integration; consult CURRENT_STATE for separate action authority.
 
 Students should follow the registered roadmap and lesson lifecycle/transition documents linked from the learning map. A map entry, directory, historical milestone or consumed approval does not activate a lesson. Build and Simulation results retain their accepted applicability; they do not establish real-hardware performance.
 

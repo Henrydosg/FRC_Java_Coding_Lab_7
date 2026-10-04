@@ -281,7 +281,8 @@ ownership](docs/architecture_decisions/ADR_S00_L19_L20_Driver_Input_Ownership.md
 [A00](docs/architecture_decisions/ADR_A00_Autonomous_Command_Foundation_Roadmap.md),
 [A01](docs/architecture_decisions/ADR_A01_Autonomous_Navigation_Path_Following_Roadmap.md),
 [V00](docs/architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md),
-[M00](docs/architecture_decisions/ADR_M00_Competition_Mechanism_Foundations_Roadmap.md), [PDF/mirror
+[M00](docs/architecture_decisions/ADR_M00_Competition_Mechanism_Foundations_Roadmap.md),
+[M01](docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md), [PDF/mirror
 policy](docs/architecture_decisions/ADR_Governance_PDF_Verified_Markdown_Mirrors.md) and [GOV2
 migration](docs/architecture_decisions/ADR_GOV2_Governance_2_0_Agent_Instructions_State_and_History_Migration.md).
 
