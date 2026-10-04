@@ -4,6 +4,34 @@
 >
 > [Root AGENTS](../../../AGENTS.md) controls governance; [CURRENT_STATE](../CURRENT_STATE.md) holds the single operational projection. Ledger entries do not create permission independently of accepted governing decisions.
 
+> **Accepted supersession:** The [F01 closure and F02 pre-rereview records](#accepted-f01-closure-and-f02-pre-rereview-reconciliation) appended below are supplied by attachment c2bbc0f0-2487-44f1-9456-340025204e0d under `PASS_ARCHITECT_GOV2_G10_F02_PRE_REREVIEW_STATE_RECONCILIATION_AUTHORIZED`. They supersede earlier F01-under-repair/current-action and F02-OPEN/scope-pending cursors preserved in this ledger. Those older entries retain their source-stage truth and failure chronology; they do not govern the current action. [CURRENT_STATE](../CURRENT_STATE.md) remains the sole operational projection.
+
+G9 User-owned publication is performed at `ade2b50e0582aaffdb31dce65c0d4f43051b912a`, with accepted origin/main identity at the same commit and Architect G9 formal closure. The subsequent independent G10 review returned HOLD with F01 and F02. This ledger records the accepted publication sequence and the bounded F01 authorization supplied in attachment d39e4948-402b-475c-92ee-367388e4c6ad; [CURRENT_STATE](../CURRENT_STATE.md) remains the sole operational cursor. Evidence, Architect decisions, repair authorization, finding closure and G10 closure remain distinct.
+
+## Accepted G9 publication and G10 F01 reconciliation provenance
+
+The following records are already-existing accepted facts supplied by the Architect F01 brief. User staging, commit and push evidence is identified as User execution; preceding independent G10 inspection is identified separately. This recording does not repeat those operations, execute F02 or claim final G10 closure.
+
+| Item | Classification | Accepted token/reference | Disposition / source |
+| --- | --- | --- | --- |
+| GOV2-G9-P01 User restage / byte verification | USER-EXECUTED STAGING / BYTE-VERIFICATION EVIDENCE | PASS; 162 total staged paths; 158 docs/governance paths; 161/161 Governance payload index blobs matched raw bytes | Accepted User evidence supplied by attachment d39e4948-402b-475c-92ee-367388e4c6ad. Restaging and raw/index verification subsequently passed; the old-root archive was committed byte-exact. The initial 161-path preflight and P01 pending/restaging records preserved below retain their earlier stage meaning and are superseded by this later evidence. No staging or index modification is performed by this recording. |
+| GOV2-G9 local publication commit verification | USER-EXECUTED LOCAL PUBLICATION EVIDENCE | PASS_GOV2_G9_LOCAL_PUBLICATION_COMMIT_VERIFIED | Publication commit ade2b50e0582aaffdb31dce65c0d4f43051b912a; accepted prior User execution supplied by the F01 brief. This is the published G9 identity, not a future commit for this metadata recording. |
+| Architect G9 local publication acceptance | ARCHITECT LOCAL PUBLICATION CHECKPOINT ACCEPTANCE | PASS_ARCHITECT_GOV2_G9_LOCAL_PUBLICATION_COMMIT_ACCEPTED | Accepted Architect checkpoint decision supplied by the F01 brief; distinct from User local commit evidence and later remote acceptance. |
+| GOV2-G9 remote publication verification | USER-EXECUTED REMOTE PUBLICATION EVIDENCE | PASS_GOV2_G9_REMOTE_PUBLICATION_VERIFIED | Accepted User remote publication evidence supplied by the F01 brief: origin/main = ade2b50e0582aaffdb31dce65c0d4f43051b912a. This recording does not perform a push or claim new User execution. |
+| Architect G9 remote publication acceptance | ARCHITECT REMOTE PUBLICATION ACCEPTANCE | PASS_ARCHITECT_GOV2_G9_REMOTE_PUBLICATION_ACCEPTED | Accepted Architect decision supplied by the F01 brief; distinct from User remote-publication evidence and formal G9 closure. |
+| Architect G9 formal closure | ARCHITECT GOV2-G9 FORMAL CLOSURE | PASS_ARCHITECT_GOV2_G9_FORMAL_CLOSURE | GOV2-G9 COMPLETE / REMOTE PUBLICATION VERIFIED; G0–G9 remain complete. This closure does not close G10 or activate Constants, T00, M01 or successor work. |
+| Independent GOV2-G10 published / remote verification | INDEPENDENT REMOTE VERIFICATION HOLD | HOLD_GOV2_G10_POST_PUBLICATION_STATE_RECORDING_REQUIRED | Preceding read-only G10 result, accepted by the F01 brief: branch main, local HEAD, tracking origin/main and live remote refs/heads/main all ade2b50e0582aaffdb31dce65c0d4f43051b912a; 162 committed paths, 158 docs/governance paths, zero unauthorized paths and critical committed byte identities PASS. Architecture/lifecycle/evidence/authority/learning-flow results remain accepted. F01 stale publication-state recording and F02 preflight/attribute compatibility remain findings; G10 HOLD / NOT CLOSED. |
+| GOV2-G10-F01 | BOUNDED STATE / PROVENANCE RECORDING DEFECT | GOV2-G10-F01 — POST-PUBLICATION CURRENT-STATE RECORDING GAP | Earlier publication-not-performed, G9-current-action and P01-awaiting-restage wording was truthful at its source stage but stale after publication. UNDER AUTHORIZED REPAIR through the exact two-file recording; no formal finding closure or G0–G9 reopen is claimed. |
+| Architect GOV2-G10-F01 authorization | ARCHITECT BOUNDED REPAIR AUTHORIZATION | PASS_ARCHITECT_GOV2_G10_F01_POST_PUBLICATION_STATE_RECONCILIATION_AUTHORIZED | Attachment d39e4948-402b-475c-92ee-367388e4c6ad authorizes only docs/governance/CURRENT_STATE.md and docs/governance/migration/DECISIONS.md. F01 state/provenance reconciliation only; no third file, F02 implementation, governance-semantic change, project execution or Git write. |
+| GOV2-G10-F02 | OPEN FINDING / SEPARATE ARCHITECT ADJUDICATION REQUIRED | GOV2-G10-F02 — MIRROR PREFLIGHT / APPROVED ATTRIBUTE POLICY COMPATIBILITY GAP | OPEN / NOT REPAIRED IN THIS TURN. The preceding G10 preflight returned FAIL with four ATTR-005 findings for the approved G9-P01 attribute rules; the twelve source/mirror identities and trust checks passed. No validator PASS is claimed, no four-rule removal or ATTR-005 weakening occurs, and F02 implementation scope is not modified or adjudicated here. |
+| F01 anti-recursion boundary | ARCHITECT RECORDING BOUNDARY | Explicit anti-recursion instruction in the F01 authorization brief | Record already-existing accepted publication facts and the current F01 authorization. Do not invent or pre-record future Architect acceptance of this repair; inserting that future acceptance into DECISIONS is not a prerequisite before F01 may close. No new provenance loop is required. |
+| Prior-state preservation / explicit supersession | IMMUTABLE PUBLISHED SNAPSHOT / SOURCE-STAGE PROVENANCE | G9 commit ade2b50e0582aaffdb31dce65c0d4f43051b912a | The previous CURRENT_STATE and DECISIONS are preserved in that published commit. Original ledger wording below remains unchanged and explicitly historical; accepted later G9 publication/G10 decisions supersede its pending operational cursors. This F01 working-tree metadata recording has not been committed or pushed by this turn; no future publication SHA is invented. |
+| Exact next recommended separate gate | RECOMMENDATION / NOT IMPLEMENTATION AUTHORIZATION | ARCHITECT GOV2-G10-F02 VALIDATOR POLICY COMPATIBILITY SCOPE ADJUDICATION | After the F01 recording, F02 remains the next unresolved item and requires separate Architect scope adjudication. CURRENT_STATE identifies the current authorized F01 action. G10 remains HOLD; active editable lesson NONE; T00 PARKED / NOT REGISTERED / NOT ACTIVATED; M01 NOT AUTHORIZED / NOT CREATED; Constants/configuration authority work NOT ACTIVATED. |
+
+## Preserved pre-publication and repair-stage provenance
+
+The following original paragraph, table and earlier-stage sections retain their exact source-stage wording. Publication NOT YET PERFORMED, G9 next/current action, HOLD / NOT PUBLISHED, no commit/push and P01 awaiting User restaging describe their original stages. They are historical/superseded by the accepted publication and G10/F01 records above, not the current cursor. Their original applicable policy boundaries and historical evidence remain preserved; no old entry supplies fresh permission.
+
 The Architect formally closed G6 and authorized the exact thirteen-file G7 cutover in attachment 0cdb536a-868d-444a-b40a-d3b37e451d37. The Architect subsequently accepted independent GOV2-G8 verification under `PASS_ARCHITECT_GOV2_G8_POST_CUTOVER_VERIFICATION_ACCEPTED` and formally closed Governance 2.0 under `PASS_ARCHITECT_GOVERNANCE_2_0_FINAL_CLOSURE`. Git publication has NOT YET BEEN PERFORMED; the current operational cursor is [CURRENT_STATE](../CURRENT_STATE.md). Accepted review evidence, Architect acceptance, closure decision and publication remain distinct.
 
 | Item | Classification | Accepted token/reference | Disposition / source |
@@ -122,3 +150,224 @@ The earlier POST-G5 record's no-root-drafting statement remains historical scope
 Root README reconciliation is REQUIRED BEFORE GOV2-G7 CUTOVER ACTIVATION, but NOT YET PERFORMED / NOT YET AUTHORIZED FOR EDITING. No root README history is extracted and no reconciliation is claimed. Its exact future preservation/reconciliation scope requires separate Architect G7 cutover readiness/scope adjudication. Candidate README, proposed root, rules, history, maps, SOURCE_MAP, RULE_COVERAGE, root AGENTS/README, A/B/C, manifest, registered ADRs, technical code, T00, M01 and Constants remain outside this exact two-file recording reconciliation.
 
 G6 remains HOLD / NOT COMPLETE PENDING FINAL CLOSURE VERIFICATION. Evidence, decisions, authorizations, findings, repair results and gate completion remain distinct. The earlier F01 repair is completed/accepted; the fresh semantic rereview is completed with HOLD and reading SATISFIED; final F01 recording reconciliation is COMPLETED / PENDING INDEPENDENT CLOSURE VERIFICATION. Current remaining action and exact next recommended gate: GOV2-G6 FINAL INDEPENDENT CLOSURE VERIFICATION. This turn performs only the authorized two-file recording and static self-check, not that independent gate. No future acceptance token for this current repair is invented, and its later insertion is not a G6 closure prerequisite under the explicit Architect anti-recursion rule. No G6 completion, G7 authorization, cutover or publication is recorded. Root README reconciliation remains a known G7 scope dependency, not the remaining G6 blocker.
+
+## Accepted F01 closure and F02 pre-rereview reconciliation
+
+Provenance: Architect pre-independent-rereview state-reconciliation brief, attachment c2bbc0f0-2487-44f1-9456-340025204e0d. The following sequence records already-issued decisions and accepted reported evidence supplied by that brief, plus the preceding review attempt observed in this chat. External attachment identifiers identify provenance; this recording does not invent dates, new execution, publication identities, repair acceptance or formal F02/G10 closure.
+
+| Sequence / item | Classification | Accepted token/reference | Disposition / provenance |
+| --- | --- | --- | --- |
+| 1. Architect F01 reconciliation acceptance | ARCHITECT REPAIR ACCEPTANCE | PASS_ARCHITECT_GOV2_G10_F01_POST_PUBLICATION_STATE_RECONCILIATION_ACCEPTED | Already-issued decision supplied by the reconciliation brief; distinct from F01 authorization and the subsequent formal closure. |
+| 2. Architect F01 formal closure | ARCHITECT FINDING CLOSURE | PASS_ARCHITECT_GOV2_G10_F01_FORMAL_CLOSURE | GOV2-G10-F01 RESOLVED / FORMALLY CLOSED. Supersedes the preserved F01 UNDER AUTHORIZED REPAIR cursor; G10 itself remains HOLD / NOT CLOSED. |
+| 3. F02 independent scope analysis | SCOPE-ANALYSIS EVIDENCE | PASS_GOV2_G10_F02_SCOPE_READY_FOR_ARCHITECT_AUTHORIZATION | Accepted preceding independent scope analysis: production docs/tools/governance/validate_governance_mirrors.py and test docs/tools/governance/tests/test_validate_governance_mirrors.py only; existing test file, no new test file. No .gitattributes, manifest, PDF, mirror or trust-metadata change. Scope analysis is not the later technical repair rereview. |
+| 4. Architect F02 scope acceptance | ARCHITECT SCOPE ADJUDICATION | PASS_ARCHITECT_GOV2_G10_F02_SCOPE_ADJUDICATION_ACCEPTED | Already-issued acceptance of exactly the two implementation paths above; supersedes the older scope-pending entry. |
+| 5. Architect F02 bounded repair authorization | ARCHITECT IMPLEMENTATION AUTHORIZATION | PASS_ARCHITECT_GOV2_G10_F02_BOUNDED_REPAIR_AUTHORIZED | Exactly the existing validator and existing test file. This implementation authorization was consumed by the implementation below; it grants no fresh repair or third-file permission. |
+| 6. F02 bounded implementation result | IMPLEMENTATION EVIDENCE / IMPLEMENTATION-AGENT SELF-CHECK | PASS_GOV2_G10_F02_BOUNDED_REPAIR_READY_FOR_INDEPENDENT_REREVIEW | Accepted report supplied by the brief: exactly the two implementation files modified; canonical policy 14 -> 18 rules by appending the four exact strings below. Reported verification is recorded separately below. This result is not true independent rereview. |
+| 7. Architect F02 implementation acceptance | ARCHITECT IMPLEMENTATION ACCEPTANCE | PASS_ARCHITECT_GOV2_G10_F02_BOUNDED_REPAIR_IMPLEMENTATION_ACCEPTED | Already-issued acceptance of the bounded repair implementation. F02 IMPLEMENTED / ARCHITECT ACCEPTED / AWAITING TRUE INDEPENDENT REREVIEW; no formal closure. |
+| 8. Later implementation-agent technical self-review | ARCHITECT ACCEPTANCE OF SELF-REVIEW TECHNICAL EVIDENCE | PASS_ARCHITECT_GOV2_G10_F02_SELF_REVIEW_TECHNICAL_EVIDENCE_ACCEPTED | The implementation agent subsequently reported technical self-review PASS, accepted as technical evidence. Self-review is not independent review and cannot satisfy the independent gate. |
+| 9. Independent rereview requirement | ARCHITECT EVIDENCE CLASSIFICATION / HOLD | HOLD_ARCHITECT_GOV2_G10_F02_INDEPENDENT_REREVIEW_REQUIRED | True independent rereview remains PENDING. Implementation PASS and self-review technical PASS do not become independent evidence. |
+| 10. First true independent-review attempt | GOVERNANCE STATE CONFLICT / REVIEW NOT PERFORMED | HOLD_GOV2_G10_F02_INDEPENDENT_REREVIEW | A new reviewer/session that did not implement or modify either F02 file correctly stopped because the active CURRENT_STATE and ledger still described F01 as the action and F02 as OPEN with scope adjudication pending. ACTIVE CURRENT_STATE / LEDGER WAS STALE; TECHNICAL INDEPENDENT REVIEW DID NOT BEGIN. This token does not mean the F02 technical repair failed. Observed preceding turn in this chat under attachment d10f0618-23ff-449b-908f-fd17a8f9312d; accepted classification supplied by the reconciliation brief. |
+| 11. This bounded recording authorization | ARCHITECT STATE / PROVENANCE RECONCILIATION AUTHORIZATION | PASS_ARCHITECT_GOV2_G10_F02_PRE_REREVIEW_STATE_RECONCILIATION_AUTHORIZED | Exactly docs/governance/CURRENT_STATE.md and docs/governance/migration/DECISIONS.md. Record the issued sequence and correct the stale projection; no implementation/test edit, third file, Git write or future-work activation. |
+| 12. Anti-recursion boundary | ARCHITECT RECORDING INSTRUCTION | Explicit instruction in attachment c2bbc0f0-2487-44f1-9456-340025204e0d | This state-recording repair need not itself receive independent review before CURRENT_STATE identifies true independent F02 rereview as the next action. Do not invent or pre-record future Architect acceptance of this recording or create another recording loop. |
+| 13. Superseded cursor and finding chronology | PROVENANCE / EXPLICIT SUPERSESSION | Preserved older ledger entries and prior working-tree CURRENT_STATE snapshot below | The earlier F01 UNDER AUTHORIZED REPAIR/current-action and F02 OPEN/NOT REPAIRED/scope-pending entries remain intact as historical source-stage records. Later decisions above control their supersession. The original four-ATTR-005 preflight FAIL remains historical evidence; it is not erased or retrospectively changed to PASS. |
+| 14. Required next gate and closure boundary | ACCEPTED ACTION REFERENCE / NOT GATE COMPLETION | TRUE INDEPENDENT GOV2-G10 F02 REPAIR REREVIEW | CURRENT_STATE identifies INDEPENDENT GOV2-G10 F02 REPAIR REREVIEW as the current authorized action. True independent rereview remains PENDING; F02 formal closure NOT YET AUTHORIZED / NOT CLOSED; G10 HOLD / NOT CLOSED. No final Governance 2.0 post-publication closure is claimed. |
+
+### Accepted implementation verification report
+
+These are reported implementation results accepted and restated by the Architect reconciliation brief, not new execution or independent verification performed by this metadata recording. The brief identifies the F02 implementation worktree stage but does not supply new run dates or a newly published repair commit; none is inferred.
+
+| Reported check | Accepted supplied result | Provenance / limit |
+| --- | --- | --- |
+| Focused GOV2 attribute tests | 8 PASS / exit 0 | Implementation verification report supplied by the brief; not rerun here. |
+| Full governance validator suite | 71 PASS / exit 0 | Implementation verification report supplied by the brief; not rerun here. |
+| Mandatory governance preflight | PASS / exit 0 | Reported implementation preflight; zero deterministic findings and zero actual repository ATTR-005 findings. |
+| Authoritative PDF hashes | 12/12 PASS | Reported implementation integrity evidence; hashes prove bytes, not semantic fidelity. |
+| Markdown mirror hashes | 12/12 PASS | Reported separate read-only verification; not inferred solely from validator output. |
+| VERIFIED metadata/trust | 12/12 PASS | Reported implementation metadata/trust evidence; no trust-state change authorized. |
+| Semantic-fidelity certification | NOT PERFORMED | No new semantic-fidelity certification is asserted. |
+
+The implementation report identifies these exact four appended canonical policy strings, in this order:
+
+```text
+/AGENTS.md -text
+/README.md -text
+docs/architecture_decisions/ADR_GOV2_Governance_2_0_Agent_Instructions_State_and_History_Migration.md -text
+docs/governance/** -text
+```
+
+The first independent-review attempt did execute the preparatory mandatory command `py -3 -B docs/tools/governance/validate_governance_mirrors.py` before returning its governance HOLD. Observed output in the preceding turn: PASS / exit 0, twelve source hashes matched, twelve metadata/trust checks passed and zero deterministic findings; semantic-fidelity certification NOT PERFORMED. It did not inspect the F02 production/test diffs or run the focused/full suites, and it did not complete the independent repair review. This limited preparatory observation is distinct from the reported implementation and later self-review evidence.
+
+G0-G9 remain COMPLETE with their accepted semantics and publication qualifications preserved. Active editable lesson NONE; T00 PARKED / NOT REGISTERED / NOT ACTIVATED; M01 NOT AUTHORIZED / NOT STARTED; Constants/configuration authority INACTIVE / NOT MODIFIED by this recording. This working-tree recording is not a new commit, push or publication. User retains ALL Git writes.
+
+### Superseded F01 working-tree CURRENT_STATE snapshot
+
+Source: docs/governance/CURRENT_STATE.md immediately before this authorized reconciliation in this session. Source SHA-256: e9cd4f93e84770ae2c7e295a3b3de7e03d86ba700b9ddde0bd27e417d465057f; 7,241 bytes; UTF-8 without BOM; LF line endings. The prior cursor is preserved verbatim below within the exact two-file recording boundary. Its F01-current-action and F02-open/scope-pending claims are superseded by the Architect decisions above; it is historical evidence, not a second operational cursor. The published pre-F01 state remains preserved at G9 commit ade2b50e0582aaffdb31dce65c0d4f43051b912a. The source hash identifies bytes and does not certify semantic fidelity.
+
+```markdown
+# Governance 2.0 Current State
+
+> ACTIVE GOVERNANCE 2.0 CURRENT-STATE CURSOR
+>
+> CURRENT_STATE does NOT self-authorize. Its authority derives from [root AGENTS](../../AGENTS.md), applicable registered decisions and properly authorized state recording.
+
+This is the single operational state/action projection. [DECISIONS](migration/DECISIONS.md) records accepted migration closure, the completed User-owned G9 local/remote publication, Architect G9 acceptance/formal closure and the subsequent independent G10 HOLD. G9 publication was performed at `ade2b50e0582aaffdb31dce65c0d4f43051b912a`; the accepted User evidence and preceding independent G10 inspection verified the same origin/main identity. This exact two-file F01 recording is authorized by `PASS_ARCHITECT_GOV2_G10_F01_POST_PUBLICATION_STATE_RECONCILIATION_AUTHORIZED` in attachment d39e4948-402b-475c-92ee-367388e4c6ad. An update requires accepted adjudication/already-authorized gate, exact recording scope, semantic consistency review and User-owned publication.
+
+Registered migration process: [GOV2 ADR](../architecture_decisions/ADR_GOV2_Governance_2_0_Agent_Instructions_State_and_History_Migration.md).
+
+| Item | Accepted projection / applicability |
+| --- | --- |
+| Learning-flow audit | COMPLETE / CLOSED — PASS_ARCHITECT_REPOSITORY_LEARNING_FLOW_AUDIT_FINAL_CLOSURE |
+| Curriculum | 62 main + 17 historical/parallel = 79 represented lessons |
+| Main progression | New WPILib Project -> S00 -> A00 -> A01 -> V00 -> M00_L16 |
+| D00 -> D01 | Historical/parallel Tank lineage; NOT M00 predecessor |
+| Canonical endpoint | M00_L16 |
+| M00 | Accepted SOFTWARE / ARCHITECTURE mechanism foundation; physical mechanisms deferred |
+| Active editable lesson | NONE |
+| Current major phase | Governance 2.0 |
+| GOV2-G0 | COMPLETE — accepted inventory/design |
+| GOV2-G1 | COMPLETE — accepted design decision and registered migration ADR |
+| GOV2-G2 | COMPLETE — PASS_ARCHITECT_GOV2_G2_RECOVERY_AND_SCOPE_CLOSURE |
+| GOV2-G3 | COMPLETE — PASS_ARCHITECT_GOV2_G3_STRUCTURE_CLOSURE |
+| GOV2-G4 | COMPLETE — PASS_ARCHITECT_GOV2_G4_CANDIDATE_POPULATION_CLOSURE |
+| GOV2-G5 | COMPLETE — PASS_ARCHITECT_GOV2_G5_BYTE_SOURCE_RULE_SEMANTIC_COVERAGE_CLOSURE |
+| GOV2-G6 | COMPLETE — PASS_ARCHITECT_GOV2_G6_FORMAL_CLOSURE |
+| GOV2-G7 | COMPLETE / CUTOVER IMPLEMENTED |
+| GOV2-G8 | COMPLETE / POST-CUTOVER VERIFIED — PASS_GOV2_G8_POST_CUTOVER_VERIFICATION_READY_FOR_ARCHITECT_FINAL_CLOSURE |
+| Architect G8 acceptance | PASS_ARCHITECT_GOV2_G8_POST_CUTOVER_VERIFICATION_ACCEPTED |
+| Governance 2.0 migration | FORMALLY CLOSED — PASS_ARCHITECT_GOVERNANCE_2_0_FINAL_CLOSURE |
+| GOV2-G9 | COMPLETE / REMOTE PUBLICATION VERIFIED |
+| Published G9 commit | ade2b50e0582aaffdb31dce65c0d4f43051b912a |
+| Verified origin/main | ade2b50e0582aaffdb31dce65c0d4f43051b912a — accepted User remote-publication evidence and preceding independent G10 live inspection |
+| Architect G9 remote acceptance | PASS_ARCHITECT_GOV2_G9_REMOTE_PUBLICATION_ACCEPTED |
+| Architect G9 formal closure | PASS_ARCHITECT_GOV2_G9_FORMAL_CLOSURE |
+| Git publication | PERFORMED / G9 COMPLETE; this later F01 working-tree recording is not committed or pushed by this turn |
+| GOV2-G10 | HOLD / INDEPENDENT REMOTE VERIFICATION NOT YET CLOSED — HOLD_GOV2_G10_POST_PUBLICATION_STATE_RECORDING_REQUIRED |
+| GOV2-G10-F01 | POST-PUBLICATION CURRENT-STATE RECORDING GAP — UNDER AUTHORIZED REPAIR; two-file recording ready for Architect acceptance, no formal finding closure claimed |
+| GOV2-G10-F02 | MIRROR PREFLIGHT / APPROVED ATTRIBUTE POLICY COMPATIBILITY GAP — OPEN / NOT REPAIRED IN THIS TURN |
+| Current authorized governance action | GOV2-G10-F01 POST-PUBLICATION STATE RECONCILIATION |
+| F01 recording scope | Exactly CURRENT_STATE.md and migration/DECISIONS.md; no F02 implementation or third-file change |
+| F01 authorization | PASS_ARCHITECT_GOV2_G10_F01_POST_PUBLICATION_STATE_RECONCILIATION_AUTHORIZED |
+| Governance 2.0 root | [AGENTS.md](../../AGENTS.md) — active constitution/entrypoint |
+| Old pre-GOV2 root | Preserved exactly in [history/archive](history/originals/AGENTS.pre-governance-2.0.md); historical evidence, no fresh permission |
+| Seven detailed rules | ACTIVE ONLY through exact root incorporation and delegated scope; root controls conflicts pending HOLD |
+| CURRENT_STATE | ACTIVE single state cursor / NON-SELF-AUTHORIZING |
+| LEARNING_FLOW_MAP | [DERIVED / NON-AUTHORIZING](LEARNING_FLOW_MAP.md) |
+| History | [EVIDENTIARY / NO FRESH PERMISSION](history/README.md) |
+| Migration records | Provenance/design/review evidence; no current operating authority or fresh permission |
+| Proposed root candidate | [Exact reviewed pre-cutover candidate](migration/PROPOSED_ROOT_AGENTS.md), preserved unchanged; no longer the operating entrypoint |
+| Root README reconciliation | IMPLEMENTED within authorized G7 scope; preserved historical records are stage-qualified; G8 verification PASS |
+| T00 | PARKED / NOT REGISTERED / NOT ACTIVATED |
+| M01 | NOT AUTHORIZED / NOT CREATED |
+| Constants/configuration authority work | NOT ACTIVATED; retained deferred technical priority, no permission from G9 publication or this F01 recording |
+| Pre-GOV2 committed checkpoint | e6a3a69e9274ba951e1eec507f3e367ebc4ada2a |
+| Dirty/untracked recovery | C:/Users/xps7350i7/Desktop/FRC_GOV2_PreMigration_Recovery/GOV2_G2_PreMigration |
+| Phase 2 | COMPLETE WITH RECORDED LIMITS |
+| Phase 3 / ACM-01–12 | FORMALLY CLOSED; ACM-12 60 CLOSED / 0 BLOCKED; F01/F02/F03 CLOSED |
+| Phase 4 / M00_L17 | NOT STARTED / FORBIDDEN; NOT STARTED / NOT AUTHORIZED |
+
+Relevant limits remain: M00 is the accepted software/architecture mechanism foundation, not physical mechanism commissioning. Phase-2 physical-lineage qualifications, Noop/physical deferral, provisional configuration and historical Simulation/hardware applicability remain preserved. D01_L11 final clean build remains NOT ESTABLISHED IN RETAINED EVIDENCE. Camera/localization/tuning qualifications stay attached to accepted scope. The repository checkpoint is not a lesson-primary or metadata identity.
+
+G0–G9 remain complete; their accepted architecture, lifecycle, evidence, authority, learning-flow and preservation results are not reopened. This F01 recording reconciles already-existing publication facts and the accepted repair authorization only. The previous pre-publication cursor remains preserved in the immutable G9 commit; DECISIONS retains and explicitly qualifies its earlier pending/restaging records. Future Architect acceptance of this two-file repair is not pre-recorded and need not first be inserted into DECISIONS before F01 can close. Detailed chronology remains in DECISIONS and history, not this operational cursor.
+
+After this F01 recording, the next unresolved item remains GOV2-G10-F02. Exact recommended next gate: ARCHITECT GOV2-G10-F02 VALIDATOR POLICY COMPATIBILITY SCOPE ADJUDICATION. F02 implementation scope is not adjudicated here; its preceding preflight FAIL is not waived or repaired. G10 remains HOLD / NOT CLOSED. This F01 recording is a working-tree metadata update, not a new publication or final G10 closure. User retains ALL Git writes. T00, M01, Constants work and successor lessons remain inactive.
+```
+
+## Accepted true independent F02 rereview and formal closure
+
+Provenance: issued Architect decisions and the exact two-file post-F02 formal-closure recording instruction supplied in pasted-request attachment 3e409519-7345-4b69-aed4-fc606cd996c6. The true independent rereview was completed in the preceding read-only review in this chat under attachment 12c67463-299f-4add-85bc-2e53acec5f77. This section records that review result and the subsequently supplied Architect decisions; this metadata recording performs no new test/validator execution, semantic-fidelity certification, publication or final G10 closure.
+
+| Sequence / item | Classification | Accepted token | Disposition / provenance |
+| --- | --- | --- | --- |
+| 1. True independent F02 technical rereview | TRUE INDEPENDENT TECHNICAL REREVIEW PASS | PASS_GOV2_G10_F02_TRUE_INDEPENDENT_REREVIEW_READY_FOR_ARCHITECT_CLOSURE | Preceding independent reviewer did not implement or modify either F02 implementation file; repository authorization and exactly two-file implementation scope were verified. This is independent evidence, distinct from implementation-agent self-review. |
+| 2. Architect independent rereview acceptance | ARCHITECT INDEPENDENT REREVIEW ACCEPTANCE | PASS_ARCHITECT_GOV2_G10_F02_TRUE_INDEPENDENT_REREVIEW_ACCEPTED | Already-issued acceptance supplied by the current recording instruction; accepts the true independent technical rereview without creating a new execution result. |
+| 3. Architect F02 formal closure | ARCHITECT F02 FORMAL CLOSURE | PASS_ARCHITECT_GOV2_G10_F02_FORMAL_CLOSURE | GOV2-G10-F02 RESOLVED / FORMALLY CLOSED. Supersedes earlier F02 pending-independent-review and not-yet-authorized/not-closed statements above; GOV2-G10 remains HOLD / NOT CLOSED. |
+
+Accepted independent evidence: eight focused GOV2 attribute tests PASS / exit 0; seventy-one full governance tests PASS / exit 0; mandatory preflight PASS / exit 0 with zero deterministic findings and zero current-policy ATTR-005 findings; 12/12 authoritative PDF hashes PASS, 12/12 Markdown mirror hashes PASS and 12/12 VERIFIED metadata/trust checks PASS. Existing tests and restrictive ATTR-003/004/005/006 semantics were preserved, the GOV2 test oracle was independent, unauthorized exceptions remained rejected, and no Git writes occurred with an empty index. These are the preceding review's accepted results, not new execution by this recording. Semantic-fidelity certification: NOT PERFORMED.
+
+Technical clarification: the 14 -> 18 transition applies to validator CANONICAL_GITATTRIBUTES_RULES. Repository root .gitattributes already contained the approved eighteen active rules at published GOV2 baseline ade2b50e0582aaffdb31dce65c0d4f43051b912a. F02 did not modify .gitattributes; the original fourteen validator rules remained in their original order, followed by exactly the four approved GOV2 strings.
+
+All earlier ledger records and embedded snapshots remain unchanged. The earlier F02 OPEN/scope-pending, awaiting-independent-review and formal-closure-not-yet-authorized statements retain their source-stage truth as HISTORICAL / SUPERSEDED by the accepted sequence above. The original preflight failure and stale-state independent-review HOLD remain preserved; neither is retrospectively changed to PASS.
+
+Authorized recording scope is exactly docs/governance/CURRENT_STATE.md and docs/governance/migration/DECISIONS.md. GOV2-G0 through GOV2-G9 remain COMPLETE; F01 remains RESOLVED / FORMALLY CLOSED; F02 is now RESOLVED / FORMALLY CLOSED; G10 remains HOLD / NOT CLOSED. The current authorized action becomes GOV2-G10 FINAL CLOSURE / FINAL INDEPENDENT STATE REVIEW. Exact recommended next gate: GOV2-G10 FINAL CLOSURE REVIEW. This recording does not perform that final review or declare Governance 2.0 final post-publication closure complete.
+
+Active editable lesson remains NONE; T00 PARKED / NOT REGISTERED / NOT ACTIVATED; M01 NOT AUTHORIZED / NOT STARTED; Constants/configuration authority INACTIVE / NOT MODIFIED. Validator, validator tests, .gitattributes, governing semantics and all other protected content remain outside this recording scope. This is an uncommitted working-tree state/provenance update; no commit, push, new publication identity or future acceptance of this recording is claimed. User retains ALL Git writes.
+
+### Superseded pre-F02-formal-closure CURRENT_STATE snapshot
+
+Source: docs/governance/CURRENT_STATE.md immediately before this bounded reconciliation. Source SHA-256: c890954d51da5311ff86051f56a4eea135f5705b94322f0f463e113c02472212; 8743 bytes; UTF-8 without BOM; LF line endings. The prior cursor is preserved verbatim below. Its F02-awaiting-rereview/current-action and formal-closure-not-yet-authorized claims are superseded by the issued Architect decisions above; this is historical evidence, not a second operational cursor. The source hash identifies bytes and does not certify semantic fidelity.
+
+~~~markdown
+# Governance 2.0 Current State
+
+> ACTIVE GOVERNANCE 2.0 CURRENT-STATE CURSOR
+>
+> CURRENT_STATE does NOT self-authorize. Its authority derives from [root AGENTS](../../AGENTS.md), applicable registered decisions and properly authorized state recording.
+
+This is the single operational state/action projection. [DECISIONS](migration/DECISIONS.md) records accepted migration closure, User-owned G9 publication, F01 formal closure, F02 scope/implementation decisions, accepted self-review evidence and the preceding independent-review HOLD caused by stale records. G9 publication was performed at `ade2b50e0582aaffdb31dce65c0d4f43051b912a`; accepted User evidence and the preceding G10 inspection verified the same origin/main identity. This exact two-file pre-rereview recording is authorized by `PASS_ARCHITECT_GOV2_G10_F02_PRE_REREVIEW_STATE_RECONCILIATION_AUTHORIZED` in attachment c2bbc0f0-2487-44f1-9456-340025204e0d. An update requires accepted adjudication/already-authorized gate, exact recording scope, semantic consistency review and User-owned publication; this working-tree recording is not publication.
+
+Registered migration process: [GOV2 ADR](../architecture_decisions/ADR_GOV2_Governance_2_0_Agent_Instructions_State_and_History_Migration.md).
+
+| Item | Accepted projection / applicability |
+| --- | --- |
+| Learning-flow audit | COMPLETE / CLOSED — PASS_ARCHITECT_REPOSITORY_LEARNING_FLOW_AUDIT_FINAL_CLOSURE |
+| Curriculum | 62 main + 17 historical/parallel = 79 represented lessons |
+| Main progression | New WPILib Project -> S00 -> A00 -> A01 -> V00 -> M00_L16 |
+| D00 -> D01 | Historical/parallel Tank lineage; NOT M00 predecessor |
+| Canonical endpoint | M00_L16 |
+| M00 | Accepted SOFTWARE / ARCHITECTURE mechanism foundation; physical mechanisms deferred |
+| Active editable lesson | NONE |
+| Current major phase | Governance 2.0 |
+| GOV2-G0 | COMPLETE — accepted inventory/design |
+| GOV2-G1 | COMPLETE — accepted design decision and registered migration ADR |
+| GOV2-G2 | COMPLETE — PASS_ARCHITECT_GOV2_G2_RECOVERY_AND_SCOPE_CLOSURE |
+| GOV2-G3 | COMPLETE — PASS_ARCHITECT_GOV2_G3_STRUCTURE_CLOSURE |
+| GOV2-G4 | COMPLETE — PASS_ARCHITECT_GOV2_G4_CANDIDATE_POPULATION_CLOSURE |
+| GOV2-G5 | COMPLETE — PASS_ARCHITECT_GOV2_G5_BYTE_SOURCE_RULE_SEMANTIC_COVERAGE_CLOSURE |
+| GOV2-G6 | COMPLETE — PASS_ARCHITECT_GOV2_G6_FORMAL_CLOSURE |
+| GOV2-G7 | COMPLETE / CUTOVER IMPLEMENTED |
+| GOV2-G8 | COMPLETE / POST-CUTOVER VERIFIED — PASS_GOV2_G8_POST_CUTOVER_VERIFICATION_READY_FOR_ARCHITECT_FINAL_CLOSURE |
+| Architect G8 acceptance | PASS_ARCHITECT_GOV2_G8_POST_CUTOVER_VERIFICATION_ACCEPTED |
+| Governance 2.0 migration | FORMALLY CLOSED — PASS_ARCHITECT_GOVERNANCE_2_0_FINAL_CLOSURE |
+| GOV2-G9 | COMPLETE / REMOTE PUBLICATION VERIFIED |
+| Published G9 commit | ade2b50e0582aaffdb31dce65c0d4f43051b912a |
+| Verified origin/main | ade2b50e0582aaffdb31dce65c0d4f43051b912a — accepted User remote-publication evidence and preceding independent G10 live inspection |
+| Architect G9 remote acceptance | PASS_ARCHITECT_GOV2_G9_REMOTE_PUBLICATION_ACCEPTED |
+| Architect G9 formal closure | PASS_ARCHITECT_GOV2_G9_FORMAL_CLOSURE |
+| Git publication | PERFORMED / G9 COMPLETE; the later F01/F02 working-tree repairs and this metadata recording are not committed or pushed by this turn |
+| GOV2-G10 | HOLD / NOT CLOSED; true independent F02 repair rereview remains pending; no final post-publication closure |
+| GOV2-G10-F01 | RESOLVED / FORMALLY CLOSED - PASS_ARCHITECT_GOV2_G10_F01_FORMAL_CLOSURE |
+| Architect F01 reconciliation acceptance | PASS_ARCHITECT_GOV2_G10_F01_POST_PUBLICATION_STATE_RECONCILIATION_ACCEPTED |
+| GOV2-G10-F02 | IMPLEMENTED / ARCHITECT ACCEPTED / AWAITING TRUE INDEPENDENT REREVIEW |
+| F02 scope adjudication | ACCEPTED - PASS_ARCHITECT_GOV2_G10_F02_SCOPE_ADJUDICATION_ACCEPTED; exactly the existing validator and its existing test file |
+| F02 bounded implementation authorization | PASS_ARCHITECT_GOV2_G10_F02_BOUNDED_REPAIR_AUTHORIZED - implementation performed; consumed scope, no fresh implementation permission |
+| Architect F02 implementation acceptance | PASS_ARCHITECT_GOV2_G10_F02_BOUNDED_REPAIR_IMPLEMENTATION_ACCEPTED |
+| F02 self-review | TECHNICAL EVIDENCE ACCEPTED / NOT INDEPENDENT REVIEW - PASS_ARCHITECT_GOV2_G10_F02_SELF_REVIEW_TECHNICAL_EVIDENCE_ACCEPTED |
+| True independent F02 rereview | PENDING / NOT PERFORMED - HOLD_ARCHITECT_GOV2_G10_F02_INDEPENDENT_REREVIEW_REQUIRED; preceding attempt held on stale state/ledger, not technical repair failure; chronology in DECISIONS |
+| F02 formal closure | NOT YET AUTHORIZED / NOT CLOSED |
+| Current authorized governance action | INDEPENDENT GOV2-G10 F02 REPAIR REREVIEW; a reviewer/session that did not implement or modify either F02 implementation file is required |
+| Pre-rereview recording scope | Exactly docs/governance/CURRENT_STATE.md and docs/governance/migration/DECISIONS.md; record issued decisions and provenance only |
+| Pre-rereview recording authorization | PASS_ARCHITECT_GOV2_G10_F02_PRE_REREVIEW_STATE_RECONCILIATION_AUTHORIZED - attachment c2bbc0f0-2487-44f1-9456-340025204e0d; no separate review of this recording is required before identifying true independent F02 rereview as the next action |
+| Governance 2.0 root | [AGENTS.md](../../AGENTS.md) — active constitution/entrypoint |
+| Old pre-GOV2 root | Preserved exactly in [history/archive](history/originals/AGENTS.pre-governance-2.0.md); historical evidence, no fresh permission |
+| Seven detailed rules | ACTIVE ONLY through exact root incorporation and delegated scope; root controls conflicts pending HOLD |
+| CURRENT_STATE | ACTIVE single state cursor / NON-SELF-AUTHORIZING |
+| LEARNING_FLOW_MAP | [DERIVED / NON-AUTHORIZING](LEARNING_FLOW_MAP.md) |
+| History | [EVIDENTIARY / NO FRESH PERMISSION](history/README.md) |
+| Migration records | Provenance/design/review evidence; no current operating authority or fresh permission |
+| Proposed root candidate | [Exact reviewed pre-cutover candidate](migration/PROPOSED_ROOT_AGENTS.md), preserved unchanged; no longer the operating entrypoint |
+| Root README reconciliation | IMPLEMENTED within authorized G7 scope; preserved historical records are stage-qualified; G8 verification PASS |
+| T00 | PARKED / NOT REGISTERED / NOT ACTIVATED |
+| M01 | NOT AUTHORIZED / NOT STARTED |
+| Constants/configuration authority work | INACTIVE / NOT MODIFIED by this recording; retained deferred technical priority, no activation permission |
+| Pre-GOV2 committed checkpoint | e6a3a69e9274ba951e1eec507f3e367ebc4ada2a |
+| Dirty/untracked recovery | C:/Users/xps7350i7/Desktop/FRC_GOV2_PreMigration_Recovery/GOV2_G2_PreMigration |
+| Phase 2 | COMPLETE WITH RECORDED LIMITS |
+| Phase 3 / ACM-01–12 | FORMALLY CLOSED; ACM-12 60 CLOSED / 0 BLOCKED; F01/F02/F03 CLOSED |
+| Phase 4 / M00_L17 | NOT STARTED / FORBIDDEN; NOT STARTED / NOT AUTHORIZED |
+
+Relevant limits remain: M00 is the accepted software/architecture mechanism foundation, not physical mechanism commissioning. Phase-2 physical-lineage qualifications, Noop/physical deferral, provisional configuration and historical Simulation/hardware applicability remain preserved. D01_L11 final clean build remains NOT ESTABLISHED IN RETAINED EVIDENCE. Camera/localization/tuning qualifications stay attached to accepted scope. The repository checkpoint is not a lesson-primary or metadata identity.
+
+G0-G9 remain complete; their accepted architecture, lifecycle, evidence, authority, learning-flow and preservation results are not reopened. This recording reconciles already-issued Architect decisions and supplied evidence only. The superseded F01 working-tree cursor is preserved with source identity and explicit supersession in DECISIONS; the earlier pre-publication cursor remains in the immutable G9 commit. Implementation PASS, accepted technical self-review and true independent rereview remain distinct. Reported implementation verification belongs to its supplied provenance; this metadata turn does not repeat it or certify semantic fidelity. Detailed chronology remains in DECISIONS, not this operational cursor.
+
+Exact recommended next gate: TRUE INDEPENDENT GOV2-G10 F02 REPAIR REREVIEW. Under the explicit Architect anti-recursion instruction, future acceptance of this state-recording repair need not be pre-recorded or independently reviewed before the cursor identifies that next action. True independent F02 rereview remains pending; F02 formal closure is NOT YET AUTHORIZED, and G10 remains HOLD / NOT CLOSED. No final Governance 2.0 post-publication closure or new Git publication is claimed. User retains ALL Git writes. Active editable lesson remains NONE; T00 is parked, M01 unauthorized/not started and Constants work inactive.
+~~~

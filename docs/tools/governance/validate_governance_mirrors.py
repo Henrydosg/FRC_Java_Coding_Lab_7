@@ -105,6 +105,12 @@ CANONICAL_GITATTRIBUTES_RULES = (
     "/docs/tools/governance/**/*.md text eol=lf",
     "/docs/tools/governance/**/*.txt text eol=lf",
     "*.pdf binary",
+    # Approved Governance 2.0 overrides preserve exact publication bytes.
+    "/AGENTS.md -text",
+    "/README.md -text",
+    "docs/architecture_decisions/"
+    "ADR_GOV2_Governance_2_0_Agent_Instructions_State_and_History_Migration.md -text",
+    "docs/governance/** -text",
 )
 CANONICAL_GITATTRIBUTES_BYTES = (
     "\n".join(CANONICAL_GITATTRIBUTES_RULES) + "\n"

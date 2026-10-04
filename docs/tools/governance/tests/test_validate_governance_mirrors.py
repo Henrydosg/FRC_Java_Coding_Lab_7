@@ -24,6 +24,34 @@ SOURCE_FIXTURE = FIXTURES / "authoritative_source.pdf"
 SOURCE_HASH = "2e7cd81435638c6d1f1547a1ca829f041cfd60f95236d9dcaeb2e66b08de9f27"
 
 
+# Independent fixture for the original policy and four approved GOV2 overrides.
+EXPECTED_GOV2_ATTRIBUTE_RULES = (
+    "/.gitattributes text eol=lf",
+    "/AGENTS.md text eol=lf",
+    "/README.md text eol=lf",
+    "/docs/Document_A/*.md text eol=lf",
+    "/docs/Document_B/**/*.md text eol=lf",
+    "/docs/Document_C/**/*.md text eol=lf",
+    "/docs/GOVERNANCE_DOCUMENT_MANIFEST.md text eol=lf",
+    "/docs/GOVERNANCE_MIRROR_CONVERSION_CONTRACT.md text eol=lf",
+    "/docs/architecture_decisions/"
+    "ADR_Governance_PDF_Verified_Markdown_Mirrors.md text eol=lf",
+    "/docs/tools/governance/**/*.py text eol=lf",
+    "/docs/tools/governance/**/*.json text eol=lf",
+    "/docs/tools/governance/**/*.md text eol=lf",
+    "/docs/tools/governance/**/*.txt text eol=lf",
+    "*.pdf binary",
+    "/AGENTS.md -text",
+    "/README.md -text",
+    "docs/architecture_decisions/"
+    "ADR_GOV2_Governance_2_0_Agent_Instructions_State_and_History_Migration.md -text",
+    "docs/governance/** -text",
+)
+EXPECTED_GOV2_ATTRIBUTE_BYTES = (
+    "\n".join(EXPECTED_GOV2_ATTRIBUTE_RULES) + "\n"
+).encode("utf-8")
+
+
 FIXTURE_METADATA = {
     "valid_textual_candidate.md": (
         "FIXTURE-VALID-TEXTUAL",
@@ -643,6 +671,143 @@ class GovernanceMirrorValidatorTest(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         self.assertEqual(code, 1)
         self.assertIn("ENC-006", output)
+
+    def test_gov2_attributes_exact_static_contract(self) -> None:
+        self.assertEqual(len(EXPECTED_GOV2_ATTRIBUTE_RULES), 18)
+        self.assertEqual(
+            validator.CANONICAL_GITATTRIBUTES_RULES, EXPECTED_GOV2_ATTRIBUTE_RULES
+        )
+        self.assertEqual(
+            validator.CANONICAL_GITATTRIBUTES_BYTES, EXPECTED_GOV2_ATTRIBUTE_BYTES
+        )
+
+    def test_gov2_attributes_approved_policy_passes(self) -> None:
+        commented = (
+            b"# Canonical policy\n\n"
+            + EXPECTED_GOV2_ATTRIBUTE_BYTES.replace(
+                b"*.pdf binary\n", b"*.pdf binary\n\n# Approved GOV2 overrides\n"
+            )
+            + b"\n   # Indented comments are also harmless.\n"
+        )
+        for name, attributes in (
+            ("plain", EXPECTED_GOV2_ATTRIBUTE_BYTES),
+            ("comments_and_blank_lines", commented),
+        ):
+            with self.subTest(policy=name):
+                code, output, temporary = self._run_fixture(
+                    "valid_textual_candidate.md", attributes_bytes=attributes
+                )
+                self.addCleanup(temporary.cleanup)
+                self.assertEqual(code, 0, output)
+                self.assertNotIn("ATTR-005", output)
+                self.assertIn("Deterministic findings: 0", output)
+
+    def test_gov2_attributes_unauthorized_rules_fail(self) -> None:
+        for rule in (
+            "/UNAPPROVED.md -text",
+            "*.md -text",
+            "real_robot_programming/module_M00/"
+            "M00_L16_MechanismAutonomousEventIntegration/README.md -text",
+            "docs/** -text",
+            "docs/governance/migration/OTHER.md -text",
+        ):
+            with self.subTest(rule=rule):
+                attributes = EXPECTED_GOV2_ATTRIBUTE_BYTES + (rule + "\n").encode()
+                code, output, temporary = self._run_fixture(
+                    "valid_textual_candidate.md", attributes_bytes=attributes
+                )
+                self.addCleanup(temporary.cleanup)
+                self.assertEqual(code, 1, output)
+                self.assertEqual(output.count("[ATTR-005]"), 1, output)
+                self.assertIn(
+                    f"unexpected or conflicting active attribute rule: {rule}", output
+                )
+                self.assertIn("Deterministic findings: 1", output)
+
+    def test_gov2_attributes_unanchored_root_rules_fail(self) -> None:
+        for rule in EXPECTED_GOV2_ATTRIBUTE_RULES[-4:-2]:
+            with self.subTest(rule=rule):
+                unanchored = rule.removeprefix("/")
+                attributes = EXPECTED_GOV2_ATTRIBUTE_BYTES.replace(
+                    (rule + "\n").encode(), (unanchored + "\n").encode()
+                )
+                code, output, temporary = self._run_fixture(
+                    "valid_textual_candidate.md", attributes_bytes=attributes
+                )
+                self.addCleanup(temporary.cleanup)
+                self.assertEqual(code, 1, output)
+                self.assertIn("ATTR-003", output)
+                self.assertIn("ATTR-005", output)
+                self.assertIn(f"required canonical attribute rule is missing: {rule}", output)
+                self.assertIn(
+                    f"unexpected or conflicting active attribute rule: {unanchored}", output
+                )
+
+    def test_gov2_attributes_duplicate_approved_rules_fail(self) -> None:
+        for rule in EXPECTED_GOV2_ATTRIBUTE_RULES[-4:]:
+            with self.subTest(rule=rule):
+                attributes = EXPECTED_GOV2_ATTRIBUTE_BYTES + (rule + "\n").encode()
+                code, output, temporary = self._run_fixture(
+                    "valid_textual_candidate.md", attributes_bytes=attributes
+                )
+                self.addCleanup(temporary.cleanup)
+                self.assertEqual(code, 1, output)
+                self.assertIn("ATTR-005", output)
+                self.assertIn(f"duplicate canonical attribute rule: {rule}", output)
+
+    def test_gov2_attributes_altered_approved_rules_fail(self) -> None:
+        for rule in EXPECTED_GOV2_ATTRIBUTE_RULES[-4:]:
+            with self.subTest(rule=rule):
+                altered = rule.removesuffix(" -text") + " text eol=crlf"
+                attributes = EXPECTED_GOV2_ATTRIBUTE_BYTES.replace(
+                    (rule + "\n").encode(), (altered + "\n").encode()
+                )
+                code, output, temporary = self._run_fixture(
+                    "valid_textual_candidate.md", attributes_bytes=attributes
+                )
+                self.addCleanup(temporary.cleanup)
+                self.assertEqual(code, 1, output)
+                self.assertIn("ATTR-003", output)
+                self.assertIn("ATTR-005", output)
+                self.assertIn(f"required canonical attribute rule is missing: {rule}", output)
+                self.assertIn(
+                    f"unexpected or conflicting active attribute rule: {altered}", output
+                )
+
+    def test_gov2_attributes_missing_approved_rules_fail(self) -> None:
+        for rule in EXPECTED_GOV2_ATTRIBUTE_RULES[-4:]:
+            with self.subTest(rule=rule):
+                attributes = EXPECTED_GOV2_ATTRIBUTE_BYTES.replace(
+                    (rule + "\n").encode(), b""
+                )
+                code, output, temporary = self._run_fixture(
+                    "valid_textual_candidate.md", attributes_bytes=attributes
+                )
+                self.addCleanup(temporary.cleanup)
+                self.assertEqual(code, 1, output)
+                self.assertIn("ATTR-003", output)
+                self.assertNotIn("ATTR-005", output)
+                self.assertIn(f"required canonical attribute rule is missing: {rule}", output)
+
+    def test_gov2_attributes_reordered_approved_rules_fail(self) -> None:
+        swapped = list(EXPECTED_GOV2_ATTRIBUTE_RULES)
+        swapped[-4], swapped[-3] = swapped[-3], swapped[-4]
+        for name, rules in (
+            ("swapped_overrides", swapped),
+            (
+                "overrides_before_original_policy",
+                EXPECTED_GOV2_ATTRIBUTE_RULES[-4:] + EXPECTED_GOV2_ATTRIBUTE_RULES[:-4],
+            ),
+        ):
+            with self.subTest(order=name):
+                attributes = ("\n".join(rules) + "\n").encode("utf-8")
+                code, output, temporary = self._run_fixture(
+                    "valid_textual_candidate.md", attributes_bytes=attributes
+                )
+                self.addCleanup(temporary.cleanup)
+                self.assertEqual(code, 1, output)
+                self.assertIn("ATTR-006", output)
+                self.assertNotIn("ATTR-005", output)
 
     def test_canonical_attributes_and_lf_mirror_pass(self) -> None:
         code, output, temporary = self._run_fixture("valid_textual_candidate.md")
