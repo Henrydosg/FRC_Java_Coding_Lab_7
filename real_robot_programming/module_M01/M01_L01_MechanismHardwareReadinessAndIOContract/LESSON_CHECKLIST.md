@@ -1,5 +1,18 @@
 # M01_L01 — Lesson Checklist
 
+## Final publication metadata — 2026-10-06
+
+| Publication field | Verified record |
+| --- | --- |
+| Lesson state | COMPLETE / FROZEN / READ-ONLY / PUBLISHED / REMOTE VERIFIED |
+| Lifecycle publication commit | e8a8618b3454e6f6a1b34575781b56c719c2838c — Complete and freeze M01_L01 hardware readiness |
+| Final technical snapshot commit | ec0a4f62f9d6e5dbd1df6b1884549558bd53fe42 — Publish frozen M01_L01 technical snapshot |
+| Tracked lesson files at the published snapshot | 344 |
+| Active editable lesson | NONE |
+| M01_L02 | NOT AUTHORIZED |
+
+Publication / remote verification is supplied User evidence, locally corroborated by main with HEAD = origin/main = ec0a4f62f9d6e5dbd1df6b1884549558bd53fe42. origin/main is the local remote-tracking ref; no live remote query or new push was performed by the agent. The [publication history event](../../../docs/governance/history/events/M01_L01_FINAL_PUBLICATION_METADATA_RECONCILIATION_2026-10-06.md) preserves the prior CURRENT_STATE verbatim and supersedes its recording-stage publication-pending claims. This metadata reconciliation is self-reviewed, uncommitted and unpublished; its future commit identity is not asserted. No new independent review or Architect recording-review result is claimed.
+
 ## Final closure and freeze — 2026-10-05
 
 | Field | Current record |
@@ -17,12 +30,12 @@
 | Hardware readiness | PASS — Architect hardware-readiness closure APPROVED in brief 0b957e8b-0922-453f-8314-7059a66aa2e3 |
 | Independent closure review | PASS — accepted by the Architect in the final closure brief |
 | Transition guide | FINAL / PASS |
-| Final freeze recording review | PENDING ARCHITECT REVIEW; publication NOT PERFORMED |
+| Final lesson publication | PUBLISHED / REMOTE VERIFIED — supplied User evidence; commit identities above |
 | M01_L02 | NOT AUTHORIZED |
 | T00 | PARKED / NOT ACTIVATED |
 | M00_L17 | NOT AUTHORIZED |
 
-Architect brief **0b957e8b-0922-453f-8314-7059a66aa2e3** accepts independent closure review PASS and Hardware Readiness Closure APPROVED, and authorizes COMPLETE / FROZEN / READ-ONLY recording and transition-guide FINAL / PASS for M01_L01 only. [Root AGENTS](../../../AGENTS.md), the [single current-state cursor](../../../docs/governance/CURRENT_STATE.md), English Documents A/B/C and the [registered M01 roadmap](../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) control scope. Design Lock and scoped hardware readiness PASS are retained. This final recording is self-reviewed only; Architect review of the freeze recording is PENDING and User-owned publication is NOT PERFORMED. No runtime or M01_L02 permission follows from closure.
+Architect brief **0b957e8b-0922-453f-8314-7059a66aa2e3** accepts independent closure review PASS and Hardware Readiness Closure APPROVED, and authorizes COMPLETE / FROZEN / READ-ONLY recording and transition-guide FINAL / PASS for M01_L01 only. [Root AGENTS](../../../AGENTS.md), the [single current-state cursor](../../../docs/governance/CURRENT_STATE.md), English Documents A/B/C and the [registered M01 roadmap](../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) control scope. Design Lock and scoped hardware readiness PASS are retained. User-verified lifecycle and technical-snapshot publication is complete; this metadata reconciliation awaits User-owned publication. No new Architect recording-review result is asserted. No runtime or M01_L02 permission follows from closure.
 
 | Locked technical question | Answer |
 | --- | --- |
@@ -67,10 +80,11 @@ Architect brief **0b957e8b-0922-453f-8314-7059a66aa2e3** accepts independent clo
 - [x] NeutralMode deferred, 35 A provisional/not applied, current 10:1 and later manual reverse/eject boundaries retained.
 - [x] Prior cursor archived verbatim; previous events, donor and technical bytes preserved.
 
-## Pending recording/publication and successor gates
+## Publication and remaining boundaries
 
-- [ ] Architect review of this final freeze recording.
-- [ ] User-owned publication and applicable external verification after recording review.
+- [x] Lifecycle publication completed at the recorded lifecycle commit on supplied User evidence.
+- [x] Frozen technical snapshot published / remote verified; 344 tracked lesson files at the recorded technical commit.
+- [ ] User-owned publication of this metadata reconciliation.
 - [ ] Separate M01_L02 activation/implementation authorization; NOT AUTHORIZED.
 
 ## Hardware readiness evidence register
@@ -95,7 +109,7 @@ Architect brief **0b957e8b-0922-453f-8314-7059a66aa2e3** accepts independent clo
 
 These final L01 readiness facts are User-verified, accepted in readiness brief **f96e63cd-cca0-4a1f-8eb5-e95a93f94772** and reaffirmed by Architect final closure brief **0b957e8b-0922-453f-8314-7059a66aa2e3**. HARDWARE READINESS = PASS is the scoped Architect readiness decision, not a commissioning or physical fault-test result. No physical fact is inferred from Noop behavior or another mechanism. No protected registry was read for this recording.
 
-The recording date is 2026-10-05. The physical observation date/time, detailed hardware snapshot, method and conditions beyond the supplied zero-output statement were not supplied; they are not invented. Local HEAD 5302c0b115849f8464a0d7d1d19a08820b19d099 identifies the documentation snapshot only. Verification ownership remains with the User; the agent performed no hardware operation.
+The recording date is 2026-10-05. The physical observation date/time, detailed hardware snapshot, method and conditions beyond the supplied zero-output statement were not supplied; they are not invented. At the 2026-10-05 readiness recording, local HEAD 5302c0b115849f8464a0d7d1d19a08820b19d099 identified the prior Design Lock documentation snapshot only; current publication identities are recorded above. Verification ownership remains with the User; the agent performed no hardware operation.
 
 No powered Intake verification was performed in M01_L01 or by this recording. The safe-zero statement is accepted pre-existing User evidence. Powered direction/inversion, installed-library compatibility, application/readback of current limits, disable/E-stop execution, unavailable/device-failure response and competition readiness are not established by this evidence. Their applicable later qualification gates remain separate.
 
@@ -121,9 +135,9 @@ The Architect final closure brief **0b957e8b-0922-453f-8314-7059a66aa2e3** accep
 
 The accepted safe-zero statement remains pre-existing User evidence, not a new powered L01 test. Recording date is not a physical-test date. Physical observation date/time, detailed snapshot, method and conditions beyond supplied evidence remain unprovided; no commissioning, applied current limit, device-failure response or competition readiness is inferred.
 
-Active editable lesson: NONE. This final freeze recording is self-reviewed only; Architect review of its recording is PENDING. Closure authorization, recording review, User-owned publication and separate successor activation remain distinct. No M01_L02 activation or implementation is authorized.
+Active editable lesson: NONE. M01_L01 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / REMOTE VERIFIED on supplied User evidence. This publication metadata reconciliation is self-reviewed and awaits User-owned publication; no new independent review or Architect acceptance is claimed. No M01_L02 activation or implementation is authorized.
 
-**Next boundary:** Await Architect review of final M01_L01 freeze recording before User-owned publication.
+**Next boundary:** Await User-owned publication of metadata reconciliation, then M01_L01 is fully closed.
 
 <!-- M01_L01 OPERATIVE DOCUMENTATION END -->
 

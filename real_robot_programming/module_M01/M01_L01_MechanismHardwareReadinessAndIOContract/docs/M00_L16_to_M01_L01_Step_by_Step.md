@@ -1,5 +1,18 @@
 # M00_L16 to M01_L01 — Step-by-Step Transition
 
+## Final publication metadata — 2026-10-06
+
+| Publication field | Verified record |
+| --- | --- |
+| Lesson state | COMPLETE / FROZEN / READ-ONLY / PUBLISHED / REMOTE VERIFIED |
+| Lifecycle publication commit | e8a8618b3454e6f6a1b34575781b56c719c2838c — Complete and freeze M01_L01 hardware readiness |
+| Final technical snapshot commit | ec0a4f62f9d6e5dbd1df6b1884549558bd53fe42 — Publish frozen M01_L01 technical snapshot |
+| Tracked lesson files at the published snapshot | 344 |
+| Active editable lesson | NONE |
+| M01_L02 | NOT AUTHORIZED |
+
+Publication / remote verification is supplied User evidence, locally corroborated by main with HEAD = origin/main = ec0a4f62f9d6e5dbd1df6b1884549558bd53fe42. origin/main is the local remote-tracking ref; no live remote query or new push was performed by the agent. The [publication history event](../../../../docs/governance/history/events/M01_L01_FINAL_PUBLICATION_METADATA_RECONCILIATION_2026-10-06.md) preserves the prior CURRENT_STATE verbatim and supersedes its recording-stage publication-pending claims. This metadata reconciliation is self-reviewed, uncommitted and unpublished; its future commit identity is not asserted. No new independent review or Architect recording-review result is claimed.
+
 Status: FINAL / PASS  
 Donor: M00_L16_MechanismAutonomousEventIntegration — COMPLETE / FROZEN / READ-ONLY  
 Donor path: real_robot_programming/module_M00/M00_L16_MechanismAutonomousEventIntegration  
@@ -17,7 +30,7 @@ M01_L02: NOT AUTHORIZED
 T00: PARKED / NOT ACTIVATED  
 M00_L17: NOT AUTHORIZED
 
-[Current state](../../../../docs/governance/CURRENT_STATE.md), [registered M01 roadmap](../../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) and [lesson plan](../LESSON_PLAN.md) govern applicability. This FINAL / PASS guide records the completed L01 documentation/readiness progression. Steps 1–13 retain their original stage wording, including historical pending/IN_PROGRESS limits, verbatim. They are superseded operationally by the accepted Architect final closure brief 0b957e8b-0922-453f-8314-7059a66aa2e3 and Steps 14–15 below. Copy/cleanup/repair/build actions remain supplied User evidence, not agent execution. No powered Intake verification was performed in L01 or this recording. Final guide PASS is a documentation/readiness result, not powered hardware qualification or M01_L02 authorization.
+[Current state](../../../../docs/governance/CURRENT_STATE.md), [registered M01 roadmap](../../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) and [lesson plan](../LESSON_PLAN.md) govern applicability. This FINAL / PASS guide records the completed L01 documentation/readiness progression. Steps 1–15 retain their original stage wording, including historical pending/IN_PROGRESS limits, verbatim. The accepted Architect final closure brief 0b957e8b-0922-453f-8314-7059a66aa2e3 and the final publication metadata above supersede their earlier lifecycle/publication cursors. Copy/cleanup/repair/build actions remain supplied User evidence, not agent execution. No powered Intake verification was performed in L01 or this recording. Final guide PASS is a documentation/readiness result, not powered hardware qualification or M01_L02 authorization.
 
 ## Step 1 — Record preparation authorization
 
@@ -170,8 +183,8 @@ The Architect final closure brief **0b957e8b-0922-453f-8314-7059a66aa2e3** accep
 
 The accepted safe-zero statement remains pre-existing User evidence, not a new powered L01 test. Recording date is not a physical-test date. Physical observation date/time, detailed snapshot, method and conditions beyond supplied evidence remain unprovided; no commissioning, applied current limit, device-failure response or competition readiness is inferred.
 
-Active editable lesson: NONE. This final freeze recording is self-reviewed only; Architect review of its recording is PENDING. Closure authorization, recording review, User-owned publication and separate successor activation remain distinct. No M01_L02 activation or implementation is authorized.
+Active editable lesson: NONE. M01_L01 remains COMPLETE / FROZEN / READ-ONLY / PUBLISHED / REMOTE VERIFIED on supplied User evidence. This publication metadata reconciliation is self-reviewed and awaits User-owned publication; no new independent review or Architect acceptance is claimed. No M01_L02 activation or implementation is authorized.
 
 Final hardware evidence remains Kraken X44, one motor, no follower, Talon FX / Kraken X44 integrated device, CAN ID 40, bus rio, firmware 26.3.0.0, 10 motor rotations : 1 intake roller rotation (10:1), and no external sensors. Historical 20:1 remains historical only. The 35 A candidate is PROVISIONAL / NOT YET FINAL OR APPLIED. NeutralMode UNKNOWN — DEFER TO M01_L02 CONFIGURATION DESIGN; no Brake/Coast selected. A game piece may jam while the roller continues rotating; simple manual reverse/eject requires a later authorized lesson. Automatic jam detection is NOT AUTHORIZED.
 
-**Next boundary:** Await Architect review of final M01_L01 freeze recording before User-owned publication.
+**Next boundary:** Await User-owned publication of metadata reconciliation, then M01_L01 is fully closed.
