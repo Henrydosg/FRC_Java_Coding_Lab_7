@@ -1,6 +1,6 @@
 # M00_L16 to M01_L01 — Step-by-Step Transition
 
-Status: IN_PROGRESS / NOT FINAL / NOT PASS  
+Status: FINAL / PASS  
 Donor: M00_L16_MechanismAutonomousEventIntegration — COMPLETE / FROZEN / READ-ONLY  
 Donor path: real_robot_programming/module_M00/M00_L16_MechanismAutonomousEventIntegration  
 Target: M01_L01_MechanismHardwareReadinessAndIOContract  
@@ -8,15 +8,16 @@ Target path: real_robot_programming/module_M01/M01_L01_MechanismHardwareReadines
 Title: Mechanism Hardware Readiness and IO Contract  
 Preparation: COMPLETE  
 Inheritance: PASS before documentation initialization  
-Lesson: IN_PROGRESS — sole active documentation/readiness lesson  
+Lesson: COMPLETE / FROZEN / READ-ONLY
+Active editable lesson: NONE  
 Design Lock: APPROVED  
-Runtime implementation: NOT AUTHORIZED  
-Hardware readiness: IN_PROGRESS / USER EVIDENCE REQUIRED  
+Runtime implementation: NOT AUTHORIZED / NOT PART OF L01  
+Hardware readiness: PASS — Architect Hardware Readiness Closure APPROVED in brief 0b957e8b-0922-453f-8314-7059a66aa2e3  
 M01_L02: NOT AUTHORIZED  
 T00: PARKED / NOT ACTIVATED  
 M00_L17: NOT AUTHORIZED
 
-[Current state](../../../../docs/governance/CURRENT_STATE.md), [registered M01 roadmap](../../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) and [lesson plan](../LESSON_PLAN.md) govern applicability. This guide records completed historical gates separately from pending work. All execution/copy/cleanup/repair/build actions below are supplied User evidence, not agent actions. Steps 11–12 are pending evidence work after recording review; no physical PASS or permission to actuate is implied.
+[Current state](../../../../docs/governance/CURRENT_STATE.md), [registered M01 roadmap](../../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) and [lesson plan](../LESSON_PLAN.md) govern applicability. This FINAL / PASS guide records the completed L01 documentation/readiness progression. Steps 1–13 retain their original stage wording, including historical pending/IN_PROGRESS limits, verbatim. They are superseded operationally by the accepted Architect final closure brief 0b957e8b-0922-453f-8314-7059a66aa2e3 and Steps 14–15 below. Copy/cleanup/repair/build actions remain supplied User evidence, not agent execution. No powered Intake verification was performed in L01 or this recording. Final guide PASS is a documentation/readiness result, not powered hardware qualification or M01_L02 authorization.
 
 ## Step 1 — Record preparation authorization
 
@@ -108,30 +109,69 @@ M00_L17: NOT AUTHORIZED
 - **Verification:** Static document consistency, preserved bytes, exact scope and unchanged technical inheritance checks; self-review is not Architect acceptance.
 - **Expected Result:** M01_L01 sole IN_PROGRESS readiness lesson; recording review PENDING; no closure or publication.
 
-## Step 11 — Collect actual unpowered Intake inventory — PENDING
+## Step 11 — Record User-verified Intake inventory
 
-- **Objective:** Obtain User-owned physical facts.
-- **Why:** Noop behavior and controller bindings cannot identify installed hardware.
-- **Action:** After Architect review of this recording, User supplies actual inventory and compatibility evidence for the pending register.
-- **Files Changed:** Future evidence entries only under applicable later authorized scope; none executed by this recording.
-- **Verification:** NOT TESTED / USER EVIDENCE REQUIRED.
-- **Expected Result:** Actual function/devices/interfaces recorded with provenance; no guessed values or powered actuation.
+- **Objective:** Record the actual supplied device facts.
+- **Why:** Noop intent cannot identify physical hardware.
+- **Action:** Record Kraken X44; one motor; no follower; Talon FX / Kraken X44 integrated device; CAN ID 40; bus rio; firmware 26.3.0.0; ratio 10 motor rotations : 1 intake roller rotation (10:1); no external sensors.
+- **Files Changed:** M01_L01 README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md and this guide.
+- **Verification:** User evidence accepted by Architect brief f96e63cd-cca0-4a1f-8eb5-e95a93f94772; static transcription check only. Physical observation time/snapshot/method beyond supplied facts not provided; no agent hardware operation.
+- **Expected Result:** Exact current inventory recorded; historical 20:1 remains historical only.
 
-## Step 12 — Establish unpowered safety readiness — PENDING
+## Step 12 — Record safe-zero and jam evidence
 
-- **Objective:** Define safe zero and operator/failure expectations.
-- **Why:** Physical safety cannot be proved by software request state.
-- **Action:** After recording review and inventory, User supplies limits/risks/mounting/safe-to-test and zero/disable/E-stop/unavailable expectations for Architect assessment.
-- **Files Changed:** Future readiness evidence only under applicable authorization; none executed here.
-- **Verification:** NOT TESTED / USER EVIDENCE REQUIRED; powered operation REAL HARDWARE DEFERRED.
-- **Expected Result:** Factual readiness and later L02 prerequisites submitted for separate acceptance; no automatic L02 permission.
+- **Objective:** Preserve the supplied operational facts and limits.
+- **Why:** Safe-zero evidence must retain its User provenance.
+- **Action:** Record safe zero YES: when motor output = 0, the intake roller stops and this is physically safe. Record that a game piece can jam while the roller continues rotating; simple manual reverse/eject may be added only in a later authorized lesson. Do not infer automatic jam detection.
+- **Files Changed:** The same four lesson lifecycle files and this guide; evidence text only.
+- **Verification:** Pre-existing User evidence accepted by the Architect; no powered Intake verification performed in L01 or this recording. Disable/E-stop, vendor-failure response and commissioning are not proved by this statement.
+- **Expected Result:** Accepted safe-zero fact and jam hazard recorded without new execution or speculative recovery design.
 
-## Completion limits
+## Step 13 — Record Architect hardware-readiness PASS
 
-The complete 349/349 comparison applies before these document edits. Only four lifecycle documents now differ and this guide is added; all remaining inherited authored files stay byte-identical to donor. The inherited donor transition guide is retained unchanged as donor history; it is not an M01 completion claim.
+- **Objective:** Project the accepted decision and remaining boundaries.
+- **Why:** Readiness acceptance, closure and successor activation are separate gates.
+- **Action:** Record HARDWARE READINESS = PASS; retain 35 A as USER PROVIDED / candidate, not final/applied; NeutralMode UNKNOWN — DEFER TO M01_L02 CONFIGURATION DESIGN. Archive the prior cursor verbatim with its original link context and update the current cursor.
+- **Files Changed:** Four lesson lifecycle files, this guide, docs/governance/CURRENT_STATE.md and docs/governance/history/events/M01_L01_HARDWARE_READINESS_CLOSURE_RECORDING_2026-10-05.md.
+- **Verification:** Static scope, preservation, consistency and governance integrity checks; self-review only. No project execution, powered operation or Git writes.
+- **Expected Result:** M01_L01 remains IN_PROGRESS, ready for Architect closure review; runtime and M01_L02 remain NOT AUTHORIZED.
 
-Frozen Backbone, RobotContainer composition role, vendor-neutral Inputs/IO, immutable observations, read-only telemetry, scheduler requirements, Swerve sole localization and existing autonomous safety boundaries remain unchanged. All six inherited Intake request routes retain non-actuating Noop behavior. No Constants edit, interface extension, Real IO, controller object, device/sensor/motor setting or powered test is introduced.
+## Step 14 — Finalize the L01 transition guide
 
-L01 hardware inventory/readiness is pending. Transition Guide PASS may be recorded only after applicable readiness work, required verification and documentation are completed and reviewed before completion/freeze. This initialization is self-reviewed only; independent recording review, closure, freeze and publication are not performed.
+- **Objective:** Complete transition documentation for the approved readiness/contract lesson.
+- **Why:** A final guide is required before COMPLETE / FROZEN recording.
+- **Action:** Accept the Architect final closure brief's independent closure review PASS and hardware-readiness closure APPROVED; retain all prior staged steps and evidence limits; finalize this guide as FINAL / PASS.
+- **Files Changed:** docs/M00_L16_to_M01_L01_Step_by_Step.md only for this step.
+- **Verification:** Accepted Architect brief 0b957e8b-0922-453f-8314-7059a66aa2e3; static guide completeness and evidence-scope check. Runtime implementation is not part of L01; no new project or powered operation.
+- **Expected Result:** Guide FINAL / PASS for L01, ready for the authorized lifecycle recording.
 
-**Next boundary:** Await Architect review of Design Lock recording before collecting User hardware-readiness evidence.
+## Step 15 — Record Architect closure and freeze
+
+- **Objective:** Project the accepted final lifecycle decision.
+- **Why:** Closure/freeze, recording review and publication remain separate gates.
+- **Action:** Record M01_L01 COMPLETE / FROZEN / READ-ONLY, readiness PASS and active editable lesson NONE. Archive the prior CURRENT_STATE verbatim with provenance and original link context; retain runtime and M01_L02 NOT AUTHORIZED.
+- **Files Changed:** Four lesson lifecycle documents, this guide's Step 15 record, docs/governance/CURRENT_STATE.md and docs/governance/history/events/M01_L01_FINAL_CLOSURE_AND_FREEZE_RECORDING_2026-10-05.md.
+- **Verification:** Static scope, preservation, document consistency and governance integrity checks only; self-review is not acceptance of this final recording. No Git writes, project execution or hardware operation.
+- **Expected Result:** Frozen L01 documentation/readiness lesson; final freeze recording review PENDING before User-owned publication; no successor activation.
+
+## Final completion and evidence limits
+
+The historical 349/349 comparison applies before lifecycle initialization. Four lifecycle documents differ from the protected donor and this guide is added; all inherited technical files remain unchanged. The donor transition guide and staged wording in Steps 1–13 remain historical evidence, not current pending lifecycle states.
+
+Frozen Backbone, RobotContainer composition role, vendor-neutral IO/Inputs, immutable observations, read-only telemetry, scheduler requirements, Swerve sole localization and inherited autonomous safety boundaries remain unchanged. All inherited Intake routes retain non-actuating Noop behavior. No Constants edit, interface extension, Real IO, runtime setting, reverse/eject or automatic jam logic is introduced.
+
+The Architect final closure brief **0b957e8b-0922-453f-8314-7059a66aa2e3** accepts independent closure review PASS and Hardware Readiness Closure APPROVED. The transition guide is finalized as FINAL / PASS for this documentation/contract lesson before the COMPLETE / FROZEN / READ-ONLY lifecycle is recorded. Runtime implementation is NOT AUTHORIZED / NOT PART OF L01. Powered actuation is outside L01 and belongs to later authorized lessons; its absence is not a L01 closure blocker. No new build/test, Simulation, Glass, Driver Station, hardware or SysId operation is performed.
+
+| L01 evidence scope | Final classification / provenance |
+| --- | --- |
+| THEORY / ARCHITECTURE | VERIFIED — THEORY VERIFIED within accepted static inheritance/architecture scope |
+| UNPOWERED HARDWARE READINESS | VERIFIED — supplied User evidence accepted by Architect hardware-readiness closure |
+| POWERED REAL INTAKE ACTUATION | NOT PERFORMED IN L01 — REAL HARDWARE DEFERRED to later authorized M01 lessons |
+
+The accepted safe-zero statement remains pre-existing User evidence, not a new powered L01 test. Recording date is not a physical-test date. Physical observation date/time, detailed snapshot, method and conditions beyond supplied evidence remain unprovided; no commissioning, applied current limit, device-failure response or competition readiness is inferred.
+
+Active editable lesson: NONE. This final freeze recording is self-reviewed only; Architect review of its recording is PENDING. Closure authorization, recording review, User-owned publication and separate successor activation remain distinct. No M01_L02 activation or implementation is authorized.
+
+Final hardware evidence remains Kraken X44, one motor, no follower, Talon FX / Kraken X44 integrated device, CAN ID 40, bus rio, firmware 26.3.0.0, 10 motor rotations : 1 intake roller rotation (10:1), and no external sensors. Historical 20:1 remains historical only. The 35 A candidate is PROVISIONAL / NOT YET FINAL OR APPLIED. NeutralMode UNKNOWN — DEFER TO M01_L02 CONFIGURATION DESIGN; no Brake/Coast selected. A game piece may jam while the roller continues rotating; simple manual reverse/eject requires a later authorized lesson. Automatic jam detection is NOT AUTHORIZED.
+
+**Next boundary:** Await Architect review of final M01_L01 freeze recording before User-owned publication.
