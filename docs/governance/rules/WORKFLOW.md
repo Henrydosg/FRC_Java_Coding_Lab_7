@@ -10,7 +10,7 @@ Registered migration decision: [GOV2 ADR](../../architecture_decisions/ADR_GOV2_
 
 ## Active operational contract
 
-ChatGPT is Architect/Mentor/Reviewer/Design Authority; Sol/Codex implements or reviews only explicitly authorized scope; User owns PowerShell, project builds/tests/Simulation/Glass/Driver Station/hardware/SysId execution and ALL Git writes. Task-relevant static inspection and read-only Git are permitted where authorized.
+ChatGPT is Architect/Mentor/Reviewer/Design Authority; Sol/Codex implements or reviews only explicitly authorized scope; User owns PowerShell, project builds/tests/Simulation/Glass/Driver Station/hardware/SysId execution and ALL Git writes. Task-relevant static inspection and read-only Git are permitted where authorized. Engineers may run explicitly authorized local, non-hardware builds/unit tests as preliminary convenience evidence per [ADR_GOV3](../../architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) §8; User runs remain authoritative.
 
 Each step has one objective and independently verifiable result. Read governance, confirm target/scope/concept and inspect dependencies before work. Stop on missing authority, missing required documents, scope expansion, conflict or failed required gate; do not advance dependent claims. Do not use a build PASS to bypass architecture or documentation gates.
 

@@ -15,9 +15,10 @@ append audit databases, repair/publication chronology or lesson status logs here
 
 | Role | Responsibility and boundary |
 | --- | --- |
-| ChatGPT | Architect / Mentor / Reviewer / governance and design authority; adjudicates design, exceptions and separate gates. |
-| Sol/Codex | Implementation/review engineer operating only within explicitly authorized actions, paths, scope and applicability. |
-| User | Verification Engineer; owns PowerShell, builds/tests, Simulation, Glass / AdvantageScope, Driver Station, real-robot verification, SysId and ALL Git writes. |
+| ChatGPT | Architect / Mentor / Reviewer; scope authorization, governance review and PASS / HOLD / FAIL gate authority. |
+| Claude Code | Repository-aware Engineer; same engineering permission envelope as Codex; no independent governance authority ([ADR_GOV3](docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md)). |
+| Codex | Repository-aware Engineer; same engineering permission envelope as Claude Code; authorized scope only ([ADR_GOV3](docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md)). |
+| User | Verification Engineer; sole Git/GitHub and powered-hardware operator; owner of authoritative build/test, Simulation, Glass / AdvantageScope, Driver Station, real-hardware and SysId verification. |
 
 An implementation or review agent cannot independently enlarge scope, select a new architecture, activate a lesson, declare missing execution verified, or
 consume a future authorization. Read-only inspection does not transfer the User's execution or repository ownership. Report accepted User results with
@@ -204,7 +205,10 @@ promote an integrity check to a semantic certification.
 ## 11. User execution and Git ownership
 
 The User runs project builds/tests, Simulation, Glass/AdvantageScope, Driver Station, hardware verification and SysId. Agents prepare authorized work and
-static review; they do not run these project operations under normal workflow. The User owns ALL Git writes. Agents must not add, commit, tag, push,
+static review; they do not run these project operations under normal workflow. Engineers may run explicitly authorized local, non-hardware Gradle
+builds and unit tests as preliminary convenience evidence (ADR_GOV3 §8). Engineer-run results do not replace User-owned authoritative verification or
+Architect gate decisions. Deployment, powered hardware operations, Driver Station, interactive Simulation and SysId remain User-owned. Task-specific
+READ-ONLY or NO-EXECUTION restrictions take precedence. This permission is subject to Documents A/B/C and all higher repository authority. The User owns ALL Git writes. Agents must not add, commit, tag, push,
 restore, checkout, reset, clean, stash or perform equivalent Git mutations. Task-relevant non-mutating status/diff/log/show/rev-parse/ls-files inspection
 is allowed. Read-only inspection does not transfer ownership, publish anything or establish live remote verification.
 
@@ -282,7 +286,8 @@ ownership](docs/architecture_decisions/ADR_S00_L19_L20_Driver_Input_Ownership.md
 [A01](docs/architecture_decisions/ADR_A01_Autonomous_Navigation_Path_Following_Roadmap.md),
 [V00](docs/architecture_decisions/ADR_V00_AprilTag_Vision_Observation_and_Pose_Fusion_Roadmap.md),
 [M00](docs/architecture_decisions/ADR_M00_Competition_Mechanism_Foundations_Roadmap.md),
-[M01](docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md), [PDF/mirror
+[M01](docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md),
+[GOV3 engineer roles and lightweight publication](docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md), [PDF/mirror
 policy](docs/architecture_decisions/ADR_Governance_PDF_Verified_Markdown_Mirrors.md) and [GOV2
 migration](docs/architecture_decisions/ADR_GOV2_Governance_2_0_Agent_Instructions_State_and_History_Migration.md).
 

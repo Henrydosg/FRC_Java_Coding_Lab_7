@@ -18,7 +18,7 @@ NEVER open or read github-recovery-codes.txt. Avoid protected hardware-registry 
 
 | Protected example | Boundary |
 | --- | --- |
-| real_robot_programming/module_A01/A01_L06_PathPlannerPathAndRuntimeIntegration/src/main/deploy/pathplanner/paths/A01_L06_OneMeter_Forward.path | Existing unrelated tracked path draft, not a migration source |
+| real_robot_programming/module_A01/A01_L06_PathPlannerPathAndRuntimeIntegration/src/main/deploy/pathplanner/paths/A01_L06_OneMeter_Forward.path | Existing unrelated tracked path draft, not a migration source. Historical evidence preserved: this path carried an uncommitted working-tree modification at GOV2 cutover. 2026-10-09 annotation: User-reported `git restore` performed on Claude Code's advice (disclosed scope deviation; see [GOV3 event](../history/events/GOV3_ADOPTION_RECORDING_2026-10-09.md)); read-only check found the path clean and equal to HEAD e831756. The discarded changes are not claimed to be independently proven unimportant. No further restore/reset/clean is authorized. |
 | PathPlanner_Practice_2026/ | Preserve unrelated practice project |
 | curriculum/FRC_Robot_Programming_For_Dummies/ | Preserve unrelated curriculum drafts/content |
 | org/ and existing caches | Preserve unrelated content; no cleanup |
