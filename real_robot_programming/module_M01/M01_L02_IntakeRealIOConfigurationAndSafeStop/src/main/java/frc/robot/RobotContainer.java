@@ -47,6 +47,7 @@ import frc.robot.io.elevator.ElevatorIONoop;
 import frc.robot.io.feeder.FeederIONoop;
 import frc.robot.io.flywheel.FlywheelIONoop;
 import frc.robot.io.intake.IntakeIONoop;
+import frc.robot.io.intake.IntakeIOReal;
 import frc.robot.io.simulation.SwerveSimulationState;
 import frc.robot.io.simulation.SwerveSimulationState.ModuleIdentity;
 import frc.robot.io.swerve.SwerveModuleIO;
@@ -148,7 +149,8 @@ public class RobotContainer {
                 Constants.VisionConstants.kMaximumAcceptedDistanceMeters),
             Constants.VisionConstants.kMaximumFreshAgeSeconds,
             Timer::getFPGATimestamp);
-    intakeSubsystem = new IntakeSubsystem(new IntakeIONoop());
+    intakeSubsystem =
+        new IntakeSubsystem(RobotBase.isReal() ? new IntakeIOReal() : new IntakeIONoop());
     feederSubsystem = new FeederSubsystem(new FeederIONoop());
     flywheelSubsystem = new FlywheelSubsystem(new FlywheelIONoop());
     elevatorSubsystem = new ElevatorSubsystem(new ElevatorIONoop());

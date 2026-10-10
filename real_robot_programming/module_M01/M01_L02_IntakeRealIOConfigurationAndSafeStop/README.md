@@ -1,23 +1,26 @@
 # M01_L02 — Intake Real IO Configuration and Safe Stop
 
-## GOV3 Group 1 activation — 2026-10-09
+## GOV3 Group 2 record — 2026-10-10
 
 | Field | Current record |
 | --- | --- |
 | Lesson / title | M01_L02_IntakeRealIOConfigurationAndSafeStop — Intake Real IO Configuration and Safe Stop |
 | One new concept | Qualified Real IO configuration with guaranteed zero output |
 | Roadmap | [Registered M01 roadmap](../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) §8 L02 |
-| Governance model | [ADR_GOV3](../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) — GROUP 1 ACTIVATE / BASELINE |
+| Governance model | [ADR_GOV3](../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) — GROUP 2 IMPLEMENT / VERIFY |
 | Primary Engineer | Claude Code; Codex optional independent reviewer before Group 3 |
 | Donor | M01_L01_MechanismHardwareReadinessAndIOContract — COMPLETE / FROZEN / READ-ONLY / PUBLISHED / REMOTE VERIFIED |
 | Inheritance audit | PASS — 344/344 donor tracked files byte-identical |
 | User baseline | BUILD SUCCESSFUL in 42s; 7 tasks (6 executed, 1 up-to-date) — supplied User evidence |
 | Design Lock | APPROVED — Architect brief "M01_L02 — GROUP 1 DESIGN LOCK AND ACTIVATION RECORDING" (2026-10-09, supplied by the User in chat) |
 | Lesson lifecycle | IN_PROGRESS — sole active editable lesson |
-| Group 1 recording | Working tree only; self-review; Architect review PENDING; User-owned Group 1 publication PENDING |
-| Group 2 implementation | NOT AUTHORIZED |
+| Group 1 publication | PUBLISHED — User-owned commit 9bdc4f8 "Activate M01_L02 and record inherited baseline"; accepted by the Architect |
+| Group 2 implementation | AUTHORIZED and implemented (working tree) |
+| Group 2 verification | User build/tests and User Simulation (Noop scope) ACCEPTED, 2026-10-10; Group 2 NOT COMPLETE |
+| Group 2 publication | AUTHORIZED TO PREPARE, NOT YET EXECUTED — User-owned |
 | Powered hardware | NOT AUTHORIZED |
 | Transition guide | IN_PROGRESS / NOT FINAL |
+| Group 3 | NOT AUTHORIZED |
 
 ## Lesson documentation
 
@@ -43,11 +46,11 @@ These are initial configuration values, not proof of safe physical jam force or 
 
 ## Zero-output design
 
-Every Intake request path — Right Bumper RunIntakeCommand, IntakeToFeederCommand, PathPlanner LEARNING_EVENT / NamedCommands and direct IntakeSubsystem callers — reaches hardware only through IntakeIO.requestIntake(). In the future IntakeIOReal, requestIntake() and stop() both issue NeutralOut only; the adapter imports no motion control request type, enforced by an architecture test. IntakeObservation's invariant (connected implies available) is preserved by reporting connected only when the configuration is healthy.
+Every Intake request path — Right Bumper RunIntakeCommand, IntakeToFeederCommand, PathPlanner LEARNING_EVENT / NamedCommands and direct IntakeSubsystem callers — reaches hardware only through IntakeIO.requestIntake(). In IntakeIOReal, requestIntake() and stop() both issue NeutralOut only; the adapter imports no motion control request type, enforced by an architecture test. IntakeObservation's invariant (connected implies available) is preserved by reporting connected only when the configuration is healthy.
 
 ## Locked Group 2 scope
 
-Future Group 2 scope — recorded by the Design Lock, NOT AUTHORIZED by this recording:
+Group 2 scope recorded by the Design Lock — AUTHORIZED and implemented. The Architect also ACCEPTED one bounded inherited test repair (last row):
 
 | Path (lesson-relative) | Change |
 | --- | --- |
@@ -56,6 +59,7 @@ Future Group 2 scope — recorded by the Design Lock, NOT AUTHORIZED by this rec
 | src/main/java/frc/robot/Constants.java | MODIFY — IntakeConstants only |
 | src/main/java/frc/robot/RobotContainer.java | MODIFY — RobotBase.isReal() ? IntakeIOReal : IntakeIONoop selection only |
 | src/test/java/frc/robot/IntakeArchitectureBoundaryTest.java | MODIFY — Real IO boundary assertions |
+| src/test/java/frc/robot/RobotContainerIntakeCommandBindingTest.java | MODIFY — one assertion aligned with the Real/Noop selection (bounded inherited repair, ACCEPTED) |
 
 Preserved unchanged: IntakeIO, IntakeIONoop, IntakeSubsystem, IntakeObservation, Intake commands, telemetry, Swerve and all other mechanisms. No nonzero output request, joystick behavior change, jam detection, reverse/eject, PID/velocity control, extra sensor or state machine.
 
@@ -65,12 +69,13 @@ Preserved unchanged: IntakeIO, IntakeIONoop, IntakeSubsystem, IntakeObservation,
 | --- | --- |
 | Inheritance / architecture audit | THEORY VERIFIED — static engineer audit accepted by the Architect |
 | Inherited baseline build | Supplied User execution: BUILD SUCCESSFUL in 42s; not engineer execution |
-| Group 2 build / tests | NOT RUN — implementation not authorized |
-| Simulation / Glass / Driver Station | NOT TESTED |
+| Group 2 build / tests | BUILD VERIFIED and SOFTWARE TEST VERIFIED — User, 2026-10-10: BUILD SUCCESSFUL in 34s; 895 tests, 0 failures, 0 errors, 0 skipped |
+| Simulation | SIMULATION VERIFIED — NOOP SCOPE ONLY — User, 2026-10-10; IntakeIOReal was not simulated |
+| Glass / Driver Station | NOT TESTED |
 | Real hardware | NOT AUTHORIZED / NOT TESTED; the Design Lock is not hardware verification |
 | Direction, inversion, stopping, current adequacy | REAL HARDWARE DEFERRED to later authorized M01 lessons |
 
-**Next boundary:** Await Architect review before User-owned GOV3 Group 1 publication of the full inherited lesson snapshot. Group 2 requires separate authorization.
+**Next boundary:** Architect review of this Group 2 recording, then User-owned Group 2 implementation publication (authorized to prepare, not yet executed). Powered verification H1–H3 and Group 3 each require separate Architect authorization.
 
 <!-- M01_L02 OPERATIVE DOCUMENTATION END -->
 

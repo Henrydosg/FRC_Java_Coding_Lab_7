@@ -308,6 +308,30 @@ public final class Constants {
     private PathPlannerLearningConstants() {}
   }
 
+  /**
+   * Stores the vendor-neutral Intake hardware identity and initial safety configuration.
+   *
+   * <p>These are initial M01_L02 configuration values, not proof of safe physical jam force or
+   * qualified motion performance.
+   */
+  public static final class IntakeConstants {
+    /** CAN ID of the single Intake Kraken X44 integrated Talon FX on the roboRIO CAN bus. */
+    public static final int kMotorCanId = 40;
+
+    /** Stator current limit bounding roller force and motor heating during a jam, in amps. */
+    public static final double kStatorCurrentLimitAmps = 40.0;
+    public static final boolean kStatorCurrentLimitEnabled = true;
+
+    /** Supply current limit kept below the 40 A Intake breaker, in amps. */
+    public static final double kSupplyCurrentLimitAmps = 35.0;
+    public static final boolean kSupplyCurrentLimitEnabled = true;
+
+    /** True when the motor should actively brake while its output is neutral. */
+    public static final boolean kBrakeWhenNeutral = true;
+
+    private IntakeConstants() {}
+  }
+
   /** Stores the vendor-neutral Flywheel readiness policy. */
   public static final class FlywheelConstants {
     /**

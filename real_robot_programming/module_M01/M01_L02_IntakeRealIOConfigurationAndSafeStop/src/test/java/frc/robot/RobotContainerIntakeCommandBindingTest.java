@@ -23,7 +23,7 @@ class RobotContainerIntakeCommandBindingTest {
   void reusesExistingIntakeSubsystemForExactlyOneRunIntakeCommand() throws IOException {
     String source = robotContainerSource();
 
-    assertTrue(source.contains("intakeSubsystem = new IntakeSubsystem(new IntakeIONoop())"));
+    assertTrue(source.contains("new IntakeSubsystem(RobotBase.isReal() ? new IntakeIOReal() : new IntakeIONoop())"));
     assertTrue(
         source.contains("RunIntakeCommand runIntakeCommand = new RunIntakeCommand(intakeSubsystem)"));
     assertEqualsOneOccurrence(source, "new RunIntakeCommand(intakeSubsystem)");

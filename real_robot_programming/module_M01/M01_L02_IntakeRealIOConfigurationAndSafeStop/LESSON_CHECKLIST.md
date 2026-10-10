@@ -1,23 +1,21 @@
 # M01_L02 — Lesson Checklist
 
-## GOV3 Group 1 activation — 2026-10-09
+## GOV3 Group 2 implementation record — 2026-10-10
 
 | Field | Current record |
 | --- | --- |
 | Lesson / title | M01_L02_IntakeRealIOConfigurationAndSafeStop — Intake Real IO Configuration and Safe Stop |
 | One new concept | Qualified Real IO configuration with guaranteed zero output |
-| Roadmap | [Registered M01 roadmap](../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) §8 L02 |
-| Governance model | [ADR_GOV3](../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) — GROUP 1 ACTIVATE / BASELINE |
+| Roadmap | [Registered M01 roadmap](../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) §8 L02 — the registered 18-lesson roadmap remains controlling |
+| Governance model | [ADR_GOV3](../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) — GROUP 2 IMPLEMENT / VERIFY |
 | Primary Engineer | Claude Code; Codex optional independent reviewer before Group 3 |
-| Donor | M01_L01_MechanismHardwareReadinessAndIOContract — COMPLETE / FROZEN / READ-ONLY / PUBLISHED / REMOTE VERIFIED |
-| Inheritance audit | PASS — 344/344 donor tracked files byte-identical |
-| User baseline | BUILD SUCCESSFUL in 42s; 7 tasks (6 executed, 1 up-to-date) — supplied User evidence |
-| Design Lock | APPROVED — Architect brief "M01_L02 — GROUP 1 DESIGN LOCK AND ACTIVATION RECORDING" (2026-10-09, supplied by the User in chat) |
 | Lesson lifecycle | IN_PROGRESS — sole active editable lesson |
-| Group 1 recording | Working tree only; self-review; Architect review PENDING; User-owned Group 1 publication PENDING |
-| Group 2 implementation | NOT AUTHORIZED |
+| Scope | Intake Real IO configuration and safe zero output ONLY |
+| Group 2 verification | User build/tests and Noop Simulation ACCEPTED; Group 2 NOT COMPLETE |
+| Group 2 publication | AUTHORIZED TO PREPARE, NOT YET EXECUTED |
 | Powered hardware | NOT AUTHORIZED |
 | Transition guide | IN_PROGRESS / NOT FINAL |
+| Group 3 | NOT AUTHORIZED |
 
 ## Group 1 gates
 
@@ -27,18 +25,28 @@
 - [x] Inheritance audit — PASS, 344/344 byte-identical; no nested duplicate.
 - [x] Design Lock — APPROVED by the Architect.
 - [x] Lifecycle documents and transition guide initialized (IN_PROGRESS / NOT FINAL).
-- [ ] Architect review of this Group 1 recording.
-- [ ] User-owned Group 1 publication including the full inherited lesson snapshot.
+- [x] User-owned Group 1 publication — commit 9bdc4f8 "Activate M01_L02 and record inherited baseline"; User-reported, accepted by the Architect; local HEAD = origin/main observed read-only.
 
-## Group 2 gates — NOT AUTHORIZED
+## Group 2 gates
 
-- [ ] Group 2 implementation authorization.
-- [ ] S1–S5 software tests; User authoritative build/tests.
-- [ ] User Simulation (Noop scope).
-- [ ] Architect powered-verification authorization.
-- [ ] H1–H3 User hardware evidence.
+- [x] Group 2 implementation authorization — Architect brief supplied by the User in chat.
+- [x] IntakeConstants added to Constants.java (CAN 40; Brake; Stator 40 A enabled; Supply 35 A enabled).
+- [x] IntakeIOReal implemented — NeutralOut-only requestIntake() and stop(); configuration apply/readback/health; fail closed without retry.
+- [x] IntakeIORealConfigurationTest (S1–S3) — 14/14 PASS, engineer-run preliminary.
+- [x] RobotContainer Real/Noop selection via RobotBase.isReal().
+- [x] Bounded inherited test repair — RobotContainerIntakeCommandBindingTest one assertion; Architect ACCEPTED repair and assertion wording deviation; focused 3/3 PASS, engineer-run preliminary.
+- [x] IntakeArchitectureBoundaryTest +3 guards (S4); full suite (S5) 895/895 PASS and BUILD SUCCESSFUL, engineer-run preliminary.
+- [x] Step 6 documentation — transition guide, LESSON_STATUS, LESSON_CHECKLIST updated (self-reviewed).
+- [x] User authoritative build/tests — BUILD SUCCESSFUL in 34s, 7 tasks executed; 895 tests, 0 failures/errors/skipped (2026-10-10); ACCEPTED.
+- [x] User Simulation (Noop scope) — INTAKE_REQUESTED then STOPPED; Available/Connected false; no console errors (2026-10-10); ACCEPTED; IntakeIOReal not simulated.
+- [x] Group 2 user-verification recording — lesson docs, CURRENT_STATE and history event (self-reviewed).
+- [ ] Architect review of the Group 2 recording.
+- [ ] Architect powered-verification authorization — NOT AUTHORIZED.
+- [ ] H1–H3 User hardware evidence — NOT TESTED.
+- [ ] Architect decision on Group 2 completion.
+- [ ] User-owned Group 2 implementation publication — AUTHORIZED TO PREPARE, NOT YET EXECUTED.
 
-## Group 3 gates
+## Group 3 gates — NOT AUTHORIZED
 
 - [ ] Independent review (Codex, optional per GOV3 §3).
 - [ ] Transition guide FINAL / PASS.
@@ -51,12 +59,13 @@
 | --- | --- |
 | Inheritance / architecture audit | THEORY VERIFIED — static engineer audit accepted by the Architect |
 | Inherited baseline build | Supplied User execution: BUILD SUCCESSFUL in 42s; not engineer execution |
-| Group 2 build / tests | NOT RUN — implementation not authorized |
-| Simulation / Glass / Driver Station | NOT TESTED |
-| Real hardware | NOT AUTHORIZED / NOT TESTED; the Design Lock is not hardware verification |
+| Group 2 tests / build | BUILD VERIFIED and SOFTWARE TEST VERIFIED — User, 2026-10-10 (895 tests, 0 failures); earlier engineer-run results preliminary only |
+| Simulation | SIMULATION VERIFIED — NOOP SCOPE ONLY — User, 2026-10-10 |
+| Glass / Driver Station | NOT TESTED |
+| Real hardware | NOT AUTHORIZED / NOT TESTED |
 | Direction, inversion, stopping, current adequacy | REAL HARDWARE DEFERRED to later authorized M01 lessons |
 
-**Next boundary:** Await Architect review before User-owned GOV3 Group 1 publication of the full inherited lesson snapshot. Group 2 requires separate authorization.
+**Next boundary:** Architect review of this Group 2 recording, then User-owned Group 2 implementation publication (authorized to prepare, not yet executed). Powered verification H1–H3 and Group 3 each require separate Architect authorization.
 
 <!-- M01_L02 OPERATIVE DOCUMENTATION END -->
 

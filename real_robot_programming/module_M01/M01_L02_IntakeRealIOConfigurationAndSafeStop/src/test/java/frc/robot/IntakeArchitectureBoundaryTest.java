@@ -24,7 +24,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
-/** Locks vendor isolation, safe-stop ordering, and the M00_L04 ownership boundary. */
+/**
+ * Locks vendor isolation, safe-stop ordering, the M00_L04 ownership boundary, and the M01_L02
+ * zero-motion Real IO boundary.
+ */
 class IntakeArchitectureBoundaryTest {
   @Test
   void intakeFoundationContainsNoVendorImports() throws IOException {
@@ -157,6 +160,77 @@ class IntakeArchitectureBoundaryTest {
     }
     assertEquals(
         Set.of("RunIntakeCommand.java", "IntakeToFeederCommand.java"), intakeNamedCommandFiles);
+  }
+
+  @Test
+  void vendorImportsAreConfinedToIntakeIOReal() throws IOException {
+    Path intakeIo = Path.of("src", "main", "java", "frc", "robot", "io", "intake");
+    Set<String> vendorImportingFiles;
+    try (Stream<Path> intakeFiles = Files.walk(intakeIo)) {
+      vendorImportingFiles =
+          intakeFiles
+              .filter(Files::isRegularFile)
+              .filter(path -> path.getFileName().toString().endsWith(".java"))
+              .filter(path -> readUnchecked(path).contains("import com.ctre"))
+              .map(path -> normalizedRelativePath(intakeIo, path))
+              .collect(Collectors.toSet());
+    }
+    assertEquals(Set.of("IntakeIOReal.java"), vendorImportingFiles);
+    assertFalse(
+        source("frc/robot/io/intake/IntakeIOReal.java")
+            .toLowerCase(Locale.ROOT)
+            .contains("import com.revrobotics"));
+  }
+
+  @Test
+  void intakeIORealIssuesNeutralOutputOnly() throws IOException {
+    String code = withoutCommentsAndLiterals(source("frc/robot/io/intake/IntakeIOReal.java"));
+
+    Set<String> controlImports =
+        Pattern.compile("import\\s+com\\.ctre\\.phoenix6\\.controls\\.(\\w+)\\s*;")
+            .matcher(code)
+            .results()
+            .map(result -> result.group(1))
+            .collect(Collectors.toSet());
+    assertEquals(Set.of("NeutralOut"), controlImports);
+
+    long setControlCalls = Pattern.compile("\\.setControl\\s*\\(").matcher(code).results().count();
+    long neutralSetControlCalls =
+        Pattern.compile("\\.setControl\\s*\\(\\s*neutralRequest\\s*\\)")
+            .matcher(code)
+            .results()
+            .count();
+    assertEquals(2L, setControlCalls);
+    assertEquals(setControlCalls, neutralSetControlCalls);
+
+    assertFalse(Pattern.compile("\\.set\\s*\\(").matcher(code).find());
+    assertFalse(Pattern.compile("\\.setVoltage\\s*\\(").matcher(code).find());
+    assertFalse(code.contains("phoenix6.controls.*"));
+  }
+
+  @Test
+  void robotContainerSelectsRealIntakeOnlyOnTheRealRobot() throws IOException {
+    String code = withoutCommentsAndLiterals(source("frc/robot/RobotContainer.java"));
+
+    assertTrue(
+        Pattern.compile(
+                "new\\s+IntakeSubsystem\\s*\\(\\s*RobotBase\\.isReal\\s*\\(\\s*\\)\\s*\\?\\s*"
+                    + "new\\s+IntakeIOReal\\s*\\(\\s*\\)\\s*:\\s*"
+                    + "new\\s+IntakeIONoop\\s*\\(\\s*\\)\\s*\\)")
+            .matcher(code)
+            .find());
+    assertEquals(
+        1L, Pattern.compile("new\\s+IntakeIOReal\\s*\\(").matcher(code).results().count());
+    assertEquals(
+        1L, Pattern.compile("new\\s+IntakeSubsystem\\s*\\(").matcher(code).results().count());
+  }
+
+  private static String readUnchecked(Path path) {
+    try {
+      return Files.readString(path);
+    } catch (IOException exception) {
+      throw new java.io.UncheckedIOException(exception);
+    }
   }
 
   private static String normalizedRelativePath(Path root, Path path) {
