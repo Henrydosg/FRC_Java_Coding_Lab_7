@@ -11,9 +11,11 @@ package frc.robot.io.swerve;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MagnetSensorConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.PositionVoltage;
@@ -465,7 +467,7 @@ class SwerveModuleIOCTREConfigurationTest {
   }
 
   @Test
-  void rejectsClosedLoopRequestsWhenConfigurationIsUnhealthyOrModuleIsNotFrontLeft() {
+  void closedLoopRequestRequiresClosedLoopEnabledAndHealthyConfiguration() {
     assertTrue(SwerveModuleIOCTRE.closedLoopRequestAllowed(true, true));
     assertFalse(SwerveModuleIOCTRE.closedLoopRequestAllowed(true, false));
     assertFalse(SwerveModuleIOCTRE.closedLoopRequestAllowed(false, true));
@@ -578,6 +580,220 @@ class SwerveModuleIOCTREConfigurationTest {
     assertFalse(SwerveModuleIOCTRE.openLoopRequestAllowed(false, 0.05));
     assertFalse(SwerveModuleIOCTRE.driveClosedLoopRequestAllowed(true, false, true));
     assertFalse(SwerveModuleIOCTRE.steerClosedLoopRequestAllowed(true, false, true));
+  }
+
+  @Test
+  void acceptsWrappedAndQuantizedReadbackForEveryConfiguredModuleOffset() {
+    double[] configuredOffsets = {
+      Constants.SwerveConstants.kFrontLeftEncoderOffsetRotations,
+      Constants.SwerveConstants.kFrontRightEncoderOffsetRotations,
+      Constants.SwerveConstants.kBackLeftEncoderOffsetRotations,
+      Constants.SwerveConstants.kBackRightEncoderOffsetRotations
+    };
+    for (double configuredOffset : configuredOffsets) {
+      CANcoderConfiguration expected =
+          createEncoderConfiguration(
+              SensorDirectionValue.CounterClockwise_Positive, configuredOffset);
+      double wrappedReadback = configuredOffset - Math.floor(configuredOffset);
+      double oneStepReadback = configuredOffset + kCANcoderQuantizationStepRotations;
+      double wholeTurnReadback = configuredOffset + 1.0;
+
+      assertNotEquals(configuredOffset, oneStepReadback);
+      assertNotEquals(configuredOffset, wholeTurnReadback);
+      assertTrue(
+          SwerveModuleIOCTRE.encoderConfigurationMatches(
+              expected,
+              createEncoderConfiguration(
+                  SensorDirectionValue.CounterClockwise_Positive, wrappedReadback)));
+      assertTrue(
+          SwerveModuleIOCTRE.encoderConfigurationMatches(
+              expected,
+              createEncoderConfiguration(
+                  SensorDirectionValue.CounterClockwise_Positive, oneStepReadback)));
+      assertTrue(
+          SwerveModuleIOCTRE.encoderConfigurationMatches(
+              expected,
+              createEncoderConfiguration(
+                  SensorDirectionValue.CounterClockwise_Positive, wholeTurnReadback)));
+      assertFalse(
+          SwerveModuleIOCTRE.encoderConfigurationMatches(
+              expected,
+              createEncoderConfiguration(
+                  SensorDirectionValue.CounterClockwise_Positive,
+                  wrappedReadback - (2.0 * kCANcoderQuantizationStepRotations))));
+      assertFalse(
+          SwerveModuleIOCTRE.encoderConfigurationMatches(
+              expected,
+              createEncoderConfiguration(
+                  SensorDirectionValue.Clockwise_Positive, wrappedReadback)));
+    }
+  }
+
+  @Test
+  void mapsInversionFlagsToPhoenixInvertedValuesForDriveAndSteer() {
+    for (boolean closedLoopEnabled : new boolean[] {false, true}) {
+      assertEquals(
+          InvertedValue.Clockwise_Positive,
+          SwerveModuleIOCTRE.createDriveConfiguration(true, closedLoopEnabled)
+              .MotorOutput.Inverted);
+      assertEquals(
+          InvertedValue.CounterClockwise_Positive,
+          SwerveModuleIOCTRE.createDriveConfiguration(false, closedLoopEnabled)
+              .MotorOutput.Inverted);
+      assertEquals(
+          InvertedValue.Clockwise_Positive,
+          SwerveModuleIOCTRE.createSteerConfiguration(
+                  true, Constants.SwerveConstants.kFrontLeftEncoderCanId, closedLoopEnabled)
+              .MotorOutput.Inverted);
+      assertEquals(
+          InvertedValue.CounterClockwise_Positive,
+          SwerveModuleIOCTRE.createSteerConfiguration(
+                  false, Constants.SwerveConstants.kFrontLeftEncoderCanId, closedLoopEnabled)
+              .MotorOutput.Inverted);
+    }
+  }
+
+  @Test
+  void appliesApprovedSupplyLimitToDriveAndStatorLimitToSteer() {
+    for (boolean closedLoopEnabled : new boolean[] {false, true}) {
+      CurrentLimitsConfigs driveLimits =
+          SwerveModuleIOCTRE.createDriveConfiguration(false, closedLoopEnabled).CurrentLimits;
+      CurrentLimitsConfigs steerLimits =
+          SwerveModuleIOCTRE.createSteerConfiguration(
+                  true, Constants.SwerveConstants.kFrontLeftEncoderCanId, closedLoopEnabled)
+              .CurrentLimits;
+
+      assertEquals(
+          Constants.SwerveConstants.kDriveSupplyCurrentLimitAmps,
+          driveLimits.SupplyCurrentLimit);
+      assertEquals(
+          Constants.SwerveConstants.kDriveSupplyCurrentLimitEnabled,
+          driveLimits.SupplyCurrentLimitEnable);
+      assertEquals(
+          Constants.SwerveConstants.kSteerStatorCurrentLimitAmps,
+          steerLimits.StatorCurrentLimit);
+      assertEquals(
+          Constants.SwerveConstants.kSteerStatorCurrentLimitEnabled,
+          steerLimits.StatorCurrentLimitEnable);
+    }
+  }
+
+  @Test
+  void nonOverriddenCurrentLimitFieldsKeepThePhoenixDefaultsRecordedByAudit() {
+    // AUD-P2A-04: these effective limits come from Phoenix 6 26.3.0 defaults, not Constants.
+    // A vendor default change must fail here and trigger configuration review.
+    CurrentLimitsConfigs driveLimits =
+        SwerveModuleIOCTRE.createDriveConfiguration(false, true).CurrentLimits;
+    CurrentLimitsConfigs steerLimits =
+        SwerveModuleIOCTRE.createSteerConfiguration(
+                true, Constants.SwerveConstants.kFrontLeftEncoderCanId, true)
+            .CurrentLimits;
+
+    assertEquals(120.0, driveLimits.StatorCurrentLimit);
+    assertTrue(driveLimits.StatorCurrentLimitEnable);
+    assertEquals(40.0, driveLimits.SupplyCurrentLowerLimit);
+    assertEquals(1.0, driveLimits.SupplyCurrentLowerTime);
+    assertEquals(70.0, steerLimits.SupplyCurrentLimit);
+    assertTrue(steerLimits.SupplyCurrentLimitEnable);
+    assertEquals(40.0, steerLimits.SupplyCurrentLowerLimit);
+    assertEquals(1.0, steerLimits.SupplyCurrentLowerTime);
+  }
+
+  @Test
+  void baseDriveComparisonIgnoresClosedLoopFieldsButNotBaseFields() {
+    TalonFXConfiguration expected = SwerveModuleIOCTRE.createDriveConfiguration(false, true);
+    TalonFXConfiguration closedLoopMismatch =
+        SwerveModuleIOCTRE.createDriveConfiguration(false, true);
+    closedLoopMismatch.Feedback.SensorToMechanismRatio = 1.0;
+    TalonFXConfiguration baseMismatch = SwerveModuleIOCTRE.createDriveConfiguration(false, true);
+    baseMismatch.CurrentLimits.SupplyCurrentLimit = 1.0;
+
+    assertTrue(
+        SwerveModuleIOCTRE.compareDriveConfiguration(
+                true, true, expected, closedLoopMismatch, false)
+            .healthy);
+    assertFalse(
+        SwerveModuleIOCTRE.compareDriveConfiguration(
+                true, true, expected, closedLoopMismatch, true)
+            .healthy);
+    assertFalse(
+        SwerveModuleIOCTRE.compareDriveConfiguration(true, true, expected, baseMismatch, false)
+            .healthy);
+  }
+
+  @Test
+  void acceptsMatchingSteerConfigurationReadback() {
+    TalonFXConfiguration expected = createFrontLeftSteerConfiguration();
+    TalonFXConfiguration actual = createFrontLeftSteerConfiguration();
+
+    assertTrue(SwerveModuleIOCTRE.steerConfigurationMatches(expected, actual, false));
+    assertTrue(SwerveModuleIOCTRE.steerConfigurationMatches(expected, actual, true));
+  }
+
+  @Test
+  void rejectsEachBaseSteerConfigurationReadbackMismatch() {
+    assertSteerMismatch(
+        false,
+        configuration ->
+            configuration.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive);
+    assertSteerMismatch(
+        false, configuration -> configuration.CurrentLimits.StatorCurrentLimitEnable = false);
+    assertSteerMismatch(
+        false, configuration -> configuration.CurrentLimits.StatorCurrentLimit = 1.0);
+  }
+
+  @Test
+  void rejectsEachClosedLoopSteerConfigurationReadbackMismatch() {
+    assertSteerMismatch(
+        true,
+        configuration ->
+            configuration.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.RotorSensor);
+    assertSteerMismatch(
+        true,
+        configuration ->
+            configuration.Feedback.FeedbackRemoteSensorID =
+                Constants.SwerveConstants.kFrontRightEncoderCanId);
+    assertSteerMismatch(true, configuration -> configuration.Feedback.RotorToSensorRatio = 2.0);
+    assertSteerMismatch(
+        true, configuration -> configuration.Feedback.SensorToMechanismRatio = 2.0);
+    assertSteerMismatch(
+        true, configuration -> configuration.ClosedLoopGeneral.ContinuousWrap = false);
+    assertSteerMismatch(true, configuration -> configuration.Slot0.kP = 1.0);
+    assertSteerMismatch(true, configuration -> configuration.Slot0.kI = 1.0);
+    assertSteerMismatch(true, configuration -> configuration.Slot0.kD = 1.0);
+    assertSteerMismatch(true, configuration -> configuration.Slot0.kS = 1.0);
+    assertSteerMismatch(true, configuration -> configuration.Slot0.kV = 1.0);
+    assertSteerMismatch(true, configuration -> configuration.Slot0.kA = 1.0);
+  }
+
+  @Test
+  void baseSteerComparisonIgnoresClosedLoopFields() {
+    TalonFXConfiguration expected = createFrontLeftSteerConfiguration();
+    TalonFXConfiguration actual = createFrontLeftSteerConfiguration();
+    actual.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.RotorSensor;
+    actual.ClosedLoopGeneral.ContinuousWrap = false;
+
+    assertTrue(SwerveModuleIOCTRE.steerConfigurationMatches(expected, actual, false));
+    assertFalse(SwerveModuleIOCTRE.steerConfigurationMatches(expected, actual, true));
+  }
+
+  private static TalonFXConfiguration createFrontLeftSteerConfiguration() {
+    return SwerveModuleIOCTRE.createSteerConfiguration(
+        Constants.SwerveConstants.kFrontLeftSteerInverted,
+        Constants.SwerveConstants.kFrontLeftEncoderCanId,
+        true);
+  }
+
+  private static void assertSteerMismatch(
+      boolean closedLoopFieldOnly, Consumer<TalonFXConfiguration> mutator) {
+    TalonFXConfiguration expected = createFrontLeftSteerConfiguration();
+    TalonFXConfiguration actual = createFrontLeftSteerConfiguration();
+    mutator.accept(actual);
+
+    assertFalse(SwerveModuleIOCTRE.steerConfigurationMatches(expected, actual, true));
+    assertEquals(
+        closedLoopFieldOnly,
+        SwerveModuleIOCTRE.steerConfigurationMatches(expected, actual, false));
   }
 
   private static CANcoderConfiguration createEncoderConfiguration(
