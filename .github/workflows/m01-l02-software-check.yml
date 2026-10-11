@@ -1,0 +1,43 @@
+# Preliminary software check for the active M01_L02 lesson.
+# CI results are preliminary software evidence only; they never replace
+# User-owned verification or Architect gate decisions (ADR_GOV3 §8).
+# No deployment, hardware operation, secrets or repository writes.
+
+name: M01_L02 Software Check
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/m01-l02-software-check.yml
+      - real_robot_programming/module_M01/M01_L02_IntakeRealIOConfigurationAndSafeStop/**
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build M01_L02
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: real_robot_programming/module_M01/M01_L02_IntakeRealIOConfigurationAndSafeStop
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # The tracked gradlew has no executable bit; set it on the runner only.
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: Clean build
+        run: ./gradlew clean build
