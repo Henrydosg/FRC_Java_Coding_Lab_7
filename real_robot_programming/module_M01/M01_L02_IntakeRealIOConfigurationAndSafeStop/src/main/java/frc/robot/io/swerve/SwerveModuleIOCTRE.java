@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Reads and controls one CTRE-based Swerve module without interpreting module state.
@@ -447,17 +448,31 @@ public class SwerveModuleIOCTRE implements SwerveModuleIO {
   private static void reportDriveConfigurationFailure(
       String moduleName,
       DriveConfigurationComparison comparison) {
-    if (comparison.healthy || !"Front Left".equals(moduleName)) {
-      return;
+    driveConfigurationFailureDiagnostic(moduleName, comparison)
+        .ifPresent(diagnostic -> DriverStation.reportWarning(diagnostic, false));
+  }
+
+  /**
+   * Formats the failure-only drive configuration diagnostic for any module.
+   *
+   * @param moduleName module identity included in the diagnostic
+   * @param comparison drive configuration comparison result
+   * @return diagnostic text when the drive configuration is unhealthy, otherwise empty
+   */
+  static Optional<String> driveConfigurationFailureDiagnostic(
+      String moduleName,
+      DriveConfigurationComparison comparison) {
+    if (comparison.healthy) {
+      return Optional.empty();
     }
 
-    DriverStation.reportWarning(
+    return Optional.of(
         String.format(
             Locale.ROOT,
-            "S00_L17 DRIVE CONFIG FAIL: build=%s, %s",
+            "S00_L17 DRIVE CONFIG FAIL: build=%s, module=%s, %s",
             kDriveConfigurationFailureBuildMarker,
-            comparison.formatFirstFailure()),
-        false);
+            moduleName,
+            comparison.formatFirstFailure()));
   }
 
   static TalonFXConfiguration createDriveConfiguration(

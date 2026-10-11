@@ -395,6 +395,34 @@ class SwerveModuleIOCTREConfigurationTest {
   }
 
   @Test
+  void reportsDriveConfigurationFailureForEveryModuleOnlyWhenUnhealthy() {
+    TalonFXConfiguration expected = SwerveModuleIOCTRE.createDriveConfiguration(false, true);
+    TalonFXConfiguration matchingActual = SwerveModuleIOCTRE.createDriveConfiguration(false, true);
+    TalonFXConfiguration mismatchedActual =
+        SwerveModuleIOCTRE.createDriveConfiguration(false, true);
+    mismatchedActual.Feedback.SensorToMechanismRatio = 1.0;
+    SwerveModuleIOCTRE.DriveConfigurationComparison healthyComparison =
+        SwerveModuleIOCTRE.compareDriveConfiguration(true, true, expected, matchingActual, true);
+    SwerveModuleIOCTRE.DriveConfigurationComparison unhealthyComparison =
+        SwerveModuleIOCTRE.compareDriveConfiguration(
+            true, true, expected, mismatchedActual, true);
+
+    for (String moduleName :
+        new String[] {"Front Left", "Front Right", "Back Left", "Back Right"}) {
+      assertTrue(
+          SwerveModuleIOCTRE.driveConfigurationFailureDiagnostic(moduleName, healthyComparison)
+              .isEmpty());
+
+      String diagnostic =
+          SwerveModuleIOCTRE.driveConfigurationFailureDiagnostic(moduleName, unhealthyComparison)
+              .orElseThrow();
+      assertTrue(diagnostic.contains("build=S00_L17_DRIVE_CONFIGURATION"));
+      assertTrue(diagnostic.contains("module=" + moduleName + ","));
+      assertTrue(diagnostic.contains("field=sensorToMechanismRatioMatches"));
+    }
+  }
+
+  @Test
   void createsVoltageRequestsWithFOCExplicitlyDisabled() {
     VelocityVoltage driveRequest = SwerveModuleIOCTRE.createDriveVelocityRequest(1.0);
     PositionVoltage steerRequest = SwerveModuleIOCTRE.createSteerPositionRequest(0.25);
