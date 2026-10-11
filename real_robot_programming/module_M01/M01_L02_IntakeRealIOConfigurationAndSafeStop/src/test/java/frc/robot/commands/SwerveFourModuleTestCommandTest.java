@@ -286,7 +286,14 @@ class SwerveFourModuleTestCommandTest {
     private int steerAngleCount;
 
     @Override
-    public void updateInputs(SwerveModuleIOInputs inputs) {}
+    public void updateInputs(SwerveModuleIOInputs inputs) {
+      inputs.driveConnected = true;
+      inputs.steerConnected = true;
+      inputs.encoderConnected = true;
+      inputs.driveConfigurationHealthy = true;
+      inputs.steerConfigurationHealthy = true;
+      inputs.encoderConfigurationHealthy = true;
+    }
 
     @Override
     public void setDriveOutput(double output) {}

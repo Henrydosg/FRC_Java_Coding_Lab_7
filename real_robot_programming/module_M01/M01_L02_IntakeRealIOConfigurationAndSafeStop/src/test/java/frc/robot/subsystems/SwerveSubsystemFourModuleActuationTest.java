@@ -281,6 +281,12 @@ class SwerveSubsystemFourModuleActuationTest {
     public void updateInputs(SwerveModuleIOInputs inputs) {
       updateCount++;
       inputs.encoderAbsolutePositionRotations = encoderAbsolutePositionRotations;
+      inputs.driveConnected = true;
+      inputs.steerConnected = true;
+      inputs.encoderConnected = true;
+      inputs.driveConfigurationHealthy = true;
+      inputs.steerConfigurationHealthy = true;
+      inputs.encoderConfigurationHealthy = true;
     }
 
     @Override

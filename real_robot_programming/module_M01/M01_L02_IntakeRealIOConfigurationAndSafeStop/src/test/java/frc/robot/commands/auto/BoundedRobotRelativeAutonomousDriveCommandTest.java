@@ -370,6 +370,12 @@ class BoundedRobotRelativeAutonomousDriveCommandTest {
     @Override
     public void updateInputs(SwerveModuleIOInputs inputs) {
       updateCount++;
+      inputs.driveConnected = true;
+      inputs.steerConnected = true;
+      inputs.encoderConnected = true;
+      inputs.driveConfigurationHealthy = true;
+      inputs.steerConfigurationHealthy = true;
+      inputs.encoderConfigurationHealthy = true;
     }
 
     @Override

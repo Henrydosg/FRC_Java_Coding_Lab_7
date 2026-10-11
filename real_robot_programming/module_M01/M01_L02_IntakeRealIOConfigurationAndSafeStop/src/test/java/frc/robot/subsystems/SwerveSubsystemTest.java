@@ -572,7 +572,7 @@ class SwerveSubsystemTest {
   }
 
   private static RecordingModuleIO[] createModules() {
-    return createModules(false);
+    return createModules(true);
   }
 
   private static RecordingModuleIO[] createModules(boolean valid) {
@@ -720,7 +720,7 @@ class SwerveSubsystemTest {
     }
 
     private RecordingModuleIO(double encoderAbsolutePositionRotations) {
-      this(encoderAbsolutePositionRotations, false);
+      this(encoderAbsolutePositionRotations, true);
     }
 
     private RecordingModuleIO(double encoderAbsolutePositionRotations, boolean valid) {

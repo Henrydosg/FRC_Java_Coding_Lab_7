@@ -114,6 +114,11 @@ public class SwerveSubsystem extends SubsystemBase {
   private ChassisReferenceFrame chassisReferenceFrame = ChassisReferenceFrame.ROBOT_RELATIVE;
   /** True only after an accepted production chassis intent requests actuation. */
   private boolean productionIntentArmed;
+  /**
+   * Latched runtime module-health fault. Set when any module is unhealthy during armed Enabled
+   * production motion; cleared only while Disabled with all four modules healthy.
+   */
+  private boolean moduleHealthFaultLatched;
   private boolean gyroSnapshotInitialized;
   private boolean fieldHeadingReferenceValid;
   private double capturedRawYawDegrees;
@@ -200,6 +205,21 @@ public class SwerveSubsystem extends SubsystemBase {
                 toPoseObservation(poseMeasurementSampleValid),
                 toEstimatedPoseObservation(poseMeasurementSampleValid)));
 
+    boolean allModulesHealthy =
+        moduleHealthy(frontLeftObservation)
+            && moduleHealthy(frontRightObservation)
+            && moduleHealthy(backLeftObservation)
+            && moduleHealthy(backRightObservation);
+    if (DriverStation.isEnabled()) {
+      if (productionIntentArmed && !allModulesHealthy) {
+        moduleHealthFaultLatched = true;
+        stop();
+        return;
+      }
+    } else if (allModulesHealthy) {
+      moduleHealthFaultLatched = false;
+    }
+
     if (!isGyroHeadingValid()) {
       if (productionIntentArmed
           && chassisReferenceFrame == ChassisReferenceFrame.FIELD_RELATIVE) {
@@ -216,7 +236,8 @@ public class SwerveSubsystem extends SubsystemBase {
     updateFinalModuleStates();
     if (DriverStation.isEnabled()
         && !frontLeftCommissioningActive
-        && productionIntentArmed) {
+        && productionIntentArmed
+        && !moduleHealthFaultLatched) {
       dispatchFinalModuleStates();
     }
   }
@@ -355,13 +376,14 @@ public class SwerveSubsystem extends SubsystemBase {
   /**
    * Accepts robot-relative chassis velocity intent without retaining the mutable WPILib value.
    *
-   * <p>Null or nonfinite requests fail closed through the existing all-module stop path.
+   * <p>Null or nonfinite requests, and any request while the runtime module-health fault is
+   * latched, fail closed through the existing all-module stop path.
    *
    * @param chassisSpeeds robot-relative velocity intent in meters per second and radians per
    *     second
    */
   public void acceptChassisSpeeds(ChassisSpeeds chassisSpeeds) {
-    if (!isFiniteChassisSpeeds(chassisSpeeds)) {
+    if (moduleHealthFaultLatched || !isFiniteChassisSpeeds(chassisSpeeds)) {
       stop();
       return;
     }
@@ -376,14 +398,15 @@ public class SwerveSubsystem extends SubsystemBase {
   /**
    * Accepts field-relative chassis velocity intent using the latest subsystem-owned gyro snapshot.
    *
-   * <p>Null or nonfinite requests, and invalid heading data, cause a full stop and disarm
-   * production intent. No zero-heading substitution or robot-relative fallback is performed.
+   * <p>Null or nonfinite requests, invalid heading data, and any request while the runtime
+   * module-health fault is latched cause a full stop and disarm production intent. No
+   * zero-heading substitution or robot-relative fallback is performed.
    *
    * @param fieldRelativeSpeeds field-relative velocity intent in meters per second and radians per
    *     second
    */
   public void acceptFieldRelativeChassisSpeeds(ChassisSpeeds fieldRelativeSpeeds) {
-    if (!isFiniteChassisSpeeds(fieldRelativeSpeeds)) {
+    if (moduleHealthFaultLatched || !isFiniteChassisSpeeds(fieldRelativeSpeeds)) {
       stop();
       return;
     }

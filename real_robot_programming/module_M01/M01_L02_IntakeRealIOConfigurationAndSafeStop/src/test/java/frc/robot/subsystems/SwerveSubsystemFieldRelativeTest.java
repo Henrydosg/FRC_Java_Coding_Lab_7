@@ -502,6 +502,12 @@ class SwerveSubsystemFieldRelativeTest {
     @Override
     public void updateInputs(SwerveModuleIOInputs inputs) {
       inputs.encoderAbsolutePositionRotations = 0.0;
+      inputs.driveConnected = true;
+      inputs.steerConnected = true;
+      inputs.encoderConnected = true;
+      inputs.driveConfigurationHealthy = true;
+      inputs.steerConfigurationHealthy = true;
+      inputs.encoderConfigurationHealthy = true;
     }
 
     @Override
