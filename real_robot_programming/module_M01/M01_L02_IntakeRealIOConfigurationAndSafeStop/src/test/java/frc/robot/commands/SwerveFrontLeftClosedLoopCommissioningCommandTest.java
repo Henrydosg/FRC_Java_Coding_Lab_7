@@ -217,6 +217,7 @@ class SwerveFrontLeftClosedLoopCommissioningCommandTest {
       inputs.encoderAbsolutePositionRotations = encoderAngleRotations;
       inputs.encoderConnected = true;
       inputs.encoderConfigurationHealthy = true;
+      inputs.encoderMeasurementValid = true;
     }
 
     @Override

@@ -27,6 +27,7 @@ import com.ctre.phoenix6.signals.ControlModeValue;
 import com.ctre.phoenix6.signals.DeviceEnableValue;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.MagnetHealthValue;
 import com.ctre.phoenix6.signals.MotorOutputStatusValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 import edu.wpi.first.math.MathUtil;
@@ -121,6 +122,7 @@ public class SwerveModuleIOCTRE implements SwerveModuleIO {
 
   private final StatusSignal<Angle> encoderAbsolutePositionSignal;
   private final StatusSignal<AngularVelocity> encoderVelocitySignal;
+  private final StatusSignal<MagnetHealthValue> encoderMagnetHealthSignal;
 
   private final DutyCycleOut driveOutputRequest = new DutyCycleOut(kStoppedOutput);
   private final DutyCycleOut steerOutputRequest = new DutyCycleOut(kStoppedOutput);
@@ -310,6 +312,7 @@ public class SwerveModuleIOCTRE implements SwerveModuleIO {
 
     encoderAbsolutePositionSignal = absoluteEncoder.getAbsolutePosition();
     encoderVelocitySignal = absoluteEncoder.getVelocity();
+    encoderMagnetHealthSignal = absoluteEncoder.getMagnetHealth();
 
     stop();
 
@@ -931,6 +934,21 @@ public class SwerveModuleIOCTRE implements SwerveModuleIO {
     return closedLoopEnabled && configurationHealthy;
   }
 
+  /**
+   * Classifies one CANcoder magnet-health sample as a usable absolute-angle measurement.
+   *
+   * @param refreshStatus status of the magnet-health signal refresh
+   * @param magnetHealth reported magnet health
+   * @return true only for a successful refresh reporting green or orange magnet health
+   */
+  static boolean magnetHealthAllowsMeasurement(
+      StatusCode refreshStatus, MagnetHealthValue magnetHealth) {
+    return refreshStatus != null
+        && refreshStatus.isOK()
+        && (magnetHealth == MagnetHealthValue.Magnet_Green
+            || magnetHealth == MagnetHealthValue.Magnet_Orange);
+  }
+
   static boolean openLoopRequestAllowed(boolean baseConfigurationHealthy, double output) {
     return output == kStoppedOutput || baseConfigurationHealthy;
   }
@@ -1016,6 +1034,8 @@ public class SwerveModuleIOCTRE implements SwerveModuleIO {
         BaseStatusSignal.refreshAll(
             encoderAbsolutePositionSignal,
             encoderVelocitySignal);
+    // Refreshed separately so measurement validity never changes encoderConnected semantics.
+    StatusCode magnetHealthRefreshStatus = encoderMagnetHealthSignal.refresh().getStatus();
 
     inputs.driveAppliedOutput = driveDutyCycleSignal.getValue();
     inputs.drivePositionRotations =
@@ -1059,6 +1079,9 @@ public class SwerveModuleIOCTRE implements SwerveModuleIO {
     inputs.driveConfigurationHealthy = driveConfigurationHealthy;
     inputs.steerConfigurationHealthy = steerConfigurationHealthy;
     inputs.encoderConfigurationHealthy = encoderConfigurationHealthy;
+    inputs.encoderMeasurementValid =
+        magnetHealthAllowsMeasurement(
+            magnetHealthRefreshStatus, encoderMagnetHealthSignal.getValue());
     captureFrontLeftDriveStaticFrictionSample();
   }
 

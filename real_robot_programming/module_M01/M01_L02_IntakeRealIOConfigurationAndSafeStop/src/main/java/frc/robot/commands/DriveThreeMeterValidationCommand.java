@@ -299,7 +299,8 @@ public final class DriveThreeMeterValidationCommand extends Command {
         && module.encoderConnected()
         && module.driveConfigurationHealthy()
         && module.steerConfigurationHealthy()
-        && module.encoderConfigurationHealthy();
+        && module.encoderConfigurationHealthy()
+        && module.encoderMeasurementValid();
   }
 
   private static boolean finite(SwerveModulePosition[] positions) {

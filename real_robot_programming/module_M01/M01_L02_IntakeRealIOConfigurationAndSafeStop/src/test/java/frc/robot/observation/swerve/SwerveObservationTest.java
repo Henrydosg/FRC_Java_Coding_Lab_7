@@ -169,6 +169,7 @@ class SwerveObservationTest {
             true,
             true,
             true,
+            true,
             true);
     SwerveObservation.GyroObservation gyro =
         new SwerveObservation.GyroObservation(

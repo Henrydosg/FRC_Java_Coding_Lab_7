@@ -826,8 +826,8 @@ public class SwerveSubsystem extends SubsystemBase {
    * Starts one fixed, Front Left-only relative closed-loop steer request while Test mode is enabled.
    *
    * <p>The relative target is computed from one fresh Front Left encoder sample. A disconnected,
-   * configuration-unhealthy, or nonfinite encoder sample stops Front Left commissioning before any
-   * steer target is sent.
+   * configuration-unhealthy, measurement-invalid, or nonfinite encoder sample stops Front Left
+   * commissioning before any steer target is sent.
    *
    * @param action explicit positive or negative steer action
    * @return true when the request was started; false when mode, ownership, or encoder-sample safety
@@ -851,6 +851,7 @@ public class SwerveSubsystem extends SubsystemBase {
       frontLeft.updateInputs(frontLeftInputs);
       if (!frontLeftInputs.encoderConnected
           || !frontLeftInputs.encoderConfigurationHealthy
+          || !frontLeftInputs.encoderMeasurementValid
           || !Double.isFinite(frontLeftInputs.encoderAbsolutePositionRotations)) {
         stopFrontLeftCommissioning();
         return false;
@@ -1173,7 +1174,8 @@ public class SwerveSubsystem extends SubsystemBase {
         && module.encoderConnected()
         && module.driveConfigurationHealthy()
         && module.steerConfigurationHealthy()
-        && module.encoderConfigurationHealthy();
+        && module.encoderConfigurationHealthy()
+        && module.encoderMeasurementValid();
   }
 
   private static boolean isFiniteChassisSpeeds(ChassisSpeeds chassisSpeeds) {
@@ -1207,7 +1209,8 @@ public class SwerveSubsystem extends SubsystemBase {
         inputs.encoderConnected,
         inputs.driveConfigurationHealthy,
         inputs.steerConfigurationHealthy,
-        inputs.encoderConfigurationHealthy);
+        inputs.encoderConfigurationHealthy,
+        inputs.encoderMeasurementValid);
   }
 
   private static SwerveObservation.GyroObservation toGyroObservation(

@@ -354,6 +354,7 @@ class SwerveModuleIOSimTest {
     assertTrue(inputs.driveConfigurationHealthy);
     assertTrue(inputs.steerConfigurationHealthy);
     assertTrue(inputs.encoderConfigurationHealthy);
+    assertTrue(inputs.encoderMeasurementValid);
   }
 
   private static void assertUnhealthy(SwerveModuleIO.SwerveModuleIOInputs inputs) {
@@ -363,6 +364,7 @@ class SwerveModuleIOSimTest {
     assertFalse(inputs.driveConfigurationHealthy);
     assertFalse(inputs.steerConfigurationHealthy);
     assertFalse(inputs.encoderConfigurationHealthy);
+    assertFalse(inputs.encoderMeasurementValid);
   }
 
   private static final class MutableClock implements DoubleSupplier {

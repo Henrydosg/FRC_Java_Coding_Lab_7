@@ -107,6 +107,14 @@ class SwerveSubsystemClosedLoopCommissioningTest {
   }
 
   @Test
+  void invalidFrontLeftEncoderMeasurementRejectsSteerCommissioningBeforeTargetDispatch() {
+    Rig rig = new Rig(0.98);
+    rig.frontLeft.encoderMeasurementValid = false;
+
+    assertSteerCommissioningRejected(rig);
+  }
+
+  @Test
   void nonfiniteFrontLeftEncoderAngleRejectsSteerCommissioningBeforeTargetDispatch() {
     for (double nonfiniteAngleRotations :
         new double[] {Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY}) {
@@ -261,6 +269,7 @@ class SwerveSubsystemClosedLoopCommissioningTest {
     private final double encoderAngleRotations;
     private boolean encoderConnected = true;
     private boolean encoderConfigurationHealthy = true;
+    private boolean encoderMeasurementValid = true;
     private RuntimeException updateFailure;
     private RuntimeException stopFailure;
     private int closedLoopRequestCount;
@@ -282,6 +291,7 @@ class SwerveSubsystemClosedLoopCommissioningTest {
       inputs.encoderAbsolutePositionRotations = encoderAngleRotations;
       inputs.encoderConnected = encoderConnected;
       inputs.encoderConfigurationHealthy = encoderConfigurationHealthy;
+      inputs.encoderMeasurementValid = encoderMeasurementValid;
     }
 
     @Override

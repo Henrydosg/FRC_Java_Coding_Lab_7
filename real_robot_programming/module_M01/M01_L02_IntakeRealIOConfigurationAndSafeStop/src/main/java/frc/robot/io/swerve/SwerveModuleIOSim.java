@@ -176,6 +176,7 @@ public final class SwerveModuleIOSim implements SwerveModuleIO {
     acceptedInputs.driveConfigurationHealthy = clockHealthy;
     acceptedInputs.steerConfigurationHealthy = clockHealthy;
     acceptedInputs.encoderConfigurationHealthy = clockHealthy;
+    acceptedInputs.encoderMeasurementValid = clockHealthy;
   }
 
   @Override

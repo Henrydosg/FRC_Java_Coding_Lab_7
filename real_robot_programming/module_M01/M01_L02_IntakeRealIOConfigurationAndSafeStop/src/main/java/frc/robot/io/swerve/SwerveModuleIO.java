@@ -54,6 +54,13 @@ public interface SwerveModuleIO {
     public boolean driveConfigurationHealthy;
     public boolean steerConfigurationHealthy;
     public boolean encoderConfigurationHealthy;
+
+    /**
+     * True only when the absolute encoder reports its angle measurement as usable. This is
+     * measurement validity, independent of {@link #encoderConnected} and
+     * {@link #encoderConfigurationHealthy}; it stays false until valid evidence exists.
+     */
+    public boolean encoderMeasurementValid;
   }
 
   /**

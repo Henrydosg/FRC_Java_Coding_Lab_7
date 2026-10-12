@@ -271,6 +271,7 @@ class SwerveSubsystemMeasuredSpeedTest {
         true,
         true,
         true,
+        true,
         true);
   }
 
@@ -325,6 +326,7 @@ class SwerveSubsystemMeasuredSpeedTest {
       inputs.driveConfigurationHealthy = driveConfigurationHealthy;
       inputs.steerConfigurationHealthy = steerConfigurationHealthy;
       inputs.encoderConfigurationHealthy = encoderConfigurationHealthy;
+      inputs.encoderMeasurementValid = true;
     }
 
     @Override

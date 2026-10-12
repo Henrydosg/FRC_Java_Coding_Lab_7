@@ -308,6 +308,7 @@ class SwerveSubsystemOdometryTest {
       inputs.driveConfigurationHealthy = driveConfigurationHealthy;
       inputs.steerConfigurationHealthy = steerConfigurationHealthy;
       inputs.encoderConfigurationHealthy = encoderConfigurationHealthy;
+      inputs.encoderMeasurementValid = true;
     }
 
     @Override

@@ -215,6 +215,7 @@ class SwerveSubsystemModulePositionTest {
         true,
         true,
         true,
+        true,
         true);
   }
 

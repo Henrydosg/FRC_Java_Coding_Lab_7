@@ -39,6 +39,7 @@ public final class SwerveModuleIONoop implements SwerveModuleIO {
     inputs.driveConfigurationHealthy = false;
     inputs.steerConfigurationHealthy = false;
     inputs.encoderConfigurationHealthy = false;
+    inputs.encoderMeasurementValid = false;
   }
 
   @Override

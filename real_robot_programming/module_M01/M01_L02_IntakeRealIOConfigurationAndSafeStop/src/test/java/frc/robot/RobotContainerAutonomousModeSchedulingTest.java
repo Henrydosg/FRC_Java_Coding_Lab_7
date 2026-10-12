@@ -786,6 +786,7 @@ class RobotContainerAutonomousModeSchedulingTest {
       inputs.steerConfigurationHealthy = true;
       inputs.encoderConnected = true;
       inputs.encoderConfigurationHealthy = true;
+      inputs.encoderMeasurementValid = true;
     }
 
     @Override

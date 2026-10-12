@@ -738,6 +738,7 @@ class SwerveSubsystemTest {
       inputs.driveConfigurationHealthy = valid;
       inputs.steerConfigurationHealthy = valid;
       inputs.encoderConfigurationHealthy = valid;
+      inputs.encoderMeasurementValid = valid;
     }
 
     @Override

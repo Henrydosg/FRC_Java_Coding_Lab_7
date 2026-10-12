@@ -131,7 +131,8 @@ public record SwerveObservation(
       boolean encoderConnected,
       boolean driveConfigurationHealthy,
       boolean steerConfigurationHealthy,
-      boolean encoderConfigurationHealthy) {}
+      boolean encoderConfigurationHealthy,
+      boolean encoderMeasurementValid) {}
 
   /** Immutable scalar state for the robot gyro. */
   public record GyroObservation(

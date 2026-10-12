@@ -287,6 +287,7 @@ class SwerveSubsystemFourModuleActuationTest {
       inputs.driveConfigurationHealthy = true;
       inputs.steerConfigurationHealthy = true;
       inputs.encoderConfigurationHealthy = true;
+      inputs.encoderMeasurementValid = true;
     }
 
     @Override

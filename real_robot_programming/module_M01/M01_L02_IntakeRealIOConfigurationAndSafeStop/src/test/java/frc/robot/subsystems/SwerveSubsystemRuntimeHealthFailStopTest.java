@@ -10,6 +10,7 @@
 package frc.robot.subsystems;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.wpi.first.hal.HAL;
@@ -38,7 +39,8 @@ class SwerveSubsystemRuntimeHealthFailStopTest {
     ENCODER_CONNECTED,
     DRIVE_CONFIGURATION_HEALTHY,
     STEER_CONFIGURATION_HEALTHY,
-    ENCODER_CONFIGURATION_HEALTHY
+    ENCODER_CONFIGURATION_HEALTHY,
+    ENCODER_MEASUREMENT_VALID
   }
 
   @BeforeAll
@@ -81,6 +83,20 @@ class SwerveSubsystemRuntimeHealthFailStopTest {
       rig.assertEveryModuleStopped();
       rig.assertZeroFinalModuleStates();
     }
+  }
+
+  @Test
+  void measurementValidityPropagatesIntoEveryModuleObservation() {
+    Rig rig = new Rig();
+    rig.modules[3].setHealth(HealthFlag.ENCODER_MEASUREMENT_VALID, false);
+
+    rig.subsystem.periodic();
+
+    var observation = rig.subsystem.getObservation().orElseThrow();
+    assertTrue(observation.frontLeft().encoderMeasurementValid());
+    assertTrue(observation.frontRight().encoderMeasurementValid());
+    assertTrue(observation.backLeft().encoderMeasurementValid());
+    assertFalse(observation.backRight().encoderMeasurementValid());
   }
 
   @Test
@@ -263,6 +279,7 @@ class SwerveSubsystemRuntimeHealthFailStopTest {
     private boolean driveConfigurationHealthy = true;
     private boolean steerConfigurationHealthy = true;
     private boolean encoderConfigurationHealthy = true;
+    private boolean encoderMeasurementValid = true;
     private int driveVelocityCount;
     private int steerAngleCount;
     private int stopCount;
@@ -276,6 +293,7 @@ class SwerveSubsystemRuntimeHealthFailStopTest {
         case DRIVE_CONFIGURATION_HEALTHY -> driveConfigurationHealthy = healthy;
         case STEER_CONFIGURATION_HEALTHY -> steerConfigurationHealthy = healthy;
         case ENCODER_CONFIGURATION_HEALTHY -> encoderConfigurationHealthy = healthy;
+        case ENCODER_MEASUREMENT_VALID -> encoderMeasurementValid = healthy;
         default -> throw new IllegalArgumentException("Unsupported health flag");
       }
     }
@@ -288,6 +306,7 @@ class SwerveSubsystemRuntimeHealthFailStopTest {
       inputs.driveConfigurationHealthy = driveConfigurationHealthy;
       inputs.steerConfigurationHealthy = steerConfigurationHealthy;
       inputs.encoderConfigurationHealthy = encoderConfigurationHealthy;
+      inputs.encoderMeasurementValid = encoderMeasurementValid;
     }
 
     @Override

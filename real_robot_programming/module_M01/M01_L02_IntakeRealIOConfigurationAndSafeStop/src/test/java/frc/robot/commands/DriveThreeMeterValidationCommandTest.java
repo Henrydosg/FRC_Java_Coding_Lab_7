@@ -314,6 +314,20 @@ class DriveThreeMeterValidationCommandTest {
   }
 
   @Test
+  void abortsWhenAModuleEncoderMeasurementIsInvalid() {
+    Rig rig = readyRig();
+    rig.backRight.encoderMeasurementValid = false;
+    rig.periodic();
+    RecordingTelemetry telemetry = new RecordingTelemetry();
+    DriveThreeMeterValidationCommand command = createCommand(rig, telemetry, new MutableClock());
+
+    command.initialize();
+
+    assertEquals("MODULE_UNHEALTHY", telemetry.latest.faultOrAbortReason());
+    assertStopped(rig);
+  }
+
+  @Test
   void interruptionAlwaysStopsTheDrivetrain() {
     Rig rig = readyRig();
     RecordingTelemetry telemetry = new RecordingTelemetry();
@@ -572,6 +586,7 @@ class DriveThreeMeterValidationCommandTest {
     private double drivePositionRotations;
     private double encoderAbsolutePositionRotations;
     private boolean driveConnected = true;
+    private boolean encoderMeasurementValid = true;
     private int driveVelocityRequestCount;
     private int stopCount;
 
@@ -585,6 +600,7 @@ class DriveThreeMeterValidationCommandTest {
       inputs.driveConfigurationHealthy = true;
       inputs.steerConfigurationHealthy = true;
       inputs.encoderConfigurationHealthy = true;
+      inputs.encoderMeasurementValid = encoderMeasurementValid;
     }
 
     @Override

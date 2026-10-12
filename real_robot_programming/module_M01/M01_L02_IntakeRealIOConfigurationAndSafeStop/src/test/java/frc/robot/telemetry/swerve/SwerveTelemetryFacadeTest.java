@@ -311,6 +311,7 @@ class SwerveTelemetryFacadeTest {
             true,
             true,
             true,
+            true,
             true);
     SwerveObservation.GyroObservation gyro =
         new SwerveObservation.GyroObservation(
