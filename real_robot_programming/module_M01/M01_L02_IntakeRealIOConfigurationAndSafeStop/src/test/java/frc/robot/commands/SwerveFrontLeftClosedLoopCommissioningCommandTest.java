@@ -215,6 +215,8 @@ class SwerveFrontLeftClosedLoopCommissioningCommandTest {
     @Override
     public void updateInputs(SwerveModuleIOInputs inputs) {
       inputs.encoderAbsolutePositionRotations = encoderAngleRotations;
+      inputs.encoderConnected = true;
+      inputs.encoderConfigurationHealthy = true;
     }
 
     @Override

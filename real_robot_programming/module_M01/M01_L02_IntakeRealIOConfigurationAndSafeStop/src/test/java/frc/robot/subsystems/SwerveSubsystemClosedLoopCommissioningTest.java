@@ -11,14 +11,18 @@ package frc.robot.subsystems;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.simulation.DriverStationSim;
 import frc.robot.Constants;
 import frc.robot.io.gyro.GyroIO;
 import frc.robot.io.swerve.SwerveModuleIO;
+import java.lang.reflect.Field;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -87,6 +91,101 @@ class SwerveSubsystemClosedLoopCommissioningTest {
   }
 
   @Test
+  void disconnectedFrontLeftEncoderRejectsSteerCommissioningBeforeTargetDispatch() {
+    Rig rig = new Rig(0.98);
+    rig.frontLeft.encoderConnected = false;
+
+    assertSteerCommissioningRejected(rig);
+  }
+
+  @Test
+  void unhealthyFrontLeftEncoderConfigurationRejectsSteerCommissioningBeforeTargetDispatch() {
+    Rig rig = new Rig(0.98);
+    rig.frontLeft.encoderConfigurationHealthy = false;
+
+    assertSteerCommissioningRejected(rig);
+  }
+
+  @Test
+  void nonfiniteFrontLeftEncoderAngleRejectsSteerCommissioningBeforeTargetDispatch() {
+    for (double nonfiniteAngleRotations :
+        new double[] {Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY}) {
+      assertSteerCommissioningRejected(new Rig(nonfiniteAngleRotations));
+    }
+  }
+
+  @Test
+  void rejectedSteerCommissioningLeavesNoOwnershipAndHealthyRequestCanStart() {
+    Rig rig = new Rig(0.98);
+    rig.frontLeft.encoderConnected = false;
+    assertSteerCommissioningRejected(rig);
+
+    rig.frontLeft.encoderConnected = true;
+    assertTrue(
+        rig.subsystem.startFrontLeftSteerAngleCommissioning(
+            SwerveSubsystem.FrontLeftClosedLoopCommissioningAction.STEER_POSITIVE));
+    assertEquals(1, rig.frontLeft.closedLoopRequestCount);
+    assertEquals(0.0425, rig.frontLeft.lastSteerAngle.getRotations(), 1.0e-12);
+    assertNoOtherModuleActuation(rig);
+  }
+
+  @Test
+  void rejectionStopFailurePropagatesOriginalExceptionAfterSingleStopAttempt()
+      throws ReflectiveOperationException {
+    Rig rig = new Rig(0.98);
+    rig.frontLeft.encoderConnected = false;
+    RuntimeException stopFailure = new RuntimeException("simulated Front Left stop failure");
+    rig.frontLeft.stopFailure = stopFailure;
+
+    RuntimeException thrown;
+    try {
+      thrown =
+          assertThrows(
+              RuntimeException.class,
+              () ->
+                  rig.subsystem.startFrontLeftSteerAngleCommissioning(
+                      SwerveSubsystem.FrontLeftClosedLoopCommissioningAction.STEER_POSITIVE));
+    } finally {
+      // The subsystem stays registered with the global scheduler; do not leak a failing fake.
+      rig.frontLeft.stopFailure = null;
+    }
+
+    assertSame(stopFailure, thrown);
+    assertEquals(0, thrown.getSuppressed().length);
+    assertEquals(1, rig.frontLeft.stopCount);
+    assertEquals(0, rig.frontLeft.closedLoopRequestCount);
+    assertCommissioningOwnershipCleared(rig.subsystem);
+    assertNoOtherModuleActuation(rig);
+  }
+
+  @Test
+  void failureBeforeRejectionCleanupStillStopsActiveCommissioning()
+      throws ReflectiveOperationException {
+    Rig rig = new Rig(0.98);
+    RuntimeException updateFailure = new RuntimeException("simulated Front Left input failure");
+    rig.frontLeft.updateFailure = updateFailure;
+
+    RuntimeException thrown;
+    try {
+      thrown =
+          assertThrows(
+              RuntimeException.class,
+              () ->
+                  rig.subsystem.startFrontLeftSteerAngleCommissioning(
+                      SwerveSubsystem.FrontLeftClosedLoopCommissioningAction.STEER_POSITIVE));
+    } finally {
+      // The subsystem stays registered with the global scheduler; do not leak a failing fake.
+      rig.frontLeft.updateFailure = null;
+    }
+
+    assertSame(updateFailure, thrown);
+    assertEquals(1, rig.frontLeft.stopCount);
+    assertEquals(0, rig.frontLeft.closedLoopRequestCount);
+    assertCommissioningOwnershipCleared(rig.subsystem);
+    assertNoOtherModuleActuation(rig);
+  }
+
+  @Test
   void sendsOnlyOneClampedFrontLeftStaticFrictionVoltageRequest() {
     Rig rig = new Rig(0.0);
 
@@ -112,6 +211,38 @@ class SwerveSubsystemClosedLoopCommissioningTest {
     assertTrue(rig.frontLeft.stopCount > 0);
   }
 
+  private static void assertSteerCommissioningRejected(Rig rig) {
+    assertFalse(
+        rig.subsystem.startFrontLeftSteerAngleCommissioning(
+            SwerveSubsystem.FrontLeftClosedLoopCommissioningAction.STEER_POSITIVE));
+    assertEquals(0, rig.frontLeft.closedLoopRequestCount);
+    assertEquals(1, rig.frontLeft.stopCount);
+    assertNoOtherModuleActuation(rig);
+  }
+
+  private static void assertCommissioningOwnershipCleared(SwerveSubsystem subsystem)
+      throws ReflectiveOperationException {
+    assertFalse((boolean) readField(subsystem, "frontLeftCommissioningActive"));
+    assertEquals(0.0, (double) readField(subsystem, "frontLeftCommissioningTimeoutSeconds"));
+    assertFalse(((Timer) readField(subsystem, "frontLeftCommissioningWatchdog")).isRunning());
+  }
+
+  private static Object readField(SwerveSubsystem subsystem, String fieldName)
+      throws ReflectiveOperationException {
+    Field field = SwerveSubsystem.class.getDeclaredField(fieldName);
+    field.setAccessible(true);
+    return field.get(subsystem);
+  }
+
+  private static void assertNoOtherModuleActuation(Rig rig) {
+    for (RecordingModuleIO module : new RecordingModuleIO[] {
+      rig.frontRight, rig.backLeft, rig.backRight
+    }) {
+      assertEquals(0, module.closedLoopRequestCount);
+      assertEquals(0, module.stopCount);
+    }
+  }
+
   private static final class Rig {
     private final RecordingModuleIO frontLeft;
     private final RecordingModuleIO frontRight = new RecordingModuleIO(0.0);
@@ -128,6 +259,10 @@ class SwerveSubsystemClosedLoopCommissioningTest {
 
   private static final class RecordingModuleIO implements SwerveModuleIO {
     private final double encoderAngleRotations;
+    private boolean encoderConnected = true;
+    private boolean encoderConfigurationHealthy = true;
+    private RuntimeException updateFailure;
+    private RuntimeException stopFailure;
     private int closedLoopRequestCount;
     private int staticFrictionRequestCount;
     private int stopCount;
@@ -141,7 +276,12 @@ class SwerveSubsystemClosedLoopCommissioningTest {
 
     @Override
     public void updateInputs(SwerveModuleIOInputs inputs) {
+      if (updateFailure != null) {
+        throw updateFailure;
+      }
       inputs.encoderAbsolutePositionRotations = encoderAngleRotations;
+      inputs.encoderConnected = encoderConnected;
+      inputs.encoderConfigurationHealthy = encoderConfigurationHealthy;
     }
 
     @Override
@@ -172,6 +312,9 @@ class SwerveSubsystemClosedLoopCommissioningTest {
     @Override
     public void stop() {
       stopCount++;
+      if (stopFailure != null) {
+        throw stopFailure;
+      }
     }
   }
 

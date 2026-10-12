@@ -825,8 +825,13 @@ public class SwerveSubsystem extends SubsystemBase {
   /**
    * Starts one fixed, Front Left-only relative closed-loop steer request while Test mode is enabled.
    *
+   * <p>The relative target is computed from one fresh Front Left encoder sample. A disconnected,
+   * configuration-unhealthy, or nonfinite encoder sample stops Front Left commissioning before any
+   * steer target is sent.
+   *
    * @param action explicit positive or negative steer action
-   * @return true when the request was started; false when mode or ownership safety rejected it
+   * @return true when the request was started; false when mode, ownership, or encoder-sample safety
+   *     rejected it
    * @throws NullPointerException when action is null
    */
   public boolean startFrontLeftSteerAngleCommissioning(
@@ -844,13 +849,22 @@ public class SwerveSubsystem extends SubsystemBase {
 
     try {
       frontLeft.updateInputs(frontLeftInputs);
+      if (!frontLeftInputs.encoderConnected
+          || !frontLeftInputs.encoderConfigurationHealthy
+          || !Double.isFinite(frontLeftInputs.encoderAbsolutePositionRotations)) {
+        stopFrontLeftCommissioning();
+        return false;
+      }
       Rotation2d currentAngle =
           Rotation2d.fromRotations(frontLeftInputs.encoderAbsolutePositionRotations);
       Rotation2d requestedStep = Rotation2d.fromRotations(steerStepRotations(acceptedAction));
       frontLeft.setSteerAngle(frontLeftRelativeSteerTarget(currentAngle, requestedStep));
       return true;
     } catch (RuntimeException failure) {
-      stopAfterFrontLeftCommissioningFailure(failure);
+      // A failed rejection stop has already cleared ownership in its finally block.
+      if (frontLeftCommissioningActive) {
+        stopAfterFrontLeftCommissioningFailure(failure);
+      }
       throw failure;
     }
   }
