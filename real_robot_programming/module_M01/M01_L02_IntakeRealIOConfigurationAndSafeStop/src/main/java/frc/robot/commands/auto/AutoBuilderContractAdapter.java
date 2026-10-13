@@ -630,9 +630,15 @@ public final class AutoBuilderContractAdapter {
             Commands.waitUntil(() -> !DriverStation.isAutonomousEnabled()),
             Commands.runOnce(() -> recordExecutionOutcome(ExecutionOutcome.MODE_LOSS)));
     Command inputUnavailable = Commands.waitUntil(() -> executionInputUnavailable);
+    // A latched adapter fault ends the path so PathPlanner inline events receive end(true).
+    Command adapterFault = Commands.waitUntil(() -> faulted);
     Command execution =
         Commands.race(
-            Objects.requireNonNull(followPath, "followPath"), timeout, modeLoss, inputUnavailable);
+            Objects.requireNonNull(followPath, "followPath"),
+            timeout,
+            modeLoss,
+            inputUnavailable,
+            adapterFault);
     return new WrapperCommand(execution) {
       @Override
       public void initialize() {

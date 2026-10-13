@@ -14,8 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.pathplanner.lib.commands.FollowPathCommand;
 import com.pathplanner.lib.config.ModuleConfig;
+import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+import com.pathplanner.lib.path.EventMarker;
+import com.pathplanner.lib.path.PathPlannerPath;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -24,8 +29,10 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DriverStationSim;
+import edu.wpi.first.wpilibj.simulation.SimHooks;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.commands.auto.AutoBuilderContractAdapter.ExecutionOutcome;
 import frc.robot.io.gyro.GyroIO;
@@ -43,6 +50,7 @@ import org.junit.jupiter.api.Test;
 class AutoBuilderContractAdapterRecoveryTest {
   private static final double kTolerance = 1.0e-12;
   private static final double kPathTimeoutSeconds = 10.0;
+  private static final double kShortPathTimeoutSeconds = 0.1;
   private Rig rig;
 
   @BeforeAll
@@ -314,6 +322,98 @@ class AutoBuilderContractAdapterRecoveryTest {
     assertTrue(rig.frontLeft.stopCount > 0);
   }
 
+  @Test
+  void latchedAdapterFaultTerminatesRunningPathAndInterruptsInlineEvent() {
+    rig = new Rig();
+    CommandScheduler scheduler = CommandScheduler.getInstance();
+    EventSubsystem eventSubsystem = new EventSubsystem();
+    RecordingEventCommand event = new RecordingEventCommand(eventSubsystem);
+    SimHooks.pauseTiming();
+    try {
+      Command composed = rig.composePath(rig.createEventFollowPath(event));
+      scheduler.schedule(composed);
+
+      scheduler.run();
+      scheduler.run();
+      assertTrue(scheduler.isScheduled(composed));
+      assertTrue(event.executeCount > 0);
+      assertEquals(0, event.endCount);
+      assertTrue(rig.swerve.acceptedRequestCount > 0);
+
+      rig.adapter.latchSchedulerBoundaryFault(new IllegalStateException("injected fatal"));
+      int acceptedAtFault = rig.swerve.acceptedRequestCount;
+      int eventExecutesAtFault = event.executeCount;
+      int stopsAtFault = rig.frontLeft.stopCount;
+      assertTrue(stopsAtFault > 0);
+
+      // The scheduler keeps running after the latch; the fault member ends the race on the
+      // first cycle. FollowPathCommand executes before that member in the same cycle, so at
+      // most one further event execute can occur before termination.
+      scheduler.run();
+
+      assertFalse(scheduler.isScheduled(composed));
+      assertEquals(1, event.endCount);
+      assertTrue(event.interrupted);
+      assertTrue(event.executeCount - eventExecutesAtFault <= 1);
+      assertEquals(acceptedAtFault, rig.swerve.acceptedRequestCount);
+      assertTrue(rig.frontLeft.stopCount > stopsAtFault);
+      assertEquals(ExecutionOutcome.FAULTED, rig.adapter.executionOutcome());
+
+      int eventExecutesAfterTermination = event.executeCount;
+      int driveRequestsAfterTermination = rig.totalDriveRequests();
+      for (int cycle = 0; cycle < 3; cycle++) {
+        scheduler.run();
+      }
+      assertEquals(eventExecutesAfterTermination, event.executeCount);
+      assertEquals(1, event.endCount);
+      assertEquals(acceptedAtFault, rig.swerve.acceptedRequestCount);
+      assertEquals(driveRequestsAfterTermination, rig.totalDriveRequests());
+      for (SwerveModuleState state : rig.swerve.getFinalModuleStates()) {
+        assertEquals(0.0, state.speedMetersPerSecond, kTolerance);
+      }
+    } finally {
+      scheduler.cancelAll();
+      scheduler.unregisterSubsystem(eventSubsystem);
+      SimHooks.resumeTiming();
+    }
+  }
+
+  @Test
+  void healthyPathIsNotEndedByTheFaultMemberAndTimeoutStillEndsIt() {
+    rig = new Rig();
+    CommandScheduler scheduler = CommandScheduler.getInstance();
+    SimHooks.pauseTiming();
+    try {
+      rig.followPath = new CallbackPath(rig.swerve, rig::runHealthyCallbackOrder);
+      Command composed =
+          (Command)
+              rig.invoke(
+                  "composeSchedulerOwnedPathCommand",
+                  new Class<?>[] {Command.class, double.class},
+                  rig.followPath,
+                  kShortPathTimeoutSeconds);
+      scheduler.schedule(composed);
+
+      for (int cycle = 0; cycle < 3; cycle++) {
+        scheduler.run();
+      }
+      assertTrue(scheduler.isScheduled(composed));
+      assertFalse(rig.adapter.isFaulted());
+
+      SimHooks.stepTimingAsync(2.0 * kShortPathTimeoutSeconds);
+      scheduler.run();
+      scheduler.run();
+
+      assertFalse(scheduler.isScheduled(composed));
+      assertTrue(rig.followPath.interrupted);
+      assertEquals(ExecutionOutcome.TIMEOUT, rig.adapter.executionOutcome());
+      assertFalse(rig.adapter.isFaulted());
+    } finally {
+      scheduler.cancelAll();
+      SimHooks.resumeTiming();
+    }
+  }
+
   private void assertInputUnavailableAndStopped() {
     assertEquals(ExecutionOutcome.INPUT_UNAVAILABLE, rig.adapter.executionOutcome());
     assertFalse(rig.adapter.isFaulted());
@@ -414,12 +514,46 @@ class AutoBuilderContractAdapterRecoveryTest {
 
     private Command composePath(Runnable callbacks) {
       followPath = new CallbackPath(swerve, callbacks);
+      return composePath(followPath);
+    }
+
+    private Command composePath(Command path) {
       return (Command)
           invoke(
               "composeSchedulerOwnedPathCommand",
               new Class<?>[] {Command.class, double.class},
-              followPath,
+              path,
               kPathTimeoutSeconds);
+    }
+
+    /** Builds a real PathPlanner path follower whose start marker runs the given inline event. */
+    private Command createEventFollowPath(Command event) {
+      PathPlannerPath canonical =
+          new PathPlannerTrajectoryAdapter(robotConfig).createCanonicalPath();
+      PathPlannerPath eventPath =
+          new PathPlannerPath(
+              canonical.getWaypoints(),
+              canonical.getRotationTargets(),
+              canonical.getPointTowardsZones(),
+              canonical.getConstraintZones(),
+              List.of(new EventMarker("FAULT_TERMINATION_TEST_EVENT", 0.0, event)),
+              canonical.getGlobalConstraints(),
+              canonical.getIdealStartingState(),
+              canonical.getGoalEndState(),
+              false);
+      return new FollowPathCommand(
+          eventPath,
+          this::supplyPose,
+          this::supplySpeeds,
+          (speeds, feedforwards) -> acceptOutput(speeds),
+          new PPHolonomicDriveController(
+              new PIDConstants(
+                  Constants.HolonomicTrajectoryFollowingConstants.kXKpPerSecond, 0.0, 0.0),
+              new PIDConstants(
+                  Constants.HolonomicTrajectoryFollowingConstants.kThetaKpPerSecond, 0.0, 0.0)),
+          robotConfig,
+          () -> false,
+          swerve);
     }
 
     private void startPath(Runnable callbacks) {
@@ -476,6 +610,30 @@ class AutoBuilderContractAdapterRecoveryTest {
     @Override
     public void execute() {
       callbacks.run();
+    }
+
+    @Override
+    public void end(boolean wasInterrupted) {
+      interrupted = wasInterrupted;
+      endCount++;
+    }
+  }
+
+  private static final class EventSubsystem extends SubsystemBase {}
+
+  /** Long-running inline event that records its PathPlanner-driven lifecycle. */
+  private static final class RecordingEventCommand extends Command {
+    private int executeCount;
+    private int endCount;
+    private boolean interrupted;
+
+    private RecordingEventCommand(EventSubsystem eventSubsystem) {
+      addRequirements(eventSubsystem);
+    }
+
+    @Override
+    public void execute() {
+      executeCount++;
     }
 
     @Override
