@@ -8,8 +8,8 @@ Target path: real_robot_programming/module_M01/M01_L02_IntakeRealIOConfiguration
 Title: Intake Real IO Configuration and Safe Stop
 Governance model: ADR_GOV3 three commit groups; current group: GROUP 2 — IMPLEMENT / VERIFY
 Design Lock: APPROVED
-Group 2: AUTHORIZED — implementation recorded; User build/tests and Noop Simulation ACCEPTED; publication PENDING; NOT COMPLETE
-Powered hardware: NOT AUTHORIZED
+Group 2: PUBLISHED / SOFTWARE VERIFIED (commit 58f8e3a); GOV3 audit repairs published through fc10df4
+Powered hardware: NOT AUTHORIZED (H1.2 awaiting real robot access / NOT VERIFIED; H2/H3 NOT AUTHORIZED)
 Group 3: NOT AUTHORIZED
 
 [Current state](../../../../docs/governance/CURRENT_STATE.md), [registered M01 roadmap](../../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md), [ADR_GOV3](../../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) and [lesson plan](../LESSON_PLAN.md) govern applicability.
@@ -162,10 +162,87 @@ Group 2 steps below were performed by the Primary Engineer within the Architect-
 - **Verification:** Engineer self-review; governance mirror validator; Architect review PENDING.
 - **Expected Result:** Group 2 ready for User-owned publication; Group 2 NOT COMPLETE; lesson IN_PROGRESS.
 
+## Step 17 — Publish Group 2
+
+- **Objective:** Publish the verified Group 2 implementation.
+- **Why:** GOV3 Group 2 ends with one User-owned publication of the verified implementation.
+- **Action:** After Architect review and Codex review PASS, the User committed and pushed Group 2.
+- **Files Changed:** Group 2 files and recording (Steps 7–16).
+- **Verification:** User-owned commit 58f8e3a548f61f19a96d3eb24a55db591cfad4a9 "Implement M01_L02 Intake real IO and safe stop"; accepted by the Architect.
+- **Expected Result:** Group 2 PUBLISHED / SOFTWARE VERIFIED; lesson remains IN_PROGRESS.
+
+## GOV3 audit repairs
+
+The GOV3 repository-wide correctness audit inspected the inherited code of this lesson. Each repair below fixes one finding in inherited Swerve or autonomous code, was separately authorized by the Architect, verified by the User and published by the User. None changes the Intake scope or adds a nonzero output path. Software results are not real hardware verification.
+
+## Step 18 — AUD-P2A-01: report drive configuration failures for every module
+
+- **Objective:** Report a drive configuration failure for any of the four swerve modules.
+- **Why:** The diagnostic previously covered only the front-left module.
+- **Action:** Extended the failure report in the CTRE swerve module adapter and added regression tests.
+- **Files Changed:** io/swerve/SwerveModuleIOCTRE.java; SwerveModuleIOCTREConfigurationTest.java.
+- **Verification:** User clean build PASS; exact focused/full counts not established. Commit f0daab798bd010bf59abb2d7f1f8c44771c6a998.
+- **Expected Result:** Every module's configuration failure is visible.
+
+## Step 19 — AUD-P2A-02 / R1: latched fail-stop on module health faults
+
+- **Objective:** Stop the drivetrain when a module health fault appears before production motion.
+- **Why:** Teleop dispatch did not check runtime module health; a drive could be commanded while a steer module was not tracking.
+- **Action:** SwerveSubsystem latches a module health fault and keeps outputs stopped; test fixtures updated to report healthy modules.
+- **Files Changed:** subsystems/SwerveSubsystem.java; new SwerveSubsystemRuntimeHealthFailStopTest.java; six existing test fixtures.
+- **Verification:** User full suite 909 PASS; focused PASS, exact count not established. Commit 2ef513afc2559a73735bd1f2a347215e10d9ebb1.
+- **Expected Result:** A health fault fails closed instead of driving.
+
+## Step 20 — AUD-P2A-06 / R2: CTRE configuration regression tests
+
+- **Objective:** Cover the CTRE swerve configuration paths with tests.
+- **Why:** The audit found configuration behavior without regression coverage.
+- **Action:** Added test cases only; no production change.
+- **Files Changed:** SwerveModuleIOCTREConfigurationTest.java.
+- **Verification:** User focused 46/46 PASS; full 918/918 PASS. Commit b364f1336816d88bd0f0a5ddf7a9baa036e022b3.
+- **Expected Result:** Configuration regressions are caught in software.
+
+## Step 21 — E2-F02: validate the encoder sample before steer commissioning
+
+- **Objective:** Use only a valid front-left encoder sample during steer commissioning.
+- **Why:** Commissioning used an unchecked encoder sample.
+- **Action:** SwerveSubsystem rejects an invalid sample and stops commissioning safely; tests added.
+- **Files Changed:** subsystems/SwerveSubsystem.java; SwerveSubsystemClosedLoopCommissioningTest.java; SwerveFrontLeftClosedLoopCommissioningCommandTest.java fixture.
+- **Verification:** User focused 18/18 PASS; full 924/924 PASS. Commit d568803996e28333ee21a3213b9a1ab0113df890.
+- **Expected Result:** Commissioning never acts on an invalid encoder value.
+
+## Step 22 — E2-F01: CANcoder magnet health in Swerve safety paths
+
+- **Objective:** Treat an encoder with bad magnet health as an invalid measurement.
+- **Why:** CANcoder magnet health was not read, so a bad magnet could look like a valid angle.
+- **Action:** Added the vendor-neutral `encoderMeasurementValid` input, filled by the CTRE adapter from magnet health, and used it in Swerve module health and commissioning; Sim/Noop adapters and test fixtures updated.
+- **Files Changed:** SwerveModuleIO, SwerveModuleIOCTRE, SwerveModuleIOSim, SwerveModuleIONoop, SwerveObservation, SwerveSubsystem, DriveThreeMeterValidationCommand; new SwerveModuleMeasurementValidityTest; existing test fixtures.
+- **Verification:** User focused 77/77 PASS; full 934/934 PASS. Commit fc0fb0f181313a4f981fe9f55375a6f3ed904729. Hardware: Disabled-only all-four-CANcoder MagnetHealth pre-check PENDING.
+- **Expected Result:** A bad-magnet reading fails closed in software; physical magnet health still to be checked on the robot.
+
+## Step 23 — AUD-P2C-01: end the autonomous path on adapter fault
+
+- **Objective:** Stop a running PathPlanner path and its inline events when the autonomous adapter faults.
+- **Why:** The adapter fault was not part of the path race, so inline event commands could keep running after a fault.
+- **Action:** Added `Commands.waitUntil(() -> faulted)` to the existing path race in AutoBuilderContractAdapter; added two regression tests.
+- **Files Changed:** commands/auto/AutoBuilderContractAdapter.java; AutoBuilderContractAdapterRecoveryTest.java.
+- **Verification:** User focused 14/14 PASS; full 936/936 PASS; clean BUILD SUCCESSFUL; Codex independent review PASS; GitHub publication verified by the User. Commit fc10df4364b1933b14d615c5f8fab6f4f1f55707.
+- **Expected Result:** The path ends and the final safe stop runs. Accepted limitation: an inline event may execute once more in the cycle that detects FAULTED; this is not a synchronous emergency stop.
+
+## Step 24 — Reconcile audit state documentation (GOV3-DOC-01)
+
+- **Objective:** Make the current state and lesson records match the published baseline.
+- **Why:** The records still showed Group 2 publication as pending and did not mention the audit repairs.
+- **Action:** Updated the four lesson documents, this guide and CURRENT_STATE; archived the prior CURRENT_STATE verbatim in a new history event.
+- **Files Changed:** README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, docs/M01_L01_to_M01_L02_Step_by_Step.md; repository docs/governance/CURRENT_STATE.md and docs/governance/history/events/GOV3_DOC_01_AUDIT_STATE_RECONCILIATION_2026-10-13.md.
+- **Verification:** Engineer self-review; governance mirror validator; Architect evaluation, Codex review and User verification PENDING.
+- **Expected Result:** One truthful cursor; lesson remains IN_PROGRESS; hardware gates unchanged.
+
 ## Remaining steps — PENDING
 
 The following are planned and grant no permission. Each will be recorded with all seven fields when performed.
 
-1. Architect review of the Group 2 recording, then User-owned Group 2 implementation publication.
-2. After separate Architect authorization only: User powered checks H1–H3 — NOT AUTHORIZED.
-3. Group 3 closure — NOT AUTHORIZED.
+1. Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-01 recording.
+2. After separate Architect authorization only: User hardware checks (H1.2 awaiting real robot access; H2/H3 NOT AUTHORIZED) and the E2-F01 MagnetHealth pre-check.
+3. GOV3 Phase 2d — PLANNED / NOT AUTHORIZED.
+4. Group 3 closure — NOT AUTHORIZED.

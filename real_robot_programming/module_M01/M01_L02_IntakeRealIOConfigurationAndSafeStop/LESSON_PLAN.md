@@ -1,6 +1,6 @@
 # M01_L02 — Lesson Plan
 
-## GOV3 Group 2 record — 2026-10-10
+## Current lesson record — GOV3 Group 2 published; GOV3-DOC-01 reconciliation 2026-10-13
 
 | Field | Current record |
 | --- | --- |
@@ -15,10 +15,12 @@
 | Design Lock | APPROVED — Architect brief "M01_L02 — GROUP 1 DESIGN LOCK AND ACTIVATION RECORDING" (2026-10-09, supplied by the User in chat) |
 | Lesson lifecycle | IN_PROGRESS — sole active editable lesson |
 | Group 1 publication | PUBLISHED — User-owned commit 9bdc4f8 "Activate M01_L02 and record inherited baseline"; accepted by the Architect |
-| Group 2 implementation | AUTHORIZED and implemented (working tree) |
-| Group 2 verification | User build/tests and User Simulation (Noop scope) ACCEPTED, 2026-10-10; Group 2 NOT COMPLETE |
-| Group 2 publication | AUTHORIZED TO PREPARE, NOT YET EXECUTED — User-owned |
-| Powered hardware | NOT AUTHORIZED |
+| Group 2 implementation | AUTHORIZED and implemented |
+| Group 2 verification | User build/tests and User Simulation (Noop scope) ACCEPTED, 2026-10-10; Codex review PASS |
+| Group 2 publication | PUBLISHED / SOFTWARE VERIFIED — User-owned commit 58f8e3a "Implement M01_L02 Intake real IO and safe stop" |
+| GOV3 audit repairs | Six Architect-authorized Swerve/autonomous software repairs published after Group 2; accepted baseline fc10df4 — see [LESSON_STATUS](LESSON_STATUS.md#gov3-audit-repairs-in-this-lesson) |
+| Powered hardware | NOT AUTHORIZED. H1.2: AWAITING REAL ROBOT ACCESS / NOT VERIFIED. H2/H3: NOT AUTHORIZED. "H1.2" is an Architect handoff label for pending real-hardware verification within the existing H1 scope; it is not a separately defined lesson gate. Powered hardware remains NOT AUTHORIZED |
+| E2-F01 hardware pre-check | Disabled-only all-four-CANcoder MagnetHealth pre-check PENDING before any separately authorized powered Swerve motion |
 | Transition guide | IN_PROGRESS / NOT FINAL |
 | Group 3 | NOT AUTHORIZED |
 
@@ -65,7 +67,7 @@ Group 2 scope recorded by the Design Lock — AUTHORIZED and implemented. The Ar
 | src/test/java/frc/robot/IntakeArchitectureBoundaryTest.java | MODIFY — Real IO boundary assertions |
 | src/test/java/frc/robot/RobotContainerIntakeCommandBindingTest.java | MODIFY — one assertion aligned with the Real/Noop selection (bounded inherited repair, ACCEPTED) |
 
-Preserved unchanged: IntakeIO, IntakeIONoop, IntakeSubsystem, IntakeObservation, Intake commands, telemetry, Swerve and all other mechanisms. No nonzero output request, joystick behavior change, jam detection, reverse/eject, PID/velocity control, extra sensor or state machine.
+Preserved unchanged by Group 2: IntakeIO, IntakeIONoop, IntakeSubsystem, IntakeObservation, Intake commands, telemetry, Swerve and all other mechanisms. No nonzero output request, joystick behavior change, jam detection, reverse/eject, PID/velocity control, extra sensor or state machine. Swerve and autonomous code were later changed only by the separately authorized GOV3 audit repairs.
 
 ## Group 2 verification plan and results
 
@@ -83,7 +85,7 @@ Preserved unchanged: IntakeIO, IntakeIONoop, IntakeSubsystem, IntakeObservation,
 
 Autonomous LEARNING_EVENT on hardware is not required: it uses the same IO path proven by S4. No hardware result may be recorded before User evidence.
 
-Results (2026-10-10, accepted by the Architect): S1–S5 SOFTWARE TEST VERIFIED by the User (895 tests, 0 failures); SIM SIMULATION VERIFIED — NOOP SCOPE ONLY by the User (Keyboard 2 on Joystick[0], PageDown = Right Bumper: INTAKE_REQUESTED, then STOPPED; Available/Connected false; no console errors reported); H1–H3 NOT AUTHORIZED / NOT TESTED.
+Results (2026-10-10, accepted by the Architect): S1–S5 SOFTWARE TEST VERIFIED by the User (895 tests, 0 failures); SIM SIMULATION VERIFIED — NOOP SCOPE ONLY by the User (Keyboard 2 on Joystick[0], PageDown = Right Bumper: INTAKE_REQUESTED, then STOPPED; Available/Connected false; no console errors reported); H1–H3 NOT AUTHORIZED / NOT TESTED. Current status (2026-10-13): H1.2 (Architect handoff label within the existing H1 scope, not a separate gate) AWAITING REAL ROBOT ACCESS / NOT VERIFIED; H2/H3 NOT AUTHORIZED; current suite 936/936 PASS (User) after the GOV3 audit repairs.
 
 ## Evidence limits
 
@@ -91,13 +93,14 @@ Results (2026-10-10, accepted by the Architect): S1–S5 SOFTWARE TEST VERIFIED 
 | --- | --- |
 | Inheritance / architecture audit | THEORY VERIFIED — static engineer audit accepted by the Architect |
 | Inherited baseline build | Supplied User execution: BUILD SUCCESSFUL in 42s; not engineer execution |
-| Group 2 build / tests | BUILD VERIFIED and SOFTWARE TEST VERIFIED — User, 2026-10-10: BUILD SUCCESSFUL in 34s; 895 tests, 0 failures, 0 errors, 0 skipped |
+| Group 2 build / tests | BUILD VERIFIED and SOFTWARE TEST VERIFIED — User, 2026-10-10: BUILD SUCCESSFUL in 34s; 895 tests, 0 failures, 0 errors, 0 skipped (Group 2 snapshot) |
+| Current suite (baseline fc10df4) | SOFTWARE TEST VERIFIED — User: 936/936 PASS; full clean BUILD SUCCESSFUL |
 | Simulation | SIMULATION VERIFIED — NOOP SCOPE ONLY — User, 2026-10-10; IntakeIOReal was not simulated |
 | Glass / Driver Station | NOT TESTED |
-| Real hardware | NOT AUTHORIZED / NOT TESTED; the Design Lock is not hardware verification |
+| Real hardware | NOT AUTHORIZED / NOT VERIFIED; the Design Lock and software tests are not hardware verification |
 | Direction, inversion, stopping, current adequacy | REAL HARDWARE DEFERRED to later authorized M01 lessons |
 
-**Next boundary:** Architect review of this Group 2 recording, then User-owned Group 2 implementation publication (authorized to prepare, not yet executed). Powered verification H1–H3 and Group 3 each require separate Architect authorization.
+**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-01 recording. Powered verification, GOV3 Phase 2d and Group 3 each require separate Architect authorization.
 
 <!-- M01_L02 OPERATIVE DOCUMENTATION END -->
 

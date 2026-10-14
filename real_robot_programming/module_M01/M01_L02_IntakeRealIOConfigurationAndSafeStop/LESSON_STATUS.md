@@ -1,6 +1,6 @@
 # M01_L02 — Lesson Status
 
-## GOV3 Group 2 implementation record — 2026-10-10
+## Current lesson record — GOV3 Group 2 published; GOV3-DOC-01 reconciliation 2026-10-13
 
 | Field | Current record |
 | --- | --- |
@@ -13,11 +13,13 @@
 | Lesson lifecycle | IN_PROGRESS — sole active editable lesson |
 | Scope | Intake Real IO configuration and safe zero output ONLY (Design Lock D1–D9) |
 | Group 1 publication | User-owned commit 9bdc4f80d3321b67d4054c46bed31f18413f185e "Activate M01_L02 and record inherited baseline"; User-reported publication accepted by the Architect; local read-only observation HEAD = origin/main = 9bdc4f8 (local remote-tracking ref, not a live remote query) |
-| Group 2 implementation | AUTHORIZED by the Architect (brief supplied by the User in chat); software implementation steps performed; working tree only, uncommitted |
-| Group 2 verification | User build/tests and User Simulation (Noop scope) ACCEPTED by the Architect, 2026-10-10; Group 2 NOT COMPLETE |
-| Group 2 publication | AUTHORIZED TO PREPARE, NOT YET EXECUTED — User-owned |
+| Group 2 implementation | AUTHORIZED by the Architect (brief supplied by the User in chat); implemented |
+| Group 2 verification | User build/tests and User Simulation (Noop scope) ACCEPTED by the Architect, 2026-10-10; Codex review PASS |
+| Group 2 publication | PUBLISHED / SOFTWARE VERIFIED — User-owned commit 58f8e3a548f61f19a96d3eb24a55db591cfad4a9 "Implement M01_L02 Intake real IO and safe stop"; accepted by the Architect |
 | Bounded inherited test repair | ACCEPTED by the Architect — RobotContainerIntakeCommandBindingTest one assertion; assertion wording deviation ACCEPTED |
-| Powered hardware | NOT AUTHORIZED |
+| GOV3 audit repairs | Six Architect-authorized software repairs published in this lesson after Group 2 (see below); accepted published baseline fc10df4364b1933b14d615c5f8fab6f4f1f55707 |
+| Powered hardware | NOT AUTHORIZED. H1.2: AWAITING REAL ROBOT ACCESS / NOT VERIFIED. H2/H3: NOT AUTHORIZED |
+| E2-F01 hardware pre-check | Disabled-only all-four-CANcoder MagnetHealth pre-check PENDING before any separately authorized powered Swerve motion |
 | Transition guide | IN_PROGRESS / NOT FINAL |
 | Group 3 | NOT AUTHORIZED |
 
@@ -30,7 +32,7 @@
 | Approved configuration | CAN ID 40 on rio; NeutralMode BRAKE; Stator current limit 40 A enabled; Supply current limit 35 A enabled; inversion, ratio constant and gains not configured |
 | Failure policy | Configuration failure fails closed for the session (available=false, connected=false), error reported once, no runtime retry |
 | Composition | RobotContainer selects `RobotBase.isReal() ? new IntakeIOReal() : new IntakeIONoop()`; off-robot builds, tests and Simulation keep IntakeIONoop |
-| Unchanged | IntakeIO, IntakeIONoop, IntakeSubsystem, IntakeObservation, Intake commands, telemetry, Swerve and all other mechanisms |
+| Unchanged by Group 2 | IntakeIO, IntakeIONoop, IntakeSubsystem, IntakeObservation, Intake commands, telemetry, Swerve and all other mechanisms (Group 2 implementation baseline 58f8e3a). Swerve and autonomous code were later changed by the separately authorized GOV3 audit repairs listed below |
 
 These are initial configuration values, not proof of safe physical jam force, stopping or qualified motion performance.
 
@@ -42,13 +44,13 @@ These are initial configuration values, not proof of safe physical jam force, st
 | Inherited baseline build | Supplied User execution: BUILD SUCCESSFUL in 42s; not engineer execution |
 | IntakeIORealConfigurationTest (S1–S3) | 14/14 PASS — engineer-run, preliminary (ADR_GOV3 §8) |
 | RobotContainerIntakeCommandBindingTest (focused, after bounded repair) | 3/3 PASS — engineer-run, preliminary |
-| Full test suite including IntakeArchitectureBoundaryTest guards (S4) and inherited regression (S5) | 895/895 PASS — engineer-run, preliminary |
+| Full test suite including IntakeArchitectureBoundaryTest guards (S4) and inherited regression (S5), Group 2 snapshot | 895/895 PASS — engineer-run, preliminary |
 | Gradle build | BUILD SUCCESSFUL — engineer-run, preliminary; JAVA_HOME set to the WPILib 2026 JDK |
 | User build | BUILD VERIFIED — User, 2026-10-10: `.\gradlew clean build`, BUILD SUCCESSFUL in 34s, 7 actionable tasks: 7 executed, WPILib JDK 17; ACCEPTED |
-| User tests | SOFTWARE TEST VERIFIED — User, 2026-10-10: 895 tests, 0 failures, 0 errors, 0 skipped; ACCEPTED |
+| User tests (Group 2 snapshot) | SOFTWARE TEST VERIFIED — User, 2026-10-10: 895 tests, 0 failures, 0 errors, 0 skipped; ACCEPTED. Current suite after the GOV3 audit repairs: 936/936 PASS (User, AUD-P2C-01) |
 | Simulation | SIMULATION VERIFIED — NOOP SCOPE ONLY — User, 2026-10-10: Teleoperated, Keyboard 2 on Joystick[0], PageDown = button 6 = Right Bumper; hold INTAKE_REQUESTED, release STOPPED; Available=false, Connected=false; no console errors reported; ACCEPTED |
 | Glass / Driver Station | NOT TESTED |
-| Real hardware H1–H3 | NOT AUTHORIZED / NOT TESTED |
+| Real hardware H1–H3 | NOT AUTHORIZED / NOT VERIFIED (H1.2 awaiting real robot access) |
 | Direction, inversion, stopping, current adequacy | REAL HARDWARE DEFERRED to later authorized M01 lessons |
 
 Engineer-run results are preliminary convenience evidence, superseded for gate purposes by the accepted User results. All engineer self-review of Group 2 steps was User-delegated self-review, not independent review.
@@ -57,7 +59,22 @@ Engineer-run results are preliminary convenience evidence, superseded for gate p
 
 Simulation covered IntakeIONoop only; IntakeIOReal was not simulated. No Glass, Driver Station, deploy or powered-hardware result exists for M01_L02. A software test of IntakeIOReal's configuration, health and input-mapping logic does not prove the physical motor's readback, neutral output or response after a vendor failure.
 
-**Next boundary:** Architect review of this Group 2 recording, then User-owned Group 2 implementation publication (authorized to prepare, not yet executed). Powered verification H1–H3 and Group 3 each require separate Architect authorization.
+## GOV3 audit repairs in this lesson
+
+The GOV3 repository-wide correctness audit found defects in inherited Swerve and autonomous code. Each repair was separately authorized by the Architect, verified by the User and published; none changes the Intake scope or adds a nonzero output path.
+
+| Finding | Commit | Change | User evidence |
+| --- | --- | --- | --- |
+| AUD-P2A-01 | f0daab798bd010bf59abb2d7f1f8c44771c6a998 | Report drive configuration failures for all four swerve modules | Clean build PASS; exact counts not established |
+| AUD-P2A-02 / R1 | 2ef513afc2559a73735bd1f2a347215e10d9ebb1 | Latched fail-stop: Swerve stops on a module health fault before production motion | Full 909 PASS; focused PASS, count not established |
+| AUD-P2A-06 / R2 | b364f1336816d88bd0f0a5ddf7a9baa036e022b3 | Test-only CTRE swerve configuration regression coverage | Focused 46/46; full 918/918 PASS |
+| E2-F02 | d568803996e28333ee21a3213b9a1ab0113df890 | Validate the front-left encoder sample before steer commissioning | Focused 18/18; full 924/924 PASS |
+| E2-F01 | fc0fb0f181313a4f981fe9f55375a6f3ed904729 | Vendor-neutral `encoderMeasurementValid` (CANcoder magnet health) used in Swerve safety paths | Focused 77/77; full 934/934 PASS |
+| AUD-P2C-01 | fc10df4364b1933b14d615c5f8fab6f4f1f55707 | Adapter fault latch added to the autonomous path race | Focused 14/14; full 936/936 PASS; clean build PASS; Codex PASS |
+
+AUD-P2C-01 limitation (ACCEPTED): an inline PathPlanner event may execute once more in the scheduler cycle that detects FAULTED; it is not a synchronous emergency stop. AUD-P1-01 remains S0 (no production change); AUD-P1-02 remains a future M01 safety prerequisite. Software verification of these repairs is not real hardware verification.
+
+**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-01 recording. Powered verification, GOV3 Phase 2d and Group 3 each require separate Architect authorization.
 
 ## GOV3 Group 1 activation — 2026-10-09 (history)
 

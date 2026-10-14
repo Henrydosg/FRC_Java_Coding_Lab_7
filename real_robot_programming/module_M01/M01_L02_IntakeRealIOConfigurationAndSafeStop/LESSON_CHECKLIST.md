@@ -1,6 +1,6 @@
 # M01_L02 — Lesson Checklist
 
-## GOV3 Group 2 implementation record — 2026-10-10
+## Current lesson record — GOV3 Group 2 published; GOV3-DOC-01 reconciliation 2026-10-13
 
 | Field | Current record |
 | --- | --- |
@@ -11,9 +11,11 @@
 | Primary Engineer | Claude Code; Codex optional independent reviewer before Group 3 |
 | Lesson lifecycle | IN_PROGRESS — sole active editable lesson |
 | Scope | Intake Real IO configuration and safe zero output ONLY |
-| Group 2 verification | User build/tests and Noop Simulation ACCEPTED; Group 2 NOT COMPLETE |
-| Group 2 publication | AUTHORIZED TO PREPARE, NOT YET EXECUTED |
-| Powered hardware | NOT AUTHORIZED |
+| Group 2 verification | User build/tests and Noop Simulation ACCEPTED; Codex review PASS |
+| Group 2 publication | PUBLISHED / SOFTWARE VERIFIED — User-owned commit 58f8e3a |
+| GOV3 audit repairs | Six Architect-authorized software repairs published; accepted baseline fc10df4 |
+| Powered hardware | NOT AUTHORIZED. H1.2: AWAITING REAL ROBOT ACCESS / NOT VERIFIED. H2/H3: NOT AUTHORIZED |
+| E2-F01 hardware pre-check | Disabled-only all-four-CANcoder MagnetHealth pre-check PENDING |
 | Transition guide | IN_PROGRESS / NOT FINAL |
 | Group 3 | NOT AUTHORIZED |
 
@@ -40,11 +42,23 @@
 - [x] User authoritative build/tests — BUILD SUCCESSFUL in 34s, 7 tasks executed; 895 tests, 0 failures/errors/skipped (2026-10-10); ACCEPTED.
 - [x] User Simulation (Noop scope) — INTAKE_REQUESTED then STOPPED; Available/Connected false; no console errors (2026-10-10); ACCEPTED; IntakeIOReal not simulated.
 - [x] Group 2 user-verification recording — lesson docs, CURRENT_STATE and history event (self-reviewed).
-- [ ] Architect review of the Group 2 recording.
+- [x] Architect review of the Group 2 recording; Codex review PASS.
+- [x] User-owned Group 2 implementation publication — commit 58f8e3a548f61f19a96d3eb24a55db591cfad4a9; accepted by the Architect.
 - [ ] Architect powered-verification authorization — NOT AUTHORIZED.
-- [ ] H1–H3 User hardware evidence — NOT TESTED.
+- [ ] H1–H3 User hardware evidence — NOT VERIFIED (H1.2 awaiting real robot access; H2/H3 NOT AUTHORIZED).
 - [ ] Architect decision on Group 2 completion.
-- [ ] User-owned Group 2 implementation publication — AUTHORIZED TO PREPARE, NOT YET EXECUTED.
+
+## GOV3 audit repairs (Architect-authorized, User-verified, published)
+
+- [x] AUD-P2A-01 — f0daab7; clean build PASS.
+- [x] AUD-P2A-02 / R1 latched fail-stop — 2ef513a; full 909 PASS.
+- [x] AUD-P2A-06 / R2 — b364f13; focused 46/46, full 918/918 PASS.
+- [x] E2-F02 — d568803; focused 18/18, full 924/924 PASS.
+- [x] E2-F01 — fc0fb0f; focused 77/77, full 934/934 PASS.
+- [x] AUD-P2C-01 — fc10df4; focused 14/14, full 936/936 PASS, clean build PASS, Codex PASS; accepted same-cycle limitation (one extra inline event execute possible).
+- [ ] E2-F01 Disabled-only all-four-CANcoder MagnetHealth pre-check — PENDING.
+- [ ] GOV3-DOC-01 documentation reconciliation — Architect evaluation, Codex review, User verification and publication PENDING.
+- [ ] GOV3 Phase 2d — PLANNED / NOT AUTHORIZED.
 
 ## Group 3 gates — NOT AUTHORIZED
 
@@ -59,13 +73,14 @@
 | --- | --- |
 | Inheritance / architecture audit | THEORY VERIFIED — static engineer audit accepted by the Architect |
 | Inherited baseline build | Supplied User execution: BUILD SUCCESSFUL in 42s; not engineer execution |
-| Group 2 tests / build | BUILD VERIFIED and SOFTWARE TEST VERIFIED — User, 2026-10-10 (895 tests, 0 failures); earlier engineer-run results preliminary only |
+| Group 2 tests / build | BUILD VERIFIED and SOFTWARE TEST VERIFIED — User, 2026-10-10 (895 tests, 0 failures; Group 2 snapshot); earlier engineer-run results preliminary only |
+| Current suite (baseline fc10df4) | SOFTWARE TEST VERIFIED — User: 936/936 PASS; full clean BUILD SUCCESSFUL |
 | Simulation | SIMULATION VERIFIED — NOOP SCOPE ONLY — User, 2026-10-10 |
 | Glass / Driver Station | NOT TESTED |
-| Real hardware | NOT AUTHORIZED / NOT TESTED |
+| Real hardware | NOT AUTHORIZED / NOT VERIFIED |
 | Direction, inversion, stopping, current adequacy | REAL HARDWARE DEFERRED to later authorized M01 lessons |
 
-**Next boundary:** Architect review of this Group 2 recording, then User-owned Group 2 implementation publication (authorized to prepare, not yet executed). Powered verification H1–H3 and Group 3 each require separate Architect authorization.
+**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-01 recording. Powered verification, GOV3 Phase 2d and Group 3 each require separate Architect authorization.
 
 <!-- M01_L02 OPERATIVE DOCUMENTATION END -->
 
