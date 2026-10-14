@@ -280,6 +280,62 @@ class SwerveTelemetryFacadeTest {
     instance.close();
   }
 
+  @Test
+  void publishesEncoderMeasurementValidityIndependentlyForEveryModule() {
+    // Resources close in reverse order: facade first, then the isolated instance.
+    try (NetworkTableInstance instance = NetworkTableInstance.create();
+        SwerveTelemetryFacade facade =
+            new SwerveTelemetryFacade(instance.getTable("Swerve"), new Field2d(), field -> {})) {
+      NetworkTable swerveTable = instance.getTable("Swerve");
+      NetworkTable[] moduleTables = {
+        swerveTable.getSubTable("FrontLeft"),
+        swerveTable.getSubTable("FrontRight"),
+        swerveTable.getSubTable("BackLeft"),
+        swerveTable.getSubTable("BackRight")
+      };
+      boolean[] firstPattern = {false, true, false, true};
+      boolean[] secondPattern = {true, false, true, false};
+
+      facade.publish(observationWithEncoderMeasurementValidity(firstPattern));
+      assertEncoderMeasurementValidity(moduleTables, firstPattern);
+
+      facade.publish(observationWithEncoderMeasurementValidity(secondPattern));
+      assertEncoderMeasurementValidity(moduleTables, secondPattern);
+    }
+  }
+
+  private static void assertEncoderMeasurementValidity(
+      NetworkTable[] moduleTables, boolean[] expectedValidity) {
+    for (int index = 0; index < moduleTables.length; index++) {
+      NetworkTable moduleTable = moduleTables[index];
+      assertTrue(moduleTable.getBooleanTopic("EncoderMeasurementValid").exists());
+      assertEquals(
+          expectedValidity[index],
+          moduleTable
+              .getBooleanTopic("EncoderMeasurementValid")
+              .getEntry(!expectedValidity[index])
+              .get());
+      assertTrue(moduleTable.getBooleanTopic("EncoderConnected").getEntry(false).get());
+      assertTrue(
+          moduleTable.getBooleanTopic("EncoderConfigurationHealthy").getEntry(false).get());
+    }
+  }
+
+  private static SwerveObservation observationWithEncoderMeasurementValidity(
+      boolean[] encoderMeasurementValid) {
+    SwerveObservation.GyroObservation gyro =
+        new SwerveObservation.GyroObservation(
+            0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, true);
+    return new SwerveObservation(
+        module(encoderMeasurementValid[0]),
+        module(encoderMeasurementValid[1]),
+        module(encoderMeasurementValid[2]),
+        module(encoderMeasurementValid[3]),
+        gyro,
+        Optional.empty(),
+        Optional.empty());
+  }
+
   private static SwerveObservation observation(
       Optional<SwerveObservation.PoseObservation> currentPose) {
     return observation(currentPose, Optional.empty());
@@ -288,6 +344,15 @@ class SwerveTelemetryFacadeTest {
   private static SwerveObservation observation(
       Optional<SwerveObservation.PoseObservation> currentPose,
       Optional<SwerveObservation.EstimatedPoseObservation> estimatedPose) {
+    SwerveObservation.ModuleObservation module = module(true);
+    SwerveObservation.GyroObservation gyro =
+        new SwerveObservation.GyroObservation(
+            0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, true);
+    return new SwerveObservation(
+        module, module, module, module, gyro, currentPose, estimatedPose);
+  }
+
+  private static SwerveObservation.ModuleObservation module(boolean encoderMeasurementValid) {
     SwerveObservation.ModuleObservation module =
         new SwerveObservation.ModuleObservation(
             0.0,
@@ -312,11 +377,7 @@ class SwerveTelemetryFacadeTest {
             true,
             true,
             true,
-            true);
-    SwerveObservation.GyroObservation gyro =
-        new SwerveObservation.GyroObservation(
-            0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, true);
-    return new SwerveObservation(
-        module, module, module, module, gyro, currentPose, estimatedPose);
+            encoderMeasurementValid);
+    return module;
   }
 }

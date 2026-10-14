@@ -268,6 +268,7 @@ public final class SwerveTelemetryFacade implements AutoCloseable {
     private final BooleanPublisher driveConfigurationHealthyPublisher;
     private final BooleanPublisher steerConfigurationHealthyPublisher;
     private final BooleanPublisher encoderConfigurationHealthyPublisher;
+    private final BooleanPublisher encoderMeasurementValidPublisher;
 
     private ModulePublishers(NetworkTable moduleTable) {
       driveAppliedOutputPublisher =
@@ -293,6 +294,8 @@ public final class SwerveTelemetryFacade implements AutoCloseable {
           moduleTable.getBooleanTopic("SteerConfigurationHealthy").publish();
       encoderConfigurationHealthyPublisher =
           moduleTable.getBooleanTopic("EncoderConfigurationHealthy").publish();
+      encoderMeasurementValidPublisher =
+          moduleTable.getBooleanTopic("EncoderMeasurementValid").publish();
     }
 
     private void publish(SwerveObservation.ModuleObservation module) {
@@ -309,6 +312,7 @@ public final class SwerveTelemetryFacade implements AutoCloseable {
       driveConfigurationHealthyPublisher.set(module.driveConfigurationHealthy());
       steerConfigurationHealthyPublisher.set(module.steerConfigurationHealthy());
       encoderConfigurationHealthyPublisher.set(module.encoderConfigurationHealthy());
+      encoderMeasurementValidPublisher.set(module.encoderMeasurementValid());
     }
 
     @Override
@@ -326,6 +330,7 @@ public final class SwerveTelemetryFacade implements AutoCloseable {
       driveConfigurationHealthyPublisher.close();
       steerConfigurationHealthyPublisher.close();
       encoderConfigurationHealthyPublisher.close();
+      encoderMeasurementValidPublisher.close();
     }
   }
 }
