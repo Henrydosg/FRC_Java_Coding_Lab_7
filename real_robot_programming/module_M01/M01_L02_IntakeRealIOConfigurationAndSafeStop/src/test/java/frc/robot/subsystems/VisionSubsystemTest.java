@@ -91,26 +91,44 @@ class VisionSubsystemTest {
 
   @Test
   void invalidTimingCannotBecomeAQualifiedMeasurement() {
-    FakeVisionIO visionIO = new FakeVisionIO();
-    visionIO.inputs.available = true;
-    visionIO.inputs.connected = true;
-    visionIO.inputs.sampleValid = true;
-    visionIO.inputs.timingValid = false;
-    visionIO.inputs.targets =
-        List.of(new VisionTargetInputs(1, new Transform3d(1.0, 0.0, 0.0, new Rotation3d())));
-    VisionSubsystem subsystem =
-        new VisionSubsystem(
-            visionIO,
-            AprilTagFieldLayoutContract.loadOfficial2026(
-                frc.robot.Constants.FieldTransformConstants.FieldVariant.REBUILT_WELDED),
-            Transform3d.kZero,
-            new Policy(100.0, 100.0, 100.0),
-            1.0,
-            () -> 20.0);
+    // Fresh, in-range, known-tag sample: only timingValid=false can block qualification.
+    VisionSubsystem subsystem = qualifyingFixtureWithTimingValidity(false);
 
     subsystem.periodic();
 
     assertTrue(subsystem.getLatestQualifiedMeasurement().isEmpty());
+  }
+
+  @Test
+  void validTimingWithTheSameFixtureQualifies() {
+    // Positive control: the identical fixture qualifies once timingValid is true.
+    VisionSubsystem subsystem = qualifyingFixtureWithTimingValidity(true);
+
+    subsystem.periodic();
+
+    QualifiedVisionMeasurement measurement =
+        subsystem.getLatestQualifiedMeasurement().orElseThrow();
+    assertEquals(20.0, measurement.measurementTimestampSeconds(), 1.0e-9);
+  }
+
+  private static VisionSubsystem qualifyingFixtureWithTimingValidity(boolean timingValid) {
+    FakeVisionIO visionIO = new FakeVisionIO();
+    visionIO.inputs.available = true;
+    visionIO.inputs.connected = true;
+    visionIO.inputs.sampleValid = true;
+    visionIO.inputs.timingValid = timingValid;
+    visionIO.inputs.receiveTimestampSeconds = 20.0;
+    visionIO.inputs.totalLatencySeconds = 0.0;
+    visionIO.inputs.targets =
+        List.of(new VisionTargetInputs(1, new Transform3d(1.0, 0.0, 0.0, new Rotation3d())));
+    return new VisionSubsystem(
+        visionIO,
+        AprilTagFieldLayoutContract.loadOfficial2026(
+            frc.robot.Constants.FieldTransformConstants.FieldVariant.REBUILT_WELDED),
+        Transform3d.kZero,
+        new Policy(100.0, 100.0, 100.0),
+        1.0,
+        () -> 20.0);
   }
 
   private static final class FakeVisionIO implements VisionIO {
@@ -123,6 +141,9 @@ class VisionSubsystemTest {
       destination.available = inputs.available;
       destination.connected = inputs.connected;
       destination.sampleValid = inputs.sampleValid;
+      destination.timingValid = inputs.timingValid;
+      destination.receiveTimestampSeconds = inputs.receiveTimestampSeconds;
+      destination.totalLatencySeconds = inputs.totalLatencySeconds;
       destination.targets = inputs.targets;
     }
   }
