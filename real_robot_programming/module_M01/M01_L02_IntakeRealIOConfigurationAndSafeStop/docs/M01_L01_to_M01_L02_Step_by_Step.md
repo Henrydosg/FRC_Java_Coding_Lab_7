@@ -61,7 +61,7 @@ Group 3: NOT AUTHORIZED
 
 ## Group 2 — IMPLEMENT / VERIFY
 
-Group 2 steps below were performed by the Primary Engineer within the Architect-authorized Design Lock scope. Each step diff was self-reviewed by the engineer under User delegation; self-review is not independent review. Engineer-run test and build results are preliminary convenience evidence (ADR_GOV3 §8), not User-owned verification. The registered 18-lesson M01 roadmap remains controlling; L02 scope is Intake Real IO configuration and safe zero output only.
+Group 2 steps below were performed by the Primary Engineer within the Architect-authorized Design Lock scope. Each step diff was self-reviewed by the engineer under User delegation; self-review is not independent review. Engineer-run test and build results are preliminary convenience evidence (ADR_GOV3 §8), not User-owned verification. The M01 lesson sequence is now governed by the Fast-Track 10-lesson revision (L02 unchanged); L02 scope is Intake Real IO configuration and safe zero output only.
 
 ## Step 6 — Authorize Group 2
 
@@ -273,6 +273,15 @@ The GOV3 repository-wide correctness audit inspected the inherited code of this 
 - **Files Changed:** README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, docs/M01_L01_to_M01_L02_Step_by_Step.md; repository docs/governance/CURRENT_STATE.md and docs/governance/history/events/GOV3_DOC_03_FINAL_AUDIT_CLOSURE_2026-10-15.md.
 - **Verification:** Engineer self-review; governance mirror validator; Codex review and User verification PENDING.
 - **Expected Result:** Formal GOV3 closure can be decided by the Architect after publication; lesson remains IN_PROGRESS; hardware gates unchanged.
+
+## Step 29 — Record the M01 Fast-Track 10-lesson roadmap
+
+- **Objective:** Point this lesson's records to the approved successor M01 roadmap.
+- **Why:** The Architect approved a 10-lesson Fast-Track M01 sequence; statements that the 18-lesson roadmap controls became obsolete. L02 itself is unchanged.
+- **Action:** Registered the successor ADR, archived the prior CURRENT_STATE in a new history event, updated root navigation, and replaced the obsolete roadmap statements in LESSON_STATUS, LESSON_CHECKLIST and this guide. No code or test changed.
+- **Files Changed:** LESSON_STATUS.md, LESSON_CHECKLIST.md, docs/M01_L01_to_M01_L02_Step_by_Step.md; repository docs/architecture_decisions/ADR_M01_Fast_Track_10_Lesson_Roadmap_Revision.md, docs/governance/history/events/M01_FAST_TRACK_ROADMAP_REVISION_2026-10-15.md, docs/governance/CURRENT_STATE.md, AGENTS.md (§15 navigation) and README.md (navigation).
+- **Verification:** Engineer self-review; governance mirror validator; Architect review and User verification PENDING.
+- **Expected Result:** The next lesson after L02 is L03 Intake Real Motion & Xbox Control, with AUD-P1-02 required before any nonzero output; L02 remains IN_PROGRESS.
 
 ## Remaining steps — PENDING
 

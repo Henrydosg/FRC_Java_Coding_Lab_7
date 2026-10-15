@@ -6,7 +6,7 @@
 | --- | --- |
 | Lesson / title | M01_L02_IntakeRealIOConfigurationAndSafeStop — Intake Real IO Configuration and Safe Stop |
 | One new concept | Qualified Real IO configuration with guaranteed zero output |
-| Roadmap | [Registered M01 roadmap](../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) §8 L02 — the registered 18-lesson roadmap remains controlling |
+| Roadmap | [Registered M01 roadmap](../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) §8 L02 — L02 unchanged; the [M01 Fast-Track 10-lesson revision](../../../docs/architecture_decisions/ADR_M01_Fast_Track_10_Lesson_Roadmap_Revision.md) controls the M01 lesson sequence |
 | Governance model | [ADR_GOV3](../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) — GROUP 2 IMPLEMENT / VERIFY |
 | Primary Engineer | Claude Code; Codex optional independent reviewer before Group 3 |
 | Lesson lifecycle | IN_PROGRESS — sole active editable lesson |
