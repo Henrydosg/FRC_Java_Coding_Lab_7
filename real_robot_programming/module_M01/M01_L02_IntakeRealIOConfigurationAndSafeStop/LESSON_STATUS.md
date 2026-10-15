@@ -1,6 +1,6 @@
 # M01_L02 — Lesson Status
 
-## Current lesson record — GOV3 Group 2 published; GOV3-DOC-01 reconciliation 2026-10-13
+## Current lesson record — GOV3 Group 2 published; GOV3-DOC-02 reconciliation 2026-10-15
 
 | Field | Current record |
 | --- | --- |
@@ -17,7 +17,7 @@
 | Group 2 verification | User build/tests and User Simulation (Noop scope) ACCEPTED by the Architect, 2026-10-10; Codex review PASS |
 | Group 2 publication | PUBLISHED / SOFTWARE VERIFIED — User-owned commit 58f8e3a548f61f19a96d3eb24a55db591cfad4a9 "Implement M01_L02 Intake real IO and safe stop"; accepted by the Architect |
 | Bounded inherited test repair | ACCEPTED by the Architect — RobotContainerIntakeCommandBindingTest one assertion; assertion wording deviation ACCEPTED |
-| GOV3 audit repairs | Six Architect-authorized software repairs published in this lesson after Group 2 (see below); accepted published baseline fc10df4364b1933b14d615c5f8fab6f4f1f55707 |
+| GOV3 audit repairs | Eight Architect-authorized software repairs published in this lesson after Group 2 (see below); GOV3 Phases 2c, 2d and 3 CLOSED; accepted published baseline 23eed68ac5bb226d8ba9a70585812b206bb1206e |
 | Powered hardware | NOT AUTHORIZED. H1.2: AWAITING REAL ROBOT ACCESS / NOT VERIFIED. H2/H3: NOT AUTHORIZED |
 | E2-F01 hardware pre-check | Disabled-only all-four-CANcoder MagnetHealth pre-check PENDING before any separately authorized powered Swerve motion |
 | Transition guide | IN_PROGRESS / NOT FINAL |
@@ -47,7 +47,7 @@ These are initial configuration values, not proof of safe physical jam force, st
 | Full test suite including IntakeArchitectureBoundaryTest guards (S4) and inherited regression (S5), Group 2 snapshot | 895/895 PASS — engineer-run, preliminary |
 | Gradle build | BUILD SUCCESSFUL — engineer-run, preliminary; JAVA_HOME set to the WPILib 2026 JDK |
 | User build | BUILD VERIFIED — User, 2026-10-10: `.\gradlew clean build`, BUILD SUCCESSFUL in 34s, 7 actionable tasks: 7 executed, WPILib JDK 17; ACCEPTED |
-| User tests (Group 2 snapshot) | SOFTWARE TEST VERIFIED — User, 2026-10-10: 895 tests, 0 failures, 0 errors, 0 skipped; ACCEPTED. Current suite after the GOV3 audit repairs: 936/936 PASS (User, AUD-P2C-01) |
+| User tests (Group 2 snapshot) | SOFTWARE TEST VERIFIED — User, 2026-10-10: 895 tests, 0 failures, 0 errors, 0 skipped; ACCEPTED. Current suite after the GOV3 audit repairs: 938/938 PASS (User, AUD-P3-01) |
 | Simulation | SIMULATION VERIFIED — NOOP SCOPE ONLY — User, 2026-10-10: Teleoperated, Keyboard 2 on Joystick[0], PageDown = button 6 = Right Bumper; hold INTAKE_REQUESTED, release STOPPED; Available=false, Connected=false; no console errors reported; ACCEPTED |
 | Glass / Driver Station | NOT TESTED |
 | Real hardware H1–H3 | NOT AUTHORIZED / NOT VERIFIED (H1.2 awaiting real robot access) |
@@ -61,7 +61,7 @@ Simulation covered IntakeIONoop only; IntakeIOReal was not simulated. No Glass, 
 
 ## GOV3 audit repairs in this lesson
 
-The GOV3 repository-wide correctness audit found defects in inherited Swerve and autonomous code. Each repair was separately authorized by the Architect, verified by the User and published; none changes the Intake scope or adds a nonzero output path.
+The GOV3 repository-wide correctness audit found defects in inherited Swerve, autonomous and telemetry code and one non-discriminating vision test. Each repair was separately authorized by the Architect, verified by the User and published; none changes the Intake scope or adds a nonzero output path.
 
 | Finding | Commit | Change | User evidence |
 | --- | --- | --- | --- |
@@ -71,10 +71,12 @@ The GOV3 repository-wide correctness audit found defects in inherited Swerve and
 | E2-F02 | d568803996e28333ee21a3213b9a1ab0113df890 | Validate the front-left encoder sample before steer commissioning | Focused 18/18; full 924/924 PASS |
 | E2-F01 | fc0fb0f181313a4f981fe9f55375a6f3ed904729 | Vendor-neutral `encoderMeasurementValid` (CANcoder magnet health) used in Swerve safety paths | Focused 77/77; full 934/934 PASS |
 | AUD-P2C-01 | fc10df4364b1933b14d615c5f8fab6f4f1f55707 | Adapter fault latch added to the autonomous path race | Focused 14/14; full 936/936 PASS; clean build PASS; Codex PASS |
+| AUD-P2D-01 | d6f7615209a3e51e11a6b90ce1ddd0c6a8748608 | Publish per-module EncoderMeasurementValid telemetry (no R1 DriverStation warning) | Focused 4/4; full 937/937 PASS; clean build PASS; Codex PASS |
+| AUD-P3-01 | 23eed68ac5bb226d8ba9a70585812b206bb1206e | Test-only: vision timing-validity regression now isolates its guard, plus a positive control | Focused 5/5; full 938/938 PASS; clean build PASS; Codex PASS |
 
-AUD-P2C-01 limitation (ACCEPTED): an inline PathPlanner event may execute once more in the scheduler cycle that detects FAULTED; it is not a synchronous emergency stop. AUD-P1-01 remains S0 (no production change); AUD-P1-02 remains a future M01 safety prerequisite. Software verification of these repairs is not real hardware verification.
+AUD-P2C-01 limitation (ACCEPTED): an inline PathPlanner event may execute once more in the scheduler cycle that detects FAULTED; it is not a synchronous emergency stop. AUD-P2D-02 and AUD-P2D-03 are NOTE / NO CHANGE; AUD-P3-02 is RESIDUAL RISK / RECORD / NO CHANGE; AUD-P3-03 is NOTE / RECORD / NO CHANGE. AUD-P1-01 remains S0 (no production change); AUD-P1-02 remains a future M01 safety prerequisite. Software verification of these repairs is not real hardware verification.
 
-**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-01 recording. Powered verification, GOV3 Phase 2d and Group 3 each require separate Architect authorization.
+**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-02 recording. Powered verification, GOV3 Phase 4 and Group 3 each require separate Architect authorization.
 
 ## GOV3 Group 1 activation — 2026-10-09 (history)
 

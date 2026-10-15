@@ -1,6 +1,6 @@
 # M01_L02 — Intake Real IO Configuration and Safe Stop
 
-## Current lesson record — GOV3 Group 2 published; GOV3-DOC-01 reconciliation 2026-10-13
+## Current lesson record — GOV3 Group 2 published; GOV3-DOC-02 reconciliation 2026-10-15
 
 | Field | Current record |
 | --- | --- |
@@ -18,7 +18,7 @@
 | Group 2 implementation | AUTHORIZED and implemented |
 | Group 2 verification | User build/tests and User Simulation (Noop scope) ACCEPTED, 2026-10-10; Codex review PASS |
 | Group 2 publication | PUBLISHED / SOFTWARE VERIFIED — User-owned commit 58f8e3a "Implement M01_L02 Intake real IO and safe stop" |
-| GOV3 audit repairs | Six Architect-authorized Swerve/autonomous software repairs published after Group 2; accepted baseline fc10df4 — see [LESSON_STATUS](LESSON_STATUS.md#gov3-audit-repairs-in-this-lesson) |
+| GOV3 audit repairs | Eight Architect-authorized software repairs (Swerve, autonomous, telemetry and one vision test) published after Group 2; GOV3 Phases 2c, 2d and 3 CLOSED; accepted baseline 23eed68 — see [LESSON_STATUS](LESSON_STATUS.md#gov3-audit-repairs-in-this-lesson) |
 | Powered hardware | NOT AUTHORIZED. H1.2: AWAITING REAL ROBOT ACCESS / NOT VERIFIED. H2/H3: NOT AUTHORIZED |
 | E2-F01 hardware pre-check | Disabled-only all-four-CANcoder MagnetHealth pre-check PENDING before any separately authorized powered Swerve motion |
 | Transition guide | IN_PROGRESS / NOT FINAL |
@@ -72,13 +72,13 @@ Preserved unchanged by Group 2: IntakeIO, IntakeIONoop, IntakeSubsystem, IntakeO
 | Inheritance / architecture audit | THEORY VERIFIED — static engineer audit accepted by the Architect |
 | Inherited baseline build | Supplied User execution: BUILD SUCCESSFUL in 42s; not engineer execution |
 | Group 2 build / tests | BUILD VERIFIED and SOFTWARE TEST VERIFIED — User, 2026-10-10: BUILD SUCCESSFUL in 34s; 895 tests, 0 failures, 0 errors, 0 skipped (Group 2 snapshot) |
-| Current suite (baseline fc10df4) | SOFTWARE TEST VERIFIED — User: 936/936 PASS; full clean BUILD SUCCESSFUL |
+| Current suite (baseline 23eed68) | SOFTWARE TEST VERIFIED — User: 938/938 PASS; full clean BUILD SUCCESSFUL |
 | Simulation | SIMULATION VERIFIED — NOOP SCOPE ONLY — User, 2026-10-10; IntakeIOReal was not simulated |
 | Glass / Driver Station | NOT TESTED |
 | Real hardware | NOT AUTHORIZED / NOT VERIFIED; the Design Lock and software tests are not hardware verification |
 | Direction, inversion, stopping, current adequacy | REAL HARDWARE DEFERRED to later authorized M01 lessons |
 
-**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-01 recording. Powered verification, GOV3 Phase 2d and Group 3 each require separate Architect authorization.
+**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-02 recording. Powered verification, GOV3 Phase 4 and Group 3 each require separate Architect authorization.
 
 <!-- M01_L02 OPERATIVE DOCUMENTATION END -->
 

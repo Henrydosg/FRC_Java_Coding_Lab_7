@@ -8,7 +8,7 @@ Target path: real_robot_programming/module_M01/M01_L02_IntakeRealIOConfiguration
 Title: Intake Real IO Configuration and Safe Stop
 Governance model: ADR_GOV3 three commit groups; current group: GROUP 2 — IMPLEMENT / VERIFY
 Design Lock: APPROVED
-Group 2: PUBLISHED / SOFTWARE VERIFIED (commit 58f8e3a); GOV3 audit repairs published through fc10df4
+Group 2: PUBLISHED / SOFTWARE VERIFIED (commit 58f8e3a); GOV3 audit repairs published through 23eed68
 Powered hardware: NOT AUTHORIZED (H1.2 awaiting real robot access / NOT VERIFIED; H2/H3 NOT AUTHORIZED)
 Group 3: NOT AUTHORIZED
 
@@ -238,11 +238,38 @@ The GOV3 repository-wide correctness audit inspected the inherited code of this 
 - **Verification:** Engineer self-review; governance mirror validator; Architect evaluation, Codex review and User verification PENDING.
 - **Expected Result:** One truthful cursor; lesson remains IN_PROGRESS; hardware gates unchanged.
 
+## Step 25 — AUD-P2D-01: publish encoder measurement validity
+
+- **Objective:** Show each module's encoder measurement validity on the dashboard.
+- **Why:** A bad CANcoder magnet makes the R1 latch stop the drivetrain while every published health flag still reads true, so the cause was invisible.
+- **Action:** SwerveTelemetryFacade publishes one boolean topic EncoderMeasurementValid per module from the existing observation field; the regression test checks all four modules with TRUE and FALSE values and closes its NetworkTables resources with try-with-resources (Codex correction P2D01-R01). No R1 DriverStation warning was added.
+- **Files Changed:** telemetry/swerve/SwerveTelemetryFacade.java; SwerveTelemetryFacadeTest.java.
+- **Verification:** User focused 4/4 PASS; full 937/937 PASS; clean BUILD SUCCESSFUL; Codex independent review PASS; GitHub publication verified by the User. Commit d6f7615209a3e51e11a6b90ce1ddd0c6a8748608.
+- **Expected Result:** A magnet-health fault is visible as EncoderMeasurementValid = false while EncoderConnected and EncoderConfigurationHealthy stay true.
+
+## Step 26 — AUD-P3-01: isolate the vision timing-validity regression
+
+- **Objective:** Make the invalid-timing test fail if the timingValid guard is removed.
+- **Why:** The test fake did not copy timing fields, so the sample was rejected as stale whatever the guard did.
+- **Action:** The fake now copies timingValid, receive timestamp and latency; the negative test uses a fresh, in-range, known-tag sample with timingValid = false, and a new positive control shows the same sample qualifies with timingValid = true. Test-only; no production change.
+- **Files Changed:** subsystems/VisionSubsystemTest.java.
+- **Verification:** User focused VisionSubsystemTest 5/5 PASS; full 938/938 PASS; clean BUILD SUCCESSFUL, 7 actionable tasks: 7 executed; Codex independent review PASS; GitHub publication verified by the User. Commit 23eed68ac5bb226d8ba9a70585812b206bb1206e.
+- **Expected Result:** The regression protects the timingValid guard itself.
+
+## Step 27 — Reconcile audit state documentation (GOV3-DOC-02)
+
+- **Objective:** Make the current state and lesson records match the published baseline 23eed68.
+- **Why:** The records still showed GOV3-DOC-01 and Phase 2d as pending and did not include the Phase 2d and Phase 3 results.
+- **Action:** Updated the four lesson documents, this guide and CURRENT_STATE; archived the prior CURRENT_STATE verbatim in a new history event.
+- **Files Changed:** README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, docs/M01_L01_to_M01_L02_Step_by_Step.md; repository docs/governance/CURRENT_STATE.md and docs/governance/history/events/GOV3_DOC_02_AUDIT_STATE_RECONCILIATION_2026-10-15.md.
+- **Verification:** Engineer self-review; governance mirror validator; Architect evaluation, Codex review and User verification PENDING.
+- **Expected Result:** One truthful cursor; lesson remains IN_PROGRESS; hardware gates unchanged.
+
 ## Remaining steps — PENDING
 
 The following are planned and grant no permission. Each will be recorded with all seven fields when performed.
 
-1. Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-01 recording.
+1. Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-02 recording.
 2. After separate Architect authorization only: User hardware checks (H1.2 awaiting real robot access; H2/H3 NOT AUTHORIZED) and the E2-F01 MagnetHealth pre-check.
-3. GOV3 Phase 2d — PLANNED / NOT AUTHORIZED.
+3. GOV3 Phase 4 — NOT STARTED / NOT AUTHORIZED.
 4. Group 3 closure — NOT AUTHORIZED.

@@ -1,6 +1,6 @@
 # M01_L02 — Lesson Checklist
 
-## Current lesson record — GOV3 Group 2 published; GOV3-DOC-01 reconciliation 2026-10-13
+## Current lesson record — GOV3 Group 2 published; GOV3-DOC-02 reconciliation 2026-10-15
 
 | Field | Current record |
 | --- | --- |
@@ -13,7 +13,7 @@
 | Scope | Intake Real IO configuration and safe zero output ONLY |
 | Group 2 verification | User build/tests and Noop Simulation ACCEPTED; Codex review PASS |
 | Group 2 publication | PUBLISHED / SOFTWARE VERIFIED — User-owned commit 58f8e3a |
-| GOV3 audit repairs | Six Architect-authorized software repairs published; accepted baseline fc10df4 |
+| GOV3 audit repairs | Eight Architect-authorized software repairs published; GOV3 Phases 2c, 2d and 3 CLOSED; accepted baseline 23eed68 |
 | Powered hardware | NOT AUTHORIZED. H1.2: AWAITING REAL ROBOT ACCESS / NOT VERIFIED. H2/H3: NOT AUTHORIZED |
 | E2-F01 hardware pre-check | Disabled-only all-four-CANcoder MagnetHealth pre-check PENDING |
 | Transition guide | IN_PROGRESS / NOT FINAL |
@@ -56,9 +56,13 @@
 - [x] E2-F02 — d568803; focused 18/18, full 924/924 PASS.
 - [x] E2-F01 — fc0fb0f; focused 77/77, full 934/934 PASS.
 - [x] AUD-P2C-01 — fc10df4; focused 14/14, full 936/936 PASS, clean build PASS, Codex PASS; accepted same-cycle limitation (one extra inline event execute possible).
+- [x] AUD-P2D-01 — d6f7615; focused 4/4, full 937/937 PASS, clean build PASS, Codex PASS.
+- [x] AUD-P3-01 — 23eed68 (test-only); focused 5/5, full 938/938 PASS, clean build PASS, Codex PASS.
+- [x] GOV3-DOC-01 documentation reconciliation — CLOSED / PUBLISHED (0f3d640).
+- [x] GOV3 Phases 2c, 2d and 3 — CLOSED; AUD-P2D-02/03 NOTE; AUD-P3-02 RECORD; AUD-P3-03 NOTE.
 - [ ] E2-F01 Disabled-only all-four-CANcoder MagnetHealth pre-check — PENDING.
-- [ ] GOV3-DOC-01 documentation reconciliation — Architect evaluation, Codex review, User verification and publication PENDING.
-- [ ] GOV3 Phase 2d — PLANNED / NOT AUTHORIZED.
+- [ ] GOV3-DOC-02 documentation reconciliation — Architect evaluation, Codex review, User verification and publication PENDING.
+- [ ] GOV3 Phase 4 — NOT STARTED / NOT AUTHORIZED.
 
 ## Group 3 gates — NOT AUTHORIZED
 
@@ -74,13 +78,13 @@
 | Inheritance / architecture audit | THEORY VERIFIED — static engineer audit accepted by the Architect |
 | Inherited baseline build | Supplied User execution: BUILD SUCCESSFUL in 42s; not engineer execution |
 | Group 2 tests / build | BUILD VERIFIED and SOFTWARE TEST VERIFIED — User, 2026-10-10 (895 tests, 0 failures; Group 2 snapshot); earlier engineer-run results preliminary only |
-| Current suite (baseline fc10df4) | SOFTWARE TEST VERIFIED — User: 936/936 PASS; full clean BUILD SUCCESSFUL |
+| Current suite (baseline 23eed68) | SOFTWARE TEST VERIFIED — User: 938/938 PASS; full clean BUILD SUCCESSFUL |
 | Simulation | SIMULATION VERIFIED — NOOP SCOPE ONLY — User, 2026-10-10 |
 | Glass / Driver Station | NOT TESTED |
 | Real hardware | NOT AUTHORIZED / NOT VERIFIED |
 | Direction, inversion, stopping, current adequacy | REAL HARDWARE DEFERRED to later authorized M01 lessons |
 
-**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-01 recording. Powered verification, GOV3 Phase 2d and Group 3 each require separate Architect authorization.
+**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-02 recording. Powered verification, GOV3 Phase 4 and Group 3 each require separate Architect authorization.
 
 <!-- M01_L02 OPERATIVE DOCUMENTATION END -->
 
