@@ -76,7 +76,7 @@ The GOV3 repository-wide correctness audit found defects in inherited Swerve, au
 
 AUD-P2C-01 limitation (ACCEPTED): an inline PathPlanner event may execute once more in the scheduler cycle that detects FAULTED; it is not a synchronous emergency stop. AUD-P2D-02 and AUD-P2D-03 are NOTE / NO CHANGE; AUD-P3-02 is RESIDUAL RISK / RECORD / NO CHANGE; AUD-P3-03 is NOTE / RECORD / NO CHANGE. AUD-P1-01 remains S0 (no production change); AUD-P1-02 remains a future M01 safety prerequisite. Software verification of these repairs is not real hardware verification.
 
-**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-02 recording. Powered verification, GOV3 Phase 4 and Group 3 each require separate Architect authorization.
+**Next boundary:** Codex review, User verification and User-owned publication of the GOV3-DOC-03 final audit recording, followed by Architect formal GOV3 closure. Powered verification and Group 3 each require separate Architect authorization; no GOV3 Phase 5 is authorized.
 
 ## GOV3 Group 1 activation — 2026-10-09 (history)
 

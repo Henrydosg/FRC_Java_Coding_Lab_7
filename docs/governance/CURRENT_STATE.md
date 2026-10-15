@@ -4,15 +4,15 @@
 >
 > CURRENT_STATE does NOT self-authorize. Its authority derives from [root AGENTS](../../AGENTS.md), applicable registered decisions and explicitly authorized state recording.
 
-This is the single operational repository state/action projection. Under [ADR_GOV3](../architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md), the Architect brief "GOV3-DOC-02 — AUDIT STATE RECONCILIATION — BOUNDED DOCUMENTATION-ONLY REPAIR" (2026-10-15) authorizes this documentation-only recording of the accepted published baseline, the GOV3 Phase 2d and Phase 3 closures and the next boundary. **M01_L02 = IN_PROGRESS** and is the sole active editable lesson. Group 1 and Group 2 are published. **Powered hardware: NOT AUTHORIZED. Group 3: NOT AUTHORIZED. GOV3 Phase 4: NOT STARTED / NOT AUTHORIZED.** GOV3-DOC-02 is a documentation reconciliation IN PROGRESS in the working tree, self-reviewed only; Architect evaluation, Codex independent review, User verification and User-owned publication are pending. No future commit or push identity is claimed.
+This is the single operational repository state/action projection. Under [ADR_GOV3](../architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md), the Architect brief "GOV3-DOC-03 — FINAL AUDIT CLOSURE RECORDING" (2026-10-15) authorizes this documentation-only recording of the accepted GOV3 Phase 4 final report (PASS_GOV3_PHASE_4_FINAL_REPORT_WITH_RECORDING_GAP), the completed technical audit and its evidence limitations. **M01_L02 = IN_PROGRESS** and is the sole active editable lesson. Group 1 and Group 2 are published. **Powered hardware: NOT AUTHORIZED. Group 3: NOT AUTHORIZED. GOV3 formal closure: PENDING.** GOV3-DOC-03 is a documentation recording IN_PROGRESS in the working tree, self-reviewed only; Codex independent review, User verification and User-owned publication are pending. No future commit or push identity is claimed.
 
-The [GOV3-DOC-02 reconciliation event and verbatim prior cursor](history/events/GOV3_DOC_02_AUDIT_STATE_RECONCILIATION_2026-10-15.md) preserves the superseded GOV3-DOC-01 cursor. The [GOV3-DOC-01 reconciliation event](history/events/GOV3_DOC_01_AUDIT_STATE_RECONCILIATION_2026-10-13.md), [Group 2 verification recording event](history/events/M01_L02_GROUP2_USER_VERIFICATION_RECORDING_2026-10-10.md), [Group 1 activation event](history/events/M01_L02_GROUP1_ACTIVATION_RECORDING_2026-10-09.md), [GOV3 adoption event](history/events/GOV3_ADOPTION_RECORDING_2026-10-09.md) and earlier events remain unchanged history. The [registered M01 roadmap](../architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) controls curriculum scope; M01 Roadmap Revision 2 was NOT APPROVED and the registered 18-lesson roadmap remains controlling.
+The [GOV3-DOC-03 final audit closure event and verbatim prior cursor](history/events/GOV3_DOC_03_FINAL_AUDIT_CLOSURE_2026-10-15.md) preserves the superseded GOV3-DOC-02 cursor. The [GOV3-DOC-02 reconciliation event](history/events/GOV3_DOC_02_AUDIT_STATE_RECONCILIATION_2026-10-15.md), [GOV3-DOC-01 reconciliation event](history/events/GOV3_DOC_01_AUDIT_STATE_RECONCILIATION_2026-10-13.md), [Group 2 verification recording event](history/events/M01_L02_GROUP2_USER_VERIFICATION_RECORDING_2026-10-10.md), [Group 1 activation event](history/events/M01_L02_GROUP1_ACTIVATION_RECORDING_2026-10-09.md), [GOV3 adoption event](history/events/GOV3_ADOPTION_RECORDING_2026-10-09.md) and earlier events remain unchanged history. The [registered M01 roadmap](../architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) controls curriculum scope; M01 Roadmap Revision 2 was NOT APPROVED and the registered 18-lesson roadmap remains controlling.
 
 ## Accepted operational cursor
 
 | Item | Accepted projection / applicability |
 | --- | --- |
-| Accepted published baseline | 23eed68ac5bb226d8ba9a70585812b206bb1206e "test(M01_L02): isolate vision timing validity regression" — User-verified HEAD == origin/main == GitHub remote; accepted by the Architect |
+| Accepted published baseline | dc4e6cccc865ae949922b392b79ad63c16c4be65 "docs(governance): reconcile GOV3 audit closures" (GOV3-DOC-02, CLOSED / PUBLISHED / USER VERIFIED); latest software baseline 23eed68ac5bb226d8ba9a70585812b206bb1206e (User-verified HEAD == origin/main == GitHub remote); accepted by the Architect |
 | Learning-flow audit | COMPLETE / CLOSED; accepted 62 main + 17 historical/parallel = 79 represented lessons; not recomputed by M01 work |
 | Existing main progression | New WPILib Project → S00 → A00 → A01 → V00 → M00_L16 → M01_L01 → M01_L02 (IN_PROGRESS) |
 | Historical/parallel lineage | D00 → D01 Tank lineage; NOT M00/M01 donor |
@@ -30,7 +30,7 @@ The [GOV3-DOC-02 reconciliation event and verbatim prior cursor](history/events/
 | M01_L02 failure policy | Configuration failure fails closed for the session (available/connected false, error reported once); no runtime retry — F3 ACCEPTED |
 | M01_L02 Group 1 publication | PUBLISHED — User-owned commit 9bdc4f80d3321b67d4054c46bed31f18413f185e "Activate M01_L02 and record inherited baseline" |
 | M01_L02 Group 2 | PUBLISHED / SOFTWARE VERIFIED — User-owned commit 58f8e3a548f61f19a96d3eb24a55db591cfad4a9 "Implement M01_L02 Intake real IO and safe stop"; Codex review PASS; accepted by the Architect |
-| GOV3 repository-wide correctness audit | Phases 2c, 2d and 3 CLOSED; repairs published inside M01_L02 (see GOV3 audit position below); GOV3-DOC-01 CLOSED / PUBLISHED (0f3d6406498e9580a3a55d17d13f05d32feb6177); GOV3-DOC-02 documentation reconciliation IN PROGRESS, publication PENDING; GOV3 Phase 4 NOT STARTED / NOT AUTHORIZED |
+| GOV3 repository-wide correctness audit | Technical audit COMPLETE; Phases 2c, 2d and 3 CLOSED; Phase 4 final report ACCEPTED (PASS_GOV3_PHASE_4_FINAL_REPORT_WITH_RECORDING_GAP); repairs published inside M01_L02 (see GOV3 audit position below); GOV3-DOC-01 CLOSED / PUBLISHED (0f3d6406498e9580a3a55d17d13f05d32feb6177); GOV3-DOC-02 CLOSED / PUBLISHED (dc4e6cccc865ae949922b392b79ad63c16c4be65); GOV3-DOC-03 recording IN_PROGRESS, publication PENDING; formal GOV3 closure PENDING; no Phase 5 authorized |
 | M01_L02 powered hardware | NOT AUTHORIZED. H1.2: AWAITING REAL ROBOT ACCESS / NOT VERIFIED. H2/H3: NOT AUTHORIZED |
 | E2-F01 hardware pre-check | Disabled-only all-four-CANcoder MagnetHealth pre-check PENDING before any separately authorized powered Swerve motion |
 | M01_L02 transition guide | IN_PROGRESS / NOT FINAL |
@@ -39,7 +39,7 @@ The [GOV3-DOC-02 reconciliation event and verbatim prior cursor](history/events/
 | T00 | PARKED / NOT REGISTERED / NOT ACTIVATED; protected candidate contents excluded |
 | Earlier ACM repository-wide audit (pre-M01) | Its Phase 2 COMPLETE WITH RECORDED LIMITS; its Phase 3 / ACM-01–12 FORMALLY CLOSED; ACM-12 60 CLOSED / 0 BLOCKED; F01/F02/F03 CLOSED. These ACM phases are distinct from the GOV3 audit phases below |
 | Phase 4 / M00_L17 (ACM audit lineage) | NOT STARTED / FORBIDDEN; M00_L17 NOT AUTHORIZED (distinct from GOV3 Phase 4) |
-| Next boundary | Architect evaluation of this GOV3-DOC-02 recording, then Codex independent review, User verification and User-owned publication. GOV3 Phase 4, powered verification and Group 3 each require separate Architect authorization. |
+| Next boundary | Codex independent review, User verification and User-owned publication of GOV3-DOC-03, followed by Architect formal GOV3 closure. Powered verification and Group 3 each require separate Architect authorization; no GOV3 Phase 5 is authorized. |
 
 ## GOV3 audit position
 
@@ -67,7 +67,11 @@ The GOV3 repository-wide code-correctness audit (Architect brief "GOV3 — REPOS
 | AUD-P3-01 | CLOSED / REPAIRED / SOFTWARE VERIFIED / PUBLISHED — 23eed68ac5bb226d8ba9a70585812b206bb1206e (test-only) |
 | AUD-P3-02 | RESIDUAL RISK / RECORD / NO CHANGE |
 | AUD-P3-03 | NOTE / RECORD / NO CHANGE |
-| Phase 4 | NOT STARTED / NOT AUTHORIZED |
+| Phase 4 (final consolidated audit report) | Defined and authorized by the Architect brief "GOV3 — PHASE 4 — FINAL CONSOLIDATED AUDIT REPORT"; report ACCEPTED — PASS_GOV3_PHASE_4_FINAL_REPORT_WITH_RECORDING_GAP |
+| Technical audit | COMPLETE — no unresolved confirmed production correctness defect in the recorded findings |
+| Formal GOV3 closure | PENDING User verification and publication of GOV3-DOC-03, then Architect formal closure |
+
+Evidence limitations (accepted with the Phase 4 report; see the GOV3-DOC-03 event): closure records for GOV3 Phases 0, 1, 2a and 2b are not established in repository evidence; dispositions known only from chat or engineer recollection are NOT ESTABLISHED; Codex review evidence for AUD-P2A-01, R1, R2, E2-F02 and E2-F01 is not recorded; f0daab7 through fc0fb0f are ancestors of the verified published HEAD, without recorded per-commit publication checks; missing historical test counts remain NOT ESTABLISHED.
 
 AUD-P2C-01 limitation (ACCEPTED): the adapter fault ends a running path at the next race check, not synchronously. An inline PathPlanner event may execute once more in the scheduler cycle that detects FAULTED. It is not a synchronous emergency stop; AUD-P1-02 remains a separate future requirement.
 

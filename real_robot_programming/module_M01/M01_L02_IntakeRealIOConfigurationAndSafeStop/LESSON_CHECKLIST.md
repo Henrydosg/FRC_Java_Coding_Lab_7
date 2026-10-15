@@ -61,8 +61,9 @@
 - [x] GOV3-DOC-01 documentation reconciliation — CLOSED / PUBLISHED (0f3d640).
 - [x] GOV3 Phases 2c, 2d and 3 — CLOSED; AUD-P2D-02/03 NOTE; AUD-P3-02 RECORD; AUD-P3-03 NOTE.
 - [ ] E2-F01 Disabled-only all-four-CANcoder MagnetHealth pre-check — PENDING.
-- [ ] GOV3-DOC-02 documentation reconciliation — Architect evaluation, Codex review, User verification and publication PENDING.
-- [ ] GOV3 Phase 4 — NOT STARTED / NOT AUTHORIZED.
+- [x] GOV3-DOC-02 documentation reconciliation — CLOSED / PUBLISHED (dc4e6cc).
+- [x] GOV3 Phase 4 final consolidated audit report — ACCEPTED (PASS_GOV3_PHASE_4_FINAL_REPORT_WITH_RECORDING_GAP); technical audit COMPLETE.
+- [ ] GOV3-DOC-03 final audit recording — Codex review, User verification and publication PENDING; then Architect formal GOV3 closure.
 
 ## Group 3 gates — NOT AUTHORIZED
 
@@ -84,7 +85,7 @@
 | Real hardware | NOT AUTHORIZED / NOT VERIFIED |
 | Direction, inversion, stopping, current adequacy | REAL HARDWARE DEFERRED to later authorized M01 lessons |
 
-**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-02 recording. Powered verification, GOV3 Phase 4 and Group 3 each require separate Architect authorization.
+**Next boundary:** Codex review, User verification and User-owned publication of the GOV3-DOC-03 final audit recording, followed by Architect formal GOV3 closure. Powered verification and Group 3 each require separate Architect authorization; no GOV3 Phase 5 is authorized.
 
 <!-- M01_L02 OPERATIVE DOCUMENTATION END -->
 

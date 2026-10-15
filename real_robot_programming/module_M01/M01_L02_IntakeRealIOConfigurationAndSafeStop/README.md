@@ -78,7 +78,7 @@ Preserved unchanged by Group 2: IntakeIO, IntakeIONoop, IntakeSubsystem, IntakeO
 | Real hardware | NOT AUTHORIZED / NOT VERIFIED; the Design Lock and software tests are not hardware verification |
 | Direction, inversion, stopping, current adequacy | REAL HARDWARE DEFERRED to later authorized M01 lessons |
 
-**Next boundary:** Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-02 recording. Powered verification, GOV3 Phase 4 and Group 3 each require separate Architect authorization.
+**Next boundary:** Codex review, User verification and User-owned publication of the GOV3-DOC-03 final audit recording, followed by Architect formal GOV3 closure. Powered verification and Group 3 each require separate Architect authorization; no GOV3 Phase 5 is authorized.
 
 <!-- M01_L02 OPERATIVE DOCUMENTATION END -->
 

@@ -265,11 +265,19 @@ The GOV3 repository-wide correctness audit inspected the inherited code of this 
 - **Verification:** Engineer self-review; governance mirror validator; Architect evaluation, Codex review and User verification PENDING.
 - **Expected Result:** One truthful cursor; lesson remains IN_PROGRESS; hardware gates unchanged.
 
+## Step 28 — Record the GOV3 final audit result (GOV3-DOC-03)
+
+- **Objective:** Record that the GOV3 technical audit is complete and its Phase 4 final report is accepted.
+- **Why:** The records still showed GOV3-DOC-02 and GOV3 Phase 4 as pending; formal closure needs one recorded state with its evidence limits.
+- **Action:** Updated CURRENT_STATE and the operative next-boundary and checklist statements; archived the prior CURRENT_STATE verbatim in a new history event that lists final dispositions, residual risks and evidence limitations K1–K6. No code or test changed.
+- **Files Changed:** README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, docs/M01_L01_to_M01_L02_Step_by_Step.md; repository docs/governance/CURRENT_STATE.md and docs/governance/history/events/GOV3_DOC_03_FINAL_AUDIT_CLOSURE_2026-10-15.md.
+- **Verification:** Engineer self-review; governance mirror validator; Codex review and User verification PENDING.
+- **Expected Result:** Formal GOV3 closure can be decided by the Architect after publication; lesson remains IN_PROGRESS; hardware gates unchanged.
+
 ## Remaining steps — PENDING
 
 The following are planned and grant no permission. Each will be recorded with all seven fields when performed.
 
-1. Architect evaluation, Codex review, User verification and User-owned publication of the GOV3-DOC-02 recording.
+1. Codex review, User verification and User-owned publication of the GOV3-DOC-03 recording, then Architect formal GOV3 closure.
 2. After separate Architect authorization only: User hardware checks (H1.2 awaiting real robot access; H2/H3 NOT AUTHORIZED) and the E2-F01 MagnetHealth pre-check.
-3. GOV3 Phase 4 — NOT STARTED / NOT AUTHORIZED.
-4. Group 3 closure — NOT AUTHORIZED.
+3. Group 3 closure — NOT AUTHORIZED.
