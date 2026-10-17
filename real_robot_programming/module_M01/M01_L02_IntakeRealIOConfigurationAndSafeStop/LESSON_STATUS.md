@@ -1,27 +1,27 @@
 # M01_L02 — Lesson Status
 
-## Current lesson record — GOV3 Group 2 published; GOV3-DOC-02 reconciliation 2026-10-15
+## Current lesson record — GOV3 Group 3 closure recording 2026-10-16
 
 | Field | Current record |
 | --- | --- |
 | Lesson / title | M01_L02_IntakeRealIOConfigurationAndSafeStop — Intake Real IO Configuration and Safe Stop |
 | One new concept | Qualified Real IO configuration with guaranteed zero output |
 | Roadmap | [Registered M01 roadmap](../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) §8 L02 — L02 unchanged; the [M01 Fast-Track 10-lesson revision](../../../docs/architecture_decisions/ADR_M01_Fast_Track_10_Lesson_Roadmap_Revision.md) controls the M01 lesson sequence |
-| Governance model | [ADR_GOV3](../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) — GROUP 2 IMPLEMENT / VERIFY |
+| Governance model | [ADR_GOV3](../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) — GROUP 3 COMPLETE / FREEZE |
 | Primary Engineer | Claude Code; Codex optional independent reviewer before Group 3 |
 | Donor | M01_L01_MechanismHardwareReadinessAndIOContract — COMPLETE / FROZEN / READ-ONLY / PUBLISHED / REMOTE VERIFIED |
-| Lesson lifecycle | IN_PROGRESS — sole active editable lesson |
+| Lesson lifecycle | COMPLETE / FROZEN / READ-ONLY — Group 3 recording 2026-10-16; User-owned publication PENDING |
 | Scope | Intake Real IO configuration and safe zero output ONLY (Design Lock D1–D9) |
 | Group 1 publication | User-owned commit 9bdc4f80d3321b67d4054c46bed31f18413f185e "Activate M01_L02 and record inherited baseline"; User-reported publication accepted by the Architect; local read-only observation HEAD = origin/main = 9bdc4f8 (local remote-tracking ref, not a live remote query) |
 | Group 2 implementation | AUTHORIZED by the Architect (brief supplied by the User in chat); implemented |
-| Group 2 verification | User build/tests and User Simulation (Noop scope) ACCEPTED by the Architect, 2026-10-10; Codex review PASS |
+| Group 2 verification | User build/tests and User Simulation (Noop scope) ACCEPTED by the Architect, 2026-10-10; Codex review PASS; Group 2 hardware acceptance PASS (Architect, 2026-10-16) |
 | Group 2 publication | PUBLISHED / SOFTWARE VERIFIED — User-owned commit 58f8e3a548f61f19a96d3eb24a55db591cfad4a9 "Implement M01_L02 Intake real IO and safe stop"; accepted by the Architect |
 | Bounded inherited test repair | ACCEPTED by the Architect — RobotContainerIntakeCommandBindingTest one assertion; assertion wording deviation ACCEPTED |
 | GOV3 audit repairs | Eight Architect-authorized software repairs published in this lesson after Group 2 (see below); GOV3 Phases 2c, 2d and 3 CLOSED; accepted published baseline 23eed68ac5bb226d8ba9a70585812b206bb1206e |
-| Powered hardware | NOT AUTHORIZED. H1.2: AWAITING REAL ROBOT ACCESS / NOT VERIFIED. H2/H3: NOT AUTHORIZED |
-| E2-F01 hardware pre-check | Disabled-only all-four-CANcoder MagnetHealth pre-check PENDING before any separately authorized powered Swerve motion |
-| Transition guide | IN_PROGRESS / NOT FINAL |
-| Group 3 | NOT AUTHORIZED |
+| Powered hardware | Group 2 hardware acceptance PASS (Architect): H1 configuration/readback and H2/H3 stationary-output verification by the User, 2026-10-15/16. Nonzero Intake output NOT AUTHORIZED |
+| E2-F01 hardware pre-check | DONE — all four CANcoder MagnetHealth readings GREEN in the Disabled preflight before the Teleop test (User) |
+| Transition guide | FINAL / PASS |
+| Group 3 | AUTHORIZED (REISSUE_AUTH_M01_L02_GROUP3_EXACT_7_FILE_CLOSEOUT); closure recorded; User verification and publication PENDING |
 
 ## Implementation summary
 
@@ -49,15 +49,17 @@ These are initial configuration values, not proof of safe physical jam force, st
 | User build | BUILD VERIFIED — User, 2026-10-10: `.\gradlew clean build`, BUILD SUCCESSFUL in 34s, 7 actionable tasks: 7 executed, WPILib JDK 17; ACCEPTED |
 | User tests (Group 2 snapshot) | SOFTWARE TEST VERIFIED — User, 2026-10-10: 895 tests, 0 failures, 0 errors, 0 skipped; ACCEPTED. Current suite after the GOV3 audit repairs: 938/938 PASS (User, AUD-P3-01) |
 | Simulation | SIMULATION VERIFIED — NOOP SCOPE ONLY — User, 2026-10-10: Teleoperated, Keyboard 2 on Joystick[0], PageDown = button 6 = Right Bumper; hold INTAKE_REQUESTED, release STOPPED; Available=false, Connected=false; no console errors reported; ACCEPTED |
-| Glass / Driver Station | NOT TESTED |
-| Real hardware H1–H3 | NOT AUTHORIZED / NOT VERIFIED (H1.2 awaiting real robot access) |
-| Direction, inversion, stopping, current adequacy | REAL HARDWARE DEFERRED to later authorized M01 lessons |
+| Glass / Driver Station | GLASS VERIFIED — Intake Available = true, Connected = true; RequestedState STOPPED / INTAKE_REQUESTED / STOPPED (User screenshots, 2026-10-16). DRIVER STATION VERIFIED — Teleop Enable and controlled Disable, final state Disabled (H2/H3 scope) |
+| Real hardware H1 | REAL HARDWARE VERIFIED — configuration/readback scope (User, 2026-10-15/16): Kraken X44 CAN 40 on rio; Brake; Stator 40 A and Supply 35 A enabled; build and Disabled deployment PASS; readback PASS (Phoenix Tuner X prescribed; no independent tool log); no Intake configuration error observed |
+| Real hardware H2 | REAL HARDWARE VERIFIED — stationary-output scope: Teleop Enabled; RequestedState STOPPED / INTAKE_REQUESTED / STOPPED; all motors stationary |
+| Real hardware H3 | REAL HARDWARE VERIFIED — stationary-output scope: controlled Disable while holding Right Bumper; all motors stationary; final state Disabled |
+| Direction, inversion, stopping, current adequacy | REAL HARDWARE DEFERRED to M01_L03 and later authorized M01 lessons |
 
 Engineer-run results are preliminary convenience evidence, superseded for gate purposes by the accepted User results. All engineer self-review of Group 2 steps was User-delegated self-review, not independent review.
 
 ## Evidence limits
 
-Simulation covered IntakeIONoop only; IntakeIOReal was not simulated. No Glass, Driver Station, deploy or powered-hardware result exists for M01_L02. A software test of IntakeIOReal's configuration, health and input-mapping logic does not prove the physical motor's readback, neutral output or response after a vendor failure.
+Simulation covered IntakeIONoop only; IntakeIOReal was not simulated. Hardware evidence (H1–H3) is limited to configuration/readback and stationary output: zero motion does not independently prove the internal Talon FX NeutralOut control mode; no rotating-motor stopping test and no nonzero Intake output occurred; the operator was instructed to keep the roller clear but no separate roller-clear attestation is recorded; the exact deployed commit was not recorded (the M01_L02 source tree is identical from 23eed68 to c508f6f); the 938/938 suite was not rerun at the documentation HEAD. A software test of IntakeIOReal's configuration, health and input-mapping logic does not prove the physical motor's readback, neutral output or response after a vendor failure.
 
 ## GOV3 audit repairs in this lesson
 
@@ -76,7 +78,25 @@ The GOV3 repository-wide correctness audit found defects in inherited Swerve, au
 
 AUD-P2C-01 limitation (ACCEPTED): an inline PathPlanner event may execute once more in the scheduler cycle that detects FAULTED; it is not a synchronous emergency stop. AUD-P2D-02 and AUD-P2D-03 are NOTE / NO CHANGE; AUD-P3-02 is RESIDUAL RISK / RECORD / NO CHANGE; AUD-P3-03 is NOTE / RECORD / NO CHANGE. AUD-P1-01 remains S0 (no production change); AUD-P1-02 remains a future M01 safety prerequisite. Software verification of these repairs is not real hardware verification.
 
-**Next boundary:** Codex review, User verification and User-owned publication of the GOV3-DOC-03 final audit recording, followed by Architect formal GOV3 closure. Powered verification and Group 3 each require separate Architect authorization; no GOV3 Phase 5 is authorized.
+## Group 3 closure record — 2026-10-16
+
+| Field | Record |
+| --- | --- |
+| Lesson | M01_L02_IntakeRealIOConfigurationAndSafeStop |
+| Previous Lesson | M01_L01_MechanismHardwareReadinessAndIOContract |
+| Status | COMPLETE / FROZEN / READ-ONLY (publication PENDING) |
+| Architecture Review | PASS — Design Lock APPROVED; GOV3 audit FORMALLY CLOSED |
+| Baseline Build | PASS — User, BUILD SUCCESSFUL in 42s (Group 1) |
+| Build | PASS — User clean build (latest at software baseline 23eed68) |
+| Simulation | PASS — SIMULATION VERIFIED, Noop scope (User, 2026-10-10) |
+| Driver Station / Glass | PASS — H1–H3 scope (User, 2026-10-15/16) |
+| Real Robot | PASS — configuration/readback and stationary-output scope; motion REAL HARDWARE DEFERRED to M01_L03 |
+| Transition Guide | PASS — FINAL |
+| Git Commit | PENDING — User-owned Group 3 closure commit |
+| Git Push | PENDING — User-owned push and fresh remote verification |
+| Known Issues | AUD-P1-02 must be satisfied before any nonzero Intake output (M01_L03); AUD-P2C-01 accepted same-cycle limitation; AUD-P3-02 and AUD-P3-03 recorded; hardware evidence limits above |
+
+**Next boundary:** User verification and User-owned publication of this Group 3 closure recording; publication is then established by Git history (ADR_GOV3 §4). M01_L03 Intake Real Motion & Xbox Control requires separate preparation authorization; AUD-P1-02 must be satisfied before any nonzero Intake output.
 
 ## GOV3 Group 1 activation — 2026-10-09 (history)
 

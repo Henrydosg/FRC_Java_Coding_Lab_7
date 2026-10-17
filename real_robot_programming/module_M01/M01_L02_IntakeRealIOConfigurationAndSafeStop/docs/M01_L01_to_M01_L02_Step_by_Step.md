@@ -1,16 +1,16 @@
 # M01_L01 to M01_L02 — Step-by-Step Transition
 
-Status: IN_PROGRESS / NOT FINAL
+Status: FINAL / PASS
 Donor: M01_L01_MechanismHardwareReadinessAndIOContract — COMPLETE / FROZEN / READ-ONLY / PUBLISHED / REMOTE VERIFIED
 Donor path: real_robot_programming/module_M01/M01_L01_MechanismHardwareReadinessAndIOContract
 Target: M01_L02_IntakeRealIOConfigurationAndSafeStop
 Target path: real_robot_programming/module_M01/M01_L02_IntakeRealIOConfigurationAndSafeStop
 Title: Intake Real IO Configuration and Safe Stop
-Governance model: ADR_GOV3 three commit groups; current group: GROUP 2 — IMPLEMENT / VERIFY
+Governance model: ADR_GOV3 three commit groups; current group: GROUP 3 — COMPLETE / FREEZE
 Design Lock: APPROVED
 Group 2: PUBLISHED / SOFTWARE VERIFIED (commit 58f8e3a); GOV3 audit repairs published through 23eed68
-Powered hardware: NOT AUTHORIZED (H1.2 awaiting real robot access / NOT VERIFIED; H2/H3 NOT AUTHORIZED)
-Group 3: NOT AUTHORIZED
+Powered hardware: H1–H3 REAL HARDWARE VERIFIED (configuration/readback and stationary-output scope); nonzero Intake output NOT AUTHORIZED
+Group 3: COMPLETE / FROZEN / READ-ONLY recorded; User-owned publication PENDING
 
 [Current state](../../../../docs/governance/CURRENT_STATE.md), [registered M01 roadmap](../../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md), [ADR_GOV3](../../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) and [lesson plan](../LESSON_PLAN.md) govern applicability.
 
@@ -283,10 +283,62 @@ The GOV3 repository-wide correctness audit inspected the inherited code of this 
 - **Verification:** Engineer self-review; governance mirror validator; Architect review and User verification PENDING.
 - **Expected Result:** The next lesson after L02 is L03 Intake Real Motion & Xbox Control, with AUD-P1-02 required before any nonzero output; L02 remains IN_PROGRESS.
 
-## Remaining steps — PENDING
+## Group 3 — COMPLETE / FREEZE
 
-The following are planned and grant no permission. Each will be recorded with all seven fields when performed.
+## Step 30 — Authorize bounded powered verification
 
-1. Codex review, User verification and User-owned publication of the GOV3-DOC-03 recording, then Architect formal GOV3 closure.
-2. After separate Architect authorization only: User hardware checks (H1.2 awaiting real robot access; H2/H3 NOT AUTHORIZED) and the E2-F01 MagnetHealth pre-check.
-3. Group 3 closure — NOT AUTHORIZED.
+- **Objective:** Permit the User to check the Real Intake adapter on the robot without any nonzero output.
+- **Why:** Powered steps need explicit Architect authorization before the User operates the robot (ADR_GOV3 §6).
+- **Action:** Architect authorized the bounded H1 Disabled configuration/deployment checks, the H2 Teleop zero-output test and the H3 controlled-Disable zero-output test.
+- **Files Changed:** None.
+- **Verification:** Architect authorization supplied by the User in chat; accepted in the Group 3 closeout brief.
+- **Expected Result:** H1–H3 may be run; nonzero Intake output stays NOT AUTHORIZED.
+
+## Step 31 — E2-F01 Disabled preflight
+
+- **Objective:** Confirm every swerve CANcoder reports a usable magnet before enabling the robot.
+- **Why:** E2-F01 requires a Disabled MagnetHealth check before any powered Swerve operation.
+- **Action:** User read MagnetHealth for all four CANcoders with the robot Disabled, before the Teleop test.
+- **Files Changed:** None.
+- **Verification:** All four readings GREEN (User).
+- **Expected Result:** E2-F01 hardware pre-check DONE.
+
+## Step 32 — H1: Disabled configuration and deployment
+
+- **Objective:** Prove the deployed code configures the real Intake motor correctly.
+- **Why:** L02's primary gate is a qualified configuration with safe stationary output.
+- **Action:** User built and deployed with the robot Disabled, read back the Talon FX configuration and watched Glass and the Driver Station console.
+- **Files Changed:** None.
+- **Verification:** Kraken X44 on CAN 40, bus rio; Brake; Stator 40 A and Supply 35 A enabled; build and deployment PASS; readback PASS (Phoenix Tuner X prescribed; no independent tool log); no "Intake TalonFX configuration unhealthy" error; Glass Intake Available = true, Connected = true (screenshots, 2026-10-16). Deployed commit not recorded; the lesson source tree is identical from 23eed68 to c508f6f.
+- **Expected Result:** REAL HARDWARE VERIFIED — configuration/readback scope.
+
+## Step 33 — H2: Teleop zero-output test
+
+- **Objective:** Show the Right Bumper request reaches the subsystem while the motor stays still.
+- **Why:** L02 must keep zero output even when the driver requests the Intake.
+- **Action:** User enabled Teleop with the roller kept clear (as instructed), then released, held and released the Right Bumper while watching Glass and the robot.
+- **Files Changed:** None.
+- **Verification:** RequestedState STOPPED → INTAKE_REQUESTED → STOPPED (Glass screenshots); all motors stationary, no abnormal movement. No separate roller-clear attestation is recorded.
+- **Expected Result:** REAL HARDWARE VERIFIED — stationary-output scope. Zero motion does not independently prove the internal NeutralOut control mode.
+
+## Step 34 — H3: controlled Disable test
+
+- **Objective:** Show disabling during a held request causes no motion.
+- **Why:** Mode loss must stay fail-safe.
+- **Action:** User disabled the robot from the Driver Station while holding the Right Bumper.
+- **Files Changed:** None.
+- **Verification:** All motors stationary; no unexpected movement; final Driver Station state Disabled (User).
+- **Expected Result:** REAL HARDWARE VERIFIED — stationary-output scope. No rotating-motor stop or nonzero output was tested.
+
+## Step 35 — Record Group 3 closure
+
+- **Objective:** Close M01_L02 as COMPLETE / FROZEN / READ-ONLY.
+- **Why:** The Architect accepted the Group 2 hardware verification (PASS) and authorized the Group 3 closeout.
+- **Action:** Recorded the hardware evidence and its limits, completed the checklist, finalized this guide, updated CURRENT_STATE and archived the prior CURRENT_STATE verbatim in a new history event. No code or test changed.
+- **Files Changed:** README.md, LESSON_STATUS.md, LESSON_PLAN.md, LESSON_CHECKLIST.md, docs/M01_L01_to_M01_L02_Step_by_Step.md; repository docs/governance/CURRENT_STATE.md and docs/governance/history/events/M01_L02_GROUP3_CLOSURE_RECORDING_2026-10-16.md.
+- **Verification:** Engineer self-review; governance mirror validator; User verification and User-owned publication PENDING.
+- **Expected Result:** M01_L02 COMPLETE / FROZEN / READ-ONLY; no active editable lesson. Next: separate M01_L03 Intake Real Motion & Xbox Control preparation authorization, with AUD-P1-02 required before any nonzero Intake output.
+
+## Guide status
+
+FINAL / PASS. Implementation and required verification are complete within the L02 scope. Publication is User-owned and is established by Git history after push (ADR_GOV3 §4).
