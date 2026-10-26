@@ -9,10 +9,9 @@
 
 package frc.robot.commands;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -25,6 +24,7 @@ import frc.robot.io.feeder.FeederIO;
 import frc.robot.io.feeder.FeederIO.FeederIOInputs;
 import frc.robot.io.intake.IntakeIO;
 import frc.robot.io.intake.IntakeIO.IntakeIOInputs;
+import frc.robot.observation.intake.IntakeObservation.RequestedState;
 import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import java.util.ArrayList;
@@ -102,6 +102,27 @@ class IntakeToFeederCommandTest {
   }
 
   @Test
+  void learningEventPathStaysUnpoweredInEveryEnabledMode() {
+    boolean[][] modes = {{true, false}, {false, true}, {false, false}};
+    for (boolean[] mode : modes) {
+      DriverStationSim.setAutonomous(mode[0]);
+      DriverStationSim.setTest(mode[1]);
+      DriverStationSim.notifyNewData();
+      Rig rig = new Rig();
+      rig.intake.periodic();
+
+      rig.command.initialize();
+
+      // The recording IO keeps the rejecting default setVoltage; any call would latch the fault.
+      assertFalse(rig.intake.getObservation().faultLatched());
+      assertFalse(rig.intake.isCommissioningActive());
+      assertEquals(
+          RequestedState.INTAKE_REQUESTED, rig.intake.getObservation().requestedState());
+      rig.command.end(true);
+    }
+  }
+
+  @Test
   void initializeRequestsIntakeExactlyOnce() {
     Rig rig = new Rig();
 
@@ -163,75 +184,95 @@ class IntakeToFeederCommandTest {
   }
 
   @Test
-  void intakeRequestFailurePreventsFeederRequest() {
+  void intakeRequestFailureFailsClosedWithoutThrowingOrRequestingFeeder() {
     Rig rig = new Rig();
     rig.intakeIO.requestFailure = new RuntimeException("intake request failed");
 
-    RuntimeException thrown = assertThrows(RuntimeException.class, rig.command::initialize);
+    assertDoesNotThrow(rig.command::initialize);
 
-    assertSame(rig.intakeIO.requestFailure, thrown);
     assertEquals(0, rig.feederIO.requestCount);
-  }
-
-  @Test
-  void intakeRequestFailureAttemptsBothCleanupOperations() {
-    Rig rig = new Rig();
-    rig.intakeIO.requestFailure = new RuntimeException("intake request failed");
-
-    assertThrows(RuntimeException.class, rig.command::initialize);
-
-    assertEquals(1, rig.feederIO.stopCount);
-    assertEquals(1, rig.intakeIO.stopCount);
+    assertTrue(rig.command.isFinished());
+    assertTrue(rig.intake.getObservation().faultLatched());
+    assertEquals(RequestedState.STOPPED, rig.intake.getObservation().requestedState());
     assertEquals(
-        List.of("intake.request", "feeder.stop", "intake.stop"), rig.events);
+        List.of("intake.request", "intake.stop", "feeder.stop", "intake.stop"), rig.events);
   }
 
   @Test
-  void feederRequestFailureAttemptsBothCleanupOperations() {
+  void feederRequestFailureFailsClosedAndLatchesIntakeFault() {
     Rig rig = new Rig();
     rig.feederIO.requestFailure = new RuntimeException("feeder request failed");
 
-    assertThrows(RuntimeException.class, rig.command::initialize);
+    assertDoesNotThrow(rig.command::initialize);
 
-    assertEquals(1, rig.feederIO.stopCount);
-    assertEquals(1, rig.intakeIO.stopCount);
+    assertTrue(rig.command.isFinished());
+    assertTrue(rig.intake.getObservation().faultLatched());
     assertEquals(
-        List.of("intake.request", "feeder.request", "feeder.stop", "intake.stop"),
+        List.of("intake.request", "feeder.request", "feeder.stop", "intake.stop", "intake.stop"),
         rig.events);
   }
 
   @Test
-  void initializeFailurePreservesPrimaryAndSuppressedCleanupOrder() {
-    assertInitializeFailurePreservesCleanupOrder(true);
-    assertInitializeFailurePreservesCleanupOrder(false);
+  void initializeFailureWithFailingStopsStillDoesNotThrow() {
+    Rig rig = new Rig();
+    rig.feederIO.requestFailure = new RuntimeException("feeder request failed");
+    rig.feederIO.stopFailure = new RuntimeException("feeder cleanup failed");
+    rig.intakeIO.stopFailure = new RuntimeException("intake cleanup failed");
+
+    assertDoesNotThrow(rig.command::initialize);
+
+    assertTrue(rig.command.isFinished());
+    assertTrue(rig.intake.getObservation().faultLatched());
+    assertTrue(rig.feederIO.stopCount >= 1);
+    assertTrue(rig.intakeIO.stopCount >= 1);
   }
 
   @Test
-  void feederStopFailureStillAttemptsIntakeStop() {
+  void feederStopFailureStillAttemptsIntakeStopWithoutThrowing() {
     Rig rig = new Rig();
-    RuntimeException feederFailure = new RuntimeException("feeder stop failed");
-    rig.feederIO.stopFailure = feederFailure;
+    rig.feederIO.stopFailure = new RuntimeException("feeder stop failed");
 
-    RuntimeException thrown = assertThrows(RuntimeException.class, () -> rig.command.end(false));
+    assertDoesNotThrow(() -> rig.command.end(false));
 
-    assertSame(feederFailure, thrown);
     assertEquals(List.of("feeder.stop", "intake.stop"), rig.events);
     assertEquals(1, rig.intakeIO.stopCount);
+    assertFalse(rig.intake.getObservation().faultLatched());
   }
 
   @Test
-  void dualStopFailurePreservesPrimaryAndSuppressedOrdering() {
+  void dualStopFailureAttemptsBothStopsAndLatchesIntakeFault() {
     Rig rig = new Rig();
-    RuntimeException feederFailure = new RuntimeException("feeder stop failed");
-    RuntimeException intakeFailure = new RuntimeException("intake stop failed");
-    rig.feederIO.stopFailure = feederFailure;
-    rig.intakeIO.stopFailure = intakeFailure;
+    rig.feederIO.stopFailure = new RuntimeException("feeder stop failed");
+    rig.intakeIO.stopFailure = new RuntimeException("intake stop failed");
 
-    RuntimeException thrown = assertThrows(RuntimeException.class, () -> rig.command.end(true));
+    assertDoesNotThrow(() -> rig.command.end(true));
+    assertDoesNotThrow(() -> rig.command.end(true));
 
-    assertSame(feederFailure, thrown);
-    assertArrayEquals(new Throwable[] {intakeFailure}, thrown.getSuppressed());
-    assertEquals(List.of("feeder.stop", "intake.stop"), rig.events);
+    assertEquals(
+        List.of("feeder.stop", "intake.stop", "feeder.stop", "intake.stop"), rig.events);
+    assertTrue(rig.intake.getObservation().faultLatched());
+  }
+
+  @Test
+  void scheduledInitializationFailureFinishesWithoutSchedulerExceptionOrRestart() {
+    Rig rig = new Rig();
+    rig.feederIO.requestFailure = new RuntimeException("feeder request failed");
+
+    assertDoesNotThrow(() -> scheduler.schedule(rig.command));
+    assertDoesNotThrow(scheduler::run);
+
+    assertFalse(rig.command.isScheduled());
+    assertTrue(rig.intake.getObservation().faultLatched());
+    int intakeRequestsAfterFailure = rig.intakeIO.requestCount;
+
+    rig.feederIO.requestFailure = null;
+    assertDoesNotThrow(() -> scheduler.schedule(rig.command));
+    assertDoesNotThrow(scheduler::run);
+
+    assertFalse(rig.command.isScheduled());
+    assertEquals(intakeRequestsAfterFailure, rig.intakeIO.requestCount);
+    assertEquals(1, rig.feederIO.requestCount);
+    assertEquals(RequestedState.STOPPED, rig.intake.getObservation().requestedState());
   }
 
   @Test
@@ -321,36 +362,6 @@ class IntakeToFeederCommandTest {
         List.of("feeder.stop", "intake.stop", "feeder.competitor"), rig.events);
     assertEquals(1, rig.feederIO.stopCount);
     assertEquals(1, rig.intakeIO.stopCount);
-  }
-
-  private static void assertInitializeFailurePreservesCleanupOrder(boolean intakeRequestFails) {
-    Rig rig = new Rig();
-    String failureMessage = intakeRequestFails ? "intake request failed" : "feeder request failed";
-    RuntimeException primaryFailure = new RuntimeException(failureMessage);
-    RuntimeException feederCleanupFailure = new RuntimeException("feeder cleanup failed");
-    RuntimeException intakeCleanupFailure = new RuntimeException("intake cleanup failed");
-    if (intakeRequestFails) {
-      rig.intakeIO.requestFailure = primaryFailure;
-    } else {
-      rig.feederIO.requestFailure = primaryFailure;
-    }
-    rig.feederIO.stopFailure = feederCleanupFailure;
-    rig.intakeIO.stopFailure = intakeCleanupFailure;
-
-    RuntimeException thrown = assertThrows(RuntimeException.class, rig.command::initialize);
-
-    assertSame(primaryFailure, thrown);
-    assertArrayEquals(
-        new Throwable[] {feederCleanupFailure, intakeCleanupFailure}, thrown.getSuppressed());
-    if (intakeRequestFails) {
-      assertEquals(
-          List.of("intake.request", "feeder.stop", "intake.stop"), rig.events);
-      assertEquals(0, rig.feederIO.requestCount);
-    } else {
-      assertEquals(
-          List.of("intake.request", "feeder.request", "feeder.stop", "intake.stop"),
-          rig.events);
-    }
   }
 
   private static Command createRequirementCompetitor(

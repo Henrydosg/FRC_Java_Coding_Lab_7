@@ -11,10 +11,18 @@ package frc.robot.io.intake;
 
 /** Deterministic safe Intake implementation that never produces physical output. */
 public final class IntakeIONoop implements IntakeIO {
+  /** Reports an unavailable Intake with explicitly invalid measurements every cycle. */
   @Override
   public void updateInputs(IntakeIOInputs inputs) {
     inputs.available = false;
     inputs.connected = false;
+    inputs.measurementValid = false;
+    inputs.timestampSeconds = Double.NaN;
+    inputs.motorPositionRotations = Double.NaN;
+    inputs.motorVelocityRotationsPerSecond = Double.NaN;
+    inputs.statorCurrentAmps = Double.NaN;
+    inputs.supplyCurrentAmps = Double.NaN;
+    inputs.appliedVolts = Double.NaN;
   }
 
   @Override

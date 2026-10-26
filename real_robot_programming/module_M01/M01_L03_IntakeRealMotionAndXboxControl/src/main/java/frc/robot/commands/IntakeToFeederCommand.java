@@ -9,15 +9,25 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import java.util.Objects;
 
-/** Coordinates Intake and Feeder semantic requests for one scheduler-owned lifecycle. */
+/**
+ * Coordinates Intake and Feeder semantic requests for one scheduler-owned lifecycle.
+ *
+ * <p>Initialization failures fail closed: both mechanisms are stopped, the Intake fault is
+ * latched and the command finishes on its next scheduler check instead of throwing. Cleanup never
+ * throws: the Intake stop path is non-throwing and a Feeder stop failure is reported once and does
+ * not prevent the Intake stop attempt.
+ */
 public final class IntakeToFeederCommand extends Command {
   private final IntakeSubsystem intake;
   private final FeederSubsystem feeder;
+  private boolean initializationFailed;
+  private boolean feederStopFailureReported;
 
   /**
    * Creates the command that requests Intake and Feeder behavior together.
@@ -33,18 +43,22 @@ public final class IntakeToFeederCommand extends Command {
 
   @Override
   public void initialize() {
-    try {
-      intake.requestIntake();
-    } catch (RuntimeException failure) {
-      stopOutputsAfterFailure(failure);
-      throw failure;
+    initializationFailed = false;
+
+    intake.requestIntake();
+    if (intake.getObservation().faultLatched()) {
+      // The Intake rejected or failed the request and has already attempted its own stop.
+      failClosed();
+      return;
     }
 
     try {
       feeder.requestFeed();
     } catch (RuntimeException failure) {
-      stopOutputsAfterFailure(failure);
-      throw failure;
+      DriverStation.reportError(
+          "IntakeToFeederCommand Feeder request failed; outputs stopped: " + failure, false);
+      failClosed();
+      intake.latchFault();
     }
   }
 
@@ -53,53 +67,30 @@ public final class IntakeToFeederCommand extends Command {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return initializationFailed;
   }
 
   @Override
   public void end(boolean interrupted) {
-    RuntimeException feederFailure = null;
-    RuntimeException intakeFailure = null;
+    stopBoth();
+  }
 
+  private void failClosed() {
+    initializationFailed = true;
+    stopBoth();
+  }
+
+  private void stopBoth() {
     try {
       feeder.stop();
     } catch (RuntimeException failure) {
-      feederFailure = failure;
+      if (!feederStopFailureReported) {
+        feederStopFailureReported = true;
+        DriverStation.reportError(
+            "IntakeToFeederCommand Feeder stop failed; neutral output not confirmed: " + failure,
+            false);
+      }
     }
-
-    try {
-      intake.stop();
-    } catch (RuntimeException failure) {
-      intakeFailure = failure;
-    }
-
-    if (feederFailure != null) {
-      addSuppressedIfDistinct(feederFailure, intakeFailure);
-      throw feederFailure;
-    }
-    if (intakeFailure != null) {
-      throw intakeFailure;
-    }
-  }
-
-  private void stopOutputsAfterFailure(RuntimeException primaryFailure) {
-    try {
-      feeder.stop();
-    } catch (RuntimeException cleanupFailure) {
-      addSuppressedIfDistinct(primaryFailure, cleanupFailure);
-    }
-
-    try {
-      intake.stop();
-    } catch (RuntimeException cleanupFailure) {
-      addSuppressedIfDistinct(primaryFailure, cleanupFailure);
-    }
-  }
-
-  private static void addSuppressedIfDistinct(
-      RuntimeException primaryFailure, RuntimeException cleanupFailure) {
-    if (cleanupFailure != null && cleanupFailure != primaryFailure) {
-      primaryFailure.addSuppressed(cleanupFailure);
-    }
+    intake.stop();
   }
 }

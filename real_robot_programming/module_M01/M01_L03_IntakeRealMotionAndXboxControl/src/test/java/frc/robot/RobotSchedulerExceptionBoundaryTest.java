@@ -11,6 +11,7 @@ package frc.robot;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -24,13 +25,28 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.auto.AutonomousPreparationCoordinator;
 import frc.robot.commands.VisionFusionCoordinator;
+import frc.robot.io.elevator.ElevatorIO;
+import frc.robot.io.elevator.ElevatorIONoop;
+import frc.robot.io.feeder.FeederIO;
+import frc.robot.io.feeder.FeederIONoop;
+import frc.robot.io.flywheel.FlywheelIO;
+import frc.robot.io.flywheel.FlywheelIONoop;
 import frc.robot.io.gyro.GyroIO;
+import frc.robot.io.intake.IntakeIO;
+import frc.robot.io.intake.IntakeIONoop;
 import frc.robot.io.swerve.SwerveModuleIONoop;
 import frc.robot.io.vision.VisionIOSimHarness;
 import frc.robot.observation.autonomous.AutonomousPreparationObservation.State;
+import frc.robot.observation.intake.IntakeObservation.RequestedState;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.FeederSubsystem;
+import frc.robot.subsystems.FlywheelSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -196,6 +212,196 @@ class RobotSchedulerExceptionBoundaryTest {
     assertTrue(coordinator.getObservation().adapterFatalFaulted());
     assertTrue(
         coordinator.getObservation().firstFatalReason().contains("scheduler boundary failure"));
+  }
+
+  @Test
+  void schedulerFatalStopsEveryMechanismAndLatchesIntake() throws ReflectiveOperationException {
+    RobotContainer container = readRobotContainer(robot);
+    MechanismStopRecorder recorder = installMechanismStopRecorder(container);
+    IntakeSubsystem intake = readField(container, "intakeSubsystem", IntakeSubsystem.class);
+    swerveSubsystem.acceptChassisSpeeds(
+        new ChassisSpeeds(TEST_DRIVE_SPEED_METERS_PER_SECOND, 0.0, 0.0));
+    assertTrue(hasNonzeroFinalModuleSpeed());
+
+    scheduler.schedule(new FailingCommand(FailurePoint.EXECUTE));
+    assertDoesNotThrow(() -> robot.robotPeriodic());
+
+    assertSwerveStopped();
+    assertEquals(State.FAULTED, coordinator.getObservation().state());
+    assertEquals(List.of("intake", "feeder", "flywheel", "elevator"), recorder.stops);
+    assertTrue(intake.getObservation().faultLatched());
+
+    intake.requestIntake();
+    assertEquals(RequestedState.STOPPED, intake.getObservation().requestedState());
+    assertEquals(0, recorder.intakeRequests);
+  }
+
+  @Test
+  void oneFailingMechanismStopDoesNotSkipTheOthers() throws ReflectiveOperationException {
+    RobotContainer container = readRobotContainer(robot);
+    MechanismStopRecorder recorder = installMechanismStopRecorder(container);
+    recorder.failingStops.add("feeder");
+    recorder.failingStops.add("flywheel");
+    swerveSubsystem.acceptChassisSpeeds(
+        new ChassisSpeeds(TEST_DRIVE_SPEED_METERS_PER_SECOND, 0.0, 0.0));
+
+    assertDoesNotThrow(
+        () -> container.handleSchedulerRuntimeException(new IllegalStateException("fatal")));
+
+    assertSwerveStopped();
+    assertEquals(State.FAULTED, coordinator.getObservation().state());
+    assertEquals(List.of("intake", "feeder", "flywheel", "elevator"), recorder.stops);
+  }
+
+  @Test
+  void repeatedFatalNotificationsRemainSafeAndKeepIntakeLatched()
+      throws ReflectiveOperationException {
+    RobotContainer container = readRobotContainer(robot);
+    MechanismStopRecorder recorder = installMechanismStopRecorder(container);
+    recorder.failingStops.add("intake");
+    recorder.failingStops.add("elevator");
+    IntakeSubsystem intake = readField(container, "intakeSubsystem", IntakeSubsystem.class);
+
+    for (int notification = 0; notification < 3; notification++) {
+      assertDoesNotThrow(
+          () -> container.handleSchedulerRuntimeException(new IllegalStateException("fatal")));
+    }
+    assertDoesNotThrow(() -> robot.robotPeriodic());
+
+    assertEquals(3, recorder.stops.stream().filter("elevator"::equals).count());
+    assertEquals(3, recorder.stops.stream().filter("intake"::equals).count());
+    assertTrue(intake.getObservation().faultLatched());
+    assertEquals(State.FAULTED, coordinator.getObservation().state());
+    intake.requestIntake();
+    assertEquals(0, recorder.intakeRequests);
+    assertFalse(intake.getObservation().requestedState() == RequestedState.INTAKE_REQUESTED);
+  }
+
+  private static MechanismStopRecorder installMechanismStopRecorder(RobotContainer container)
+      throws ReflectiveOperationException {
+    MechanismStopRecorder recorder = new MechanismStopRecorder();
+    replaceField(
+        readField(container, "intakeSubsystem", IntakeSubsystem.class),
+        "intakeIO",
+        recorder.intakeIO());
+    replaceField(
+        readField(container, "feederSubsystem", FeederSubsystem.class),
+        "feederIO",
+        recorder.feederIO());
+    replaceField(
+        readField(container, "flywheelSubsystem", FlywheelSubsystem.class),
+        "flywheelIO",
+        recorder.flywheelIO());
+    replaceField(
+        readField(container, "elevatorSubsystem", ElevatorSubsystem.class),
+        "elevatorIO",
+        recorder.elevatorIO());
+    return recorder;
+  }
+
+  private static <T> T readField(Object owner, String name, Class<T> type)
+      throws ReflectiveOperationException {
+    Field field = owner.getClass().getDeclaredField(name);
+    field.setAccessible(true);
+    return type.cast(field.get(owner));
+  }
+
+  private static void replaceField(Object owner, String name, Object replacement)
+      throws ReflectiveOperationException {
+    Field field = owner.getClass().getDeclaredField(name);
+    field.setAccessible(true);
+    field.set(owner, replacement);
+  }
+
+  /** Records mechanism stop order and optionally fails selected stops; inputs stay Noop. */
+  private static final class MechanismStopRecorder {
+    private final List<String> stops = new ArrayList<>();
+    private final List<String> failingStops = new ArrayList<>();
+    private int intakeRequests;
+
+    private void recordStop(String mechanism) {
+      stops.add(mechanism);
+      if (failingStops.contains(mechanism)) {
+        throw new IllegalStateException(mechanism + " stop failed");
+      }
+    }
+
+    private IntakeIO intakeIO() {
+      IntakeIONoop noop = new IntakeIONoop();
+      return new IntakeIO() {
+        @Override
+        public void updateInputs(IntakeIOInputs inputs) {
+          noop.updateInputs(inputs);
+        }
+
+        @Override
+        public void requestIntake() {
+          intakeRequests++;
+        }
+
+        @Override
+        public void stop() {
+          recordStop("intake");
+        }
+      };
+    }
+
+    private FeederIO feederIO() {
+      FeederIONoop noop = new FeederIONoop();
+      return new FeederIO() {
+        @Override
+        public void updateInputs(FeederIOInputs inputs) {
+          noop.updateInputs(inputs);
+        }
+
+        @Override
+        public void requestFeed() {}
+
+        @Override
+        public void stop() {
+          recordStop("feeder");
+        }
+      };
+    }
+
+    private FlywheelIO flywheelIO() {
+      FlywheelIONoop noop = new FlywheelIONoop();
+      return new FlywheelIO() {
+        @Override
+        public void updateInputs(FlywheelIOInputs inputs) {
+          noop.updateInputs(inputs);
+        }
+
+        @Override
+        public void requestVelocity(double targetRpm) {}
+
+        @Override
+        public void stop() {
+          recordStop("flywheel");
+        }
+      };
+    }
+
+    private ElevatorIO elevatorIO() {
+      ElevatorIONoop noop = new ElevatorIONoop();
+      return new ElevatorIO() {
+        @Override
+        public void updateInputs(ElevatorIOInputs inputs) {
+          noop.updateInputs(inputs);
+        }
+
+        @Override
+        public void requestPositionMeters(double targetPositionMeters) {}
+
+        @Override
+        public void requestHoming() {}
+
+        @Override
+        public void stop() {
+          recordStop("elevator");
+        }
+      };
+    }
   }
 
   private static RobotContainer readRobotContainer(Robot robot)

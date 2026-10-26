@@ -31,6 +31,7 @@ import frc.robot.commands.auto.AutonomousRoutineFactory;
 import frc.robot.commands.auto.AutoBuilderContractAdapter;
 import frc.robot.commands.DriveThreeMeterValidationDashboard;
 import frc.robot.commands.FieldRelativeTeleopDriveCommand;
+import frc.robot.commands.IntakeCommissioningCommand;
 import frc.robot.commands.IntakeToFeederCommand;
 import frc.robot.commands.auto.PathPlannerTrajectoryAdapter;
 import frc.robot.commands.auto.PrepareAutonomousCommand;
@@ -77,6 +78,7 @@ import frc.robot.telemetry.validation.DriveThreeMeterValidationTelemetryFacade;
 import frc.robot.telemetry.vision.VisionTelemetryFacade;
 import frc.robot.vision.AprilTagFieldLayoutContract;
 import frc.robot.observation.vision.VisionMeasurementQualityEvaluator.Policy;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -108,6 +110,7 @@ public class RobotContainer {
   private final SendableChooser<AutonomousRoutineFactory.AutonomousRoutineId>
       autonomousRoutineChooser;
   private final RobotTelemetry robotTelemetry;
+  private final Set<String> reportedFatalStopFailures = new HashSet<>();
 
   /**
    * Creates the composition root.
@@ -225,6 +228,11 @@ public class RobotContainer {
             () -> new IntakeToFeederCommand(intakeSubsystem, feederSubsystem),
             Set.of(intakeSubsystem, feederSubsystem)));
     commissioningDashboard = new SwerveFrontLeftCommissioningDashboard(swerveSubsystem);
+    // Explicit User-started Test-mode Intake commissioning; never bound to a controller.
+    SmartDashboard.putData(
+        "Intake Commissioning Forward", IntakeCommissioningCommand.forward(intakeSubsystem));
+    SmartDashboard.putData(
+        "Intake Commissioning Reverse", IntakeCommissioningCommand.reverse(intakeSubsystem));
     fourModuleTestDashboard = new SwerveFourModuleTestDashboard(swerveSubsystem);
     driveThreeMeterValidationDashboard =
         new DriveThreeMeterValidationDashboard(
@@ -277,6 +285,10 @@ public class RobotContainer {
 
     RunIntakeCommand runIntakeCommand = new RunIntakeCommand(intakeSubsystem);
     driverController.rightBumper().whileTrue(runIntakeCommand);
+    // B reverse is bound after Right Bumper: both commands require Intake, so the later press wins
+    // (B wins a same-cycle press) and an interrupted held command is never restarted.
+    RunIntakeCommand reverseIntakeCommand = RunIntakeCommand.reverse(intakeSubsystem);
+    driverController.b().whileTrue(reverseIntakeCommand);
 
     RunFeederCommand runFeederCommand = new RunFeederCommand(feederSubsystem);
     driverController.leftBumper().whileTrue(runFeederCommand);
@@ -337,10 +349,46 @@ public class RobotContainer {
     return autonomousRoutineFactory.create(selectedRoutine, currentAlliance);
   }
 
-  /** Routes an unexpected Robot-level scheduler failure to the autonomous safety owners. */
+  /**
+   * Routes an unexpected Robot-level scheduler failure to the autonomous safety owners, then
+   * attempts an independent stop of every mechanism subsystem.
+   *
+   * <p>The existing Swerve path runs first and keeps its original failure propagation. Each
+   * mechanism stop is isolated, so one failure cannot skip the others; a mechanism stop failure is
+   * reported once per mechanism and is not treated as proof that the hardware stopped. Repeated
+   * calls are safe. The Intake fault latch rejects later Intake requests until robot-code restart.
+   */
   public void handleSchedulerRuntimeException(RuntimeException failure) {
-    autonomousPreparationCoordinator.recordSchedulerFatal(
-        Objects.requireNonNull(failure, "failure"));
+    RuntimeException requiredFailure = Objects.requireNonNull(failure, "failure");
+    RuntimeException swerveSafetyFailure = null;
+    try {
+      autonomousPreparationCoordinator.recordSchedulerFatal(requiredFailure);
+    } catch (RuntimeException coordinatorFailure) {
+      swerveSafetyFailure = coordinatorFailure;
+    }
+
+    attemptFatalMechanismStop("Intake", intakeSubsystem::latchFault);
+    attemptFatalMechanismStop("Feeder", feederSubsystem::stop);
+    attemptFatalMechanismStop("Flywheel", flywheelSubsystem::stop);
+    attemptFatalMechanismStop("Elevator", elevatorSubsystem::stop);
+
+    if (swerveSafetyFailure != null) {
+      throw swerveSafetyFailure;
+    }
+  }
+
+  private void attemptFatalMechanismStop(String mechanismName, Runnable stopAttempt) {
+    try {
+      stopAttempt.run();
+    } catch (RuntimeException stopFailure) {
+      if (reportedFatalStopFailures.add(mechanismName)) {
+        DriverStation.reportError(
+            mechanismName
+                + " scheduler-fatal stop attempt failed; neutral output not confirmed: "
+                + stopFailure,
+            false);
+      }
+    }
   }
 
   private static RobotConfig createPathPlannerRobotConfig() {

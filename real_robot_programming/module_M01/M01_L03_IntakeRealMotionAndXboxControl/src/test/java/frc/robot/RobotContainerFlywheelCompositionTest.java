@@ -42,6 +42,10 @@ class RobotContainerFlywheelCompositionTest {
   private static final Pattern FLYWHEEL_DIRECT_CONTROL =
       Pattern.compile(
           "\\bflywheelSubsystem\\s*(?:\\.\\s*(?:requestVelocity|stop)\\s*\\(|::\\s*(?:requestVelocity|stop)\\b)");
+  private static final Pattern FLYWHEEL_SCHEDULER_FATAL_STOP =
+      Pattern.compile(
+          "attemptFatalMechanismStop\\s*\\(\\s*\"Flywheel\"\\s*,\\s*flywheelSubsystem\\s*::\\s*stop"
+              + "\\s*\\)\\s*;");
   private static final Pattern FLYWHEEL_TRIGGER_BINDING =
       Pattern.compile(
           "(?s)\\.(?:whileTrue|onTrue|onFalse|toggleOnTrue|toggleOnFalse)\\s*\\([^;]*\\bflywheelSubsystem\\b");
@@ -104,8 +108,13 @@ class RobotContainerFlywheelCompositionTest {
   void containsNoFlywheelBindingAutonomousRegistrationOrFeederCoordination()
       throws IOException {
     String activeRobotContainerSource = robotContainerSourceWithoutComments();
+    // AUD-P1-02 Design Lock D1: the scheduler-fatal fan-out is the single approved stop reference.
+    assertEquals(
+        1L, FLYWHEEL_SCHEDULER_FATAL_STOP.matcher(activeRobotContainerSource).results().count());
+    String sourceWithoutFatalStop =
+        FLYWHEEL_SCHEDULER_FATAL_STOP.matcher(activeRobotContainerSource).replaceAll("");
 
-    assertFalse(FLYWHEEL_DIRECT_CONTROL.matcher(activeRobotContainerSource).find());
+    assertFalse(FLYWHEEL_DIRECT_CONTROL.matcher(sourceWithoutFatalStop).find());
     assertFalse(FLYWHEEL_TRIGGER_BINDING.matcher(activeRobotContainerSource).find());
     assertFalse(FLYWHEEL_AUTONOMOUS_REGISTRATION.matcher(activeRobotContainerSource).find());
     assertFalse(FEEDER_FLYWHEEL_COMMAND_CONSTRUCTION.matcher(activeRobotContainerSource).find());

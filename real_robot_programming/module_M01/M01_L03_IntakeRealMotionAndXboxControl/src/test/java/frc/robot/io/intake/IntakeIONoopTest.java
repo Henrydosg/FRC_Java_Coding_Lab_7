@@ -11,6 +11,7 @@ package frc.robot.io.intake;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import frc.robot.io.intake.IntakeIO.IntakeIOInputs;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,29 @@ class IntakeIONoopTest {
 
     assertFalse(inputs.available);
     assertFalse(inputs.connected);
+  }
+
+  @Test
+  void reportsAnInvalidNaNMeasurementInsteadOfFabricatedZero() {
+    IntakeIONoop intakeIO = new IntakeIONoop();
+    IntakeIOInputs inputs = new IntakeIOInputs();
+    inputs.measurementValid = true;
+    inputs.timestampSeconds = 0.0;
+    inputs.motorPositionRotations = 0.0;
+    inputs.motorVelocityRotationsPerSecond = 0.0;
+    inputs.statorCurrentAmps = 0.0;
+    inputs.supplyCurrentAmps = 0.0;
+    inputs.appliedVolts = 0.0;
+
+    intakeIO.updateInputs(inputs);
+
+    assertFalse(inputs.measurementValid);
+    assertTrue(Double.isNaN(inputs.timestampSeconds));
+    assertTrue(Double.isNaN(inputs.motorPositionRotations));
+    assertTrue(Double.isNaN(inputs.motorVelocityRotationsPerSecond));
+    assertTrue(Double.isNaN(inputs.statorCurrentAmps));
+    assertTrue(Double.isNaN(inputs.supplyCurrentAmps));
+    assertTrue(Double.isNaN(inputs.appliedVolts));
   }
 
   @Test

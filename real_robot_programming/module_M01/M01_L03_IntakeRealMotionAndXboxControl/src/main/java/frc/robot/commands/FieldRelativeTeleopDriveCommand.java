@@ -26,6 +26,7 @@ public final class FieldRelativeTeleopDriveCommand extends Command {
   private final XboxDriverInputSource driverInputSource;
   private final DriverInputTelemetryFacade driverInputTelemetryFacade;
   private final Consumer<DriverInputObservation> driverInputPublisher;
+  private boolean cleanupStopFailed;
 
   /**
    * Creates the field-relative teleop command.
@@ -70,8 +71,19 @@ public final class FieldRelativeTeleopDriveCommand extends Command {
     addRequirements(swerveSubsystem);
   }
 
+  /**
+   * Submits field-relative driver intent while Teleop is enabled.
+   *
+   * <p>After a cleanup stop failure, driver intent is no longer submitted for the rest of the
+   * robot-code session; every execution only re-attempts the Swerve stop, so rescheduling this
+   * default command cannot re-arm drive output.
+   */
   @Override
   public void execute() {
+    if (cleanupStopFailed) {
+      attemptInhibitedStop();
+      return;
+    }
     if (!DriverStation.isTeleopEnabled()) {
       swerveSubsystem.stop();
       return;
@@ -95,14 +107,40 @@ public final class FieldRelativeTeleopDriveCommand extends Command {
     }
   }
 
+  /**
+   * Attempts the Swerve stop without letting a failure escape, so scheduler cancellation and
+   * interruption bookkeeping always completes.
+   *
+   * <p>A stop failure is reported once, is not treated as proof that the modules stopped, and
+   * inhibits later driver intent from this command until robot-code restart.
+   */
   @Override
   public void end(boolean interrupted) {
-    swerveSubsystem.stop();
+    try {
+      swerveSubsystem.stop();
+    } catch (RuntimeException stopFailure) {
+      if (!cleanupStopFailed) {
+        cleanupStopFailed = true;
+        DriverStation.reportError(
+            "Swerve stop failed during teleop drive command cleanup; neutral output not confirmed; "
+                + "teleop drive intent inhibited until robot-code restart: "
+                + stopFailure,
+            false);
+      }
+    }
   }
 
   @Override
   public boolean isFinished() {
     return false;
+  }
+
+  private void attemptInhibitedStop() {
+    try {
+      swerveSubsystem.stop();
+    } catch (RuntimeException repeatedStopFailure) {
+      // Already reported once when the inhibition latched; the next execution retries the stop.
+    }
   }
 
   private void stopAfterFailure(RuntimeException failure) {

@@ -329,6 +329,41 @@ public final class Constants {
     /** True when the motor should actively brake while its output is neutral. */
     public static final boolean kBrakeWhenNeutral = true;
 
+    /**
+     * Hardware peak output magnitude configured in the Talon FX, in volts (forward +, reverse -).
+     *
+     * <p>Provisional value; not yet verified on real hardware.
+     */
+    public static final double kPeakOutputVolts = 6.0;
+
+    /**
+     * Test-mode commissioning output magnitude, in volts.
+     *
+     * <p>Provisional value; not yet verified on real hardware.
+     */
+    public static final double kCommissioningVoltageVolts = 1.5;
+
+    /**
+     * Maximum active duration of one commissioning output, in seconds. Enforced by scheduler-driven
+     * software checks; Driver Station Disable/E-stop remains the physical backstop.
+     */
+    public static final double kCommissioningMaximumDurationSeconds = 1.0;
+
+    /**
+     * Teleop manual forward output while the forward button is held, in volts.
+     *
+     * <p>Provisional value; software only, not yet verified on real hardware.
+     */
+    public static final double kManualForwardVoltageVolts = 4.0;
+
+    /**
+     * Teleop manual reverse output magnitude while the reverse button is held, in volts; applied
+     * as a negative voltage.
+     *
+     * <p>Provisional value; software only, not yet verified on real hardware.
+     */
+    public static final double kManualReverseVoltageMagnitudeVolts = 3.0;
+
     private IntakeConstants() {}
   }
 

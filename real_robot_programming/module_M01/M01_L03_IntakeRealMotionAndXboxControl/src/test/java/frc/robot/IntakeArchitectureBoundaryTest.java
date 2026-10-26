@@ -139,7 +139,14 @@ class IntakeArchitectureBoundaryTest {
         Pattern.compile(
             "\\.(?:whileTrue|whileFalse|onTrue|onFalse|"
                 + "toggleOnTrue|toggleOnFalse|onChange)\\s*\\(");
-    assertEquals(3L, triggerBinding.matcher(code).results().count());
+    assertEquals(4L, triggerBinding.matcher(code).results().count());
+    assertTrue(
+        code.contains(
+            "RunIntakeCommand reverseIntakeCommand = RunIntakeCommand.reverse(intakeSubsystem)"));
+    assertTrue(code.contains("driverController.b().whileTrue(reverseIntakeCommand)"));
+    assertTrue(
+        code.indexOf("driverController.rightBumper().whileTrue(runIntakeCommand)")
+            < code.indexOf("driverController.b().whileTrue(reverseIntakeCommand)"));
     assertTrue(code.contains("swerveSubsystem.setDefaultCommand(fieldRelativeTeleopDriveCommand)"));
     assertEquals(
         1L, Pattern.compile("\\.setDefaultCommand\\s*\\(").matcher(code).results().count());
@@ -159,7 +166,11 @@ class IntakeArchitectureBoundaryTest {
               .collect(Collectors.toSet());
     }
     assertEquals(
-        Set.of("RunIntakeCommand.java", "IntakeToFeederCommand.java"), intakeNamedCommandFiles);
+        Set.of(
+            "RunIntakeCommand.java",
+            "IntakeToFeederCommand.java",
+            "IntakeCommissioningCommand.java"),
+        intakeNamedCommandFiles);
   }
 
   @Test
@@ -183,7 +194,7 @@ class IntakeArchitectureBoundaryTest {
   }
 
   @Test
-  void intakeIORealIssuesNeutralOutputOnly() throws IOException {
+  void intakeIORealIssuesNeutralOutputExceptForTheSingleVoltagePath() throws IOException {
     String code = withoutCommentsAndLiterals(source("frc/robot/io/intake/IntakeIOReal.java"));
 
     Set<String> controlImports =
@@ -192,7 +203,7 @@ class IntakeArchitectureBoundaryTest {
             .results()
             .map(result -> result.group(1))
             .collect(Collectors.toSet());
-    assertEquals(Set.of("NeutralOut"), controlImports);
+    assertEquals(Set.of("NeutralOut", "VoltageOut"), controlImports);
 
     long setControlCalls = Pattern.compile("\\.setControl\\s*\\(").matcher(code).results().count();
     long neutralSetControlCalls =
@@ -200,12 +211,74 @@ class IntakeArchitectureBoundaryTest {
             .matcher(code)
             .results()
             .count();
-    assertEquals(2L, setControlCalls);
-    assertEquals(setControlCalls, neutralSetControlCalls);
+    long voltageSetControlCalls =
+        Pattern.compile(
+                "\\.setControl\\s*\\(\\s*voltageRequest\\s*\\.\\s*withOutput\\s*\\(\\s*volts\\s*\\)\\s*\\)")
+            .matcher(code)
+            .results()
+            .count();
+    assertEquals(3L, setControlCalls);
+    assertEquals(2L, neutralSetControlCalls);
+    assertEquals(1L, voltageSetControlCalls);
+    assertTrue(code.contains("new VoltageOut(0.0).withEnableFOC(false)"));
+    assertEquals(1L, Pattern.compile("\\bnew\\s+VoltageOut\\b").matcher(code).results().count());
+
+    int setVoltageMethod = code.indexOf("public void setVoltage(double volts)");
+    int voltageControl = code.indexOf("voltageRequest.withOutput(volts)");
+    assertTrue(setVoltageMethod >= 0);
+    assertTrue(voltageControl > setVoltageMethod);
 
     assertFalse(Pattern.compile("\\.set\\s*\\(").matcher(code).find());
     assertFalse(Pattern.compile("\\.setVoltage\\s*\\(").matcher(code).find());
     assertFalse(code.contains("phoenix6.controls.*"));
+  }
+
+  @Test
+  void intakeVoltageIsRequestedOnlyByTheSubsystemCommissioningPath() throws IOException {
+    Path main = Path.of("src", "main", "java");
+    Set<String> voltageCallers;
+    try (Stream<Path> files = Files.walk(main)) {
+      voltageCallers =
+          files
+              .filter(Files::isRegularFile)
+              .filter(path -> path.getFileName().toString().endsWith(".java"))
+              .filter(
+                  path ->
+                      Pattern.compile("intakeIO\\s*\\.\\s*setVoltage\\s*\\(")
+                          .matcher(withoutCommentsAndLiterals(readUnchecked(path)))
+                          .find())
+              .map(path -> normalizedRelativePath(main, path))
+              .collect(Collectors.toSet());
+    }
+    assertEquals(Set.of("frc/robot/subsystems/IntakeSubsystem.java"), voltageCallers);
+
+    String subsystem = withoutCommentsAndLiterals(source("frc/robot/subsystems/IntakeSubsystem.java"));
+    int startMethod = subsystem.indexOf("public boolean startCommissioningVoltage(double volts)");
+    int testGate = subsystem.indexOf("DriverStation.isTestEnabled()");
+    assertTrue(startMethod >= 0);
+    assertTrue(testGate >= 0);
+    assertEquals(
+        2L, Pattern.compile("intakeIO\\s*\\.\\s*setVoltage\\s*\\(").matcher(subsystem).results().count());
+    assertTrue(subsystem.contains("public boolean startManual(ManualDirection direction)"));
+    assertTrue(subsystem.contains("DriverStation.isTeleopEnabled()"));
+    assertTrue(source("frc/robot/commands/RunIntakeCommand.java").contains("startManual"));
+    assertFalse(source("frc/robot/commands/IntakeToFeederCommand.java").contains("startManual"));
+    assertFalse(source("frc/robot/commands/IntakeCommissioningCommand.java").contains("startManual"));
+    assertFalse(robotContainer().contains("startManual"));
+
+    for (String command :
+        Set.of(
+            "frc/robot/commands/RunIntakeCommand.java",
+            "frc/robot/commands/IntakeToFeederCommand.java")) {
+      // Neither held-button nor autonomous-event commands may use the commissioning path.
+      assertFalse(source(command).contains("startCommissioningVoltage"), command);
+    }
+    String robotContainer = withoutCommentsAndLiterals(source("frc/robot/RobotContainer.java"));
+    assertFalse(robotContainer.contains("startCommissioningVoltage"));
+    assertFalse(
+        Pattern.compile("(?s)\\.(?:whileTrue|onTrue|onFalse|toggleOnTrue)\\s*\\([^;]*IntakeCommissioning")
+            .matcher(robotContainer)
+            .find());
   }
 
   @Test
@@ -223,6 +296,10 @@ class IntakeArchitectureBoundaryTest {
         1L, Pattern.compile("new\\s+IntakeIOReal\\s*\\(").matcher(code).results().count());
     assertEquals(
         1L, Pattern.compile("new\\s+IntakeSubsystem\\s*\\(").matcher(code).results().count());
+  }
+
+  private static String robotContainer() throws IOException {
+    return withoutCommentsAndLiterals(source("frc/robot/RobotContainer.java"));
   }
 
   private static String readUnchecked(Path path) {
