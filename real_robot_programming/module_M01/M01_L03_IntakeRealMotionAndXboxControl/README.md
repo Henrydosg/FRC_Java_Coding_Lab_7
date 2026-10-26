@@ -1,25 +1,23 @@
 # M01_L03 — Intake Real Motion and Xbox Control
 
-## GOV3 Group 1 activation — 2026-10-17
+## Current lesson record — GOV3 Group 3 closure recording 2026-10-26
 
 | Field | Current record |
 | --- | --- |
 | Lesson / title | M01_L03_IntakeRealMotionAndXboxControl — Intake Real Motion and Xbox Control |
-| Previous lesson | M01_L02_IntakeRealIOConfigurationAndSafeStop |
+| Previous lesson | M01_L02_IntakeRealIOConfigurationAndSafeStop — COMPLETE / FROZEN / READ-ONLY |
 | One new concept | Qualified first Intake motion and manual control |
 | Roadmap | [M01 Fast-Track 10-lesson revision](../../../docs/architecture_decisions/ADR_M01_Fast_Track_10_Lesson_Roadmap_Revision.md) §4 L03 (controls numbering); [original M01 roadmap](../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) binding for everything else |
-| Governance model | [ADR_GOV3](../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) — GROUP 1 ACTIVATE / BASELINE |
+| Governance model | [ADR_GOV3](../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) — GROUP 3 COMPLETE / FREEZE |
 | Primary Engineer | Claude Code; Codex independent reviewer |
-| Donor | M01_L02_IntakeRealIOConfigurationAndSafeStop — COMPLETE / FROZEN / READ-ONLY; User-owned publication commit ed6653e |
-| Inheritance audit | PASS — 349/349 donor tracked files byte-identical to the target; no other non-generated difference; no nested duplicate project (engineer read-only comparison, 2026-10-17) |
-| User baseline | BUILD SUCCESSFUL in 1m 5s; 7 actionable tasks (6 executed, 1 up-to-date) — supplied User evidence |
-| Design Lock | CONDITIONAL PASS — Architect brief "M01_L03 — GROUP 1 LIFECYCLE ACTIVATION" (AUTH_M01_L03_GROUP1_ACTIVATION_RECORDING, 2026-10-17, supplied by the User in chat); design decisions only, not implementation authorization |
-| AUD-P1-02 | MANDATORY / UNRESOLVED implementation safety gate — must be satisfied and accepted before any nonzero Intake output |
-| Lesson lifecycle | IN_PROGRESS — sole active editable lesson |
-| Group 1 recording | Working tree only; self-review; Architect review PENDING; User-owned Group 1 publication PENDING |
-| Group 2 implementation | NOT AUTHORIZED |
-| Powered hardware / nonzero Intake output | NOT AUTHORIZED |
-| Transition guide | IN_PROGRESS / NOT FINAL |
+| Lesson lifecycle | COMPLETE / FROZEN / READ-ONLY — Group 3 recording 2026-10-26; User-owned publication PENDING |
+| Group 1 publication | User-owned commit fb65c08efbe2ab8a5000c3bfbd803b26d3961e38 "Activate M01_L03 and record inherited baseline"; accepted by the Architect |
+| Group 2 implementation | Checkpoints A–E implemented and accepted by the Architect; User-owned Group 2 publication PENDING |
+| Final software regression | SOFTWARE TEST VERIFIED — User: 1031 tests, 0 failures, 0 errors, 0 skipped |
+| Final independent review | INDEPENDENT REVIEW PASS — Codex PASS_M01_L03_D_E |
+| Real hardware | REAL HARDWARE FUNCTIONAL VERIFIED — Test commissioning ±1.5 V and Xbox manual forward/reverse (User, Microsoft Xbox Controller); fault scenarios NOT TESTED |
+| Transition guide | FINAL / PASS |
+| Group 3 | AUTHORIZED (AUTH_M01_L03_GROUP3_FINAL_LIFECYCLE_CLOSURE); closure recorded; User verification and publication PENDING |
 
 ## Lesson documentation
 
@@ -28,49 +26,51 @@
 - [Lesson checklist](LESSON_CHECKLIST.md)
 - [M01_L02 to M01_L03 transition guide](docs/M01_L02_to_M01_L03_Step_by_Step.md)
 
-## Design Lock decisions — CONDITIONAL PASS
+## Implemented behavior
 
-The Architect accepted the engineering direction of the targeted Design Lock report subject to the constraints below. These are design decisions; they do not authorize implementation.
-
-| ID | Decision |
+| Path | Behavior (as built) |
 | --- | --- |
-| D1 — stop fan-out | Use the existing RobotContainer scheduler-fatal runtime boundary for independent per-mechanism stop attempts. Preserve existing Swerve safety behavior. |
-| D2 — IO contract | Prefer a backward-compatible additive IntakeIO.setVoltage(double). Do not remove or replace existing IO contract methods without explicit contract authority (ES-06 §11). |
-| Manual forward | Right Bumper held — forward +4.0 V (provisional); release stops |
-| Manual reverse | B button held — reverse −3.0 V (provisional); subject to Fast-Track L03 gate 5 |
-| Hardware peak | ±6.0 V output limit (provisional) |
-| Commissioning | Test mode only; ±1.5 V for 1.0 s |
-| Fatal latch | Persistent until a controlled robot-code restart; never cleared automatically by Disable, mode change or signal recovery |
-| Motor inversion | TBD — pending authorized real-hardware direction testing |
+| Measured feedback | Kraken X44 position, velocity, stator/supply current and motor voltage (rotor units); measurementValid requires a healthy configuration, applied 50 Hz signal rate, connection, OK status and every sample no older than 100 ms; invalid values and timestampSeconds are NaN |
+| Scheduler-fatal stop | RobotContainer runs the existing Swerve safety path first, then independent stop attempts for Intake, Feeder, Flywheel and Elevator |
+| Intake sticky fault | Latched by scheduler-fatal, rejected output/stop requests or command failure; rejects every later output request until robot-code restart; stop stays available |
+| Test commissioning | Glass/SmartDashboard "Intake Commissioning Forward/Reverse": ±1.5 V, at most 1.0 s, Test-enabled only |
+| Manual control | Right Bumper held: +4.0 V; Xbox B held: −3.0 V; release, interruption or Disable: neutral stop. Teleop-enabled only; later press wins; B wins a same-cycle press; a forced stop needs a fresh press |
+| Autonomous / legacy request | LEARNING_EVENT / IntakeToFeederCommand use the legacy requestIntake(), which issues NeutralOut only |
+| Hardware configuration | One Kraken X44 on CAN 40 / rio; Brake; Stator 40 A; Supply 35 A; peak output ±6.0 V; VoltageOut with FOC disabled; inversion left at the Phoenix default |
+| Controller | Microsoft Xbox Controller is the verified operational controller. An earlier Logitech mapping discrepancy was resolved operationally by using the Xbox controller; no code was changed for it |
 
-Safety constraints: no nonzero Autonomous Intake output; independent all-actuator stop attempts; no throwing cleanup paths; initialization failures fail closed; CTRE command and stop failures are checked; no automatic restart after a fatal fault.
+Voltages are provisional values accepted for this lesson, not final tuning.
 
-Voltages and durations are design values, not hardware evidence. The exact Group 2 file scope is set by a separate Group 2 authorization.
+## Checkpoint evidence
 
-## Ordered L03 gates (Fast-Track ADR §4)
+| Checkpoint | Software (User) | Independent review | Real hardware |
+| --- | --- | --- | --- |
+| A — measured feedback | BUILD SUCCESSFUL in 49s; 953/953 PASS | Codex HOLD (F-A4 sample age) | Measured feedback valid — User observation during Checkpoint C (tool and values not recorded) |
+| A — F-A4 freshness repair | BUILD SUCCESSFUL in 33s; 967/967 PASS | Codex PASS | NOT TESTED separately |
+| B — AUD-P1-02 fan-out, sticky latch, non-throwing cleanup | BUILD SUCCESSFUL in 39s; 980/980 PASS | Codex HOLD_AUD_P1_02 (H1, H2) | NOT TESTED — no fault injection |
+| B — H1 Swerve cleanup / H2 CTRE OK-only status | BUILD SUCCESSFUL in 39s; 990/990 PASS | Codex PASS_H1_H2_REPAIR | NOT TESTED — no fault injection |
+| C — Test commissioning | 1013/1013 PASS | Codex PASS | REAL HARDWARE FUNCTIONAL VERIFIED — forward +1.5 V and reverse −1.5 V correct and opposite; both stopped after approximately 1 s (operator observation, not instrumented); repeat works; Disabled prevented commissioning |
+| D — Right Bumper forward / release stop | Final regression 1031/1031 PASS | Codex PASS_M01_L03_D_E | REAL HARDWARE FUNCTIONAL VERIFIED — Intake forward; stops on release |
+| E — Xbox B reverse / release stop | Final regression 1031/1031 PASS | Codex PASS_M01_L03_D_E | REAL HARDWARE FUNCTIONAL VERIFIED — Intake reverse; stops on release |
 
-Each gate is separate and ordered; a later gate cannot pass before an earlier one.
+All software results are User execution accepted by the Architect. No engineer Gradle run was performed in this lesson. Real-hardware results are User-operated observations accepted by the Architect.
 
-1. Measurement validity — truthful measured Intake inputs with units, freshness and validity; powered stationary observation, actuation inhibited.
-2. **AUD-P1-02 satisfied** — all-actuator scheduler-fatal stop coverage and exception-safe command cleanup (including the known IntakeToFeederCommand.end() rethrow) before any nonzero mechanism output.
-3. Safe bounded first motion — scheduler-managed, output/time-bounded, Test-enabled commissioning through subsystem/IO; direction/inversion and observed stopping.
-4. Xbox held-forward and release-stop without unintended restart.
-5. Simple manual reverse only if safely supported by the accepted evidence; otherwise excluded.
-6. User hardware verification of the gates above.
+## Evidence limits — deferred and untested
 
-## Evidence limits
+- Fault scenarios on hardware are NOT TESTED: CTRE output or stop rejection, CAN loss during motion, scheduler-fatal fan-out, sticky-latch behavior and stale-feedback stop are software-verified only.
+- Physical stop timing, stopping distance and the 1.0 s bound are not instrumented; "approximately 1 second" is an operator observation.
+- Current limits (40 A stator, 35 A supply) and ±6.0 V peak behavior under load or jam are NOT TESTED.
+- Autonomous isolation and Teleop/Test mode exclusion are software-verified only; no powered Autonomous test was performed.
+- The same-cycle Right Bumper + B transient (+4 V, neutral, −3 V within one loop) is software-verified only.
+- No GUI Simulation, Glass record or Driver Station log for L03 was supplied to the repository.
+- The exact deployed snapshot for the hardware observations was the uncommitted working tree; no commit identity was recorded. Written authorization text for the Checkpoint C and D/E powered tests is not recorded in the repository; the Architect accepted the User-reported results.
+- Recorded notes unchanged: AUD-P2C-01 same-cycle limitation; B-1 composition-test method-reference loophole; B-2 FeederSubsystem.stop() may still throw (handled by callers); AUD-P3-02, AUD-P3-03.
 
-| Evidence scope | Current classification |
-| --- | --- |
-| Inheritance / architecture audit | THEORY VERIFIED — static engineer comparison; Architect review of this recording PENDING |
-| Inherited baseline build | Supplied User execution: BUILD SUCCESSFUL in 1m 5s; not engineer execution |
-| Group 2 build / tests | NOT RUN — implementation not authorized |
-| Simulation / Glass / Driver Station | NOT TESTED |
-| Real hardware | NOT AUTHORIZED / NOT TESTED in M01_L03; the Design Lock is not hardware verification |
-| Inherited M01_L02 hardware evidence | Preserved in the frozen M01_L02 record (H1 configuration/readback, H2/H3 stationary-output scope); not repeated or extended here |
-| Direction, inversion, stopping, current adequacy | NOT TESTED — required by L03 gates 3–6 |
+**Next boundary:** User verification and User-owned publication of the Group 2 implementation snapshot and this Group 3 closure recording; publication is then established by Git history (ADR_GOV3 §4). After freeze there is no active editable lesson; M01_L04 requires separate User and Architect authorization.
 
-**Next boundary:** Architect review of this Group 1 recording, then User-owned GOV3 Group 1 publication of the full inherited lesson snapshot. Group 2 requires separate authorization; AUD-P1-02 precedes any nonzero Intake output.
+## GOV3 Group 1 activation — 2026-10-17 (history)
+
+Group 1 recorded: inheritance PASS (349/349 donor tracked files byte-identical); User baseline BUILD SUCCESSFUL in 1m 5s, 7 actionable tasks (6 executed, 1 up-to-date); Design Lock CONDITIONAL PASS (AUTH_M01_L03_GROUP1_ACTIVATION_RECORDING). Its recording-stage fields "Group 2 implementation: NOT AUTHORIZED", "AUD-P1-02: MANDATORY / UNRESOLVED" and "Powered hardware: NOT AUTHORIZED" are superseded by the records above; the Group 1 text is preserved in commit fb65c08.
 
 <!-- M01_L03 OPERATIVE DOCUMENTATION END -->
 

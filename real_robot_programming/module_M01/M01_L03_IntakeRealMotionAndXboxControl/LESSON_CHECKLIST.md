@@ -1,67 +1,69 @@
 # M01_L03 — Lesson Checklist
 
-## GOV3 Group 1 activation — 2026-10-17
+## Current lesson record — GOV3 Group 3 closure recording 2026-10-26
 
 | Field | Current record |
 | --- | --- |
 | Lesson / title | M01_L03_IntakeRealMotionAndXboxControl — Intake Real Motion and Xbox Control |
-| Previous lesson | M01_L02_IntakeRealIOConfigurationAndSafeStop |
+| Previous lesson | M01_L02_IntakeRealIOConfigurationAndSafeStop — COMPLETE / FROZEN / READ-ONLY |
 | One new concept | Qualified first Intake motion and manual control |
 | Roadmap | [M01 Fast-Track 10-lesson revision](../../../docs/architecture_decisions/ADR_M01_Fast_Track_10_Lesson_Roadmap_Revision.md) §4 L03 (controls numbering); [original M01 roadmap](../../../docs/architecture_decisions/ADR_M01_Real_Mechanism_Hardware_Integration_Roadmap.md) binding for everything else |
-| Governance model | [ADR_GOV3](../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) — GROUP 1 ACTIVATE / BASELINE |
+| Governance model | [ADR_GOV3](../../../docs/architecture_decisions/ADR_GOV3_Engineer_Roles_and_Lightweight_Lesson_Publication.md) — GROUP 3 COMPLETE / FREEZE |
 | Primary Engineer | Claude Code; Codex independent reviewer |
-| Donor | M01_L02_IntakeRealIOConfigurationAndSafeStop — COMPLETE / FROZEN / READ-ONLY; User-owned publication commit ed6653e |
-| Inheritance audit | PASS — 349/349 donor tracked files byte-identical to the target; no other non-generated difference; no nested duplicate project (engineer read-only comparison, 2026-10-17) |
-| User baseline | BUILD SUCCESSFUL in 1m 5s; 7 actionable tasks (6 executed, 1 up-to-date) — supplied User evidence |
-| Design Lock | CONDITIONAL PASS — Architect brief "M01_L03 — GROUP 1 LIFECYCLE ACTIVATION" (AUTH_M01_L03_GROUP1_ACTIVATION_RECORDING, 2026-10-17, supplied by the User in chat); design decisions only, not implementation authorization |
-| AUD-P1-02 | MANDATORY / UNRESOLVED implementation safety gate — must be satisfied and accepted before any nonzero Intake output |
-| Lesson lifecycle | IN_PROGRESS — sole active editable lesson |
-| Group 1 recording | Working tree only; self-review; Architect review PENDING; User-owned Group 1 publication PENDING |
-| Group 2 implementation | NOT AUTHORIZED |
-| Powered hardware / nonzero Intake output | NOT AUTHORIZED |
-| Transition guide | IN_PROGRESS / NOT FINAL |
+| Lesson lifecycle | COMPLETE / FROZEN / READ-ONLY — Group 3 recording 2026-10-26; User-owned publication PENDING |
+| Group 1 publication | User-owned commit fb65c08efbe2ab8a5000c3bfbd803b26d3961e38 "Activate M01_L03 and record inherited baseline"; accepted by the Architect |
+| Group 2 implementation | Checkpoints A–E implemented and accepted by the Architect; User-owned Group 2 publication PENDING |
+| Final software regression | SOFTWARE TEST VERIFIED — User: 1031 tests, 0 failures, 0 errors, 0 skipped |
+| Final independent review | INDEPENDENT REVIEW PASS — Codex PASS_M01_L03_D_E |
+| Real hardware | REAL HARDWARE FUNCTIONAL VERIFIED — Test commissioning ±1.5 V and Xbox manual forward/reverse (User, Microsoft Xbox Controller); fault scenarios NOT TESTED |
+| Transition guide | FINAL / PASS |
+| Group 3 | AUTHORIZED (AUTH_M01_L03_GROUP3_FINAL_LIFECYCLE_CLOSURE); closure recorded; User verification and publication PENDING |
 
 ## Group 1 gates
 
-- [x] User copy/rename/generated-artifact cleanup — supplied User evidence.
-- [x] Inherited baseline — BUILD SUCCESSFUL in 1m 5s, 7 actionable tasks (6 executed, 1 up-to-date) — supplied User evidence.
-- [x] Inheritance audit — PASS, 349/349 byte-identical; no nested duplicate.
-- [x] Design Lock — CONDITIONAL PASS by the Architect.
-- [x] Group 1 activation recording authorized — AUTH_M01_L03_GROUP1_ACTIVATION_RECORDING.
-- [x] Lifecycle documents and transition guide initialized (IN_PROGRESS / NOT FINAL).
-- [ ] Architect review of this Group 1 recording.
-- [ ] User-owned Group 1 publication including the full inherited lesson snapshot.
+- [x] Copy/rename/cleanup, inherited baseline and inheritance audit (User / engineer).
+- [x] Design Lock CONDITIONAL PASS; Group 1 recording and publication (fb65c08).
 
-## Group 2 gates — NOT AUTHORIZED
+## Group 2 gates
 
-- [ ] Group 2 implementation authorization.
-- [ ] Gate 1 — measurement validity (software, then authorized powered stationary observation).
-- [ ] Gate 2 — AUD-P1-02 satisfied and accepted.
-- [ ] Gate 3 — bounded Test-mode commissioning; direction/inversion and observed stopping.
-- [ ] Gate 4 — Xbox held-forward and release-stop.
-- [ ] Gate 5 — manual reverse (B) only if supported by accepted evidence.
-- [ ] Gate 6 — User hardware verification, each powered step separately authorized.
+- [x] Checkpoint A measured feedback; F-A4 repair — User software PASS; Codex PASS.
+- [x] Checkpoint B AUD-P1-02; H1/H2 repair — User software PASS; Codex PASS_H1_H2_REPAIR.
+- [x] Checkpoint C commissioning — User software PASS; Codex PASS; User hardware functional PASS.
+- [x] Checkpoint D/E Xbox manual control — User final regression 1031/1031; Codex PASS_M01_L03_D_E; User hardware functional PASS.
+- [ ] User-owned Group 2 implementation publication.
 
 ## Group 3 gates
 
-- [ ] Independent review (Codex).
-- [ ] Transition guide FINAL / PASS.
-- [ ] Architect closure; COMPLETE / FROZEN / READ-ONLY recording.
-- [ ] User-owned publication and fresh remote verification.
+- [x] Independent review (Codex) — final PASS.
+- [x] Transition guide FINAL / PASS.
+- [x] Architect closure authorization (AUTH_M01_L03_GROUP3_FINAL_LIFECYCLE_CLOSURE); COMPLETE / FROZEN / READ-ONLY recorded.
+- [ ] User-owned Group 3 publication and fresh remote verification.
 
-## Evidence limits
+## ES-04 execution checklist
 
-| Evidence scope | Current classification |
-| --- | --- |
-| Inheritance / architecture audit | THEORY VERIFIED — static engineer comparison; Architect review of this recording PENDING |
-| Inherited baseline build | Supplied User execution: BUILD SUCCESSFUL in 1m 5s; not engineer execution |
-| Group 2 build / tests | NOT RUN — implementation not authorized |
-| Simulation / Glass / Driver Station | NOT TESTED |
-| Real hardware | NOT AUTHORIZED / NOT TESTED in M01_L03; the Design Lock is not hardware verification |
-| Inherited M01_L02 hardware evidence | Preserved in the frozen M01_L02 record (H1 configuration/readback, H2/H3 stationary-output scope); not repeated or extended here |
-| Direction, inversion, stopping, current adequacy | NOT TESTED — required by L03 gates 3–6 |
+- [x] Backbone Check, Contract Design and Architecture Review (Design Lock).
+- [x] Full implementation and BUILD SUCCESSFUL (User).
+- [ ] Simulation verification — NOT TESTED (no L03 GUI Simulation evidence).
+- [x] Glass / Driver Station and real robot verification — functional scope only.
+- [x] Safety review (AUD-P1-02, independent reviews) and Known Issues recorded.
+- [ ] Git commit — User-owned, PENDING.
 
-**Next boundary:** Architect review of this Group 1 recording, then User-owned GOV3 Group 1 publication of the full inherited lesson snapshot. Group 2 requires separate authorization; AUD-P1-02 precedes any nonzero Intake output.
+## Evidence limits — deferred and untested
+
+- Fault scenarios on hardware are NOT TESTED: CTRE output or stop rejection, CAN loss during motion, scheduler-fatal fan-out, sticky-latch behavior and stale-feedback stop are software-verified only.
+- Physical stop timing, stopping distance and the 1.0 s bound are not instrumented; "approximately 1 second" is an operator observation.
+- Current limits (40 A stator, 35 A supply) and ±6.0 V peak behavior under load or jam are NOT TESTED.
+- Autonomous isolation and Teleop/Test mode exclusion are software-verified only; no powered Autonomous test was performed.
+- The same-cycle Right Bumper + B transient (+4 V, neutral, −3 V within one loop) is software-verified only.
+- No GUI Simulation, Glass record or Driver Station log for L03 was supplied to the repository.
+- The exact deployed snapshot for the hardware observations was the uncommitted working tree; no commit identity was recorded. Written authorization text for the Checkpoint C and D/E powered tests is not recorded in the repository; the Architect accepted the User-reported results.
+- Recorded notes unchanged: AUD-P2C-01 same-cycle limitation; B-1 composition-test method-reference loophole; B-2 FeederSubsystem.stop() may still throw (handled by callers); AUD-P3-02, AUD-P3-03.
+
+**Next boundary:** User verification and User-owned publication of the Group 2 implementation snapshot and this Group 3 closure recording; publication is then established by Git history (ADR_GOV3 §4). After freeze there is no active editable lesson; M01_L04 requires separate User and Architect authorization.
+
+## GOV3 Group 1 activation — 2026-10-17 (history)
+
+Group 1 recorded: inheritance PASS (349/349 donor tracked files byte-identical); User baseline BUILD SUCCESSFUL in 1m 5s, 7 actionable tasks (6 executed, 1 up-to-date); Design Lock CONDITIONAL PASS (AUTH_M01_L03_GROUP1_ACTIVATION_RECORDING). Its recording-stage fields "Group 2 implementation: NOT AUTHORIZED", "AUD-P1-02: MANDATORY / UNRESOLVED" and "Powered hardware: NOT AUTHORIZED" are superseded by the records above; the Group 1 text is preserved in commit fb65c08.
 
 <!-- M01_L03 OPERATIVE DOCUMENTATION END -->
 
